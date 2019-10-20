@@ -14,7 +14,7 @@ class Home extends React.Component {
           <div className="jumbotron">
             <div className="container text-center">
               <div className="row">
-                <div className="col-12 col-md-6">
+                <div className="col-12 col-lg-6">
                   <h1>YouthKitbag</h1>
                   <h2 className="pb-3">Inventory, Trade, Report</h2>
                   <h3 className="">school kit, club kit, team kit, any kit</h3>
@@ -22,9 +22,9 @@ class Home extends React.Component {
                     sports gear, musical instruments, school uniforms, more ...
                   </h4>
                 </div>
-                <div className="col-12 col-md-6">
+                <div className="col-12 col-lg-6">
                   <div className="row">
-                    <div className="col-12 col-md-10 mb-3 mx-auto bg-dark text-white p-5 rounded-lg">
+                    <div className="col-12 col-lg-10 mb-3 mx-auto bg-dark text-white p-5 rounded-lg">
                       <Alert />
                       <SignUpForm />
                     </div>

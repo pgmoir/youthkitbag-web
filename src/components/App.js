@@ -49,6 +49,7 @@ import MarketItemViewPage from './market/MarketItemViewPage';
 import AccountPage from './account/AccountPage';
 import PackagePage from './account/PackagePage';
 import BadgesPage from './account/BadgesPage';
+import SettingsPage from './account/SettingsPage';
 
 class App extends React.Component {
   render() {
@@ -183,6 +184,7 @@ class App extends React.Component {
                 exact
                 component={AccountPage}
               />
+              <PrivateRoute path="/settings" exact component={SettingsPage} />
               <PrivateRoute
                 path="/settings/account/profile"
                 exact

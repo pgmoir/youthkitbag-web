@@ -40,66 +40,29 @@ class Header extends React.Component {
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav mr-auto">
-                <li className="nav-item dropdown mr-3">
-                  <Link
-                    className="nav-item nav-link dropdown-toggle"
-                    to="/whydropdown"
-                    id="whyDropdown"
-                    data-toggle="dropdown"
-                    data-display="static"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Why?
-                  </Link>
-                  <div
-                    className="dropdown-menu dropdown-menu-right"
-                    aria-labelledby="whyDropdown"
-                  >
-                    <Link className="dropdown-item" to="/why#created">
-                      ... I created YouthKitbag
+                {!loggedIn && (
+                  <li className="nav-item dropdown mr-3">
+                    <Link
+                      className="nav-item nav-link dropdown-toggle"
+                      to="/whydropdown"
+                      id="whyDropdown"
+                      data-toggle="dropdown"
+                      data-display="static"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      Why?
                     </Link>
-                    {/* <hr />
-                    <Link className="dropdown-item" to="/why#tryit">
-                      ... you should try it
-                    </Link>
-                    <Link className="dropdown-item" to="/why#concern">
-                      ... you might be concerned
-                    </Link> */}
-                  </div>
-                </li>
-                <li className="nav-item">
-                  <Link to="/pricing" className="nav-link">
-                    Pricing
-                  </Link>
-                </li>
-                {/* <li className="nav-item dropdown mr-3">
-                  <Link
-                    className="nav-item nav-link dropdown-toggle"
-                    to="/marketdropdown"
-                    id="marketDropdown"
-                    data-toggle="dropdown"
-                    data-display="static"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Market
-                  </Link>
-                  <div
-                    className="dropdown-menu dropdown-menu-right"
-                    aria-labelledby="marketDropdown"
-                  >
-                    <Link className="dropdown-item" to="/market/trade">
-                      Trade
-                    </Link>
-                    <Link className="dropdown-item" to="/market/wanted">
-                      Wanted
-                    </Link>
-                    <Link className="dropdown-item" to="/market/stolen">
-                      Stolen
-                    </Link>
-                  </div>
-                </li> */}
+                    <div
+                      className="dropdown-menu dropdown-menu-right"
+                      aria-labelledby="whyDropdown"
+                    >
+                      <Link className="dropdown-item" to="/why#created">
+                        ... I created YouthKitbag
+                      </Link>
+                    </div>
+                  </li>
+                )}
               </ul>
               <ul className="navbar-nav ml-auto">
                 {loggedIn && (
@@ -109,44 +72,16 @@ class Header extends React.Component {
                         Market
                       </Link>
                     </li>
-                    <li className="nav-item dropdown mr-3">
-                      <Link
-                        className="nav-item nav-link dropdown-toggle"
-                        to="/kitbagdropdown"
-                        id="kitbagDropdown"
-                        data-toggle="dropdown"
-                        data-display="static"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
+                    <li className="nav-item">
+                      <Link to="/kitbag/kit" className="nav-link">
                         Kitbag
                       </Link>
-                      <div
-                        className="dropdown-menu dropdown-menu-right"
-                        aria-labelledby="kitbagDropdown"
-                      >
-                        <Link className="dropdown-item" to="/kitbag/kit">
-                          Your kit
-                        </Link>
-                        <Link className="dropdown-item" to="/kitbag/kit/new">
-                          Add new kit
-                        </Link>
-                        <hr />
-                        <Link className="dropdown-item" to="/kitbag/market">
-                          Your market place
-                        </Link>
-                        {/* <Link className="dropdown-item" to="/kitbag/trade">
-                        Your trades
-                      </Link>
-                      <Link className="dropdown-item" to="/kitbag/wanted">
-                        Your wanted items
-                      </Link>
-                      <Link className="dropdown-item" to="/kitbag/stolen">
-                        Your stolen items
-                      </Link> */}
-                      </div>
                     </li>
-
+                    <li className="nav-item">
+                      <Link to="/kitbag/market" className="nav-link">
+                        My Market
+                      </Link>
+                    </li>
                     <li className="nav-item dropdown mr-3">
                       <Link
                         className="nav-item nav-link dropdown-toggle"
@@ -192,10 +127,7 @@ class Header extends React.Component {
                     </li>
 
                     <li className="nav-item mr-3">
-                      <Link
-                        className="nav-link d-inline"
-                        to="/settings/account"
-                      >
+                      <Link className="nav-link d-inline" to="/settings">
                         <img
                           src={
                             this.props.user.profile.images &&

@@ -31,6 +31,9 @@ class Footer extends React.Component {
                       Help &amp; contacts
                     </Link>
                   </li>
+                  <li className="links">
+                    <Link to="/pricing">Pricing</Link>
+                  </li>
                 </ul>
               </div>
               <hr className="w-100 clearfix d-md-none mx-3" />
