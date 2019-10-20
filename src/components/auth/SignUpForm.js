@@ -3,6 +3,7 @@ import useForm from '../hooks/useForm';
 import { signup } from '../../actions/AuthActions';
 import validate from './SignUpFormValidationRules';
 import { useDispatch } from 'react-redux';
+import { TextForm } from '../includes/forms';
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
@@ -26,54 +27,35 @@ const SignUpForm = () => {
 
   return (
     <form className="w-100 d-block" onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="email">Email</label>
-        <input
-          className={`form-control ${errors.email && 'is-invalid'}`}
-          name="email"
-          type="email"
-          onChange={handleChange}
-          value={values.email}
-          aria-describedby="email"
-          autoComplete="username email"
-          required
-        />
-        {errors.email && <div className="invalid-feedback">{errors.email}</div>}
-      </div>
-      <div className="form-group">
-        <label htmlFor="password">Password</label>
-        <input
-          className={`form-control ${errors.email && 'is-invalid'}`}
-          name="password"
-          type="password"
-          onChange={handleChange}
-          value={values.password}
-          aria-describedby="password"
-          autoComplete="current-password"
-          required
-        />
-        {errors.password && (
-          <div className="invalid-feedback">{errors.password}</div>
-        )}
-      </div>
-      <div className="form-group">
-        <label htmlFor="confirmPassword">Password</label>
-        <input
-          className={`form-control ${errors.confirmPassword && 'is-invalid'}`}
-          name="confirmPassword"
-          type="password"
-          onChange={handleChange}
-          value={values.confirmPassword}
-          aria-describedby="confirmPassword"
-          autoComplete="new-password"
-          required
-        />
-        {errors.confirmPassword && (
-          <div className="invalid-feedback">{errors.confirmPassword}</div>
-        )}
-      </div>
-      <button className="btn btn-primary" type="submit">
-        Sign Up
+      <TextForm
+        colFormat="3-9"
+        label="Email"
+        type="email"
+        value={values.email}
+        field="email"
+        handleChange={handleChange}
+        error={errors.email}
+      />
+      <TextForm
+        colFormat="3-9"
+        label="Password"
+        type="password"
+        value={values.password}
+        field="password"
+        handleChange={handleChange}
+        error={errors.password}
+      />
+      <TextForm
+        colFormat="3-9"
+        label="Confirm"
+        type="confirmPassword"
+        value={values.confirmPassword}
+        field="password"
+        handleChange={handleChange}
+        error={errors.confirmPassword}
+      />
+      <button className="btn btn-success btn-lg py-3 px-5 mt-3" type="submit">
+        Sign Up for YouthKitbag
       </button>
     </form>
   );

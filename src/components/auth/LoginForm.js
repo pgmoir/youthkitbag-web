@@ -28,7 +28,7 @@ const LoginForm = () => {
       <div className="mb-3">
         <div className="row mb-3">
           <a
-            className="btn btn-lg btn-block btn-google"
+            className="btn btn-lg p-3 btn-block btn-google"
             href={`${baseUrl}/auth/google`}
           >
             Login with Google
@@ -36,7 +36,7 @@ const LoginForm = () => {
         </div>
         <div className="row mb-3">
           <a
-            className="btn btn-lg btn-block btn-facebook"
+            className="btn btn-lg p-3 btn-block btn-facebook"
             href={`${baseUrl}/auth/facebook`}
           >
             Login with Facebook
@@ -44,7 +44,7 @@ const LoginForm = () => {
         </div>
         <div className="row mb-3">
           <a
-            className="btn btn-lg btn-block btn-github"
+            className="btn btn-lg p-3 btn-block btn-github"
             href={`${baseUrl}/auth/github`}
           >
             Login with GitHub

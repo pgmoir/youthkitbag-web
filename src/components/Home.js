@@ -1,4 +1,6 @@
 import React from 'react';
+import Alert from './includes/Alert';
+import SignUpForm from './auth/SignUpForm';
 
 class Home extends React.Component {
   render() {
@@ -11,12 +13,24 @@ class Home extends React.Component {
         >
           <div className="jumbotron">
             <div className="container text-center">
-              <h1>YouthKitbag</h1>
-              <h2 className="pb-3">Inventory, Trade, Report</h2>
-              <h3 className="">school kit, club kit, team kit, any kit</h3>
-              <h4 className="pb-5">
-                sports gear, musical instruments, school uniforms, more ...
-              </h4>
+              <div className="row">
+                <div className="col-12 col-md-6">
+                  <h1>YouthKitbag</h1>
+                  <h2 className="pb-3">Inventory, Trade, Report</h2>
+                  <h3 className="">school kit, club kit, team kit, any kit</h3>
+                  <h4 className="pb-5">
+                    sports gear, musical instruments, school uniforms, more ...
+                  </h4>
+                </div>
+                <div className="col-12 col-md-6">
+                  <div className="row">
+                    <div className="col-12 col-md-10 mb-3 mx-auto bg-dark text-white p-5 rounded-lg">
+                      <Alert />
+                      <SignUpForm />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div className="container mb-3">
