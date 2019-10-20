@@ -18,12 +18,19 @@ const MarketItemViewPage = ({ current, fetchMarketItem, match }) => {
 
   const [market, setTrade] = useState({
     title: 'Loading requested item of market ...',
+    marketType: '',
     subtitle: '',
     description: '',
-    condition: '',
-    marketPrice: 0.0,
-    activitys: '',
+    location: '',
     images: [],
+    activitys: '',
+    condition: '',
+    security: '',
+    tracking: '',
+    occurredOn: '',
+    freeTrade: false,
+    marketPrice: 0.0,
+    completed: false,
     topImage: '/images/default.png'
   });
 
@@ -39,7 +46,13 @@ const MarketItemViewPage = ({ current, fetchMarketItem, match }) => {
 
   return (
     <div>
-      <Title title={!market ? 'Loading...' : market.title} />
+      <Title
+        title={
+          !market
+            ? 'Loading...'
+            : `${market.marketType.toUpperCase()} - ${market.title}`
+        }
+      />
       <section
         id="main"
         className="container-fluid"

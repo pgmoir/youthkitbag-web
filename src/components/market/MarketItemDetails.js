@@ -1,16 +1,30 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { respondMarketItem } from '../../actions/MarketActions';
-import { TextForm, TextAreaForm, DateForm } from '../includes/forms';
+import { TextForm, TextAreaForm } from '../includes/forms';
 import validate from './MarketItemDetailsValidationRules';
+import FoundResponse from './response/FoundResponse';
+import LostResponse from './response/LostResponse';
+import StolenResponse from './response/StolenResponse';
+import TradeResponse from './response/TradeResponse';
+import WantedResponse from './response/WantedResponse';
+import FoundResponded from './responded/FoundResponded';
+import LostResponded from './responded/LostResponded';
+import StolenResponded from './responded/StolenResponded';
+import TradeResponded from './responded/TradeResponded';
+import WantedResponded from './responded/WantedResponded';
 
 const MarketItemDetails = ({ market }) => {
   const dispatch = useDispatch();
   const newErrors = useSelector(state => state.toast.errors);
 
-  const initialValues = { _id: '', offeredOn: '', details: '', offerPrice: 0 };
+  const initialValues = {
+    _id: '',
+    responseOn: '',
+    details: '',
+    responsePrice: 0
+  };
 
   const {
     setChange,
@@ -20,7 +34,7 @@ const MarketItemDetails = ({ market }) => {
     setValues,
     errors,
     setErrors
-  } = useForm(initialValues, updateTrade, validate);
+  } = useForm(initialValues, updateMarket, validate);
 
   useEffect(() => {
     if (newErrors) {
@@ -72,20 +86,34 @@ const MarketItemDetails = ({ market }) => {
     if (market) {
       setValues({
         _id: market._id,
-        offeredOn: '',
+        responseOn: '',
         details: '',
-        offerPrice: 0
+        responsePrice: 0
       });
     }
   }, [market, setValues]);
 
-  function updateTrade() {
-    // if (values._id) {
+  function updateMarket() {
     dispatch(respondMarketItem(values._id, values));
-    // } else {
-    //   dispatch(createKitbagStolen(values));
-    // }
   }
+
+  const responseComponents = {
+    found: FoundResponse,
+    lost: LostResponse,
+    stolen: StolenResponse,
+    trade: TradeResponse,
+    wanted: WantedResponse
+  };
+  const Response = responseComponents[market.marketType || 'trade'];
+
+  const respondedComponents = {
+    found: FoundResponded,
+    lost: LostResponded,
+    stolen: StolenResponded,
+    trade: TradeResponded,
+    wanted: WantedResponded
+  };
+  const Responded = respondedComponents[market.marketType || 'trade'];
 
   return (
     <div className="row">
@@ -133,84 +161,20 @@ const MarketItemDetails = ({ market }) => {
           value={market.activitys}
           readOnly={true}
         />
-        {market.offerDetails && market.offerDetails.length === 0 && (
+        <hr />
+        {market.responseDetails && market.responseDetails.length === 0 && (
           <React.Fragment>
-            <hr />
-            <h3>Are you interested in this item</h3>
-            <p>
-              If you are interested in aquiring this item, then make an offer
-              and leave details below. The owner will get back to you as quickly
-              as possible
-            </p>
-            <form className="mb-3" onSubmit={handleSubmit}>
-              <div>
-                <DateForm
-                  colFormat="3-9"
-                  label="Offered On"
-                  value={values.offeredOn}
-                  field="reportedOn"
-                  setChange={setChange}
-                  errors={errors.offeredOn}
-                />
-                <TextAreaForm
-                  colFormat="3-9"
-                  label="Details"
-                  value={values.details}
-                  field="details"
-                  handleChange={handleChange}
-                  errors={errors.reportedOn}
-                />
-                <TextForm
-                  colFormat="3-9"
-                  type="number"
-                  label="Offer Price"
-                  value={values.offerPrice}
-                  field="offerPrice"
-                  step=".01"
-                  min="0"
-                  max="99999.99"
-                  handleChange={handleChange}
-                  error={errors.offerPrice}
-                />
-              </div>
-              <hr />
-              <div>
-                <button className="btn btn-primary" type="submit">
-                  Offer
-                </button>
-                <Link className="btn btn-link" to="/market/market">
-                  Cancel
-                </Link>
-              </div>
-            </form>
+            <Response
+              values={values}
+              handleChange={handleChange}
+              errors={errors}
+              handleSubmit={handleSubmit}
+            />
           </React.Fragment>
         )}
-        {market.offerDetails && market.offerDetails.length > 0 && (
+        {market.responseDetails && market.responseDetails.length > 0 && (
           <React.Fragment>
-            <hr />
-            <h3>Thank you! You made this offer</h3>
-            <form className="mb-3" onSubmit={handleSubmit}>
-              <div>
-                <DateForm
-                  colFormat="3-9"
-                  label="Offered On"
-                  value={market.offerDetails[0].offeredOn}
-                  readOnly={true}
-                />
-                <TextAreaForm
-                  colFormat="3-9"
-                  label="Details"
-                  value={market.offerDetails[0].details}
-                  readOnly={true}
-                />
-                <TextForm
-                  colFormat="3-9"
-                  label="Offer"
-                  value={`£${market.offerDetails[0].offerPrice.toFixed(2)}`}
-                  readOnly={true}
-                />
-              </div>
-            </form>
+            <Responded responseDetails={market.responseDetails[0]} />
           </React.Fragment>
         )}
       </div>
