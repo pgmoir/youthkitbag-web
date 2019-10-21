@@ -294,7 +294,7 @@ body {
   .youthkitbag .bg-smoke {
     background-color: rgba(10, 10, 10, 0.9); }
   .youthkitbag .btn-facebook {
-    background: #3b5998 url("/images/facebook.svg") no-repeat 13px -10px;
+    background: #3b5998 url("/images/facebook.svg") no-repeat 13px -3px;
     background-size: 47px;
     color: #fff; }
   .youthkitbag .btn-google {

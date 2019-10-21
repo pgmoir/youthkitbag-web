@@ -7,6 +7,7 @@ import { TextForm } from '../includes/forms';
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
+  const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
   const initialValues = {
     email: '',
@@ -57,6 +58,20 @@ const SignUpForm = () => {
       <button className="btn btn-success btn-lg py-3 px-5 mt-3" type="submit">
         Sign Up for YouthKitbag
       </button>
+      <p className="h6 pt-3">
+        Alternatively use{' '}
+        <a href={`${baseUrl}/auth/google`} className="text-white">
+          Google
+        </a>
+        ,{' '}
+        <a href={`${baseUrl}/auth/facebook`} className="text-white">
+          Facebook
+        </a>
+        {' or '}
+        <a href={`${baseUrl}/auth/github`} className="text-white">
+          GitHub
+        </a>
+      </p>
     </form>
   );
 };
