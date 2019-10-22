@@ -22,12 +22,17 @@ class MarketItems extends React.Component {
       by = values.by ? values.by : '';
       page = values.page ? values.page : '';
     }
-
+    console.log('DIDMOUNT', search);
     this.props.fetchMarketItems(search, by, page, 24);
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.location.search !== prevProps.location.search) {
+      console.log(
+        'DIDUPDATE',
+        this.props.location.search,
+        prevProps.location.search
+      );
       const values = queryString.parse(this.props.location.search);
       const search = values.search ? values.search : '';
       const by = values.by ? values.by : '';

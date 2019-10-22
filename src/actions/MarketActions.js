@@ -16,6 +16,7 @@ export const fetchMarketItems = (
   page = 1,
   pagesize = 24
 ) => dispatch => {
+  console.log('FETCHMKTITEMS', search);
   const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/market`, {

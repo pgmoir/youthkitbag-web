@@ -39,7 +39,6 @@ import KitBag from './kitbag/kit/KitBag';
 import KitPage from './kitbag/kit/KitPage';
 import KitDelete from './kitbag/kit/KitDelete';
 
-import MarketKits from './kitbag/market/MarketKits';
 import MarketKitPage from './kitbag/market/MarketKitPage';
 import MarketKitDelete from './kitbag/market/MarketKitDelete';
 
@@ -140,7 +139,6 @@ class App extends React.Component {
                 exact
                 component={MarketKitDelete}
               />
-              <PrivateRoute path="/kitbag/market" component={MarketKits} />
 
               <PrivateRoute
                 path="/settings/groups/new"

@@ -3,7 +3,6 @@ import {
   CREATE_MARKET_KIT,
   EDIT_MARKET_KIT,
   DELETE_MARKET_KIT,
-  FETCH_MARKET_KITS,
   LOGOUT
 } from '../actions/types';
 
@@ -19,12 +18,6 @@ export default (state = initialState, action) => {
       return { ...state, current: action.payload };
     case DELETE_MARKET_KIT:
       return { ...state };
-    case FETCH_MARKET_KITS:
-      return {
-        ...state,
-        list: action.payload.items,
-        current: {}
-      };
     case LOGOUT:
       return initialState;
     default:
