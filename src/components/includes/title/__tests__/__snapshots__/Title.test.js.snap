@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component has changed 1`] = `
+<section
+  aria-label="breadcrumb navigation and page title"
+  className="container-fluid"
+  id="title"
+  role="banner"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="d-block hgt-1"
+    />
+    <h1
+      className="h-standard pb-2"
+    >
+      New kit
+    </h1>
+  </div>
+</section>
+`;
