@@ -5,7 +5,7 @@ import {
   fetchMarketKitFromKit
 } from '../../../actions/KitbagMarketActions';
 import MarketKitForm from './MarketKitForm';
-import Title from '../../includes/Title';
+import Title from '../../includes/title/Title';
 import Alert from '../../includes/Alert';
 
 const mapStateToProps = state => ({
@@ -63,23 +63,22 @@ const MarketKitPage = ({
         ...current,
         imagesToUpload: 0
       };
-      console.log('SETMARKETKIT', current);
       setMarketKit(newMarketKit);
     }
   }, [current]);
 
-  function itemIsLoding() {
+  function itemIsLoading() {
     return marketId && !market._id;
   }
 
   function getTitle() {
-    if (itemIsLoding()) {
+    if (itemIsLoading()) {
       return 'Loading ...';
     }
 
-    return market._id
-      ? `MarketKit: ${market.title}`
-      : 'Create a new item for market';
+    return market._id || market.sourceId
+      ? `${market.marketType.toUpperCase()} - ${market.title}`
+      : `Add ${market.marketType} item to the market`;
   }
 
   return (

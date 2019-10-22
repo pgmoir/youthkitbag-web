@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchSubscriptionPackage } from '../actions/SubscriptionActions';
-import Title from './includes/Title';
+import Title from './includes/title/Title';
 import Alert from './includes/Alert';
 
 const mapStateToProps = state => ({

@@ -83,6 +83,7 @@ const DateInput = ({ value, field, readOnly, setChange }) => {
         readOnly={readOnly}
         onChange={e => handleDayChange(e)}
         onBlur={e => handleDayChange(e)}
+        tabIndex={readOnly ? -1 : 0}
       />
       <input
         className={`form-control group-control-center date-input-w2`}
@@ -99,6 +100,7 @@ const DateInput = ({ value, field, readOnly, setChange }) => {
         readOnly={readOnly}
         onChange={e => handleMonthChange(e)}
         onBlur={e => handleMonthChange(e)}
+        tabIndex={readOnly ? -1 : 0}
       />
       <input
         className={`form-control group-control-right date-input-w4 `}
@@ -115,6 +117,7 @@ const DateInput = ({ value, field, readOnly, setChange }) => {
         readOnly={readOnly}
         onChange={e => handleYearChange(e)}
         onBlur={e => handleYearChange(e)}
+        tabIndex={readOnly ? -1 : 0}
       />
     </div>
   );

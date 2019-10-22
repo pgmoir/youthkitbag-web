@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import Title from '../includes/Title';
+import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 import ProfileView from './ProfileView';
 

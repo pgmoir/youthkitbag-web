@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchGroups } from '../../actions';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
-import Title from '../includes/Title';
+import Title from '../includes/title/Title';
 import GroupCard from './GroupCard';
 import SearchForm from '../includes/SearchForm';
 import Pagination from '../includes/Pagination';

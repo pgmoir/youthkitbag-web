@@ -9,20 +9,13 @@ const TradeResponse = ({ values, handleChange, errors, handleSubmit }) => {
         <React.Fragment>
           <h3>Are you interested in this item</h3>
           <p>
-            If you are interested in aquiring this item, then make an offer and
-            leave details below. The owner will get back to you as quickly as
-            possible.
+            If you are interested in aquiring this item, then please submit an
+            offer price you&apos;re willing to pay, or leave as 0 (zero) if te
+            item is being offered for free and add any other relevant details
+            below. The owner will get back to you as quickly as possible.
           </p>
           <form className="mb-3" onSubmit={handleSubmit}>
             <div>
-              <TextAreaForm
-                colFormat="3-9"
-                label="Details"
-                value={values.details}
-                field="details"
-                handleChange={handleChange}
-                errors={errors.details}
-              />
               <TextForm
                 colFormat="3-9"
                 type="number"
@@ -34,6 +27,14 @@ const TradeResponse = ({ values, handleChange, errors, handleSubmit }) => {
                 max="99999.99"
                 handleChange={handleChange}
                 error={errors.responsePrice}
+              />
+              <TextAreaForm
+                colFormat="0-12"
+                label="Details"
+                value={values.details}
+                field="details"
+                handleChange={handleChange}
+                errors={errors.details}
               />
             </div>
             <hr />

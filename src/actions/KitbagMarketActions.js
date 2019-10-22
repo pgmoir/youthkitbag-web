@@ -38,7 +38,7 @@ export const fetchMarketKits = (
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/kitbag/market');
+        history.push('/auth/login?return=/market');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: response });
     });
@@ -61,14 +61,13 @@ export const fetchMarketKit = marketId => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/kitbag/market');
+        history.push('/auth/login?return=/market');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
 };
 
 export const fetchMarketKitFromKit = (kitId, marketType) => dispatch => {
-  console.log('FETCH', kitId, marketType);
   const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/kitbag/market/add/${kitId}/${marketType}`, {
@@ -85,7 +84,7 @@ export const fetchMarketKitFromKit = (kitId, marketType) => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/kitbag/market');
+        history.push('/auth/login?return=/market');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
@@ -106,7 +105,7 @@ export const createMarketKit = formValues => dispatch => {
     )
     .then(response => {
       dispatch({ type: CREATE_MARKET_KIT, payload: response.data });
-      history.push('/kitbag/market?search=&by=&page=1&pagesize=24');
+      history.push('/market?search=&by=&page=1&pagesize=24');
     })
     .catch(err => {
       const { response } = err;
@@ -114,7 +113,7 @@ export const createMarketKit = formValues => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          '/auth/login?return=/kitbag/market?search=&by=&page=1&pagesize=24'
+          '/auth/login?return=/market?search=&by=&page=1&pagesize=24'
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -136,7 +135,7 @@ export const editMarketKit = (marketId, formValues) => dispatch => {
     )
     .then(response => {
       dispatch({ type: EDIT_MARKET_KIT, payload: response.data });
-      history.push('/kitbag/market?search=&by=&page=1&pagesize=24');
+      history.push('/market?search=&by=&page=1&pagesize=24');
     })
     .catch(err => {
       const { response } = err;
@@ -144,7 +143,7 @@ export const editMarketKit = (marketId, formValues) => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          '/auth/login?return=/kitbag/market?search=&by=&page=1&pagesize=24'
+          '/auth/login?return=/market?search=&by=&page=1&pagesize=24'
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -162,7 +161,7 @@ export const deleteMarketKit = marketId => dispatch => {
     })
     .then(response => {
       dispatch({ type: DELETE_MARKET_KIT, payload: response.data });
-      history.push('/kitbag/market?search=&by=&page=1&pagesize=24');
+      history.push('/market?search=&by=&page=1&pagesize=24');
     })
     .catch(err => {
       const { response } = err;
@@ -170,7 +169,7 @@ export const deleteMarketKit = marketId => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          '/auth/login?return=/kitbag/market?search=&by=&page=1&pagesize=24'
+          '/auth/login?return=/market?search=&by=&page=1&pagesize=24'
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });

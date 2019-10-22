@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Title from './includes/Title';
+import Title from './includes/title/Title';
 
 const Pricing = () => {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextAreaForm, TextForm, DateForm } from '../../includes/forms';
+import { TextAreaForm, TextForm } from '../../includes/forms';
 
 const WantedResponded = ({ responseDetails }) => {
   return (
@@ -13,22 +13,22 @@ const WantedResponded = ({ responseDetails }) => {
           </p>
           <form className="mb-3">
             <div>
-              <DateForm
+              <TextForm
                 colFormat="3-9"
                 label="Offered On"
-                value={responseDetails.responseOn}
-                readOnly={true}
-              />
-              <TextAreaForm
-                colFormat="3-9"
-                label="Details"
-                value={responseDetails.details}
+                value={new Date(responseDetails.responseOn).toDateString()}
                 readOnly={true}
               />
               <TextForm
                 colFormat="3-9"
                 label="Asking Price"
                 value={`£${responseDetails.responsePrice.toFixed(2)}`}
+                readOnly={true}
+              />
+              <TextAreaForm
+                colFormat="sro-12"
+                label="Details"
+                value={responseDetails.details}
                 readOnly={true}
               />
             </div>

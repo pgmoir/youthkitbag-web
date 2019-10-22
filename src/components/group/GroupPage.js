@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchGroup } from '../../actions/GroupActions';
 import GroupForm from './GroupForm';
-import Title from '../includes/Title';
+import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 
 const mapStateToProps = state => ({

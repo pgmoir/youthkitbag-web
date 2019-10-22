@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchMarketItems } from '../../actions/MarketActions';
 import queryString from 'query-string';
-import Title from '../includes/Title';
+import Title from '../includes/title/Title';
 import MarketItemCard from './MarketItemCard';
 import SearchForm from '../includes/SearchForm';
 import Pagination from '../includes/Pagination';

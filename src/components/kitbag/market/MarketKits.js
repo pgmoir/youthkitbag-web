@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchMarketKits } from '../../../actions/KitbagMarketActions';
 import queryString from 'query-string';
-import Title from '../../includes/Title';
+import Title from '../../includes/title/Title';
 import MarketKitCard from './MarketKitCard';
 import SearchForm from '../../includes/SearchForm';
 import Pagination from '../../includes/Pagination';

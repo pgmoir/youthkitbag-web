@@ -97,6 +97,91 @@ const MarketItemDetails = ({ market }) => {
     dispatch(respondMarketItem(values._id, values));
   }
 
+  const showCondition = () => {
+    if (!['trade'].includes(market.marketType)) {
+      return null;
+    }
+
+    return (
+      <TextForm
+        colFormat="3-9"
+        label="Condition"
+        value={market.condition}
+        readOnly={true}
+      />
+    );
+  };
+
+  const showPrice = () => {
+    if (!['trade', 'wanted'].includes(market.marketType)) {
+      return null;
+    }
+
+    const label =
+      market.marketType === 'trade' ? 'Asking Price' : 'Offer Price';
+    const price =
+      market.marketPrice === 0 ? 'FREE' : `£${market.marketPrice.toFixed(2)}`;
+
+    return (
+      <TextForm colFormat="3-9" label={label} value={price} readOnly={true} />
+    );
+  };
+
+  const showStolenOn = () => {
+    if (!['stolen'].includes(market.marketType)) {
+      return null;
+    }
+
+    const occurredOn = new Date(market.occurredOn).toDateString();
+
+    return (
+      <TextForm
+        colFormat="3-9"
+        label="Stolen On"
+        value={occurredOn}
+        readOnly={true}
+      />
+    );
+  };
+
+  const showSecurity = () => {
+    if (!['stolen'].includes(market.marketType)) {
+      return null;
+    }
+
+    const security = !market.security
+      ? 'Frame number not available'
+      : market.security;
+
+    return (
+      <TextForm
+        colFormat="3-9"
+        label="Security"
+        value={security}
+        readOnly={true}
+      />
+    );
+  };
+
+  const showTracking = () => {
+    if (!['stolen'].includes(market.marketType)) {
+      return null;
+    }
+
+    const tracking = !market.tracking
+      ? 'Police incident number not available'
+      : market.tracking;
+
+    return (
+      <TextForm
+        colFormat="3-9"
+        label="Incident Number"
+        value={tracking}
+        readOnly={true}
+      />
+    );
+  };
+
   const responseComponents = {
     found: FoundResponse,
     lost: LostResponse,
@@ -143,18 +228,11 @@ const MarketItemDetails = ({ market }) => {
           value={market.description}
           readOnly={true}
         />
-        <TextForm
-          colFormat="3-9"
-          label="Condition"
-          value={market.condition}
-          readOnly={true}
-        />
-        <TextForm
-          colFormat="3-9"
-          label="Asking Price"
-          value={`£${market.marketPrice.toFixed(2)}`}
-          readOnly={true}
-        />
+        {showCondition()}
+        {showPrice()}
+        {showStolenOn()}
+        {showSecurity()}
+        {showTracking()}
         <TextForm
           colFormat="3-9"
           label="Activities"

@@ -1,26 +1,27 @@
 import React from 'react';
-import { TextAreaForm, DateForm } from '../../includes/forms';
+import { TextAreaForm, TextForm } from '../../includes/forms';
 
 const StolenResponded = ({ responseDetails }) => {
   return (
     <React.Fragment>
       {responseDetails && (
         <React.Fragment>
-          <h3>Thank you! You made this offer</h3>
+          <h3>Thank you very much for providing this information</h3>
           <p>
-            Please be patient while the owner of this item considers you&apos;re
-            offer. We&apos;re sure they will get back to you soon.
+            This information will only be shared between yourself, the owner and
+            any law enforcement authorities. We hope it helps to secure the safe
+            return of this item.
           </p>
           <form className="mb-3">
             <div>
-              <DateForm
+              <TextForm
                 colFormat="3-9"
-                label="Offered On"
-                value={responseDetails.responseOn}
+                label="Reported On"
+                value={new Date(responseDetails.responseOn).toDateString()}
                 readOnly={true}
               />
               <TextAreaForm
-                colFormat="3-9"
+                colFormat="sro-12"
                 label="Details"
                 value={responseDetails.details}
                 readOnly={true}

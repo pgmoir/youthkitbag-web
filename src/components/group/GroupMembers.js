@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchGroupMembers } from '../../actions';
-import Title from '../includes/Title';
+import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 import GroupMember from './GroupMember';
 

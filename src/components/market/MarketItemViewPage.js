@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchMarketItem } from '../../actions/MarketActions';
 import MarketItemDetails from './MarketItemDetails';
-import Title from '../includes/Title';
+import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 
 const mapStateToProps = state => ({

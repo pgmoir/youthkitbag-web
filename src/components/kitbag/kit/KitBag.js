@@ -4,7 +4,7 @@ import { fetchKitbagKits } from '../../../actions';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import Alert from '../../includes/Alert';
-import Title from '../../includes/Title';
+import Title from '../../includes/title/Title';
 import KitCard from './KitCard';
 import SearchForm from '../../includes/SearchForm';
 import Pagination from '../../includes/Pagination';

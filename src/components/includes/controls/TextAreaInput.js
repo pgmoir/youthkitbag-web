@@ -12,6 +12,7 @@ const TextAreaInput = ({ value, field, readOnly, handleChange, error }) => {
         onBlur={handleChange}
         value={value}
         aria-describedby={field}
+        tabIndex={readOnly ? -1 : 0}
       ></textarea>
       {error && <div className="invalid-feedback">{error}</div>}
     </React.Fragment>

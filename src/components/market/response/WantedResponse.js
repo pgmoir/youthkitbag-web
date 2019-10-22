@@ -10,19 +10,12 @@ const WantedResponse = ({ values, handleChange, errors, handleSubmit }) => {
           <h3>Are you able to supply this item</h3>
           <p>
             If you can help fulfill this wanted request, then please submit an
-            asking price (or optionally donate for free) with details. The
+            asking price, or optionally, leave as 0 (zero) if you&apos;re
+            willing to donate for free, and any other relevant details. The
             purchaser will get back to you as quickly as possible.
           </p>
           <form className="mb-3" onSubmit={handleSubmit}>
             <div>
-              <TextAreaForm
-                colFormat="3-9"
-                label="Details"
-                value={values.details}
-                field="details"
-                handleChange={handleChange}
-                errors={errors.details}
-              />
               <TextForm
                 colFormat="3-9"
                 type="number"
@@ -34,6 +27,14 @@ const WantedResponse = ({ values, handleChange, errors, handleSubmit }) => {
                 max="99999.99"
                 handleChange={handleChange}
                 error={errors.responsePrice}
+              />
+              <TextAreaForm
+                colFormat="0-12"
+                label="Details"
+                value={values.details}
+                field="details"
+                handleChange={handleChange}
+                errors={errors.details}
               />
             </div>
             <hr />

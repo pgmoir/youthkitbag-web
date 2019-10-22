@@ -27,6 +27,7 @@ const TextInput = ({
         value={value}
         aria-describedby={field}
         autoComplete={autoComplete}
+        tabIndex={readOnly ? -1 : 0}
       />
       {error && <div className="invalid-feedback">{error}</div>}
     </React.Fragment>

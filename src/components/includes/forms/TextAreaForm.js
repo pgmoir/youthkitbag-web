@@ -28,6 +28,27 @@ const TextAreaForm = ({
           </div>
         </div>
       )}
+      {colFormat.endsWith('-12') && (
+        <div className="form-group row">
+          <label
+            htmlFor="{field}"
+            className={`col-12 col-form-label ${
+              colFormat === 'sro-12' ? 'sr-only' : ''
+            }`}
+          >
+            {label}
+          </label>
+          <div className="col-12">
+            <TextAreaInput
+              value={value}
+              field={field}
+              readOnly={readOnly}
+              handleChange={handleChange}
+              error={error}
+            />
+          </div>
+        </div>
+      )}
       {colFormat === 'a-4' && <div className="form-group col-sm-4"></div>}
     </React.Fragment>
   );

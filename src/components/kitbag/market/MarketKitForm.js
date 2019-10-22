@@ -23,8 +23,6 @@ const MarketForm = ({ market }) => {
 
   const initialValues = { ...market };
 
-  const conditionItems = ['Used', 'New', 'Almost New', 'Other'];
-
   const {
     setChange,
     handleChange,
@@ -61,6 +59,145 @@ const MarketForm = ({ market }) => {
     }
   }
 
+  const showCondition = () => {
+    if (!['trade'].includes(market.marketType)) {
+      return null;
+    }
+
+    const conditionItems = ['Used', 'New', 'Almost New', 'Other'];
+
+    return (
+      <SelectForm
+        colFormat="3-9"
+        label="Condition"
+        value={values.status}
+        field="condition"
+        handleChange={handleChange}
+        error={errors.condition}
+        items={conditionItems}
+      />
+    );
+  };
+
+  const showPrice = () => {
+    if (!['trade', 'wanted'].includes(market.marketType)) {
+      return null;
+    }
+
+    const label =
+      market.marketType === 'trade' ? 'Asking Price' : 'Offer Price';
+
+    return (
+      <TextForm
+        colFormat="3-9"
+        type="number"
+        label={label}
+        value={values.marketPrice}
+        field="marketPrice"
+        step=".01"
+        min="0"
+        max="99999.99"
+        handleChange={handleChange}
+        error={errors.marketPrice}
+      />
+    );
+  };
+
+  const showStolenOn = () => {
+    if (!['stolen'].includes(market.marketType)) {
+      return null;
+    }
+
+    return (
+      <DateForm
+        colFormat="3-9"
+        value={values.occurredOn}
+        label="Stolen On"
+        field="occurredOn"
+        setChange={setChange}
+        error={errors.occurredOn}
+      />
+    );
+  };
+
+  const showSecurity = () => {
+    if (!['stolen'].includes(market.marketType)) {
+      return null;
+    }
+
+    return (
+      <TextForm
+        colFormat="3-9"
+        label="Security"
+        value={values.security}
+        field="security"
+        handleChange={handleChange}
+        error={errors.security}
+      />
+    );
+  };
+
+  const showTracking = () => {
+    if (!['stolen'].includes(market.marketType)) {
+      return null;
+    }
+
+    return (
+      <TextForm
+        colFormat="3-9"
+        label="Incident Number"
+        value={values.tracking}
+        field="tracking"
+        handleChange={handleChange}
+        error={errors.tracking}
+      />
+    );
+  };
+
+  const completedLabel = () => {
+    if (!market.marketType) {
+      return 'Completed';
+    }
+
+    switch (market.marketType) {
+      case 'stolen':
+      case 'lost':
+        return 'Recovered';
+      case 'found':
+        return 'Returned';
+      case 'wanted':
+        return 'Aquired';
+      default:
+        return 'Completed';
+    }
+  };
+
+  const completedHelp = () => {
+    let helpText = 'complete this trade';
+
+    if (market.marketType) {
+      switch (market.marketType) {
+        case 'stolen':
+          helpText = 'recover this stolen item';
+          break;
+        case 'lost':
+          helpText = 'recover this lost item';
+          break;
+        case 'found':
+          helpText = 'return this lost item';
+          break;
+        case 'wanted':
+          helpText = 'aquire this item';
+          break;
+        default:
+          helpText = 'complete this trade';
+          break;
+      }
+    }
+
+    return `Have you managed to ${helpText}? If yes, great! Check this box so that it won't be included amongst the active market items anymore.`;
+  };
+
   return (
     <div className="row">
       <ImagesForm
@@ -94,28 +231,11 @@ const MarketForm = ({ market }) => {
             handleChange={handleChange}
             error={errors.description}
           />
-          <SelectForm
-            colFormat="3-9"
-            label="Condition"
-            value={values.status}
-            field="condition"
-            handleChange={handleChange}
-            error={errors.condition}
-            items={conditionItems}
-          />
-          <TextForm
-            colFormat="3-9"
-            type="number"
-            label="Asking Price"
-            value={values.marketPrice}
-            field="marketPrice"
-            step=".01"
-            min="0"
-            max="99999.99"
-            handleChange={handleChange}
-            error={errors.marketPrice}
-          />
-          <hr />
+          {showCondition()}
+          {showPrice()}
+          {showStolenOn()}
+          {showSecurity()}
+          {showTracking()}
           <TextForm
             colFormat="3-9"
             label="Activities"
@@ -127,12 +247,12 @@ const MarketForm = ({ market }) => {
           {values._id && (
             <CheckboxForm
               colFormat="3-1-8"
-              label="Marketd"
-              value={values.marketd}
-              field="marketd"
+              label={completedLabel()}
+              value={values.completed}
+              field="completed"
               onChange={handleChange}
-              error={errors.marketd}
-              help="Have you managed to market this item of kit? If yes, great! Check this box so that it won't be included on the trading market anymore."
+              error={errors.completed}
+              help={completedHelp()}
             />
           )}
           <hr />

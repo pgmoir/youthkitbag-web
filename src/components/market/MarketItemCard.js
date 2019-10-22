@@ -45,7 +45,7 @@ class MarketItemCard extends React.Component {
   }
 
   render() {
-    const { _id, title, subtitle, isOwned } = this.props.market;
+    const { _id, title, subtitle, isOwned, marketType } = this.props.market;
 
     if (!_id) return this.renderBlank();
 
@@ -65,7 +65,7 @@ class MarketItemCard extends React.Component {
               role="presentation"
             />
             <div className="card-body">
-              <h3 className="card-title h6 ellipsis">{title}</h3>
+              <h3 className="card-title h6 ellipsis">{`${marketType.toUpperCase()} - ${title}`}</h3>
               {subtitle && <p className="card-text ellipsis">{subtitle}</p>}
             </div>
           </Link>

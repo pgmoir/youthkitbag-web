@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Title from '../includes/Title';
+import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 import ResetForm from './ResetForm';
 
