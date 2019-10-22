@@ -3,6 +3,7 @@ import useForm from '../hooks/useForm';
 import { login } from '../../actions/AuthActions';
 import validate from './LoginFormValidationRules';
 import { useDispatch } from 'react-redux';
+import { TextForm } from '../includes/forms';
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -57,41 +58,32 @@ const LoginForm = () => {
         <span className="centre-line"></span>
       </p>
       <form className="w-100 d-block" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            className={`form-control ${errors.email && 'is-invalid'}`}
-            name="email"
-            type="email"
-            onChange={handleChange}
-            value={values.email}
-            aria-describedby="email"
-            autoComplete="username email"
-            required
-          />
-          {errors.email && (
-            <div className="invalid-feedback">{errors.email}</div>
-          )}
+        <TextForm
+          colFormat="3-9"
+          label="Email"
+          value={values.email}
+          field="email"
+          handleChange={handleChange}
+          error={errors.email}
+          autoComplete="username email"
+        />
+        <TextForm
+          colFormat="3-9"
+          label="Password"
+          value={values.email}
+          field="email"
+          handleChange={handleChange}
+          error={errors.email}
+          autoComplete="current-password"
+        />
+        <div className="mx-auto">
+          <button
+            className="d-block btn btn-success btn-lg py-3 px-5 mt-3 mx-auto"
+            type="submit"
+          >
+            Login to YouthKitbag
+          </button>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            className={`form-control ${errors.email && 'is-invalid'}`}
-            name="password"
-            type="password"
-            onChange={handleChange}
-            value={values.password}
-            aria-describedby="password"
-            autoComplete="current-password"
-            required
-          />
-          {errors.password && (
-            <div className="invalid-feedback">{errors.password}</div>
-          )}
-        </div>
-        <button className="btn btn-primary" type="submit">
-          Login
-        </button>
       </form>
     </React.Fragment>
   );

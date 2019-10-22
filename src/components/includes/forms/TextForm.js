@@ -13,7 +13,8 @@ const TextForm = ({
   readOnly,
   handleChange,
   index,
-  error
+  error,
+  autoComplete
 }) => {
   const columns = colFormat.split('-');
   return (
@@ -34,6 +35,7 @@ const TextForm = ({
               readOnly={readOnly}
               handleChange={handleChange}
               error={error}
+              autoComplete={autoComplete}
             />
           </div>
         </div>
@@ -51,6 +53,7 @@ const TextForm = ({
             readOnly={readOnly}
             handleChange={handleChange}
             error={error}
+            autoComplete={autoComplete}
           />
         </div>
       )}

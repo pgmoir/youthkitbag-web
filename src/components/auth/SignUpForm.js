@@ -59,18 +59,10 @@ const SignUpForm = () => {
         Sign Up for YouthKitbag
       </button>
       <p className="h6 pt-3">
-        Alternatively use{' '}
-        <a href={`${baseUrl}/auth/google`} className="text-white">
-          Google
-        </a>
-        ,{' '}
-        <a href={`${baseUrl}/auth/facebook`} className="text-white">
-          Facebook
-        </a>
+        Alternatively use <a href={`${baseUrl}/auth/google`}>Google</a>,{' '}
+        <a href={`${baseUrl}/auth/facebook`}>Facebook</a>
         {' or '}
-        <a href={`${baseUrl}/auth/github`} className="text-white">
-          GitHub
-        </a>
+        <a href={`${baseUrl}/auth/github`}>GitHub</a>
       </p>
     </form>
   );

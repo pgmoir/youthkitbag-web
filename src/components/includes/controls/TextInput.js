@@ -9,12 +9,13 @@ const TextInput = ({
   max,
   readOnly,
   handleChange,
-  error
+  error,
+  autoComplete
 }) => {
   return (
     <React.Fragment>
       <input
-        className={`form-control ${error && 'is-invalid'}`}
+        className={`form-control${error ? ' is-invalid' : ''}`}
         name={field}
         type={type ? type : 'text'}
         step={step}
@@ -25,6 +26,7 @@ const TextInput = ({
         onBlur={handleChange}
         value={value}
         aria-describedby={field}
+        autoComplete={autoComplete}
       />
       {error && <div className="invalid-feedback">{error}</div>}
     </React.Fragment>

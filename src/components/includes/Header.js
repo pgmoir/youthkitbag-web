@@ -77,11 +77,6 @@ class Header extends React.Component {
                         Kitbag
                       </Link>
                     </li>
-                    <li className="nav-item">
-                      <Link to="/kitbag/market" className="nav-link">
-                        My Market
-                      </Link>
-                    </li>
                     <li className="nav-item dropdown mr-3">
                       <Link
                         className="nav-item nav-link dropdown-toggle"

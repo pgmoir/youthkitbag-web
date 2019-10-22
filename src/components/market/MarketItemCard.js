@@ -2,10 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class MarketItemCard extends React.Component {
-  renderAskingPrice = marketPrice => {
-    if (!marketPrice || marketPrice === 0) return 'Free';
-    return `£${marketPrice.toFixed(2)}`;
-  };
+  renderNotification() {
+    if (!this.props.market) return null;
+    const {
+      isOwned,
+      marketType,
+      marketPrice,
+      responseDetails
+    } = this.props.market;
+    if (isOwned) {
+      return responseDetails.filter(r => r.legit && !r.accepted).length;
+    }
+    if (['trade', 'wanted'].includes(marketType)) {
+      if (!marketPrice || marketPrice === 0) return 'Free';
+      return `£${marketPrice.toFixed(2)}`;
+    }
+    return marketType;
+  }
 
   topImage() {
     const { images } = this.props.market;
@@ -32,7 +45,7 @@ class MarketItemCard extends React.Component {
   }
 
   render() {
-    const { _id, title, subtitle, marketPrice } = this.props.market;
+    const { _id, title, subtitle, isOwned } = this.props.market;
 
     if (!_id) return this.renderBlank();
 
@@ -40,9 +53,11 @@ class MarketItemCard extends React.Component {
       <div className="col-6 col-md-4 col-lg-3 mb-3">
         <article className="card card-link card-b1">
           <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">
-            {this.renderAskingPrice(marketPrice)}
+            {this.renderNotification()}
           </span>
-          <Link to={`/market/view/${_id}`}>
+          <Link
+            to={isOwned ? `/kitbag/market/edit/${_id}` : `/market/view/${_id}`}
+          >
             <img
               className="card-img-top"
               src={this.topImage()}

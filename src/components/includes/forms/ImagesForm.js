@@ -203,7 +203,7 @@ const ImagesForm = ({ values, readOnly, setChange, addArrayItem, error }) => {
                 <input
                   type="file"
                   multiple
-                  className={`custom-file-input ${error && 'is-invalid'}`}
+                  className={`custom-file-input${error ? ' is-invalid' : ''}`}
                   id="photos"
                   aria-describedby="photos"
                   onChange={e => onFileChanged(e)}

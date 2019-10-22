@@ -217,7 +217,7 @@ const MarketForm = ({ market }) => {
             <button className="btn btn-primary" type="submit">
               Save
             </button>
-            <Link className="btn btn-link" to="/kitbag/market">
+            <Link className="btn btn-link" to="/market">
               Cancel
             </Link>
           </div>
