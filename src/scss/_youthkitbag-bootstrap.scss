@@ -148,18 +148,28 @@ span {
   background: #3b5998 url('/images/facebook.svg') no-repeat 13px -3px;
   background-size: 47px;
   color: #fff;
+  &:hover {
+    background-color: #2e4575;
+    color: #fff;
+  }
 }
 
 .btn-google {
   border: 1px solid #95989a;
   background: #fff url('/images/google.svg') no-repeat 25px;
   background-size: 25px;
+  &:hover {
+    background-color: #eee;
+  }
 }
 
 .btn-github {
   border: 1px solid #95989a;
   background: #fff url('/images/github.svg') no-repeat 25px;
   background-size: 25px;
+  &:hover {
+    background-color: #eee;
+  }
 }
 
 $jumbotron-h1-size: 2.5rem;

@@ -297,14 +297,21 @@ body {
     background: #3b5998 url("/images/facebook.svg") no-repeat 13px -3px;
     background-size: 47px;
     color: #fff; }
+    .youthkitbag .btn-facebook:hover {
+      background-color: #2e4575;
+      color: #fff; }
   .youthkitbag .btn-google {
     border: 1px solid #95989a;
     background: #fff url("/images/google.svg") no-repeat 25px;
     background-size: 25px; }
+    .youthkitbag .btn-google:hover {
+      background-color: #eee; }
   .youthkitbag .btn-github {
     border: 1px solid #95989a;
     background: #fff url("/images/github.svg") no-repeat 25px;
     background-size: 25px; }
+    .youthkitbag .btn-github:hover {
+      background-color: #eee; }
   .youthkitbag .jumbotron h1 {
     font-size: 2.5rem;
     font-weight: bold;
