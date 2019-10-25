@@ -128,17 +128,9 @@ const ProfileForm = () => {
             <dd className="col-9 pb-2">
               {user.package.size.kit} of {user.package.max.kit}
             </dd>
-            <dt className="col-3 pb-2">Trade</dt>
+            <dt className="col-3 pb-2">Market</dt>
             <dd className="col-9 pb-2">
-              {user.package.size.trade} of {user.package.max.trade}
-            </dd>
-            <dt className="col-3 pb-2">Wanted</dt>
-            <dd className="col-9 pb-2">
-              {user.package.size.wanted} of {user.package.max.wanted}
-            </dd>
-            <dt className="col-3 pb-2">Stolen</dt>
-            <dd className="col-9 pb-2">
-              {user.package.size.stolen} of {user.package.max.stolen}
+              {user.package.size.market} of {user.package.max.market}
             </dd>
             <dt className="col-3 pb-2">Photos</dt>
             <dd className="col-9 pb-2">

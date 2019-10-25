@@ -4,14 +4,9 @@ import { Link } from 'react-router-dom';
 class MarketItemCard extends React.Component {
   renderNotification() {
     if (!this.props.market) return null;
-    const {
-      isOwned,
-      marketType,
-      marketPrice,
-      responseDetails
-    } = this.props.market;
+    const { isOwned, marketType, marketPrice, threads } = this.props.market;
     if (isOwned) {
-      return responseDetails.filter(r => r.legit && !r.accepted).length;
+      return threads.length;
     }
     if (['trade', 'wanted'].includes(marketType)) {
       if (!marketPrice || marketPrice === 0) return 'Free';

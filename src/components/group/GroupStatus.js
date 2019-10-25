@@ -18,9 +18,9 @@ class GroupStatus extends React.Component {
 
   renderContent() {
     if (!this.props.group) {
-      return 'Are you sure you want to change the status of this group. Any change may impact existing members, trades, wanted or stolen items.';
+      return 'Are you sure you want to change the status of this group. Any change may impact existing members or market items.';
     }
-    return `How do you want to change the status of "${this.props.group.name}"? You can either approve or block this group. Any change may impact existing members, trades, wanted or stolen items.`;
+    return `How do you want to change the status of "${this.props.group.name}"? You can either approve or block this group. Any change may impact existing members or market items.`;
   }
 
   renderActions() {

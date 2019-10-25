@@ -9,11 +9,7 @@ import LostResponse from './response/LostResponse';
 import StolenResponse from './response/StolenResponse';
 import TradeResponse from './response/TradeResponse';
 import WantedResponse from './response/WantedResponse';
-import FoundResponded from './responded/FoundResponded';
-import LostResponded from './responded/LostResponded';
-import StolenResponded from './responded/StolenResponded';
-import TradeResponded from './responded/TradeResponded';
-import WantedResponded from './responded/WantedResponded';
+import Threads from './threads/Threads';
 
 const MarketItemDetails = ({ market }) => {
   const dispatch = useDispatch();
@@ -191,72 +187,70 @@ const MarketItemDetails = ({ market }) => {
   };
   const Response = responseComponents[market.marketType || 'trade'];
 
-  const respondedComponents = {
-    found: FoundResponded,
-    lost: LostResponded,
-    stolen: StolenResponded,
-    trade: TradeResponded,
-    wanted: WantedResponded
-  };
-  const Responded = respondedComponents[market.marketType || 'trade'];
-
   return (
-    <div className="row">
-      <div className="col-12 col-lg-6 order-1 order-lg-2" role="main">
-        <div>
-          <img
-            id="preview"
-            name="preview"
-            className="img-fluid mb-3"
-            src={market.topImage}
-            alt=""
-            role="presentation"
-          />
-        </div>
-        <div>{renderSecondaryImages()}</div>
-      </div>
-      <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
-        <TextForm
-          colFormat="3-9"
-          label="Subtitle"
-          value={market.subtitle}
-          readOnly={true}
-        />
-        <TextAreaForm
-          colFormat="3-9"
-          label="Description"
-          value={market.description}
-          readOnly={true}
-        />
-        {showCondition()}
-        {showPrice()}
-        {showStolenOn()}
-        {showSecurity()}
-        {showTracking()}
-        <TextForm
-          colFormat="3-9"
-          label="Activities"
-          value={market.activitys}
-          readOnly={true}
-        />
-        <hr />
-        {market.responseDetails && market.responseDetails.length === 0 && (
-          <React.Fragment>
-            <Response
-              values={values}
-              handleChange={handleChange}
-              errors={errors}
-              handleSubmit={handleSubmit}
+    <React.Fragment>
+      {market._id && (
+        <div className="row">
+          <div className="col-12 col-lg-6 order-1 order-lg-2" role="main">
+            <div>
+              <img
+                id="preview"
+                name="preview"
+                className="img-fluid mb-3"
+                src={market.topImage}
+                alt=""
+                role="presentation"
+              />
+            </div>
+            <div>{renderSecondaryImages()}</div>
+          </div>
+          <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
+            <TextForm
+              colFormat="3-9"
+              label="Subtitle"
+              value={market.subtitle}
+              readOnly={true}
             />
-          </React.Fragment>
-        )}
-        {market.responseDetails && market.responseDetails.length > 0 && (
-          <React.Fragment>
-            <Responded responseDetails={market.responseDetails[0]} />
-          </React.Fragment>
-        )}
-      </div>
-    </div>
+            <TextAreaForm
+              colFormat="3-9"
+              label="Description"
+              value={market.description}
+              readOnly={true}
+            />
+            {showCondition()}
+            {showPrice()}
+            {showStolenOn()}
+            {showSecurity()}
+            {showTracking()}
+            <TextForm
+              colFormat="3-9"
+              label="Activities"
+              value={market.activitys}
+              readOnly={true}
+            />
+            <hr />
+            {market.threads.length === 0 && (
+              <Response
+                values={values}
+                handleChange={handleChange}
+                errors={errors}
+                handleSubmit={handleSubmit}
+              />
+            )}
+          </div>
+        </div>
+      )}
+      {market._id && market.threads.length > 0 && (
+        <React.Fragment>
+          <hr />
+          <div className="row">
+            <div className="col-12">
+              <Threads threads={market.threads} />
+            </div>
+          </div>
+        </React.Fragment>
+      )}
+    </React.Fragment>
   );
 };
 

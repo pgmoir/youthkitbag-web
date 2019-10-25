@@ -55,11 +55,7 @@ class GroupMemberState extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return { stolen: state.kitbag.stolen[ownProps.match.params.id] };
-};
-
 export default connect(
-  mapStateToProps,
+  null,
   { editGroupMemberState }
 )(GroupMemberState);

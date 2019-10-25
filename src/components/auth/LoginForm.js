@@ -60,6 +60,7 @@ const LoginForm = () => {
       <form className="w-100 d-block" onSubmit={handleSubmit}>
         <TextForm
           colFormat="3-9"
+          type="email"
           label="Email"
           value={values.email}
           field="email"
@@ -69,11 +70,12 @@ const LoginForm = () => {
         />
         <TextForm
           colFormat="3-9"
+          type="password"
           label="Password"
-          value={values.email}
-          field="email"
+          value={values.password}
+          field="password"
           handleChange={handleChange}
-          error={errors.email}
+          error={errors.password}
           autoComplete="current-password"
         />
         <div className="mx-auto">

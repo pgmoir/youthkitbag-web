@@ -35,6 +35,8 @@ const KitForm = ({ kit }) => {
     'Trashed',
     'Given Away',
     'Donated',
+    'Lost',
+    'Found',
     'Other'
   ];
   const conditionItems = ['Used', 'New', 'Almost New', 'Other'];

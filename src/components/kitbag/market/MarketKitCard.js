@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 class MarketKitCard extends React.Component {
   renderNotificationCount() {
     if (!this.props.market) return 0;
-    return this.props.market.responseDetails.filter(r => r.legit && !r.accepted)
-      .length;
+    return this.props.market.threads..length;
   }
 
   topImage() {
