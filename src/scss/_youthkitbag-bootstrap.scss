@@ -268,3 +268,27 @@ $jumbotron-h4-size: 1.1rem;
     }
   }
 }
+
+.thread-link {
+  .thread-icon {
+    .fas {
+      font-size: 3rem;
+    }
+  }
+  .thread-msg {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: auto;
+    white-space: nowrap;
+  }
+}
+
+.flex-truncated {
+  flex: 1;
+  &,
+  & > * {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

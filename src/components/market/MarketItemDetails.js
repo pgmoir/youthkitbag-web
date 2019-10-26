@@ -245,9 +245,10 @@ const MarketItemDetails = ({ market }) => {
           <hr />
           <div className="row">
             <div className="col-12">
-              <Threads threads={market.threads} />
+              <h3>{`Thread for "${market.title}"`}</h3>
             </div>
           </div>
+          <Threads threads={market.threads} />
         </React.Fragment>
       )}
     </React.Fragment>
