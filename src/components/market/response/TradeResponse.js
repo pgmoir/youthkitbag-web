@@ -34,7 +34,7 @@ const TradeResponse = ({ values, handleChange, errors, handleSubmit }) => {
                 value={values.details}
                 field="details"
                 handleChange={handleChange}
-                errors={errors.details}
+                error={errors.details}
               />
             </div>
             <hr />

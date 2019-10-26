@@ -9,7 +9,7 @@ import LostResponse from './response/LostResponse';
 import StolenResponse from './response/StolenResponse';
 import TradeResponse from './response/TradeResponse';
 import WantedResponse from './response/WantedResponse';
-import Threads from './threads/Threads';
+import Threads from '../thread/threads/Threads';
 
 const MarketItemDetails = ({ market }) => {
   const dispatch = useDispatch();
@@ -242,13 +242,12 @@ const MarketItemDetails = ({ market }) => {
       )}
       {market._id && market.threads.length > 0 && (
         <React.Fragment>
-          <hr />
           <div className="row">
             <div className="col-12">
-              <h3>{`Thread for "${market.title}"`}</h3>
+              <h4>{`Thread for "${market.title}"`}</h4>
             </div>
           </div>
-          <Threads threads={market.threads} />
+          <Threads threads={market.threads} source="market" />
         </React.Fragment>
       )}
     </React.Fragment>
