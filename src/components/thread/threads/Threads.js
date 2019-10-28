@@ -20,20 +20,6 @@ class Threads extends React.Component {
     });
   }
 
-  renderBlankMessages() {
-    return null;
-    // const blankMessageChains = [{}, {}, {}, {}, {}, {}];
-    // return blankMessageChains.map((thread, index) => {
-    //   return (
-    //     <ThreadMessageChain
-    //       key={`${thread._id}-${index}`}
-    //       thread={thread}
-    //       source={this.props.source}
-    //     />
-    //   );
-    // });
-  }
-
   renderThreadLinks() {
     if (!this.props.threads) return this.renderBlankLinks();
     let items = [...this.props.threads];
@@ -53,13 +39,41 @@ class Threads extends React.Component {
     });
   }
 
+  cleanThread(thread) {
+    let newThread = { ...thread };
+    newThread.messages = [];
+    const { messages } = thread;
+    let previoudsDate = { day: 0, month: 0, year: 0 };
+    for (var i = 0; i < messages.length; i++) {
+      const sentOnDate = new Date(messages[i].sentOn);
+      const compareDate = {
+        day: sentOnDate.getDate(),
+        month: sentOnDate.getMonth(),
+        year: sentOnDate.getFullYear()
+      };
+      const sameDate =
+        previoudsDate.day === compareDate.day &&
+        previoudsDate.month === compareDate.month &&
+        previoudsDate.year === compareDate.year;
+      previoudsDate = compareDate;
+      newThread.messages.push({
+        _id: messages[i]._id,
+        toSourceUser: messages[i].toSourceUser,
+        sentOn: sameDate ? undefined : messages[i].sentOn,
+        content: messages[i].content
+      });
+    }
+    return newThread;
+  }
+
   renderThreadMessages() {
-    let items = [...this.props.threads];
-    return items.map((thread, index) => {
+    let threads = [...this.props.threads];
+    return threads.map((thread, index) => {
+      const thisThread = this.cleanThread(thread);
       return (
         <ThreadMessageChain
-          key={`${thread._id}-${index}`}
-          thread={thread}
+          key={`${thisThread._id}-${index}`}
+          thread={thisThread}
           source={this.props.source}
         />
       );
