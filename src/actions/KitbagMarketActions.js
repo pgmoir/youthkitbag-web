@@ -117,6 +117,37 @@ export const editMarketKit = (marketId, formValues) => dispatch => {
     });
 };
 
+export const respondToMarketKitThread = (
+  marketId,
+  threadId,
+  formValues
+) => dispatch => {
+  const token = localStorage.getItem('token');
+  axios
+    .put(
+      `${baseUrl}/kitbag/market/respond/${marketId}/${threadId}`,
+      { ...formValues },
+      {
+        headers: {
+          Authorization: `bearer ${token}`,
+          'content-type': 'application/json'
+        }
+      }
+    )
+    .then(() => {
+      dispatch(fetchMarketKit(marketId));
+    })
+    .catch(err => {
+      const { response } = err;
+      if (response.status === 401) {
+        window.localStorage.clear();
+        dispatch({ type: GETALL_FAILURE, payload: response });
+        history.push(`/auth/login?return=/kitbag/market/edit/${marketId}`);
+      }
+      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+    });
+};
+
 export const deleteMarketKit = marketId => dispatch => {
   const token = localStorage.getItem('token');
   axios

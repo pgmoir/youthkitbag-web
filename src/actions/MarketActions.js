@@ -16,7 +16,6 @@ export const fetchMarketItems = (
   page = 1,
   pagesize = 24
 ) => dispatch => {
-  console.log('FETCHMKTITEMS', search);
   const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/market`, {
@@ -82,6 +81,37 @@ export const respondMarketItem = (marketId, formValues) => dispatch => {
     .then(response => {
       dispatch({ type: RESPOND_MARKET_ITEM, payload: response.data });
       history.push(`/market/${marketId}`);
+    })
+    .catch(err => {
+      const { response } = err;
+      if (response.status === 401) {
+        window.localStorage.clear();
+        dispatch({ type: GETALL_FAILURE, payload: response });
+        history.push(`/auth/login?return=/market/${marketId}`);
+      }
+      dispatch({ type: API_MARKET_ERROR, payload: err.response });
+    });
+};
+
+export const respondToMarketThread = (
+  marketId,
+  threadId,
+  formValues
+) => dispatch => {
+  const token = localStorage.getItem('token');
+  axios
+    .put(
+      `${baseUrl}/market/respond/${marketId}/${threadId}`,
+      { ...formValues },
+      {
+        headers: {
+          Authorization: `bearer ${token}`,
+          'content-type': 'application/json'
+        }
+      }
+    )
+    .then(() => {
+      dispatch(fetchMarketItem(marketId));
     })
     .catch(err => {
       const { response } = err;
