@@ -36,6 +36,7 @@ const SignUpForm = () => {
         field="email"
         handleChange={handleChange}
         error={errors.email}
+        autoComplete="username"
       />
       <TextForm
         colFormat="3-9"
@@ -45,6 +46,7 @@ const SignUpForm = () => {
         field="password"
         handleChange={handleChange}
         error={errors.password}
+        autoComplete="current-password"
       />
       <TextForm
         colFormat="3-9"
