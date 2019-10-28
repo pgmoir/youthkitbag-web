@@ -51,9 +51,9 @@ const SignUpForm = () => {
       <TextForm
         colFormat="3-9"
         label="Confirm"
-        type="confirmPassword"
+        type="password"
         value={values.confirmPassword}
-        field="password"
+        field="confirmPassword"
         handleChange={handleChange}
         error={errors.confirmPassword}
       />
