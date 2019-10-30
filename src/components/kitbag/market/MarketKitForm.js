@@ -353,7 +353,11 @@ const MarketForm = ({ market }) => {
               <h4>{`All messages about "${market.title}"`}</h4>
             </div>
           </div>
-          <Threads threads={market.threads} source="kitbag" />
+          <Threads
+            threads={market.threads}
+            source="kitbag"
+            marketType={market.marketType}
+          />
         </React.Fragment>
       )}
     </React.Fragment>

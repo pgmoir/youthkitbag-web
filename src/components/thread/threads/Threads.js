@@ -4,6 +4,11 @@ import ThreadMessageChain from '../threadMessageChain/ThreadMessageChain';
 import { compareForSameDate } from '../../../helpers/date';
 
 class Threads extends React.Component {
+  state = {
+    threadDisplayed:
+      this.props.threads.length > 0 ? this.props.threads[0]._id : undefined
+  };
+
   renderThreadLinks() {
     let { threads, source } = this.props;
     if (!threads) return (threads = [{}, {}, {}, {}, {}, {}]);
@@ -13,6 +18,7 @@ class Threads extends React.Component {
           key={`${thread._id}-${index}`}
           thread={thread}
           source={source}
+          changeThreadDisplayed={this.changeThreadDisplayed}
         />
       );
     });
@@ -39,6 +45,10 @@ class Threads extends React.Component {
     return newThread;
   }
 
+  changeThreadDisplayed = id => {
+    console.log('CHANGED', id);
+  };
+
   renderThreadMessages() {
     let threads = [...this.props.threads];
     return threads.map((thread, index) => {
@@ -48,6 +58,8 @@ class Threads extends React.Component {
           key={`${thisThread._id}-${index}`}
           thread={thisThread}
           source={this.props.source}
+          marketType={this.props.marketType}
+          displayed={this.state.threadDisplayed}
         />
       );
     });

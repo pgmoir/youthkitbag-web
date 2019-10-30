@@ -5,8 +5,10 @@ import { respondToMarketKitThread } from '../../../actions/KitbagMarketActions';
 import { respondToMarketThread } from '../../../actions/MarketActions';
 import validate from './ThreadMessageChainFormValidationRules';
 import TextAreaInput from '../../includes/controls/TextAreaInput';
+import RadioGroupInput from '../../includes/controls/RadioGroupInput';
+import Alert from '../../includes/Alert';
 
-const ThreadMessageChain = ({ thread, source }) => {
+const ThreadMessageChain = ({ thread, source, marketType, displayed }) => {
   const dispatch = useDispatch();
   const newErrors = useSelector(state => state.toast.errors);
 
@@ -22,6 +24,19 @@ const ThreadMessageChain = ({ thread, source }) => {
     respondToThread,
     validate
   );
+
+  const responseStateOptions = {
+    market: {
+      trade: ['open', 'withdraw'],
+      wanted: ['open', 'withdraw'],
+      default: ['open', 'close']
+    },
+    kitbag: {
+      trade: ['open', 'accept', 'reject'],
+      wanted: ['open', 'accept', 'reject'],
+      default: ['open', 'close']
+    }
+  };
 
   function respondToThread() {
     if (source === 'market') {
@@ -107,84 +122,62 @@ const ThreadMessageChain = ({ thread, source }) => {
     });
   };
 
-  const renderResponseOptions = () => {
+  const renderResponseStateOptions = () => {
+    let options = responseStateOptions[source][marketType];
+    if (!options) options = responseStateOptions[source]['default'];
+
+    if (thread.responseState !== 'open') {
+      if (source === 'market' || thread.responseState === 'withdraw') {
+        return null;
+      } else {
+        options = ['reopen'];
+      }
+    }
+
     return (
-      <div className="col-auto mt-2">
-        <div className="form-check form-check-inline">
-          <input
-            className="form-check-input form-check-adjust"
-            type="radio"
-            name="responseState"
-            id="open"
-            value="open"
-            onChange={handleChange}
-            checked={values.responseState === 'open'}
-          />
-          <label className="form-check-label" htmlFor="messaging">
-            Messaging
-          </label>
-        </div>
-        <div className="form-check form-check-inline">
-          <input
-            className="form-check-input form-check-adjust"
-            type="radio"
-            name="responseState"
-            id="accepted"
-            value="accepted"
-            onChange={handleChange}
-            checked={values.responseState === 'accepted'}
-          />
-          <label className="form-check-label" htmlFor="accept">
-            Accept
-          </label>
-        </div>
-        <div className="form-check form-check-inline">
-          <input
-            className="form-check-input form-check-adjust"
-            type="radio"
-            name="responseState"
-            id="rejected"
-            value="rejected"
-            onChange={handleChange}
-            checked={values.responseState === 'rejected'}
-          />
-          <label className="form-check-label" htmlFor="reject">
-            Reject
-          </label>
-        </div>
-      </div>
+      <RadioGroupInput
+        options={options}
+        field="responseState"
+        value={values.responseState}
+        handleChange={handleChange}
+      />
     );
   };
 
   return (
     <React.Fragment>
-      <div className="thread-message-chain mb-2 bg-light border rounded-sm">
-        {renderMessages()}
-      </div>
-      <form className="mb-3" onSubmit={handleSubmit}>
-        <div className="form-row">
-          <div className="col">
-            <TextAreaInput
-              handleChange={handleChange}
-              field="content"
-              value={values.content}
-              error={errors.content}
-              addClassName="mb-2"
-              rows="2"
-              placeholder="Reply with message"
-            />
+      {thread._id === displayed && (
+        <React.Fragment>
+          <div className="thread-message-chain mb-2 bg-light border rounded-sm">
+            {renderMessages()}
           </div>
-        </div>
-        <div className="form-row">
-          <div className="col"></div>
-          {renderResponseOptions()}
-          <div className="col-auto">
-            <button className="btn btn-primary" type="submit">
-              Send
-            </button>
-          </div>
-        </div>
-      </form>
+          <Alert />
+          <form className="mb-3" onSubmit={handleSubmit}>
+            <div className="form-row">
+              <div className="col">
+                <TextAreaInput
+                  handleChange={handleChange}
+                  field="content"
+                  value={values.content}
+                  error={errors.content}
+                  addClassName="mb-2"
+                  rows="2"
+                  placeholder="Reply with message"
+                />
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="col"></div>
+              {renderResponseStateOptions()}
+              <div className="col-auto">
+                <button className="btn btn-primary" type="submit">
+                  Send
+                </button>
+              </div>
+            </div>
+          </form>
+        </React.Fragment>
+      )}
     </React.Fragment>
   );
 };

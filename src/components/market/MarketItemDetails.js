@@ -247,7 +247,11 @@ const MarketItemDetails = ({ market }) => {
               <h4>{`Thread for "${market.title}"`}</h4>
             </div>
           </div>
-          <Threads threads={market.threads} source="market" />
+          <Threads
+            threads={market.threads}
+            source="market"
+            marketType={market.marketType}
+          />
         </React.Fragment>
       )}
     </React.Fragment>

@@ -17,14 +17,31 @@ class ThreadLink extends React.Component {
     return user.profile.images[0].imageUrl;
   }
 
+  getBgStyle(responseState) {
+    switch (responseState) {
+      case 'accept':
+        return 'bg-success text-light';
+      case 'reject':
+        return 'bg-danger text-light';
+      case 'withdraw':
+        return 'bg-warning';
+      default:
+        return 'bg-light';
+    }
+  }
+
   render() {
-    const { _id, sourceUser, responseUser } = this.props.thread;
+    const { _id, sourceUser, responseUser, responseState } = this.props.thread;
     const lastMessage = _id ? this.getLastMessage() : {};
     const isMarket = this.props.source === 'market';
     const secondaryUser = isMarket ? sourceUser : responseUser;
 
     return (
-      <div className="thread-link pb-2">
+      <div
+        className="thread-link pb-2"
+        role="button"
+        onClick={e => this.props.changeThreadDisplayed(this.props.thread._id)}
+      >
         <div className="d-block float-left">
           <div className="p-2">
             <img
@@ -38,7 +55,7 @@ class ThreadLink extends React.Component {
             />
           </div>
         </div>
-        <div className="bg-light">
+        <div className={this.getBgStyle(responseState)}>
           <div className="d-flex">
             <div className="mr-auto py-2 flex-truncated">
               {_id && secondaryUser.profile.username}
