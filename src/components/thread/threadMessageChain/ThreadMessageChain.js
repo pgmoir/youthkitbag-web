@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { respondToMarketKitThread } from '../../../actions/KitbagMarketActions';
 import { respondToMarketThread } from '../../../actions/MarketActions';
 import validate from './ThreadMessageChainFormValidationRules';
+import TextAreaInput from '../../includes/controls/TextAreaInput';
 
 const ThreadMessageChain = ({ thread, source }) => {
   const dispatch = useDispatch();
@@ -12,7 +13,8 @@ const ThreadMessageChain = ({ thread, source }) => {
   const initialMessage = {
     marketId: thread.source,
     threadId: thread._id,
-    content: ''
+    content: '',
+    responseState: thread.responseState
   };
 
   const { handleChange, handleSubmit, values, errors, setErrors } = useForm(
@@ -90,7 +92,13 @@ const ThreadMessageChain = ({ thread, source }) => {
                     : 'justify-content-start'
                 }`}
               >
-                <div className="p-2 w-75 bg-light">{content}</div>
+                <div
+                  className={`p-2 w-75 bg-affair-30 rounded-lg position-relative  ${
+                    toPrimaryUser ? 'speech-right' : 'speech-left'
+                  }`}
+                >
+                  {content}
+                </div>
               </div>
             </div>
           </div>
@@ -99,23 +107,78 @@ const ThreadMessageChain = ({ thread, source }) => {
     });
   };
 
+  const renderResponseOptions = () => {
+    return (
+      <div className="col-auto mt-2">
+        <div className="form-check form-check-inline">
+          <input
+            className="form-check-input form-check-adjust"
+            type="radio"
+            name="responseState"
+            id="open"
+            value="open"
+            onChange={handleChange}
+            checked={values.responseState === 'open'}
+          />
+          <label className="form-check-label" htmlFor="messaging">
+            Messaging
+          </label>
+        </div>
+        <div className="form-check form-check-inline">
+          <input
+            className="form-check-input form-check-adjust"
+            type="radio"
+            name="responseState"
+            id="accepted"
+            value="accepted"
+            onChange={handleChange}
+            checked={values.responseState === 'accepted'}
+          />
+          <label className="form-check-label" htmlFor="accept">
+            Accept
+          </label>
+        </div>
+        <div className="form-check form-check-inline">
+          <input
+            className="form-check-input form-check-adjust"
+            type="radio"
+            name="responseState"
+            id="rejected"
+            value="rejected"
+            onChange={handleChange}
+            checked={values.responseState === 'rejected'}
+          />
+          <label className="form-check-label" htmlFor="reject">
+            Reject
+          </label>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <React.Fragment>
-      <div className="thread-message-chain pb-2">{renderMessages()}</div>
+      <div className="thread-message-chain mb-2 bg-light border rounded-sm">
+        {renderMessages()}
+      </div>
       <form className="mb-3" onSubmit={handleSubmit}>
-        <div className="input-group">
-          <input
-            name="content"
-            className="form-control"
-            type="text"
-            onChange={handleChange}
-            value={values.content}
-            id="content"
-            arialabel="Your reply"
-            placeholder="Your reply"
-            error={errors.content}
-          />
-          <div className="input-group-append">
+        <div className="form-row">
+          <div className="col">
+            <TextAreaInput
+              handleChange={handleChange}
+              field="content"
+              value={values.content}
+              error={errors.content}
+              addClassName="mb-2"
+              rows="2"
+              placeholder="Reply with message"
+            />
+          </div>
+        </div>
+        <div className="form-row">
+          <div className="col"></div>
+          {renderResponseOptions()}
+          <div className="col-auto">
             <button className="btn btn-primary" type="submit">
               Send
             </button>

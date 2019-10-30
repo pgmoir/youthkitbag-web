@@ -293,6 +293,10 @@ body {
     border-bottom-right-radius: 0rem; }
   .youthkitbag .bg-smoke {
     background-color: rgba(10, 10, 10, 0.9); }
+  .youthkitbag .bg-affair-30 {
+    background-color: #7d419830; }
+  .youthkitbag .bg-affair-20 {
+    background-color: #7d419820; }
   .youthkitbag .btn-facebook {
     background: #3b5998 url("/images/facebook.svg") no-repeat 13px -3px;
     background-size: 47px;
@@ -378,5 +382,30 @@ body {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis; }
+  .youthkitbag .speech-right:before {
+    content: '';
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 0.25rem solid #7d419830;
+    border-right: 0.25rem solid transparent;
+    border-top: 0.25rem solid #7d419830;
+    border-bottom: 0.25rem solid transparent;
+    right: -7px;
+    top: 15px; }
+  .youthkitbag .speech-left:before {
+    content: '';
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 0.25rem solid transparent;
+    border-right: 0.25rem solid #7d419830;
+    border-top: 0.25rem solid #7d419830;
+    border-bottom: 0.25rem solid transparent;
+    left: -7px;
+    top: 15px; }
+  .youthkitbag .form-check-inline .form-check-input.form-check-adjust {
+    margin-top: -0.3rem;
+    margin-right: 0.75rem; }
 
 /*# sourceMappingURL=youthkitbag.css.map */
