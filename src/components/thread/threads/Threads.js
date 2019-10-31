@@ -5,8 +5,15 @@ import { compareForSameDate } from '../../../helpers/date';
 
 class Threads extends React.Component {
   state = {
-    threadDisplayed:
-      this.props.threads.length > 0 ? this.props.threads[0]._id : undefined
+    threadDisplayed: undefined
+  };
+
+  componentDidMount = () => {
+    console.log('COMPDIDMOUNT', this.props.threads);
+    this.setState({
+      threadDisplayed:
+        this.props.threads.length > 0 ? this.props.threads[0]._id : undefined
+    });
   };
 
   renderThreadLinks() {
@@ -46,7 +53,7 @@ class Threads extends React.Component {
   }
 
   changeThreadDisplayed = id => {
-    console.log('CHANGED', id);
+    this.setState({ threadDisplayed: id });
   };
 
   renderThreadMessages() {
