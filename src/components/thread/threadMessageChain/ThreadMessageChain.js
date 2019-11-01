@@ -77,49 +77,52 @@ const ThreadMessageChain = ({ thread, source, marketType, displayed }) => {
     const isMarket = source === 'market';
     const primaryUser = isMarket ? responseUser : sourceUser;
     const secondaryUser = isMarket ? sourceUser : responseUser;
-    return messages.map((message, index) => {
-      const { toSourceUser, content } = message;
-      const toPrimaryUser = source === 'market' ? !toSourceUser : toSourceUser;
-      return (
-        <div className="bg-white" key={`${index}`}>
-          {displaySentOn(message.sentOn)}
-          <div className="pb-3">
-            <div
-              className={`d-block ${
-                toPrimaryUser ? 'float-right' : 'float-left'
-              } px-2 pb-3`}
-            >
-              <img
-                src={
-                  toPrimaryUser
-                    ? getThumbnail(secondaryUser)
-                    : getThumbnail(primaryUser)
-                }
-                className="img-avatar img-thumbnail img-link rounded-circle p-0 m-1"
-                alt=""
-              />
-            </div>
-            <div>
+    return messages
+      .filter(m => m.content.length > 0)
+      .map((message, index) => {
+        const { toSourceUser, content } = message;
+        const toPrimaryUser =
+          source === 'market' ? !toSourceUser : toSourceUser;
+        return (
+          <div className="bg-white" key={`${index}`}>
+            {displaySentOn(message.sentOn)}
+            <div className="pb-3">
               <div
-                className={`d-flex ${
-                  toPrimaryUser
-                    ? 'justify-content-end'
-                    : 'justify-content-start'
-                }`}
+                className={`d-block ${
+                  toPrimaryUser ? 'float-right' : 'float-left'
+                } px-2 pb-3`}
               >
+                <img
+                  src={
+                    toPrimaryUser
+                      ? getThumbnail(secondaryUser)
+                      : getThumbnail(primaryUser)
+                  }
+                  className="img-avatar img-thumbnail img-link rounded-circle p-0 m-1"
+                  alt=""
+                />
+              </div>
+              <div>
                 <div
-                  className={`p-2 w-75 bg-affair-30 rounded-lg position-relative  ${
-                    toPrimaryUser ? 'speech-right' : 'speech-left'
+                  className={`d-flex ${
+                    toPrimaryUser
+                      ? 'justify-content-end'
+                      : 'justify-content-start'
                   }`}
                 >
-                  {content}
+                  <div
+                    className={`p-2 w-75 bg-affair-30 rounded-lg position-relative  ${
+                      toPrimaryUser ? 'speech-right' : 'speech-left'
+                    }`}
+                  >
+                    {content}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      );
-    });
+        );
+      });
   };
 
   const renderResponseStateOptions = () => {

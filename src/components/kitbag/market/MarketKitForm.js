@@ -65,6 +65,18 @@ const MarketForm = ({ market }) => {
       return null;
     }
 
+    if (isReadOnly()) {
+      return (
+        <TextForm
+          colFormat="3-9"
+          label="Condition"
+          value={values.condition}
+          field="condition"
+          readOnly={true}
+        />
+      );
+    }
+
     const conditionItems = ['Used', 'New', 'Almost New', 'Other'];
 
     return (
@@ -76,6 +88,7 @@ const MarketForm = ({ market }) => {
         handleChange={handleChange}
         error={errors.condition}
         items={conditionItems}
+        readOnly={isReadOnly()}
       />
     );
   };
@@ -100,6 +113,7 @@ const MarketForm = ({ market }) => {
         max="99999.99"
         handleChange={handleChange}
         error={errors.marketPrice}
+        readOnly={isReadOnly()}
       />
     );
   };
@@ -117,6 +131,7 @@ const MarketForm = ({ market }) => {
         field="occurredOn"
         setChange={setChange}
         error={errors.occurredOn}
+        readOnly={isReadOnly()}
       />
     );
   };
@@ -134,6 +149,7 @@ const MarketForm = ({ market }) => {
         field="security"
         handleChange={handleChange}
         error={errors.security}
+        readOnly={isReadOnly()}
       />
     );
   };
@@ -199,6 +215,20 @@ const MarketForm = ({ market }) => {
     return `Have you managed to ${helpText}? If yes, great! Check this box so that it won't be included amongst the active market items anymore.`;
   };
 
+  const isReadOnly = () => {
+    if (market.completed) {
+      return true;
+    }
+    if (!market.threads) {
+      return false;
+    }
+    const closedThreadStates = ['withdraw', 'reject'];
+    return (
+      market.threads.filter(m => closedThreadStates.includes(m.responseState))
+        .length > 0
+    );
+  };
+
   return (
     <React.Fragment>
       <div className="row">
@@ -216,6 +246,7 @@ const MarketForm = ({ market }) => {
               field="title"
               handleChange={handleChange}
               error={errors.title}
+              readOnly={isReadOnly()}
             />
             <TextForm
               colFormat="3-9"
@@ -224,6 +255,7 @@ const MarketForm = ({ market }) => {
               field="subtitle"
               handleChange={handleChange}
               error={errors.subtitle}
+              readOnly={isReadOnly()}
             />
             <TextAreaForm
               colFormat="3-9"
@@ -232,6 +264,7 @@ const MarketForm = ({ market }) => {
               field="description"
               handleChange={handleChange}
               error={errors.description}
+              readOnly={isReadOnly()}
             />
             {showCondition()}
             {showPrice()}
@@ -245,6 +278,7 @@ const MarketForm = ({ market }) => {
               field="activitys"
               handleChange={handleChange}
               error={errors.activitys}
+              readOnly={isReadOnly()}
             />
             {values._id && (
               <CheckboxForm

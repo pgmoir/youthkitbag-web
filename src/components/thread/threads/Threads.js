@@ -9,7 +9,6 @@ class Threads extends React.Component {
   };
 
   componentDidMount = () => {
-    console.log('COMPDIDMOUNT', this.props.threads);
     this.setState({
       threadDisplayed:
         this.props.threads.length > 0 ? this.props.threads[0]._id : undefined
