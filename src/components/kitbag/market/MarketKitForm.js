@@ -236,6 +236,7 @@ const MarketForm = ({ market }) => {
           values={values}
           setChange={setChange}
           addArrayItem={addArrayItem}
+          readOnly={isReadOnly()}
         />
         <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
           <form className="mb-3" onSubmit={handleSubmit}>
@@ -382,9 +383,10 @@ const MarketForm = ({ market }) => {
       </div>
       {market._id && market.threads.length > 0 && (
         <React.Fragment>
+          <hr />
           <div className="row">
             <div className="col-12">
-              <h4>{`All messages about "${market.title}"`}</h4>
+              <h4>Offers and messages</h4>
             </div>
           </div>
           <Threads

@@ -24,7 +24,7 @@ class ThreadLink extends React.Component {
       case 'reject':
         return 'bg-danger text-light';
       case 'withdraw':
-        return 'bg-warning';
+        return 'bg-warning text-gray-500';
       default:
         return 'bg-light';
     }
@@ -38,9 +38,10 @@ class ThreadLink extends React.Component {
 
     return (
       <div
-        className="thread-link pb-2"
+        className="thread-link mb-2"
         role="button"
         onClick={e => this.props.changeThreadDisplayed(this.props.thread._id)}
+        tabIndex="0"
       >
         <div className="d-block float-left">
           <div className="p-2">
