@@ -77,7 +77,7 @@ const GroupForm = ({ group }) => {
             Save
           </button>
         )}
-        <Link className="btn btn-link" to="/settings/groups">
+        <Link className="btn btn-link" to="/groups">
           Cancel
         </Link>
       </div>

@@ -443,5 +443,10 @@ body {
     background-color: #343a40; }
   .youthkitbag .bg-gray-900 {
     background-color: #212529; }
+  .youthkitbag .list-group-item {
+    padding: 1rem 1rem 0.8rem 1rem; }
+    .youthkitbag .list-group-item.active {
+      border-right: 0.5rem solid #31358e;
+      background-color: #7d419820; }
 
 /*# sourceMappingURL=youthkitbag.css.map */

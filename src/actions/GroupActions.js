@@ -35,7 +35,7 @@ export const fetchGroups = (
     .then(response => {
       dispatch({ type: FETCH_GROUPS, payload: response.data });
       history.push(
-        `/settings/groups?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`
+        `/groups?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`
       );
     })
     .catch(err => {
@@ -43,7 +43,7 @@ export const fetchGroups = (
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/settings/groups');
+        history.push('/auth/login?return=/groups');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: response });
     });
@@ -66,7 +66,7 @@ export const fetchGroup = groupId => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/settings/groups/view');
+        history.push('/auth/login?return=/groups/view');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
@@ -87,7 +87,7 @@ export const createGroup = formValues => dispatch => {
     )
     .then(response => {
       dispatch({ type: CREATE_GROUP, payload: response.data });
-      history.push('/settings/groups?search=&by=&page=1&pagesize=24');
+      history.push('/groups?search=&by=&page=1&pagesize=24');
     })
     .catch(err => {
       const { response } = err;
@@ -95,7 +95,7 @@ export const createGroup = formValues => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          '/auth/login?return=/settings/groups?search=&by=&page=1&pagesize=24'
+          '/auth/login?return=/groups?search=&by=&page=1&pagesize=24'
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -117,7 +117,7 @@ export const editGroup = (groupId, formValues) => dispatch => {
     )
     .then(response => {
       dispatch({ type: EDIT_GROUP, payload: response.data });
-      history.push('/settings/groups?search=&by=&page=1&pagesize=24');
+      history.push('/groups?search=&by=&page=1&pagesize=24');
     })
     .catch(err => {
       const { response } = err;
@@ -125,7 +125,7 @@ export const editGroup = (groupId, formValues) => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          '/auth/login?return=/settings/groups?search=&by=&page=1&pagesize=24'
+          '/auth/login?return=/groups?search=&by=&page=1&pagesize=24'
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -147,7 +147,7 @@ export const editGroupStatus = (groupId, status) => dispatch => {
     )
     .then(response => {
       dispatch({ type: EDIT_GROUP_STATUS, payload: response.data });
-      history.push('/settings/groups?search=&by=&page=1&pagesize=24');
+      history.push('/groups?search=&by=&page=1&pagesize=24');
     })
     .catch(err => {
       const { response } = err;
@@ -155,7 +155,7 @@ export const editGroupStatus = (groupId, status) => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          '/auth/login?return=/settings/groups?search=&by=&page=1&pagesize=24'
+          '/auth/login?return=/groups?search=&by=&page=1&pagesize=24'
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -173,14 +173,14 @@ export const fetchGroupMembers = groupId => dispatch => {
     })
     .then(response => {
       dispatch({ type: FETCH_GROUP_MEMBERS, payload: response.data });
-      history.push(`/settings/groups/${groupId}/members`);
+      history.push(`/groups/${groupId}/members`);
     })
     .catch(err => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/settings/groups/${groupId}/members`);
+        history.push(`/auth/login?return=/groups/${groupId}/members`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: response });
     });
@@ -201,14 +201,14 @@ export const editGroupMemberState = (groupId, memberId, state) => dispatch => {
     )
     .then(response => {
       dispatch({ type: EDIT_GROUP_MEMBER_STATE, payload: response.data });
-      history.push(`/settings/groups/${groupId}/members`);
+      history.push(`/groups/${groupId}/members`);
     })
     .catch(err => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/settings/groups/${groupId}/members`);
+        history.push(`/auth/login?return=/groups/${groupId}/members`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
@@ -230,17 +230,17 @@ export const requestGroupJoin = groupId => dispatch => {
     .then(response => {
       dispatch({ type: CREATE_GROUP_JOIN, payload: response.data });
       dispatch(getUser());
-      history.push(`/settings/groups/${groupId}`);
+      history.push(`/groups/${groupId}`);
     })
     .catch(err => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/settings/groups/${groupId}`);
+        history.push(`/auth/login?return=/groups/${groupId}`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
-      history.push(`/settings/groups/${groupId}`);
+      history.push(`/groups/${groupId}`);
     });
 };
 
@@ -259,14 +259,14 @@ export const requestGroupLeave = groupId => dispatch => {
     )
     .then(response => {
       dispatch({ type: EDIT_GROUP_LEAVE, payload: response.data });
-      history.push(`/settings/groups/${groupId}`);
+      history.push(`/groups/${groupId}`);
     })
     .catch(err => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/settings/groups/${groupId}`);
+        history.push(`/auth/login?return=/groups/${groupId}`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });

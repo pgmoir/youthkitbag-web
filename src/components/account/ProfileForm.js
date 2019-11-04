@@ -8,7 +8,6 @@ import { TextForm, ImagesForm } from '../includes/forms';
 
 const ProfileForm = ({ profile }) => {
   const dispatch = useDispatch();
-  //const profile = useSelector(state => state.user.profile);
   const newErrors = useSelector(state => state.toast.errors);
 
   const {

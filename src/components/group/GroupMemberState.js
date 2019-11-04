@@ -19,7 +19,7 @@ class GroupMemberState extends React.Component {
     return (
       <React.Fragment>
         <Link
-          to={`/settings/groups/${groupId}/members`}
+          to={`/groups/${groupId}/members`}
           className="btn btn-outline-secondary"
           data-dismiss="modal"
         >
@@ -49,7 +49,7 @@ class GroupMemberState extends React.Component {
         title={this.renderTitle()}
         content={this.renderContent()}
         actions={this.renderActions()}
-        onDismiss={() => history.push(`/settings/groups/${groupId}/members`)}
+        onDismiss={() => history.push(`/groups/${groupId}/members`)}
       />
     );
   }

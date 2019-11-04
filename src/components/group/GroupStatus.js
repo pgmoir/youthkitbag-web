@@ -51,7 +51,7 @@ class GroupStatus extends React.Component {
         title={this.renderTitle()}
         content={this.renderContent()}
         actions={this.renderActions()}
-        onDismiss={() => history.push('/settings/groups')}
+        onDismiss={() => history.push('/groups')}
       />
     );
   }

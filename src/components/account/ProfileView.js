@@ -32,7 +32,7 @@ const ProfileForm = () => {
       items.push(
         <div key={`groups${i}`} className="carousel-thumbnail d-inline-flex">
           <React.Fragment>
-            <Link to={`/settings/groups/${id}`}>
+            <Link to={`/groups/${id}`}>
               <span className="icons-top-left">
                 <i
                   aria-hidden="true"
@@ -150,7 +150,7 @@ const ProfileForm = () => {
       <div className="col-12 col-lg-6 pb-3" role="main">
         <h3 className="h5 pb-2">
           Groups
-          <Link className="pl-3" to="/settings/groups">
+          <Link className="pl-3" to="/groups">
             join / leave
           </Link>
         </h3>

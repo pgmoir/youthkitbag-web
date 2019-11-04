@@ -393,3 +393,11 @@ $jumbotron-h4-size: 1.1rem;
 .bg-gray-900 {
   background-color: $gray-900;
 }
+
+.list-group-item {
+  padding: 1rem 1rem 0.8rem 1rem;
+  &.active {
+    border-right: 0.5rem solid $dark;
+    background-color: $affair-20;
+  }
+}

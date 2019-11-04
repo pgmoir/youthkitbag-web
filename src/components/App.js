@@ -140,64 +140,40 @@ class App extends React.Component {
                 component={MarketKitDelete}
               />
 
+              <PrivateRoute path="/groups/new" exact component={GroupPage} />
               <PrivateRoute
-                path="/settings/groups/new"
-                exact
-                component={GroupPage}
-              />
-              <PrivateRoute
-                path="/settings/groups/status/:groupId"
+                path="/groups/status/:groupId"
                 exact
                 component={GroupStatus}
               />
               <PrivateRoute
-                path="/settings/groups/:groupId/members/:memberId/:state"
+                path="/groups/:groupId/members/:memberId/:state"
                 exact
                 component={GroupMemberState}
               />
               <PrivateRoute
-                path="/settings/groups/:groupId/members"
+                path="/groups/:groupId/members"
                 exact
                 component={GroupMembers}
               />
               <PrivateRoute
-                path="/settings/groups/:groupId/join"
+                path="/groups/:groupId/join"
                 exact
                 component={GroupMemberJoin}
               />
               <PrivateRoute
-                path="/settings/groups/:groupId/leave"
+                path="/groups/:groupId/leave"
                 exact
                 component={GroupMemberLeave}
               />
               <PrivateRoute
-                path="/settings/groups/:groupId"
+                path="/groups/:groupId"
                 exact
                 component={GroupPage}
               />
-              <PrivateRoute path="/settings/groups" component={Groups} />
+              <PrivateRoute path="/groups" component={Groups} />
 
-              <PrivateRoute
-                path="/settings/account"
-                exact
-                component={AccountPage}
-              />
-              <PrivateRoute path="/settings" exact component={SettingsPage} />
-              <PrivateRoute
-                path="/settings/account/profile"
-                exact
-                component={ProfilePage}
-              />
-              <PrivateRoute
-                path="/settings/account/package"
-                exact
-                component={PackagePage}
-              />
-              <PrivateRoute
-                path="/settings/account/badges"
-                exact
-                component={BadgesPage}
-              />
+              <PrivateRoute path="/settings" component={SettingsPage} />
             </Switch>
           </main>
           <Footer />

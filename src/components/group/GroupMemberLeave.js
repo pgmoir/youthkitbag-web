@@ -29,7 +29,7 @@ class GroupMemberLeave extends React.Component {
     return (
       <React.Fragment>
         <Link
-          to={`/settings/groups/${groupId}`}
+          to={`/groups/${groupId}`}
           className="btn btn-outline-secondary"
           data-dismiss="modal"
         >
@@ -53,7 +53,7 @@ class GroupMemberLeave extends React.Component {
         content={this.renderContent()}
         actions={this.renderActions()}
         onDismiss={() =>
-          history.push(`/settings/groups/${this.props.match.params.groupId}`)
+          history.push(`/groups/${this.props.match.params.groupId}`)
         }
       />
     );

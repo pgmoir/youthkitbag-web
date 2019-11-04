@@ -71,7 +71,7 @@ const GroupPage = ({ current, fetchGroup, match }) => {
             <div className="col-12 mb-3 d-flex justify-content-end">
               {groupId && group.groupAdmin && group.status !== 'blocked' && (
                 <Link
-                  to={`/settings/groups/${groupId}/members`}
+                  to={`/groups/${groupId}/members`}
                   className="btn btn-primary"
                 >
                   Members
@@ -79,7 +79,7 @@ const GroupPage = ({ current, fetchGroup, match }) => {
               )}
               {groupId && group.status !== 'blocked' && !group.groupMember && (
                 <Link
-                  to={`/settings/groups/${groupId}/join`}
+                  to={`/groups/${groupId}/join`}
                   className={`btn btn-primary ${
                     group.groupMemberState ? 'disabled' : ''
                   }`}
@@ -90,7 +90,7 @@ const GroupPage = ({ current, fetchGroup, match }) => {
               )}
               {groupId && group.status !== 'blocked' && group.groupMember && (
                 <Link
-                  to={`/settings/groups/${groupId}/leave`}
+                  to={`/groups/${groupId}/leave`}
                   className="btn btn-primary"
                 >
                   Leave
@@ -109,7 +109,7 @@ const GroupPage = ({ current, fetchGroup, match }) => {
 //   <div>
 //     <Link
 //       className="btn btn-primary"
-//       to={`/settings/groups/${values._id}/members`}
+//       to={`/groups/${values._id}/members`}
 //     >
 //       Members
 //     </Link>

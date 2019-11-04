@@ -93,7 +93,7 @@ class Groups extends React.Component {
 
     return (
       <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
-        <Link to="/settings/groups/new" className="btn btn-primary">
+        <Link to="/groups/new" className="btn btn-primary">
           Add new group
         </Link>
       </div>

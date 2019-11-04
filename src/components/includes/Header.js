@@ -93,29 +93,20 @@ class Header extends React.Component {
                         className="dropdown-menu dropdown-menu-right"
                         aria-labelledby="settingsDropdown"
                       >
-                        <Link className="dropdown-item" to="/settings/account">
+                        <Link className="dropdown-item" to="/settings">
                           Account
                         </Link>
-                        <Link
-                          className="dropdown-item"
-                          to="/settings/account/profile"
-                        >
+                        <Link className="dropdown-item" to="/settings/profile">
                           Profile
                         </Link>
-                        <Link
-                          className="dropdown-item"
-                          to="/settings/account/package"
-                        >
+                        <Link className="dropdown-item" to="/settings/package">
                           Package
                         </Link>
-                        <Link
-                          className="dropdown-item"
-                          to="/settings/account/badges"
-                        >
+                        <Link className="dropdown-item" to="/settings/badges">
                           Badges
                         </Link>
                         <hr />
-                        <Link className="dropdown-item" to="/settings/groups">
+                        <Link className="dropdown-item" to="/groups">
                           Groups
                         </Link>
                       </div>

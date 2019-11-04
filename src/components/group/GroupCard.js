@@ -54,7 +54,7 @@ class GroupCard extends React.Component {
         <article className="card card-link card-b1">
           <span className="icons-top-left pt-1">
             {appAdmin ? (
-              <Link to={`/settings/groups/status/${_id}`}>
+              <Link to={`/groups/status/${_id}`}>
                 <span
                   className={`icon-tray-item ${this.statusIcon(status)}`}
                 ></span>
@@ -70,7 +70,7 @@ class GroupCard extends React.Component {
           >
             {memberCount}
           </span>
-          <Link to={`/settings/groups/${_id}`}>
+          <Link to={`/groups/${_id}`}>
             <img
               className="card-img-top"
               src={this.topImage()}

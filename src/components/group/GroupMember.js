@@ -85,21 +85,21 @@ class GroupMember extends React.Component {
                 className={`fas fa-meh w-25 text-center ${this.isRequested()}`}
               ></span>
               <Link
-                to={`/settings/groups/${groupId}/members/${user._id}/approved`}
+                to={`/groups/${groupId}/members/${user._id}/approved`}
               >
                 <span
                   className={`fas fa-laugh w-25 text-center ${this.isApproved()}`}
                 ></span>
               </Link>
               <Link
-                to={`/settings/groups/${groupId}/members/${user._id}/rejected`}
+                to={`/groups/${groupId}/members/${user._id}/rejected`}
               >
                 <span
                   className={`fas fa-sad-tear w-25 text-center ${this.isRejected()}`}
                 ></span>
               </Link>
               <Link
-                to={`/settings/groups/${groupId}/members/${user._id}/suspended`}
+                to={`/groups/${groupId}/members/${user._id}/suspended`}
               >
                 <span
                   className={`fas fa-meh-blank w-25 text-center ${this.isSuspended()}`}
