@@ -17,101 +17,40 @@ class Header extends React.Component {
           </div>
         </Link>
         <nav
-          className="navbar navbar-expand-sm navbar-dark purple-gradient"
+          className="navbar navbar-expand navbar-dark purple-gradient"
           aria-label="primary navigation"
         >
           <div className="container">
             <Link className="navbar-brand mr-6 navbar-logo" to="/">
               YouthKitbag
             </Link>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div
-              className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            >
-              <ul className="navbar-nav mr-auto">
-                {!loggedIn && (
-                  <li className="nav-item dropdown mr-3">
-                    <Link
-                      className="nav-item nav-link dropdown-toggle"
-                      to="/whydropdown"
-                      id="whyDropdown"
-                      data-toggle="dropdown"
-                      data-display="static"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      Why?
-                    </Link>
-                    <div
-                      className="dropdown-menu dropdown-menu-right"
-                      aria-labelledby="whyDropdown"
-                    >
-                      <Link className="dropdown-item" to="/why#created">
-                        ... I created YouthKitbag
-                      </Link>
-                    </div>
-                  </li>
-                )}
-              </ul>
-              <ul className="navbar-nav ml-auto">
+              <ul className="navbar-nav navbar-expand ml-auto">
                 {loggedIn && (
                   <React.Fragment>
                     <li className="nav-item">
-                      <Link to="/market" className="nav-link">
-                        Market
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link to="/kitbag/kit" className="nav-link">
-                        Kitbag
-                      </Link>
-                    </li>
-                    <li className="nav-item dropdown mr-3">
                       <Link
-                        className="nav-item nav-link dropdown-toggle"
-                        to="/settingsdropdown"
-                        id="settingsDropdown"
-                        data-toggle="dropdown"
-                        data-display="static"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        Settings
+                          className="btn btn-info text-nowrap mr-3"
+                          to="/market"
+                          aria-label="Market place"
+                        >
+                        <span
+                          className="fas fa-th"
+                          aria-hidden="true"
+                        ></span>{' '}
                       </Link>
-                      <div
-                        className="dropdown-menu dropdown-menu-right"
-                        aria-labelledby="settingsDropdown"
+                    </li> 
+                    <li className="nav-item">
+                      <Link
+                        className="btn btn-info text-nowrap mr-3"
+                        to="/kitbag/kit"
+                        aria-label="Your kitbag"
                       >
-                        <Link className="dropdown-item" to="/settings">
-                          Account
-                        </Link>
-                        <Link className="dropdown-item" to="/settings/profile">
-                          Profile
-                        </Link>
-                        <Link className="dropdown-item" to="/settings/package">
-                          Package
-                        </Link>
-                        <Link className="dropdown-item" to="/settings/badges">
-                          Badges
-                        </Link>
-                        <hr />
-                        <Link className="dropdown-item" to="/groups">
-                          Groups
-                        </Link>
-                      </div>
-                    </li>
-
+                        <span
+                          className="fas fa-shopping-bag"
+                          aria-hidden="true"
+                        ></span>{' '}
+                      </Link>
+                    </li> 
                     <li className="nav-item mr-3">
                       <Link className="nav-link d-inline" to="/settings">
                         <img
@@ -126,40 +65,50 @@ class Header extends React.Component {
                         />
                       </Link>
                     </li>
+                    <li className="nav-item">
+                      <Link
+                        className="btn btn-danger text-nowrap"
+                        to="/auth/logout"
+                        aria-label="Logout from application"
+                      >
+                        <span
+                          className="fas fa-sign-out-alt"
+                          aria-hidden="true"
+                        ></span>{' '}
+                      </Link>
+                    </li> 
                   </React.Fragment>
                 )}
                 {!loggedIn && (
-                  <li className="nav-item">
-                    <Link
-                      className="btn btn-success text-nowrap"
-                      to="/auth/login"
-                      aria-label="Login to use personalised features"
-                    >
-                      <span
-                        className="fas fa-sign-in-alt"
-                        aria-hidden="true"
-                      ></span>{' '}
-                      Login
-                    </Link>
-                  </li>
-                )}
-                {loggedIn && (
-                  <li className="nav-item">
-                    <Link
-                      className="btn btn-danger text-nowrap"
-                      to="/auth/logout"
-                      aria-label="Logout from application"
-                    >
-                      <span
-                        className="fas fa-sign-out-alt"
-                        aria-hidden="true"
-                      ></span>{' '}
-                      Logout
-                    </Link>
-                  </li>
+                  <React.Fragment>
+                    <li className="nav-item">
+                      <Link
+                          className="btn btn-info text-nowrap mr-3"
+                          to="/why#created"
+                          aria-label="Why did I create YouthKitbag"
+                        >
+                        <span
+                          className="fas fa-question-circle"
+                          aria-hidden="true"
+                        ></span>{' '}
+                      </Link>
+                    </li> 
+                    <li className="nav-item">
+                      <Link
+                        className="btn btn-success text-nowrap"
+                        to="/auth/login"
+                        aria-label="Login to use personalised features"
+                      >
+                        <span
+                          className="fas fa-sign-in-alt"
+                          aria-hidden="true"
+                        ></span>{' '}
+                      </Link>
+                    </li>
+                  </React.Fragment>
                 )}
               </ul>
-            </div>
+
           </div>
         </nav>
       </header>
