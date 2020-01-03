@@ -4,6 +4,10 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { getUser } from '../../actions/UserActions';
 import Title from '../includes/title/Title';
 import ProfileForm from './ProfileForm';
+import FamilyForm from './FamilyForm';
+import GroupsForm from './GroupsForm';
+import PackageForm from './PackageForm';
+import BadgesPage from './BadgesPage';
 
 const SettingsPage = ({ profile }) => {
   const [page, setPage] = useState(null);
@@ -18,11 +22,22 @@ const SettingsPage = ({ profile }) => {
     );
   };
 
+  const Family = () => {
+    setPage('family');
+    return (
+      <div>
+        <h2>Family</h2>
+        <FamilyForm profile={profile} />
+      </div>
+    );
+  };
+
   const Groups = () => {
     setPage('groups');
     return (
       <div>
         <h2>Groups</h2>
+        <GroupsForm profile={profile} />
       </div>
     );
   };
@@ -32,6 +47,7 @@ const SettingsPage = ({ profile }) => {
     return (
       <div>
         <h2>Package</h2>
+        <PackageForm profile={profile} />
       </div>
     );
   };
@@ -41,6 +57,7 @@ const SettingsPage = ({ profile }) => {
     return (
       <div>
         <h2>Badges</h2>
+        <BadgesPage badges={profile.badges} />
       </div>
     );
   };
@@ -69,6 +86,13 @@ const SettingsPage = ({ profile }) => {
                 </li>
                 <li
                   className={`list-group-item ${
+                    page === 'family' ? 'active' : ''
+                  }`}
+                >
+                  <Link to="/settings/family">Family</Link>
+                </li>
+                <li
+                  className={`list-group-item ${
                     page === 'package' ? 'active' : ''
                   }`}
                 >
@@ -85,6 +109,7 @@ const SettingsPage = ({ profile }) => {
             </div>
             <div className="col-12 col-md-8">
               <Route path="/settings/profile" component={Profile} />
+              <Route path="/settings/family" component={Family} />
               <Route path="/settings/groups" component={Groups} />
               <Route path="/settings/package" component={Package} />
               <Route path="/settings/badges" component={Badges} />

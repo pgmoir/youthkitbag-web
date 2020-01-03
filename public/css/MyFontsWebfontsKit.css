@@ -22,13 +22,23 @@
  * © 2019 MyFonts Inc
 */
 
-
 /* @import must be at top of file, otherwise CSS will not work */
-@import url("//hello.myfonts.net/count/3a630b");
+@import url('//hello.myfonts.net/count/3a630b');
 
-  
-@font-face {font-family: 'PrentonRPPro-Regular';src: url('webfonts/3A630B_0_0.eot');src: url('webfonts/3A630B_0_0.eot?#iefix') format('embedded-opentype'),url('webfonts/3A630B_0_0.woff2') format('woff2'),url('webfonts/3A630B_0_0.woff') format('woff'),url('webfonts/3A630B_0_0.ttf') format('truetype');}
- 
-  
-@font-face {font-family: 'PrentonRPProLight-Regular';src: url('webfonts/3A630B_1_0.eot');src: url('webfonts/3A630B_1_0.eot?#iefix') format('embedded-opentype'),url('webfonts/3A630B_1_0.woff2') format('woff2'),url('webfonts/3A630B_1_0.woff') format('woff'),url('webfonts/3A630B_1_0.ttf') format('truetype');}
- 
+@font-face {
+  font-family: 'PrentonRPPro-Regular';
+  src: url('webfonts/3A630B_0_0.eot');
+  src: url('webfonts/3A630B_0_0.eot?#iefix') format('embedded-opentype'),
+    url('webfonts/3A630B_0_0.woff2') format('woff2'),
+    url('webfonts/3A630B_0_0.woff') format('woff'),
+    url('webfonts/3A630B_0_0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'PrentonRPProLight-Regular';
+  src: url('webfonts/3A630B_1_0.eot');
+  src: url('webfonts/3A630B_1_0.eot?#iefix') format('embedded-opentype'),
+    url('webfonts/3A630B_1_0.woff2') format('woff2'),
+    url('webfonts/3A630B_1_0.woff') format('woff'),
+    url('webfonts/3A630B_1_0.ttf') format('truetype');
+}
