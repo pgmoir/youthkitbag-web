@@ -11,10 +11,10 @@ import history from '../helpers/history';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
-export const fetchMarketKit = marketId => dispatch => {
+export const fetchMarketKit = (accountId, marketId) => dispatch => {
   const token = localStorage.getItem('token');
   axios
-    .get(`${baseUrl}/kitbag/market/${marketId}`, {
+    .get(`${baseUrl}/kitbag/market/${accountId}/${marketId}`, {
       headers: {
         Authorization: `bearer ${token}`,
         'content-type': 'application/json'
@@ -28,16 +28,20 @@ export const fetchMarketKit = marketId => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/market');
+        history.push(`/auth/login?return=/market/${accountId}`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
 };
 
-export const fetchMarketKitFromKit = (kitId, marketType) => dispatch => {
+export const fetchMarketKitFromKit = (
+  accountId,
+  kitId,
+  marketType
+) => dispatch => {
   const token = localStorage.getItem('token');
   axios
-    .get(`${baseUrl}/kitbag/market/add/${kitId}/${marketType}`, {
+    .get(`${baseUrl}/kitbag/market/${accountId}/add/${kitId}/${marketType}`, {
       headers: {
         Authorization: `bearer ${token}`,
         'content-type': 'application/json'
@@ -51,17 +55,17 @@ export const fetchMarketKitFromKit = (kitId, marketType) => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/market');
+        history.push(`/auth/login?return=/market/${accountId}`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
 };
 
-export const createMarketKit = formValues => dispatch => {
+export const createMarketKit = (accountId, formValues) => dispatch => {
   const token = localStorage.getItem('token');
   axios
     .post(
-      `${baseUrl}/kitbag/market`,
+      `${baseUrl}/kitbag/market/${accountId}`,
       { ...formValues },
       {
         headers: {
@@ -72,7 +76,7 @@ export const createMarketKit = formValues => dispatch => {
     )
     .then(response => {
       dispatch({ type: CREATE_MARKET_KIT, payload: response.data });
-      history.push('/market?search=&by=&page=1&pagesize=24');
+      history.push(`/market/${accountId}?search=&by=&page=1&pagesize=24`);
     })
     .catch(err => {
       const { response } = err;
@@ -80,18 +84,18 @@ export const createMarketKit = formValues => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          '/auth/login?return=/market?search=&by=&page=1&pagesize=24'
+          `/auth/login?return=/market/${accountId}?search=&by=&page=1&pagesize=24`
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
 };
 
-export const editMarketKit = (marketId, formValues) => dispatch => {
+export const editMarketKit = (accountId, marketId, formValues) => dispatch => {
   const token = localStorage.getItem('token');
   axios
     .put(
-      `${baseUrl}/kitbag/market/${marketId}`,
+      `${baseUrl}/kitbag/market/${accountId}/${marketId}`,
       { ...formValues },
       {
         headers: {
@@ -102,7 +106,7 @@ export const editMarketKit = (marketId, formValues) => dispatch => {
     )
     .then(response => {
       dispatch({ type: EDIT_MARKET_KIT, payload: response.data });
-      history.push('/market?search=&by=&page=1&pagesize=24');
+      history.push(`/market/${accountId}?search=&by=&page=1&pagesize=24`);
     })
     .catch(err => {
       const { response } = err;
@@ -118,6 +122,7 @@ export const editMarketKit = (marketId, formValues) => dispatch => {
 };
 
 export const respondToMarketKitThread = (
+  accountId,
   marketId,
   threadId,
   formValues
@@ -125,7 +130,7 @@ export const respondToMarketKitThread = (
   const token = localStorage.getItem('token');
   axios
     .put(
-      `${baseUrl}/kitbag/market/respond/${marketId}/${threadId}`,
+      `${baseUrl}/kitbag/market/${accountId}/respond/${marketId}/${threadId}`,
       { ...formValues },
       {
         headers: {
@@ -135,31 +140,7 @@ export const respondToMarketKitThread = (
       }
     )
     .then(() => {
-      dispatch(fetchMarketKit(marketId));
-    })
-    .catch(err => {
-      const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/kitbag/market/edit/${marketId}`);
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
-    });
-};
-
-export const deleteMarketKit = marketId => dispatch => {
-  const token = localStorage.getItem('token');
-  axios
-    .delete(`${baseUrl}/kitbag/market/${marketId}`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-        'content-type': 'application/json'
-      }
-    })
-    .then(response => {
-      dispatch({ type: DELETE_MARKET_KIT, payload: response.data });
-      history.push('/market?search=&by=&page=1&pagesize=24');
+      dispatch(fetchMarketKit(accountId, marketId));
     })
     .catch(err => {
       const { response } = err;
@@ -167,7 +148,33 @@ export const deleteMarketKit = marketId => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          '/auth/login?return=/market?search=&by=&page=1&pagesize=24'
+          `/auth/login?return=/kitbag/market/${accountId}/edit/${marketId}`
+        );
+      }
+      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+    });
+};
+
+export const deleteMarketKit = (accountId, marketId) => dispatch => {
+  const token = localStorage.getItem('token');
+  axios
+    .delete(`${baseUrl}/kitbag/market/${accountId}/${marketId}`, {
+      headers: {
+        Authorization: `bearer ${token}`,
+        'content-type': 'application/json'
+      }
+    })
+    .then(response => {
+      dispatch({ type: DELETE_MARKET_KIT, payload: response.data });
+      history.push(`/market/${accountId}?search=&by=&page=1&pagesize=24`);
+    })
+    .catch(err => {
+      const { response } = err;
+      if (response.status === 401) {
+        window.localStorage.clear();
+        dispatch({ type: GETALL_FAILURE, payload: response });
+        history.push(
+          `/auth/login?return=/market/${accountId}?search=&by=&page=1&pagesize=24`
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });

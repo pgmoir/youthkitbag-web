@@ -5,6 +5,7 @@ import validate from './FormEmptyValidationRules';
 import queryString from 'query-string';
 
 const SearchForm = props => {
+  const accountId = props.accountId;
   const qsvalues = queryString.parse(props.search);
   const search = qsvalues.search ? qsvalues.search : '';
   const by = qsvalues.by ? qsvalues.by : '';
@@ -27,7 +28,7 @@ const SearchForm = props => {
 
   function searchItems() {
     const { by, search } = values;
-    dispatch(props.callback(search, by, 1, pagination.itemsPerPage));
+    dispatch(props.callback(accountId, search, by, 1, pagination.itemsPerPage));
   }
 
   function clearSearch() {

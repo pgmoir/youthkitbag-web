@@ -18,6 +18,9 @@ class KitBag extends React.Component {
     var by = '';
     var search = '';
     var page = '';
+
+    const accountId = this.props.match.params.accountId;
+
     if (this.props.location.search) {
       const values = queryString.parse(this.props.location.search);
       search = values.search ? values.search : '';
@@ -25,16 +28,17 @@ class KitBag extends React.Component {
       page = values.page ? values.page : '';
     }
 
-    this.props.fetchKitbagKits(search, by, page, 24);
+    this.props.fetchKitbagKits(accountId, search, by, page, 24);
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.location.search !== prevProps.location.search) {
+      const accountId = this.props.match.params.accountId;
       const values = queryString.parse(this.props.location.search);
       const search = values.search ? values.search : '';
       const by = values.by ? values.by : '';
       const page = values.page ? values.page : '';
-      this.props.fetchKitbagKits(search, by, page, 24);
+      this.props.fetchKitbagKits(accountId, search, by, page, 24);
     }
   }
 
@@ -79,12 +83,21 @@ class KitBag extends React.Component {
     }
 
     return items.map((item, index) => {
-      return <KitCard key={`${item._id}-${index}`} kit={item} />;
+      const accountId = this.props.match.params.accountId;
+      return (
+        <KitCard
+          key={`${item._id}-${index}`}
+          kit={item}
+          accountId={accountId}
+        />
+      );
     });
   }
 
   render() {
     if (!this.props.items) return this.renderBlank();
+
+    const accountId = this.props.match.params.accountId;
 
     return (
       <div>
@@ -99,12 +112,16 @@ class KitBag extends React.Component {
             <div className="row">
               <div className="col-12 col-sm-9">
                 <SearchForm
+                  accountId={accountId}
                   search={this.props.location.search}
                   callback={fetchKitbagKits}
                 />
               </div>
               <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
-                <Link to="/kitbag/kit/new" className="btn btn-primary">
+                <Link
+                  to={`/kitbag/kit/${accountId}/new`}
+                  className="btn btn-primary"
+                >
                   Add new kit
                 </Link>
               </div>

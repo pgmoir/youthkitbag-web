@@ -18,7 +18,7 @@ import {
 } from '../../includes/forms';
 import Threads from '../../thread/threads/Threads';
 
-const MarketForm = ({ market }) => {
+const MarketForm = ({ accountId, market }) => {
   const dispatch = useDispatch();
   const newErrors = useSelector(state => state.toast.errors);
 
@@ -54,9 +54,9 @@ const MarketForm = ({ market }) => {
 
   function updateMarket() {
     if (values._id) {
-      dispatch(editMarketKit(values._id, values));
+      dispatch(editMarketKit(accountId, values._id, values));
     } else {
-      dispatch(createMarketKit(values));
+      dispatch(createMarketKit(accountId, values));
     }
   }
 

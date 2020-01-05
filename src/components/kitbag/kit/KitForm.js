@@ -18,7 +18,7 @@ import {
   ImagesForm
 } from '../../includes/forms';
 
-const KitForm = ({ kit }) => {
+const KitForm = ({ accountId, kit }) => {
   const dispatch = useDispatch();
   const newErrors = useSelector(state => state.toast.errors);
 
@@ -71,15 +71,16 @@ const KitForm = ({ kit }) => {
 
   function updateKit() {
     if (values._id) {
-      dispatch(editKitbagKit(values._id, values));
+      dispatch(editKitbagKit(accountId, values._id, values));
     } else {
-      dispatch(createKitbagKit(values));
+      dispatch(createKitbagKit(accountId, values));
     }
   }
 
   return (
     <div className="row">
       <ImagesForm
+        accountId={accountId}
         values={values}
         setChange={setChange}
         addArrayItem={addArrayItem}
@@ -326,7 +327,7 @@ const KitForm = ({ kit }) => {
             <button className="btn btn-primary" type="submit">
               Save
             </button>
-            <Link className="btn btn-link" to="/kitbag/kit">
+            <Link className="btn btn-link" to={`/kitbag/kit/${accountId}`}>
               Cancel
             </Link>
           </div>
