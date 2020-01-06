@@ -11,14 +11,16 @@ import history from '../helpers/history';
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchMarketItems = (
+  accountId,
   search = '',
   by = 'all',
   page = 1,
   pagesize = 24
 ) => dispatch => {
+  console.log('ACTIDMKT', accountId);
   const token = localStorage.getItem('token');
   axios
-    .get(`${baseUrl}/market`, {
+    .get(`${baseUrl}/market/${accountId}`, {
       params: { search, by, page, pagesize },
       headers: {
         Authorization: `bearer ${token}`,
@@ -28,7 +30,7 @@ export const fetchMarketItems = (
     .then(response => {
       dispatch({ type: FETCH_MARKET_ITEMS, payload: response.data });
       history.push(
-        `/market?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`
+        `/market/${accountId}?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`
       );
     })
     .catch(err => {
@@ -36,7 +38,7 @@ export const fetchMarketItems = (
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/market');
+        history.push('/auth/login?return=/market/5e12df4c9c92b60320f2bcff');
       }
       dispatch({ type: API_MARKET_ERROR, payload: response });
     });
@@ -59,7 +61,7 @@ export const fetchMarketItem = marketId => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/market');
+        history.push('/auth/login?return=/market/5e12df4c9c92b60320f2bcff');
       }
       dispatch({ type: API_MARKET_ERROR, payload: err.response });
     });

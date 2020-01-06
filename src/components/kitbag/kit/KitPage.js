@@ -16,6 +16,7 @@ const mapDispatchToProps = {
 
 const KitPage = ({ current, fetchKitbagKit, match }) => {
   const kitId = match.params.kitId;
+  const accountId = match.params.accountId;
   const [kit, setKit] = useState({
     title: '',
     subtitle: '',
@@ -34,10 +35,10 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
   });
 
   useEffect(() => {
-    if (kitId) {
-      fetchKitbagKit(kitId);
+    if (accountId && kitId) {
+      fetchKitbagKit(accountId, kitId);
     }
-  }, [fetchKitbagKit, kitId]);
+  }, [fetchKitbagKit, accountId, kitId]);
 
   useEffect(() => {
     if (current && current._id) {
@@ -75,19 +76,19 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
             <div className="row">
               <div className="col-12 mb-3 d-flex justify-content-end">
                 <Link
-                  to={`/kitbag/market/add/${kitId}/trade`}
+                  to={`/kitbag/market/${accountId}/add/${kitId}/trade`}
                   className="btn btn-primary mr-3"
                 >
                   Trade
                 </Link>
                 <Link
-                  to={`/kitbag/market/add/${kitId}/wanted`}
+                  to={`/kitbag/market/${accountId}/add/${kitId}/wanted`}
                   className="btn btn-secondary mr-3"
                 >
                   Wanted
                 </Link>
                 <Link
-                  to={`/kitbag/market/add/${kitId}/stolen`}
+                  to={`/kitbag/market/${accountId}/add/${kitId}/stolen`}
                   className="btn btn-danger"
                 >
                   Stolen
@@ -95,7 +96,7 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
               </div>
             </div>
           )}
-          <KitForm kit={kit} />
+          <KitForm accountId={accountId} kit={kit} />
         </div>
       </section>
     </div>

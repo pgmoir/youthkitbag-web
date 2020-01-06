@@ -10,7 +10,10 @@ import history from '../../../helpers/history';
 
 class KitDelete extends React.Component {
   componentDidMount() {
-    this.props.fetchKitbagKit(this.props.match.params.id);
+    this.props.fetchKitbagKit(
+      this.props.match.params.accountId,
+      this.props.match.params.id
+    );
   }
 
   renderTitle() {
@@ -28,11 +31,12 @@ class KitDelete extends React.Component {
   }
 
   renderActions() {
+    const accountId = this.props.match.params.accountId;
     const kitId = this.props.match.params.kitId;
     return (
       <React.Fragment>
         <Link
-          to="/kitbag/kit"
+          to={`/kitbag/kit/${accountId}`}
           className="btn btn-outline-secondary"
           data-dismiss="modal"
         >
@@ -41,7 +45,7 @@ class KitDelete extends React.Component {
         <button
           type="button"
           className="btn btn-danger"
-          onClick={() => this.props.deleteKitbagKit(kitId)}
+          onClick={() => this.props.deleteKitbagKit(accountId, kitId)}
         >
           Delete
         </button>
@@ -50,12 +54,13 @@ class KitDelete extends React.Component {
   }
 
   render() {
+    const accountId = this.props.match.params.accountId;
     return (
       <Modal
         title={this.renderTitle()}
         content={this.renderContent()}
         actions={this.renderActions()}
-        onDismiss={() => history.push('/kitbag/kit')}
+        onDismiss={() => history.push(`/kitbag/kit/${accountId}`)}
       />
     );
   }

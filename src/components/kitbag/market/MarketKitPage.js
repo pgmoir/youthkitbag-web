@@ -24,6 +24,7 @@ const MarketKitPage = ({
   match
 }) => {
   const marketId = match.params.marketId;
+  const accountId = match.params.accountId;
   const kitId = match.params.kitId;
   const marketType = match.params.marketType;
 
@@ -46,16 +47,16 @@ const MarketKitPage = ({
   });
 
   useEffect(() => {
-    if (marketId) {
-      fetchMarketKit(marketId);
+    if (accountId && marketId) {
+      fetchMarketKit(accountId, marketId);
     }
-  }, [fetchMarketKit, marketId]);
+  }, [fetchMarketKit, accountId, marketId]);
 
   useEffect(() => {
-    if (kitId) {
-      fetchMarketKitFromKit(kitId, marketType);
+    if (accountId && kitId) {
+      fetchMarketKitFromKit(accountId, kitId, marketType);
     }
-  }, [fetchMarketKitFromKit, kitId, marketType]);
+  }, [fetchMarketKitFromKit, accountId, kitId, marketType]);
 
   useEffect(() => {
     if (current && (current._id || current.sourceId)) {
@@ -91,7 +92,7 @@ const MarketKitPage = ({
       >
         <div className="container">
           <Alert />
-          <MarketKitForm market={market} />
+          <MarketKitForm accountId={accountId} market={market} />
         </div>
       </section>
     </div>

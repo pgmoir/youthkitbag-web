@@ -3,7 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
 import { resize, dataURItoBlob } from '../../../helpers/imageResize';
 
-const ImagesForm = ({ values, readOnly, setChange, addArrayItem, error }) => {
+const ImagesForm = ({
+  accountId,
+  values,
+  readOnly,
+  setChange,
+  addArrayItem,
+  error
+}) => {
   const MAXWIDTH = 720;
   const MAXHEIGHT = 720;
 
@@ -17,7 +24,7 @@ const ImagesForm = ({ values, readOnly, setChange, addArrayItem, error }) => {
       resize(files[i], MAXWIDTH, MAXHEIGHT, function(resizedDataUrl) {
         let formData = new FormData();
         formData.append('photo', dataURItoBlob(resizedDataUrl), files[i].name);
-        dispatch(addImage(formData));
+        dispatch(addImage(accountId, formData));
       });
     }
     return;

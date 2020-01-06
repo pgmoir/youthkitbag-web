@@ -41,6 +41,7 @@ class MarketItemCard extends React.Component {
 
   render() {
     const { _id, title, subtitle, isOwned, marketType } = this.props.market;
+    const accountId = this.props.accountId;
 
     if (!_id) return this.renderBlank();
 
@@ -51,7 +52,11 @@ class MarketItemCard extends React.Component {
             {this.renderNotification()}
           </span>
           <Link
-            to={isOwned ? `/kitbag/market/edit/${_id}` : `/market/view/${_id}`}
+            to={
+              isOwned
+                ? `/kitbag/market/${accountId}/edit/${_id}`
+                : `/market/${accountId}/view/${_id}`
+            }
           >
             <img
               className="card-img-top"

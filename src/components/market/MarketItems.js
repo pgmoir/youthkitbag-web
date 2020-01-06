@@ -16,28 +16,28 @@ class MarketItems extends React.Component {
     var by = '';
     var search = '';
     var page = '';
+
+    const accountId = this.props.match.params.accountId;
+    console.log('MARK', accountId);
+
     if (this.props.location.search) {
       const values = queryString.parse(this.props.location.search);
       search = values.search ? values.search : '';
       by = values.by ? values.by : '';
       page = values.page ? values.page : '';
     }
-    console.log('DIDMOUNT', search);
-    this.props.fetchMarketItems(search, by, page, 24);
+
+    this.props.fetchMarketItems(accountId, search, by, page, 24);
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.location.search !== prevProps.location.search) {
-      console.log(
-        'DIDUPDATE',
-        this.props.location.search,
-        prevProps.location.search
-      );
+      const accountId = this.props.match.params.accountId;
       const values = queryString.parse(this.props.location.search);
       const search = values.search ? values.search : '';
       const by = values.by ? values.by : '';
       const page = values.page ? values.page : '';
-      this.props.fetchMarketItems(search, by, page, 24);
+      this.props.fetchMarketItems(accountId, search, by, page, 24);
     }
   }
 
@@ -82,12 +82,21 @@ class MarketItems extends React.Component {
     }
 
     return items.map((item, index) => {
-      return <MarketItemCard key={`${item._id}-${index}`} market={item} />;
+      const accountId = this.props.match.params.accountId;
+      return (
+        <MarketItemCard
+          key={`${item._id}-${index}`}
+          market={item}
+          accountId={accountId}
+        />
+      );
     });
   }
 
   render() {
     if (!this.props.items) return this.renderBlank();
+
+    const accountId = this.props.match.params.accountId;
 
     return (
       <div>
@@ -101,6 +110,7 @@ class MarketItems extends React.Component {
             <div className="row">
               <div className="col-12 col-sm-9">
                 <SearchForm
+                  accountId={accountId}
                   search={this.props.location.search}
                   callback={fetchMarketItems}
                 />

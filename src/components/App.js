@@ -100,24 +100,27 @@ class App extends React.Component {
               />
 
               <PrivateRoute
-                path="/market/view/:marketId"
+                path="/market/:accountId/view/:marketId"
                 exact
                 component={MarketItemViewPage}
               />
-              <Route path="/market" component={MarketItems} />
+              <Route path="/market/:accountId" component={MarketItems} />
 
-              <PrivateRoute path="/kitbag/kit/new" component={KitPage} />
               <PrivateRoute
-                path="/kitbag/kit/edit/:kitId"
+                path="/kitbag/kit/:accountId/new"
+                component={KitPage}
+              />
+              <PrivateRoute
+                path="/kitbag/kit/:accountId/edit/:kitId"
                 exact
                 component={KitPage}
               />
               <PrivateRoute
-                path="/kitbag/kit/delete/:kitId"
+                path="/kitbag/kit/:accountId/delete/:kitId"
                 exact
                 component={KitDelete}
               />
-              <PrivateRoute path="/kitbag/kit" component={KitBag} />
+              <PrivateRoute path="/kitbag/kit/:accountId" component={KitBag} />
 
               <PrivateRoute
                 path="/kitbag/market/new"
@@ -125,17 +128,17 @@ class App extends React.Component {
                 component={MarketKitPage}
               />
               <PrivateRoute
-                path="/kitbag/market/add/:kitId/:marketType"
+                path="/kitbag/market/:accountId/add/:kitId/:marketType"
                 exact
                 component={MarketKitPage}
               />
               <PrivateRoute
-                path="/kitbag/market/edit/:marketId"
+                path="/kitbag/market/:accountId/edit/:marketId"
                 exact
                 component={MarketKitPage}
               />
               <PrivateRoute
-                path="/kitbag/market/delete/:marketId"
+                path="/kitbag/market/:accountId/delete/:marketId"
                 exact
                 component={MarketKitDelete}
               />
