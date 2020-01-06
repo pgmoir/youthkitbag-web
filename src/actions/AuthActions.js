@@ -31,7 +31,7 @@ export const login = (email, password) => dispatch => {
       localStorage.setItem('isloggedin', true);
       dispatch({ type: LOGIN_SUCCESS, payload: data });
       dispatch(getUser());
-      history.push('/market/5e11c9324c25760bfe687128');
+      history.push('/market/5e12df4c9c92b60320f2bcff');
     })
     .catch(err => {
       dispatch({ type: LOGIN_FAILURE, payload: err.response });
@@ -55,7 +55,7 @@ export const authenticateToken = token => dispatch => {
       localStorage.setItem('isloggedin', true);
       dispatch({ type: LOGIN_SUCCESS, payload: data });
       dispatch(getUser());
-      history.push('/market/5e11c9324c25760bfe687128');
+      history.push('/market/5e12df4c9c92b60320f2bcff');
     })
     .catch(err => {
       dispatch({ type: LOGIN_FAILURE, payload: err.response });

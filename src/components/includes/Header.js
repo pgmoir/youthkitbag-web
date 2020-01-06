@@ -30,7 +30,7 @@ class Header extends React.Component {
                   <li className="nav-item">
                     <Link
                       className="btn btn-info text-nowrap mr-3"
-                      to="/market/5e11c9324c25760bfe687128"
+                      to="/market/5e12df4c9c92b60320f2bcff"
                       aria-label="Market place"
                     >
                       <span className="fas fa-th" aria-hidden="true"></span>{' '}
@@ -39,7 +39,7 @@ class Header extends React.Component {
                   <li className="nav-item">
                     <Link
                       className="btn btn-info text-nowrap mr-3"
-                      to="/kitbag/kit/5e11c9324c25760bfe687128"
+                      to="/kitbag/kit/5e12df4c9c92b60320f2bcff"
                       aria-label="Your kitbag"
                     >
                       <span

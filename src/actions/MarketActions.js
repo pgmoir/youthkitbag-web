@@ -38,7 +38,7 @@ export const fetchMarketItems = (
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/market/5e11c9324c25760bfe687128');
+        history.push('/auth/login?return=/market/5e12df4c9c92b60320f2bcff');
       }
       dispatch({ type: API_MARKET_ERROR, payload: response });
     });
@@ -61,7 +61,7 @@ export const fetchMarketItem = marketId => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/market/5e11c9324c25760bfe687128');
+        history.push('/auth/login?return=/market/5e12df4c9c92b60320f2bcff');
       }
       dispatch({ type: API_MARKET_ERROR, payload: err.response });
     });
