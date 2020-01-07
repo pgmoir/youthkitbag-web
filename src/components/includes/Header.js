@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 class Header extends React.Component {
   render() {
     const { loggedIn } = this.props.auth;
+    const accountId = this.props.user.profile.accounts
+      ? this.props.user.profile.accounts.find(a => a.preferred).account
+      : undefined;
     return (
       <header>
         <Link
@@ -30,24 +33,26 @@ class Header extends React.Component {
                   <li className="nav-item">
                     <Link
                       className="btn btn-info text-nowrap mr-3"
-                      to="/market/5e12df4c9c92b60320f2bcff"
+                      to="/market/"
                       aria-label="Market place"
                     >
                       <span className="fas fa-th" aria-hidden="true"></span>{' '}
                     </Link>
                   </li>
-                  <li className="nav-item">
-                    <Link
-                      className="btn btn-info text-nowrap mr-3"
-                      to="/kitbag/kit/5e12df4c9c92b60320f2bcff"
-                      aria-label="Your kitbag"
-                    >
-                      <span
-                        className="fas fa-shopping-bag"
-                        aria-hidden="true"
-                      ></span>{' '}
-                    </Link>
-                  </li>
+                  {accountId && (
+                    <li className="nav-item">
+                      <Link
+                        className="btn btn-info text-nowrap mr-3"
+                        to={`/kitbag/kit/${accountId}`}
+                        aria-label="Your kitbag"
+                      >
+                        <span
+                          className="fas fa-shopping-bag"
+                          aria-hidden="true"
+                        ></span>{' '}
+                      </Link>
+                    </li>
+                  )}
                   <li className="nav-item mr-3">
                     <Link className="nav-link d-inline" to="/settings">
                       <img

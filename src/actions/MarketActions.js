@@ -17,7 +17,6 @@ export const fetchMarketItems = (
   page = 1,
   pagesize = 24
 ) => dispatch => {
-  console.log('ACTIDMKT', accountId);
   const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/market/${accountId}`, {
@@ -38,7 +37,7 @@ export const fetchMarketItems = (
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/market/5e12df4c9c92b60320f2bcff');
+        history.push('/auth/login?return=/market');
       }
       dispatch({ type: API_MARKET_ERROR, payload: response });
     });
@@ -61,7 +60,7 @@ export const fetchMarketItem = marketId => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/market/5e12df4c9c92b60320f2bcff');
+        history.push('/auth/login?return=/market');
       }
       dispatch({ type: API_MARKET_ERROR, payload: err.response });
     });

@@ -100,11 +100,11 @@ class App extends React.Component {
               />
 
               <PrivateRoute
-                path="/market/:accountId/view/:marketId"
+                path="/market/view/:marketId"
                 exact
                 component={MarketItemViewPage}
               />
-              <Route path="/market/:accountId" component={MarketItems} />
+              <Route path="/market" component={MarketItems} />
 
               <PrivateRoute
                 path="/kitbag/kit/:accountId/new"
@@ -128,17 +128,17 @@ class App extends React.Component {
                 component={MarketKitPage}
               />
               <PrivateRoute
-                path="/kitbag/market/:accountId/add/:kitId/:marketType"
+                path="/kitbag/market/add/:kitId/:marketType"
                 exact
                 component={MarketKitPage}
               />
               <PrivateRoute
-                path="/kitbag/market/:accountId/edit/:marketId"
+                path="/kitbag/market/edit/:marketId"
                 exact
                 component={MarketKitPage}
               />
               <PrivateRoute
-                path="/kitbag/market/:accountId/delete/:marketId"
+                path="/kitbag/market/delete/:marketId"
                 exact
                 component={MarketKitDelete}
               />

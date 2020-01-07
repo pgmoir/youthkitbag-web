@@ -9,7 +9,10 @@ import Title from '../../includes/title/Title';
 import Alert from '../../includes/Alert';
 
 const mapStateToProps = state => ({
-  current: state.kitbag.market.current
+  current: state.kitbag.market.current,
+  accountId: state.user.profile.accounts
+    ? state.user.profile.accounts.find(a => a.preferred).account
+    : undefined
 });
 
 const mapDispatchToProps = {
@@ -18,13 +21,13 @@ const mapDispatchToProps = {
 };
 
 const MarketKitPage = ({
+  accountId,
   current,
   fetchMarketKit,
   fetchMarketKitFromKit,
   match
 }) => {
   const marketId = match.params.marketId;
-  const accountId = match.params.accountId;
   const kitId = match.params.kitId;
   const marketType = match.params.marketType;
 
