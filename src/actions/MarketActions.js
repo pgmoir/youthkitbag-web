@@ -11,7 +11,6 @@ import history from '../helpers/history';
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchMarketItems = (
-  accountId,
   search = '',
   by = 'all',
   page = 1,
@@ -19,7 +18,7 @@ export const fetchMarketItems = (
 ) => dispatch => {
   const token = localStorage.getItem('token');
   axios
-    .get(`${baseUrl}/market/${accountId}`, {
+    .get(`${baseUrl}/market`, {
       params: { search, by, page, pagesize },
       headers: {
         Authorization: `bearer ${token}`,
@@ -29,7 +28,7 @@ export const fetchMarketItems = (
     .then(response => {
       dispatch({ type: FETCH_MARKET_ITEMS, payload: response.data });
       history.push(
-        `/market/${accountId}?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`
+        `/market?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`
       );
     })
     .catch(err => {

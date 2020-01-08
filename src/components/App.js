@@ -123,22 +123,22 @@ class App extends React.Component {
               <PrivateRoute path="/kitbag/kit/:accountId" component={KitBag} />
 
               <PrivateRoute
-                path="/kitbag/market/new"
+                path="/kitbag/market/:accountId/new"
                 exact
                 component={MarketKitPage}
               />
               <PrivateRoute
-                path="/kitbag/market/add/:kitId/:marketType"
+                path="/kitbag/market/:accountId/add/:kitId/:marketType"
                 exact
                 component={MarketKitPage}
               />
               <PrivateRoute
-                path="/kitbag/market/edit/:marketId"
+                path="/kitbag/market/:accountId/edit/:marketId"
                 exact
                 component={MarketKitPage}
               />
               <PrivateRoute
-                path="/kitbag/market/delete/:marketId"
+                path="/kitbag/market/:accountId/delete/:marketId"
                 exact
                 component={MarketKitDelete}
               />
