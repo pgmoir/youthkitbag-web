@@ -40,8 +40,14 @@ class MarketItemCard extends React.Component {
   }
 
   render() {
-    const { _id, title, subtitle, isOwned, marketType } = this.props.market;
-    const accountId = this.props.accountId;
+    const {
+      _id,
+      title,
+      subtitle,
+      isOwned,
+      marketType,
+      account
+    } = this.props.market;
 
     if (!_id) return this.renderBlank();
 
@@ -54,8 +60,8 @@ class MarketItemCard extends React.Component {
           <Link
             to={
               isOwned
-                ? `/kitbag/market/${accountId}/edit/${_id}`
-                : `/market/${accountId}/view/${_id}`
+                ? `/kitbag/market/${account}/edit/${_id}`
+                : `/market/view/${_id}`
             }
           >
             <img
