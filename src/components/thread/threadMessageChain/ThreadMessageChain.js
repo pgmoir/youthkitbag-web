@@ -8,11 +8,18 @@ import TextAreaInput from '../../includes/controls/TextAreaInput';
 import RadioGroupInput from '../../includes/controls/RadioGroupInput';
 import Alert from '../../includes/Alert';
 
-const ThreadMessageChain = ({ thread, source, marketType, displayed }) => {
+const ThreadMessageChain = ({
+  thread,
+  source,
+  accountId,
+  marketType,
+  displayed
+}) => {
   const dispatch = useDispatch();
   const newErrors = useSelector(state => state.toast.errors);
 
   const initialMessage = {
+    accountId: accountId,
     marketId: thread.source,
     threadId: thread._id,
     content: '',
@@ -40,10 +47,22 @@ const ThreadMessageChain = ({ thread, source, marketType, displayed }) => {
 
   function respondToThread() {
     if (source === 'market') {
-      dispatch(respondToMarketThread(values.marketId, values.threadId, values));
+      dispatch(
+        respondToMarketThread(
+          accountId,
+          values.marketId,
+          values.threadId,
+          values
+        )
+      );
     } else {
       dispatch(
-        respondToMarketKitThread(values.marketId, values.threadId, values)
+        respondToMarketKitThread(
+          accountId,
+          values.marketId,
+          values.threadId,
+          values
+        )
       );
     }
     values.content = '';

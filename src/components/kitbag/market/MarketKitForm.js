@@ -391,6 +391,7 @@ const MarketForm = ({ accountId, market }) => {
           </div>
           <Threads
             threads={market.threads}
+            accountId={market.account}
             source="kitbag"
             marketType={market.marketType}
           />

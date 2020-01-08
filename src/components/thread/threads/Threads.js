@@ -64,6 +64,7 @@ class Threads extends React.Component {
           key={`${thisThread._id}-${index}`}
           thread={thisThread}
           source={this.props.source}
+          accountId={this.props.accountId}
           marketType={this.props.marketType}
           displayed={this.state.threadDisplayed}
         />

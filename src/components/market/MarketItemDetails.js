@@ -247,8 +247,10 @@ const MarketItemDetails = ({ market }) => {
               <h4>{`Thread for "${market.title}"`}</h4>
             </div>
           </div>
+
           <Threads
             threads={market.threads}
+            accountId={market.account}
             source="market"
             marketType={market.marketType}
           />
