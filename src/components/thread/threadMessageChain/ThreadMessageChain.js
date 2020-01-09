@@ -47,14 +47,7 @@ const ThreadMessageChain = ({
 
   function respondToThread() {
     if (source === 'market') {
-      dispatch(
-        respondToMarketThread(
-          accountId,
-          values.marketId,
-          values.threadId,
-          values
-        )
-      );
+      dispatch(respondToMarketThread(values.marketId, values.threadId, values));
     } else {
       dispatch(
         respondToMarketKitThread(
