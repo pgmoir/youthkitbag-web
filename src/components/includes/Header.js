@@ -27,7 +27,7 @@ class Header extends React.Component {
           aria-label="primary navigation"
         >
           <div className="container">
-            <Link className="navbar-brand mr-6 navbar-logo" to="/">
+            <Link className="navbar-brand navbar-logo" to="/">
               YouthKitbag
             </Link>
             <ul className="navbar-nav navbar-expand ml-auto">
@@ -35,7 +35,7 @@ class Header extends React.Component {
                 <React.Fragment>
                   <li className="nav-item">
                     <Link
-                      className="btn btn-info text-nowrap mr-3"
+                      className="btn btn-info text-nowrap mr-1"
                       to="/market/"
                       aria-label="Market place"
                     >
@@ -45,7 +45,7 @@ class Header extends React.Component {
                   {accountId && (
                     <li className="nav-item">
                       <Link
-                        className="btn btn-info text-nowrap mr-3"
+                        className="btn btn-info text-nowrap mr-1"
                         to={`/kitbag/kit/${accountId}`}
                         aria-label="Your kitbag"
                       >
@@ -56,7 +56,7 @@ class Header extends React.Component {
                       </Link>
                     </li>
                   )}
-                  <li className="nav-item mr-3">
+                  <li className="nav-item">
                     <Link className="nav-link d-inline" to="/settings">
                       <img
                         src={
