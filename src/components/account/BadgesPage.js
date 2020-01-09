@@ -1,10 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const BadgesPage = () => {
   return (
-    <div className="row">
-      <div className="col-12 col-lg-6 order-2 order-lg-1" role="main"></div>
-    </div>
+    <React.Fragment>
+      <div className="row">
+        <p>Displays details of badges attained, and next target badges</p>
+      </div>
+      <div className="row">
+        <Link to="/badges" className="btn btn-primary">
+          Search badges
+        </Link>
+      </div>
+    </React.Fragment>
   );
 };
 

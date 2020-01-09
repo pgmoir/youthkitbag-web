@@ -1,22 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const PackagePage = () => {
+const GroupsPage = () => {
   return (
     <React.Fragment>
       <div className="row">
         <p>
-          Displays details of package, free or purchased. Shows the limits of
-          current package and counts
+          Displays groups that user is linked with, could be approved member,
+          applied, rejected, or blocked
         </p>
       </div>
       <div className="row">
-        <Link to="/packages" className="btn btn-primary">
-          Upgrade package
+        <Link to="/groups" className="btn btn-primary">
+          Search Groups
         </Link>
       </div>
     </React.Fragment>
   );
 };
 
-export default PackagePage;
+export default GroupsPage;

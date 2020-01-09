@@ -33,8 +33,6 @@ import GroupMemberState from './group/GroupMemberState';
 import GroupMemberJoin from './group/GroupMemberJoin';
 import GroupMemberLeave from './group/GroupMemberLeave';
 
-import ProfilePage from './account/ProfilePage';
-
 import KitBag from './kitbag/kit/KitBag';
 import KitPage from './kitbag/kit/KitPage';
 import KitDelete from './kitbag/kit/KitDelete';
@@ -45,9 +43,6 @@ import MarketKitDelete from './kitbag/market/MarketKitDelete';
 import MarketItems from './market/MarketItems';
 import MarketItemViewPage from './market/MarketItemViewPage';
 
-import AccountPage from './account/AccountPage';
-import PackagePage from './account/PackagePage';
-import BadgesPage from './account/BadgesPage';
 import SettingsPage from './account/SettingsPage';
 
 class App extends React.Component {

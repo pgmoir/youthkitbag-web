@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-const ProfileForm = () => {
+const ProfileView = () => {
   const user = useSelector(state => state.user);
 
   function stateIcon(state, permissons) {
@@ -167,4 +167,4 @@ const ProfileForm = () => {
   );
 };
 
-export default ProfileForm;
+export default ProfileView;

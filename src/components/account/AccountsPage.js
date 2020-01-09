@@ -1,22 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const PackagePage = () => {
+const AccountsPage = () => {
   return (
     <React.Fragment>
       <div className="row">
         <p>
-          Displays details of package, free or purchased. Shows the limits of
-          current package and counts
+          Displays accounts that user is linked with, could be approved member,
+          invited
         </p>
       </div>
       <div className="row">
-        <Link to="/packages" className="btn btn-primary">
-          Upgrade package
+        <Link to="/accounts/add" className="btn btn-primary">
+          Add Account
         </Link>
       </div>
     </React.Fragment>
   );
 };
 
-export default PackagePage;
+export default AccountsPage;

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import { getUser } from '../../actions/UserActions';
 import Title from '../includes/title/Title';
 import ProfileForm from './ProfileForm';
-import FamilyForm from './FamilyForm';
-import GroupsForm from './GroupsForm';
-import PackageForm from './PackageForm';
+import AccountsPage from './AccountsPage';
+import GroupsPage from './GroupsPage';
+import PackagePage from './PackagePage';
 import BadgesPage from './BadgesPage';
 
 const SettingsPage = ({ profile }) => {
@@ -22,12 +22,12 @@ const SettingsPage = ({ profile }) => {
     );
   };
 
-  const Family = () => {
-    setPage('family');
+  const Accounts = () => {
+    setPage('accounts');
     return (
       <div>
-        <h2>Family</h2>
-        <FamilyForm profile={profile} />
+        <h2>Accounts</h2>
+        <AccountsPage />
       </div>
     );
   };
@@ -37,7 +37,7 @@ const SettingsPage = ({ profile }) => {
     return (
       <div>
         <h2>Groups</h2>
-        <GroupsForm profile={profile} />
+        <GroupsPage />
       </div>
     );
   };
@@ -47,7 +47,7 @@ const SettingsPage = ({ profile }) => {
     return (
       <div>
         <h2>Package</h2>
-        <PackageForm profile={profile} />
+        <PackagePage />
       </div>
     );
   };
@@ -57,67 +57,65 @@ const SettingsPage = ({ profile }) => {
     return (
       <div>
         <h2>Badges</h2>
-        <BadgesPage badges={profile.badges} />
+        <BadgesPage />
       </div>
     );
   };
 
   return (
-    <Router>
-      <div>
-        <Title title="Account Settings" />
-        <div className="container">
-          <div className="row">
-            <div className="col-12 col-md-3 pb-3 pr-5">
-              <ul className="list-group">
-                <li
-                  className={`list-group-item ${
-                    page === 'profile' ? 'active' : ''
-                  }`}
-                >
-                  <Link to="/settings/profile">Profile</Link>
-                </li>
-                <li
-                  className={`list-group-item ${
-                    page === 'groups' ? 'active' : ''
-                  }`}
-                >
-                  <Link to="/settings/groups">Groups</Link>
-                </li>
-                <li
-                  className={`list-group-item ${
-                    page === 'family' ? 'active' : ''
-                  }`}
-                >
-                  <Link to="/settings/family">Family</Link>
-                </li>
-                <li
-                  className={`list-group-item ${
-                    page === 'package' ? 'active' : ''
-                  }`}
-                >
-                  <Link to="/settings/package">Package</Link>
-                </li>
-                <li
-                  className={`list-group-item ${
-                    page === 'badges' ? 'active' : ''
-                  }`}
-                >
-                  <Link to="/settings/badges">Badges</Link>
-                </li>
-              </ul>
-            </div>
-            <div className="col-12 col-md-8">
-              <Route path="/settings/profile" component={Profile} />
-              <Route path="/settings/family" component={Family} />
-              <Route path="/settings/groups" component={Groups} />
-              <Route path="/settings/package" component={Package} />
-              <Route path="/settings/badges" component={Badges} />
-            </div>
+    <div>
+      <Title title="Personal Settings" />
+      <div className="container">
+        <div className="row">
+          <div className="col-12 col-md-2 pb-3">
+            <ul className="list-group">
+              <li
+                className={`list-group-item ${
+                  page === 'profile' ? 'active' : ''
+                }`}
+              >
+                <Link to="/settings/profile">Profile</Link>
+              </li>
+              <li
+                className={`list-group-item ${
+                  page === 'accounts' ? 'active' : ''
+                }`}
+              >
+                <Link to="/settings/accounts">Accounts</Link>
+              </li>
+              <li
+                className={`list-group-item ${
+                  page === 'groups' ? 'active' : ''
+                }`}
+              >
+                <Link to="/settings/groups">Groups</Link>
+              </li>
+              <li
+                className={`list-group-item ${
+                  page === 'package' ? 'active' : ''
+                }`}
+              >
+                <Link to="/settings/package">Package</Link>
+              </li>
+              <li
+                className={`list-group-item ${
+                  page === 'badges' ? 'active' : ''
+                }`}
+              >
+                <Link to="/settings/badges">Badges</Link>
+              </li>
+            </ul>
+          </div>
+          <div className="col-12 col-md-10">
+            <Route path="/settings/profile" component={Profile} />
+            <Route path="/settings/accounts" component={Accounts} />
+            <Route path="/settings/groups" component={Groups} />
+            <Route path="/settings/package" component={Package} />
+            <Route path="/settings/badges" component={Badges} />
           </div>
         </div>
       </div>
-    </Router>
+    </div>
   );
 };
 
