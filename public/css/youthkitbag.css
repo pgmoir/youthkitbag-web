@@ -200,6 +200,12 @@ body {
       content: '';
       display: inline-block;
       padding-top: 100%; }
+  .youthkitbag td.valign-t {
+    vertical-align: top; }
+  .youthkitbag td.valign-m {
+    vertical-align: middle; }
+  .youthkitbag td.valign-b {
+    vertical-align: bottom; }
   .youthkitbag .alert {
     border-left-width: 0.45rem; }
     .youthkitbag .alert.alert-callout {

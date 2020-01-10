@@ -87,6 +87,7 @@ export const createGroup = formValues => dispatch => {
     )
     .then(response => {
       dispatch({ type: CREATE_GROUP, payload: response.data });
+      dispatch(getUser());
       history.push('/groups?search=&by=&page=1&pagesize=24');
     })
     .catch(err => {

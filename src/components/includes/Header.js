@@ -54,7 +54,7 @@ class Header extends React.Component {
                     </li>
                   )}
                   <li className="nav-item">
-                    <Link className="nav-link d-inline" to="/settings">
+                    <Link className="nav-link d-inline" to="/settings/profile">
                       <img
                         src={
                           this.props.user.profile.images &&

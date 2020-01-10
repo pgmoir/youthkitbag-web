@@ -34,7 +34,7 @@ const GroupsPage = ({ profile }) => {
               <tbody>
                 {profile.groups.map((item, index) => (
                   <tr key={`${item._id}-${index}`}>
-                    <td>
+                    <td className="valign-m">
                       <img
                         src={
                           item.images && item.images.length > 0
@@ -45,9 +45,11 @@ const GroupsPage = ({ profile }) => {
                         alt=""
                       />
                     </td>
-                    <td>{item.name}</td>
-                    <td>{item.members[0].state}</td>
-                    <td>{item.members[0].permissions.join(', ')}</td>
+                    <td className="valign-m">{item.name}</td>
+                    <td className="valign-m">{item.members[0].state}</td>
+                    <td className="valign-m">
+                      {item.members[0].permissions.join(', ')}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -57,8 +59,11 @@ const GroupsPage = ({ profile }) => {
       )}
       <div className="row mb-3">
         <div className="col-12">
-          <Link to="/groups" className="btn btn-primary">
+          <Link to="/groups" className="btn btn-primary mr-3">
             Join Group
+          </Link>
+          <Link to="/groups/new" className="btn btn-outline-primary">
+            Create Group
           </Link>
         </div>
       </div>

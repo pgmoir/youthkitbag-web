@@ -1,19 +1,46 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const BadgesPage = () => {
+const BadgesPage = ({ profile }) => {
   return (
     <React.Fragment>
       <div className="row">
-        <p>Displays details of badges attained, and next target badges</p>
+        <div className="col-12">
+          <p>
+            As a user of YouthKitbag, you will be awarded different badges and
+            trophies as you reach certain milestones and achievements.
+          </p>
+        </div>
       </div>
+      {profile && profile.badges && profile.badges.length > 0 && (
+        <div className="row">
+          <div className="col-12">
+            <h5>Awarded Badges and Trophies</h5>
+            {profile.badges.map((item, index) => (
+              <div key={`${item._id}-${index}`}></div>
+            ))}
+          </div>
+        </div>
+      )}
       <div className="row">
-        <Link to="/badges" className="btn btn-primary">
-          Search badges
-        </Link>
+        <div className="col-12">
+          <Link to="/badges" className="btn btn-primary">
+            Search badges
+          </Link>
+        </div>
       </div>
     </React.Fragment>
   );
 };
 
-export default BadgesPage;
+const mapStateToProps = state => ({
+  profile: state.user.profile
+});
+
+const mapDispatchToProps = {};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BadgesPage);

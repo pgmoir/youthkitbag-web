@@ -208,3 +208,15 @@ a[disabled] {
     padding-top: 100%;
   }
 }
+
+td {
+  &.valign-t {
+    vertical-align: top;
+  }
+  &.valign-m {
+    vertical-align: middle;
+  }
+  &.valign-b {
+    vertical-align: bottom;
+  }
+}

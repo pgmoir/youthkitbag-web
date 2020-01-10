@@ -171,7 +171,10 @@ class App extends React.Component {
               />
               <PrivateRoute path="/groups" component={Groups} />
 
-              <PrivateRoute path="/settings" component={SettingsPage} />
+              <PrivateRoute
+                path="/settings/:setting"
+                component={SettingsPage}
+              />
             </Switch>
           </main>
           <Footer />

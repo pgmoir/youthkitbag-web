@@ -55,7 +55,7 @@ const PackagePage = ({ userPackage }) => {
                 </tr>
                 <tr>
                   <td>Group Admins</td>
-                  <td>{userPackage.size.groupsadmins}</td>
+                  <td>{userPackage.size.groupadmins}</td>
                   <td>{userPackage.max.groupadmins}</td>
                 </tr>
                 <tr>
