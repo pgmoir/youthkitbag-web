@@ -5,12 +5,9 @@ import { Link } from 'react-router-dom';
 class Header extends React.Component {
   render() {
     const { loggedIn } = this.props.auth;
-    const accountId =
-      this.props.user.profile &&
-      this.props.user.profile.accounts &&
-      this.props.user.profile.accounts.length > 0
-        ? this.props.user.profile.accounts.find(a => a.preferred).account
-        : undefined;
+    const accountId = this.props.user.profile.accounts
+      ? this.props.user.profile.accounts.find(a => a.preferred)._id
+      : undefined;
     return (
       <header>
         <Link

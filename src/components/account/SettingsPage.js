@@ -25,9 +25,9 @@ const SettingsPage = ({ profile }) => {
   const Accounts = () => {
     setPage('accounts');
     return (
-      <div>
+      <div className="container">
         <h2>Accounts</h2>
-        <AccountsPage />
+        <AccountsPage profile={profile} />
       </div>
     );
   };
@@ -35,9 +35,9 @@ const SettingsPage = ({ profile }) => {
   const Groups = () => {
     setPage('groups');
     return (
-      <div>
+      <div className="container">
         <h2>Groups</h2>
-        <GroupsPage />
+        <GroupsPage profile={profile} />
       </div>
     );
   };
