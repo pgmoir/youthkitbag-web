@@ -15,7 +15,7 @@ const SettingsPage = ({ profile }) => {
   const Profile = () => {
     setPage('profile');
     return (
-      <div>
+      <div className="container">
         <h2>Profile</h2>
         <ProfileForm profile={profile} />
       </div>
@@ -27,7 +27,7 @@ const SettingsPage = ({ profile }) => {
     return (
       <div className="container">
         <h2>Accounts</h2>
-        <AccountsPage profile={profile} />
+        <AccountsPage />
       </div>
     );
   };
@@ -37,7 +37,7 @@ const SettingsPage = ({ profile }) => {
     return (
       <div className="container">
         <h2>Groups</h2>
-        <GroupsPage profile={profile} />
+        <GroupsPage />
       </div>
     );
   };
@@ -45,7 +45,7 @@ const SettingsPage = ({ profile }) => {
   const Package = () => {
     setPage('package');
     return (
-      <div>
+      <div className="container">
         <h2>Package</h2>
         <PackagePage />
       </div>
@@ -55,7 +55,7 @@ const SettingsPage = ({ profile }) => {
   const Badges = () => {
     setPage('badges');
     return (
-      <div>
+      <div className="container">
         <h2>Badges</h2>
         <BadgesPage />
       </div>
