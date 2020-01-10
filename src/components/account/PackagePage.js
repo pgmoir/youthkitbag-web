@@ -23,8 +23,8 @@ const PackagePage = ({ userPackage }) => {
       {userPackage && (
         <div className="row">
           <div className="col-12">
+            <h5>Package Usage and Limits</h5>
             <table className="table bg-light">
-              <caption>Package state</caption>
               <thead>
                 <tr>
                   <th scope="col">Name</th>
@@ -73,7 +73,7 @@ const PackagePage = ({ userPackage }) => {
           </div>
         </div>
       )}
-      <div className="row">
+      <div className="row mb-3">
         <div className="col-12">
           <Link to="/package" className="btn btn-primary">
             Upgrade Package

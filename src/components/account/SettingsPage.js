@@ -67,7 +67,26 @@ const SettingsPage = ({ profile }) => {
       <Title title="Personal Settings" />
       <div className="container">
         <div className="row">
-          <div className="col-12 col-md-2 pb-3">
+          <div className="d-block d-sm-none col-12 pb-3">
+            <div className="d-flex w-100 px-1">
+              <div className="p-2 flex-fill bg-light">
+                <Link to="/settings/profile">Profile</Link>
+              </div>
+              <div className="p-2 flex-fill bg-light">
+                <Link to="/settings/accounts">Accounts</Link>
+              </div>
+              <div className="p-2 flex-fill bg-light">
+                <Link to="/settings/groups">Groups</Link>
+              </div>
+              <div className="p-2 flex-fill bg-light">
+                <Link to="/settings/package">Package</Link>
+              </div>
+              <div className="p-2 flex-fill bg-light">
+                <Link to="/settings/badges">Badges</Link>
+              </div>
+            </div>
+          </div>
+          <div className="d-none d-sm-block col-sm-2 pb-3">
             <ul className="list-group">
               <li
                 className={`list-group-item ${
@@ -106,7 +125,7 @@ const SettingsPage = ({ profile }) => {
               </li>
             </ul>
           </div>
-          <div className="col-12 col-md-10">
+          <div className="col-12 col-sm-10">
             <Route path="/settings/profile" component={Profile} />
             <Route path="/settings/accounts" component={Accounts} />
             <Route path="/settings/groups" component={Groups} />

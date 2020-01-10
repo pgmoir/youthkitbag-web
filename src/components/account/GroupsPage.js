@@ -21,22 +21,19 @@ const GroupsPage = ({ profile }) => {
       {profile && profile.groups && profile.groups.length > 0 && (
         <div className="row">
           <div className="col-12">
+            <h5>Group Membership</h5>
             <table className="table bg-light">
-              <caption>Group membership</caption>
               <thead>
                 <tr>
-                  <th scope="col">#</th>
                   <th scope="col">Icon</th>
-                  <th scope="col">Name</th>
+                  <th scope="col">Group</th>
                   <th scope="col">State</th>
                   <th scope="col">Permissions</th>
-                  <th scope="col">Id</th>
                 </tr>
               </thead>
               <tbody>
                 {profile.groups.map((item, index) => (
                   <tr key={`${item._id}-${index}`}>
-                    <th scope="row">{index}</th>
                     <td>
                       <img
                         src={
@@ -51,7 +48,6 @@ const GroupsPage = ({ profile }) => {
                     <td>{item.name}</td>
                     <td>{item.members[0].state}</td>
                     <td>{item.members[0].permissions.join(', ')}</td>
-                    <td>{item._id}</td>
                   </tr>
                 ))}
               </tbody>
@@ -59,7 +55,7 @@ const GroupsPage = ({ profile }) => {
           </div>
         </div>
       )}
-      <div className="row">
+      <div className="row mb-3">
         <div className="col-12">
           <Link to="/groups" className="btn btn-primary">
             Join Group
