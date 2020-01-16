@@ -3,7 +3,8 @@ import {
   GET_USER,
   EDIT_USER_PROFILE,
   API_KITBAG_ERROR,
-  GETALL_FAILURE
+  GETALL_FAILURE,
+  RESET
 } from './types';
 import axios from 'axios';
 import history from '../helpers/history';
@@ -73,6 +74,7 @@ export const editProfilePreferredAccount = (userId, accountId) => dispatch => {
     )
     .then(response => {
       dispatch({ type: EDIT_USER_PROFILE, payload: response.data });
+      dispatch({ type: RESET });
       dispatch(getUser());
       history.push('/settings/accounts');
     })

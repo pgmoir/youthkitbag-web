@@ -11,7 +11,11 @@ import Pagination from '../../includes/Pagination';
 
 class KitBag extends React.Component {
   getTitle() {
-    return `Your kit (${this.props.pagination.totalItems})`;
+    if (!this.props.accounts) {
+      return 'Loading ...';
+    }
+    const account = this.props.accounts.find(a => a.preferred);
+    return `${account.name} (${this.props.pagination.totalItems})`;
   }
 
   componentDidMount() {
@@ -139,7 +143,8 @@ const mapStateToProps = state => {
   return {
     items: Object.values(state.kitbag.kit.list),
     filter: state.filter,
-    pagination: state.pagination
+    pagination: state.pagination,
+    accounts: state.user.profile.accounts
   };
 };
 

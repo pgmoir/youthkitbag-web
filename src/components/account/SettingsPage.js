@@ -8,6 +8,7 @@ import AccountsPage from './AccountsPage';
 import GroupsPage from './GroupsPage';
 import PackagePage from './PackagePage';
 import BadgesPage from './BadgesPage';
+import Alert from '../includes/Alert';
 
 const SettingsPage = ({ profile }) => {
   const [page, setPage] = useState(null);
@@ -66,6 +67,7 @@ const SettingsPage = ({ profile }) => {
     <div>
       <Title title="Personal Settings" />
       <div className="container">
+        <Alert />
         <div className="row">
           <div className="d-block d-sm-none col-12 pb-3">
             <div className="d-flex w-100 px-1">

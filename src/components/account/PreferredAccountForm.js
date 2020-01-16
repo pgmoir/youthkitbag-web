@@ -14,12 +14,17 @@ const PreferredAccountForm = ({ userId, accounts }) => {
   } = usePreferredAccountForm(accounts, updatePreferredAccount);
 
   useEffect(() => {
+    console.log('USEEFFECT', accounts);
     if (accounts) {
+      console.log('USEEFFECT-INSIDE', accounts);
       setValues(accounts);
     }
   }, [accounts, setValues]);
 
   function updatePreferredAccount() {
+    console.log('UPDATEBEF', accounts);
+    accounts = undefined;
+    console.log('UPDATEAFT', accounts);
     const accountId = values.find(a => a.preferred)._id;
     dispatch(editProfilePreferredAccount(userId, accountId));
   }
@@ -35,7 +40,9 @@ const PreferredAccountForm = ({ userId, accounts }) => {
                 <th scope="col">Account</th>
                 <th scope="col">State</th>
                 <th scope="col">Permissions</th>
-                <th scope="col">Preferred</th>
+                <th scope="col" className="text-center">
+                  Preferred
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -44,7 +51,7 @@ const PreferredAccountForm = ({ userId, accounts }) => {
                   <td>{item.name}</td>
                   <td>{item.members[0].state}</td>
                   <td>{item.members[0].permissions.join(', ')}</td>
-                  <td>
+                  <td className="text-center">
                     <input
                       className="form-check-input"
                       type="radio"

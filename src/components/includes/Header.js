@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 class Header extends React.Component {
   render() {
     const { loggedIn } = this.props.auth;
-    const accountId = this.props.user.profile.accounts
-      ? this.props.user.profile.accounts.find(a => a.preferred)._id
+    const account = this.props.user.profile.accounts
+      ? this.props.user.profile.accounts.find(a => a.preferred)
       : undefined;
     return (
       <header>
@@ -39,12 +39,12 @@ class Header extends React.Component {
                       <span className="fas fa-th" aria-hidden="true"></span>{' '}
                     </Link>
                   </li>
-                  {accountId && (
+                  {account && (
                     <li className="nav-item">
                       <Link
                         className="btn btn-info text-nowrap mr-1"
-                        to={`/kitbag/kit/${accountId}`}
-                        aria-label="Your kitbag"
+                        to={`/kitbag/kit/${account._id}`}
+                        aria-label={`${account.name}`}
                       >
                         <span
                           className="fas fa-shopping-bag"

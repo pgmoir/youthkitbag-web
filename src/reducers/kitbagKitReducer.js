@@ -3,6 +3,7 @@ import {
   CREATE_KITBAG_KIT,
   EDIT_KITBAG_KIT,
   FETCH_KITBAG_KITS,
+  RESET,
   LOGOUT
 } from '../actions/types';
 
@@ -17,6 +18,7 @@ export default (state = initialState, action) => {
     case CREATE_KITBAG_KIT:
     case EDIT_KITBAG_KIT:
       return { current: action.payload.kit, list: [] };
+    case RESET:
     case LOGOUT:
       return initialState;
     default:

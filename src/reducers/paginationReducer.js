@@ -2,6 +2,7 @@ import {
   FETCH_KITBAG_KITS,
   FETCH_MARKET_ITEMS,
   FETCH_GROUPS,
+  RESET,
   LOGOUT
 } from '../actions/types';
 
@@ -13,6 +14,7 @@ export default (state = initialState, action) => {
     case FETCH_MARKET_ITEMS:
     case FETCH_GROUPS:
       return { ...state, ...action.payload.pagination };
+    case RESET:
     case LOGOUT:
       return initialState;
     default:

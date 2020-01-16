@@ -2,6 +2,7 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
+export const RESET = 'RESET';
 export const LOGOUT = 'LOGOUT';
 
 export const SIGNUP_SUCCESS = 'USERS_SIGNUP_SUCCESS';
