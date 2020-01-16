@@ -45,14 +45,43 @@ export const editProfile = (userId, formValues) => dispatch => {
     .then(response => {
       dispatch({ type: EDIT_USER_PROFILE, payload: response.data });
       dispatch(getUser());
-      history.push('/settings/account');
+      history.push('/settings/profile');
     })
     .catch(err => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/settings/account');
+        history.push('/auth/login?return=/settings/profile');
+      }
+      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+    });
+};
+
+export const editProfilePreferredAccount = (userId, accountId) => dispatch => {
+  const token = localStorage.getItem('token');
+  axios
+    .put(
+      `${baseUrl}/user/${userId}/profile/account/${accountId}`,
+      {},
+      {
+        headers: {
+          Authorization: `bearer ${token}`,
+          'content-type': 'application/json'
+        }
+      }
+    )
+    .then(response => {
+      dispatch({ type: EDIT_USER_PROFILE, payload: response.data });
+      dispatch(getUser());
+      history.push('/settings/accounts');
+    })
+    .catch(err => {
+      const { response } = err;
+      if (response.status === 401) {
+        window.localStorage.clear();
+        dispatch({ type: GETALL_FAILURE, payload: response });
+        history.push('/auth/login?return=/settings/accounts');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });

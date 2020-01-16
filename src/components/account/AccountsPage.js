@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PreferredAccountForm from './PreferredAccountForm';
 
 const AccountsPage = ({ profile }) => {
   return (
@@ -21,56 +22,11 @@ const AccountsPage = ({ profile }) => {
         </div>
       </div>
       {profile && profile.accounts && profile.accounts.length > 0 && (
-        <div className="row">
-          <div className="col-12">
-            <h5>Account Membership</h5>
-            <table className="table bg-light">
-              <thead>
-                <tr>
-                  <th scope="col">Account</th>
-                  <th scope="col">State</th>
-                  <th scope="col">Permissions</th>
-                  <th scope="col">Preferred</th>
-                </tr>
-              </thead>
-              <tbody>
-                {profile.accounts.map((item, index) => (
-                  <tr key={`${item._id}-${index}`}>
-                    <td>{item.name}</td>
-                    <td>{item.members[0].state}</td>
-                    <td>{item.members[0].permissions.join(', ')}</td>
-                    <td>{item.preferred.toString()}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <PreferredAccountForm
+          userId={profile._id}
+          accounts={profile.accounts}
+        />
       )}
-
-      {/* <div className="row">
-        <div className="col-12 mb-3 ">
-          <div className="d-flex bg-light w-100">
-            <div className="flex-col d-md-flex bg-light w-100">
-              <div className="flex-grow-1 p-2 bg-light border-left border-right border-bottom">
-                Moir family kitbag
-              </div>
-              <div className="flex-grow-1 p-2 bg-light border-left border-right border-bottom">
-                approved
-              </div>
-              <div className="flex-grow-1 p-2 bg-light border-left border-right border-bottom">
-                member, admin
-              </div>
-            </div>
-            <div className="d-flex bg-light">
-              <div className="p-2 bg-light border-left border-bottom">
-                preferred
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
       <div className="row mb-3">
         <div className="col-12">
           <Link to="/accounts/add" className="btn btn-primary">

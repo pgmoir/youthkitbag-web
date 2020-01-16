@@ -18,7 +18,6 @@ class MarketItems extends React.Component {
     var page = '';
 
     const accountId = this.props.match.params.accountId;
-    console.log('MARK', accountId);
 
     if (this.props.location.search) {
       const values = queryString.parse(this.props.location.search);

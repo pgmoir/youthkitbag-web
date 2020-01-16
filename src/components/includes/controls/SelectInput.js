@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CheckboxInput = ({ value, field, handleChange, items }) => {
+const SelectInput = ({ value, field, handleChange, items }) => {
   return (
     <React.Fragment>
       <select
@@ -24,4 +24,4 @@ const CheckboxInput = ({ value, field, handleChange, items }) => {
   );
 };
 
-export default CheckboxInput;
+export default SelectInput;
