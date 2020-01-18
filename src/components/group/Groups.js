@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchGroups } from '../../actions';
-import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import Title from '../includes/title/Title';
 import GroupCard from './GroupCard';
@@ -9,36 +9,48 @@ import SearchForm from '../includes/SearchForm';
 import Pagination from '../includes/Pagination';
 import Alert from '../includes/Alert';
 
-class Groups extends React.Component {
-  getTitle() {
-    return `Found groups (${this.props.pagination.totalItems})`;
-  }
+const mapStateToProps = state => ({
+  items: Object.values(state.group.list),
+  filter: state.filter,
+  pagination: state.pagination,
+  userPackage: state.user.package
+});
 
-  componentDidMount() {
-    var by = '';
-    var search = '';
-    var page = '';
-    if (this.props.location.search) {
-      const values = queryString.parse(this.props.location.search);
-      search = values.search ? values.search : '';
-      by = values.by ? values.by : '';
-      page = values.page ? values.page : '';
+const mapDispatchToProps = {
+  fetchGroups
+};
+
+const Groups = ({ items, pagination, userPackage, fetchGroups }) => {
+  const { search } = useLocation();
+  const [groups, setGroups] = useState([]);
+
+  useEffect(() => {
+    if (items) {
+      console.log('SETGROUPS TO ITEMS', items);
+      setGroups(items);
     }
+  }, [items]);
 
-    this.props.fetchGroups(search, by, page, 24);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.location.search !== prevProps.location.search) {
-      const values = queryString.parse(this.props.location.search);
-      const search = values.search ? values.search : '';
-      const by = values.by ? values.by : '';
-      const page = values.page ? values.page : '';
-      this.props.fetchGroups(search, by, page, 24);
+  useEffect(() => {
+    if (search) {
+      console.log('SEARCH');
+      const qsvalues = queryString.parse(search);
+      const searchValue = qsvalues.search ? qsvalues.search : '';
+      const byValue = qsvalues.by ? qsvalues.by : '';
+      const pageValue = qsvalues.page ? qsvalues.page : 1;
+      const pagesizeValue = qsvalues.pagesize ? qsvalues.pagesize : 24;
+      fetchGroups(searchValue, byValue, pageValue, pagesizeValue);
+    } else {
+      console.log('INITIALFETCH');
+      fetchGroups();
     }
+  }, [search, fetchGroups]);
+
+  function getTitle() {
+    return `Found groups (${pagination.totalItems})`;
   }
 
-  renderBlank() {
+  function renderBlank() {
     return (
       <div>
         <Title title="Loading ...." />
@@ -53,38 +65,29 @@ class Groups extends React.Component {
                 <div className="bg-light hgt-3 mb-3">&nbsp;</div>
               </div>
             </div>
-            <div className="row">{this.renderBlankList()}</div>
+            <div className="row">{renderBlankList()}</div>
           </div>
         </section>
       </div>
     );
   }
 
-  renderBlankList() {
+  function renderBlankList() {
     const blankList = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
     return blankList.map((item, index) => {
       return <GroupCard key={`${item._id}-${index}`} group={item} />;
     });
   }
 
-  renderList() {
-    if (!this.props.items) return this.renderBlankList();
+  function renderList() {
+    if (!groups) return renderBlankList();
 
-    let items = [...this.props.items];
-
-    if (items.length < 12) {
-      for (var i = items.length; i < 12; i++) {
-        items.push({});
-      }
-    }
-
-    return items.map((item, index) => {
+    return groups.map((item, index) => {
       return <GroupCard key={`${item._id}-${index}`} group={item} />;
     });
   }
 
-  renderAddNewButton() {
-    const { userPackage } = this.props;
+  function renderAddNewButton() {
     if (
       !userPackage ||
       userPackage.max.groupadmins <= userPackage.size.groupadmins
@@ -100,12 +103,10 @@ class Groups extends React.Component {
     );
   }
 
-  render() {
-    if (!this.props.items) return this.renderBlank();
-
+  function renderPage() {
     return (
       <div>
-        <Title title={this.getTitle()} />
+        <Title title={getTitle()} />
         <section
           id="main"
           className="container-fluid"
@@ -115,32 +116,27 @@ class Groups extends React.Component {
             <Alert />
             <div className="row">
               <div className="col-12 col-sm-9">
-                <SearchForm
-                  search={this.props.location.search}
-                  callback={fetchGroups}
-                />
+                <SearchForm search={search} callback={fetchGroups} />
               </div>
-              {this.renderAddNewButton()}
+              {renderAddNewButton()}
             </div>
-            <div className="row">{this.renderList()}</div>
+            <div className="row">{renderList()}</div>
             <Pagination />
           </div>
         </section>
       </div>
     );
   }
-}
 
-const mapStateToProps = state => {
-  return {
-    items: Object.values(state.group.list),
-    filter: state.filter,
-    pagination: state.pagination,
-    userPackage: state.user.package
-  };
+  return (
+    <React.Fragment>
+      {groups && renderPage()}
+      {!groups && renderBlank()}
+    </React.Fragment>
+  );
 };
 
 export default connect(
   mapStateToProps,
-  { fetchGroups }
+  mapDispatchToProps
 )(Groups);

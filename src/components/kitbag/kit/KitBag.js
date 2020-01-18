@@ -61,7 +61,7 @@ const KitBag = ({ items, pagination, accounts, fetchKitbagKits, match }) => {
     return `${account.name} (${pagination.totalItems})`;
   }
 
-  function renderBlankPage() {
+  function renderBlank() {
     return (
       <div>
         <Title title="Loading ...." />
@@ -104,7 +104,7 @@ const KitBag = ({ items, pagination, accounts, fetchKitbagKits, match }) => {
     });
   }
 
-  function renderPopulatedPage() {
+  function renderPage() {
     console.log('KITS', kits);
     return (
       <div>
@@ -143,8 +143,8 @@ const KitBag = ({ items, pagination, accounts, fetchKitbagKits, match }) => {
 
   return (
     <React.Fragment>
-      {kits && renderPopulatedPage()}
-      {!kits && renderBlankPage()}
+      {kits && renderPage()}
+      {!kits && renderBlank()}
     </React.Fragment>
   );
 };
