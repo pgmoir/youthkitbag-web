@@ -19,6 +19,7 @@ export const fetchKitbagKits = (
   page = 1,
   pagesize = 24
 ) => dispatch => {
+  console.log('FETCH', accountId, search, by, page, pagesize);
   const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/kitbag/kit/${accountId}`, {

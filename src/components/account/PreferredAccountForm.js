@@ -14,17 +14,13 @@ const PreferredAccountForm = ({ userId, accounts }) => {
   } = usePreferredAccountForm(accounts, updatePreferredAccount);
 
   useEffect(() => {
-    console.log('USEEFFECT', accounts);
     if (accounts) {
-      console.log('USEEFFECT-INSIDE', accounts);
       setValues(accounts);
     }
   }, [accounts, setValues]);
 
   function updatePreferredAccount() {
-    console.log('UPDATEBEF', accounts);
     accounts = undefined;
-    console.log('UPDATEAFT', accounts);
     const accountId = values.find(a => a.preferred)._id;
     dispatch(editProfilePreferredAccount(userId, accountId));
   }

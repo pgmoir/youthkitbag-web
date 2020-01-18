@@ -56,6 +56,7 @@ const SignUpForm = () => {
         field="confirmPassword"
         handleChange={handleChange}
         error={errors.confirmPassword}
+        autoComplete="new-password"
       />
       <button className="btn btn-success btn-lg py-3 px-5 mt-3" type="submit">
         Sign Up for YouthKitbag

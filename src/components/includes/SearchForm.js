@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import useForm from '../hooks/useForm';
 import validate from './FormEmptyValidationRules';
 import queryString from 'query-string';
@@ -10,7 +10,6 @@ const SearchForm = props => {
   const search = qsvalues.search ? qsvalues.search : '';
   const by = qsvalues.by ? qsvalues.by : '';
 
-  const dispatch = useDispatch();
   const filter = useSelector(state => state.filter);
   const pagination = useSelector(state => state.pagination);
   const [isClearing, setIsClearing] = useState(false);
@@ -28,7 +27,8 @@ const SearchForm = props => {
 
   function searchItems() {
     const { by, search } = values;
-    dispatch(props.callback(accountId, search, by, 1, pagination.itemsPerPage));
+    console.log('SERACH', accountId, search, by);
+    props.callback(accountId, search, by, 1, pagination.itemsPerPage);
   }
 
   function clearSearch() {

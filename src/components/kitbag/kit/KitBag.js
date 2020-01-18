@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchKitbagKits } from '../../../actions';
-import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import Alert from '../../includes/Alert';
 import Title from '../../includes/title/Title';
@@ -9,44 +9,59 @@ import KitCard from './KitCard';
 import SearchForm from '../../includes/SearchForm';
 import Pagination from '../../includes/Pagination';
 
-class KitBag extends React.Component {
-  getTitle() {
-    if (!this.props.accounts) {
+const mapStateToProps = state => ({
+  items: Object.values(state.kitbag.kit.list),
+  filter: state.filter,
+  pagination: state.pagination,
+  accounts: state.user.profile.accounts
+});
+
+const mapDispatchToProps = {
+  fetchKitbagKits
+};
+
+const KitBag = ({ items, pagination, accounts, fetchKitbagKits, match }) => {
+  const { search } = useLocation();
+  const accountId = match.params.accountId;
+  const [kits, setKits] = useState([]);
+
+  useEffect(() => {
+    if (items) {
+      console.log('SETKIT TO ITEMS', items);
+      setKits(items);
+    }
+  }, [items]);
+
+  useEffect(() => {
+    if (search) {
+      console.log('SEARCH');
+      const qsvalues = queryString.parse(search);
+      const searchValue = qsvalues.search ? qsvalues.search : '';
+      const byValue = qsvalues.by ? qsvalues.by : '';
+      const pageValue = qsvalues.page ? qsvalues.page : 1;
+      const pagesizeValue = qsvalues.pagesize ? qsvalues.pagesize : 24;
+      fetchKitbagKits(
+        accountId,
+        searchValue,
+        byValue,
+        pageValue,
+        pagesizeValue
+      );
+    } else if (accountId) {
+      console.log('INITIALFETCH');
+      fetchKitbagKits(accountId);
+    }
+  }, [search, fetchKitbagKits, accountId]);
+
+  function getTitle() {
+    if (!accounts) {
       return 'Loading ...';
     }
-    const account = this.props.accounts.find(a => a.preferred);
-    return `${account.name} (${this.props.pagination.totalItems})`;
+    const account = accounts.find(a => a.preferred);
+    return `${account.name} (${pagination.totalItems})`;
   }
 
-  componentDidMount() {
-    var by = '';
-    var search = '';
-    var page = '';
-
-    const accountId = this.props.match.params.accountId;
-
-    if (this.props.location.search) {
-      const values = queryString.parse(this.props.location.search);
-      search = values.search ? values.search : '';
-      by = values.by ? values.by : '';
-      page = values.page ? values.page : '';
-    }
-
-    this.props.fetchKitbagKits(accountId, search, by, page, 24);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.location.search !== prevProps.location.search) {
-      const accountId = this.props.match.params.accountId;
-      const values = queryString.parse(this.props.location.search);
-      const search = values.search ? values.search : '';
-      const by = values.by ? values.by : '';
-      const page = values.page ? values.page : '';
-      this.props.fetchKitbagKits(accountId, search, by, page, 24);
-    }
-  }
-
-  renderBlank() {
+  function renderBlankPage() {
     return (
       <div>
         <Title title="Loading ...." />
@@ -61,33 +76,24 @@ class KitBag extends React.Component {
                 <div className="bg-light hgt-3 mb-3">&nbsp;</div>
               </div>
             </div>
-            <div className="row">{this.renderBlankList()}</div>
+            <div className="row">{renderBlankList()}</div>
           </div>
         </section>
       </div>
     );
   }
 
-  renderBlankList() {
+  function renderBlankList() {
     const blankList = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
     return blankList.map((item, index) => {
       return <KitCard key={`${item._id}-${index}`} kit={item} />;
     });
   }
 
-  renderList() {
-    if (!this.props.items) return this.renderBlankList();
+  function renderList() {
+    if (!kits) return renderBlankList();
 
-    let items = [...this.props.items];
-
-    if (items.length < 12) {
-      for (var i = items.length; i < 12; i++) {
-        items.push({});
-      }
-    }
-
-    return items.map((item, index) => {
-      const accountId = this.props.match.params.accountId;
+    return kits.map((item, index) => {
       return (
         <KitCard
           key={`${item._id}-${index}`}
@@ -98,14 +104,11 @@ class KitBag extends React.Component {
     });
   }
 
-  render() {
-    if (!this.props.items) return this.renderBlank();
-
-    const accountId = this.props.match.params.accountId;
-
+  function renderPopulatedPage() {
+    console.log('KITS', kits);
     return (
       <div>
-        <Title title={this.getTitle()} />
+        <Title title={getTitle()} />
         <section
           id="main"
           className="container-fluid"
@@ -117,7 +120,7 @@ class KitBag extends React.Component {
               <div className="col-12 col-sm-9">
                 <SearchForm
                   accountId={accountId}
-                  search={this.props.location.search}
+                  search={search}
                   callback={fetchKitbagKits}
                 />
               </div>
@@ -130,25 +133,23 @@ class KitBag extends React.Component {
                 </Link>
               </div>
             </div>
-            <div className="row">{this.renderList()}</div>
+            <div className="row">{renderList()}</div>
             <Pagination />
           </div>
         </section>
       </div>
     );
   }
-}
 
-const mapStateToProps = state => {
-  return {
-    items: Object.values(state.kitbag.kit.list),
-    filter: state.filter,
-    pagination: state.pagination,
-    accounts: state.user.profile.accounts
-  };
+  return (
+    <React.Fragment>
+      {kits && renderPopulatedPage()}
+      {!kits && renderBlankPage()}
+    </React.Fragment>
+  );
 };
 
 export default connect(
   mapStateToProps,
-  { fetchKitbagKits }
+  mapDispatchToProps
 )(KitBag);
