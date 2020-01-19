@@ -1,27 +1,20 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { getUser } from '../../actions/UserActions';
 
-class User extends React.Component {
-  componentDidMount() {
-    this.props.actions.getUser();
-  }
-  render() {
-    return null;
-  }
-}
+const mapDispatchToProps = {
+  getUser
+};
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ getUser }, dispatch)
-});
+const User = ({ getUser }) => {
+  useEffect(() => {
+    getUser();
+  }, [getUser]);
 
-const mapStateToProps = state => ({
-  user: state.user,
-  auth: state.auth
-});
+  return null;
+};
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(User);

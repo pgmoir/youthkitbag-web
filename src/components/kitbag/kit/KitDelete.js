@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
@@ -8,31 +8,47 @@ import {
 import Modal from '../../includes/Modal';
 import history from '../../../helpers/history';
 
-class KitDelete extends React.Component {
-  componentDidMount() {
-    this.props.fetchKitbagKit(
-      this.props.match.params.accountId,
-      this.props.match.params.id
-    );
-  }
+const mapStateToProps = (state, ownProps) => ({
+  item: state.kitbag.kit[ownProps.match.params.id]
+});
 
-  renderTitle() {
-    if (!this.props.kit) {
+const mapDispatchToProps = {
+  fetchKitbagKit,
+  deleteKitbagKit
+};
+
+const KitDelete = ({ item, match, fetchKitbagKit, deleteKitbagKit }) => {
+  const accountId = match.params.accountId;
+  const kitId = match.params.kitId;
+  const [kit, setKit] = useState({});
+
+  useEffect(() => {
+    if (item) {
+      setKit(item);
+    }
+  }, [item, setKit]);
+
+  useEffect(() => {
+    if (accountId && kitId) {
+      fetchKitbagKit(accountId, kitId);
+    }
+  }, [accountId, kitId, fetchKitbagKit]);
+
+  function renderTitle() {
+    if (!kit) {
       return 'Delete item of kit';
     }
-    return `Delete "${this.props.kit.title}"`;
+    return `Delete "${kit.title}"`;
   }
 
-  renderContent() {
-    if (!this.props.kit) {
+  function renderContent() {
+    if (!kit) {
       return 'Are you sure you want to delete this item of kit? You do have the option to just change the active status and retain the history of this item.';
     }
-    return `Are you sure you want to delete "${this.props.kit.title}"? You do have the option to just change the active status and retain the history of this item.`;
+    return `Are you sure you want to delete "${kit.title}"? You do have the option to just change the active status and retain the history of this item.`;
   }
 
-  renderActions() {
-    const accountId = this.props.match.params.accountId;
-    const kitId = this.props.match.params.kitId;
+  function renderActions() {
     return (
       <React.Fragment>
         <Link
@@ -45,7 +61,7 @@ class KitDelete extends React.Component {
         <button
           type="button"
           className="btn btn-danger"
-          onClick={() => this.props.deleteKitbagKit(accountId, kitId)}
+          onClick={() => deleteKitbagKit(accountId, kitId)}
         >
           Delete
         </button>
@@ -53,24 +69,17 @@ class KitDelete extends React.Component {
     );
   }
 
-  render() {
-    const accountId = this.props.match.params.accountId;
-    return (
-      <Modal
-        title={this.renderTitle()}
-        content={this.renderContent()}
-        actions={this.renderActions()}
-        onDismiss={() => history.push(`/kitbag/kit/${accountId}`)}
-      />
-    );
-  }
-}
-
-const mapStateToProps = (state, ownProps) => {
-  return { kit: state.kitbag.kit[ownProps.match.params.id] };
+  return (
+    <Modal
+      title={renderTitle()}
+      content={renderContent()}
+      actions={renderActions()}
+      onDismiss={() => history.push(`/kitbag/kit/${accountId}`)}
+    />
+  );
 };
 
 export default connect(
   mapStateToProps,
-  { fetchKitbagKit, deleteKitbagKit }
+  mapDispatchToProps
 )(KitDelete);

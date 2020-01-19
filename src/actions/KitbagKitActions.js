@@ -31,9 +31,9 @@ export const fetchKitbagKits = (
     })
     .then(response => {
       dispatch({ type: FETCH_KITBAG_KITS, payload: response.data });
-      history.push(
-        `/kitbag/kit/${accountId}?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`
-      );
+      // history.push(
+      //   `/kitbag/kit/${accountId}?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`
+      // );
     })
     .catch(err => {
       const { response } = err;

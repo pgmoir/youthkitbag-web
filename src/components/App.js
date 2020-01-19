@@ -30,7 +30,6 @@ import KitBag from './kitbag/kit/KitBag';
 import KitPage from './kitbag/kit/KitPage';
 import KitDelete from './kitbag/kit/KitDelete';
 import MarketKitPage from './kitbag/market/MarketKitPage';
-import MarketKitDelete from './kitbag/market/MarketKitDelete';
 import MarketItems from './market/MarketItems';
 import MarketItemViewPage from './market/MarketItemViewPage';
 import SettingsPage from './account/SettingsPage';
@@ -116,11 +115,6 @@ const App = () => {
               path="/kitbag/market/:accountId/edit/:marketId"
               exact
               component={MarketKitPage}
-            />
-            <PrivateRoute
-              path="/kitbag/market/:accountId/delete/:marketId"
-              exact
-              component={MarketKitDelete}
             />
 
             <PrivateRoute path="/groups/new" exact component={GroupPage} />

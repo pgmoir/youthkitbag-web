@@ -1,21 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { authenticateToken } from '../../actions/AuthActions';
 
-class Token extends React.Component {
-  componentDidMount() {
-    this.props.actions.authenticateToken(this.props.match.params.token);
-  }
+const mapDispatchToProps = {
+  authenticateToken
+};
 
-  render() {
-    return <h1 className="loading-text">Authenticating user...</h1>;
-  }
-}
+const Token = ({ authenticateToken, match }) => {
+  const token = match.params.token;
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ authenticateToken }, dispatch)
-});
+  useEffect(() => {
+    console.log('AUTHENTICATE', token);
+    authenticateToken(token);
+  }, [token, authenticateToken]);
+
+  return <h1 className="loading-text">Authenticating user...</h1>;
+};
 
 export default connect(
   null,

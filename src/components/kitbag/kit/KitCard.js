@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-class KitCard extends React.Component {
-  totalQuantity() {
-    const { inbag } = this.props.kit;
+const KitCard = ({ kit, accountId }) => {
+  function totalQuantity() {
+    const { inbag } = kit;
     if (!inbag) {
       return 0;
     }
@@ -12,15 +12,15 @@ class KitCard extends React.Component {
     }, 0);
   }
 
-  topImage() {
-    const { images } = this.props.kit;
+  function topImage() {
+    const { images } = kit;
     if (!images || images.length === 0) {
       return '/images/default.png';
     }
     return images[0].imageUrl;
   }
 
-  renderBlank() {
+  function renderBlank() {
     return (
       <div className="col-6 col-md-4 col-lg-3 mb-3">
         <article className="card card-link card-b1">
@@ -36,39 +36,36 @@ class KitCard extends React.Component {
     );
   }
 
-  render() {
-    const { _id, title, subtitle } = this.props.kit;
-    const accountId = this.props.accountId;
+  const { _id, title, subtitle } = kit;
 
-    if (!_id) return this.renderBlank();
+  if (!_id) return renderBlank();
 
-    return (
-      <div className="col-6 col-md-4 col-lg-3 mb-3">
-        <article className="card card-link card-b1">
-          <span className="icons-top-left pt-1">
-            <Link to={`/kitbag/kit/${accountId}/delete/${_id}`}>
-              <span className="icon-tray-item fas fa-trash-alt"></span>
-            </Link>
-          </span>
-          <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">
-            {this.totalQuantity()}
-          </span>
-          <Link to={`/kitbag/kit/${accountId}/edit/${_id}`}>
-            <img
-              className="card-img-top"
-              src={this.topImage()}
-              alt={title}
-              role="presentation"
-            />
-            <div className="card-body">
-              <h3 className="card-title h6 ellipsis">{title}</h3>
-              {subtitle && <p className="card-text ellipsis">{subtitle}</p>}
-            </div>
+  return (
+    <div className="col-6 col-md-4 col-lg-3 mb-3">
+      <article className="card card-link card-b1">
+        <span className="icons-top-left pt-1">
+          <Link to={`/kitbag/kit/${accountId}/delete/${_id}`}>
+            <span className="icon-tray-item fas fa-trash-alt"></span>
           </Link>
-        </article>
-      </div>
-    );
-  }
-}
+        </span>
+        <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">
+          {totalQuantity()}
+        </span>
+        <Link to={`/kitbag/kit/${accountId}/edit/${_id}`}>
+          <img
+            className="card-img-top"
+            src={topImage()}
+            alt={title}
+            role="presentation"
+          />
+          <div className="card-body">
+            <h3 className="card-title h6 ellipsis">{title}</h3>
+            {subtitle && <p className="card-text ellipsis">{subtitle}</p>}
+          </div>
+        </Link>
+      </article>
+    </div>
+  );
+};
 
 export default KitCard;

@@ -1,20 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as AuthAction from '../../actions/AuthActions';
+import { logout } from '../../actions/AuthActions';
 
-class Logout extends React.Component {
-  componentDidMount() {
-    this.props.actions.logout();
-  }
-  render() {
-    return <h1 className="loading-text">Logging out...</h1>;
-  }
-}
+const mapDispatchToProps = {
+  logout
+};
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(AuthAction, dispatch)
-});
+const Logout = ({ logout }) => {
+  useEffect(() => {
+    logout();
+  }, [logout]);
+
+  return <h1 className="loading-text">Logging out...</h1>;
+};
 
 export default connect(
   null,

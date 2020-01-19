@@ -1,22 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ThreadLink from '../threadlink/ThreadLink';
 import ThreadMessageChain from '../threadMessageChain/ThreadMessageChain';
 import { compareForSameDate } from '../../../helpers/date';
 
-class Threads extends React.Component {
-  state = {
-    threadDisplayed: undefined
-  };
+const Threads = ({ threads, accountId, source, marketType }) => {
+  const [threadDisplayed, setThreadDisplayed] = useState();
 
-  componentDidMount = () => {
-    this.setState({
-      threadDisplayed:
-        this.props.threads.length > 0 ? this.props.threads[0]._id : undefined
-    });
-  };
+  useEffect(() => {
+    if (threads) {
+      setThreadDisplayed(threads.length > 0 ? threads[0]._id : undefined);
+    }
+  }, [threads, setThreadDisplayed]);
 
-  renderThreadLinks() {
-    let { threads, source } = this.props;
+  function renderThreadLinks() {
     if (!threads) return (threads = [{}, {}, {}, {}, {}, {}]);
     return threads.map((thread, index) => {
       return (
@@ -24,13 +20,13 @@ class Threads extends React.Component {
           key={`${thread._id}-${index}`}
           thread={thread}
           source={source}
-          changeThreadDisplayed={this.changeThreadDisplayed}
+          changeThreadDisplayed={changeThreadDisplayed}
         />
       );
     });
   }
 
-  parseThread(thread) {
+  function parseThread(thread) {
     let newThread = { ...thread };
     newThread.messages = [];
     const { messages } = thread;
@@ -51,37 +47,34 @@ class Threads extends React.Component {
     return newThread;
   }
 
-  changeThreadDisplayed = id => {
-    this.setState({ threadDisplayed: id });
-  };
+  function changeThreadDisplayed(id) {
+    setThreadDisplayed(id);
+  }
 
-  renderThreadMessages() {
-    let threads = [...this.props.threads];
+  function renderThreadMessages() {
     return threads.map((thread, index) => {
-      const thisThread = this.parseThread(thread);
+      const thisThread = parseThread(thread);
       return (
         <ThreadMessageChain
           key={`${thisThread._id}-${index}`}
           thread={thisThread}
-          source={this.props.source}
-          accountId={this.props.accountId}
-          marketType={this.props.marketType}
-          displayed={this.state.threadDisplayed}
+          source={source}
+          accountId={accountId}
+          marketType={marketType}
+          displayed={threadDisplayed}
         />
       );
     });
   }
 
-  render() {
-    return (
-      <React.Fragment>
-        <div className="row pb-3">
-          <div className="col-4">{this.renderThreadLinks()}</div>
-          <div className="col-8">{this.renderThreadMessages()}</div>
-        </div>
-      </React.Fragment>
-    );
-  }
-}
+  return (
+    <React.Fragment>
+      <div className="row pb-3">
+        <div className="col-4">{renderThreadLinks()}</div>
+        <div className="col-8">{renderThreadMessages()}</div>
+      </div>
+    </React.Fragment>
+  );
+};
 
 export default Threads;

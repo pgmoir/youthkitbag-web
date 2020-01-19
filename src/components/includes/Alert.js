@@ -1,26 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { resetToast, shownToast } from '../../actions/ToastActions';
 
-const mapStateToProps = state => {
-  return { toast: state.toast };
+const mapDispatchToProps = {
+  resetToast,
+  shownToast
 };
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ resetToast, shownToast }, dispatch)
+const mapStateToProps = state => ({
+  toast: state.toast
 });
 
-class Alert extends React.Component {
-  componentWillUnmount() {
-    if (this.props.toast.currentMessage) {
-      this.props.toast.hasShown
-        ? this.props.actions.resetToast()
-        : this.props.actions.shownToast();
-    }
-  }
+const Alert = ({ resetToast, shownToast, toast }) => {
+  // componentWillUnmount() {
+  //   if (toast.currentMessage) {
+  //     toast.hasShown
+  //       ? resetToast()
+  //       : shownToast();
+  //   }
+  // }
 
-  alertStyle(style) {
+  function alertStyle(style) {
     switch (style) {
       case 'error':
         return 'alert-danger';
@@ -31,19 +31,14 @@ class Alert extends React.Component {
     }
   }
 
-  render() {
-    if (!this.props.toast || !this.props.toast.currentMessage) return null;
+  if (!toast || !toast.currentMessage) return null;
 
-    return (
-      <div
-        className={`alert ${this.alertStyle(this.props.toast.currentStyle)}`}
-        role="alert"
-      >
-        {this.props.toast.currentMessage}
-      </div>
-    );
-  }
-}
+  return (
+    <div className={`alert ${alertStyle(toast.currentStyle)}`} role="alert">
+      {toast.currentMessage}
+    </div>
+  );
+};
 
 export default connect(
   mapStateToProps,
