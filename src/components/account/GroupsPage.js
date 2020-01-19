@@ -35,17 +35,21 @@ const GroupsPage = ({ profile }) => {
                 {profile.groups.map((item, index) => (
                   <tr key={`${item._id}-${index}`}>
                     <td className="valign-m">
-                      <img
-                        src={
-                          item.images && item.images.length > 0
-                            ? item.images[0].imageUrl
-                            : '/images/defaultthumb.png'
-                        }
-                        className="img-avatar img-thumbnail img-link rounded-circle p-0 m-1"
-                        alt=""
-                      />
+                      <Link to={`/groups/${item._id}`}>
+                        <img
+                          src={
+                            item.images && item.images.length > 0
+                              ? item.images[0].imageUrl
+                              : '/images/defaultthumb.png'
+                          }
+                          className="img-avatar img-thumbnail img-link rounded-circle p-0 m-1"
+                          alt=""
+                        />
+                      </Link>
                     </td>
-                    <td className="valign-m">{item.name}</td>
+                    <td className="valign-m">
+                      <Link to={`/groups/${item._id}`}>{item.name}</Link>
+                    </td>
                     <td className="valign-m">{item.members[0].state}</td>
                     <td className="valign-m">
                       {item.members[0].permissions.join(', ')}

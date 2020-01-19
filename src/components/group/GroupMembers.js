@@ -25,7 +25,6 @@ const GroupMembers = ({ memberList, fetchGroupMembers, match }) => {
 
   useEffect(() => {
     if (groupId) {
-      console.log('INITIALFETCH');
       fetchGroupMembers(groupId);
     }
   }, [groupId, fetchGroupMembers]);

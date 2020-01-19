@@ -21,13 +21,7 @@ const mapDispatchToProps = {
   fetchMarketItems
 };
 
-const MarketItems = ({
-  items,
-  pagination,
-  accounts,
-  fetchMarketItems,
-  match
-}) => {
+const MarketItems = ({ items, pagination, fetchMarketItems, match }) => {
   const { search } = useLocation();
   const accountId = match.params.accountId;
   const [marketItems, setMarketItems] = useState([]);
@@ -40,7 +34,6 @@ const MarketItems = ({
 
   useEffect(() => {
     if (search) {
-      console.log('SEARCH');
       const qsvalues = queryString.parse(search);
       const searchValue = qsvalues.search ? qsvalues.search : '';
       const byValue = qsvalues.by ? qsvalues.by : '';
@@ -48,7 +41,6 @@ const MarketItems = ({
       const pagesizeValue = qsvalues.pagesize ? qsvalues.pagesize : 24;
       fetchMarketItems(searchValue, byValue, pageValue, pagesizeValue);
     } else {
-      console.log('INITIALFETCH');
       fetchMarketItems();
     }
   }, [search, fetchMarketItems]);

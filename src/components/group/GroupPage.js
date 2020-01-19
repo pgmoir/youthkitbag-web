@@ -45,16 +45,16 @@ const GroupPage = ({ current, fetchGroup, match }) => {
     }
   }, [current]);
 
-  function groupIsLoding() {
+  function groupIsLoading() {
     return groupId && !group._id;
   }
 
   function getTitle() {
-    if (groupIsLoding()) {
+    if (groupIsLoading()) {
       return 'Loading ...';
     }
-
-    return group._id ? group.name : 'Create new group';
+    const leftState = group.groupMemberState === 'left' ? ' (left)' : '';
+    return group._id ? `${group.name}${leftState}` : 'Create new group';
   }
 
   return (
@@ -82,7 +82,7 @@ const GroupPage = ({ current, fetchGroup, match }) => {
                   to={`/groups/${groupId}/join`}
                   className={`btn btn-primary ${
                     group.groupMemberState ? 'disabled' : ''
-                  }`}
+                  } ml-3`}
                   disabled={group.groupMemberState}
                 >
                   Join
@@ -91,7 +91,7 @@ const GroupPage = ({ current, fetchGroup, match }) => {
               {groupId && group.status !== 'blocked' && group.groupMember && (
                 <Link
                   to={`/groups/${groupId}/leave`}
-                  className="btn btn-primary"
+                  className="btn btn-primary ml-3"
                 >
                   Leave
                 </Link>

@@ -10,7 +10,6 @@ const Token = ({ authenticateToken, match }) => {
   const token = match.params.token;
 
   useEffect(() => {
-    console.log('AUTHENTICATE', token);
     authenticateToken(token);
   }, [token, authenticateToken]);
 

@@ -26,14 +26,12 @@ const Groups = ({ items, pagination, userPackage, fetchGroups }) => {
 
   useEffect(() => {
     if (items) {
-      console.log('SETGROUPS TO ITEMS', items);
       setGroups(items);
     }
   }, [items]);
 
   useEffect(() => {
     if (search) {
-      console.log('SEARCH');
       const qsvalues = queryString.parse(search);
       const searchValue = qsvalues.search ? qsvalues.search : '';
       const byValue = qsvalues.by ? qsvalues.by : '';
@@ -41,7 +39,6 @@ const Groups = ({ items, pagination, userPackage, fetchGroups }) => {
       const pagesizeValue = qsvalues.pagesize ? qsvalues.pagesize : 24;
       fetchGroups(searchValue, byValue, pageValue, pagesizeValue);
     } else {
-      console.log('INITIALFETCH');
       fetchGroups();
     }
   }, [search, fetchGroups]);

@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const GroupMember = ({ groupId, member }) => {
-  console.log('GROUPMEMBER', groupId, member);
   const { user, permissions } = member;
 
   function getThumbnail() {

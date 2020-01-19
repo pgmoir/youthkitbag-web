@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const MarketItemCard = ({ market }) => {
-  console.log('MARKETITEMCARD', market);
   function renderNotification() {
     if (!market) return null;
     const { isOwned, marketType, marketPrice, threads } = market;

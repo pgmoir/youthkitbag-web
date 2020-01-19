@@ -27,8 +27,7 @@ const SearchForm = props => {
 
   function searchItems() {
     const { by, search } = values;
-    console.log('SERACH', accountId, search, by);
-    props.callback(accountId, search, by, 1, pagination.itemsPerPage);
+    props.callback(search, by, 1, pagination.itemsPerPage, accountId);
   }
 
   function clearSearch() {

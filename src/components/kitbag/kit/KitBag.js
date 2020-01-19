@@ -27,29 +27,26 @@ const KitBag = ({ items, pagination, accounts, fetchKitbagKits, match }) => {
 
   useEffect(() => {
     if (items) {
-      console.log('SETKIT TO ITEMS', items);
       setKits(items);
     }
   }, [items]);
 
   useEffect(() => {
     if (search) {
-      console.log('SEARCH');
       const qsvalues = queryString.parse(search);
       const searchValue = qsvalues.search ? qsvalues.search : '';
       const byValue = qsvalues.by ? qsvalues.by : '';
       const pageValue = qsvalues.page ? qsvalues.page : 1;
       const pagesizeValue = qsvalues.pagesize ? qsvalues.pagesize : 24;
       fetchKitbagKits(
-        accountId,
         searchValue,
         byValue,
         pageValue,
-        pagesizeValue
+        pagesizeValue,
+        accountId
       );
     } else if (accountId) {
-      console.log('INITIALFETCH');
-      fetchKitbagKits(accountId);
+      fetchKitbagKits('', 'all', 1, 24, accountId);
     }
   }, [search, fetchKitbagKits, accountId]);
 
@@ -105,7 +102,6 @@ const KitBag = ({ items, pagination, accounts, fetchKitbagKits, match }) => {
   }
 
   function renderPage() {
-    console.log('KITS', kits);
     return (
       <div>
         <Title title={getTitle()} />

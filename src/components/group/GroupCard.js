@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const GroupCard = ({ group }) => {
-  console.log('GROUPCARD', group);
   function topImage() {
     const { images } = group;
     if (!images || images.length === 0) {
