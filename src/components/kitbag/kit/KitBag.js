@@ -21,7 +21,27 @@ const mapDispatchToProps = {
 };
 
 const KitBag = ({ items, pagination, accounts, fetchKitbagKits, match }) => {
+  //console.log('ITEMS', items);
+  //console.log('PAGINATION', pagination);
+  //console.log('ACCOUNTS', accounts);
+  //console.log('MATCH', match);
   const { search } = useLocation();
+
+  function fromQueryStringOrDefault() {
+    //console.log('fromQueryStringOrDefault');
+    return search
+      ? queryString.parse(search)
+      : {
+          search: '',
+          by: 'all',
+          page: 1,
+          pageSize: 24
+        };
+  }
+
+  //console.log('SEARCH', search);
+  const [searchParams, setSearchParams] = useState(fromQueryStringOrDefault());
+  //console.log('SEARCHPARAMS', searchParams);
   const accountId = match.params.accountId;
   const [kits, setKits] = useState([]);
 
@@ -32,23 +52,32 @@ const KitBag = ({ items, pagination, accounts, fetchKitbagKits, match }) => {
   }, [items]);
 
   useEffect(() => {
+    console.log('SEARCH', search, searchParams);
     if (search) {
-      const qsvalues = queryString.parse(search);
-      const searchValue = qsvalues.search ? qsvalues.search : '';
-      const byValue = qsvalues.by ? qsvalues.by : '';
-      const pageValue = qsvalues.page ? qsvalues.page : 1;
-      const pagesizeValue = qsvalues.pagesize ? qsvalues.pagesize : 24;
+      const newSearchParams = queryString.parse(search);
+      if (
+        newSearchParams.search !== searchParams.search ||
+        newSearchParams.by !== searchParams.by ||
+        newSearchParams.page !== searchParams.page ||
+        newSearchParams.pageSize !== searchParams.pageSize
+      ) {
+        console.log('SETSEARCH', searchParams, newSearchParams);
+        setSearchParams(newSearchParams);
+      }
+    }
+  }, [search, searchParams, setSearchParams]);
+
+  useEffect(() => {
+    if (searchParams && accountId) {
       fetchKitbagKits(
-        searchValue,
-        byValue,
-        pageValue,
-        pagesizeValue,
+        searchParams.search,
+        searchParams.by,
+        searchParams.page,
+        searchParams.pageSize,
         accountId
       );
-    } else if (accountId) {
-      fetchKitbagKits('', 'all', 1, 24, accountId);
     }
-  }, [search, fetchKitbagKits, accountId]);
+  }, [searchParams, fetchKitbagKits, accountId]);
 
   function getTitle() {
     if (!accounts) {
