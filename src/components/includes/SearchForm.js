@@ -7,7 +7,7 @@ import queryString from 'query-string';
 const SearchForm = props => {
   const accountId = props.accountId;
   const qsvalues = queryString.parse(props.search);
-  const search = qsvalues.search ? qsvalues.search : '';
+  const searchFor = qsvalues.searchFor ? qsvalues.searchFor : '';
   const by = qsvalues.by ? qsvalues.by : '';
 
   const filter = useSelector(state => state.filter);
@@ -16,7 +16,7 @@ const SearchForm = props => {
 
   const initialValues = {
     by: by,
-    search: search
+    searchFor: searchFor
   };
 
   const { setValues, handleChange, handleSubmit, values } = useForm(
@@ -26,12 +26,12 @@ const SearchForm = props => {
   );
 
   function searchItems() {
-    const { by, search } = values;
-    props.callback(search, by, 1, pagination.itemsPerPage, accountId);
+    const { by, searchFor } = values;
+    props.callback(searchFor, by, 1, pagination.itemsPerPage, accountId);
   }
 
   function clearSearch() {
-    setValues({ by: '', search: '' });
+    setValues({ by: '', searchFor: '' });
     setIsClearing(true);
   }
 
@@ -63,12 +63,12 @@ const SearchForm = props => {
               </select>
             </div>
             <input
-              name="search"
+              name="searchFor"
               className="form-control"
               type="text"
               onChange={handleChange}
-              value={values.search}
-              id="search"
+              value={values.searchFor}
+              id="searchFor"
               arialabel="Search by text"
             />
             <div className="input-group-append">

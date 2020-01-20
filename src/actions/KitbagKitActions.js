@@ -13,7 +13,7 @@ import history from '../helpers/history';
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchKitbagKits = (
-  search = '',
+  searchFor = '',
   by = 'all',
   page = 1,
   pagesize = 24,
@@ -22,7 +22,7 @@ export const fetchKitbagKits = (
   const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/kitbag/kit/${accountId}`, {
-      params: { search, by, page, pagesize },
+      params: { searchFor, by, page, pagesize },
       headers: {
         Authorization: `bearer ${token}`,
         'content-type': 'application/json'
@@ -31,7 +31,7 @@ export const fetchKitbagKits = (
     .then(response => {
       dispatch({ type: FETCH_KITBAG_KITS, payload: response.data });
       history.push(
-        `/kitbag/kit/${accountId}?search=${search}&by=${by}&page=${page}&pagesize=${pagesize}`
+        `/kitbag/kit/${accountId}?searchFor=${searchFor}&by=${by}&page=${page}&pagesize=${pagesize}`
       );
     })
     .catch(err => {

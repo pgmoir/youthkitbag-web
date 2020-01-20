@@ -21,27 +21,25 @@ const mapDispatchToProps = {
 };
 
 const KitBag = ({ items, pagination, accounts, fetchKitbagKits, match }) => {
-  //console.log('ITEMS', items);
-  //console.log('PAGINATION', pagination);
-  //console.log('ACCOUNTS', accounts);
-  //console.log('MATCH', match);
   const { search } = useLocation();
+  console.log('SEARCH', search);
 
   function fromQueryStringOrDefault() {
-    //console.log('fromQueryStringOrDefault');
+    console.log('fromQueryStringOrDefault', search);
     return search
       ? queryString.parse(search)
       : {
-          search: '',
+          searchFor: '',
           by: 'all',
           page: 1,
           pageSize: 24
         };
   }
 
-  //console.log('SEARCH', search);
-  const [searchParams, setSearchParams] = useState(fromQueryStringOrDefault());
-  //console.log('SEARCHPARAMS', searchParams);
+  const [{ searchFor, by, page, pageSize }, setSearchParams] = useState(
+    fromQueryStringOrDefault()
+  );
+
   const accountId = match.params.accountId;
   const [kits, setKits] = useState([]);
 
@@ -52,32 +50,16 @@ const KitBag = ({ items, pagination, accounts, fetchKitbagKits, match }) => {
   }, [items]);
 
   useEffect(() => {
-    console.log('SEARCH', search, searchParams);
-    if (search) {
-      const newSearchParams = queryString.parse(search);
-      if (
-        newSearchParams.search !== searchParams.search ||
-        newSearchParams.by !== searchParams.by ||
-        newSearchParams.page !== searchParams.page ||
-        newSearchParams.pageSize !== searchParams.pageSize
-      ) {
-        console.log('SETSEARCH', searchParams, newSearchParams);
-        setSearchParams(newSearchParams);
-      }
-    }
-  }, [search, searchParams, setSearchParams]);
+    console.log('SEARCHUE', search);
+    setSearchParams(queryString.parse(search));
+  }, [search, setSearchParams]);
 
   useEffect(() => {
-    if (searchParams && accountId) {
-      fetchKitbagKits(
-        searchParams.search,
-        searchParams.by,
-        searchParams.page,
-        searchParams.pageSize,
-        accountId
-      );
+    if (accountId) {
+      console.log('FETCHKITBAGS');
+      fetchKitbagKits(searchFor, by, page, pageSize, accountId);
     }
-  }, [searchParams, fetchKitbagKits, accountId]);
+  }, [searchFor, by, page, pageSize, fetchKitbagKits, accountId]);
 
   function getTitle() {
     if (!accounts) {

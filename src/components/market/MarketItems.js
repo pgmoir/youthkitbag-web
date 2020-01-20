@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchMarketItems } from '../../actions/MarketActions';
 import queryString from 'query-string';
@@ -6,16 +7,13 @@ import Title from '../includes/title/Title';
 import MarketItemCard from './MarketItemCard';
 import SearchForm from '../includes/SearchForm';
 import Pagination from '../includes/Pagination';
-import { useLocation } from 'react-router-dom';
 
-const mapStateToProps = state => {
-  return {
-    items: Object.values(state.market.list),
-    filter: state.filter,
-    pagination: state.pagination,
-    accounts: state.user.profile.accounts
-  };
-};
+const mapStateToProps = state => ({
+  items: Object.values(state.market.list),
+  filter: state.filter,
+  pagination: state.pagination,
+  accounts: state.user.profile.accounts
+});
 
 const mapDispatchToProps = {
   fetchMarketItems
@@ -35,7 +33,7 @@ const MarketItems = ({ items, pagination, fetchMarketItems, match }) => {
   useEffect(() => {
     if (search) {
       const qsvalues = queryString.parse(search);
-      const searchValue = qsvalues.search ? qsvalues.search : '';
+      const searchValue = qsvalues.searchFor ? qsvalues.searchFor : '';
       const byValue = qsvalues.by ? qsvalues.by : '';
       const pageValue = qsvalues.page ? qsvalues.page : 1;
       const pagesizeValue = qsvalues.pagesize ? qsvalues.pagesize : 24;

@@ -33,7 +33,7 @@ const Groups = ({ items, pagination, userPackage, fetchGroups }) => {
   useEffect(() => {
     if (search) {
       const qsvalues = queryString.parse(search);
-      const searchValue = qsvalues.search ? qsvalues.search : '';
+      const searchValue = qsvalues.searchFor ? qsvalues.searchFor : '';
       const byValue = qsvalues.by ? qsvalues.by : '';
       const pageValue = qsvalues.page ? qsvalues.page : 1;
       const pagesizeValue = qsvalues.pagesize ? qsvalues.pagesize : 24;
