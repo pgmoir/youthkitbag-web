@@ -76,7 +76,7 @@ export const createMarketKit = (accountId, formValues) => dispatch => {
     )
     .then(response => {
       dispatch({ type: CREATE_MARKET_KIT, payload: response.data });
-      history.push(`/market/${accountId}?searchFor=&by=&page=1&pagesize=24`);
+      history.push(`/market/${accountId}?searchfor=&by=&page=1&pagesize=24`);
     })
     .catch(err => {
       const { response } = err;
@@ -84,7 +84,7 @@ export const createMarketKit = (accountId, formValues) => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          `/auth/login?return=/market/${accountId}?searchFor=&by=&page=1&pagesize=24`
+          `/auth/login?return=/market/${accountId}?searchfor=&by=&page=1&pagesize=24`
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -106,7 +106,7 @@ export const editMarketKit = (accountId, marketId, formValues) => dispatch => {
     )
     .then(response => {
       dispatch({ type: EDIT_MARKET_KIT, payload: response.data });
-      history.push(`/market/${accountId}?searchFor=&by=&page=1&pagesize=24`);
+      history.push(`/market/${accountId}?searchfor=&by=&page=1&pagesize=24`);
     })
     .catch(err => {
       const { response } = err;
@@ -114,7 +114,7 @@ export const editMarketKit = (accountId, marketId, formValues) => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          '/auth/login?return=/market?searchFor=&by=&page=1&pagesize=24'
+          '/auth/login?return=/market?searchfor=&by=&page=1&pagesize=24'
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -166,7 +166,7 @@ export const deleteMarketKit = (accountId, marketId) => dispatch => {
     })
     .then(response => {
       dispatch({ type: DELETE_MARKET_KIT, payload: response.data });
-      history.push(`/market/${accountId}?searchFor=&by=&page=1&pagesize=24`);
+      history.push(`/market/${accountId}?searchfor=&by=&page=1&pagesize=24`);
     })
     .catch(err => {
       const { response } = err;
@@ -174,7 +174,7 @@ export const deleteMarketKit = (accountId, marketId) => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          `/auth/login?return=/market/${accountId}?searchFor=&by=&page=1&pagesize=24`
+          `/auth/login?return=/market/${accountId}?searchfor=&by=&page=1&pagesize=24`
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });

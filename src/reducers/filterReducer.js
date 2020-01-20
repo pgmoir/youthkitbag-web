@@ -8,7 +8,7 @@ import {
 
 const initialState = {
   by: 'all',
-  searchFor: '',
+  searchfor: '',
   options: [{ key: 'all', value: 'All' }]
 };
 

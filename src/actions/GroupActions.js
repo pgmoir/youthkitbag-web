@@ -18,7 +18,7 @@ import { getUser } from './UserActions';
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchGroups = (
-  searchFor = '',
+  searchfor = '',
   by = 'all',
   page = 1,
   pagesize = 24
@@ -26,7 +26,7 @@ export const fetchGroups = (
   const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/group/search`, {
-      params: { searchFor, by, page, pagesize },
+      params: { searchfor, by, page, pagesize },
       headers: {
         Authorization: `bearer ${token}`,
         'content-type': 'application/json'
@@ -35,7 +35,7 @@ export const fetchGroups = (
     .then(response => {
       dispatch({ type: FETCH_GROUPS, payload: response.data });
       history.push(
-        `/groups?searchFor=${searchFor}&by=${by}&page=${page}&pagesize=${pagesize}`
+        `/groups?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}`
       );
     })
     .catch(err => {
@@ -88,7 +88,7 @@ export const createGroup = formValues => dispatch => {
     .then(response => {
       dispatch({ type: CREATE_GROUP, payload: response.data });
       dispatch(getUser());
-      history.push('/groups?searchFor=&by=&page=1&pagesize=24');
+      history.push('/groups?searchfor=&by=&page=1&pagesize=24');
     })
     .catch(err => {
       const { response } = err;
@@ -96,7 +96,7 @@ export const createGroup = formValues => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          '/auth/login?return=/groups?searchFor=&by=&page=1&pagesize=24'
+          '/auth/login?return=/groups?searchfor=&by=&page=1&pagesize=24'
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -118,7 +118,7 @@ export const editGroup = (groupId, formValues) => dispatch => {
     )
     .then(response => {
       dispatch({ type: EDIT_GROUP, payload: response.data });
-      history.push('/groups?searchFor=&by=&page=1&pagesize=24');
+      history.push('/groups?searchfor=&by=&page=1&pagesize=24');
     })
     .catch(err => {
       const { response } = err;
@@ -126,7 +126,7 @@ export const editGroup = (groupId, formValues) => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          '/auth/login?return=/groups?searchFor=&by=&page=1&pagesize=24'
+          '/auth/login?return=/groups?searchfor=&by=&page=1&pagesize=24'
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
@@ -148,7 +148,7 @@ export const editGroupStatus = (groupId, status) => dispatch => {
     )
     .then(response => {
       dispatch({ type: EDIT_GROUP_STATUS, payload: response.data });
-      history.push('/groups?searchFor=&by=&page=1&pagesize=24');
+      history.push('/groups?searchfor=&by=&page=1&pagesize=24');
     })
     .catch(err => {
       const { response } = err;
@@ -156,7 +156,7 @@ export const editGroupStatus = (groupId, status) => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          '/auth/login?return=/groups?searchFor=&by=&page=1&pagesize=24'
+          '/auth/login?return=/groups?searchfor=&by=&page=1&pagesize=24'
         );
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });

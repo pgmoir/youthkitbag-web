@@ -21,23 +21,15 @@ const mapDispatchToProps = {
 };
 
 const KitBag = ({ items, pagination, accounts, fetchKitbagKits, match }) => {
-  const { search } = useLocation();
+  console.log('=========================================================');
+  let { search } = useLocation();
+  if (!search) {
+    search = '?searchfor=&by=all&page=1&pagesize=24';
+  }
   console.log('SEARCH', search);
 
-  function fromQueryStringOrDefault() {
-    console.log('fromQueryStringOrDefault', search);
-    return search
-      ? queryString.parse(search)
-      : {
-          searchFor: '',
-          by: 'all',
-          page: 1,
-          pageSize: 24
-        };
-  }
-
-  const [{ searchFor, by, page, pageSize }, setSearchParams] = useState(
-    fromQueryStringOrDefault()
+  const [{ searchfor, by, page, pagesize }] = useState(
+    queryString.parse(search)
   );
 
   const accountId = match.params.accountId;
@@ -49,17 +41,15 @@ const KitBag = ({ items, pagination, accounts, fetchKitbagKits, match }) => {
     }
   }, [items]);
 
-  useEffect(() => {
-    console.log('SEARCHUE', search);
-    setSearchParams(queryString.parse(search));
-  }, [search, setSearchParams]);
+  // useEffect(() => {
+  //   console.log('SEARCHUE', search);
+  //   setSearchParams(queryString.parse(search));
+  // }, [search, setSearchParams]);
 
   useEffect(() => {
-    if (accountId) {
-      console.log('FETCHKITBAGS');
-      fetchKitbagKits(searchFor, by, page, pageSize, accountId);
-    }
-  }, [searchFor, by, page, pageSize, fetchKitbagKits, accountId]);
+    console.log('FETCHKITBAGS');
+    fetchKitbagKits(searchfor, by, page, pagesize, accountId);
+  }, [searchfor, by, page, pagesize, fetchKitbagKits, accountId]);
 
   function getTitle() {
     if (!accounts) {

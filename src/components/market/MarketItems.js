@@ -20,7 +20,17 @@ const mapDispatchToProps = {
 };
 
 const MarketItems = ({ items, pagination, fetchMarketItems, match }) => {
-  const { search } = useLocation();
+  console.log('=========================================================');
+  let { search } = useLocation();
+  if (!search) {
+    search = '?searchfor=&by=all&page=1&pagesize=24';
+  }
+  console.log('SEARCH', search);
+
+  const [{ searchfor, by, page, pagesize }] = useState(
+    queryString.parse(search)
+  );
+
   const accountId = match.params.accountId;
   const [marketItems, setMarketItems] = useState([]);
 
@@ -31,17 +41,9 @@ const MarketItems = ({ items, pagination, fetchMarketItems, match }) => {
   }, [items]);
 
   useEffect(() => {
-    if (search) {
-      const qsvalues = queryString.parse(search);
-      const searchValue = qsvalues.searchFor ? qsvalues.searchFor : '';
-      const byValue = qsvalues.by ? qsvalues.by : '';
-      const pageValue = qsvalues.page ? qsvalues.page : 1;
-      const pagesizeValue = qsvalues.pagesize ? qsvalues.pagesize : 24;
-      fetchMarketItems(searchValue, byValue, pageValue, pagesizeValue);
-    } else {
-      fetchMarketItems();
-    }
-  }, [search, fetchMarketItems]);
+    console.log('FETCHMARKETBAGS');
+    fetchMarketItems(searchfor, by, page, pagesize);
+  }, [searchfor, by, page, pagesize, fetchMarketItems]);
 
   function getTitle() {
     return `Market place items (${pagination.totalItems})`;
