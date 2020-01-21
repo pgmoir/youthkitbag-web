@@ -131,7 +131,11 @@ const KitBag = ({ items, pagination, accounts, fetchKitbagKits, match }) => {
               </div>
             </div>
             <div className="row">{renderList()}</div>
-            <Pagination />
+            <Pagination
+              accountId={accountId}
+              search={search}
+              callback={fetchKitbagKits}
+            />
           </div>
         </section>
       </div>

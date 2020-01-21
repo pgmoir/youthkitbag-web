@@ -1,14 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import queryString from 'query-string';
 
 const mapStateToProps = state => {
   return { pagination: state.pagination };
 };
 
-const Pagination = ({ pagination }) => {
-  function getPaginationLink(page) {
-    return `?page=${page}${pagination.filterUrl}`;
+const Pagination = ({ pagination, accountId, search, callback }) => {
+  const { searchfor, by, pagesize } = queryString.parse(search);
+
+  function changePage(moveToPage) {
+    console.log(
+      'PAGECHANGE-GET',
+      searchfor,
+      by,
+      moveToPage,
+      pagesize ? pagesize : 24,
+      accountId
+    );
+    callback(searchfor, by, moveToPage, pagesize ? pagesize : 24, accountId);
   }
 
   function isFirstPageDisabled() {
@@ -33,41 +43,41 @@ const Pagination = ({ pagination }) => {
         <nav aria-label="Page navigation">
           <ul className="pagination">
             <li className={`page-item ${isFirstPageDisabled()}`}>
-              <Link className="page-link" to={getPaginationLink(1)}>
+              <button className="page-link" onClick={() => changePage(1)}>
                 First
-              </Link>
+              </button>
             </li>
             <li className={`page-item ${isPreviousPageDisabled()}`}>
-              <Link
+              <button
                 className="page-link"
-                to={getPaginationLink(pagination.previousPage)}
+                onClick={() => changePage(pagination.previousPage)}
               >
                 Previous
-              </Link>
+              </button>
             </li>
             <li className="page-item active">
-              <Link
+              <button
                 className="page-link"
-                to={getPaginationLink(pagination.currentPage)}
+                onClick={() => changePage(pagination.currentPage)}
               >
                 {pagination.currentPage}
-              </Link>
+              </button>
             </li>
             <li className={`page-item ${isNextPageDisabled()}`}>
-              <Link
+              <button
                 className="page-link"
-                to={getPaginationLink(pagination.nextPage)}
+                onClick={() => changePage(pagination.nextPage)}
               >
                 Next
-              </Link>
+              </button>
             </li>
             <li className={`page-item ${isLastPageDisabled()}`}>
-              <Link
+              <button
                 className="page-link"
-                to={getPaginationLink(pagination.lastPage)}
+                onClick={() => changePage(pagination.lastPage)}
               >
                 Last
-              </Link>
+              </button>
             </li>
           </ul>
         </nav>

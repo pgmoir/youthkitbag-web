@@ -120,7 +120,7 @@ const Groups = ({ items, pagination, userPackage, fetchGroups }) => {
               {renderAddNewButton()}
             </div>
             <div className="row">{renderList()}</div>
-            <Pagination />
+            <Pagination search={search} callback={fetchGroups} />
           </div>
         </section>
       </div>

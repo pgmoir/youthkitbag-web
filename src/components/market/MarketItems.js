@@ -112,7 +112,11 @@ const MarketItems = ({ items, pagination, fetchMarketItems, match }) => {
               </div>
             </div>
             <div className="row">{renderList()}</div>
-            <Pagination />
+            <Pagination
+              accountId={accountId}
+              search={search}
+              callback={fetchMarketItems}
+            />
           </div>
         </section>
       </div>

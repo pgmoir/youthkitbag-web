@@ -4,11 +4,8 @@ import useForm from '../hooks/useForm';
 import validate from './FormEmptyValidationRules';
 import queryString from 'query-string';
 
-const SearchForm = props => {
-  const accountId = props.accountId;
-  const qsvalues = queryString.parse(props.search);
-  const searchfor = qsvalues.searchfor ? qsvalues.searchfor : '';
-  const by = qsvalues.by ? qsvalues.by : '';
+const SearchForm = ({ accountId, search, callback }) => {
+  const { searchfor, by } = queryString.parse(search);
 
   const filter = useSelector(state => state.filter);
   const pagination = useSelector(state => state.pagination);
@@ -27,7 +24,15 @@ const SearchForm = props => {
 
   function searchItems() {
     const { by, searchfor } = values;
-    props.callback(searchfor, by, 1, pagination.itemsPerPage, accountId);
+    console.log(
+      'SEARCHITEMS',
+      searchfor,
+      by,
+      1,
+      pagination.itemsPerPage,
+      accountId
+    );
+    callback(searchfor, by, 1, pagination.itemsPerPage, accountId);
   }
 
   function clearSearch() {
