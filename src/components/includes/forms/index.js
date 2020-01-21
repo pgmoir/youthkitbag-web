@@ -1,5 +1,6 @@
 export * from './DateForm';
 export * from './TextForm';
+export * from './TextAutoListForm';
 export * from './TextAreaForm';
 export * from './CheckboxForm';
 export * from './AddArrayButtonForm';

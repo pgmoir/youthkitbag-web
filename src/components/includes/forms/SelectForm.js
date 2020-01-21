@@ -9,7 +9,8 @@ const SelectForm = ({
   handleChange,
   index,
   error,
-  items
+  items,
+  useItem
 }) => {
   const columns = colFormat.split('-');
   return (
@@ -26,6 +27,7 @@ const SelectForm = ({
               handleChange={handleChange}
               items={items}
               error={error}
+              useItem={useItem}
             />
           </div>
         </div>
@@ -39,6 +41,7 @@ const SelectForm = ({
             handleChange={handleChange}
             items={items}
             error={error}
+            useItem={useItem}
           />
         </div>
       )}

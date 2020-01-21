@@ -1,7 +1,7 @@
 import React from 'react';
-import TextInput from '../controls/TextInput';
+import TextAutoListInput from '../controls/TextAutoListInput';
 
-const TextForm = ({
+const TextAutoListForm = ({
   colFormat,
   label,
   type,
@@ -26,7 +26,7 @@ const TextForm = ({
             {label}
           </label>
           <div className="col-sm-9">
-            <TextInput
+            <TextAutoListInput
               type={type}
               value={value}
               field={field}
@@ -45,7 +45,7 @@ const TextForm = ({
       {colFormat.startsWith('a') && (
         <div className={`form-group col-sm-${columns[1]}`}>
           {index === 0 && <label className="d-none d-sm-block">{label}</label>}
-          <TextInput
+          <TextAutoListInput
             type={type}
             value={value}
             field={field}
@@ -64,4 +64,4 @@ const TextForm = ({
   );
 };
 
-export { TextForm };
+export { TextAutoListForm };

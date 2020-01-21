@@ -11,7 +11,6 @@ import Pagination from '../../includes/Pagination';
 
 const mapStateToProps = state => ({
   items: Object.values(state.kitbag.kit.list),
-  filter: state.filter,
   pagination: state.pagination,
   accounts: state.user.profile.accounts
 });

@@ -89,6 +89,7 @@ const MarketForm = ({ accountId, market }) => {
         error={errors.condition}
         items={conditionItems}
         readOnly={isReadOnly()}
+        useItem={false}
       />
     );
   };

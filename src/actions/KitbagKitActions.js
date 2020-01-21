@@ -6,6 +6,7 @@ import {
   EDIT_KITBAG_KIT,
   DELETE_KITBAG_KIT,
   API_KITBAG_ERROR,
+  FETCH_PURCHASES_FROM,
   GETALL_FAILURE
 } from './types';
 import history from '../helpers/history';
@@ -30,6 +31,7 @@ export const fetchKitbagKits = (
     })
     .then(response => {
       dispatch({ type: FETCH_KITBAG_KITS, payload: response.data });
+      dispatch(fetchPurchasesFrom(accountId));
       history.push(
         `/kitbag/kit/${accountId}?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}`
       );
@@ -56,6 +58,7 @@ export const fetchKitbagKit = (accountId, kitId) => dispatch => {
     })
     .then(response => {
       dispatch({ type: FETCH_KITBAG_KIT, payload: response.data });
+      dispatch(fetchPurchasesFrom(accountId));
     })
     .catch(err => {
       const { response } = err;
@@ -83,6 +86,7 @@ export const createKitbagKit = (accountId, formValues) => dispatch => {
     )
     .then(response => {
       dispatch({ type: CREATE_KITBAG_KIT, payload: response.data });
+      dispatch(fetchPurchasesFrom(accountId));
       history.push(`/kitbag/kit/${accountId}`);
     })
     .catch(err => {
@@ -111,6 +115,7 @@ export const editKitbagKit = (accountId, kitId, formValues) => dispatch => {
     )
     .then(response => {
       dispatch({ type: EDIT_KITBAG_KIT, payload: response.data });
+      dispatch(fetchPurchasesFrom(accountId));
       history.push(`/kitbag/kit/${accountId}`);
     })
     .catch(err => {
@@ -135,6 +140,7 @@ export const deleteKitbagKit = (accountId, kitId) => dispatch => {
     })
     .then(response => {
       dispatch({ type: DELETE_KITBAG_KIT, payload: response.data });
+      dispatch(fetchPurchasesFrom(accountId));
       history.push(`/kitbag/kit/${accountId}`);
     })
     .catch(err => {
@@ -145,5 +151,28 @@ export const deleteKitbagKit = (accountId, kitId) => dispatch => {
         history.push(`/auth/login?return=/kitbag/kit/${accountId}`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+    });
+};
+
+export const fetchPurchasesFrom = (accountId = null) => dispatch => {
+  const token = localStorage.getItem('token');
+  axios
+    .get(`${baseUrl}/kitbag/kit/${accountId}/purchasesfrom`, {
+      headers: {
+        Authorization: `bearer ${token}`,
+        'content-type': 'application/json'
+      }
+    })
+    .then(response => {
+      dispatch({ type: FETCH_PURCHASES_FROM, payload: response.data });
+    })
+    .catch(err => {
+      const { response } = err;
+      if (response.status === 401) {
+        window.localStorage.clear();
+        dispatch({ type: GETALL_FAILURE, payload: response });
+        history.push(`/auth/login`);
+      }
+      dispatch({ type: API_KITBAG_ERROR, payload: response });
     });
 };

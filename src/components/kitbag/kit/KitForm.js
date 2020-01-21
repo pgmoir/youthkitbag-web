@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import {
   createKitbagKit,
@@ -10,6 +10,7 @@ import validate from './KitFormValidationRules';
 import {
   DateForm,
   TextForm,
+  TextAutoListForm,
   TextAreaForm,
   SelectForm,
   AddArrayButtonForm,
@@ -18,10 +19,24 @@ import {
   ImagesForm
 } from '../../includes/forms';
 
-const KitForm = ({ accountId, kit }) => {
-  const dispatch = useDispatch();
-  const newErrors = useSelector(state => state.toast.errors);
+const mapDispatchToProps = {
+  createKitbagKit,
+  editKitbagKit
+};
 
+const mapStateToProps = state => ({
+  newErrors: state.toast.errors,
+  purchasesfrom: state.kitbag.kit.purchasesfrom
+});
+
+const KitForm = ({
+  accountId,
+  kit,
+  createKitbagKit,
+  editKitbagKit,
+  newErrors,
+  purchasesfrom
+}) => {
   const initialPurchase = { from: '', quantity: 0, ondate: '', price: 0.0 };
   const initialInbag = { location: '', condition: 'used', quantity: 0 };
 
@@ -71,9 +86,9 @@ const KitForm = ({ accountId, kit }) => {
 
   function updateKit() {
     if (values._id) {
-      dispatch(editKitbagKit(accountId, values._id, values));
+      editKitbagKit(accountId, values._id, values);
     } else {
-      dispatch(createKitbagKit(accountId, values));
+      createKitbagKit(accountId, values);
     }
   }
 
@@ -119,20 +134,32 @@ const KitForm = ({ accountId, kit }) => {
             handleChange={handleChange}
             error={errors.status}
             items={statusItems}
+            useItem={false}
           />
           <hr />
           <div>
             {values.purchases &&
               values.purchases.map((item, index) => (
                 <div className="form-row" key={index}>
-                  <TextForm
+                  <TextAutoListForm
                     colFormat="a-3"
                     value={values.purchases[index].from}
                     label="Purchased from"
                     field={`purchases[${index}].from`}
                     handleChange={handleChange}
                     index={index}
+                    autoList={purchasesfrom}
                   />
+                  {/* <SelectForm
+                    colFormat="a-3"
+                    label="Purchased from"
+                    value={values.purchases[index].from}
+                    field={`purchases[${index}].from`}
+                    handleChange={handleChange}
+                    items={purchasesfrom}
+                    index={index}
+                    useItem={true}
+                  /> */}
                   <TextForm
                     colFormat="a-2"
                     type="number"
@@ -199,6 +226,7 @@ const KitForm = ({ accountId, kit }) => {
                     handleChange={handleChange}
                     items={conditionItems}
                     index={index}
+                    useItem={false}
                   />
                   <TextForm
                     colFormat="a-3"
@@ -337,4 +365,7 @@ const KitForm = ({ accountId, kit }) => {
   );
 };
 
-export default KitForm;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(KitForm);

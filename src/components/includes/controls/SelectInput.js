@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SelectInput = ({ value, field, handleChange, items }) => {
+const SelectInput = ({ value, field, handleChange, items, useItem }) => {
   return (
     <React.Fragment>
       <select
@@ -12,9 +12,10 @@ const SelectInput = ({ value, field, handleChange, items }) => {
         aria-describedby={field}
       >
         {items.map(item => {
-          const id = item.replace(' ', '').toLowerCase();
+          const regex = /\s/g;
+          const id = item.replace(regex, '').toLowerCase();
           return (
-            <option key={id} value={id}>
+            <option key={id} value={useItem ? item : id}>
               {item}
             </option>
           );
