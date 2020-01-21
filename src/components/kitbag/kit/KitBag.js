@@ -32,7 +32,7 @@ const KitBag = ({ items, pagination, accounts, fetchKitbagKits, match }) => {
     queryString.parse(search)
   );
 
-  const accountId = match.params.accountId;
+  const [accountId] = useState(match.params.accountId);
   const [kits, setKits] = useState([]);
 
   useEffect(() => {
@@ -40,11 +40,6 @@ const KitBag = ({ items, pagination, accounts, fetchKitbagKits, match }) => {
       setKits(items);
     }
   }, [items]);
-
-  // useEffect(() => {
-  //   console.log('SEARCHUE', search);
-  //   setSearchParams(queryString.parse(search));
-  // }, [search, setSearchParams]);
 
   useEffect(() => {
     console.log('FETCHKITBAGS');
