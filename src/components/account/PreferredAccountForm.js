@@ -44,7 +44,9 @@ const PreferredAccountForm = ({ userId, accounts }) => {
             <tbody>
               {accounts.map((item, index) => (
                 <tr key={index}>
-                  <td>{item.name}</td>
+                  <td>
+                    <Link to={`/accounts/${item._id}`}>{item.name}</Link>
+                  </td>
                   <td>{item.members[0].state}</td>
                   <td>{item.members[0].permissions.join(', ')}</td>
                   <td className="text-center">

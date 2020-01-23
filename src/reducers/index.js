@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 import authReducer from './authReducer';
+import accountReducer from './AccountReducer';
 import userReducer from './userReducer';
 import groupReducer from './groupReducer';
 import kitbagReducer from './kitbagReducer';
@@ -12,6 +13,7 @@ import subscriptionReducer from './subscriptionReducer';
 import imageReducer from './imageReducer';
 
 export default combineReducers({
+  account: accountReducer,
   auth: authReducer,
   user: userReducer,
   group: groupReducer,

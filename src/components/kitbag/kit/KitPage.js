@@ -103,7 +103,4 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(KitPage);
+export default connect(mapStateToProps, mapDispatchToProps)(KitPage);

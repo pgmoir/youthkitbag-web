@@ -33,6 +33,7 @@ import MarketKitPage from './kitbag/market/MarketKitPage';
 import MarketItems from './market/MarketItems';
 import MarketItemViewPage from './market/MarketItemViewPage';
 import SettingsPage from './account/SettingsPage';
+import AccountPage from './accounts/AccountPage';
 
 const App = () => {
   return (
@@ -145,6 +146,9 @@ const App = () => {
             />
             <PrivateRoute path="/groups/:groupId" exact component={GroupPage} />
             <PrivateRoute path="/groups" component={Groups} />
+
+            <PrivateRoute path="/accounts/new" component={AccountPage} />
+            <PrivateRoute path="/accounts/:accountId" component={AccountPage} />
 
             <PrivateRoute path="/settings/:setting" component={SettingsPage} />
           </Switch>
