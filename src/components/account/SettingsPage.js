@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Route, Link } from 'react-router-dom';
-import { getUser } from '../../actions/UserActions';
 import Title from '../includes/title/Title';
 import ProfileForm from './ProfileForm';
 import AccountsPage from './AccountsPage';
@@ -144,11 +143,7 @@ const mapStateToProps = state => ({
   profile: state.user.profile
 });
 
-const mapDispatchToProps = {
-  getUser
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(SettingsPage);

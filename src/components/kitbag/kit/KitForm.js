@@ -26,7 +26,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   newErrors: state.toast.errors,
-  purchasesfrom: state.kitbag.kit.purchasesfrom
+  kitbagLists: state.kitbag.kit.lists
 });
 
 const KitForm = ({
@@ -35,7 +35,7 @@ const KitForm = ({
   createKitbagKit,
   editKitbagKit,
   newErrors,
-  purchasesfrom
+  kitbagLists
 }) => {
   const initialPurchase = { from: '', quantity: 0, ondate: '', price: 0.0 };
   const initialInbag = { location: '', condition: 'used', quantity: 0 };
@@ -148,18 +148,8 @@ const KitForm = ({
                     field={`purchases[${index}].from`}
                     handleChange={handleChange}
                     index={index}
-                    autoList={purchasesfrom}
+                    autoList={kitbagLists.purchasesFroms}
                   />
-                  {/* <SelectForm
-                    colFormat="a-3"
-                    label="Purchased from"
-                    value={values.purchases[index].from}
-                    field={`purchases[${index}].from`}
-                    handleChange={handleChange}
-                    items={purchasesfrom}
-                    index={index}
-                    useItem={true}
-                  /> */}
                   <TextForm
                     colFormat="a-2"
                     type="number"

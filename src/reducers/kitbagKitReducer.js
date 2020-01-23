@@ -5,10 +5,10 @@ import {
   FETCH_KITBAG_KITS,
   RESET,
   LOGOUT,
-  FETCH_PURCHASES_FROM
+  FETCH_KITBAG_LISTS
 } from '../actions/types';
 
-const initialState = { current: {}, list: [], purchasesfrom: [] };
+const initialState = { current: {}, list: [], lists: [] };
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -19,8 +19,8 @@ export default (state = initialState, action) => {
     case CREATE_KITBAG_KIT:
     case EDIT_KITBAG_KIT:
       return { ...state, current: action.payload.kit, list: [] };
-    case FETCH_PURCHASES_FROM:
-      return { ...state, purchasesfrom: action.payload };
+    case FETCH_KITBAG_LISTS:
+      return { ...state, lists: action.payload };
     case RESET:
     case LOGOUT:
       return initialState;

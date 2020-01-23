@@ -1,20 +1,31 @@
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getUser } from '../../actions/UserActions';
+import { fetchKitbagLists } from '../../actions/KitbagKitActions';
 
 const mapDispatchToProps = {
-  getUser
+  getUser,
+  fetchKitbagLists
 };
 
-const User = ({ getUser }) => {
+const mapStateToProps = state => ({
+  accounts: state.user.profile.accounts
+});
+
+const User = ({ getUser, fetchKitbagLists, accounts }) => {
+  const accountId = accounts ? accounts.find(a => a.preferred)._id : undefined;
+
   useEffect(() => {
     getUser();
-  }, [getUser]);
+    if (accountId) {
+      fetchKitbagLists(accountId);
+    }
+  }, [getUser, fetchKitbagLists, accountId]);
 
   return null;
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(User);
