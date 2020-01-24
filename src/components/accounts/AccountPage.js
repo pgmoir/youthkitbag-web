@@ -70,26 +70,14 @@ const AccountPage = ({ current, fetchAccount, match }) => {
                 account.accountAdmin &&
                 account.status !== 'blocked' && (
                   <Link
-                    to={`/accounts/${accountId}/members`}
+                    to={`/accounts/${accountId}/invite`}
                     className="btn btn-primary"
                   >
-                    Members
+                    Invite
                   </Link>
                 )}
               {accountId &&
-                account.status !== 'blocked' &&
-                !account.accountMember && (
-                  <Link
-                    to={`/accounts/${accountId}/join`}
-                    className={`btn btn-primary ${
-                      account.accountMemberState ? 'disabled' : ''
-                    } ml-3`}
-                    disabled={account.accountMemberState}
-                  >
-                    Join
-                  </Link>
-                )}
-              {accountId &&
+                !account.accountAdmin &&
                 account.status !== 'blocked' &&
                 account.accountMember && (
                   <Link

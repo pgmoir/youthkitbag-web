@@ -62,7 +62,6 @@ const AccountForm = ({
   }, [account, setValues]);
 
   function updateAccount() {
-    console.log('UPDATE', values);
     if (values._id) {
       editAccount(values._id, values);
     } else {
@@ -159,7 +158,8 @@ const AccountForm = ({
                     value={values.members[index].permissions}
                     label="Permissions"
                     field={`members[${index}].permissions`}
-                    readOnly={true}
+                    handleChange={handleChange}
+                    readOnly={isReadOnly}
                     index={index}
                   />
                   <TextForm
@@ -167,7 +167,8 @@ const AccountForm = ({
                     value={values.members[index].state}
                     label="State"
                     field={`members[${index}].state`}
-                    readOnly={true}
+                    handleChange={handleChange}
+                    readOnly={isReadOnly}
                     index={index}
                   />
                   <RemoveArrayButtonForm
