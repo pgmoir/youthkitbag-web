@@ -8,7 +8,7 @@ import {
   EDIT_ACCOUNT_MEMBER_STATE,
   API_KITBAG_ERROR,
   GETALL_FAILURE,
-  CREATE_ACCOUNT_JOIN,
+  CREATE_ACCOUNT_INVITE,
   EDIT_ACCOUNT_LEAVE
 } from './types';
 import history from '../helpers/history';
@@ -17,7 +17,6 @@ import { getUser } from './UserActions';
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchAccount = accountId => dispatch => {
-  console.log('ACCOUNTFETCH', accountId);
   const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/account/${accountId}`, {
@@ -187,11 +186,11 @@ export const editAccountMemberState = (
     });
 };
 
-export const requestAccountJoin = accountId => dispatch => {
+export const inviteToAccount = (accountId, email) => dispatch => {
   const token = localStorage.getItem('token');
   axios
-    .post(
-      `${baseUrl}/account/${accountId}/members/join`,
+    .put(
+      `${baseUrl}/account/${accountId}/member/invite/${email}`,
       {},
       {
         headers: {
@@ -201,8 +200,7 @@ export const requestAccountJoin = accountId => dispatch => {
       }
     )
     .then(response => {
-      dispatch({ type: CREATE_ACCOUNT_JOIN, payload: response.data });
-      dispatch(getUser());
+      dispatch({ type: CREATE_ACCOUNT_INVITE, payload: response.data });
       history.push(`/accounts/${accountId}`);
     })
     .catch(err => {
