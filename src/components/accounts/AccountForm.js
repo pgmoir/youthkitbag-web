@@ -97,7 +97,7 @@ const AccountForm = ({
             Save
           </button>
         )}
-        <Link className="btn btn-link" to="/accounts">
+        <Link className="btn btn-link" to="/settings/accounts">
           Cancel
         </Link>
       </div>
@@ -139,7 +139,7 @@ const AccountForm = ({
               values.members.map((item, index) => (
                 <div className="form-row" key={index}>
                   <TextForm
-                    colFormat="a-6"
+                    colFormat="a-4"
                     value={values.members[index].user.email}
                     label="Email"
                     field={`members[${index}].user.email`}
@@ -147,10 +147,26 @@ const AccountForm = ({
                     index={index}
                   />
                   <TextForm
-                    colFormat="a-5"
+                    colFormat="a-2"
                     value={values.members[index].user.profile.username}
                     label="Username"
                     field={`members[${index}].user.profile.username`}
+                    readOnly={true}
+                    index={index}
+                  />
+                  <TextForm
+                    colFormat="a-3"
+                    value={values.members[index].permissions}
+                    label="Permissions"
+                    field={`members[${index}].permissions`}
+                    readOnly={true}
+                    index={index}
+                  />
+                  <TextForm
+                    colFormat="a-2"
+                    value={values.members[index].state}
+                    label="State"
+                    field={`members[${index}].state`}
                     readOnly={true}
                     index={index}
                   />
