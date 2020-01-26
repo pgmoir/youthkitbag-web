@@ -139,7 +139,11 @@ const AccountForm = ({
                 <div className="form-row" key={index}>
                   <TextForm
                     colFormat="a-4"
-                    value={values.members[index].user.email}
+                    value={
+                      values.members[index].user
+                        ? values.members[index].user.email
+                        : values.members[index].email
+                    }
                     label="Email"
                     field={`members[${index}].user.email`}
                     readOnly={true}
@@ -147,7 +151,11 @@ const AccountForm = ({
                   />
                   <TextForm
                     colFormat="a-2"
-                    value={values.members[index].user.profile.username}
+                    value={
+                      values.members[index].user
+                        ? values.members[index].user.profile.username
+                        : ''
+                    }
                     label="Username"
                     field={`members[${index}].user.profile.username`}
                     readOnly={true}

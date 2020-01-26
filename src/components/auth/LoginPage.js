@@ -4,7 +4,16 @@ import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 import LoginForm from './LoginForm';
 
-const Login = () => {
+const Login = ({ location }) => {
+  let referrer = '/market';
+  if (
+    location &&
+    location.state &&
+    location.state.from &&
+    location.state.from.pathname
+  ) {
+    referrer = location.state.from.pathname;
+  }
   return (
     <div>
       <Title title="Login" />
@@ -23,7 +32,7 @@ const Login = () => {
           <div className="row">
             <div className="col-12 col-md-6 mb-3 mx-auto">
               <Alert />
-              <LoginForm />
+              <LoginForm referrer={referrer} />
             </div>
           </div>
         </div>

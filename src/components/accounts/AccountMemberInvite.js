@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { fetchAccount, inviteToAccount } from '../../actions/AccountActions';
 import validate from './AccountMemberInviteFormValidationRules';
 import { TextForm } from '../includes/forms';
-import Modal from '../includes/Modal';
+import ModalWithForm from '../includes/ModalWithForm';
 import history from '../../helpers/history';
 
 const mapDispatchToProps = {
@@ -18,7 +18,7 @@ const mapStateToProps = state => ({
   newErrors: state.toast.errors
 });
 
-const AccountMemberJoin = ({
+const AccountMemberInvite = ({
   fetchAccount,
   inviteToAccount,
   account,
@@ -48,8 +48,7 @@ const AccountMemberJoin = ({
 
   function sendInvite() {
     if (values.email) {
-      console.log('INVITED', values.email, accountId);
-      //inviteToAccount(accountId, values.email);
+      inviteToAccount(accountId, values.email);
     }
   }
   function renderTitle() {
@@ -63,44 +62,52 @@ const AccountMemberJoin = ({
     if (!account) {
       return 'Invite option not available.';
     }
-    return `Do you want to send an invite to join this account?`;
+    return (
+      <React.Fragment>
+        <p>
+          Enter an email for a person you want to give access to this account
+        </p>
+        <TextForm
+          colFormat="3-9"
+          label="Email"
+          value={values.email}
+          field="email"
+          handleChange={handleChange}
+          error={errors.email}
+        />
+      </React.Fragment>
+    );
   }
 
   function renderActions() {
     return (
       <React.Fragment>
-        <form className="mb-3" onSubmit={handleSubmit}>
-          <TextForm
-            colFormat="3-9"
-            label="Email"
-            value={values.email}
-            field="email"
-            handleChange={handleChange}
-            error={errors.email}
-          />
-          <Link
-            to={`/accounts/${accountId}`}
-            className="btn btn-outline-secondary"
-            data-dismiss="modal"
-          >
-            Cancel
-          </Link>
-          <button type="submit" className="btn btn-success">
-            Invite to Join
-          </button>
-        </form>
+        <Link
+          to={`/accounts/${accountId}`}
+          className="btn btn-outline-secondary"
+          data-dismiss="modal"
+        >
+          Cancel
+        </Link>
+        <button type="submit" className="btn btn-success">
+          Invite to Join
+        </button>
       </React.Fragment>
     );
   }
 
   return (
-    <Modal
+    <ModalWithForm
       title={renderTitle()}
       content={renderContent()}
       actions={renderActions()}
+      handleSubmit={handleSubmit}
       onDismiss={() => history.push(`/accounts/${accountId}`)}
     />
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountMemberJoin);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AccountMemberInvite);

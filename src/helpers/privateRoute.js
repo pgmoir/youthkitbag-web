@@ -5,6 +5,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const token = localStorage.getItem('token');
   const isloggedin = localStorage.getItem('isloggedin');
   const user = localStorage.getItem('user');
+  console.log('Private', token, isloggedin, user);
   return (
     <Route
       {...rest}
@@ -12,7 +13,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         isloggedin && token && user ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/auth/login" />
+          <Redirect
+            to={{
+              pathname: '/auth/login',
+              state: { from: props.location }
+            }}
+          />
         )
       }
     />

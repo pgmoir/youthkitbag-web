@@ -35,6 +35,7 @@ import MarketItemViewPage from './market/MarketItemViewPage';
 import SettingsPage from './account/SettingsPage';
 import AccountPage from './accounts/AccountPage';
 import AccountMemberInvite from './accounts/AccountMemberInvite';
+import AccountMemberAccept from './accounts/AccountMemberAccept';
 
 const App = () => {
   return (
@@ -152,6 +153,10 @@ const App = () => {
             <PrivateRoute
               path="/accounts/:accountId/invite"
               component={AccountMemberInvite}
+            />
+            <PrivateRoute
+              path="/accounts/:accountId/member/accept/:email/:token"
+              component={AccountMemberAccept}
             />
             <PrivateRoute path="/accounts/:accountId" component={AccountPage} />
 

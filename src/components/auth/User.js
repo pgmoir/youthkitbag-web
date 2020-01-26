@@ -13,7 +13,10 @@ const mapStateToProps = state => ({
 });
 
 const User = ({ getUser, fetchKitbagLists, accounts }) => {
-  const accountId = accounts ? accounts.find(a => a.preferred)._id : undefined;
+  const accountId =
+    accounts && accounts.length > 0
+      ? accounts.find(a => a.preferred)._id
+      : undefined;
 
   useEffect(() => {
     getUser();
@@ -25,7 +28,4 @@ const User = ({ getUser, fetchKitbagLists, accounts }) => {
   return null;
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(User);
+export default connect(mapStateToProps, mapDispatchToProps)(User);

@@ -14,7 +14,7 @@ import { getUser } from './UserActions';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
-export const login = (email, password) => dispatch => {
+export const login = (email, password, referrer) => dispatch => {
   window.localStorage.clear();
   axios
     .post(
@@ -31,7 +31,7 @@ export const login = (email, password) => dispatch => {
       localStorage.setItem('isloggedin', true);
       dispatch({ type: LOGIN_SUCCESS, payload: data });
       dispatch(getUser());
-      history.push('/market');
+      history.push(referrer ? referrer : '/market');
     })
     .catch(err => {
       dispatch({ type: LOGIN_FAILURE, payload: err.response });

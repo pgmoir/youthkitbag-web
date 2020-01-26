@@ -1,12 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { login } from '../../actions/AuthActions';
 import validate from './LoginFormValidationRules';
-import { useDispatch } from 'react-redux';
 import { TextForm } from '../includes/forms';
 
-const LoginForm = () => {
-  const dispatch = useDispatch();
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {
+  login
+};
+
+const LoginForm = ({ referrer, login }) => {
   const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
   const initialValues = {
@@ -21,7 +26,7 @@ const LoginForm = () => {
   );
 
   function loginSubmit() {
-    dispatch(login(values.email, values.password));
+    login(values.email, values.password, referrer);
   }
 
   return (
@@ -30,7 +35,7 @@ const LoginForm = () => {
         <div className="row mb-3">
           <a
             className="btn btn-lg p-3 btn-block btn-google"
-            href={`${baseUrl}/auth/google`}
+            href={`${baseUrl}/auth/google?referrer=${referrer}`}
           >
             Login with Google
           </a>
@@ -38,7 +43,7 @@ const LoginForm = () => {
         <div className="row mb-3">
           <a
             className="btn btn-lg p-3 btn-block btn-facebook"
-            href={`${baseUrl}/auth/facebook`}
+            href={`${baseUrl}/auth/facebook?referrer=${referrer}`}
           >
             Login with Facebook
           </a>
@@ -46,7 +51,7 @@ const LoginForm = () => {
         <div className="row mb-3">
           <a
             className="btn btn-lg p-3 btn-block btn-github"
-            href={`${baseUrl}/auth/github`}
+            href={`${baseUrl}/auth/github?referrer=${referrer}`}
           >
             Login with GitHub
           </a>
@@ -91,4 +96,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
