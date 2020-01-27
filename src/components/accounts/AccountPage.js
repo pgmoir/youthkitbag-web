@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchAccount } from '../../actions/AccountActions';
+import { fetchAccount, clearAccount } from '../../actions/AccountActions';
 import AccountForm from './AccountForm';
 import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
@@ -11,10 +11,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  fetchAccount
+  fetchAccount,
+  clearAccount
 };
 
-const AccountPage = ({ current, fetchAccount, match }) => {
+const AccountPage = ({ current, fetchAccount, clearAccount, match }) => {
   const { accountId } = match.params;
   const [account, setAccount] = useState({
     name: '',
@@ -53,6 +54,12 @@ const AccountPage = ({ current, fetchAccount, match }) => {
     const leftState = account.accountMemberState === 'left' ? ' (left)' : '';
     return account._id ? `${account.name}${leftState}` : 'Create new account';
   }
+
+  useEffect(() => {
+    return function clearUp() {
+      clearAccount();
+    };
+  }, [clearAccount]);
 
   return (
     <div>

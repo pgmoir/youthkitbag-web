@@ -1,8 +1,7 @@
 import axios from 'axios';
 import {
-  CREATE_ACCOUNT,
+  CLEAR_ACCOUNT,
   FETCH_ACCOUNT,
-  EDIT_ACCOUNT,
   EDIT_ACCOUNT_STATUS,
   FETCH_ACCOUNT_MEMBERS,
   EDIT_ACCOUNT_MEMBER_STATE,
@@ -52,19 +51,17 @@ export const createAccount = formValues => dispatch => {
         }
       }
     )
-    .then(response => {
-      dispatch({ type: CREATE_ACCOUNT, payload: response.data });
+    .then(() => {
+      dispatch({ type: CLEAR_ACCOUNT });
       dispatch(getUser());
-      history.push('/accounts?searchfor=&by=&page=1&pagesize=24');
+      history.push('/settings/accounts');
     })
     .catch(err => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(
-          '/auth/login?return=/accounts?searchfor=&by=&page=1&pagesize=24'
-        );
+        history.push('/auth/login?return=/settings/accounts');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
@@ -83,18 +80,16 @@ export const editAccount = (accountId, formValues) => dispatch => {
         }
       }
     )
-    .then(response => {
-      dispatch({ type: EDIT_ACCOUNT, payload: response.data });
-      history.push('/accounts?searchfor=&by=&page=1&pagesize=24');
+    .then(() => {
+      dispatch({ type: CLEAR_ACCOUNT });
+      history.push('/settings/accounts');
     })
     .catch(err => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(
-          '/auth/login?return=/accounts?searchfor=&by=&page=1&pagesize=24'
-        );
+        history.push('/auth/login?return=/settings/accounts');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
@@ -115,16 +110,14 @@ export const editAccountStatus = (accountId, status) => dispatch => {
     )
     .then(response => {
       dispatch({ type: EDIT_ACCOUNT_STATUS, payload: response.data });
-      history.push('/accounts?searchfor=&by=&page=1&pagesize=24');
+      history.push('/settings/accounts');
     })
     .catch(err => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(
-          '/auth/login?return=/accounts?searchfor=&by=&page=1&pagesize=24'
-        );
+        history.push('/auth/login?return=/settings/accounts');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
@@ -201,7 +194,7 @@ export const inviteToAccount = (accountId, email) => dispatch => {
     )
     .then(response => {
       dispatch({ type: CREATE_ACCOUNT_INVITE, payload: response.data });
-      history.push(`/accounts/${accountId}`);
+      history.push(`/settings/accounts`);
     })
     .catch(err => {
       const { response } = err;
@@ -211,7 +204,7 @@ export const inviteToAccount = (accountId, email) => dispatch => {
         history.push(`/auth/login?return=/accounts/${accountId}`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
-      history.push(`/accounts/${accountId}`);
+      history.push(`/settings/accounts`);
     });
 };
 
@@ -230,15 +223,19 @@ export const requestAccountLeave = accountId => dispatch => {
     )
     .then(response => {
       dispatch({ type: EDIT_ACCOUNT_LEAVE, payload: response.data });
-      history.push(`/accounts/${accountId}`);
+      history.push(`/settings/accounts`);
     })
     .catch(err => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/accounts/${accountId}`);
+        history.push(`/auth/login?return=/settings/accounts`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
+};
+
+export const clearAccount = () => dispatch => {
+  dispatch({ type: CLEAR_ACCOUNT });
 };

@@ -68,7 +68,7 @@ const PreferredAccountForm = ({ userId, accounts }) => {
             <button className="btn btn-primary" type="submit">
               Save
             </button>
-            <Link className="btn btn-link" to="/settings/account">
+            <Link className="btn btn-link" to="/settings/accounts">
               Cancel
             </Link>
           </div>
