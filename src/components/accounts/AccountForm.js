@@ -133,62 +133,65 @@ const AccountForm = ({
             error={errors.description}
           />
           <hr />
-          <div>
-            {values.members &&
-              values.members.map((item, index) => (
-                <div className="form-row" key={index}>
-                  <TextForm
-                    colFormat="a-4"
-                    value={
-                      values.members[index].user
-                        ? values.members[index].user.email
-                        : values.members[index].email
-                    }
-                    label="Email"
-                    field={`members[${index}].user.email`}
-                    readOnly={true}
-                    index={index}
-                  />
-                  <TextForm
-                    colFormat="a-2"
-                    value={
-                      values.members[index].user
-                        ? values.members[index].user.profile.username
-                        : ''
-                    }
-                    label="Username"
-                    field={`members[${index}].user.profile.username`}
-                    readOnly={true}
-                    index={index}
-                  />
-                  <TextForm
-                    colFormat="a-3"
-                    value={values.members[index].permissions}
-                    label="Permissions"
-                    field={`members[${index}].permissions`}
-                    handleChange={handleChange}
-                    readOnly={isReadOnly}
-                    index={index}
-                  />
-                  <TextForm
-                    colFormat="a-2"
-                    value={values.members[index].state}
-                    label="State"
-                    field={`members[${index}].state`}
-                    handleChange={handleChange}
-                    readOnly={isReadOnly}
-                    index={index}
-                  />
-                  <RemoveArrayButtonForm
-                    colFormat="a-1"
-                    title="Remove Member"
-                    onClick={() => removeArrayItem('members', index)}
-                    index={index}
-                  />
-                </div>
-              ))}
-          </div>
-          <hr />
+          {values.members && values.members.length > 0 && (
+            <React.Fragment>
+              <div>
+                {values.members.map((item, index) => (
+                  <div className="form-row" key={index}>
+                    <TextForm
+                      colFormat="a-4"
+                      value={
+                        values.members[index].user
+                          ? values.members[index].user.email
+                          : values.members[index].email
+                      }
+                      label="Email"
+                      field={`members[${index}].user.email`}
+                      readOnly={true}
+                      index={index}
+                    />
+                    <TextForm
+                      colFormat="a-2"
+                      value={
+                        values.members[index].user
+                          ? values.members[index].user.profile.username
+                          : ''
+                      }
+                      label="Username"
+                      field={`members[${index}].user.profile.username`}
+                      readOnly={true}
+                      index={index}
+                    />
+                    <TextForm
+                      colFormat="a-3"
+                      value={values.members[index].permissions}
+                      label="Permissions"
+                      field={`members[${index}].permissions`}
+                      handleChange={handleChange}
+                      readOnly={isReadOnly}
+                      index={index}
+                    />
+                    <TextForm
+                      colFormat="a-2"
+                      value={values.members[index].state}
+                      label="State"
+                      field={`members[${index}].state`}
+                      handleChange={handleChange}
+                      readOnly={isReadOnly}
+                      index={index}
+                    />
+                    <RemoveArrayButtonForm
+                      colFormat="a-1"
+                      title="Remove Member"
+                      onClick={() => removeArrayItem('members', index)}
+                      index={index}
+                    />
+                  </div>
+                ))}
+              </div>
+              <hr />
+            </React.Fragment>
+          )}
           {!isReadOnly && (
             <div>
               {values.images &&
