@@ -51,9 +51,7 @@ const SettingsPage = ({ profile, userPackage }) => {
     setPage('package');
     return (
       <div className="container">
-        <h2>
-          Package <i className={`fas fa-${userPackage.icon}`}></i>
-        </h2>
+        <h2>Package</h2>
         <PackagePage />
       </div>
     );

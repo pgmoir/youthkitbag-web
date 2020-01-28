@@ -23,7 +23,10 @@ const PackagePage = ({ userPackage }) => {
       {userPackage && (
         <div className="row">
           <div className="col-12">
-            <h5>Package Usage and Limits</h5>
+            <h5>
+              <i className={`fas fa-${userPackage.icon}`}></i> Package Usage and
+              Limits
+            </h5>
             <table className="table bg-light">
               <thead>
                 <tr>
@@ -90,7 +93,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PackagePage);
+export default connect(mapStateToProps, mapDispatchToProps)(PackagePage);
