@@ -82,9 +82,9 @@ const SettingsPage = ({ profile }) => {
               <div className="p-2 flex-fill bg-light">
                 <Link to="/settings/package">Package</Link>
               </div>
-              <div className="p-2 flex-fill bg-light">
+              {/* <div className="p-2 flex-fill bg-light">
                 <Link to="/settings/badges">Badges</Link>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="d-none d-sm-block col-sm-2 pb-3">
@@ -117,13 +117,13 @@ const SettingsPage = ({ profile }) => {
               >
                 <Link to="/settings/package">Package</Link>
               </li>
-              <li
+              {/* <li
                 className={`list-group-item ${
                   page === 'badges' ? 'active' : ''
                 }`}
               >
                 <Link to="/settings/badges">Badges</Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="col-12 col-sm-10">
@@ -131,7 +131,7 @@ const SettingsPage = ({ profile }) => {
             <Route path="/settings/accounts" component={Accounts} />
             <Route path="/settings/groups" component={Groups} />
             <Route path="/settings/package" component={Package} />
-            <Route path="/settings/badges" component={Badges} />
+            {/* <Route path="/settings/badges" component={Badges} /> */}
           </div>
         </div>
       </div>
@@ -143,7 +143,4 @@ const mapStateToProps = state => ({
   profile: state.user.profile
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(SettingsPage);
+export default connect(mapStateToProps, null)(SettingsPage);
