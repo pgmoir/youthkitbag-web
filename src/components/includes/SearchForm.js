@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import useForm from '../hooks/useForm';
 import validate from './FormEmptyValidationRules';
-import queryString from 'query-string';
 
 const SearchForm = ({ accountId, search, callback }) => {
-  const { searchfor, by } = queryString.parse(search);
+  const { searchfor, by } = search;
 
   const filter = useSelector(state => state.filter);
   const pagination = useSelector(state => state.pagination);

@@ -7,7 +7,8 @@ import {
   DELETE_KITBAG_KIT,
   API_KITBAG_ERROR,
   FETCH_KITBAG_LISTS,
-  GETALL_FAILURE
+  GETALL_FAILURE,
+  SEARCH_KITBAG_KITS
 } from './types';
 import history from '../helpers/history';
 
@@ -31,6 +32,10 @@ export const fetchKitbagKits = (
     })
     .then(response => {
       dispatch({ type: FETCH_KITBAG_KITS, payload: response.data });
+      dispatch({
+        type: SEARCH_KITBAG_KITS,
+        payload: { searchfor, by, page, pagesize }
+      });
       history.push(
         `/kitbag/kit/${accountId}?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}`
       );

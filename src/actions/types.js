@@ -29,6 +29,7 @@ export const FLAG_TOAST = 'FLAG_TOAST';
 export const SET_TOAST = 'SET_TOAST';
 export const SET_ERROR = 'SET_ERROR';
 
+export const SEARCH_KITBAG_KITS = 'SEARCH_KITBAG_KITS';
 export const CREATE_KITBAG_KIT = 'CREATE_KITBAG_KIT';
 export const FETCH_KITBAG_KITS = 'FETCH_KITBAG_KITS';
 export const FETCH_KITBAG_KIT = 'FETCH_KITBAG_KIT';

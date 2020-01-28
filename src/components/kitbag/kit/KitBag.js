@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchKitbagKits } from '../../../actions';
-import queryString from 'query-string';
 import Alert from '../../includes/Alert';
 import Title from '../../includes/title/Title';
 import KitCard from './KitCard';
@@ -10,6 +9,7 @@ import SearchForm from '../../includes/SearchForm';
 import Pagination from '../../includes/Pagination';
 
 const mapStateToProps = state => ({
+  search: state.kitbag.kit.search,
   items: Object.values(state.kitbag.kit.list),
   pagination: state.pagination,
   accounts: state.user.profile.accounts
@@ -19,17 +19,18 @@ const mapDispatchToProps = {
   fetchKitbagKits
 };
 
-const KitBag = ({ items, pagination, accounts, fetchKitbagKits, match }) => {
+const KitBag = ({
+  search,
+  items,
+  pagination,
+  accounts,
+  fetchKitbagKits,
+  match
+}) => {
   console.log('=========================================================');
-  let { search } = useLocation();
-  if (!search) {
-    search = '?searchfor=&by=all&page=1&pagesize=24';
-  }
   console.log('SEARCH', search);
 
-  const [{ searchfor, by, page, pagesize }] = useState(
-    queryString.parse(search)
-  );
+  const { searchfor, by, page, pagesize } = search;
 
   const [accountId] = useState(match.params.accountId);
   const [kits, setKits] = useState([]);
@@ -144,7 +145,4 @@ const KitBag = ({ items, pagination, accounts, fetchKitbagKits, match }) => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(KitBag);
+export default connect(mapStateToProps, mapDispatchToProps)(KitBag);
