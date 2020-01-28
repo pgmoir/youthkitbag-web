@@ -9,7 +9,7 @@ const GroupsPage = ({ profile }) => {
         <div className="col-12">
           <p>
             As a user of YouthKitbag, you can join as many accounts as allowed
-            within your chosen package limits. The default coffee account (free)
+            within your chosen package limits. The default Star account (free)
             allows you to join 3 groups.
           </p>
           <p>
@@ -81,7 +81,4 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GroupsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(GroupsPage);

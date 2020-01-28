@@ -9,7 +9,12 @@ import PackagePage from './PackagePage';
 import BadgesPage from './BadgesPage';
 import Alert from '../includes/Alert';
 
-const SettingsPage = ({ profile }) => {
+const mapStateToProps = state => ({
+  profile: state.user.profile,
+  userPackage: state.user.package
+});
+
+const SettingsPage = ({ profile, userPackage }) => {
   const [page, setPage] = useState(null);
 
   const Profile = () => {
@@ -46,7 +51,9 @@ const SettingsPage = ({ profile }) => {
     setPage('package');
     return (
       <div className="container">
-        <h2>Package</h2>
+        <h2>
+          Package <i className={`fas fa-${userPackage.icon}`}></i>
+        </h2>
         <PackagePage />
       </div>
     );
@@ -138,9 +145,5 @@ const SettingsPage = ({ profile }) => {
     </div>
   );
 };
-
-const mapStateToProps = state => ({
-  profile: state.user.profile
-});
 
 export default connect(mapStateToProps, null)(SettingsPage);

@@ -17,7 +17,7 @@ const Pricing = () => {
             <div className="col-12 col-md-4">
               <article className="card">
                 <div className="card-header h4 text-center">
-                  Free <i className="fas fa-coffee"></i>
+                  Free (Star) <i className="fas fa-star"></i>
                 </div>
                 <img className="card-img" src="" alt="" role="presentation" />
                 <div className="card-body">
@@ -47,7 +47,7 @@ const Pricing = () => {
             <div className="col-12 col-md-4">
               <article className="card">
                 <div className="card-header h4 text-center">
-                  Standard <i className="fas fa-beer"></i>
+                  Standard (Medal) <i className="fas fa-medal"></i>
                 </div>
                 <img className="card-img" src="" alt="" role="presentation" />
                 <div className="card-body">
@@ -80,7 +80,7 @@ const Pricing = () => {
             <div className="col-12 col-md-4">
               <article className="card">
                 <div className="card-header h4 text-center">
-                  Premium <i className="fas fa-cocktail"></i>
+                  Premium (Trophy) <i className="fas fa-trophy"></i>
                 </div>
                 <img className="card-img" src="" alt="" role="presentation" />
                 <div className="card-body">

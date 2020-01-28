@@ -10,7 +10,7 @@ const AccountsPage = ({ profile }) => {
         <div className="col-12">
           <p>
             As a user of YouthKitbag, you can create as many accounts as allowed
-            within your chosen package limits. The default coffee account (free)
+            within your chosen package limits. The default Star account (free)
             allows you to create 3 accounts.
           </p>
           <p>
