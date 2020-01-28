@@ -24,9 +24,6 @@ export const SIGN_OUT = 'SIGN_OUT';
 export const FETCH_SUBSCRIPTION_PACKAGE = 'FETCH_SUBSCRIPTION_PACKAGE';
 
 export const RESET_TOAST = 'RESET_TOAST';
-export const SHOWN_TOAST = 'SHOWN_TOAST';
-export const FLAG_TOAST = 'FLAG_TOAST';
-export const SET_TOAST = 'SET_TOAST';
 export const SET_ERROR = 'SET_ERROR';
 
 export const SEARCH_KITBAG_KITS = 'SEARCH_KITBAG_KITS';
