@@ -7,8 +7,6 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  by: 'all',
-  searchfor: '',
   options: [{ key: 'all', value: 'All' }]
 };
 
