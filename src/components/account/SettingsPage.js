@@ -6,7 +6,7 @@ import ProfileForm from './ProfileForm';
 import AccountsPage from './AccountsPage';
 import GroupsPage from './GroupsPage';
 import PackagePage from './PackagePage';
-import BadgesPage from './BadgesPage';
+// import BadgesPage from './BadgesPage';
 import Alert from '../includes/Alert';
 
 const mapStateToProps = state => ({
@@ -59,15 +59,15 @@ const SettingsPage = ({ profile, userPackage }) => {
     );
   };
 
-  const Badges = () => {
-    setPage('badges');
-    return (
-      <div className="container">
-        <h2>Badges</h2>
-        <BadgesPage />
-      </div>
-    );
-  };
+  // const Badges = () => {
+  //   setPage('badges');
+  //   return (
+  //     <div className="container">
+  //       <h2>Badges</h2>
+  //       <BadgesPage />
+  //     </div>
+  //   );
+  // };
 
   return (
     <div>

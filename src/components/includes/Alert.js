@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { resetToast, shownToast } from '../../actions/ToastActions';
 
@@ -12,13 +12,11 @@ const mapStateToProps = state => ({
 });
 
 const Alert = ({ resetToast, shownToast, toast }) => {
-  // componentWillUnmount() {
-  //   if (toast.currentMessage) {
-  //     toast.hasShown
-  //       ? resetToast()
-  //       : shownToast();
-  //   }
-  // }
+  useEffect(() => {
+    return function clearUp() {
+      resetToast();
+    };
+  }, [resetToast]);
 
   function alertStyle(style) {
     switch (style) {
@@ -40,7 +38,4 @@ const Alert = ({ resetToast, shownToast, toast }) => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Alert);
+export default connect(mapStateToProps, mapDispatchToProps)(Alert);
