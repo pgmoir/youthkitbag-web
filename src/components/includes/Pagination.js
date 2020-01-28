@@ -10,14 +10,6 @@ const Pagination = ({ pagination, accountId, search, callback }) => {
   const { searchfor, by, pagesize } = queryString.parse(search);
 
   function changePage(moveToPage) {
-    console.log(
-      'PAGECHANGE-GET',
-      searchfor,
-      by,
-      moveToPage,
-      pagesize ? pagesize : 24,
-      accountId
-    );
     callback(searchfor, by, moveToPage, pagesize ? pagesize : 24, accountId);
   }
 

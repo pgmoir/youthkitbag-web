@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PreferredAccountForm from './PreferredAccountForm';
 
+const mapDispatchToProps = {};
+
+const mapStateToProps = state => ({
+  profile: state.user.profile
+});
+
 const AccountsPage = ({ profile }) => {
   return (
     <React.Fragment>
@@ -37,11 +43,5 @@ const AccountsPage = ({ profile }) => {
     </React.Fragment>
   );
 };
-
-const mapStateToProps = state => ({
-  profile: state.user.profile
-});
-
-const mapDispatchToProps = {};
 
 export default connect(mapStateToProps, mapDispatchToProps)(AccountsPage);

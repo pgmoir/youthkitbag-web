@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
-import { editProfile } from '../../actions/UserActions';
+import { editProfile, loadSettingsPage } from '../../actions/UserActions';
 import validate from './ProfileFormValidationRules';
 import { TextForm, ImagesForm } from '../includes/forms';
 
-const ProfileForm = ({ profile }) => {
-  const dispatch = useDispatch();
-  const newErrors = useSelector(state => state.toast.errors);
+const mapDispatchToProps = { editProfile, loadSettingsPage };
 
+const mapStateToProps = state => ({
+  newErrors: state.toast.errors
+});
+
+const ProfileForm = ({ profile, editProfile, loadSettingsPage, newErrors }) => {
   const {
     setChange,
     handleChange,
@@ -38,7 +40,11 @@ const ProfileForm = ({ profile }) => {
   }, [profile, setValues]);
 
   function updateProfile() {
-    dispatch(editProfile(values._id, values));
+    editProfile(values._id, values);
+  }
+
+  function cancelPage() {
+    loadSettingsPage('/settings/profile');
   }
 
   return (
@@ -138,9 +144,9 @@ const ProfileForm = ({ profile }) => {
             <button className="btn btn-primary" type="submit">
               Save
             </button>
-            <Link className="btn btn-link" to="/settings/account">
+            <button className="btn btn-link" onClick={() => cancelPage()}>
               Cancel
-            </Link>
+            </button>
           </div>
         </form>
       </div>
@@ -148,4 +154,4 @@ const ProfileForm = ({ profile }) => {
   );
 };
 
-export default ProfileForm;
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm);

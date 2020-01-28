@@ -4,7 +4,8 @@ import {
   EDIT_USER_PROFILE,
   API_KITBAG_ERROR,
   GETALL_FAILURE,
-  RESET
+  RESET,
+  RESET_TOAST
 } from './types';
 import axios from 'axios';
 import history from '../helpers/history';
@@ -87,4 +88,9 @@ export const editProfilePreferredAccount = (userId, accountId) => dispatch => {
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
+};
+
+export const loadSettingsPage = url => dispatch => {
+  dispatch({ type: RESET_TOAST });
+  history.push(url);
 };

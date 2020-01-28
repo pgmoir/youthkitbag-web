@@ -1,11 +1,23 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import usePreferredAccountForm from '../hooks/usePreferredAccountForm';
-import { editProfilePreferredAccount } from '../../actions/UserActions';
+import {
+  editProfilePreferredAccount,
+  loadSettingsPage
+} from '../../actions/UserActions';
+import { connect } from 'react-redux';
 
-const PreferredAccountForm = ({ userId, accounts }) => {
-  const dispatch = useDispatch();
+const mapDispatchToProps = {
+  editProfilePreferredAccount,
+  loadSettingsPage
+};
+
+const PreferredAccountForm = ({
+  userId,
+  accounts,
+  editProfilePreferredAccount,
+  loadSettingsPage
+}) => {
   const {
     setPreferred,
     handleSubmit,
@@ -22,7 +34,11 @@ const PreferredAccountForm = ({ userId, accounts }) => {
   function updatePreferredAccount() {
     accounts = undefined;
     const accountId = values.find(a => a.preferred)._id;
-    dispatch(editProfilePreferredAccount(userId, accountId));
+    editProfilePreferredAccount(userId, accountId);
+  }
+
+  function cancelPage() {
+    loadSettingsPage('/settings/accounts');
   }
 
   return (
@@ -68,9 +84,9 @@ const PreferredAccountForm = ({ userId, accounts }) => {
             <button className="btn btn-primary" type="submit">
               Save
             </button>
-            <Link className="btn btn-link" to="/settings/accounts">
+            <button className="btn btn-link" onClick={() => cancelPage()}>
               Cancel
-            </Link>
+            </button>
           </div>
         </form>
       </div>
@@ -78,4 +94,4 @@ const PreferredAccountForm = ({ userId, accounts }) => {
   );
 };
 
-export default PreferredAccountForm;
+export default connect(null, mapDispatchToProps)(PreferredAccountForm);
