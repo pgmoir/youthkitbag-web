@@ -4,30 +4,39 @@ import {
   FETCH_GROUP_MEMBERS,
   LOGOUT,
   CREATE_GROUP,
-  EDIT_GROUP
+  EDIT_GROUP,
+  SEARCH_GROUPS
 } from '../actions/types';
 
-const initialState = { current: {}, list: [], memberList: {} };
+const initialState = {
+  current: {},
+  list: [],
+  memberList: {},
+  search: { searchfor: '', by: 'all', page: 1, pagesize: 24 }
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case SEARCH_GROUPS:
+      return { ...state, search: action.payload };
     case FETCH_GROUPS:
       return {
+        ...state,
         current: {},
         list: action.payload.groups,
         memberList: {}
       };
     case FETCH_GROUP:
       return {
+        ...state,
         current: action.payload,
-        list: [],
         memberList: {}
       };
     case CREATE_GROUP:
     case EDIT_GROUP:
       return {
-        current: action.payload.kit,
-        list: [],
+        ...state,
+        current: {},
         memberList: {}
       };
     case FETCH_GROUP_MEMBERS:

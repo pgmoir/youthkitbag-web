@@ -1,35 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchMarketItems } from '../../actions/MarketActions';
-import queryString from 'query-string';
 import Title from '../includes/title/Title';
 import MarketItemCard from './MarketItemCard';
 import SearchForm from '../includes/SearchForm';
 import Pagination from '../includes/Pagination';
 
 const mapStateToProps = state => ({
+  search: state.market.search,
   items: Object.values(state.market.list),
-  filter: state.filter,
-  pagination: state.pagination,
-  accounts: state.user.profile.accounts
+  pagination: state.pagination
 });
 
 const mapDispatchToProps = {
   fetchMarketItems
 };
 
-const MarketItems = ({ items, pagination, fetchMarketItems, match }) => {
+const MarketItems = ({
+  search,
+  items,
+  pagination,
+  fetchMarketItems,
+  match
+}) => {
   console.log('=========================================================');
-  let { search } = useLocation();
-  if (!search) {
-    search = '?searchfor=&by=all&page=1&pagesize=24';
-  }
   console.log('SEARCH', search);
 
-  const [{ searchfor, by, page, pagesize }] = useState(
-    queryString.parse(search)
-  );
+  const { searchfor, by, page, pagesize } = search;
 
   const accountId = match.params.accountId;
   const [marketItems, setMarketItems] = useState([]);
@@ -131,7 +128,4 @@ const MarketItems = ({ items, pagination, fetchMarketItems, match }) => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MarketItems);
+export default connect(mapStateToProps, mapDispatchToProps)(MarketItems);

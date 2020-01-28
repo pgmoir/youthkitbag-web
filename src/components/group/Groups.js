@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchGroups } from '../../actions';
-import queryString from 'query-string';
 import Title from '../includes/title/Title';
 import GroupCard from './GroupCard';
 import SearchForm from '../includes/SearchForm';
@@ -10,8 +9,8 @@ import Pagination from '../includes/Pagination';
 import Alert from '../includes/Alert';
 
 const mapStateToProps = state => ({
+  search: state.group.search,
   items: Object.values(state.group.list),
-  filter: state.filter,
   pagination: state.pagination,
   userPackage: state.user.package
 });
@@ -20,17 +19,11 @@ const mapDispatchToProps = {
   fetchGroups
 };
 
-const Groups = ({ items, pagination, userPackage, fetchGroups }) => {
+const Groups = ({ search, items, pagination, userPackage, fetchGroups }) => {
   console.log('=========================================================');
-  let { search } = useLocation();
-  if (!search) {
-    search = '?searchfor=&by=all&page=1&pagesize=24';
-  }
   console.log('SEARCH', search);
 
-  const [{ searchfor, by, page, pagesize }] = useState(
-    queryString.parse(search)
-  );
+  const { searchfor, by, page, pagesize } = search;
 
   const [groups, setGroups] = useState([]);
 
@@ -135,7 +128,4 @@ const Groups = ({ items, pagination, userPackage, fetchGroups }) => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Groups);
+export default connect(mapStateToProps, mapDispatchToProps)(Groups);

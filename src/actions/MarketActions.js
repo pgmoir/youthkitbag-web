@@ -4,7 +4,8 @@ import {
   FETCH_MARKET_ITEM,
   API_MARKET_ERROR,
   GETALL_FAILURE,
-  RESPOND_MARKET_ITEM
+  RESPOND_MARKET_ITEM,
+  SEARCH_MARKET_ITEMS
 } from './types';
 import history from '../helpers/history';
 
@@ -27,6 +28,10 @@ export const fetchMarketItems = (
     })
     .then(response => {
       dispatch({ type: FETCH_MARKET_ITEMS, payload: response.data });
+      dispatch({
+        type: SEARCH_MARKET_ITEMS,
+        payload: { searchfor, by, page, pagesize }
+      });
       history.push(
         `/market?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}`
       );

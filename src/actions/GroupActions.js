@@ -10,7 +10,8 @@ import {
   API_KITBAG_ERROR,
   GETALL_FAILURE,
   CREATE_GROUP_JOIN,
-  EDIT_GROUP_LEAVE
+  EDIT_GROUP_LEAVE,
+  SEARCH_GROUPS
 } from './types';
 import history from '../helpers/history';
 import { getUser } from './UserActions';
@@ -34,6 +35,10 @@ export const fetchGroups = (
     })
     .then(response => {
       dispatch({ type: FETCH_GROUPS, payload: response.data });
+      dispatch({
+        type: SEARCH_GROUPS,
+        payload: { searchfor, by, page, pagesize }
+      });
       history.push(
         `/groups?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}`
       );
