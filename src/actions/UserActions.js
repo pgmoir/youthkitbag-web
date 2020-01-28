@@ -45,9 +45,9 @@ export const editProfile = (userId, formValues) => dispatch => {
       }
     )
     .then(response => {
+      history.push('/settings/profile');
       dispatch({ type: EDIT_USER_PROFILE, payload: response.data });
       dispatch(getUser());
-      history.push('/settings/profile');
     })
     .catch(err => {
       const { response } = err;
@@ -74,10 +74,10 @@ export const editProfilePreferredAccount = (userId, accountId) => dispatch => {
       }
     )
     .then(response => {
+      history.push('/settings/accounts');
       dispatch({ type: EDIT_USER_PROFILE, payload: response.data });
       dispatch({ type: RESET });
       dispatch(getUser());
-      history.push('/settings/accounts');
     })
     .catch(err => {
       const { response } = err;

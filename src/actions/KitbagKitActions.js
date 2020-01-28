@@ -88,8 +88,8 @@ export const createKitbagKit = (accountId, formValues) => dispatch => {
       }
     )
     .then(response => {
-      dispatch({ type: CREATE_KITBAG_KIT, payload: response.data });
       history.push(`/kitbag/kit/${accountId}`);
+      dispatch({ type: CREATE_KITBAG_KIT, payload: response.data });
     })
     .catch(err => {
       const { response } = err;
@@ -116,8 +116,8 @@ export const editKitbagKit = (accountId, kitId, formValues) => dispatch => {
       }
     )
     .then(response => {
-      dispatch({ type: EDIT_KITBAG_KIT, payload: response.data });
       history.push(`/kitbag/kit/${accountId}`);
+      dispatch({ type: EDIT_KITBAG_KIT, payload: response.data });
     })
     .catch(err => {
       const { response } = err;
@@ -140,8 +140,8 @@ export const deleteKitbagKit = (accountId, kitId) => dispatch => {
       }
     })
     .then(response => {
-      dispatch({ type: DELETE_KITBAG_KIT, payload: response.data });
       history.push(`/kitbag/kit/${accountId}`);
+      dispatch({ type: DELETE_KITBAG_KIT, payload: response.data });
     })
     .catch(err => {
       const { response } = err;

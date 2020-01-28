@@ -84,8 +84,8 @@ export const respondMarketItem = (marketId, formValues) => dispatch => {
       }
     )
     .then(response => {
-      dispatch({ type: RESPOND_MARKET_ITEM, payload: response.data });
       history.push(`/market/${marketId}`);
+      dispatch({ type: RESPOND_MARKET_ITEM, payload: response.data });
     })
     .catch(err => {
       const { response } = err;

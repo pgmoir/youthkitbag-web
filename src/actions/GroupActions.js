@@ -91,9 +91,9 @@ export const createGroup = formValues => dispatch => {
       }
     )
     .then(response => {
+      history.push('/groups?searchfor=&by=&page=1&pagesize=24');
       dispatch({ type: CREATE_GROUP, payload: response.data });
       dispatch(getUser());
-      history.push('/groups?searchfor=&by=&page=1&pagesize=24');
     })
     .catch(err => {
       const { response } = err;
@@ -122,8 +122,8 @@ export const editGroup = (groupId, formValues) => dispatch => {
       }
     )
     .then(response => {
-      dispatch({ type: EDIT_GROUP, payload: response.data });
       history.push('/groups?searchfor=&by=&page=1&pagesize=24');
+      dispatch({ type: EDIT_GROUP, payload: response.data });
     })
     .catch(err => {
       const { response } = err;
@@ -152,8 +152,8 @@ export const editGroupStatus = (groupId, status) => dispatch => {
       }
     )
     .then(response => {
-      dispatch({ type: EDIT_GROUP_STATUS, payload: response.data });
       history.push('/groups?searchfor=&by=&page=1&pagesize=24');
+      dispatch({ type: EDIT_GROUP_STATUS, payload: response.data });
     })
     .catch(err => {
       const { response } = err;
@@ -178,8 +178,8 @@ export const fetchGroupMembers = groupId => dispatch => {
       }
     })
     .then(response => {
-      dispatch({ type: FETCH_GROUP_MEMBERS, payload: response.data });
       history.push(`/groups/${groupId}/members`);
+      dispatch({ type: FETCH_GROUP_MEMBERS, payload: response.data });
     })
     .catch(err => {
       const { response } = err;
@@ -206,8 +206,8 @@ export const editGroupMemberState = (groupId, memberId, state) => dispatch => {
       }
     )
     .then(response => {
-      dispatch({ type: EDIT_GROUP_MEMBER_STATE, payload: response.data });
       history.push(`/groups/${groupId}/members`);
+      dispatch({ type: EDIT_GROUP_MEMBER_STATE, payload: response.data });
     })
     .catch(err => {
       const { response } = err;
@@ -234,9 +234,9 @@ export const requestGroupJoin = groupId => dispatch => {
       }
     )
     .then(response => {
+      history.push(`/groups/${groupId}`);
       dispatch({ type: CREATE_GROUP_JOIN, payload: response.data });
       dispatch(getUser());
-      history.push(`/groups/${groupId}`);
     })
     .catch(err => {
       const { response } = err;
@@ -264,8 +264,8 @@ export const requestGroupLeave = groupId => dispatch => {
       }
     )
     .then(response => {
-      dispatch({ type: EDIT_GROUP_LEAVE, payload: response.data });
       history.push(`/groups/${groupId}`);
+      dispatch({ type: EDIT_GROUP_LEAVE, payload: response.data });
     })
     .catch(err => {
       const { response } = err;

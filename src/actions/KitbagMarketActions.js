@@ -75,8 +75,8 @@ export const createMarketKit = (accountId, formValues) => dispatch => {
       }
     )
     .then(response => {
-      dispatch({ type: CREATE_MARKET_KIT, payload: response.data });
       history.push(`/market/${accountId}?searchfor=&by=&page=1&pagesize=24`);
+      dispatch({ type: CREATE_MARKET_KIT, payload: response.data });
     })
     .catch(err => {
       const { response } = err;
@@ -105,8 +105,8 @@ export const editMarketKit = (accountId, marketId, formValues) => dispatch => {
       }
     )
     .then(response => {
-      dispatch({ type: EDIT_MARKET_KIT, payload: response.data });
       history.push(`/market/${accountId}?searchfor=&by=&page=1&pagesize=24`);
+      dispatch({ type: EDIT_MARKET_KIT, payload: response.data });
     })
     .catch(err => {
       const { response } = err;
@@ -165,8 +165,8 @@ export const deleteMarketKit = (accountId, marketId) => dispatch => {
       }
     })
     .then(response => {
-      dispatch({ type: DELETE_MARKET_KIT, payload: response.data });
       history.push(`/market/${accountId}?searchfor=&by=&page=1&pagesize=24`);
+      dispatch({ type: DELETE_MARKET_KIT, payload: response.data });
     })
     .catch(err => {
       const { response } = err;

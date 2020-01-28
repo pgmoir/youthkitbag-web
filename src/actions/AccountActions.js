@@ -3,8 +3,6 @@ import {
   CLEAR_ACCOUNT,
   FETCH_ACCOUNT,
   EDIT_ACCOUNT_STATUS,
-  FETCH_ACCOUNT_MEMBERS,
-  EDIT_ACCOUNT_MEMBER_STATE,
   API_KITBAG_ERROR,
   GETALL_FAILURE,
   CREATE_ACCOUNT_INVITE,
@@ -52,9 +50,9 @@ export const createAccount = formValues => dispatch => {
       }
     )
     .then(() => {
+      history.push('/settings/accounts');
       dispatch({ type: CLEAR_ACCOUNT });
       dispatch(getUser());
-      history.push('/settings/accounts');
     })
     .catch(err => {
       const { response } = err;
@@ -81,8 +79,9 @@ export const editAccount = (accountId, formValues) => dispatch => {
       }
     )
     .then(() => {
-      dispatch({ type: CLEAR_ACCOUNT });
       history.push('/settings/accounts');
+      dispatch({ type: CLEAR_ACCOUNT });
+      dispatch(getUser());
     })
     .catch(err => {
       const { response } = err;
@@ -109,8 +108,8 @@ export const editAccountStatus = (accountId, status) => dispatch => {
       }
     )
     .then(response => {
-      dispatch({ type: EDIT_ACCOUNT_STATUS, payload: response.data });
       history.push('/settings/accounts');
+      dispatch({ type: EDIT_ACCOUNT_STATUS, payload: response.data });
     })
     .catch(err => {
       const { response } = err;
@@ -118,62 +117,6 @@ export const editAccountStatus = (accountId, status) => dispatch => {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push('/auth/login?return=/settings/accounts');
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
-    });
-};
-
-export const fetchAccountMembers = accountId => dispatch => {
-  const token = localStorage.getItem('token');
-  axios
-    .get(`${baseUrl}/account/${accountId}/members`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-        'content-type': 'application/json'
-      }
-    })
-    .then(response => {
-      dispatch({ type: FETCH_ACCOUNT_MEMBERS, payload: response.data });
-      history.push(`/accounts/${accountId}/members`);
-    })
-    .catch(err => {
-      const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/accounts/${accountId}/members`);
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: response });
-    });
-};
-
-export const editAccountMemberState = (
-  accountId,
-  memberId,
-  state
-) => dispatch => {
-  const token = localStorage.getItem('token');
-  axios
-    .put(
-      `${baseUrl}/account/${accountId}/members/${memberId}/${state}`,
-      {},
-      {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'content-type': 'application/json'
-        }
-      }
-    )
-    .then(response => {
-      dispatch({ type: EDIT_ACCOUNT_MEMBER_STATE, payload: response.data });
-      history.push(`/accounts/${accountId}/members`);
-    })
-    .catch(err => {
-      const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/accounts/${accountId}/members`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
@@ -193,8 +136,8 @@ export const inviteToAccount = (accountId, email) => dispatch => {
       }
     )
     .then(response => {
-      dispatch({ type: CREATE_ACCOUNT_INVITE, payload: response.data });
       history.push(`/settings/accounts`);
+      dispatch({ type: CREATE_ACCOUNT_INVITE, payload: response.data });
     })
     .catch(err => {
       const { response } = err;
@@ -222,8 +165,8 @@ export const requestAccountLeave = accountId => dispatch => {
       }
     )
     .then(response => {
-      dispatch({ type: EDIT_ACCOUNT_LEAVE, payload: response.data });
       history.push(`/settings/accounts`);
+      dispatch({ type: EDIT_ACCOUNT_LEAVE, payload: response.data });
     })
     .catch(err => {
       const { response } = err;
