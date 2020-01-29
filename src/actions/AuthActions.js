@@ -31,7 +31,7 @@ export const login = (email, password, referrer) => dispatch => {
       localStorage.setItem('isloggedin', true);
       dispatch({ type: LOGIN_SUCCESS, payload: data });
       dispatch(getUser());
-      history.push(referrer ? referrer : '/market');
+      history.push(referrer ? referrer : '/');
     })
     .catch(err => {
       dispatch({ type: LOGIN_FAILURE, payload: err.response });
