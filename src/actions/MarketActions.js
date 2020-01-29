@@ -5,7 +5,8 @@ import {
   API_MARKET_ERROR,
   GETALL_FAILURE,
   RESPOND_MARKET_ITEM,
-  SEARCH_MARKET_ITEMS
+  SEARCH_MARKET_ITEMS,
+  RESET_TOAST
 } from './types';
 import history from '../helpers/history';
 
@@ -116,6 +117,7 @@ export const respondToMarketThread = (
       }
     )
     .then(() => {
+      dispatch({ type: RESET_TOAST });
       dispatch(fetchMarketItem(marketId));
     })
     .catch(err => {
