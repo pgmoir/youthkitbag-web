@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const KitbagMarketAnnouncement = ({ accountId }) => {
+const KitbagMarketAnnouncement = () => {
   function renderBlock() {
     return (
       <div className="card border-0">

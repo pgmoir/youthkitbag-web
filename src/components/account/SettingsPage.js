@@ -10,11 +10,10 @@ import PackagePage from './PackagePage';
 import Alert from '../includes/Alert';
 
 const mapStateToProps = state => ({
-  profile: state.user.profile,
-  userPackage: state.user.package
+  profile: state.user.profile
 });
 
-const SettingsPage = ({ profile, userPackage }) => {
+const SettingsPage = ({ profile }) => {
   const [page, setPage] = useState(null);
 
   const Profile = () => {

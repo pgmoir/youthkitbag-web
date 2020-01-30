@@ -42,7 +42,7 @@ const LoggedInLanding = ({ user }) => {
               <MarketAnnouncement />
               <KitbagKitAddMoreAdvice accountId={accountId} />
               <KitbagKitAnnouncement accountId={accountId} />
-              <KitbagMarketAnnouncement accountId={accountId} />
+              <KitbagMarketAnnouncement />
               <KitbagKitLevelWarnings />
             </div>
           </div>
