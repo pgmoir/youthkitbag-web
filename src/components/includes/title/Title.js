@@ -4,7 +4,7 @@ const Title = props => {
   return (
     <section
       id="title"
-      className="container-fluid"
+      className="container-fluid px-0"
       role="banner"
       aria-label="breadcrumb navigation and page title"
     >
