@@ -1,21 +1,24 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const ProfileAnnouncement = ({ user }) => {
-  const { firstname, lastname, username } = user.profile;
-
-  function requiresUpdate() {
-    return !firstname || !lastname || !username;
-  }
-
+const ProfileAnnouncement = () => {
   function renderBlock() {
-    if (!requiresUpdate()) return null;
-
     return (
-      <div className="col-12 col-md-6">
-        <h3>Profile to update</h3>
-        {!username && <p>You have not entered a username.</p>}
-        {!firstname && <p>You have not entered a first name.</p>}
-        {!lastname && <p>You have not entered a last name.</p>}
+      <div className="card border-0">
+        <div className="alert alert-warning mb-0" role="alert">
+          <h4 className="alert-heading">Complete your profile</h4>
+          <hr />
+          <p>
+            It appears that you haven&apos;t completed your YouthKitbag profile.
+            It always helps to add a few extra details, so that we can identify
+            more relevant resources to show you.
+          </p>
+          <Link className="btn btn-warning" to="/settings/profile">
+            Update profile
+          </Link>
+          <span className="ml-3">or</span>
+          <button className="btn btn-link">Hide this message</button>
+        </div>
       </div>
     );
   }

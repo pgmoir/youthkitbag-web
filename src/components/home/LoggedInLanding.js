@@ -6,14 +6,24 @@ import ProfileAnnouncement from './ProfileAnnouncement';
 import MarketAnnouncement from './MarketAnnouncement';
 import KitbagKitAnnouncement from './KitbagKitAnnouncement';
 import KitbagMarketAnnouncement from './KitbagMarketAnnouncement';
-import GroupsAnnouncement from './GroupsAnnouncement';
+import GroupAnnouncement from './GroupAnnouncement';
 import AccountAnnouncement from './AccountAnnouncement';
+import KitbagKitLevelWarnings from './KitbagKitLevelWarnings';
+import KitbagKitAddMoreAdvice from './KitbagKitAddMoreAdvice';
 
 const mapStateToProps = state => ({
   user: state.user
 });
 
 const LoggedInLanding = ({ user }) => {
+  const accountId =
+    user &&
+    user.profile &&
+    user.profile.accounts &&
+    user.profile.accounts.length > 0
+      ? user.profile.accounts.find(a => a.preferred)._id
+      : undefined;
+
   return (
     <div>
       <section
@@ -25,12 +35,16 @@ const LoggedInLanding = ({ user }) => {
         <div className="container">
           <Alert />
           <div className="row">
-            <ProfileAnnouncement user={user} />
-            <AccountAnnouncement />
-            <MarketAnnouncement />
-            <KitbagKitAnnouncement />
-            <KitbagMarketAnnouncement />
-            <GroupsAnnouncement />
+            <div className="card-columns">
+              <AccountAnnouncement />
+              <ProfileAnnouncement user={user} />
+              <GroupAnnouncement />
+              <MarketAnnouncement />
+              <KitbagKitAddMoreAdvice accountId={accountId} />
+              <KitbagKitAnnouncement accountId={accountId} />
+              <KitbagMarketAnnouncement accountId={accountId} />
+              <KitbagKitLevelWarnings />
+            </div>
           </div>
         </div>
       </section>

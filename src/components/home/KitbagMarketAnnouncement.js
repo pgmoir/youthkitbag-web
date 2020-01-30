@@ -1,12 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const KitbagMarketAnnouncement = () => {
+const KitbagMarketAnnouncement = ({ accountId }) => {
   function renderBlock() {
     return (
-      <div className="col-12 col-md-6">
-        <h3>Kitbag market news</h3>
-        <p>These items have been posted for trade.</p>
-        <p>You have these new offers and messages.</p>
+      <div className="card border-0">
+        <div className="alert alert-warning mb-0" role="alert">
+          <h4 className="alert-heading">Kitbag market activity</h4>
+          <hr />
+          <p>The following items have recently been traded in your kitbag.</p>
+          <p>You have the following responses to action.</p>
+          <Link className="btn btn-warning" to={`/kmarket`}>
+            View kitbag
+          </Link>
+        </div>
       </div>
     );
   }
