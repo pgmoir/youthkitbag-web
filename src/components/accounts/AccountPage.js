@@ -28,7 +28,6 @@ const AccountPage = ({ current, fetchAccount, clearAccount, match }) => {
 
   useEffect(() => {
     if (accountId) {
-      console.log('UE-FETCH', accountId);
       fetchAccount(accountId);
     }
   }, [fetchAccount, accountId]);

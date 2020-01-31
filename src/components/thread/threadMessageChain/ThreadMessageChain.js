@@ -1,23 +1,31 @@
 import React, { useEffect } from 'react';
 import useForm from '../../hooks/useForm';
-import { useDispatch, useSelector } from 'react-redux';
 import { respondToMarketKitThread } from '../../../actions/KitbagMarketActions';
 import { respondToMarketThread } from '../../../actions/MarketActions';
-import validate from './ThreadMessageChainFormValidationRules';
 import TextAreaInput from '../../includes/controls/TextAreaInput';
 import RadioGroupInput from '../../includes/controls/RadioGroupInput';
 import Alert from '../../includes/Alert';
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => ({
+  newErrors: state.toast.errors
+});
+
+const mapDispatchToProps = {
+  respondToMarketThread,
+  respondToMarketKitThread
+};
 
 const ThreadMessageChain = ({
   thread,
   source,
   accountId,
   marketType,
-  displayed
+  displayed,
+  newErrors,
+  respondToMarketThread,
+  respondToMarketKitThread
 }) => {
-  const dispatch = useDispatch();
-  const newErrors = useSelector(state => state.toast.errors);
-
   const initialMessage = {
     accountId: accountId,
     marketId: thread.source,
@@ -28,8 +36,7 @@ const ThreadMessageChain = ({
 
   const { handleChange, handleSubmit, values, errors, setErrors } = useForm(
     initialMessage,
-    respondToThread,
-    validate
+    respondToThread
   );
 
   const responseStateOptions = {
@@ -47,15 +54,13 @@ const ThreadMessageChain = ({
 
   function respondToThread() {
     if (source === 'market') {
-      dispatch(respondToMarketThread(values.marketId, values.threadId, values));
+      respondToMarketThread(values.marketId, values.threadId, values);
     } else {
-      dispatch(
-        respondToMarketKitThread(
-          accountId,
-          values.marketId,
-          values.threadId,
-          values
-        )
+      respondToMarketKitThread(
+        accountId,
+        values.marketId,
+        values.threadId,
+        values
       );
     }
     values.content = '';
@@ -197,4 +202,4 @@ const ThreadMessageChain = ({
   );
 };
 
-export default ThreadMessageChain;
+export default connect(mapStateToProps, mapDispatchToProps)(ThreadMessageChain);

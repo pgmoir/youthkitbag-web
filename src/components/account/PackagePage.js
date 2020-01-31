@@ -2,6 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+const mapStateToProps = state => ({
+  userPackage: state.user.package
+});
+
 const PackagePage = ({ userPackage }) => {
   return (
     <React.Fragment>
@@ -87,10 +91,4 @@ const PackagePage = ({ userPackage }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  userPackage: state.user.package
-});
-
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(PackagePage);
+export default connect(mapStateToProps)(PackagePage);

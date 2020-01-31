@@ -17,7 +17,7 @@ const mapDispatchToProps = {
   deleteKitbagKit
 };
 
-const KitDelete = ({ item, match, fetchKitbagKit, deleteKitbagKit }) => {
+const KitDelete = ({ item, fetchKitbagKit, deleteKitbagKit, match }) => {
   const accountId = match.params.accountId;
   const kitId = match.params.kitId;
   const [kit, setKit] = useState({});
@@ -79,7 +79,4 @@ const KitDelete = ({ item, match, fetchKitbagKit, deleteKitbagKit }) => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(KitDelete);
+export default connect(mapStateToProps, mapDispatchToProps)(KitDelete);

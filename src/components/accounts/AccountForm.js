@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { createAccount, editAccount } from '../../actions/AccountActions';
-import validate from './AccountFormValidationRules';
 import {
   TextForm,
   TextAreaForm,
@@ -11,22 +10,22 @@ import {
   RemoveArrayButtonForm
 } from '../includes/forms';
 
+const mapStateToProps = state => ({
+  userPackage: state.user.package,
+  newErrors: state.toast.errors
+});
+
 const mapDispatchToProps = {
   createAccount,
   editAccount
 };
 
-const mapStateToProps = state => ({
-  newErrors: state.toast.errors,
-  userPackage: state.user.package
-});
-
 const AccountForm = ({
   account,
-  createAccount,
-  editAccount,
+  userPackage,
   newErrors,
-  userPackage
+  createAccount,
+  editAccount
 }) => {
   const [isReadOnly, setIsReadOnly] = useState(true);
   const [hasAccountAdmin, setHasAccountAdmin] = useState(false);
@@ -43,7 +42,7 @@ const AccountForm = ({
     setValues,
     errors,
     setErrors
-  } = useForm(initialValues, updateAccount, validate);
+  } = useForm(initialValues, updateAccount);
 
   useEffect(() => {
     if (newErrors) {

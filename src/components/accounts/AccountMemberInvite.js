@@ -3,26 +3,25 @@ import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { Link } from 'react-router-dom';
 import { fetchAccount, inviteToAccount } from '../../actions/AccountActions';
-import validate from './AccountMemberInviteFormValidationRules';
 import { TextForm } from '../includes/forms';
 import ModalWithForm from '../includes/ModalWithForm';
 import history from '../../helpers/history';
-
-const mapDispatchToProps = {
-  fetchAccount,
-  inviteToAccount
-};
 
 const mapStateToProps = state => ({
   account: state.account.current,
   newErrors: state.toast.errors
 });
 
-const AccountMemberInvite = ({
+const mapDispatchToProps = {
   fetchAccount,
-  inviteToAccount,
+  inviteToAccount
+};
+
+const AccountMemberInvite = ({
   account,
   newErrors,
+  fetchAccount,
+  inviteToAccount,
   match
 }) => {
   const accountId = match.params.accountId;
@@ -30,8 +29,7 @@ const AccountMemberInvite = ({
 
   const { handleChange, handleSubmit, values, errors, setErrors } = useForm(
     invite,
-    sendInvite,
-    validate
+    sendInvite
   );
 
   useEffect(() => {

@@ -2,18 +2,17 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { login } from '../../actions/AuthActions';
-import validate from './LoginFormValidationRules';
 import { TextForm } from '../includes/forms';
-
-const mapDispatchToProps = {
-  login
-};
 
 const mapStateToProps = state => ({
   newErrors: state.toast.errors
 });
 
-const LoginForm = ({ referrer, login, newErrors }) => {
+const mapDispatchToProps = {
+  login
+};
+
+const LoginForm = ({ referrer, newErrors, login }) => {
   const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
   const initialValues = {
@@ -23,8 +22,7 @@ const LoginForm = ({ referrer, login, newErrors }) => {
 
   const { values, handleChange, handleSubmit, errors, setErrors } = useForm(
     initialValues,
-    loginSubmit,
-    validate
+    loginSubmit
   );
 
   useEffect(() => {
@@ -40,7 +38,7 @@ const LoginForm = ({ referrer, login, newErrors }) => {
   return (
     <React.Fragment>
       <div className="mb-3">
-        <div className="row mb-3">
+        <div className="row mb-3 mx-0">
           <a
             className="btn btn-lg p-3 btn-block btn-google"
             href={`${baseUrl}/auth/google?referrer=${referrer}`}
@@ -48,7 +46,7 @@ const LoginForm = ({ referrer, login, newErrors }) => {
             Login with Google
           </a>
         </div>
-        <div className="row mb-3">
+        <div className="row mb-3 mx-0">
           <a
             className="btn btn-lg p-3 btn-block btn-facebook"
             href={`${baseUrl}/auth/facebook?referrer=${referrer}`}
@@ -56,7 +54,7 @@ const LoginForm = ({ referrer, login, newErrors }) => {
             Login with Facebook
           </a>
         </div>
-        <div className="row mb-3">
+        <div className="row mb-3 mx-0">
           <a
             className="btn btn-lg p-3 btn-block btn-github"
             href={`${baseUrl}/auth/github?referrer=${referrer}`}

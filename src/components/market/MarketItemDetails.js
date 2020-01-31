@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { respondMarketItem } from '../../actions/MarketActions';
 import { TextForm, TextAreaForm } from '../includes/forms';
-import validate from './MarketItemDetailsValidationRules';
 import FoundResponse from './response/FoundResponse';
 import LostResponse from './response/LostResponse';
 import StolenResponse from './response/StolenResponse';
@@ -11,10 +10,15 @@ import TradeResponse from './response/TradeResponse';
 import WantedResponse from './response/WantedResponse';
 import Threads from '../thread/threads/Threads';
 
-const MarketItemDetails = ({ market }) => {
-  const dispatch = useDispatch();
-  const newErrors = useSelector(state => state.toast.errors);
+const mapStateToProps = state => ({
+  newErrors: state.toast.errors
+});
 
+const mapDispatchToProps = {
+  respondMarketItem
+};
+
+const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
   const initialValues = {
     _id: '',
     responseOn: '',
@@ -30,7 +34,7 @@ const MarketItemDetails = ({ market }) => {
     setValues,
     errors,
     setErrors
-  } = useForm(initialValues, updateMarket, validate);
+  } = useForm(initialValues, updateMarket);
 
   useEffect(() => {
     if (newErrors) {
@@ -90,7 +94,7 @@ const MarketItemDetails = ({ market }) => {
   }, [market, setValues]);
 
   function updateMarket() {
-    dispatch(respondMarketItem(values._id, values));
+    respondMarketItem(values._id, values);
   }
 
   const showCondition = () => {
@@ -260,4 +264,4 @@ const MarketItemDetails = ({ market }) => {
   );
 };
 
-export default MarketItemDetails;
+export default connect(mapStateToProps, mapDispatchToProps)(MarketItemDetails);

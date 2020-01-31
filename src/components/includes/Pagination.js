@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 
-const mapStateToProps = state => {
-  return { pagination: state.pagination };
-};
+const mapStateToProps = state => ({
+  pagination: state.pagination
+});
 
-const Pagination = ({ pagination, accountId, search, callback }) => {
+const Pagination = ({ accountId, search, callback, pagination }) => {
   const { searchfor, by, pagesize } = queryString.parse(search);
 
   function changePage(moveToPage) {

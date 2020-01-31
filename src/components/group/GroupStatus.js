@@ -4,16 +4,16 @@ import { fetchGroup, editGroupStatus } from './../../actions/GroupActions';
 import Modal from './../includes/Modal';
 import history from './../../helpers/history';
 
+const mapStateToProps = (state, ownProps) => ({
+  group: state.group[ownProps.match.params.groupId]
+});
+
 const mapDispatchToProps = {
   fetchGroup,
   editGroupStatus
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  group: state.group[ownProps.match.params.groupId]
-});
-
-const GroupStatus = ({ fetchGroup, editGroupStatus, group, match }) => {
+const GroupStatus = ({ group, fetchGroup, editGroupStatus, match }) => {
   const groupId = match.params.groupId;
 
   useEffect(() => {
@@ -68,7 +68,4 @@ const GroupStatus = ({ fetchGroup, editGroupStatus, group, match }) => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GroupStatus);
+export default connect(mapStateToProps, mapDispatchToProps)(GroupStatus);

@@ -15,7 +15,9 @@ const useForm = (initiaValues, callback, validate) => {
   const handleSubmit = event => {
     if (event) event.preventDefault();
     setIsSubmitting(true);
-    setErrors(validate(values));
+    if (validate) {
+      setErrors(validate(values));
+    }
   };
 
   const getNameValue = eventTarget => {

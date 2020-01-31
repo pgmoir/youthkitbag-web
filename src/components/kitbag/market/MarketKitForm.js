@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import {
   createMarketKit,
   editMarketKit
 } from '../../../actions/KitbagMarketActions';
-import validate from './MarketKitFormValidationRules';
 import {
   DateForm,
   TextForm,
@@ -18,10 +17,22 @@ import {
 } from '../../includes/forms';
 import Threads from '../../thread/threads/Threads';
 
-const MarketForm = ({ accountId, market }) => {
-  const dispatch = useDispatch();
-  const newErrors = useSelector(state => state.toast.errors);
+const mapStateToProps = state => ({
+  newErrors: state.toast.errors
+});
 
+const mapDispatchToProps = {
+  createMarketKit,
+  editMarketKit
+};
+
+const MarketForm = ({
+  accountId,
+  market,
+  newErrors,
+  createMarketKit,
+  editMarketKit
+}) => {
   const initialValues = { ...market };
 
   const {
@@ -34,7 +45,7 @@ const MarketForm = ({ accountId, market }) => {
     setValues,
     errors,
     setErrors
-  } = useForm(initialValues, updateMarket, validate);
+  } = useForm(initialValues, updateMarket);
 
   useEffect(() => {
     if (newErrors) {
@@ -54,9 +65,9 @@ const MarketForm = ({ accountId, market }) => {
 
   function updateMarket() {
     if (values._id) {
-      dispatch(editMarketKit(accountId, values._id, values));
+      editMarketKit(accountId, values._id, values);
     } else {
-      dispatch(createMarketKit(accountId, values));
+      createMarketKit(accountId, values);
     }
   }
 
@@ -402,4 +413,4 @@ const MarketForm = ({ accountId, market }) => {
   );
 };
 
-export default MarketForm;
+export default connect(mapStateToProps, mapDispatchToProps)(MarketForm);

@@ -1,49 +1,57 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useForm from '../hooks/useForm';
 import { newPassword } from '../../actions/AuthActions';
-import validate from './ResetFormValidationRules';
-import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
+import { TextForm } from '../includes/forms';
 
-const NewPasswordForm = () => {
-  const dispatch = useDispatch();
+const mapStateToProps = state => ({
+  newErrors: state.toast.errors
+});
 
+const mapDispatchToProps = {
+  newPassword
+};
+
+const NewPasswordForm = ({ newErrors, newPassword }) => {
   const initialValues = {
     password: ''
   };
 
-  const { values, handleChange, handleSubmit, errors } = useForm(
+  const { values, handleChange, handleSubmit, errors, setErrors } = useForm(
     initialValues,
-    newPasswordSubmit,
-    validate
+    newPasswordSubmit
   );
 
+  useEffect(() => {
+    if (newErrors) {
+      setErrors(newErrors);
+    }
+  }, [newErrors, setErrors]);
+
   function newPasswordSubmit() {
-    dispatch(newPassword(values.password));
+    newPassword(values.password);
   }
 
   return (
     <form className="w-100 d-block" onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="password">New Password</label>
-        <input
-          className={`form-control ${errors.email && 'is-invalid'}`}
-          name="password"
-          type="password"
-          onChange={handleChange}
-          value={values.password}
-          aria-describedby="password"
-          autoComplete="current-password"
-          required
-        />
-        {errors.password && (
-          <div className="invalid-feedback">{errors.password}</div>
-        )}
-      </div>
-      <button className="btn btn-primary" type="submit">
+      <TextForm
+        colFormat="3-9"
+        type="password"
+        label="Password"
+        value={values.password}
+        field="password"
+        handleChange={handleChange}
+        error={errors.password}
+        autoComplete="current-password"
+      />
+      <button
+        className="d-block btn btn-success btn-lg py-3 px-5 mt-3 mx-auto"
+        type="submit"
+      >
         Update Password
       </button>
     </form>
   );
 };
 
-export default NewPasswordForm;
+export default connect(mapStateToProps, mapDispatchToProps)(NewPasswordForm);

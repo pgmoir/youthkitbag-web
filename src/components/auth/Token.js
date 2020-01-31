@@ -16,7 +16,4 @@ const Token = ({ authenticateToken, match }) => {
   return <h1 className="loading-text">Authenticating user...</h1>;
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Token);
+export default connect(null, mapDispatchToProps)(Token);

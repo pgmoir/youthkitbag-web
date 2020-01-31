@@ -1,19 +1,18 @@
 import React, { useEffect } from 'react';
 import useForm from '../hooks/useForm';
 import { signup } from '../../actions/AuthActions';
-import validate from './SignUpFormValidationRules';
 import { connect } from 'react-redux';
 import { TextForm } from '../includes/forms';
-
-const mapDispatchToProps = {
-  signup
-};
 
 const mapStateToProps = state => ({
   newErrors: state.toast.errors
 });
 
-const SignUpForm = ({ signup, newErrors }) => {
+const mapDispatchToProps = {
+  signup
+};
+
+const SignUpForm = ({ newErrors, signup }) => {
   const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
   const initialValues = {
@@ -24,8 +23,7 @@ const SignUpForm = ({ signup, newErrors }) => {
 
   const { values, handleChange, handleSubmit, errors, setErrors } = useForm(
     initialValues,
-    resetSubmit,
-    validate
+    resetSubmit
   );
 
   useEffect(() => {

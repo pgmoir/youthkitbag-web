@@ -2,26 +2,24 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { reset } from '../../actions/AuthActions';
-import validate from './ResetFormValidationRules';
 import { TextForm } from '../includes/forms';
-
-const mapDispatchToProps = {
-  reset
-};
 
 const mapStateToProps = state => ({
   newErrors: state.toast.errors
 });
 
-const ResetForm = ({ reset, newErrors }) => {
+const mapDispatchToProps = {
+  reset
+};
+
+const ResetForm = ({ newErrors, reset }) => {
   const initialValues = {
     email: ''
   };
 
   const { values, handleChange, handleSubmit, errors, setErrors } = useForm(
     initialValues,
-    resetSubmit,
-    validate
+    resetSubmit
   );
 
   useEffect(() => {

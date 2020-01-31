@@ -2,6 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+const mapStateToProps = state => ({
+  profile: state.user.profile
+});
+
 const BadgesPage = ({ profile }) => {
   return (
     <React.Fragment>
@@ -34,13 +38,4 @@ const BadgesPage = ({ profile }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  profile: state.user.profile
-});
-
-const mapDispatchToProps = {};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(BadgesPage);
+export default connect(mapStateToProps)(BadgesPage);

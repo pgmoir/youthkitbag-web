@@ -2,16 +2,15 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { editProfile, loadSettingsPage } from '../../actions/UserActions';
-import validate from './ProfileFormValidationRules';
 import { TextForm, ImagesForm } from '../includes/forms';
-
-const mapDispatchToProps = { editProfile, loadSettingsPage };
 
 const mapStateToProps = state => ({
   newErrors: state.toast.errors
 });
 
-const ProfileForm = ({ profile, editProfile, loadSettingsPage, newErrors }) => {
+const mapDispatchToProps = { editProfile, loadSettingsPage };
+
+const ProfileForm = ({ profile, newErrors, editProfile, loadSettingsPage }) => {
   const {
     setChange,
     handleChange,
@@ -21,7 +20,7 @@ const ProfileForm = ({ profile, editProfile, loadSettingsPage, newErrors }) => {
     setValues,
     errors,
     setErrors
-  } = useForm(profile, updateProfile, validate);
+  } = useForm(profile, updateProfile);
 
   useEffect(() => {
     if (newErrors) {

@@ -6,7 +6,6 @@ import {
   createKitbagKit,
   editKitbagKit
 } from '../../../actions/KitbagKitActions';
-import validate from './KitFormValidationRules';
 import {
   DateForm,
   TextForm,
@@ -19,23 +18,23 @@ import {
   ImagesForm
 } from '../../includes/forms';
 
+const mapStateToProps = state => ({
+  kitbagLists: state.kitbag.kit.lists,
+  newErrors: state.toast.errors
+});
+
 const mapDispatchToProps = {
   createKitbagKit,
   editKitbagKit
 };
 
-const mapStateToProps = state => ({
-  newErrors: state.toast.errors,
-  kitbagLists: state.kitbag.kit.lists
-});
-
 const KitForm = ({
   accountId,
   kit,
-  createKitbagKit,
-  editKitbagKit,
+  kitbagLists,
   newErrors,
-  kitbagLists
+  createKitbagKit,
+  editKitbagKit
 }) => {
   const initialPurchase = { from: '', quantity: 0, ondate: '', price: 0.0 };
   const initialInbag = { location: '', condition: 'used', quantity: 0 };
@@ -66,7 +65,7 @@ const KitForm = ({
     setValues,
     errors,
     setErrors
-  } = useForm(kit, updateKit, validate);
+  } = useForm(kit, updateKit);
 
   useEffect(() => {
     if (newErrors) {
@@ -355,7 +354,4 @@ const KitForm = ({
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(KitForm);
+export default connect(mapStateToProps, mapDispatchToProps)(KitForm);

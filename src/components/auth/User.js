@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import { getUser } from '../../actions/UserActions';
 import { fetchKitbagLists } from '../../actions/KitbagKitActions';
 
+const mapStateToProps = state => ({
+  accounts: state.user.profile.accounts
+});
+
 const mapDispatchToProps = {
   getUser,
   fetchKitbagLists
 };
 
-const mapStateToProps = state => ({
-  accounts: state.user.profile.accounts
-});
-
-const User = ({ getUser, fetchKitbagLists, accounts }) => {
+const User = ({ accounts, getUser, fetchKitbagLists }) => {
   const accountId =
     accounts && accounts.length > 0
       ? accounts.find(a => a.preferred)._id

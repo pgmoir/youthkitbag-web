@@ -5,16 +5,16 @@ import { fetchGroup, requestGroupJoin } from '../../actions/GroupActions';
 import Modal from '../includes/Modal';
 import history from '../../helpers/history';
 
+const mapStateToProps = state => ({
+  group: state.group.current
+});
+
 const mapDispatchToProps = {
   fetchGroup,
   requestGroupJoin
 };
 
-const mapStateToProps = state => ({
-  group: state.group.current
-});
-
-const GroupMemberJoin = ({ fetchGroup, requestGroupJoin, group, match }) => {
+const GroupMemberJoin = ({ group, fetchGroup, requestGroupJoin, match }) => {
   const groupId = match.params.groupId;
 
   useEffect(() => {
@@ -68,7 +68,4 @@ const GroupMemberJoin = ({ fetchGroup, requestGroupJoin, group, match }) => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GroupMemberJoin);
+export default connect(mapStateToProps, mapDispatchToProps)(GroupMemberJoin);

@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { createGroup, editGroup } from '../../actions/GroupActions';
-import validate from './GroupFormValidationRules';
 import { TextForm, TextAreaForm, ImagesForm } from '../includes/forms';
+import { connect } from 'react-redux';
 
-const GroupForm = ({ group }) => {
-  const dispatch = useDispatch();
-  const newErrors = useSelector(state => state.toast.errors);
-  const userPackage = useSelector(state => state.user.package);
+const mapStateToProps = state => ({
+  userPackage: state.user.package,
+  newErrors: state.toast.errors
+});
+
+const mapDispatchToProps = {
+  createGroup,
+  editGroup
+};
+
+const GroupForm = ({
+  group,
+  userPackage,
+  newErrors,
+  createGroup,
+  editGroup
+}) => {
   const [isReadOnly, setIsReadOnly] = useState(true);
   const [hasGroupAdmin, setHasGroupAdmin] = useState(false);
 
@@ -24,7 +36,7 @@ const GroupForm = ({ group }) => {
     setValues,
     errors,
     setErrors
-  } = useForm(initialValues, updateGroup, validate);
+  } = useForm(initialValues, updateGroup);
 
   useEffect(() => {
     if (newErrors) {
@@ -44,9 +56,9 @@ const GroupForm = ({ group }) => {
 
   function updateGroup() {
     if (values._id) {
-      dispatch(editGroup(values._id, values));
+      editGroup(values._id, values);
     } else {
-      dispatch(createGroup(values));
+      createGroup(values);
     }
   }
 
@@ -204,4 +216,4 @@ const GroupForm = ({ group }) => {
   );
 };
 
-export default GroupForm;
+export default connect(mapStateToProps, mapDispatchToProps)(GroupForm);

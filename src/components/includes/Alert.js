@@ -2,15 +2,15 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { resetToast } from '../../actions/ToastActions';
 
-const mapDispatchToProps = {
-  resetToast
-};
-
 const mapStateToProps = state => ({
   toast: state.toast
 });
 
-const Alert = ({ resetToast, toast }) => {
+const mapDispatchToProps = {
+  resetToast
+};
+
+const Alert = ({ toast, resetToast }) => {
   useEffect(() => {
     return function clearUp() {
       resetToast();

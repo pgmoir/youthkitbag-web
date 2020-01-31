@@ -52,4 +52,4 @@ const LoggedInLanding = ({ user }) => {
   );
 };
 
-export default connect(mapStateToProps, null)(LoggedInLanding);
+export default connect(mapStateToProps)(LoggedInLanding);
