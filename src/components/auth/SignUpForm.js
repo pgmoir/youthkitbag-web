@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useForm from '../hooks/useForm';
 import { signup } from '../../actions/AuthActions';
 import validate from './SignUpFormValidationRules';
@@ -9,7 +9,11 @@ const mapDispatchToProps = {
   signup
 };
 
-const SignUpForm = ({ signup }) => {
+const mapStateToProps = state => ({
+  newErrors: state.toast.errors
+});
+
+const SignUpForm = ({ signup, newErrors }) => {
   const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
   const initialValues = {
@@ -18,11 +22,17 @@ const SignUpForm = ({ signup }) => {
     confirmPassword: ''
   };
 
-  const { values, handleChange, handleSubmit, errors } = useForm(
+  const { values, handleChange, handleSubmit, errors, setErrors } = useForm(
     initialValues,
     resetSubmit,
     validate
   );
+
+  useEffect(() => {
+    if (newErrors) {
+      setErrors(newErrors);
+    }
+  }, [newErrors, setErrors]);
 
   function resetSubmit() {
     const { email, password, confirmPassword } = values;
@@ -61,10 +71,13 @@ const SignUpForm = ({ signup }) => {
         error={errors.confirmPassword}
         autoComplete="new-password"
       />
-      <button className="btn btn-success btn-lg py-3 px-5 mt-3" type="submit">
+      <button
+        className="d-block btn btn-success btn-lg py-3 px-5 mt-3 mx-auto"
+        type="submit"
+      >
         Sign Up for YouthKitbag
       </button>
-      <p className="h6 pt-3">
+      <p className="h6 pt-3 text-center">
         Alternatively use <a href={`${baseUrl}/auth/google`}>Google</a>,{' '}
         <a href={`${baseUrl}/auth/facebook`}>Facebook</a>
         {' or '}
@@ -74,4 +87,4 @@ const SignUpForm = ({ signup }) => {
   );
 };
 
-export default connect(null, mapDispatchToProps)(SignUpForm);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpForm);

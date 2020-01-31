@@ -74,9 +74,7 @@ export const signup = (email, password, confirmPassword) => dispatch => {
     )
     .then(response => {
       history.push('/auth/login', { signup: 'success' });
-      console.log('RESPONSE', response);
-      const { data } = response;
-      dispatch({ type: SIGNUP_SUCCESS, payload: data });
+      dispatch({ type: SIGNUP_SUCCESS, payload: response.data });
     })
     .catch(err => {
       dispatch({ type: SIGNUP_FAILURE, payload: err.response });

@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { login } from '../../actions/AuthActions';
 import validate from './LoginFormValidationRules';
 import { TextForm } from '../includes/forms';
 
-const mapStateToProps = state => ({});
-
 const mapDispatchToProps = {
   login
 };
 
-const LoginForm = ({ referrer, login }) => {
+const mapStateToProps = state => ({
+  newErrors: state.toast.errors
+});
+
+const LoginForm = ({ referrer, login, newErrors }) => {
   const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
   const initialValues = {
@@ -19,11 +21,17 @@ const LoginForm = ({ referrer, login }) => {
     password: ''
   };
 
-  const { values, handleChange, handleSubmit, errors } = useForm(
+  const { values, handleChange, handleSubmit, errors, setErrors } = useForm(
     initialValues,
     loginSubmit,
     validate
   );
+
+  useEffect(() => {
+    if (newErrors) {
+      setErrors(newErrors);
+    }
+  }, [newErrors, setErrors]);
 
   function loginSubmit() {
     login(values.email, values.password, referrer);
@@ -83,14 +91,12 @@ const LoginForm = ({ referrer, login }) => {
           error={errors.password}
           autoComplete="current-password"
         />
-        <div className="mx-auto">
-          <button
-            className="d-block btn btn-success btn-lg py-3 px-5 mt-3 mx-auto"
-            type="submit"
-          >
-            Login to YouthKitbag
-          </button>
-        </div>
+        <button
+          className="d-block btn btn-success btn-lg py-3 px-5 mt-3 mx-auto"
+          type="submit"
+        >
+          Login to YouthKitbag
+        </button>
       </form>
     </React.Fragment>
   );
