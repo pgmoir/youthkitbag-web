@@ -59,6 +59,24 @@ body {
   font-family: PrentonRPPro-Regular, sans-serif, 'Font `Awesome 5 Free' !important;
   font-size: 20px; }
 
+em {
+  font-family: PrentonRPPro-Italic;
+  font-weight: normal;
+  font-style: normal; }
+
+strong,
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4 {
+  font-family: PrentonRPProMedium-Regular;
+  font-weight: normal;
+  font-style: normal; }
+
 .navbar-brand.navbar-logo {
   font-size: 2rem;
   font-weight: bold; }
@@ -324,15 +342,12 @@ body {
       background-color: #eee; }
   .youthkitbag .jumbotron h1 {
     font-size: 2.5rem;
-    font-weight: bold;
     color: #31358e; }
   .youthkitbag .jumbotron h2 {
     font-size: 1.8rem;
-    font-weight: bold;
     color: #31358e; }
   .youthkitbag .jumbotron h3 {
     font-size: 1.3rem;
-    font-style: italic;
     color: #31358e; }
   .youthkitbag .jumbotron h4 {
     font-size: 1.1rem;

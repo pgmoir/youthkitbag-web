@@ -42,7 +42,8 @@ $body-bg: #7d419830;
 // /* 172 required to bring link color to AA standards to contrast ratio with other text */
 $link-color: #006adb;
 
-$font-family-base: PrentonRPPro-Regular, PrentonRPProLight-Regular, sans-serif,
+$font-family-base: PrentonRPPro-Regular, PrentonRPProLight-Regular,
+  PrentonRPProMedium-Regular, PrentonRPPro-Italic, PrentonRPPro-Bold, sans-serif,
   'Font `Awesome 5 Free' !important;
 
 // $paragraph-margin-bottom:   0.5rem;

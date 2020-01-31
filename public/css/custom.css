@@ -59,7 +59,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
   margin: 0;
-  font-family: PrentonRPPro-Regular, PrentonRPProLight-Regular, sans-serif, "Font `Awesome 5 Free" !important;
+  font-family: PrentonRPPro-Regular, PrentonRPProLight-Regular, PrentonRPProMedium-Regular, PrentonRPPro-Italic, PrentonRPPro-Bold, sans-serif, "Font `Awesome 5 Free" !important;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -4373,7 +4373,7 @@ a.close.disabled {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: PrentonRPPro-Regular, PrentonRPProLight-Regular, sans-serif, "Font `Awesome 5 Free" !important;
+  font-family: PrentonRPPro-Regular, PrentonRPProLight-Regular, PrentonRPProMedium-Regular, PrentonRPPro-Italic, PrentonRPPro-Bold, sans-serif, "Font `Awesome 5 Free" !important;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
@@ -4458,7 +4458,7 @@ a.close.disabled {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: PrentonRPPro-Regular, PrentonRPProLight-Regular, sans-serif, "Font `Awesome 5 Free" !important;
+  font-family: PrentonRPPro-Regular, PrentonRPProLight-Regular, PrentonRPProMedium-Regular, PrentonRPPro-Italic, PrentonRPPro-Bold, sans-serif, "Font `Awesome 5 Free" !important;
   font-style: normal;
   font-weight: 400;
   line-height: 1.5;
