@@ -28,11 +28,32 @@ const Alert = ({ resetToast, toast }) => {
     }
   }
 
+  function alertIcon(style) {
+    switch (style) {
+      case 'error':
+        return 'fa-times-circle';
+      case 'warning':
+        return 'fa-exclamation-triangle';
+      default:
+        return 'fa-check-circle';
+    }
+  }
+
   if (!toast || !toast.currentMessage) return null;
 
   return (
-    <div className={`alert ${alertStyle(toast.currentStyle)}`} role="alert">
-      {toast.currentMessage}
+    <div
+      className={`alert ${alertStyle(
+        toast.currentStyle
+      )} d-flex flex-row align-items-center`}
+      role="alert"
+    >
+      <div className="pr-4">
+        <span className={`fas ${alertIcon(toast.currentStyle)} fa-2x`}></span>
+      </div>
+      <div>
+        <p className="my-0">{toast.currentMessage}</p>
+      </div>
     </div>
   );
 };
