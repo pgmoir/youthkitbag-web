@@ -2,11 +2,14 @@ import React from 'react';
 import useForm from '../hooks/useForm';
 import { signup } from '../../actions/AuthActions';
 import validate from './SignUpFormValidationRules';
-import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { TextForm } from '../includes/forms';
 
-const SignUpForm = () => {
-  const dispatch = useDispatch();
+const mapDispatchToProps = {
+  signup
+};
+
+const SignUpForm = ({ signup }) => {
   const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
   const initialValues = {
@@ -23,7 +26,7 @@ const SignUpForm = () => {
 
   function resetSubmit() {
     const { email, password, confirmPassword } = values;
-    dispatch(signup(email, password, confirmPassword));
+    signup(email, password, confirmPassword);
   }
 
   return (
@@ -71,4 +74,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default connect(null, mapDispatchToProps)(SignUpForm);
