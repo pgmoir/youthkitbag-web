@@ -10,6 +10,7 @@ import GroupAnnouncement from './GroupAnnouncement';
 import AccountAnnouncement from './AccountAnnouncement';
 import KitbagKitLevelWarnings from './KitbagKitLevelWarnings';
 import KitbagKitAddMoreAdvice from './KitbagKitAddMoreAdvice';
+import WelcomeAnnouncement from './WelcomeAnnouncement';
 
 const mapStateToProps = state => ({
   user: state.user
@@ -34,6 +35,7 @@ const LoggedInLanding = ({ user }) => {
         <Title title="Dashboard" />
         <div className="container">
           <Alert />
+          <WelcomeAnnouncement userId={user.profile._id} />
           <div className="row">
             <div className="card-columns">
               <AccountAnnouncement />

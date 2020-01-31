@@ -6,7 +6,7 @@ const AccountAnnouncement = () => {
     return (
       <div className="card border-0">
         <div className="alert alert-success mb-0" role="alert">
-          <h4 className="alert-heading">Get started</h4>
+          <h2 className="alert-heading">Get started</h2>
           <hr />
           <p>
             <strong>Welcome to YouthKitbag.</strong> To make the most of

@@ -90,6 +90,34 @@ export const editProfilePreferredAccount = (userId, accountId) => dispatch => {
     });
 };
 
+export const hideFlag = (userId, name, hide) => dispatch => {
+  const token = localStorage.getItem('token');
+  axios
+    .put(
+      `${baseUrl}/user/${userId}/flags/${name}/${hide}`,
+      {},
+      {
+        headers: {
+          Authorization: `bearer ${token}`,
+          'content-type': 'application/json'
+        }
+      }
+    )
+    .then(() => {
+      dispatch({ type: RESET });
+      dispatch(getUser());
+    })
+    .catch(err => {
+      const { response } = err;
+      if (response.status === 401) {
+        window.localStorage.clear();
+        dispatch({ type: GETALL_FAILURE, payload: response });
+        history.push('/auth/login?return=/settings/accounts');
+      }
+      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+    });
+};
+
 export const loadSettingsPage = url => dispatch => {
   dispatch({ type: RESET_TOAST });
   history.push(url);

@@ -6,7 +6,7 @@ const ProfileAnnouncement = () => {
     return (
       <div className="card border-0">
         <div className="alert alert-warning mb-0" role="alert">
-          <h4 className="alert-heading">Complete your profile</h4>
+          <h2 className="alert-heading">Complete your profile</h2>
           <hr />
           <p>
             It appears that you haven&apos;t completed your YouthKitbag profile.

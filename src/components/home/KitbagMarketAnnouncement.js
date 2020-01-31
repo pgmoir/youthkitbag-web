@@ -6,7 +6,7 @@ const KitbagMarketAnnouncement = () => {
     return (
       <div className="card border-0">
         <div className="alert alert-warning mb-0" role="alert">
-          <h4 className="alert-heading">Kitbag market activity</h4>
+          <h2 className="alert-heading">Kitbag market activity</h2>
           <hr />
           <p>The following items have recently been traded in your kitbag.</p>
           <p>You have the following responses to action.</p>

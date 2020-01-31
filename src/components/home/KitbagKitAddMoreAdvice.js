@@ -8,7 +8,7 @@ const KitbagKitAddMoreAdvice = ({ accountId }) => {
     return (
       <div className="card border-0">
         <div className="alert alert-info mb-0" role="alert">
-          <h4 className="alert-heading">Add more kit</h4>
+          <h2 className="alert-heading">Add more kit</h2>
           <hr />
           <p>
             You only have 10 items stored in your preferred account. Remember to

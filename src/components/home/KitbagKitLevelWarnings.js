@@ -6,7 +6,7 @@ const KitbagKitLevelWarnings = () => {
     return (
       <div className="card border-0">
         <div className="alert alert-danger mb-0" role="alert">
-          <h4 className="alert-heading">Kit level warnings</h4>
+          <h2 className="alert-heading">Kit level warnings</h2>
           <hr />
           <p>
             You have the following items at warning level. Please order new

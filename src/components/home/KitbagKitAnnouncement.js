@@ -6,7 +6,7 @@ const KitbagKitAnnouncement = ({ accountId }) => {
     return (
       <div className="card border-0">
         <div className="alert alert-warning mb-0" role="alert">
-          <h4 className="alert-heading">Kitbag activity</h4>
+          <h2 className="alert-heading">Kitbag activity</h2>
           <hr />
           <p>
             The following items have recently been added, edited or traded in

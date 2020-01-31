@@ -6,7 +6,7 @@ const GroupAnnouncement = () => {
     return (
       <div className="card border-0">
         <div className="alert alert-primary mb-0" role="alert">
-          <h4 className="alert-heading">Join a group</h4>
+          <h2 className="alert-heading">Join a group</h2>
           <hr />
           <p>
             YouthKitbag currently only allows trading through accredited clubs

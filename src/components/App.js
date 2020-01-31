@@ -36,6 +36,7 @@ import SettingsPage from './account/SettingsPage';
 import AccountPage from './accounts/AccountPage';
 import AccountMemberInvite from './accounts/AccountMemberInvite';
 import AccountMemberAccept from './accounts/AccountMemberAccept';
+import LearnMore from './learn/LearnMore';
 
 const App = () => {
   return (
@@ -58,6 +59,8 @@ const App = () => {
             <Route path="/" exact component={Home} />
             <Route path="/why" exact component={Why} />
             <Route path="/pricing" exact component={Pricing} />
+
+            <Route path="/learn/:activity" component={LearnMore} />
 
             <Route path="/site/terms" exact component={Terms} />
             <Route path="/site/privacy" exact component={Privacy} />
