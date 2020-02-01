@@ -32,7 +32,7 @@ const LoggedInLanding = ({ user }) => {
         className="container-fluid"
         aria-label="main body of content plus related links and features"
       >
-        <Title title="Dashboard" />
+        <Title title="" />
         <div className="container">
           <Alert />
           <WelcomeAnnouncement userId={user.profile._id} />
