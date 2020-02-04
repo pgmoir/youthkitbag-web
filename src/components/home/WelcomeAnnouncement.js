@@ -26,7 +26,6 @@ const WelcomeAnnouncement = ({ userId, flags, hideFlag }) => {
   }
 
   function renderBlock() {
-    console.log('WA', welcomeAnnouncement);
     if (welcomeAnnouncement) return null;
 
     return (

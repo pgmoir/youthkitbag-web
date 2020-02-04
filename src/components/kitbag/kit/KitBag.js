@@ -27,11 +27,7 @@ const KitBag = ({
   fetchKitbagKits,
   match
 }) => {
-  console.log('=========================================================');
-  console.log('SEARCH', search);
-
   const { searchfor, by, page, pagesize } = search;
-
   const [accountId] = useState(match.params.accountId);
   const [kits, setKits] = useState([]);
 
@@ -42,7 +38,6 @@ const KitBag = ({
   }, [items]);
 
   useEffect(() => {
-    console.log('FETCHKITBAGS');
     fetchKitbagKits(searchfor, by, page, pagesize, accountId);
   }, [searchfor, by, page, pagesize, fetchKitbagKits, accountId]);
 

@@ -5,7 +5,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const token = localStorage.getItem('token');
   const isloggedin = localStorage.getItem('isloggedin');
   const user = localStorage.getItem('user');
-  console.log('Private', token, isloggedin, user);
   return (
     <Route
       {...rest}

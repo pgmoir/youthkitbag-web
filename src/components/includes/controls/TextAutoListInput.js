@@ -15,7 +15,6 @@ const TextAutoListInput = ({
   placeHolder,
   autoList
 }) => {
-  console.log('FIELD', field, '-', autoList);
   return (
     <React.Fragment>
       <input

@@ -63,12 +63,7 @@ const AccountPage = ({
 
   function renderNoAccountIntro() {
     if (!profile.accounts) return null;
-    console.log(
-      'PROFILE',
-      profile.accounts,
-      !profile.accounts,
-      profile.accounts.length
-    );
+
     if (!profile.accounts || profile.accounts.length > 0) return null;
 
     return (

@@ -23,14 +23,6 @@ const SearchForm = ({ accountId, search, callback }) => {
 
   function searchItems() {
     const { by, searchfor } = values;
-    console.log(
-      'SEARCHITEMS',
-      searchfor,
-      by,
-      1,
-      pagination.itemsPerPage,
-      accountId
-    );
     callback(searchfor, by, 1, pagination.itemsPerPage, accountId);
   }
 

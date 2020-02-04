@@ -23,11 +23,7 @@ const MarketItems = ({
   fetchMarketItems,
   match
 }) => {
-  console.log('=========================================================');
-  console.log('SEARCH', search);
-
   const { searchfor, by, page, pagesize } = search;
-
   const accountId = match.params.accountId;
   const [marketItems, setMarketItems] = useState([]);
 
@@ -38,7 +34,6 @@ const MarketItems = ({
   }, [items]);
 
   useEffect(() => {
-    console.log('FETCHMARKETBAGS');
     fetchMarketItems(searchfor, by, page, pagesize);
   }, [searchfor, by, page, pagesize, fetchMarketItems]);
 

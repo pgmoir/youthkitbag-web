@@ -3,9 +3,6 @@ import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 
 const AccountMemebrAccept = ({ match }) => {
-  console.log('MATCH', match.params.accountId);
-  console.log('MATCH', match.params.token);
-  console.log('MATCH', match.params.email);
   // const { accountId } = match.params;
   // const [account, setAccount] = useState({
   //   name: '',
@@ -18,7 +15,6 @@ const AccountMemebrAccept = ({ match }) => {
 
   // useEffect(() => {
   //   if (accountId) {
-  //     console.log('UE-FETCH', accountId);
   //     fetchAccount(accountId);
   //   }
   // }, [fetchAccount, accountId]);

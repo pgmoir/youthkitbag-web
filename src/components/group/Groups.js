@@ -20,11 +20,7 @@ const mapDispatchToProps = {
 };
 
 const Groups = ({ search, items, pagination, userPackage, fetchGroups }) => {
-  console.log('=========================================================');
-  console.log('SEARCH', search);
-
   const { searchfor, by, page, pagesize } = search;
-
   const [groups, setGroups] = useState([]);
 
   useEffect(() => {
@@ -34,7 +30,6 @@ const Groups = ({ search, items, pagination, userPackage, fetchGroups }) => {
   }, [items]);
 
   useEffect(() => {
-    console.log('GROUPS');
     fetchGroups(searchfor, by, page, pagesize);
   }, [searchfor, by, page, pagesize, fetchGroups]);
 
