@@ -9,12 +9,16 @@ const mapStateToProps = state => ({
 
 const Header = ({ auth, user }) => {
   const { loggedIn } = auth;
+
   const account = user.profile.accounts
     ? user.profile.accounts.find(a => a.preferred)
     : undefined;
-  const inGroup =
-    user.profile.groups &&
-    user.profile.groups.find(g => g.member.state === 'approved');
+
+  const group = user.profile.groups
+    ? user.profile.groups
+        .filter(g => g.status === 'approved')
+        .find(a => a.member.state === 'approved')
+    : undefined;
 
   return (
     <header>
@@ -38,7 +42,7 @@ const Header = ({ auth, user }) => {
           <ul className="navbar-nav navbar-expand ml-auto">
             {loggedIn && (
               <React.Fragment>
-                {inGroup && (
+                {group && (
                   <li className="nav-item">
                     <Link
                       className="btn btn-info text-nowrap mr-1"
