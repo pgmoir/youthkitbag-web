@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const ProfileAnnouncement = ({ profile }) => {
   function profileComplete() {
     const { firstname, lastname, username, activitys } = profile;
-    return firstname && lastname && username && activitys;
+    return firstname && lastname && username && activitys.length > 0;
   }
 
   function renderBlock() {
