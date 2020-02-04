@@ -3,6 +3,7 @@ import useForm from '../hooks/useForm';
 import { newPassword } from '../../actions/AuthActions';
 import { connect } from 'react-redux';
 import { TextForm } from '../includes/forms';
+import validate from '../includes/FormEmptyValidationRules';
 
 const mapStateToProps = state => ({
   newErrors: state.toast.errors
@@ -19,7 +20,8 @@ const NewPasswordForm = ({ newErrors, newPassword }) => {
 
   const { values, handleChange, handleSubmit, errors, setErrors } = useForm(
     initialValues,
-    newPasswordSubmit
+    newPasswordSubmit,
+    validate
   );
 
   useEffect(() => {

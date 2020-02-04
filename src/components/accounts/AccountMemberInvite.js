@@ -6,6 +6,7 @@ import { fetchAccount, inviteToAccount } from '../../actions/AccountActions';
 import { TextForm } from '../includes/forms';
 import ModalWithForm from '../includes/ModalWithForm';
 import history from '../../helpers/history';
+import validate from '../includes/FormEmptyValidationRules';
 
 const mapStateToProps = state => ({
   account: state.account.current,
@@ -29,7 +30,8 @@ const AccountMemberInvite = ({
 
   const { handleChange, handleSubmit, values, errors, setErrors } = useForm(
     invite,
-    sendInvite
+    sendInvite,
+    validate
   );
 
   useEffect(() => {

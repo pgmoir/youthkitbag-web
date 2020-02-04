@@ -6,6 +6,7 @@ import TextAreaInput from '../../includes/controls/TextAreaInput';
 import RadioGroupInput from '../../includes/controls/RadioGroupInput';
 import Alert from '../../includes/Alert';
 import { connect } from 'react-redux';
+import validate from '../../includes/FormEmptyValidationRules';
 
 const mapStateToProps = state => ({
   newErrors: state.toast.errors
@@ -36,7 +37,8 @@ const ThreadMessageChain = ({
 
   const { handleChange, handleSubmit, values, errors, setErrors } = useForm(
     initialMessage,
-    respondToThread
+    respondToThread,
+    validate
   );
 
   const responseStateOptions = {

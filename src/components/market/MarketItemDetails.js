@@ -9,6 +9,7 @@ import StolenResponse from './response/StolenResponse';
 import TradeResponse from './response/TradeResponse';
 import WantedResponse from './response/WantedResponse';
 import Threads from '../thread/threads/Threads';
+import validate from '../includes/FormEmptyValidationRules';
 
 const mapStateToProps = state => ({
   newErrors: state.toast.errors
@@ -34,7 +35,7 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
     setValues,
     errors,
     setErrors
-  } = useForm(initialValues, updateMarket);
+  } = useForm(initialValues, updateMarket, validate);
 
   useEffect(() => {
     if (newErrors) {

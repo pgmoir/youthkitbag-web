@@ -4,6 +4,7 @@ import useForm from '../hooks/useForm';
 import { createGroup, editGroup } from '../../actions/GroupActions';
 import { TextForm, TextAreaForm, ImagesForm } from '../includes/forms';
 import { connect } from 'react-redux';
+import validate from '../includes/FormEmptyValidationRules';
 
 const mapStateToProps = state => ({
   userPackage: state.user.package,
@@ -36,7 +37,7 @@ const GroupForm = ({
     setValues,
     errors,
     setErrors
-  } = useForm(initialValues, updateGroup);
+  } = useForm(initialValues, updateGroup, validate);
 
   useEffect(() => {
     if (newErrors) {

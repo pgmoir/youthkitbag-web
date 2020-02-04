@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { editProfile, loadSettingsPage } from '../../actions/UserActions';
 import { TextForm, ImagesForm } from '../includes/forms';
+import validate from '../includes/FormEmptyValidationRules';
 
 const mapStateToProps = state => ({
   newErrors: state.toast.errors
@@ -20,7 +21,7 @@ const ProfileForm = ({ profile, newErrors, editProfile, loadSettingsPage }) => {
     setValues,
     errors,
     setErrors
-  } = useForm(profile, updateProfile);
+  } = useForm(profile, updateProfile, validate);
 
   useEffect(() => {
     if (newErrors) {

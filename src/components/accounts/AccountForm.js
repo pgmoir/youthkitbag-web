@@ -9,6 +9,7 @@ import {
   ImagesForm,
   RemoveArrayButtonForm
 } from '../includes/forms';
+import validate from '../includes/FormEmptyValidationRules';
 
 const mapStateToProps = state => ({
   userPackage: state.user.package,
@@ -42,7 +43,7 @@ const AccountForm = ({
     setValues,
     errors,
     setErrors
-  } = useForm(initialValues, updateAccount);
+  } = useForm(initialValues, updateAccount, validate);
 
   useEffect(() => {
     if (newErrors) {

@@ -17,6 +17,7 @@ import {
   CheckboxForm,
   ImagesForm
 } from '../../includes/forms';
+import validate from '../../includes/FormEmptyValidationRules';
 
 const mapStateToProps = state => ({
   kitbagLists: state.kitbag.kit.lists,
@@ -65,7 +66,7 @@ const KitForm = ({
     setValues,
     errors,
     setErrors
-  } = useForm(kit, updateKit);
+  } = useForm(kit, updateKit, validate);
 
   useEffect(() => {
     if (newErrors) {

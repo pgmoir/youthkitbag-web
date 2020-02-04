@@ -6,6 +6,7 @@ import { requestToJoinAccount } from '../../actions/AccountActions';
 import { TextForm } from '../includes/forms';
 import ModalWithForm from '../includes/ModalWithForm';
 import history from '../../helpers/history';
+import validate from '../includes/FormEmptyValidationRules';
 
 const mapStateToProps = state => ({
   newErrors: state.toast.errors
@@ -20,7 +21,8 @@ const AccountMemberJoin = ({ newErrors, requestToJoinAccount }) => {
 
   const { handleChange, handleSubmit, values, errors, setErrors } = useForm(
     request,
-    sendRequest
+    sendRequest,
+    validate
   );
 
   useEffect(() => {

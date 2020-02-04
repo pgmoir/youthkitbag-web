@@ -16,6 +16,7 @@ import {
   SelectForm
 } from '../../includes/forms';
 import Threads from '../../thread/threads/Threads';
+import validate from '../../includes/FormEmptyValidationRules';
 
 const mapStateToProps = state => ({
   newErrors: state.toast.errors
@@ -45,7 +46,7 @@ const MarketForm = ({
     setValues,
     errors,
     setErrors
-  } = useForm(initialValues, updateMarket);
+  } = useForm(initialValues, updateMarket, validate);
 
   useEffect(() => {
     if (newErrors) {
