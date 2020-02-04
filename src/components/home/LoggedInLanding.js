@@ -38,7 +38,7 @@ const LoggedInLanding = ({ user }) => {
           <WelcomeAnnouncement userId={user.profile._id} />
           <div className="row">
             <div className="card-columns">
-              <AccountAnnouncement />
+              <AccountAnnouncement accountId={accountId} />
               <ProfileAnnouncement user={user} />
               <GroupAnnouncement />
               <MarketAnnouncement />

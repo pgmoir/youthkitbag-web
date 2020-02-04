@@ -1,8 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const AccountAnnouncement = () => {
+/* 
+  For users that have neiither set up an account, or do not belong to an account, then 
+  we recommend setting up or joining one.
+*/
+const AccountAnnouncement = ({ accountId }) => {
   function renderBlock() {
+    if (accountId) return null;
+
     return (
       <div className="card border-0">
         <div className="alert alert-success mb-0" role="alert">
