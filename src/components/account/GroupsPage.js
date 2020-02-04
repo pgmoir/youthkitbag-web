@@ -54,9 +54,9 @@ const GroupsPage = ({ profile }) => {
                     <td className="valign-m">
                       <Link to={`/groups/${item._id}`}>{item.name}</Link>
                     </td>
-                    <td className="valign-m">{item.members[0].state}</td>
+                    <td className="valign-m">{item.member.state}</td>
                     <td className="valign-m">
-                      {item.members[0].permissions.join(', ')}
+                      {item.member.permissions.join(', ')}
                     </td>
                   </tr>
                 ))}
