@@ -78,7 +78,7 @@ const ProfileForm = ({ profile, newErrors, editProfile, loadSettingsPage }) => {
             value={values.username}
             field="username"
             handleChange={handleChange}
-            error={errors.usernamee}
+            error={errors.username}
           />
           <TextForm
             colFormat="3-9"
