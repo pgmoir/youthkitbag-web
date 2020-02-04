@@ -5,7 +5,7 @@ import Alert from '../includes/Alert';
 import LoginForm from './LoginForm';
 
 const Login = ({ location }) => {
-  let referrer = '/market';
+  let referrer = '/';
   if (
     location &&
     location.state &&
