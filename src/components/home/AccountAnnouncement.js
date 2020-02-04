@@ -9,15 +9,18 @@ const AccountAnnouncement = () => {
           <h2 className="alert-heading">Get started</h2>
           <hr />
           <p>
-            <strong>Welcome to YouthKitbag.</strong> To make the most of
-            YouthKitbag you will need an account to keep track of all the kit
-            you have and want to trade.
+            To make the most of YouthKitbag you will need an account to keep
+            track of all the kit you have and want to trade. You can either set
+            one up for just yourself, or for your family, or there may be one
+            you&apos;d like to join.
           </p>
           <Link className="btn btn-success" to="/accounts/new">
             Create an account
           </Link>
           <span className="ml-3">or</span>
-          <button className="btn btn-link">Join an account</button>
+          <Link className="btn btn-link" to="/accounts/join">
+            Join an account
+          </Link>
         </div>
       </div>
     );

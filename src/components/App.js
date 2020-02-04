@@ -36,6 +36,7 @@ import SettingsPage from './account/SettingsPage';
 import AccountPage from './accounts/AccountPage';
 import AccountMemberInvite from './accounts/AccountMemberInvite';
 import AccountMemberAccept from './accounts/AccountMemberAccept';
+import AccountMemberJoin from './accounts/AccountMemberJoin';
 import LearnMore from './learn/LearnMore';
 
 const App = () => {
@@ -153,6 +154,7 @@ const App = () => {
             <PrivateRoute path="/groups" component={Groups} />
 
             <PrivateRoute path="/accounts/new" component={AccountPage} />
+            <PrivateRoute path="/accounts/join" component={AccountMemberJoin} />
             <PrivateRoute
               path="/accounts/:accountId/invite"
               component={AccountMemberInvite}

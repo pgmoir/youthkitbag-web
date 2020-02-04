@@ -151,6 +151,34 @@ export const inviteToAccount = (accountId, email) => dispatch => {
     });
 };
 
+export const requestToJoinAccount = email => dispatch => {
+  const token = localStorage.getItem('token');
+  axios
+    .post(
+      `${baseUrl}/account/requesttojoin/${email}`,
+      {},
+      {
+        headers: {
+          Authorization: `bearer ${token}`,
+          'content-type': 'application/json'
+        }
+      }
+    )
+    .then(() => {
+      history.push(`/`);
+    })
+    .catch(err => {
+      const { response } = err;
+      if (response.status === 401) {
+        window.localStorage.clear();
+        dispatch({ type: GETALL_FAILURE, payload: response });
+        history.push(`/auth/login?return=/`);
+      }
+      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      history.push(`/`);
+    });
+};
+
 export const requestAccountLeave = accountId => dispatch => {
   const token = localStorage.getItem('token');
   axios
