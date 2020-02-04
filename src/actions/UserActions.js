@@ -90,7 +90,8 @@ export const editProfilePreferredAccount = (userId, accountId) => dispatch => {
     });
 };
 
-export const hideFlag = (userId, name, hide) => dispatch => {
+export const hideFlag = (name, hide) => dispatch => {
+  const userId = localStorage.getItem('user');
   const token = localStorage.getItem('token');
   axios
     .put(

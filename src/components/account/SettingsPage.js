@@ -8,6 +8,7 @@ import GroupsPage from './GroupsPage';
 import PackagePage from './PackagePage';
 // import BadgesPage from './BadgesPage';
 import Alert from '../includes/Alert';
+import ProfileHelp from './ProfileHelp';
 
 const mapStateToProps = state => ({
   profile: state.user.profile
@@ -21,6 +22,7 @@ const SettingsPage = ({ profile }) => {
     return (
       <div className="container">
         <h2>Profile</h2>
+        <ProfileHelp />
         <ProfileForm profile={profile} />
       </div>
     );

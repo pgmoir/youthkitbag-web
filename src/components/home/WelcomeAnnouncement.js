@@ -12,7 +12,7 @@ const mapDispatchToProps = {
   hideFlag
 };
 
-const WelcomeAnnouncement = ({ userId, flags, hideFlag }) => {
+const WelcomeAnnouncement = ({ flags, hideFlag }) => {
   const [welcomeAnnouncement, setWelcomeAnnouncement] = useState(true);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const WelcomeAnnouncement = ({ userId, flags, hideFlag }) => {
   }, [flags, setWelcomeAnnouncement]);
 
   function hideWelcomeAnnouncement() {
-    hideFlag(userId, 'welcomeAnnouncement', true);
+    hideFlag('welcomeAnnouncement', true);
   }
 
   function renderBlock() {
