@@ -10,6 +10,7 @@ import PackagePage from './PackagePage';
 import Alert from '../includes/Alert';
 import ProfileHelp from './ProfileHelp';
 import AccountsHelp from './AccountsHelp';
+import GroupsHelp from './GroupsHelp';
 
 const mapStateToProps = state => ({
   profile: state.user.profile
@@ -45,6 +46,7 @@ const SettingsPage = ({ profile }) => {
     return (
       <div className="container">
         <h2>Groups</h2>
+        <GroupsHelp />
         <GroupsPage />
       </div>
     );

@@ -5,6 +5,7 @@ import { fetchGroup } from '../../actions/GroupActions';
 import GroupForm from './GroupForm';
 import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
+import GroupsHelp from '../account/GroupsHelp';
 
 const mapStateToProps = state => ({
   current: state.group.current
@@ -66,6 +67,7 @@ const GroupPage = ({ current, fetchGroup, match }) => {
         aria-label="main body of content plus related links and features"
       >
         <div className="container">
+          <GroupsHelp />
           <Alert />
           <div className="row">
             <div className="col-12 mb-3 d-flex justify-content-end">
@@ -115,7 +117,4 @@ const GroupPage = ({ current, fetchGroup, match }) => {
 //     </Link>
 //   </div>
 // )}
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GroupPage);
+export default connect(mapStateToProps, mapDispatchToProps)(GroupPage);

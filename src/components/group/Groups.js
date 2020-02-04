@@ -7,6 +7,7 @@ import GroupCard from './GroupCard';
 import SearchForm from '../includes/SearchForm';
 import Pagination from '../includes/Pagination';
 import Alert from '../includes/Alert';
+import GroupsHelp from '../account/GroupsHelp';
 
 const mapStateToProps = state => ({
   search: state.group.search,
@@ -47,6 +48,7 @@ const Groups = ({ search, items, pagination, userPackage, fetchGroups }) => {
           aria-label="main body of content plus related links and features"
         >
           <div className="container">
+            <GroupsHelp />
             <div className="row">
               <div className="col-12 col-sm-9">
                 <div className="bg-light hgt-3 mb-3">&nbsp;</div>
@@ -100,6 +102,7 @@ const Groups = ({ search, items, pagination, userPackage, fetchGroups }) => {
           aria-label="main body of content plus related links and features"
         >
           <div className="container">
+            <GroupsHelp />
             <Alert />
             <div className="row">
               <div className="col-12 col-sm-9">

@@ -64,7 +64,6 @@ const AccountPage = ({
 
   function renderNoAccountIntro() {
     if (!profile.accounts) return null;
-
     if (!profile.accounts || profile.accounts.length > 0) return null;
 
     return <AccountsHelp />;
