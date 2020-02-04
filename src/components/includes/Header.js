@@ -12,6 +12,9 @@ const Header = ({ auth, user }) => {
   const account = user.profile.accounts
     ? user.profile.accounts.find(a => a.preferred)
     : undefined;
+  const inGroup =
+    user.profile.groups &&
+    user.profile.groups.find(g => g.member.state === 'approved');
 
   return (
     <header>
@@ -35,15 +38,17 @@ const Header = ({ auth, user }) => {
           <ul className="navbar-nav navbar-expand ml-auto">
             {loggedIn && (
               <React.Fragment>
-                <li className="nav-item">
-                  <Link
-                    className="btn btn-info text-nowrap mr-1"
-                    to="/market/"
-                    aria-label="Market place"
-                  >
-                    <span className="fas fa-th" aria-hidden="true"></span>{' '}
-                  </Link>
-                </li>
+                {inGroup && (
+                  <li className="nav-item">
+                    <Link
+                      className="btn btn-info text-nowrap mr-1"
+                      to="/market/"
+                      aria-label="Market place"
+                    >
+                      <span className="fas fa-th" aria-hidden="true"></span>{' '}
+                    </Link>
+                  </li>
+                )}
                 {account && (
                   <li className="nav-item">
                     <Link
