@@ -5,6 +5,7 @@ import { fetchAccount, clearAccount } from '../../actions/AccountActions';
 import AccountForm from './AccountForm';
 import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
+import AccountsHelp from '../account/AccountsHelp';
 
 const mapStateToProps = state => ({
   current: state.account.current,
@@ -66,30 +67,7 @@ const AccountPage = ({
 
     if (!profile.accounts || profile.accounts.length > 0) return null;
 
-    return (
-      <div className="jumbotron">
-        <h1 className="display-4">Why create an account?</h1>
-        <p className="lead">
-          YouthKitbag serves two key purposes. One being the ability to trade or
-          recycle within a safe and accredited group. The other is the ability
-          to keep track of youth kit you own, and it also simplifies the trading
-          process. <strong>You do this by creating an account</strong>.
-        </p>
-        <hr className="my-4"></hr>
-        <p>
-          An account can be shared by multiple users, so it is perfect for
-          families. Only admin users can trade items, but members can add and
-          edit stored items. Or you can just create it for your own self
-          organisation.
-        </p>
-        <p>
-          To learn more we have a short video which explains this feature more.
-        </p>
-        <Link to="/learn/intro" className="btn btn-primary btn-lg">
-          Watch our guide to YouthKitbag
-        </Link>
-      </div>
-    );
+    return <AccountsHelp />;
   }
 
   useEffect(() => {

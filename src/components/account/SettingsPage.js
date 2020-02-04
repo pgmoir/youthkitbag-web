@@ -9,6 +9,7 @@ import PackagePage from './PackagePage';
 // import BadgesPage from './BadgesPage';
 import Alert from '../includes/Alert';
 import ProfileHelp from './ProfileHelp';
+import AccountsHelp from './AccountsHelp';
 
 const mapStateToProps = state => ({
   profile: state.user.profile
@@ -33,6 +34,7 @@ const SettingsPage = ({ profile }) => {
     return (
       <div className="container">
         <h2>Accounts</h2>
+        <AccountsHelp />
         <AccountsPage />
       </div>
     );

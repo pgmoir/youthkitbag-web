@@ -10,21 +10,21 @@ const mapDispatchToProps = {
   hideFlag
 };
 
-const ProfileHelp = ({ flags, hideFlag }) => {
-  const [ProfileHelp, setProfileHelp] = useState(true);
+const AccountsHelp = ({ flags, hideFlag }) => {
+  const [AccountsHelp, setAccountsHelp] = useState(true);
 
   useEffect(() => {
-    if (!flags) return setProfileHelp(true);
+    if (!flags) return setAccountsHelp(true);
 
-    var found = flags.find(e => e.name === 'profileHelp');
-    setProfileHelp(!found ? false : found.hide);
-  }, [flags, setProfileHelp]);
+    var found = flags.find(e => e.name === 'accountsHelp');
+    setAccountsHelp(!found ? false : found.hide);
+  }, [flags, setAccountsHelp]);
 
-  function hideProfileHelp() {
-    hideFlag('profileHelp', true);
+  function hideAccountsHelp() {
+    hideFlag('accountsHelp', true);
   }
 
-  if (ProfileHelp) return null;
+  if (AccountsHelp) return null;
 
   return (
     <div className="row">
@@ -38,7 +38,7 @@ const ProfileHelp = ({ flags, hideFlag }) => {
           </div>
           <div className="w-100">
             <div className="h4 alert-heading">
-              Why should you complete your profile?
+              Why should you create or join an account?
             </div>
             <hr />
             <button
@@ -46,17 +46,23 @@ const ProfileHelp = ({ flags, hideFlag }) => {
               className="close"
               data-dismiss="alert"
               aria-label="Close"
-              onClick={() => hideProfileHelp()}
+              onClick={() => hideAccountsHelp()}
             >
               <span aria-hidden="true">×</span>
             </button>
             <p>
-              I know you&apos;ve already created an account with your email
-              address. But, it is always nicer to deal with people using real
-              names, or at least a username. A photo of yourself or something
-              personal to you adds a bit of colour. And finally letting us know
-              what activities you are interested in will help us filter the most
-              interesting things for you within your groups.
+              An account allows you to create details of the kit (clothing,
+              equipement, instruments, paraphenalia, etc.) that you own, that
+              you either want to keep track of, or you might want to sell,
+              trade, recycle, or even for items you want YouthKitbag to try and
+              track down.
+            </p>
+            <p>
+              You can share an account with other family members so that you
+              each can have you own separate login or club/team administrators
+              (if you&apos;re trying to maintain a kitbag inventory for a club).
+              After you create the account, you will be able to invite others to
+              join via an automated email.
             </p>
             <p></p>
             <hr />
@@ -74,4 +80,4 @@ const ProfileHelp = ({ flags, hideFlag }) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileHelp);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountsHelp);
