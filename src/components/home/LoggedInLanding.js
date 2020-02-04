@@ -33,13 +33,13 @@ const LoggedInLanding = ({ user }) => {
         aria-label="main body of content plus related links and features"
       >
         <Title title="" />
+        <WelcomeAnnouncement userId={user.profile._id} />
         <div className="container">
           <Alert />
-          <WelcomeAnnouncement userId={user.profile._id} />
           <div className="row">
             <div className="card-columns">
               <AccountAnnouncement accountId={accountId} />
-              <ProfileAnnouncement user={user} />
+              <ProfileAnnouncement profile={user.profile} />
               <GroupAnnouncement />
               <MarketAnnouncement />
               <KitbagKitAddMoreAdvice accountId={accountId} />

@@ -1,8 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ProfileAnnouncement = () => {
+const ProfileAnnouncement = ({ profile }) => {
+  function profileComplete() {
+    const { firstname, lastname, username, activitys } = profile;
+    return firstname && lastname && username && activitys;
+  }
+
   function renderBlock() {
+    if (profileComplete()) return null;
+
     return (
       <div className="card border-0">
         <div className="alert alert-warning mb-0" role="alert">
@@ -16,8 +23,8 @@ const ProfileAnnouncement = () => {
           <Link className="btn btn-warning" to="/settings/profile">
             Update profile
           </Link>
-          <span className="ml-3">or</span>
-          <button className="btn btn-link">Hide this message</button>
+          {/* <span className="ml-3">or</span>
+          <button className="btn btn-link">Hide this message</button> */}
         </div>
       </div>
     );
