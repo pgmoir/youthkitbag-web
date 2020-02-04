@@ -12,10 +12,10 @@ const mapDispatchToProps = {
 };
 
 const WelcomeAnnouncement = ({ userId, flags, hideFlag }) => {
-  const [welcomeAnnouncement, setWelcomeAnnouncement] = useState(false);
+  const [welcomeAnnouncement, setWelcomeAnnouncement] = useState(true);
 
   useEffect(() => {
-    if (!flags) return setWelcomeAnnouncement(false);
+    if (!flags) return setWelcomeAnnouncement(true);
 
     var found = flags.find(e => e.name === 'welcomeAnnouncement');
     setWelcomeAnnouncement(!found ? false : found.hide);
