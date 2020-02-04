@@ -17,7 +17,7 @@ const Modal = props => {
         role="document"
         onClick={e => e.stopPropagation()}
       >
-        <div className="modal-content">
+        <div className="modal-content bg-mischka">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">
               {props.title}

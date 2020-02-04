@@ -23,7 +23,7 @@ const ModalWithForm = ({
         role="document"
         onClick={e => e.stopPropagation()}
       >
-        <div className="modal-content">
+        <div className="modal-content bg-mischka">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">
               {title}
@@ -38,7 +38,7 @@ const ModalWithForm = ({
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form className="mb-3" onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <div className="modal-body">{content}</div>
             <div className="modal-footer">{actions}</div>
           </form>
