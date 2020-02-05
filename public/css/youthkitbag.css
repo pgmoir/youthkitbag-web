@@ -199,8 +199,10 @@ h4,
   .youthkitbag a[disabled] {
     pointer-events: none; }
   .youthkitbag .img-avatar {
-    height: 30px;
-    min-width: 30px; }
+    min-height: 30px;
+    min-width: 30px;
+    max-height: 30px;
+    max-width: 30px; }
   .youthkitbag .blank-circle {
     flex: 1;
     margin: 1%;
@@ -223,6 +225,8 @@ h4,
     vertical-align: middle; }
   .youthkitbag td.valign-b {
     vertical-align: bottom; }
+  .youthkitbag .mw-2rem {
+    max-width: 2rem; }
   .youthkitbag .alert {
     border-left-width: 0.45rem; }
     .youthkitbag .alert.alert-callout {

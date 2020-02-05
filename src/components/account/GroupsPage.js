@@ -29,7 +29,7 @@ const GroupsPage = ({ profile }) => {
             <table className="table bg-light">
               <thead>
                 <tr>
-                  <th scope="col">Icon</th>
+                  <th scope="col"></th>
                   <th scope="col">Group</th>
                   <th scope="col">State</th>
                   <th scope="col">Permissions</th>
@@ -38,7 +38,7 @@ const GroupsPage = ({ profile }) => {
               <tbody>
                 {profile.groups.map((item, index) => (
                   <tr key={`${item._id}-${index}`}>
-                    <td className="valign-m">
+                    <td className="valign-m mw-2rem">
                       <Link to={`/groups/${item._id}`}>
                         <img
                           src={

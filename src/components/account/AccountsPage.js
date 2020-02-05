@@ -17,11 +17,19 @@ const AccountsPage = ({ profile }) => {
             within your chosen package limits. The default Star account (free)
             allows you to create 3 accounts.
           </p>
+          <Link to="/accounts/new" className="btn btn-primary mb-3">
+            Create Account
+          </Link>
           <p>
             You can then invite others to join your accounts via email. Those
             invited, will need to create an account, and then accept your
             invite. Once accepted, they will have access to view, update and
             switch to the market any items in the kitbag.
+          </p>
+          <p>
+            If you are a member of multiple accounts, you can only view one at a
+            time. Therefore to switch between accounts, select the preferred
+            account below and click on save to apply the change.
           </p>
         </div>
       </div>
@@ -31,13 +39,6 @@ const AccountsPage = ({ profile }) => {
           accounts={profile.accounts}
         />
       )}
-      <div className="row mb-3">
-        <div className="col-12">
-          <Link to="/accounts/new" className="btn btn-primary">
-            Create Account
-          </Link>
-        </div>
-      </div>
     </React.Fragment>
   );
 };

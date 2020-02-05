@@ -49,6 +49,7 @@ const PreferredAccountForm = ({
           <table className="table bg-light">
             <thead>
               <tr>
+                <th scope="col"></th>
                 <th scope="col">Account</th>
                 <th scope="col">State</th>
                 <th scope="col">Permissions</th>
@@ -60,14 +61,29 @@ const PreferredAccountForm = ({
             <tbody>
               {accounts.map((item, index) => (
                 <tr key={index}>
-                  <td>
+                  <td className="valign-m mw-2rem">
+                    <Link to={`/accounts/${item._id}`}>
+                      <img
+                        src={
+                          item.images && item.images.length > 0
+                            ? item.images[0].imageUrl
+                            : '/images/defaultthumb.png'
+                        }
+                        className="img-avatar img-thumbnail img-link rounded-circle p-0 m-1"
+                        alt=""
+                      />
+                    </Link>
+                  </td>
+                  <td className="valign-m">
                     <Link to={`/accounts/${item._id}`}>{item.name}</Link>
                   </td>
-                  <td>{item.member.state}</td>
-                  <td>{item.member.permissions.join(', ')}</td>
-                  <td className="text-center">
+                  <td className="valign-m">{item.member.state}</td>
+                  <td className="valign-m">
+                    {item.member.permissions.join(', ')}
+                  </td>
+                  <td className="valign-m text-center">
                     <input
-                      className="form-check-input"
+                      className=""
                       type="radio"
                       name="AccountPreference"
                       id={item._id}
