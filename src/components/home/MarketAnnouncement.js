@@ -1,5 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {};
 
 const MarketAnnouncement = ({ group }) => {
   if (!group) return null;
@@ -18,4 +23,4 @@ const MarketAnnouncement = ({ group }) => {
   );
 };
 
-export default MarketAnnouncement;
+export default connect(mapStateToProps, mapDispatchToProps)(MarketAnnouncement);

@@ -17,15 +17,17 @@ const mapStateToProps = state => ({
 });
 
 const LoggedInLanding = ({ user }) => {
-  const accountId = user.profile.accounts
-    ? user.profile.accounts.find(a => a.preferred)._id
-    : undefined;
+  const accountId =
+    user.profile.accounts && user.profile.accounts.length > 0
+      ? user.profile.accounts.find(a => a.preferred)._id
+      : undefined;
 
-  const group = user.profile.groups
-    ? user.profile.groups
-        .filter(g => g.status === 'approved')
-        .find(a => a.member.state === 'approved')
-    : undefined;
+  const group =
+    user.profile.groups && user.profile.groups.length > 0
+      ? user.profile.groups
+          .filter(g => g.status === 'approved')
+          .find(a => a.member.state === 'approved')
+      : undefined;
 
   return (
     <div>
