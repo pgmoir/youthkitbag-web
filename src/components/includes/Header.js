@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import GdprHelp from '../learn/GdprHelp';
+import CookieConsent from 'react-cookie-consent';
 
 const mapStateToProps = state => ({
   auth: state.auth,
@@ -128,7 +128,17 @@ const Header = ({ auth, user }) => {
           </div>
         </nav>
       </header>
-      <GdprHelp />
+      <CookieConsent
+        cookieName="youthkitbagCookieConstent-1"
+        buttonClasses="btn btn-warning mr-5"
+        disableButtonStyles={true}
+      >
+        <div className="py-4">
+          This website requires cookies to handle key features such as logging
+          in and authentication. It currently does not use any marketing or
+          advertising cookies. If we introduce these we will advise you.
+        </div>
+      </CookieConsent>
     </React.Fragment>
   );
 };
