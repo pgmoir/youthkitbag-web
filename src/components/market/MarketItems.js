@@ -5,6 +5,7 @@ import Title from '../includes/title/Title';
 import MarketItemCard from './MarketItemCard';
 import SearchForm from '../includes/SearchForm';
 import Pagination from '../includes/Pagination';
+import Alert from '../includes/Alert';
 
 const mapStateToProps = state => ({
   search: state.market.search,
@@ -94,6 +95,7 @@ const MarketItems = ({
           aria-label="main body of content plus related links and features"
         >
           <div className="container">
+            <Alert />
             <div className="row">
               <div className="col-12 col-sm-9">
                 <SearchForm

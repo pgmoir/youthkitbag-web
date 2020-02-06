@@ -75,7 +75,7 @@ export const createMarketKit = (accountId, formValues) => dispatch => {
       }
     )
     .then(response => {
-      history.push(`/market/${accountId}?searchfor=&by=&page=1&pagesize=24`);
+      history.push(`/market/${accountId}`);
       dispatch({ type: CREATE_MARKET_KIT, payload: response.data });
     })
     .catch(err => {
@@ -83,9 +83,7 @@ export const createMarketKit = (accountId, formValues) => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(
-          `/auth/login?return=/market/${accountId}?searchfor=&by=&page=1&pagesize=24`
-        );
+        history.push(`/auth/login?return=/market/${accountId}`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
@@ -105,7 +103,7 @@ export const editMarketKit = (accountId, marketId, formValues) => dispatch => {
       }
     )
     .then(response => {
-      history.push(`/market/${accountId}?searchfor=&by=&page=1&pagesize=24`);
+      history.push(`/market/${accountId}`);
       dispatch({ type: EDIT_MARKET_KIT, payload: response.data });
     })
     .catch(err => {
@@ -113,9 +111,7 @@ export const editMarketKit = (accountId, marketId, formValues) => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(
-          '/auth/login?return=/market?searchfor=&by=&page=1&pagesize=24'
-        );
+        history.push('/auth/login?return=/market');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
@@ -165,7 +161,7 @@ export const deleteMarketKit = (accountId, marketId) => dispatch => {
       }
     })
     .then(response => {
-      history.push(`/market/${accountId}?searchfor=&by=&page=1&pagesize=24`);
+      history.push(`/market/${accountId}`);
       dispatch({ type: DELETE_MARKET_KIT, payload: response.data });
     })
     .catch(err => {
@@ -173,9 +169,7 @@ export const deleteMarketKit = (accountId, marketId) => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(
-          `/auth/login?return=/market/${accountId}?searchfor=&by=&page=1&pagesize=24`
-        );
+        history.push(`/auth/login?return=/market/${accountId}`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });

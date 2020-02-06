@@ -103,7 +103,7 @@ const DateInput = ({ value, field, readOnly, setChange }) => {
         tabIndex={readOnly ? -1 : 0}
       />
       <input
-        className={`form-control group-control-right date-input-w4 `}
+        className={`form-control group-control-right date-input-w4`}
         key={`${field}-year`}
         id={`${field}-year`}
         name={`${field}-year`}

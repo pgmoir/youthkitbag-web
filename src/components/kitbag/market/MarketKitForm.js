@@ -123,7 +123,7 @@ const MarketForm = ({
         field="marketPrice"
         step=".01"
         min="0"
-        max="99999.99"
+        max="29999.99"
         handleChange={handleChange}
         error={errors.marketPrice}
         readOnly={isReadOnly()}
@@ -336,9 +336,13 @@ const MarketForm = ({
                       title="Remove Purchase"
                       onClick={() => removeArrayItem('groups', index)}
                       index={index}
+                      disabled={values.groups.length <= 1}
                     />
                   </div>
                 ))}
+              {errors.groups && (
+                <label className="text-danger">{errors.groups}</label>
+              )}
             </div>
             <hr />
             <div>

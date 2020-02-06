@@ -24,7 +24,7 @@ const WantedResponse = ({ values, handleChange, errors, handleSubmit }) => {
                 field="responsePrice"
                 step=".01"
                 min="0"
-                max="99999.99"
+                max="29999.99"
                 handleChange={handleChange}
                 error={errors.responsePrice}
               />

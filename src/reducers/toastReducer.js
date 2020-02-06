@@ -13,7 +13,9 @@ import {
   EDIT_USER_PROFILE,
   API_MARKET_ERROR,
   SIGNUP_SUCCESS,
-  SIGNUP_FAILURE
+  SIGNUP_FAILURE,
+  EDIT_KITBAG_KIT,
+  EDIT_MARKET_KIT
 } from '../actions/types';
 
 const initialState = {
@@ -30,6 +32,8 @@ export default (state = initialState, action) => {
     case EDIT_GROUP_STATUS:
     case EDIT_GROUP_MEMBER_STATE:
     case EDIT_USER_PROFILE:
+    case EDIT_KITBAG_KIT:
+    case EDIT_MARKET_KIT:
     case SIGNUP_SUCCESS:
       return {
         currentMessage: action.payload.message,

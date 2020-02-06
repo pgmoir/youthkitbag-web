@@ -1,6 +1,12 @@
 import React from 'react';
 
-const RemoveArrayButtonForm = ({ colFormat, title, onClick, index }) => {
+const RemoveArrayButtonForm = ({
+  colFormat,
+  title,
+  onClick,
+  index,
+  disabled
+}) => {
   const columnFormat = colFormat.split('-');
   return (
     <React.Fragment>
@@ -20,6 +26,7 @@ const RemoveArrayButtonForm = ({ colFormat, title, onClick, index }) => {
             type="button"
             title={title}
             onClick={onClick}
+            disabled={disabled}
           >
             <span className="icon-tray-item fas fa-trash-alt"></span>
           </button>

@@ -178,7 +178,7 @@ const KitForm = ({
                     field={`purchases[${index}].price`}
                     step=".01"
                     min="0.00"
-                    max="99999.99"
+                    max="29999.99"
                     handleChange={handleChange}
                     index={index}
                   />
