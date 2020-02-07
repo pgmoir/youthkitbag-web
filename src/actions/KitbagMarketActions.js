@@ -28,7 +28,7 @@ export const fetchMarketKit = (accountId, marketId) => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/market/${accountId}`);
+        history.push(`/auth/login?return=/market`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });

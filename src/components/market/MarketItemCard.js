@@ -46,6 +46,13 @@ const MarketItemCard = ({ market }) => {
   return (
     <div className="col-6 col-md-4 col-lg-3 mb-3">
       <article className="card card-link card-b1">
+        {isOwned && (
+          <span className="icons-top-left pt-1">
+            <Link to={`/kitbag/market/${account}/delete/${_id}`}>
+              <span className="icon-tray-item fas fa-trash-alt"></span>
+            </Link>
+          </span>
+        )}
         <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">
           {renderNotification()}
         </span>

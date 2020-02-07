@@ -2,28 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
-  fetchKitbagKit,
-  deleteKitbagKit
-} from '../../../actions/KitbagKitActions';
+  fetchMarketKit,
+  deleteMarketKit
+} from '../../../actions/KitbagMarketActions';
 import Modal from '../../includes/Modal';
 import history from '../../../helpers/history';
 
-const mapStateToProps = (state, ownProps) => ({
-  item: state.kitbag.kit.list.find(
-    k =>
-      k._id === ownProps.match.params.kitId &&
-      k.account === ownProps.match.params.accountId
-  )
+const mapStateToProps = state => ({
+  item: state.kitbag.market.current
 });
 
 const mapDispatchToProps = {
-  fetchKitbagKit,
-  deleteKitbagKit
+  fetchMarketKit,
+  deleteMarketKit
 };
 
-const KitDelete = ({ item, fetchKitbagKit, deleteKitbagKit, match }) => {
-  const accountId = match.params.accountId;
-  const kitId = match.params.kitId;
+const KitDelete = ({ item, fetchMarketKit, deleteMarketKit, match }) => {
+  const { accountId, marketId } = match.params;
   const [kit, setKit] = useState({});
 
   useEffect(() => {
@@ -33,10 +28,10 @@ const KitDelete = ({ item, fetchKitbagKit, deleteKitbagKit, match }) => {
   }, [item, setKit]);
 
   useEffect(() => {
-    if (accountId && kitId) {
-      fetchKitbagKit(accountId, kitId);
+    if (accountId && marketId) {
+      fetchMarketKit(accountId, marketId);
     }
-  }, [accountId, kitId, fetchKitbagKit]);
+  }, [accountId, marketId, fetchMarketKit]);
 
   function renderTitle() {
     if (!kit) {
@@ -56,7 +51,7 @@ const KitDelete = ({ item, fetchKitbagKit, deleteKitbagKit, match }) => {
     return (
       <React.Fragment>
         <Link
-          to={`/kitbag/kit/${accountId}`}
+          to={`/market`}
           className="btn btn-outline-secondary"
           data-dismiss="modal"
         >
@@ -65,7 +60,7 @@ const KitDelete = ({ item, fetchKitbagKit, deleteKitbagKit, match }) => {
         <button
           type="button"
           className="btn btn-danger"
-          onClick={() => deleteKitbagKit(accountId, kitId)}
+          onClick={() => deleteMarketKit(accountId, marketId)}
         >
           Delete
         </button>
@@ -78,7 +73,7 @@ const KitDelete = ({ item, fetchKitbagKit, deleteKitbagKit, match }) => {
       title={renderTitle()}
       content={renderContent()}
       actions={renderActions()}
-      onDismiss={() => history.push(`/kitbag/kit/${accountId}`)}
+      onDismiss={() => history.push(`/market`)}
     />
   );
 };
