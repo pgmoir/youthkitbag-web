@@ -20,6 +20,18 @@
   &.card-b1 {
     border: 1px solid $silver;
     border-bottom: 0.25rem solid $silver;
+    &.card-b-stolen {
+      border: 1px solid #ff6864;
+      border-bottom: 0.25rem solid #ff6864;
+    }
+    &.card-b-trade {
+      border: 1px solid #40e290;
+      border-bottom: 0.25rem solid #40e290;
+    }
+    &.card-b-wanted {
+      border: 1px solid #6452fe;
+      border-bottom: 0.25rem solid #6452fe;
+    }
   }
   &.card-cta {
     border: 0rem;
@@ -32,6 +44,18 @@
     &:hover {
       background-color: $selago;
       border-bottom-color: $matisse;
+    }
+    &.card-b-stolen:hover {
+      background-color: #ffd1d938;
+      border-bottom-color: #bd2723;
+    }
+    &.card-b-trade:hover {
+      background-color: #9cc8ae38;
+      border-bottom-color: #327e51;
+    }
+    &.card-b-wanted:hover {
+      background-color: #adb6fc38;
+      border-bottom-color: #2a15df;
     }
     &.card-top {
       .card-body {

@@ -45,7 +45,7 @@ const MarketItemCard = ({ market }) => {
 
   return (
     <div className="col-6 col-md-4 col-lg-3 mb-3">
-      <article className="card card-link card-b1">
+      <article className={`card card-link card-b1 card-b-${marketType}`}>
         {isOwned && (
           <span className="icons-top-left pt-1">
             <Link to={`/kitbag/market/${account}/delete/${_id}`}>
