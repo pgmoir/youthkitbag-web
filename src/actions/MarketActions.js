@@ -86,6 +86,7 @@ export const respondMarketItem = (marketId, formValues) => dispatch => {
     )
     .then(response => {
       history.push(`/market/${marketId}`);
+      dispatch({ type: RESET_TOAST });
       dispatch({ type: RESPOND_MARKET_ITEM, payload: response.data });
     })
     .catch(err => {

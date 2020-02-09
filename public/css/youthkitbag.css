@@ -227,6 +227,8 @@ h4,
     vertical-align: bottom; }
   .youthkitbag .mw-2rem {
     max-width: 2rem; }
+  .youthkitbag .display-linebreak {
+    white-space: pre-line; }
   .youthkitbag .alert {
     border-left-width: 0.45rem; }
     .youthkitbag .alert.alert-callout {
@@ -244,6 +246,15 @@ h4,
     .youthkitbag .card.card-b1 {
       border: 1px solid #cccccc;
       border-bottom: 0.25rem solid #cccccc; }
+      .youthkitbag .card.card-b1.card-b-stolen {
+        border: 1px solid #ff6864;
+        border-bottom: 0.25rem solid #ff6864; }
+      .youthkitbag .card.card-b1.card-b-trade {
+        border: 1px solid #40e290;
+        border-bottom: 0.25rem solid #40e290; }
+      .youthkitbag .card.card-b1.card-b-wanted {
+        border: 1px solid #6452fe;
+        border-bottom: 0.25rem solid #6452fe; }
     .youthkitbag .card.card-cta {
       border: 0rem; }
     .youthkitbag .card.card-link a {
@@ -252,6 +263,15 @@ h4,
     .youthkitbag .card.card-link:hover {
       background-color: #eff6fd;
       border-bottom-color: #2070b0; }
+    .youthkitbag .card.card-link.card-b-stolen:hover {
+      background-color: #ffd1d938;
+      border-bottom-color: #bd2723; }
+    .youthkitbag .card.card-link.card-b-trade:hover {
+      background-color: #9cc8ae38;
+      border-bottom-color: #327e51; }
+    .youthkitbag .card.card-link.card-b-wanted:hover {
+      background-color: #adb6fc38;
+      border-bottom-color: #2a15df; }
     .youthkitbag .card.card-link.card-top .card-body {
       background-color: rgba(31, 32, 37, 0.9);
       color: #ffffff; }

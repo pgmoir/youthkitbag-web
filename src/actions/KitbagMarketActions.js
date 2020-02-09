@@ -5,7 +5,8 @@ import {
   EDIT_MARKET_KIT,
   DELETE_MARKET_KIT,
   API_KITBAG_ERROR,
-  GETALL_FAILURE
+  GETALL_FAILURE,
+  RESET_TOAST
 } from './types';
 import history from '../helpers/history';
 
@@ -136,6 +137,7 @@ export const respondToMarketKitThread = (
       }
     )
     .then(() => {
+      dispatch({ type: RESET_TOAST });
       dispatch(fetchMarketKit(accountId, marketId));
     })
     .catch(err => {
