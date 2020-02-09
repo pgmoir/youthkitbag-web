@@ -130,7 +130,7 @@ const ThreadMessageChain = ({
                   }`}
                 >
                   <div
-                    className={`p-2 w-75 bg-affair-30 rounded-lg position-relative  ${
+                    className={`p-2 w-75 bg-affair-30 rounded-lg position-relative display-linebreak  ${
                       toPrimaryUser ? 'speech-right' : 'speech-left'
                     }`}
                   >
