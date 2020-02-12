@@ -12,11 +12,6 @@ const ThreadLink = ({ thread, source, changeThreadDisplayed }) => {
     return new Date(sentOn).toDateString();
   }
 
-  function getThumbnail(user) {
-    if (user.profile.images.length === 0) return '/images/defaultthumb.png';
-    return user.profile.images[0].imageUrl;
-  }
-
   function getBgStyle(responseState) {
     switch (responseState) {
       case 'accept':
@@ -30,10 +25,10 @@ const ThreadLink = ({ thread, source, changeThreadDisplayed }) => {
     }
   }
 
-  const { _id, sourceUser, responseUser, responseState } = thread;
+  const { _id, sourceAccount, responseUser, responseState } = thread;
   const lastMessage = _id ? getLastMessage() : {};
   const isMarket = source === 'market';
-  const secondaryUser = isMarket ? sourceUser : responseUser;
+  const threadWith = isMarket ? sourceAccount : responseUser;
 
   return (
     <div
@@ -45,7 +40,7 @@ const ThreadLink = ({ thread, source, changeThreadDisplayed }) => {
       <div className="d-block float-left">
         <div className="p-2">
           <img
-            src={_id ? getThumbnail(secondaryUser) : '/images/defaultthumb.png'}
+            src={_id ? threadWith.image : '/images/defaultthumb.png'}
             className="img-avatar img-thumbnail img-link rounded-circle p-0 m-1"
             alt=""
           />
@@ -54,7 +49,7 @@ const ThreadLink = ({ thread, source, changeThreadDisplayed }) => {
       <div className={getBgStyle(responseState)}>
         <div className="d-flex">
           <div className="mr-auto py-2 flex-truncated">
-            {_id && secondaryUser.profile.username}
+            {_id && threadWith.name}
             {!_id && <div className="bg-light hgt-1 mr-3 mt-1">&nbsp;</div>}
           </div>
           <div className="py-2 flex-truncated text-right pr-2">

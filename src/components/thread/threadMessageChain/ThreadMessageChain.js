@@ -84,39 +84,24 @@ const ThreadMessageChain = ({
     );
   };
 
-  const getThumbnail = user => {
-    if (user.profile.images.length === 0) {
-      return '/images/defaultthumb.png';
-    }
-    return user.profile.images[0].imageUrl;
-  };
-
   const renderMessages = () => {
-    const { messages, sourceUser, responseUser } = thread;
-    const isMarket = source === 'market';
-    const primaryUser = isMarket ? responseUser : sourceUser;
-    const secondaryUser = isMarket ? sourceUser : responseUser;
+    const { messages } = thread;
+
     return messages
       .filter(m => m.content.length > 0)
       .map((message, index) => {
-        const { toSourceUser, content } = message;
-        const toPrimaryUser =
-          source === 'market' ? !toSourceUser : toSourceUser;
+        const { toSourceAccount, fromUser, content } = message;
         return (
           <div className="bg-white" key={`${index}`}>
             {displaySentOn(message.sentOn)}
             <div className="pb-3">
               <div
                 className={`d-block ${
-                  toPrimaryUser ? 'float-right' : 'float-left'
+                  toSourceAccount ? 'float-right' : 'float-left'
                 } px-2 pb-3`}
               >
                 <img
-                  src={
-                    toPrimaryUser
-                      ? getThumbnail(secondaryUser)
-                      : getThumbnail(primaryUser)
-                  }
+                  src={fromUser.image}
                   className="img-avatar img-thumbnail img-link rounded-circle p-0 m-1"
                   alt=""
                 />
@@ -124,14 +109,14 @@ const ThreadMessageChain = ({
               <div>
                 <div
                   className={`d-flex ${
-                    toPrimaryUser
+                    toSourceAccount
                       ? 'justify-content-end'
                       : 'justify-content-start'
                   }`}
                 >
                   <div
                     className={`p-2 w-75 bg-affair-30 rounded-lg position-relative display-linebreak  ${
-                      toPrimaryUser ? 'speech-right' : 'speech-left'
+                      toSourceAccount ? 'speech-right' : 'speech-left'
                     }`}
                   >
                     {content}
