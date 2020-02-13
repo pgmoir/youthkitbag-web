@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ThreadLink from '../threadlink/ThreadLink';
 import ThreadMessageChain from '../threadMessageChain/ThreadMessageChain';
+import { compareForSameDate } from '../../../helpers/date';
 
 const Threads = ({ threads, accountId, source, marketType }) => {
   const [threadDisplayed, setThreadDisplayed] = useState();
@@ -10,6 +11,29 @@ const Threads = ({ threads, accountId, source, marketType }) => {
       setThreadDisplayed(threads.length > 0 ? threads[0]._id : undefined);
     }
   }, [threads, setThreadDisplayed]);
+
+  function parseThread(thread) {
+    let newThread = { ...thread };
+    newThread.messages = [];
+    const { messages } = thread;
+    let previousDate;
+    for (var i = 0; i < messages.length; i++) {
+      const { toSourceAccount, fromUser, content, sentOn } = messages[i];
+      const { sourceDate, newPreviousDate } = compareForSameDate(
+        sentOn,
+        previousDate
+      );
+      previousDate = newPreviousDate;
+      newThread.messages.push({
+        _id: i,
+        toSourceAccount,
+        fromUser,
+        sentOn: sourceDate,
+        content
+      });
+    }
+    return newThread;
+  }
 
   function renderThreadLinks() {
     if (!threads) return (threads = [{}, {}, {}, {}, {}, {}]);
@@ -31,10 +55,11 @@ const Threads = ({ threads, accountId, source, marketType }) => {
 
   function renderThreadMessages() {
     return threads.map((thread, index) => {
+      const thisThread = parseThread(thread);
       return (
         <ThreadMessageChain
-          key={`${thread._id}-${index}`}
-          thread={thread}
+          key={`${thisThread._id}-${index}`}
+          thread={thisThread}
           source={source}
           accountId={accountId}
           marketType={marketType}

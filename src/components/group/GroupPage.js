@@ -54,8 +54,13 @@ const GroupPage = ({ current, fetchGroup, match }) => {
     if (groupIsLoading()) {
       return 'Loading ...';
     }
-    const leftState = group.groupMemberState === 'left' ? ' (left)' : '';
-    return group._id ? `${group.name}${leftState}` : 'Create new group';
+    if (!group._id) {
+      return 'Create new group';
+    }
+    const groupMemberState = group.groupMemberState
+      ? ` (member: ${group.groupMemberState})`
+      : '';
+    return `${group.name} - ${group.status}${groupMemberState}`;
   }
 
   return (
@@ -71,7 +76,7 @@ const GroupPage = ({ current, fetchGroup, match }) => {
           <Alert />
           <div className="row">
             <div className="col-12 mb-3 d-flex justify-content-end">
-              {groupId && group.groupAdmin && group.status !== 'blocked' && (
+              {groupId && group.groupAdmin && group.status === 'approved' && (
                 <Link
                   to={`/groups/${groupId}/members`}
                   className="btn btn-primary"
@@ -79,7 +84,7 @@ const GroupPage = ({ current, fetchGroup, match }) => {
                   Members
                 </Link>
               )}
-              {groupId && group.status !== 'blocked' && !group.groupMember && (
+              {groupId && group.status === 'approved' && !group.groupMember && (
                 <Link
                   to={`/groups/${groupId}/join`}
                   className={`btn btn-primary ${
@@ -90,7 +95,7 @@ const GroupPage = ({ current, fetchGroup, match }) => {
                   Join
                 </Link>
               )}
-              {groupId && group.status !== 'blocked' && group.groupMember && (
+              {groupId && group.status === 'approved' && group.groupMember && (
                 <Link
                   to={`/groups/${groupId}/leave`}
                   className="btn btn-primary ml-3"
@@ -107,14 +112,4 @@ const GroupPage = ({ current, fetchGroup, match }) => {
   );
 };
 
-// {(values.appAdmin || values.groupAdmin) && values._id && (
-//   <div>
-//     <Link
-//       className="btn btn-primary"
-//       to={`/groups/${values._id}/members`}
-//     >
-//       Members
-//     </Link>
-//   </div>
-// )}
 export default connect(mapStateToProps, mapDispatchToProps)(GroupPage);
