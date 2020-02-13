@@ -23,6 +23,19 @@ const MarketItemCard = ({ market }) => {
     return images[0].imageUrl;
   }
 
+  function marketTypeIcon() {
+    if (!marketType) {
+      return null;
+    }
+    if (marketType === 'stolen') {
+      return <i className="fas fa-volume-up"></i>;
+    } else if (marketType === 'wanted') {
+      return <i className="fas fa-binoculars"></i>;
+    } else {
+      return <i className="fas fa-hands-helping"></i>;
+    }
+  }
+
   function renderBlank() {
     return (
       <div className="col-6 col-md-4 col-lg-3 mb-3">
@@ -45,7 +58,7 @@ const MarketItemCard = ({ market }) => {
 
   return (
     <div className="col-6 col-md-4 col-lg-3 mb-3">
-      <article className={`card card-link card-b1 card-b-${marketType}`}>
+      <article className="card card-link card-b1">
         {isOwned && (
           <span className="icons-top-left pt-1">
             <Link to={`/kitbag/market/${account}/delete/${_id}`}>
@@ -70,7 +83,10 @@ const MarketItemCard = ({ market }) => {
             role="presentation"
           />
           <div className="card-body">
-            <h3 className="card-title h6 ellipsis">{`${marketType.toUpperCase()} - ${title}`}</h3>
+            <h3 className="card-title h6 ellipsis">
+              {marketTypeIcon()}&nbsp;&nbsp;
+              {title}
+            </h3>
             {subtitle && <p className="card-text ellipsis">{subtitle}</p>}
           </div>
         </Link>
