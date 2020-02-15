@@ -6,7 +6,8 @@ import {
   DELETE_MARKET_KIT,
   API_KITBAG_ERROR,
   GETALL_FAILURE,
-  RESET_TOAST
+  RESET_TOAST,
+  FETCH_KITBAG_MARKET_ITEMS
 } from './types';
 import history from '../helpers/history';
 
@@ -174,5 +175,28 @@ export const deleteMarketKit = (accountId, marketId) => dispatch => {
         history.push(`/auth/login?return=/market/${accountId}`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+    });
+};
+
+export const fetchKitbagMarketItems = () => dispatch => {
+  const token = localStorage.getItem('token');
+  axios
+    .get(`${baseUrl}/kitbag/market`, {
+      headers: {
+        Authorization: `bearer ${token}`,
+        'content-type': 'application/json'
+      }
+    })
+    .then(response => {
+      dispatch({ type: FETCH_KITBAG_MARKET_ITEMS, payload: response.data });
+    })
+    .catch(err => {
+      const { response } = err;
+      if (response.status === 401) {
+        window.localStorage.clear();
+        dispatch({ type: GETALL_FAILURE, payload: response });
+        history.push('/auth/login?return=/market');
+      }
+      dispatch({ type: API_KITBAG_ERROR, payload: response });
     });
 };

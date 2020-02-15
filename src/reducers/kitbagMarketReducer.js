@@ -6,10 +6,11 @@ import {
   RESET,
   LOGOUT,
   RESPOND_MARKET_KIT,
-  FETCH_MARKET_ITEMS
+  FETCH_MARKET_ITEMS,
+  FETCH_KITBAG_MARKET_ITEMS
 } from '../actions/types';
 
-const initialState = { current: {} };
+const initialState = { current: {}, list: [] };
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -23,6 +24,8 @@ export default (state = initialState, action) => {
       return { ...state, current: action.payload };
     case DELETE_MARKET_KIT:
       return { ...state };
+    case FETCH_KITBAG_MARKET_ITEMS:
+      return { ...state, list: action.payload };
     case FETCH_MARKET_ITEMS:
     case RESET:
     case LOGOUT:
