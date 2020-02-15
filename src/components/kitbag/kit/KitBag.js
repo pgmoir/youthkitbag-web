@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchKitbagKits } from '../../../actions';
 import Alert from '../../includes/Alert';
@@ -7,6 +7,7 @@ import Title from '../../includes/title/Title';
 import KitCard from './KitCard';
 import SearchForm from '../../includes/SearchForm';
 import Pagination from '../../includes/Pagination';
+import queryString from 'query-string';
 
 const mapStateToProps = state => ({
   search: state.kitbag.kit.search,
@@ -27,9 +28,19 @@ const KitBag = ({
   fetchKitbagKits,
   match
 }) => {
-  const { searchfor, by, page, pagesize } = search;
+  const query = useLocation().search;
+  let { searchfor, by, page, pagesize, loading } = search;
+  if (loading && query) {
+    const searchQuery = queryString.parse(query);
+    searchfor = searchQuery.searchfor;
+    by = searchQuery.by;
+    page = searchQuery.page;
+    pagesize = searchQuery.pagesize;
+    search = { searchfor, by, page, pagesize };
+  }
+
   const [accountId] = useState(match.params.accountId);
-  const [kits, setKits] = useState([]);
+  const [kits, setKits] = useState(items);
 
   useEffect(() => {
     if (items) {
@@ -49,7 +60,14 @@ const KitBag = ({
     return `${account.name} (${pagination.totalItems})`;
   }
 
-  function renderBlank() {
+  function renderBlankList() {
+    const blankList = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+    return blankList.map((item, index) => {
+      return <KitCard key={`${item._id}-${index}`} kit={item} />;
+    });
+  }
+
+  if (!kits) {
     return (
       <div>
         <Title title="Loading ...." />
@@ -71,16 +89,7 @@ const KitBag = ({
     );
   }
 
-  function renderBlankList() {
-    const blankList = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
-    return blankList.map((item, index) => {
-      return <KitCard key={`${item._id}-${index}`} kit={item} />;
-    });
-  }
-
   function renderList() {
-    if (!kits) return renderBlankList();
-
     return kits.map((item, index) => {
       return (
         <KitCard
@@ -92,51 +101,42 @@ const KitBag = ({
     });
   }
 
-  function renderPage() {
-    return (
-      <div>
-        <Title title={getTitle()} />
-        <section
-          id="main"
-          className="container-fluid"
-          aria-label="main body of content plus related links and features"
-        >
-          <div className="container">
-            <Alert />
-            <div className="row">
-              <div className="col-12 col-sm-9">
-                <SearchForm
-                  accountId={accountId}
-                  search={search}
-                  callback={fetchKitbagKits}
-                />
-              </div>
-              <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
-                <Link
-                  to={`/kitbag/kit/${accountId}/new`}
-                  className="btn btn-primary"
-                >
-                  Add new kit
-                </Link>
-              </div>
-            </div>
-            <div className="row">{renderList()}</div>
-            <Pagination
-              accountId={accountId}
-              search={search}
-              callback={fetchKitbagKits}
-            />
-          </div>
-        </section>
-      </div>
-    );
-  }
-
   return (
-    <React.Fragment>
-      {kits && renderPage()}
-      {!kits && renderBlank()}
-    </React.Fragment>
+    <div>
+      <Title title={getTitle()} />
+      <section
+        id="main"
+        className="container-fluid"
+        aria-label="main body of content plus related links and features"
+      >
+        <div className="container">
+          <Alert />
+          <div className="row">
+            <div className="col-12 col-sm-9">
+              <SearchForm
+                accountId={accountId}
+                search={search}
+                callback={fetchKitbagKits}
+              />
+            </div>
+            <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
+              <Link
+                to={`/kitbag/kit/${accountId}/new`}
+                className="btn btn-primary"
+              >
+                Add new kit
+              </Link>
+            </div>
+          </div>
+          <div className="row">{renderList()}</div>
+          <Pagination
+            accountId={accountId}
+            search={search}
+            callback={fetchKitbagKits}
+          />
+        </div>
+      </section>
+    </div>
   );
 };
 

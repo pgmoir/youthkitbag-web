@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchGroups } from '../../actions';
 import Title from '../includes/title/Title';
@@ -8,6 +8,7 @@ import SearchForm from '../includes/SearchForm';
 import Pagination from '../includes/Pagination';
 import Alert from '../includes/Alert';
 import GroupsHelp from '../account/GroupsHelp';
+import queryString from 'query-string';
 
 const mapStateToProps = state => ({
   search: state.group.search,
@@ -21,7 +22,17 @@ const mapDispatchToProps = {
 };
 
 const Groups = ({ search, items, pagination, userPackage, fetchGroups }) => {
-  const { searchfor, by, page, pagesize } = search;
+  const query = useLocation().search;
+  let { searchfor, by, page, pagesize, loading } = search;
+  if (loading) {
+    const searchQuery = queryString.parse(query);
+    searchfor = searchQuery.searchfor;
+    by = searchQuery.by;
+    page = searchQuery.page;
+    pagesize = searchQuery.pagesize;
+    search = { searchfor, by, page, pagesize };
+  }
+
   const [groups, setGroups] = useState([]);
 
   useEffect(() => {
@@ -38,7 +49,14 @@ const Groups = ({ search, items, pagination, userPackage, fetchGroups }) => {
     return `Found groups (${pagination.totalItems})`;
   }
 
-  function renderBlank() {
+  function renderBlankList() {
+    const blankList = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+    return blankList.map((item, index) => {
+      return <GroupCard key={`${item._id}-${index}`} group={item} />;
+    });
+  }
+
+  if (!groups) {
     return (
       <div>
         <Title title="Loading ...." />
@@ -61,16 +79,7 @@ const Groups = ({ search, items, pagination, userPackage, fetchGroups }) => {
     );
   }
 
-  function renderBlankList() {
-    const blankList = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
-    return blankList.map((item, index) => {
-      return <GroupCard key={`${item._id}-${index}`} group={item} />;
-    });
-  }
-
   function renderList() {
-    if (!groups) return renderBlankList();
-
     return groups.map((item, index) => {
       return <GroupCard key={`${item._id}-${index}`} group={item} />;
     });
@@ -92,37 +101,28 @@ const Groups = ({ search, items, pagination, userPackage, fetchGroups }) => {
     );
   }
 
-  function renderPage() {
-    return (
-      <div>
-        <Title title={getTitle()} />
-        <section
-          id="main"
-          className="container-fluid"
-          aria-label="main body of content plus related links and features"
-        >
-          <div className="container">
-            <GroupsHelp />
-            <Alert />
-            <div className="row">
-              <div className="col-12 col-sm-9">
-                <SearchForm search={search} callback={fetchGroups} />
-              </div>
-              {renderAddNewButton()}
-            </div>
-            <div className="row">{renderList()}</div>
-            <Pagination search={search} callback={fetchGroups} />
-          </div>
-        </section>
-      </div>
-    );
-  }
-
   return (
-    <React.Fragment>
-      {groups && renderPage()}
-      {!groups && renderBlank()}
-    </React.Fragment>
+    <div>
+      <Title title={getTitle()} />
+      <section
+        id="main"
+        className="container-fluid"
+        aria-label="main body of content plus related links and features"
+      >
+        <div className="container">
+          <GroupsHelp />
+          <Alert />
+          <div className="row">
+            <div className="col-12 col-sm-9">
+              <SearchForm search={search} callback={fetchGroups} />
+            </div>
+            {renderAddNewButton()}
+          </div>
+          <div className="row">{renderList()}</div>
+          <Pagination search={search} callback={fetchGroups} />
+        </div>
+      </section>
+    </div>
   );
 };
 

@@ -1,16 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import queryString from 'query-string';
 
 const mapStateToProps = state => ({
   pagination: state.pagination
 });
 
 const Pagination = ({ accountId, search, callback, pagination }) => {
-  const { searchfor, by, pagesize } = queryString.parse(search);
+  const { searchfor, by, pagesize } = search;
 
   function changePage(moveToPage) {
-    callback(searchfor, by, moveToPage, pagesize ? pagesize : 24, accountId);
+    callback(searchfor, by, moveToPage, pagesize, accountId);
   }
 
   function isFirstPageDisabled() {

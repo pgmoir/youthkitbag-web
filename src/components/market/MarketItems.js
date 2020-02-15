@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchMarketItems } from '../../actions/MarketActions';
 import Title from '../includes/title/Title';
@@ -6,6 +7,7 @@ import MarketItemCard from './MarketItemCard';
 import SearchForm from '../includes/SearchForm';
 import Pagination from '../includes/Pagination';
 import Alert from '../includes/Alert';
+import queryString from 'query-string';
 
 const mapStateToProps = state => ({
   search: state.market.search,
@@ -24,7 +26,17 @@ const MarketItems = ({
   fetchMarketItems,
   match
 }) => {
-  const { searchfor, by, page, pagesize } = search;
+  const query = useLocation().search;
+  let { searchfor, by, page, pagesize, loading } = search;
+  if (loading) {
+    const searchQuery = queryString.parse(query);
+    searchfor = searchQuery.searchfor;
+    by = searchQuery.by;
+    page = searchQuery.page;
+    pagesize = searchQuery.pagesize;
+    search = { searchfor, by, page, pagesize };
+  }
+
   const accountId = match.params.accountId;
   const [marketItems, setMarketItems] = useState([]);
 
@@ -42,7 +54,14 @@ const MarketItems = ({
     return `Market place items (${pagination.totalItems})`;
   }
 
-  function renderBlankPage() {
+  function renderBlankList() {
+    const blankList = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+    return blankList.map((item, index) => {
+      return <MarketItemCard key={`${item._id}-${index}`} market={item} />;
+    });
+  }
+
+  if (!marketItems) {
     return (
       <div>
         <Title title="Loading ...." />
@@ -64,16 +83,7 @@ const MarketItems = ({
     );
   }
 
-  function renderBlankList() {
-    const blankList = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
-    return blankList.map((item, index) => {
-      return <MarketItemCard key={`${item._id}-${index}`} market={item} />;
-    });
-  }
-
   function renderList() {
-    if (!marketItems) return renderBlankList();
-
     return marketItems.map((item, index) => {
       return (
         <MarketItemCard
@@ -85,43 +95,34 @@ const MarketItems = ({
     });
   }
 
-  function renderPopulatedPage() {
-    return (
-      <div>
-        <Title title={getTitle()} />
-        <section
-          id="main"
-          className="container-fluid"
-          aria-label="main body of content plus related links and features"
-        >
-          <div className="container">
-            <Alert />
-            <div className="row">
-              <div className="col-12 col-sm-9">
-                <SearchForm
-                  accountId={accountId}
-                  search={search}
-                  callback={fetchMarketItems}
-                />
-              </div>
-            </div>
-            <div className="row">{renderList()}</div>
-            <Pagination
-              accountId={accountId}
-              search={search}
-              callback={fetchMarketItems}
-            />
-          </div>
-        </section>
-      </div>
-    );
-  }
-
   return (
-    <React.Fragment>
-      {marketItems && renderPopulatedPage()}
-      {!marketItems && renderBlankPage()}
-    </React.Fragment>
+    <div>
+      <Title title={getTitle()} />
+      <section
+        id="main"
+        className="container-fluid"
+        aria-label="main body of content plus related links and features"
+      >
+        <div className="container">
+          <Alert />
+          <div className="row">
+            <div className="col-12 col-sm-9">
+              <SearchForm
+                accountId={accountId}
+                search={search}
+                callback={fetchMarketItems}
+              />
+            </div>
+          </div>
+          <div className="row">{renderList()}</div>
+          <Pagination
+            accountId={accountId}
+            search={search}
+            callback={fetchMarketItems}
+          />
+        </div>
+      </section>
+    </div>
   );
 };
 
