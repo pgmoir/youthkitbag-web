@@ -5,10 +5,7 @@ const GroupMember = ({ groupId, member }) => {
   const { user, permissions } = member;
 
   function getThumbnail() {
-    if (member.user.images.length) {
-      return member.user.images[0].imageUrl;
-    }
-    return '/images/defaultthumb.png';
+    return member.user.image;
   }
 
   function isRequested() {
