@@ -2,12 +2,29 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const MarketItemCard = ({ market }) => {
+  const {
+    _id,
+    title,
+    subtitle,
+    isOwned,
+    marketType,
+    account,
+    marketPrice,
+    threads
+  } = market;
+
+  const isStolen = marketType === 'stolen';
+  const isTrade = marketType === 'trade' && marketPrice > 0;
+  const isRecycle = marketType === 'trade' && marketPrice === 0;
+  const isWanted = marketType === 'wanted';
+
   function renderNotification() {
     if (!market) return null;
-    const { isOwned, marketType, marketPrice, threads } = market;
+
     if (isOwned) {
       return threads.length;
     }
+
     if (['trade', 'wanted'].includes(marketType)) {
       if (!marketPrice || marketPrice === 0) return 'Free';
       return `£${marketPrice.toFixed(2)}`;
@@ -23,13 +40,21 @@ const MarketItemCard = ({ market }) => {
     return images[0].imageUrl;
   }
 
+  function marketTypeStyle() {
+    if (isStolen) return 'danger';
+    if (isRecycle) return 'success';
+    if (isTrade) return 'primary';
+    return 'secondary';
+  }
+
   function marketTypeIcon() {
     if (!marketType) {
       return null;
     }
-    if (marketType === 'stolen') {
+
+    if (isStolen) {
       return <i className="fas fa-volume-up"></i>;
-    } else if (marketType === 'wanted') {
+    } else if (isWanted) {
       return <i className="fas fa-binoculars"></i>;
     } else {
       return <i className="fas fa-hands-helping"></i>;
@@ -51,8 +76,6 @@ const MarketItemCard = ({ market }) => {
       </div>
     );
   }
-
-  const { _id, title, subtitle, isOwned, marketType, account } = market;
 
   if (!_id) return renderBlank();
 
@@ -83,7 +106,7 @@ const MarketItemCard = ({ market }) => {
             role="presentation"
           />
           <div className="card-body">
-            <h3 className="card-title h6 ellipsis">
+            <h3 className={`card-title h6 ellipsis text-${marketTypeStyle()}`}>
               {marketTypeIcon()}&nbsp;&nbsp;
               {title}
             </h3>
