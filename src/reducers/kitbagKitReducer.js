@@ -13,7 +13,7 @@ const initialState = {
   current: {},
   list: [],
   lists: [],
-  search: { searchfor: '', by: 'all', page: 1, pagesize: 24, loading: true }
+  search: { searchfor: '', by: '', page: 1, pagesize: 24, loading: true }
 };
 
 export default (state = initialState, action) => {

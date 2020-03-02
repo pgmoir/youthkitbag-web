@@ -305,6 +305,28 @@ h4,
       /* fallback */
       max-height: 4.5;
       /* fallback */ }
+  .youthkitbag h1.ellipsis,
+  .youthkitbag .h1.ellipsis,
+  .youthkitbag h2.ellipsis,
+  .youthkitbag .h2.ellipsis,
+  .youthkitbag h3.ellipsis,
+  .youthkitbag .h3.ellipsis,
+  .youthkitbag h4.ellipsis,
+  .youthkitbag .h4.ellipsis,
+  .youthkitbag h5.ellipsis,
+  .youthkitbag .h5.ellipsis,
+  .youthkitbag h6.ellipsis,
+  .youthkitbag .h6.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    /* number of lines to show */
+    line-height: 1.5;
+    /* fallback */
+    max-height: 4.5;
+    /* fallback */ }
   .youthkitbag .badge.badge-fullsize {
     font-size: 100%; }
   .youthkitbag .badge.badge-top-right {
@@ -329,6 +351,9 @@ h4,
     font-size: 2.2rem; }
   .youthkitbag .img-link {
     cursor: pointer; }
+  .youthkitbag .img-small {
+    max-height: 90px;
+    max-width: 90px; }
   .youthkitbag .form-group .valid-feedback {
     color: #1d7631 !important;
     font-size: 100%; }

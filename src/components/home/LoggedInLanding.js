@@ -5,7 +5,10 @@ import { connect } from 'react-redux';
 import ProfileAnnouncement from './ProfileAnnouncement';
 import MarketAnnouncement from './MarketAnnouncement';
 import KitbagKitAnnouncement from './KitbagKitAnnouncement';
-import KitbagMarketAnnouncement from './KitbagMarketAnnouncement';
+import KitbagMarketTradeAnnouncement from './KitbagMarketTradeAnnouncement';
+import KitbagMarketRecycleAnnouncement from './KitbagMarketRecycleAnnouncement';
+import KitbagMarketStolenAnnouncement from './KitbagMarketStolenAnnouncement';
+import KitbagMarketWantedAnnouncement from './KitbagMarketWantedAnnouncement';
 import GroupAnnouncement from './GroupAnnouncement';
 import AccountAnnouncement from './AccountAnnouncement';
 import KitbagKitLevelWarnings from './KitbagKitLevelWarnings';
@@ -48,7 +51,10 @@ const LoggedInLanding = ({ user }) => {
               <MarketAnnouncement group={group} />
               <KitbagKitAddMoreAdvice accountId={accountId} />
               <KitbagKitAnnouncement accountId={accountId} />
-              <KitbagMarketAnnouncement group={group} />
+              <KitbagMarketTradeAnnouncement group={group} />
+              <KitbagMarketRecycleAnnouncement group={group} />
+              <KitbagMarketStolenAnnouncement group={group} />
+              <KitbagMarketWantedAnnouncement group={group} />
               <KitbagKitLevelWarnings accountId={accountId} />
             </div>
           </div>

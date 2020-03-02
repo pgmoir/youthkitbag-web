@@ -101,6 +101,29 @@
   }
 }
 
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  &.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1; /* number of lines to show */
+    line-height: 1.5; /* fallback */
+    max-height: 1.5 * 3; /* fallback */
+  }
+}
+
 .badge {
   &.badge-fullsize {
     font-size: 100%;
@@ -143,6 +166,11 @@ span {
 
 .img-link {
   cursor: pointer;
+}
+
+.img-small {
+  max-height: 90px;
+  max-width: 90px;
 }
 
 .form-group {

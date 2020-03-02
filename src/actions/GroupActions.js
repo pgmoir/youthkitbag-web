@@ -20,7 +20,7 @@ const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchGroups = (
   searchfor = '',
-  by = 'all',
+  by = '',
   page = 1,
   pagesize = 24
 ) => dispatch => {

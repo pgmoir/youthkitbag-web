@@ -14,10 +14,11 @@ const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchMarketItems = (
   searchfor = '',
-  by = 'all',
+  by = '',
   page = 1,
   pagesize = 24
 ) => dispatch => {
+  console.log('FETCH MAR ITE', page, pagesize, typeof page);
   const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/market`, {
@@ -28,6 +29,7 @@ export const fetchMarketItems = (
       }
     })
     .then(response => {
+      console.log('PAGE', page);
       dispatch({ type: FETCH_MARKET_ITEMS, payload: response.data });
       dispatch({
         type: SEARCH_MARKET_ITEMS,

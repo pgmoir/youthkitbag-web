@@ -16,7 +16,7 @@ const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchKitbagKits = (
   searchfor = '',
-  by = 'all',
+  by = '',
   page = 1,
   pagesize = 24,
   accountId = null

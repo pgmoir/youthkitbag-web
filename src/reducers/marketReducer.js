@@ -9,12 +9,13 @@ import {
 const initialState = {
   list: [],
   current: {},
-  search: { searchfor: '', by: 'all', page: 1, pagesize: 24 }
+  search: { searchfor: '', by: '', page: 1, pagesize: 24, loading: true }
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case SEARCH_MARKET_ITEMS:
+      console.log('SEARCH MI', action.payload);
       return { ...state, search: action.payload };
     case FETCH_MARKET_ITEMS:
       return { ...state, current: {}, list: action.payload.items };

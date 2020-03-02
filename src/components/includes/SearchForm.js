@@ -9,7 +9,7 @@ const SearchForm = ({ accountId, search, callback }) => {
   const filter = useSelector(state => state.filter);
   const pagination = useSelector(state => state.pagination);
   const [isClearing, setIsClearing] = useState(false);
-
+  console.log('BY', by);
   const initialValues = {
     by: by,
     searchfor: searchfor
@@ -52,7 +52,11 @@ const SearchForm = ({ accountId, search, callback }) => {
                 value={values.by}
               >
                 {filter.options.map(o => (
-                  <option key={o.key} value={o.key}>
+                  <option
+                    key={o.key}
+                    value={o.key}
+                    defaultValue={o.key === by ? 'true' : ''}
+                  >
                     {o.value}
                   </option>
                 ))}

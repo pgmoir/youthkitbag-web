@@ -28,12 +28,12 @@ const MarketItems = ({
 }) => {
   const query = useLocation().search;
   let { searchfor, by, page, pagesize, loading } = search;
-  if (loading) {
+  if (query || loading) {
     const searchQuery = queryString.parse(query);
     searchfor = searchQuery.searchfor;
     by = searchQuery.by;
-    page = searchQuery.page;
-    pagesize = searchQuery.pagesize;
+    page = +searchQuery.page;
+    pagesize = +searchQuery.pagesize;
     search = { searchfor, by, page, pagesize };
   }
 
@@ -94,6 +94,8 @@ const MarketItems = ({
       );
     });
   }
+
+  console.log('SEARCH', search);
 
   return (
     <div>

@@ -48,7 +48,7 @@ const Header = ({ auth, user }) => {
                     <li className="nav-item">
                       <Link
                         className="btn btn-info text-nowrap mr-1"
-                        to="/market/"
+                        to="/market?searchfor=&by=&page=1&pagesize=24"
                         aria-label="Market place"
                       >
                         <span className="fas fa-th" aria-hidden="true"></span>{' '}

@@ -7,7 +7,7 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  options: [{ key: 'all', value: 'All' }]
+  options: [{ key: '', value: 'All' }]
 };
 
 export default (state = initialState, action) => {

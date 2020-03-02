@@ -7,10 +7,21 @@ import {
   LOGOUT,
   RESPOND_MARKET_KIT,
   FETCH_MARKET_ITEMS,
-  FETCH_KITBAG_MARKET_ITEMS
+  FETCH_KITBAG_MARKET_ITEMS,
+  FETCH_KITBAG_MARKET_TRADES,
+  FETCH_KITBAG_MARKET_RECYCLES,
+  FETCH_KITBAG_MARKET_STOLENS,
+  FETCH_KITBAG_MARKET_WANTEDS
 } from '../actions/types';
 
-const initialState = { current: {}, list: [] };
+const initialState = {
+  current: {},
+  list: [],
+  trades: [],
+  recycles: [],
+  stolens: [],
+  wanteds: []
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -26,6 +37,14 @@ export default (state = initialState, action) => {
       return { ...state };
     case FETCH_KITBAG_MARKET_ITEMS:
       return { ...state, list: action.payload };
+    case FETCH_KITBAG_MARKET_TRADES:
+      return { ...state, trades: action.payload };
+    case FETCH_KITBAG_MARKET_RECYCLES:
+      return { ...state, recycles: action.payload };
+    case FETCH_KITBAG_MARKET_STOLENS:
+      return { ...state, stolens: action.payload };
+    case FETCH_KITBAG_MARKET_WANTEDS:
+      return { ...state, wanteds: action.payload };
     case FETCH_MARKET_ITEMS:
     case RESET:
     case LOGOUT:

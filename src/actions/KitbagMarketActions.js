@@ -7,7 +7,11 @@ import {
   API_KITBAG_ERROR,
   GETALL_FAILURE,
   RESET_TOAST,
-  FETCH_KITBAG_MARKET_ITEMS
+  FETCH_KITBAG_MARKET_ITEMS,
+  FETCH_KITBAG_MARKET_TRADES,
+  FETCH_KITBAG_MARKET_RECYCLES,
+  FETCH_KITBAG_MARKET_STOLENS,
+  FETCH_KITBAG_MARKET_WANTEDS
 } from './types';
 import history from '../helpers/history';
 
@@ -178,17 +182,45 @@ export const deleteMarketKit = (accountId, marketId) => dispatch => {
     });
 };
 
-export const fetchKitbagMarketItems = () => dispatch => {
+export const fetchKitbagMarketItems = (by, pagesize) => dispatch => {
   const token = localStorage.getItem('token');
   axios
-    .get(`${baseUrl}/kitbag/market`, {
+    .get(`${baseUrl}/kitbag/market?by=${by}&pagesize=${pagesize}`, {
       headers: {
         Authorization: `bearer ${token}`,
         'content-type': 'application/json'
       }
     })
     .then(response => {
-      dispatch({ type: FETCH_KITBAG_MARKET_ITEMS, payload: response.data });
+      switch (by) {
+        case 'trade':
+          dispatch({
+            type: FETCH_KITBAG_MARKET_TRADES,
+            payload: response.data
+          });
+          break;
+        case 'recycle':
+          dispatch({
+            type: FETCH_KITBAG_MARKET_RECYCLES,
+            payload: response.data
+          });
+          break;
+        case 'stolen':
+          dispatch({
+            type: FETCH_KITBAG_MARKET_STOLENS,
+            payload: response.data
+          });
+          break;
+        case 'wanted':
+          dispatch({
+            type: FETCH_KITBAG_MARKET_WANTEDS,
+            payload: response.data
+          });
+          break;
+        default:
+          dispatch({ type: FETCH_KITBAG_MARKET_ITEMS, payload: response.data });
+          break;
+      }
     })
     .catch(err => {
       const { response } = err;
