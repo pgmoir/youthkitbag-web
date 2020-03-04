@@ -1,6 +1,7 @@
 import React from 'react';
 import Alert from '../includes/Alert';
 import SignUpForm from '../auth/SignUpForm';
+import { Link } from 'react-router-dom';
 
 const LoggedOutLanding = () => {
   return (
@@ -36,56 +37,97 @@ const LoggedOutLanding = () => {
           <div className="row">
             <div className="col-12 col-sm-6 col-md-3">
               <article className="card card-link card-b1">
-                <div className="d-flex">
-                  <div className="blank-square bg-light" />
-                </div>
-                <div className="card-body">
-                  <h3 className="card-title h6 ellipsis bg-light hgt-2">
-                    &nbsp;
-                  </h3>
-                  <p className="card-text ellipsis bg-light hgt-3">&nbsp;</p>
-                </div>
+                <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">
+                  10
+                </span>
+                <Link to="/auth/signup">
+                  <img
+                    className="card-img-top"
+                    src="/images/homepage-innertubes.jpg"
+                    alt="Example of innertubes in kitbag"
+                    role="presentation"
+                  />
+                  <div className="card-body">
+                    <h2 className="card-title">Kitbag Inventory</h2>
+                    <p className="card-text bg-light">
+                      Create multiple kitbags to keep a record of what sports,
+                      musical, hobby or school equipment you own. Keep track of
+                      expenditure, location and flag when replacement levels
+                      low.
+                    </p>
+                  </div>
+                </Link>
               </article>
             </div>
             <div className="col-12 col-sm-6 col-md-3">
               <article className="card card-link card-b1">
-                <div className="d-flex">
-                  <div className="blank-square bg-light" />
-                </div>
-                <div className="card-body">
-                  <h3 className="card-title h6 ellipsis bg-light hgt-2">
-                    &nbsp;
-                  </h3>
-                  <p className="card-text ellipsis bg-light hgt-3">&nbsp;</p>
-                </div>
+                <Link to="/auth/signup">
+                  <img
+                    className="card-img-top"
+                    src="/images/homepage-family.jpg"
+                    alt="Example of innertubes in kitbag"
+                    role="presentation"
+                  />
+                  <div className="card-body">
+                    <h2 className="card-title">Family Account</h2>
+                    <p className="card-text bg-light">
+                      Set up family or group account, so that multiple members
+                      can access view and store equipment details. Share with
+                      family members. Help the kids find and manage their own
+                      kit!
+                    </p>
+                  </div>
+                </Link>
               </article>
-            </div>
+            </div>{' '}
             <div className="col-12 col-sm-6 col-md-3">
               <article className="card card-link card-b1">
-                <div className="d-flex">
-                  <div className="blank-square bg-light" />
-                </div>
-                <div className="card-body">
-                  <h3 className="card-title h6 ellipsis bg-light hgt-2">
-                    &nbsp;
-                  </h3>
-                  <p className="card-text ellipsis bg-light hgt-3">&nbsp;</p>
-                </div>
+                <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">
+                  10
+                </span>
+                <Link to="/auth/signup">
+                  <img
+                    className="card-img-top"
+                    src="/images/homepage-club.jpg"
+                    alt="Example of innertubes in kitbag"
+                    role="presentation"
+                  />
+                  <div className="card-body">
+                    <h2 className="card-title">Clubs &amp; Teams</h2>
+                    <p className="card-text bg-light">
+                      Create multiple kitbags to keep a record of what sports,
+                      musical, hobby or school equipment you own. Share with
+                      family members. Help the kids find and manage their own
+                      kit!
+                    </p>
+                  </div>
+                </Link>
               </article>
-            </div>
+            </div>{' '}
             <div className="col-12 col-sm-6 col-md-3">
               <article className="card card-link card-b1">
-                <div className="d-flex">
-                  <div className="blank-square bg-light" />
-                </div>
-                <div className="card-body">
-                  <h3 className="card-title h6 ellipsis bg-light hgt-2">
-                    &nbsp;
-                  </h3>
-                  <p className="card-text ellipsis bg-light hgt-3">&nbsp;</p>
-                </div>
+                <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">
+                  10
+                </span>
+                <Link to="/auth/signup">
+                  <img
+                    className="card-img-top"
+                    src="/images/homepage-innertubes.jpg"
+                    alt="Example of innertubes in kitbag"
+                    role="presentation"
+                  />
+                  <div className="card-body">
+                    <h2 className="card-title">Trade &amp; Report</h2>
+                    <p className="card-text bg-light">
+                      Create multiple kitbags to keep a record of what sports,
+                      musical, hobby or school equipment you own. Share with
+                      family members. Help the kids find and manage their own
+                      kit!
+                    </p>
+                  </div>
+                </Link>
               </article>
-            </div>
+            </div>{' '}
           </div>
         </div>
       </section>
