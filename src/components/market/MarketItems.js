@@ -27,13 +27,23 @@ const MarketItems = ({
   match
 }) => {
   const query = useLocation().search;
-  let { searchfor, by, page, pagesize, loading } = search;
+  let {
+    searchfor,
+    by,
+    page,
+    pagesize,
+    excgroups,
+    excaccounts,
+    loading
+  } = search;
   if (query || loading) {
     const searchQuery = queryString.parse(query);
     searchfor = searchQuery.searchfor;
     by = searchQuery.by;
     page = +searchQuery.page;
     pagesize = +searchQuery.pagesize;
+    excgroups = searchQuery.excgroups === 'true';
+    excaccounts = searchQuery.excaccounts === 'true';
     search = { searchfor, by, page, pagesize };
   }
 
@@ -47,8 +57,8 @@ const MarketItems = ({
   }, [items]);
 
   useEffect(() => {
-    fetchMarketItems(searchfor, by, page, pagesize);
-  }, [searchfor, by, page, pagesize, fetchMarketItems]);
+    fetchMarketItems(searchfor, by, page, pagesize, excgroups, excaccounts);
+  }, [searchfor, by, page, pagesize, excgroups, excaccounts, fetchMarketItems]);
 
   function getTitle() {
     return `Market place items (${pagination.totalItems})`;
@@ -94,8 +104,6 @@ const MarketItems = ({
       );
     });
   }
-
-  console.log('SEARCH', search);
 
   return (
     <div>

@@ -9,7 +9,6 @@ const SearchForm = ({ accountId, search, callback }) => {
   const filter = useSelector(state => state.filter);
   const pagination = useSelector(state => state.pagination);
   const [isClearing, setIsClearing] = useState(false);
-  console.log('BY', by);
   const initialValues = {
     by: by,
     searchfor: searchfor

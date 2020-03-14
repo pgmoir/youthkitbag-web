@@ -6,10 +6,18 @@ const mapStateToProps = state => ({
 });
 
 const Pagination = ({ accountId, search, callback, pagination }) => {
-  const { searchfor, by, pagesize } = search;
+  const { searchfor, by, pagesize, excgroups, excaccounts } = search;
 
   function changePage(moveToPage) {
-    callback(searchfor, by, moveToPage, pagesize, accountId);
+    callback(
+      searchfor,
+      by,
+      moveToPage,
+      pagesize,
+      accountId,
+      excgroups,
+      excaccounts
+    );
   }
 
   function isFirstPageDisabled() {

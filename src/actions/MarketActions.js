@@ -16,27 +16,28 @@ export const fetchMarketItems = (
   searchfor = '',
   by = '',
   page = 1,
-  pagesize = 24
+  pagesize = 24,
+  accountId,
+  excgroups = false,
+  excaccounts = false
 ) => dispatch => {
-  console.log('FETCH MAR ITE', page, pagesize, typeof page);
   const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/market`, {
-      params: { searchfor, by, page, pagesize },
+      params: { searchfor, by, page, pagesize, excgroups, excaccounts },
       headers: {
         Authorization: `bearer ${token}`,
         'content-type': 'application/json'
       }
     })
     .then(response => {
-      console.log('PAGE', page);
       dispatch({ type: FETCH_MARKET_ITEMS, payload: response.data });
       dispatch({
         type: SEARCH_MARKET_ITEMS,
-        payload: { searchfor, by, page, pagesize }
+        payload: { searchfor, by, page, pagesize, excgroups, excaccounts }
       });
       history.push(
-        `/market?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}`
+        `/market?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}&excgroups=${excgroups}&excaccounts=${excaccounts}`
       );
     })
     .catch(err => {

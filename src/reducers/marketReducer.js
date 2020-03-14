@@ -15,7 +15,6 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case SEARCH_MARKET_ITEMS:
-      console.log('SEARCH MI', action.payload);
       return { ...state, search: action.payload };
     case FETCH_MARKET_ITEMS:
       return { ...state, current: {}, list: action.payload.items };
