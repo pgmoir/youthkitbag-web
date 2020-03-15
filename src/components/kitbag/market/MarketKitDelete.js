@@ -34,14 +34,14 @@ const KitDelete = ({ item, fetchMarketKit, deleteMarketKit, match }) => {
   }, [accountId, marketId, fetchMarketKit]);
 
   function renderTitle() {
-    if (!kit) {
+    if (!kit._id) {
       return 'Delete item of kit';
     }
     return `Delete "${kit.title}"`;
   }
 
   function renderContent() {
-    if (!kit) {
+    if (!kit._id) {
       return 'Are you sure you want to delete this item of kit? You do have the option to just change the active status and retain the history of this item.';
     }
     return `Are you sure you want to delete "${kit.title}"? You do have the option to just change the active status and retain the history of this item.`;
