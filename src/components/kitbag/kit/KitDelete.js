@@ -8,12 +8,8 @@ import {
 import Modal from '../../includes/Modal';
 import history from '../../../helpers/history';
 
-const mapStateToProps = (state, ownProps) => ({
-  item: state.kitbag.kit.list.find(
-    k =>
-      k._id === ownProps.match.params.kitId &&
-      k.account === ownProps.match.params.accountId
-  )
+const mapStateToProps = state => ({
+  item: state.kitbag.kit.current
 });
 
 const mapDispatchToProps = {
@@ -33,20 +29,22 @@ const KitDelete = ({ item, fetchKitbagKit, deleteKitbagKit, match }) => {
   }, [item, setKit]);
 
   useEffect(() => {
+    console.log('USEE', accountId, kitId);
     if (accountId && kitId) {
       fetchKitbagKit(accountId, kitId);
     }
   }, [accountId, kitId, fetchKitbagKit]);
 
   function renderTitle() {
-    if (!kit) {
+    if (!kit._id) {
       return 'Delete item of kit';
     }
     return `Delete "${kit.title}"`;
   }
 
   function renderContent() {
-    if (!kit) {
+    console.log('DEL', kit);
+    if (!kit._id) {
       return 'Are you sure you want to delete this item of kit? You do have the option to just change the active status and retain the history of this item.';
     }
     return `Are you sure you want to delete "${kit.title}"? You do have the option to just change the active status and retain the history of this item.`;
