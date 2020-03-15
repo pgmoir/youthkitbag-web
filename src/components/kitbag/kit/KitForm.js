@@ -100,7 +100,7 @@ const KitForm = ({
         setChange={setChange}
         addArrayItem={addArrayItem}
       />
-      <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
+      <div className="col-12 col-md-6 order-2 order-md-1" role="main">
         <form className="mb-3" onSubmit={handleSubmit}>
           <TextForm
             colFormat="3-9"

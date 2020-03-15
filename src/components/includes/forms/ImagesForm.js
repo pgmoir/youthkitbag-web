@@ -188,7 +188,7 @@ const ImagesForm = ({
 
   return (
     <React.Fragment>
-      <div className="col-12 col-lg-6 order-1 order-lg-2" role="main">
+      <div className="col-12 col-md-6 order-1 order-md-2" role="main">
         <div>
           <img
             id="preview"

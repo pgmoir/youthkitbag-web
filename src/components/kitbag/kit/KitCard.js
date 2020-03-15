@@ -41,7 +41,7 @@ const KitCard = ({ kit, accountId }) => {
   if (!_id) return renderBlank();
 
   return (
-    <div className="col-6 col-md-4 col-lg-3 mb-3">
+    <div className="col-6 col-sm-4 col-md-3 mb-3">
       <article className="card card-link card-b1">
         <span className="icons-top-left pt-1">
           <Link to={`/kitbag/kit/${accountId}/delete/${_id}`}>
