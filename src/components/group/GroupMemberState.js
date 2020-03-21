@@ -56,7 +56,4 @@ const GroupMemberState = ({ editGroupMemberState, match }) => {
   );
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(GroupMemberState);
+export default connect(null, mapDispatchToProps)(GroupMemberState);

@@ -82,9 +82,6 @@ const LoggedOutLanding = () => {
             </div>{' '}
             <div className="col-12 col-sm-6 col-md-3">
               <article className="card card-link card-b1">
-                <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">
-                  10
-                </span>
                 <Link to="/auth/signup">
                   <img
                     className="card-img-top"
@@ -95,10 +92,10 @@ const LoggedOutLanding = () => {
                   <div className="card-body">
                     <h2 className="card-title">Clubs &amp; Teams</h2>
                     <p className="card-text bg-light">
-                      Create multiple kitbags to keep a record of what sports,
-                      musical, hobby or school equipment you own. Share with
-                      family members. Help the kids find and manage their own
-                      kit!
+                      Been scammed on eBay? Theft targetted on Facebook? There
+                      is no open trading&#185; with the general public on
+                      YouthKitbag. Only through vetted organisations that
+                      control their own membership.
                     </p>
                   </div>
                 </Link>
@@ -107,7 +104,7 @@ const LoggedOutLanding = () => {
             <div className="col-12 col-sm-6 col-md-3">
               <article className="card card-link card-b1">
                 <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">
-                  10
+                  £3.99
                 </span>
                 <Link to="/auth/signup">
                   <img
@@ -119,10 +116,11 @@ const LoggedOutLanding = () => {
                   <div className="card-body">
                     <h2 className="card-title">Trade &amp; Report</h2>
                     <p className="card-text bg-light">
-                      Create multiple kitbags to keep a record of what sports,
-                      musical, hobby or school equipment you own. Share with
-                      family members. Help the kids find and manage their own
-                      kit!
+                      Want to sell or recycle your kit? Has you kit been stolen?
+                      Do you need a new or replacement item? YouthKitbag lets
+                      you trade, request and report with other club, team
+                      members. Financial transactions are not handled by
+                      YouthKitbag.
                     </p>
                   </div>
                 </Link>

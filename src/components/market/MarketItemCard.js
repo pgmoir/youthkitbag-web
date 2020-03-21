@@ -21,15 +21,14 @@ const MarketItemCard = ({ market }) => {
   function renderNotification() {
     if (!market) return null;
 
-    if (isOwned) {
-      return threads.length;
-    }
+    const numberThreads = isOwned ? ` / ${threads.length}` : '';
 
     if (['trade', 'wanted'].includes(marketType)) {
-      if (!marketPrice || marketPrice === 0) return 'Free';
-      return `£${marketPrice.toFixed(2)}`;
+      if (!marketPrice || marketPrice === 0) return `Free${numberThreads}`;
+      return `£${marketPrice.toFixed(2)}${numberThreads}`;
     }
-    return marketType;
+
+    return `${marketType}${numberThreads}`;
   }
 
   function topImage() {
