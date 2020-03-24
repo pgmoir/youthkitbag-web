@@ -7,6 +7,9 @@ const mapStateToProps = state => ({});
 const mapDispatchToProps = {};
 
 const MarketAnnouncement = ({ group }) => {
+  //TODO: This needs coding - just dont show for now
+  return null;
+
   if (!group) return null;
 
   return (

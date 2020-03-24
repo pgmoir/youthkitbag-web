@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { fetchKitbagMarketItems } from '../../actions/KitbagMarketActions';
 
 const mapStateToProps = state => ({
-  items: state.kitbag.market.stolens
+  totalItems: state.kitbag.market.stolens.totalItems,
+  items: state.kitbag.market.stolens.items
 });
 
 const mapDispatchToProps = {
@@ -14,6 +15,7 @@ const mapDispatchToProps = {
 const KitbagMarketStolenAnnouncement = ({
   group,
   items,
+  totalItems,
   fetchKitbagMarketItems
 }) => {
   const [marketItems, setMarketItems] = useState([]);
@@ -35,7 +37,7 @@ const KitbagMarketStolenAnnouncement = ({
     return images[0].imageUrl;
   }
 
-  if (!group || !marketItems) return null;
+  if (!group || !marketItems || totalItems === 0) return null;
 
   function renderList() {
     return marketItems.map((m, index) => {
@@ -66,6 +68,7 @@ const KitbagMarketStolenAnnouncement = ({
     <div className="card border-0">
       <div className="alert alert-danger mb-0" role="alert">
         <h2 className="alert-heading">Your stolen items</h2>
+        <p>You currently have {totalItems} active reported stolen items.</p>
         <div className="mb-3">{renderList()}</div>
         <p>These are your most recently active stolen items.</p>
         <p className="mb-1">
