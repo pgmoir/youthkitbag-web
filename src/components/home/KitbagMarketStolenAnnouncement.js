@@ -42,24 +42,27 @@ const KitbagMarketStolenAnnouncement = ({
   function renderList() {
     return marketItems.map((m, index) => {
       return (
-        <div
+        <Link
+          className="a-inherit"
           key={index}
-          className="bg-white d-flex flex-row align-items-center mb-2"
+          to={`/kitbag/market/${m.account}/edit/${m._id}`}
         >
-          <div className="pl-1 py-1 pr-2">
-            <img
-              src={topImage(m.images)}
-              alt="{m.title}"
-              className="img-fluid img-thumbnail img-small"
-            />
+          <div className="bg-white d-flex flex-row align-items-center mb-2">
+            <div className="pl-1 py-1 pr-2">
+              <img
+                src={topImage(m.images)}
+                alt="{m.title}"
+                className="img-fluid img-thumbnail img-small"
+              />
+            </div>
+            <div className="">
+              <h3 className="h6 ellipsis mb-0">{m.title}</h3>
+              <p className="mb-0">
+                You have <strong>{m.threads.length}</strong> active threads
+              </p>
+            </div>
           </div>
-          <div className="">
-            <h3 className="h6 ellipsis mb-0">{m.title}</h3>
-            <p className="mb-0">
-              You have <strong>{m.threads.length}</strong> active threads
-            </p>
-          </div>
-        </div>
+        </Link>
       );
     });
   }
