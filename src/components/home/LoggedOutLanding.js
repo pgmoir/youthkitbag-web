@@ -17,10 +17,14 @@ const LoggedOutLanding = () => {
               <div className="col-12 col-lg-6">
                 <h1>YouthKitbag</h1>
                 <h2 className="pb-3">Inventory, Trade, Report</h2>
-                <h3 className="">school kit, club kit, team kit, any kit</h3>
-                <h4 className="pb-5">
+                <h3>school kit, club kit, team kit, any kit</h3>
+                <h4 className="pb-3">
                   sports gear, musical instruments, school uniforms, more ...
                 </h4>
+                <h5 className="pb-3">
+                  Why did I create this application?{' '}
+                  <Link to="/why#created">I explain here</Link>
+                </h5>
               </div>
               <div className="col-12 col-lg-6">
                 <div className="row">
@@ -48,8 +52,8 @@ const LoggedOutLanding = () => {
                     role="presentation"
                   />
                   <div className="card-body">
-                    <h2 className="card-title">Kitbag Inventory</h2>
-                    <p className="card-text bg-light">
+                    <h2 className="card-title">Inventory</h2>
+                    <p className="card-text">
                       Create multiple kitbags to keep a record of what sports,
                       musical, hobby or school equipment you own. Keep track of
                       expenditure, location and flag when replacement levels
@@ -70,7 +74,7 @@ const LoggedOutLanding = () => {
                   />
                   <div className="card-body">
                     <h2 className="card-title">Family Account</h2>
-                    <p className="card-text bg-light">
+                    <p className="card-text">
                       Set up family or group account, so that multiple members
                       can access view and store equipment details. Share with
                       family members. Help the kids find and manage their own
@@ -91,7 +95,7 @@ const LoggedOutLanding = () => {
                   />
                   <div className="card-body">
                     <h2 className="card-title">Clubs &amp; Teams</h2>
-                    <p className="card-text bg-light">
+                    <p className="card-text">
                       Been scammed on eBay? Theft targetted on Facebook? There
                       is no open trading&#185; with the general public on
                       YouthKitbag. Only through vetted organisations that
@@ -109,18 +113,16 @@ const LoggedOutLanding = () => {
                 <Link to="/auth/signup">
                   <img
                     className="card-img-top"
-                    src="/images/homepage-innertubes.jpg"
+                    src="/images/homepage-trade.jpg"
                     alt="Example of innertubes in kitbag"
                     role="presentation"
                   />
                   <div className="card-body">
                     <h2 className="card-title">Trade &amp; Report</h2>
-                    <p className="card-text bg-light">
-                      Want to sell or recycle your kit? Has you kit been stolen?
-                      Do you need a new or replacement item? YouthKitbag lets
-                      you trade, request and report with other club, team
-                      members. Financial transactions are not handled by
-                      YouthKitbag.
+                    <p className="card-text">
+                      Sell or recycle your kit? Something stolen? Want new or
+                      replacement item? YouthKitbag lets you trade, request and
+                      report directly with other club, team members.
                     </p>
                   </div>
                 </Link>
