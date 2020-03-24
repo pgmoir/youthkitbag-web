@@ -63,7 +63,7 @@ const Why = () => {
             </div>
           </div>
 
-          <div className="row m-0 px-0 pb-3 bg-light">
+          <div className="row m-0 mb-3 px-0 bg-light">
             <div className="col-lg-6 p-0 order-1">
               <img
                 className="img-fluid pr-0 pr-lg-3 pb-3 pb-lg-0"
