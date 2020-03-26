@@ -40,6 +40,7 @@ import AccountMemberInvite from './accounts/AccountMemberInvite';
 import AccountMemberAccept from './accounts/AccountMemberAccept';
 import AccountMemberJoin from './accounts/AccountMemberJoin';
 import LearnMore from './learn/LearnMore';
+import BetaAnnouncement from './home/BetaAnnouncement';
 
 const App = () => {
   return (
@@ -47,6 +48,7 @@ const App = () => {
       <Router history={history}>
         <User />
         <Header />
+        <BetaAnnouncement />
         <main>
           <noscript>You need to enable JavaScript to run this app.</noscript>
           <Link
