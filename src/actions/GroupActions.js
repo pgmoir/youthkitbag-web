@@ -193,7 +193,6 @@ export const fetchGroupMembers = groupId => dispatch => {
 };
 
 export const editGroupMemberState = (groupId, memberId, state) => dispatch => {
-  console.log('MEM', groupId, memberId, state);
   const token = localStorage.getItem('token');
   axios
     .put(

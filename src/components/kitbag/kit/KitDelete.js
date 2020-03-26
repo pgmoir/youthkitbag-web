@@ -29,7 +29,6 @@ const KitDelete = ({ item, fetchKitbagKit, deleteKitbagKit, match }) => {
   }, [item, setKit]);
 
   useEffect(() => {
-    console.log('USEE', accountId, kitId);
     if (accountId && kitId) {
       fetchKitbagKit(accountId, kitId);
     }
@@ -43,7 +42,6 @@ const KitDelete = ({ item, fetchKitbagKit, deleteKitbagKit, match }) => {
   }
 
   function renderContent() {
-    console.log('DEL', kit);
     if (!kit._id) {
       return 'Are you sure you want to delete this item of kit? You do have the option to just change the active status and retain the history of this item.';
     }
