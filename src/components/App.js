@@ -21,6 +21,7 @@ import Token from './auth/Token';
 import PurchaseSubscriptionPage from './PurchaseSubscriptionPage';
 import Groups from './group/Groups';
 import GroupPage from './group/GroupPage';
+import ShowGroupPage from './show/ShowGroupPage';
 import GroupStatus from './group/GroupStatus';
 import GroupMembers from './group/GroupMembers';
 import GroupMemberState from './group/GroupMemberState';
@@ -128,6 +129,11 @@ const App = () => {
               path="/kitbag/market/:accountId/delete/:marketId"
               exact
               component={MarketKitDelete}
+            />
+            <Route
+              path="/show/group/:groupId"
+              exact
+              component={ShowGroupPage}
             />
             <PrivateRoute path="/groups/new" exact component={GroupPage} />
             <PrivateRoute

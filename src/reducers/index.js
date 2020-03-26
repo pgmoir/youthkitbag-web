@@ -11,6 +11,7 @@ import paginationReducer from './paginationReducer';
 import toastReducer from './toastReducer';
 import subscriptionReducer from './subscriptionReducer';
 import imageReducer from './imageReducer';
+import showReducer from './showReducer';
 
 export default combineReducers({
   account: accountReducer,
@@ -23,5 +24,6 @@ export default combineReducers({
   pagination: paginationReducer,
   toast: toastReducer,
   subscription: subscriptionReducer,
-  images: imageReducer
+  images: imageReducer,
+  show: showReducer
 });

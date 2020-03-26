@@ -354,6 +354,9 @@ h4,
   .youthkitbag .img-small {
     max-height: 90px;
     max-width: 90px; }
+  .youthkitbag .img-medium {
+    max-height: 150px;
+    max-width: 150px; }
   .youthkitbag .form-group .valid-feedback {
     color: #1d7631 !important;
     font-size: 100%; }
