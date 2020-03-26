@@ -11,7 +11,7 @@ const GroupIntro = ({ group, trades, recycles, stolens, wanteds }) => {
 
   return (
     <div className="row" role="main">
-      <div className="col-12 col-sm-6 pr-2">
+      <div className="col-12 col-md-6 pr-2">
         <p className="f-lg">
           {group.status === 'approved' && (
             <>
@@ -34,17 +34,23 @@ const GroupIntro = ({ group, trades, recycles, stolens, wanteds }) => {
             </>
           )}
         </p>
-        <div className="card p-3 mx-3 my-5">
+        <div className="card p-3 mr-3 my-3">
           <blockquote className="blockquote mb-0 card-body">
-            <p>
-              I thoroughly recommend given YouthKitbag a go for trading all your
-              club gear and accessories.
-            </p>
+            {!group.recommendation && (
+              <p>
+                I thoroughly recommend giving YouthKitbag a go for trading all
+                your club gear and accessories.
+              </p>
+            )}
+            {group.recommendation && <p>{group.recommendation}</p>}
             <footer className="blockquote-footer">
               <small className="text-muted">
                 recommendation made by{' '}
                 <cite title="Source Title">
-                  Phil Moir (YouthKitbag developer)
+                  {!group.recommendationBy && (
+                    <>Phil Moir (YouthKitbag developer)</>
+                  )}
+                  {group.recommendationBy && <>{group.recommendationBy}</>}
                 </cite>
               </small>
             </footer>
@@ -62,7 +68,7 @@ const GroupIntro = ({ group, trades, recycles, stolens, wanteds }) => {
             return <li key={i}>{m}</li>;
           })}
         </ul>
-        <div className="bg-dark text-white p-5 mx-3 my-5 rounded-lg">
+        <div className="bg-dark text-white p-5 mr-3 my-3 rounded-lg">
           <h3 className="pb-3 text-center">
             What are you waiting for? Come and join!
           </h3>
@@ -75,7 +81,7 @@ const GroupIntro = ({ group, trades, recycles, stolens, wanteds }) => {
         </div>
       </div>
 
-      <div className="col-12 col-sm-6">
+      <div className="col-12 col-md-6">
         <GroupIntroRecycles recycles={recycles} />
         <GroupIntroTrades trades={trades} />
         <GroupIntroStolens stolens={stolens} />

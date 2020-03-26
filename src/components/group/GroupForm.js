@@ -135,7 +135,24 @@ const GroupForm = ({
             handleChange={handleChange}
             error={errors.description}
           />
-          {}
+          <TextForm
+            colFormat="3-9"
+            label="Reocmmendation"
+            value={values.recommendation}
+            field="recommendation"
+            readOnly={isReadOnly}
+            handleChange={handleChange}
+            error={errors.recommendation}
+          />
+          <TextForm
+            colFormat="3-9"
+            label="Reocmmendation by"
+            value={values.recommendationBy}
+            field="recommendationBy"
+            readOnly={isReadOnly}
+            handleChange={handleChange}
+            error={errors.recommendationBy}
+          />
           <TextForm
             colFormat="3-9"
             type="email"

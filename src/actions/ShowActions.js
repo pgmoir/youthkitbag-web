@@ -1,7 +1,6 @@
 import axios from 'axios';
 import {
   FETCH_SHOW_GROUP,
-  FETCH_SHOW_GROUP_MARKET,
   API_KITBAG_ERROR,
   GETALL_FAILURE,
   FETCH_SHOW_MARKET_TRADES,
@@ -35,12 +34,6 @@ export const fetchShowGroupMarket = (groupId, by) => dispatch => {
     .get(`${baseUrl}/show/group/market/${groupId}/${by}`)
     .then(response => {
       switch (by) {
-        case 'trade':
-          dispatch({
-            type: FETCH_SHOW_MARKET_TRADES,
-            payload: response.data
-          });
-          break;
         case 'recycle':
           dispatch({
             type: FETCH_SHOW_MARKET_RECYCLES,
@@ -56,6 +49,12 @@ export const fetchShowGroupMarket = (groupId, by) => dispatch => {
         case 'wanted':
           dispatch({
             type: FETCH_SHOW_MARKET_WANTEDS,
+            payload: response.data
+          });
+          break;
+        default:
+          dispatch({
+            type: FETCH_SHOW_MARKET_TRADES,
             payload: response.data
           });
           break;

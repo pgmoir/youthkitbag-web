@@ -21,6 +21,8 @@ const GroupPage = ({ current, fetchGroup, match }) => {
     name: '',
     tagline: '',
     description: '',
+    recommendation: '',
+    recommendationBy: '',
     email: '',
     website: '',
     location: '',

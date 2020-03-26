@@ -1,11 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const KitbagKitAnnouncement = ({ accountId }) => {
-  //TODO: This needs coding - just dont show for now
-  return null;
-
-  if (!accountId) return null;
+const KitbagKitAnnouncement = ({ accountId, doNotShow }) => {
+  if (!accountId || !doNotShow) return null;
 
   return (
     <div className="card border-0">
