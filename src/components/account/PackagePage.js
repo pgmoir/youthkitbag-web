@@ -27,7 +27,7 @@ const PackagePage = ({ userPackage }) => {
       {userPackage && (
         <div className="row">
           <div className="col-12">
-            <h5>
+            <h5 className={`bg-${userPackage.theme} mb-0 p-3`}>
               <i className={`fas fa-${userPackage.icon}`}></i> Package Usage and
               Limits
             </h5>

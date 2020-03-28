@@ -134,7 +134,7 @@ h4,
     border-radius: 0.25rem;
     border-bottom: 0.25rem; }
     .youthkitbag .h-highlight.h-light {
-      border-bottom: 0.25rem solid #cccccc;
+      border-bottom: 0.25rem solid #b4b4b4;
       background-color: #f0f0f0;
       color: #2d3039; }
     .youthkitbag .h-highlight.h-dark {
@@ -157,7 +157,7 @@ h4,
     white-space: normal !important;
     word-wrap: break-word; }
   .youthkitbag .footer {
-    color: #cccccc; }
+    color: #b4b4b4; }
     .youthkitbag .footer h6,
     .youthkitbag .footer .h6 {
       color: #f0f0f0; }
@@ -242,10 +242,10 @@ h4,
   .youthkitbag .card {
     margin-bottom: 1rem;
     border: 1rem;
-    border-bottom: 0.25rem solid #cccccc; }
+    border-bottom: 0.25rem solid #b4b4b4; }
     .youthkitbag .card.card-b1 {
-      border: 1px solid #cccccc;
-      border-bottom: 0.25rem solid #cccccc; }
+      border: 1px solid #b4b4b4;
+      border-bottom: 0.25rem solid #b4b4b4; }
       .youthkitbag .card.card-b1.card-b-stolen {
         border: 1px solid #ff6864;
         border-bottom: 0.25rem solid #ff6864; }
@@ -375,6 +375,12 @@ h4,
     background-color: #7d419820; }
   .youthkitbag .bg-mischka {
     background-color: #d9d3dc; }
+  .youthkitbag .bg-bronze {
+    background-color: #af9500; }
+  .youthkitbag .bg-silver {
+    background-color: #b4b4b4; }
+  .youthkitbag .bg-gold {
+    background-color: #ad8a56; }
   .youthkitbag .btn-facebook {
     background: #3b5998 url("/images/facebook.svg") no-repeat 13px -3px;
     background-size: 47px;

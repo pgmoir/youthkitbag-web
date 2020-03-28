@@ -6,7 +6,7 @@ import Title from './includes/title/Title';
 const Pricing = () => {
   return (
     <div>
-      <Title title="Pricing" />
+      <Title title="Pricing & User Limitations" />
       <section
         id="main"
         className="container-fluid"
@@ -16,22 +16,18 @@ const Pricing = () => {
           <div className="row">
             <div className="col-12 col-md-4">
               <article className="card">
-                <div className="card-header h4 text-center">
+                <div className="card-header h4 text-center bg-bronze">
                   Free (Star) <i className="fas fa-star"></i>
                 </div>
                 <img className="card-img" src="" alt="" role="presentation" />
                 <div className="card-body">
-                  <h5 className="text-center mb-3">Size of Kitbag</h5>
-                  <p className="card-text text-center">
-                    20 items in private kitbag
-                  </p>
-                  <p className="card-text text-center">
-                    5 items listed for sale
-                  </p>
-                  <p className="card-text text-center">
-                    5 items listed as wanted
-                  </p>
-                  <p className="card-text text-center">2 photos per item</p>
+                  <p className="card-text text-center">add 50 kitbag items</p>
+                  <p className="card-text text-center">add 50 market items</p>
+                  <p className="card-text text-center">upload 100 photos</p>
+                  <p className="card-text text-center">admin 1 account</p>
+                  <p className="card-text text-center">join 1 account</p>
+                  <p className="card-text text-center">admin 1 group</p>
+                  <p className="card-text text-center">join 2 groups</p>
                   <hr />
                   <h5 className="text-center mb-3">Cost</h5>
                   <p className="card-text text-center">Absolutely nothing</p>
@@ -46,25 +42,21 @@ const Pricing = () => {
             </div>
             <div className="col-12 col-md-4">
               <article className="card">
-                <div className="card-header h4 text-center">
+                <div className="card-header h4 text-center bg-silver">
                   Standard (Medal) <i className="fas fa-medal"></i>
                 </div>
                 <img className="card-img" src="" alt="" role="presentation" />
                 <div className="card-body">
-                  <h5 className="text-center mb-3">Size of Kitbag</h5>
-                  <p className="card-text text-center">
-                    100 items in private kitbag
-                  </p>
-                  <p className="card-text text-center">
-                    25 items listed for sale
-                  </p>
-                  <p className="card-text text-center">
-                    25 items listed as wanted
-                  </p>
-                  <p className="card-text text-center">5 photos per item</p>
+                  <p className="card-text text-center">add 500 kitbag items</p>
+                  <p className="card-text text-center">add 500 market items</p>
+                  <p className="card-text text-center">upload 1000 photos</p>
+                  <p className="card-text text-center">admin 2 account</p>
+                  <p className="card-text text-center">join 3 account</p>
+                  <p className="card-text text-center">admin 2 group</p>
+                  <p className="card-text text-center">join 5 groups</p>
                   <hr />
                   <h5 className="text-center mb-3">Cost</h5>
-                  <p className="card-text text-center">£2 / month</p>
+                  <p className="card-text text-center">£20 / year</p>
                   <hr />
                   <div className="d-flex">
                     <Link
@@ -79,25 +71,21 @@ const Pricing = () => {
             </div>
             <div className="col-12 col-md-4">
               <article className="card">
-                <div className="card-header h4 text-center">
+                <div className="card-header h4 text-center bg-gold">
                   Premium (Trophy) <i className="fas fa-trophy"></i>
                 </div>
                 <img className="card-img" src="" alt="" role="presentation" />
                 <div className="card-body">
-                  <h5 className="text-center mb-3">Size of Kitbag</h5>
-                  <p className="card-text text-center">
-                    1000 items in private kitbag
-                  </p>
-                  <p className="card-text text-center">
-                    100 items listed for sale
-                  </p>
-                  <p className="card-text text-center">
-                    100 items listed as wanted
-                  </p>
-                  <p className="card-text text-center">10 photos per item</p>
+                  <p className="card-text text-center">add 5000 kitbag items</p>
+                  <p className="card-text text-center">add 5000 market items</p>
+                  <p className="card-text text-center">upload 10000 photos</p>
+                  <p className="card-text text-center">admin 3 account</p>
+                  <p className="card-text text-center">join 5 account</p>
+                  <p className="card-text text-center">admin 3 group</p>
+                  <p className="card-text text-center">join 10 groups</p>
                   <hr />
                   <h5 className="text-center mb-3">Cost</h5>
-                  <p className="card-text text-center">£5 / month</p>
+                  <p className="card-text text-center">£50 / year</p>
                   <hr />
                   <div className="d-flex">
                     <Link
