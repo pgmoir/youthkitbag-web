@@ -6,6 +6,7 @@ import {
   LOGOUT,
   RESET_REQUESTED,
   SIGNUP_FAILURE,
+  PASSWORD_RESET_CHECK,
   PASSWORD_RESET
 } from './types';
 import axios from 'axios';
@@ -113,12 +114,24 @@ export const reset = email => dispatch => {
     });
 };
 
-export const newPassword = (password, userId, token) => dispatch => {
+export const checkNewPassword = token => dispatch => {
+  window.localStorage.clear();
+  axios
+    .get(`${baseUrl}/auth/reset/${token}`)
+    .then(response => {
+      dispatch({ type: PASSWORD_RESET_CHECK, payload: response.data });
+    })
+    .catch(err => {
+      dispatch({ type: SIGNUP_FAILURE, payload: err.response });
+    });
+};
+
+export const setNewPassword = (userId, passwordToken, password) => dispatch => {
   window.localStorage.clear();
   axios
     .post(
       `${baseUrl}/auth/new-password`,
-      { password, userId, token },
+      { userId, passwordToken, password },
       {
         'content-type': 'application/json'
       }

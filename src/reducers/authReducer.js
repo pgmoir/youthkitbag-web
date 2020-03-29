@@ -5,7 +5,8 @@ import {
   SIGNUP_FAILURE,
   GETALL_SUCCESS,
   GETALL_FAILURE,
-  LOGOUT
+  LOGOUT,
+  PASSWORD_RESET_CHECK
 } from '../actions/types';
 
 const isLogin = !!(
@@ -47,6 +48,11 @@ export default function authentication(state = initialState, action) {
       };
     case LOGOUT:
       return {
+        loggedIn: false
+      };
+    case PASSWORD_RESET_CHECK:
+      return {
+        userId: action.payload.userId,
         loggedIn: false
       };
     default:

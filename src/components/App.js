@@ -77,7 +77,7 @@ const App = () => {
             <Route path="/auth/reset" exact component={Reset} />
             <Route path="/auth/token/:token" exact component={Token} />
             <Route
-              path="/auth/newpassword/:key"
+              path="/auth/newpassword/:token"
               exact
               component={NewPassword}
             />

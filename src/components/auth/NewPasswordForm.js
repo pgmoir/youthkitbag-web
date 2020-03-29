@@ -1,19 +1,27 @@
 import React, { useEffect } from 'react';
 import useForm from '../hooks/useForm';
-import { newPassword } from '../../actions/AuthActions';
+import { checkNewPassword, setNewPassword } from '../../actions/AuthActions';
 import { connect } from 'react-redux';
 import { TextForm } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
 
 const mapStateToProps = state => ({
+  userId: state.auth.userId,
   newErrors: state.toast.errors
 });
 
 const mapDispatchToProps = {
-  newPassword
+  checkNewPassword,
+  setNewPassword
 };
 
-const NewPasswordForm = ({ newErrors, newPassword }) => {
+const NewPasswordForm = ({
+  userId,
+  newErrors,
+  checkNewPassword,
+  setNewPassword,
+  token
+}) => {
   const initialValues = {
     password: ''
   };
@@ -25,13 +33,19 @@ const NewPasswordForm = ({ newErrors, newPassword }) => {
   );
 
   useEffect(() => {
+    if (token) {
+      checkNewPassword(token);
+    }
+  }, [token, checkNewPassword]);
+
+  useEffect(() => {
     if (newErrors) {
       setErrors(newErrors);
     }
   }, [newErrors, setErrors]);
 
   function newPasswordSubmit() {
-    newPassword(values.password);
+    setNewPassword(userId, token, values.password);
   }
 
   return (

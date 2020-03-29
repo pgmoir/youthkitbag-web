@@ -4,7 +4,8 @@ import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 import NewPasswordForm from './NewPasswordForm';
 
-const NewPasswordPage = () => {
+const NewPasswordPage = ({ match }) => {
+  const token = match.params.token;
   return (
     <div>
       <Title title="Set a new password" />
@@ -21,7 +22,7 @@ const NewPasswordPage = () => {
           <div className="row">
             <div className="col-12 col-md-6 mb-3 mx-auto">
               <Alert />
-              <NewPasswordForm />
+              <NewPasswordForm token={token} />
             </div>
           </div>
         </div>
