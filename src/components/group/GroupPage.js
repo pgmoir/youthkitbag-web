@@ -78,14 +78,16 @@ const GroupPage = ({ current, fetchGroup, match }) => {
           <Alert />
           <div className="row">
             <div className="col-12 mb-3 d-flex justify-content-end">
-              {groupId && group.groupAdmin && group.status === 'approved' && (
-                <Link
-                  to={`/groups/${groupId}/members`}
-                  className="btn btn-primary"
-                >
-                  Members
-                </Link>
-              )}
+              {groupId &&
+                group.status === 'approved' &&
+                (group.groupAdmin || group.groupMember) && (
+                  <Link
+                    to={`/groups/${groupId}/members`}
+                    className="btn btn-primary"
+                  >
+                    Members
+                  </Link>
+                )}
               {groupId && group.status === 'approved' && !group.groupMember && (
                 <Link
                   to={`/groups/${groupId}/join`}

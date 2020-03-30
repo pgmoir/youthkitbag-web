@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const GroupMember = ({ groupId, member }) => {
+const GroupMember = ({ groupId, member, groupMember, groupAdmin }) => {
   const { user, permissions, state } = member;
 
   function getThumbnail() {
@@ -56,11 +56,13 @@ const GroupMember = ({ groupId, member }) => {
   return (
     <div className="col-6 col-sm-4 col-lg-3 col-xl-2 mb-3">
       <article className="card card-b1">
-        <span className="icons-top-left pt-1">
-          <Link to={`/groups/${groupId}/members/${user._id}/delete`}>
-            <span className="icon-tray-item fas fa-trash-alt"></span>
-          </Link>
-        </span>
+        {groupAdmin && (
+          <span className="icons-top-left pt-1">
+            <Link to={`/groups/${groupId}/members/${user._id}/delete`}>
+              <span className="icon-tray-item fas fa-trash-alt"></span>
+            </Link>
+          </span>
+        )}
         <div className="p-2">
           <img
             className="card-img-top img-thumbnail rounded-circle p-0"
@@ -85,7 +87,7 @@ const GroupMember = ({ groupId, member }) => {
             <span
               className={`fas fa-meh w-25 text-center ${isRequested()}`}
             ></span>
-            {state !== 'left' && (
+            {groupAdmin && state !== 'left' && (
               <>
                 <Link to={`/groups/${groupId}/members/${user._id}/approved`}>
                   <span
@@ -102,6 +104,19 @@ const GroupMember = ({ groupId, member }) => {
                     className={`fas fa-meh-blank w-25 text-center ${isSuspended()}`}
                   ></span>
                 </Link>
+              </>
+            )}
+            {!groupAdmin && groupMember && state !== 'left' && (
+              <>
+                <span
+                  className={`fas fa-laugh w-25 text-center ${isApproved()}`}
+                ></span>
+                <span
+                  className={`fas fa-sad-tear w-25 text-center ${isRejected()}`}
+                ></span>
+                <span
+                  className={`fas fa-meh-blank w-25 text-center ${isSuspended()}`}
+                ></span>
               </>
             )}
             {state === 'left' && (

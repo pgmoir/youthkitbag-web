@@ -72,6 +72,8 @@ const GroupMembers = ({ memberList, fetchGroupMembers, match }) => {
           key={`${member._id}-${index}`}
           member={member}
           groupId={group._id}
+          groupMember={group.groupMember}
+          groupAdmin={group.groupAdmin}
         />
       );
     });

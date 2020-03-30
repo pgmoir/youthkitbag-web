@@ -137,7 +137,7 @@ const GroupForm = ({
           />
           <TextForm
             colFormat="3-9"
-            label="Reocmmendation"
+            label="Recommendation"
             value={values.recommendation}
             field="recommendation"
             readOnly={isReadOnly}
@@ -146,7 +146,7 @@ const GroupForm = ({
           />
           <TextForm
             colFormat="3-9"
-            label="Reocmmendation by"
+            label="Recommendation by"
             value={values.recommendationBy}
             field="recommendationBy"
             readOnly={isReadOnly}
