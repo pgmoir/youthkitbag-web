@@ -41,6 +41,7 @@ import AccountMemberAccept from './accounts/AccountMemberAccept';
 import AccountMemberJoin from './accounts/AccountMemberJoin';
 import LearnMore from './learn/LearnMore';
 import BetaAnnouncement from './home/BetaAnnouncement';
+import GroupMemberDelete from './group/GroupMemberDelete';
 
 const App = () => {
   return (
@@ -142,6 +143,11 @@ const App = () => {
               path="/groups/status/:groupId"
               exact
               component={GroupStatus}
+            />
+            <PrivateRoute
+              path="/groups/:groupId/members/:memberId/delete"
+              exact
+              component={GroupMemberDelete}
             />
             <PrivateRoute
               path="/groups/:groupId/members/:memberId/:state"

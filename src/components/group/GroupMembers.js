@@ -30,7 +30,9 @@ const GroupMembers = ({ memberList, fetchGroupMembers, match }) => {
   }, [groupId, fetchGroupMembers]);
 
   function getTitle() {
-    return `${group.name} - members (${group.members.length})`;
+    return `${group.name} - members (${
+      group.members.filter(m => m.state !== 'left').length
+    })`;
   }
 
   function renderBlank() {
@@ -98,7 +100,4 @@ const GroupMembers = ({ memberList, fetchGroupMembers, match }) => {
   return <React.Fragment>{render()}</React.Fragment>;
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GroupMembers);
+export default connect(mapStateToProps, mapDispatchToProps)(GroupMembers);

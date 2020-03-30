@@ -10,6 +10,7 @@ import {
   LOGIN_FAILURE,
   EDIT_GROUP_STATUS,
   EDIT_GROUP_MEMBER_STATE,
+  DELETE_GROUP_MEMBER,
   EDIT_USER_PROFILE,
   API_MARKET_ERROR,
   SIGNUP_SUCCESS,
@@ -41,6 +42,7 @@ export default (state = initialState, action) => {
       };
     case DELETE_KITBAG_KIT:
     case DELETE_MARKET_KIT:
+    case DELETE_GROUP_MEMBER:
       return {
         currentMessage: action.payload.message,
         currentStyle: 'warning'

@@ -5,6 +5,7 @@ import {
   FETCH_GROUP,
   EDIT_GROUP,
   EDIT_GROUP_STATUS,
+  DELETE_GROUP_MEMBER,
   FETCH_GROUP_MEMBERS,
   EDIT_GROUP_MEMBER_STATE,
   API_KITBAG_ERROR,
@@ -208,6 +209,30 @@ export const editGroupMemberState = (groupId, memberId, state) => dispatch => {
     .then(response => {
       history.push(`/groups/${groupId}/members`);
       dispatch({ type: EDIT_GROUP_MEMBER_STATE, payload: response.data });
+    })
+    .catch(err => {
+      const { response } = err;
+      if (response.status === 401) {
+        window.localStorage.clear();
+        dispatch({ type: GETALL_FAILURE, payload: response });
+        history.push(`/auth/login?return=/groups/${groupId}/members`);
+      }
+      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+    });
+};
+
+export const deleteGroupMember = (groupId, memberId) => dispatch => {
+  const token = localStorage.getItem('token');
+  axios
+    .delete(`${baseUrl}/group/${groupId}/members/${memberId}/delete`, {
+      headers: {
+        Authorization: `bearer ${token}`,
+        'content-type': 'application/json'
+      }
+    })
+    .then(response => {
+      history.push(`/groups/${groupId}/members`);
+      dispatch({ type: DELETE_GROUP_MEMBER, payload: response.data });
     })
     .catch(err => {
       const { response } = err;
