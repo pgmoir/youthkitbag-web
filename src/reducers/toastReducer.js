@@ -16,7 +16,8 @@ import {
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
   EDIT_KITBAG_KIT,
-  EDIT_MARKET_KIT
+  EDIT_MARKET_KIT,
+  EDIT_GROUP
 } from '../actions/types';
 
 const initialState = {
@@ -30,6 +31,7 @@ export default (state = initialState, action) => {
     case CREATE_GROUP:
     case CREATE_KITBAG_KIT:
     case CREATE_MARKET_KIT:
+    case EDIT_GROUP:
     case EDIT_GROUP_STATUS:
     case EDIT_GROUP_MEMBER_STATE:
     case EDIT_USER_PROFILE:

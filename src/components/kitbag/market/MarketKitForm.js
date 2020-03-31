@@ -17,6 +17,7 @@ import {
 } from '../../includes/forms';
 import Threads from '../../thread/threads/Threads';
 import validate from '../../includes/FormEmptyValidationRules';
+import { getImages } from '../../../helpers/image';
 
 const mapStateToProps = state => ({
   newErrors: state.toast.errors
@@ -34,7 +35,7 @@ const MarketForm = ({
   createMarketKit,
   editMarketKit
 }) => {
-  const initialValues = { ...market };
+  const initialValues = { ...market, images: getImages(market.images) };
 
   const {
     setChange,
@@ -56,6 +57,7 @@ const MarketForm = ({
 
   useEffect(() => {
     if (market) {
+      market.images = getImages(market.images);
       market.topImage =
         market.images && market.images.filter(i => i.state !== 'D').length > 0
           ? market.images.filter(i => i.state !== 'D')[0].imageUrl

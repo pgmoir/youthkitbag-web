@@ -4,6 +4,7 @@ import useForm from '../hooks/useForm';
 import { editProfile, loadSettingsPage } from '../../actions/UserActions';
 import { TextForm, ImagesForm } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
+import { getImages } from '../../helpers/image';
 
 const mapStateToProps = state => ({
   newErrors: state.toast.errors
@@ -12,6 +13,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = { editProfile, loadSettingsPage };
 
 const ProfileForm = ({ profile, newErrors, editProfile, loadSettingsPage }) => {
+  const initialValues = { ...profile, images: getImages(profile.images) };
+
   const {
     setChange,
     handleChange,
@@ -21,7 +24,7 @@ const ProfileForm = ({ profile, newErrors, editProfile, loadSettingsPage }) => {
     setValues,
     errors,
     setErrors
-  } = useForm(profile, updateProfile, validate);
+  } = useForm(initialValues, updateProfile, validate);
 
   useEffect(() => {
     if (newErrors) {
@@ -31,6 +34,7 @@ const ProfileForm = ({ profile, newErrors, editProfile, loadSettingsPage }) => {
 
   useEffect(() => {
     if (profile) {
+      profile.images = getImages(profile.images);
       profile.topImage =
         profile.images && profile.images.filter(i => i.state !== 'D').length > 0
           ? profile.images.filter(i => i.state !== 'D')[0].imageUrl

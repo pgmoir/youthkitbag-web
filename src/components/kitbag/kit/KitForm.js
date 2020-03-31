@@ -18,6 +18,7 @@ import {
   ImagesForm
 } from '../../includes/forms';
 import validate from '../../includes/FormEmptyValidationRules';
+import { getImages } from '../../../helpers/image';
 
 const mapStateToProps = state => ({
   kitbagLists: state.kitbag.kit.lists,
@@ -37,6 +38,7 @@ const KitForm = ({
   createKitbagKit,
   editKitbagKit
 }) => {
+  const initialValues = { ...kit, images: getImages(kit.images) };
   const initialPurchase = { from: '', quantity: 0, ondate: '', price: 0.0 };
   const initialInbag = { location: '', condition: 'used', quantity: 0 };
 
@@ -66,7 +68,7 @@ const KitForm = ({
     setValues,
     errors,
     setErrors
-  } = useForm(kit, updateKit, validate);
+  } = useForm(initialValues, updateKit, validate);
 
   useEffect(() => {
     if (newErrors) {
@@ -76,6 +78,7 @@ const KitForm = ({
 
   useEffect(() => {
     if (kit) {
+      kit.images = getImages(kit.images);
       kit.topImage =
         kit.images && kit.images.filter(i => i.state !== 'D').length > 0
           ? kit.images.filter(i => i.state !== 'D')[0].imageUrl

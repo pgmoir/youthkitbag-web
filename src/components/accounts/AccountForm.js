@@ -10,6 +10,7 @@ import {
   RemoveArrayButtonForm
 } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
+import { getImages } from '../../helpers/image';
 
 const mapStateToProps = state => ({
   userPackage: state.user.package,
@@ -31,7 +32,12 @@ const AccountForm = ({
   const [isReadOnly, setIsReadOnly] = useState(true);
   const [hasAccountAdmin, setHasAccountAdmin] = useState(false);
 
-  const initialValues = { ...account, accountAdmin: true, exists: false };
+  const initialValues = {
+    ...account,
+    images: getImages(account.images),
+    accountAdmin: true,
+    exists: false
+  };
 
   const {
     setChange,
@@ -53,6 +59,7 @@ const AccountForm = ({
 
   useEffect(() => {
     if (account) {
+      account.images = getImages(account.images);
       account.topImage =
         account.images && account.images.filter(i => i.state !== 'D').length > 0
           ? account.images.filter(i => i.state !== 'D')[0].imageUrl

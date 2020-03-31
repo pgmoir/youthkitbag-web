@@ -123,7 +123,7 @@ export const editGroup = (groupId, formValues) => dispatch => {
       }
     )
     .then(response => {
-      history.push('/groups?searchfor=&by=&page=1&pagesize=24');
+      history.push('/groups');
       dispatch({ type: EDIT_GROUP, payload: response.data });
     })
     .catch(err => {
@@ -131,9 +131,7 @@ export const editGroup = (groupId, formValues) => dispatch => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(
-          '/auth/login?return=/groups?searchfor=&by=&page=1&pagesize=24'
-        );
+        history.push('/auth/login?return=/groups');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
