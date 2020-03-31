@@ -61,7 +61,7 @@ const PreferredAccountForm = ({
             <tbody>
               {accounts.map((item, index) => (
                 <tr key={index}>
-                  <td className="valign-m mw-2rem">
+                  <td className="valign-m mw-3rem">
                     <Link to={`/accounts/${item._id}`}>
                       <img
                         src={

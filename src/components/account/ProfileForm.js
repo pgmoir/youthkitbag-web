@@ -84,14 +84,6 @@ const ProfileForm = ({ profile, newErrors, editProfile, loadSettingsPage }) => {
             handleChange={handleChange}
             error={errors.username}
           />
-          <TextForm
-            colFormat="3-9"
-            label="Location"
-            value={values.location}
-            field="location"
-            handleChange={handleChange}
-            error={errors.location}
-          />
           <hr />
           <TextForm
             colFormat="3-9"

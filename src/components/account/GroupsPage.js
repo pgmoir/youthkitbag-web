@@ -38,7 +38,7 @@ const GroupsPage = ({ profile }) => {
               <tbody>
                 {profile.groups.map((item, index) => (
                   <tr key={`${item._id}-${index}`}>
-                    <td className="valign-m mw-2rem">
+                    <td className="valign-m mw-3rem">
                       <Link to={`/groups/${item._id}`}>
                         <img
                           src={
