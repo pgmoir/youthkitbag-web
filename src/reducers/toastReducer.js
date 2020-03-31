@@ -12,6 +12,7 @@ import {
   EDIT_GROUP_MEMBER_STATE,
   DELETE_GROUP_MEMBER,
   EDIT_USER_PROFILE,
+  RESET_USER_FLAGS,
   API_MARKET_ERROR,
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
@@ -35,6 +36,7 @@ export default (state = initialState, action) => {
     case EDIT_GROUP_STATUS:
     case EDIT_GROUP_MEMBER_STATE:
     case EDIT_USER_PROFILE:
+    case RESET_USER_FLAGS:
     case EDIT_KITBAG_KIT:
     case EDIT_MARKET_KIT:
     case SIGNUP_SUCCESS:

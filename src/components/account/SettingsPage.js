@@ -11,6 +11,7 @@ import Alert from '../includes/Alert';
 import ProfileHelp from './ProfileHelp';
 import AccountsHelp from './AccountsHelp';
 import GroupsHelp from './GroupsHelp';
+import ConfigurationPage from './ConfigurationPage';
 
 const mapStateToProps = state => ({
   profile: state.user.profile
@@ -62,6 +63,16 @@ const SettingsPage = ({ profile }) => {
     );
   };
 
+  const Configuration = () => {
+    setPage('configuration');
+    return (
+      <div className="container">
+        <h2>Configuration</h2>
+        <ConfigurationPage />
+      </div>
+    );
+  };
+
   // const Badges = () => {
   //   setPage('badges');
   //   return (
@@ -95,6 +106,9 @@ const SettingsPage = ({ profile }) => {
               {/* <div className="p-2 flex-fill bg-light">
                 <Link to="/settings/badges">Badges</Link>
               </div> */}
+              <div className="p-2 flex-fill bg-light">
+                <Link to="/settings/configuration">Configuration</Link>
+              </div>
             </div>
           </div>
           <div className="d-none d-sm-block col-sm-2 pb-3">
@@ -134,6 +148,13 @@ const SettingsPage = ({ profile }) => {
               >
                 <Link to="/settings/badges">Badges</Link>
               </li> */}
+              <li
+                className={`list-group-item ${
+                  page === 'configuration' ? 'active' : ''
+                }`}
+              >
+                <Link to="/settings/configuration">Configuration</Link>
+              </li>
             </ul>
           </div>
           <div className="col-12 col-sm-10">
@@ -142,6 +163,7 @@ const SettingsPage = ({ profile }) => {
             <Route path="/settings/groups" component={Groups} />
             <Route path="/settings/package" component={Package} />
             {/* <Route path="/settings/badges" component={Badges} /> */}
+            <Route path="/settings/configuration" component={Configuration} />
           </div>
         </div>
       </div>

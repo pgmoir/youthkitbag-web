@@ -2,6 +2,7 @@ import {
   GETALL_SUCCESS,
   GET_USER,
   EDIT_USER_PROFILE,
+  RESET_USER_FLAGS,
   API_KITBAG_ERROR,
   GETALL_FAILURE,
   RESET,
@@ -106,6 +107,35 @@ export const hideFlag = (name, hide) => dispatch => {
     )
     .then(() => {
       dispatch({ type: RESET });
+      dispatch(getUser());
+    })
+    .catch(err => {
+      const { response } = err;
+      if (response.status === 401) {
+        window.localStorage.clear();
+        dispatch({ type: GETALL_FAILURE, payload: response });
+        history.push('/auth/login?return=/settings/accounts');
+      }
+      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+    });
+};
+
+export const resetFlags = () => dispatch => {
+  const userId = localStorage.getItem('user');
+  const token = localStorage.getItem('token');
+  axios
+    .put(
+      `${baseUrl}/user/${userId}/flags/reset`,
+      {},
+      {
+        headers: {
+          Authorization: `bearer ${token}`,
+          'content-type': 'application/json'
+        }
+      }
+    )
+    .then(response => {
+      dispatch({ type: RESET_USER_FLAGS, payload: response.data });
       dispatch(getUser());
     })
     .catch(err => {

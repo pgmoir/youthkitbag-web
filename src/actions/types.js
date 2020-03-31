@@ -18,6 +18,7 @@ export const PASSWORD_RESET_CHECK = 'PASSWORD_RESET_CHECK';
 
 export const GET_USER = 'GET_USER';
 export const EDIT_USER_PROFILE = 'EDIT_USER_PROFILE';
+export const RESET_USER_FLAGS = 'RESET_USER_FLAGS';
 
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
