@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Alert from '../includes/Alert';
 import Title from '../includes/title/Title';
 import { connect } from 'react-redux';
+import {
+  userHasGroupMembership,
+  userPreferredAccountId
+} from '../../helpers/user';
 import ProfileAnnouncement from './ProfileAnnouncement';
-import MarketAnnouncement from './MarketAnnouncement';
 import KitbagKitAnnouncement from './KitbagKitAnnouncement';
 import KitbagMarketTradeAnnouncement from './KitbagMarketTradeAnnouncement';
 import KitbagMarketRecycleAnnouncement from './KitbagMarketRecycleAnnouncement';
@@ -20,10 +23,9 @@ const mapStateToProps = state => ({
 });
 
 const LoggedInLanding = ({ user }) => {
-  const accountId =
-    user.profile.accounts && user.profile.accounts.length > 0
-      ? user.profile.accounts.find(a => a.preferred)._id
-      : undefined;
+  const [loading, setLoading] = useState(true);
+  const [preferredAccountId, setPreferredAccountId] = useState(null);
+  const [hasGroupMembership, setHasGroupMembership] = useState(false);
 
   const group =
     user.profile.groups && user.profile.groups.length > 0
@@ -31,6 +33,20 @@ const LoggedInLanding = ({ user }) => {
           .filter(g => g.status === 'approved')
           .find(a => a.member.state === 'approved')
       : undefined;
+
+  useEffect(() => {
+    if (user) {
+      setPreferredAccountId(userPreferredAccountId(user));
+      setLoading(false);
+    }
+  }, [user, setPreferredAccountId]);
+
+  useEffect(() => {
+    if (user) {
+      setHasGroupMembership(userHasGroupMembership(user));
+      setLoading(false);
+    }
+  }, [user, setHasGroupMembership]);
 
   return (
     <div>
@@ -45,17 +61,21 @@ const LoggedInLanding = ({ user }) => {
           <Alert />
           <div className="row">
             <div className="card-columns">
-              <AccountAnnouncement accountId={accountId} />
+              <AccountAnnouncement
+                loading={loading}
+                accountId={preferredAccountId}
+              />
               <ProfileAnnouncement profile={user.profile} />
-              <GroupAnnouncement group={group} />
-              <MarketAnnouncement group={group} />
-              <KitbagKitAddMoreAdvice accountId={accountId} />
-              <KitbagKitAnnouncement accountId={accountId} />
+              <GroupAnnouncement
+                loading={loading}
+                hasGroupMembership={hasGroupMembership}
+              />
+              <KitbagKitAddMoreAdvice accountId={preferredAccountId} />
+              <KitbagKitAnnouncement accountId={preferredAccountId} />
               <KitbagMarketTradeAnnouncement group={group} />
               <KitbagMarketRecycleAnnouncement group={group} />
               <KitbagMarketStolenAnnouncement group={group} />
               <KitbagMarketWantedAnnouncement group={group} />
-              <KitbagKitLevelWarnings accountId={accountId} />
             </div>
           </div>
         </div>

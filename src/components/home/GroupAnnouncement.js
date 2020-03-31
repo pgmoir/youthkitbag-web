@@ -1,8 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const GroupAnnouncement = ({ group }) => {
-  if (group) return null;
+const GroupAnnouncement = ({ hasGroupMembership, loading }) => {
+  if (hasGroupMembership) return null;
+
+  if (loading) {
+    return (
+      <div className="card border-0">
+        <div className="alert alert-primary mb-0" role="alert">
+          <h2 className="alert-heading">Loading ...</h2>
+          <hr />
+          <p className="card-text">
+            Identifying if you are currently a member of any group
+          </p>
+          <p className="card-text ellipsis bg-light hgt-3">&nbsp;</p>
+          <p className="card-text ellipsis bg-light hgt-3">&nbsp;</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="card border-0">

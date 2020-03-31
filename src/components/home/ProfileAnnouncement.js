@@ -22,8 +22,6 @@ const ProfileAnnouncement = ({ profile }) => {
         <Link className="btn btn-warning" to="/settings/profile">
           Update profile
         </Link>
-        {/* <span className="ml-3">or</span>
-          <button className="btn btn-link">Hide this message</button> */}
       </div>
     </div>
   );
