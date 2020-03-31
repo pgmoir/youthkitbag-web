@@ -14,7 +14,6 @@ import KitbagMarketStolenAnnouncement from './KitbagMarketStolenAnnouncement';
 import KitbagMarketWantedAnnouncement from './KitbagMarketWantedAnnouncement';
 import GroupAnnouncement from './GroupAnnouncement';
 import AccountAnnouncement from './AccountAnnouncement';
-import KitbagKitLevelWarnings from './KitbagKitLevelWarnings';
 import KitbagKitAddMoreAdvice from './KitbagKitAddMoreAdvice';
 import WelcomeAnnouncement from './WelcomeAnnouncement';
 

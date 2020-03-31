@@ -1,5 +1,4 @@
 import React from 'react';
-import { ImagesForm } from '../includes/forms';
 import { connect } from 'react-redux';
 import { ImagesDisplay } from '../includes/forms/ImagesDisplay';
 
@@ -10,6 +9,10 @@ const mapStateToProps = state => ({
 
 const GroupDisplay = ({ group }) => {
   if (!group._id) return null;
+
+  const showGroupUrl = `${window.location
+    .toString()
+    .replace('/groups/', '/show/group/')}`;
 
   return (
     <div className="row">
@@ -29,6 +32,14 @@ const GroupDisplay = ({ group }) => {
             return <li key={i}>{m}</li>;
           })}
         </ul>
+        <h2 className="h5">
+          Copy and share the link below to promote this group
+        </h2>
+        <p>
+          <a href={showGroupUrl} target="_blank" rel="noopener noreferrer">
+            {showGroupUrl}
+          </a>
+        </p>
       </div>
     </div>
   );

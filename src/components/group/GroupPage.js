@@ -18,6 +18,7 @@ const mapDispatchToProps = {
 
 const GroupPage = ({ current, fetchGroup, match }) => {
   const { groupId } = match.params;
+  const [createGroup, setCreateGroup] = useState(false);
   const [group, setGroup] = useState({
     name: '',
     tagline: '',
@@ -35,9 +36,13 @@ const GroupPage = ({ current, fetchGroup, match }) => {
 
   useEffect(() => {
     if (groupId) {
-      fetchGroup(groupId);
+      if (groupId === 'new') {
+        setCreateGroup(true);
+      } else {
+        fetchGroup(groupId);
+      }
     }
-  }, [fetchGroup, groupId]);
+  }, [groupId, fetchGroup]);
 
   useEffect(() => {
     if (current && current._id) {
@@ -50,14 +55,14 @@ const GroupPage = ({ current, fetchGroup, match }) => {
   }, [current]);
 
   function groupIsLoading() {
-    return groupId && !group._id;
+    return groupId && !group._id && !createGroup;
   }
 
   function getTitle() {
     if (groupIsLoading()) {
       return 'Loading ...';
     }
-    if (!group._id) {
+    if (createGroup) {
       return 'Create new group';
     }
 
@@ -104,9 +109,12 @@ const GroupPage = ({ current, fetchGroup, match }) => {
               {group.groupMemberState && (
                 <h2>Your member status {getGroupMemberStateIcon()}</h2>
               )}
+              {!group.groupMemberState && (
+                <h2>You are not a member of this group</h2>
+              )}
             </div>
             <div className="col-12 col-sm-4 mb-3 d-flex justify-content-end">
-              {groupId &&
+              {group._id &&
                 group.status === 'approved' &&
                 (group.groupAdmin || group.groupMember) && (
                   <Link
@@ -116,7 +124,7 @@ const GroupPage = ({ current, fetchGroup, match }) => {
                     Members
                   </Link>
                 )}
-              {groupId && group.status === 'approved' && !group.groupMember && (
+              {group._id && group.status === 'approved' && !group.groupMember && (
                 <Link
                   to={`/groups/${groupId}/join`}
                   className={`btn btn-primary ${
@@ -127,7 +135,7 @@ const GroupPage = ({ current, fetchGroup, match }) => {
                   Join
                 </Link>
               )}
-              {groupId && group.status === 'approved' && group.groupMember && (
+              {group._id && group.status === 'approved' && group.groupMember && (
                 <Link
                   to={`/groups/${groupId}/leave`}
                   className="btn btn-primary ml-3"
@@ -137,8 +145,8 @@ const GroupPage = ({ current, fetchGroup, match }) => {
               )}
             </div>
           </div>
-          {group.groupAdmin && <GroupForm group={group} />}
-          {!group.groupAdmin && <GroupDisplay group={group} />}
+          {(group.groupAdmin || createGroup) && <GroupForm group={group} />}
+          {!group.groupAdmin && !createGroup && <GroupDisplay group={group} />}
         </div>
       </section>
     </div>

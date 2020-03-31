@@ -138,7 +138,6 @@ const App = () => {
               exact
               component={ShowGroupPage}
             />
-            <PrivateRoute path="/groups/new" exact component={GroupPage} />
             <PrivateRoute
               path="/groups/status/:groupId"
               exact
