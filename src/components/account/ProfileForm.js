@@ -62,19 +62,19 @@ const ProfileForm = ({ profile, newErrors, editProfile, loadSettingsPage }) => {
         <form className="mb-3" onSubmit={handleSubmit}>
           <TextForm
             colFormat="3-9"
-            label="Last Name"
-            value={values.lastname}
-            field="lastname"
-            handleChange={handleChange}
-            error={errors.lastname}
-          />
-          <TextForm
-            colFormat="3-9"
             label="First Name"
             value={values.firstname}
             field="firstname"
             handleChange={handleChange}
             error={errors.firstname}
+          />
+          <TextForm
+            colFormat="3-9"
+            label="Last Name"
+            value={values.lastname}
+            field="lastname"
+            handleChange={handleChange}
+            error={errors.lastname}
           />
           <TextForm
             colFormat="3-9"
