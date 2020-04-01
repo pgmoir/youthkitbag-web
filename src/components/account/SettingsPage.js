@@ -68,7 +68,7 @@ const SettingsPage = ({ profile }) => {
     return (
       <div className="container">
         <h2>Configuration</h2>
-        <ConfigurationPage />
+        <ConfigurationPage userId={profile._id} />
       </div>
     );
   };

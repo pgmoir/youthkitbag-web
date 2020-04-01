@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { resetFlags } from '../../actions/UserActions';
+import { Link } from 'react-router-dom';
 
 const mapStateToProps = state => ({
   flags: state.user.flags
@@ -10,7 +11,7 @@ const mapDispatchToProps = {
   resetFlags
 };
 
-const ConfigurationPage = ({ flags, resetFlags }) => {
+const ConfigurationPage = ({ userId, flags, resetFlags }) => {
   return (
     <React.Fragment>
       <div className="row">
@@ -27,19 +28,43 @@ const ConfigurationPage = ({ flags, resetFlags }) => {
         flags will remove them all from your user account and the various alerts
         and announcements that can be dismissed will magically reappear.
       </p>
-      <h4>Flags that have already been dismissed</h4>
-      {flags && (
-        <ul>
-          {flags.map(f => {
-            return <li key={f._id}>{f.name}</li>;
-          })}
-        </ul>
+      {(!flags || flags.length === 0) && (
+        <p>You currently have no flags to reset.</p>
       )}
+      {flags && flags.length > 0 && (
+        <>
+          <h4>Flags that have already been dismissed</h4>
+          <ul>
+            {flags.map(f => {
+              return <li key={f._id}>{f.name}</li>;
+            })}
+          </ul>
+          <div className="row mb-3">
+            <div className="col-12">
+              <button className="btn btn-success" onClick={() => resetFlags()}>
+                Reset Flags
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+      <hr />
+      <h3>Delete User</h3>
+      <p>
+        If you no longer want to use YouthKitbag, we are incredibly sad.
+        However, this is your choice, and as long as you have passed over
+        administration of any kitbags or groups to another user, or if you were
+        the sole owner/user of a kitbag, you will be able to delete your user
+        and all associated data.
+      </p>
       <div className="row mb-3">
         <div className="col-12">
-          <button className="btn btn-success" onClick={() => resetFlags()}>
-            Reset Flags
-          </button>
+          <Link
+            to={`/settings/user/${userId}/delete`}
+            className="btn btn-danger"
+          >
+            Delete User
+          </Link>
         </div>
       </div>
     </React.Fragment>

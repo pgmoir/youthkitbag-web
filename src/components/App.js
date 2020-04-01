@@ -42,6 +42,7 @@ import AccountMemberJoin from './accounts/AccountMemberJoin';
 import LearnMore from './learn/LearnMore';
 import BetaAnnouncement from './home/BetaAnnouncement';
 import GroupMemberDelete from './group/GroupMemberDelete';
+import DeleteUser from './account/DeleteUser';
 
 const App = () => {
   return (
@@ -183,6 +184,10 @@ const App = () => {
             />
             <PrivateRoute path="/accounts/:accountId" component={AccountPage} />
 
+            <PrivateRoute
+              path="/settings/user/:userId/delete"
+              component={DeleteUser}
+            />
             <PrivateRoute path="/settings/:setting" component={SettingsPage} />
           </Switch>
         </main>
