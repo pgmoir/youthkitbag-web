@@ -130,7 +130,7 @@ const Header = ({ auth, user }) => {
       </header>
       <CookieConsent
         cookieName="youthkitbagCookieConstent-1"
-        buttonClasses="btn btn-warning mr-5"
+        buttonClasses="btn btn-warning mx-auto mx-sm-3 mb-3 my-sm-auto"
         disableButtonStyles={true}
       >
         <div className="py-4">
