@@ -28,7 +28,10 @@ const RemoveArrayButtonForm = ({
             onClick={onClick}
             disabled={disabled}
           >
-            <span className="icon-tray-item fas fa-trash-alt"></span>
+            <span
+              className="icon-tray-item fas fa-trash-alt"
+              title="Delete this item"
+            ></span>
           </button>
         </div>
       )}

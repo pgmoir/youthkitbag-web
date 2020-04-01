@@ -29,7 +29,11 @@ const GroupIntroStolens = ({ stolens }) => {
                     />
                     <div className="card-body">
                       <h3 className="card-title text-micro ellipsis mb-0 text-danger">
-                        <i className="fas fa-volume-up"></i>&nbsp;&nbsp;
+                        <span
+                          className="fas fa-volume-up"
+                          title="Stolen item"
+                        ></span>
+                        &nbsp;&nbsp;
                         {m.title}
                       </h3>
                       {m.subtitle && (

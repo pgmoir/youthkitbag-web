@@ -32,7 +32,11 @@ const GroupIntroTrades = ({ trades }) => {
                     />
                     <div className="card-body">
                       <h3 className="card-title text-micro ellipsis mb-0 text-primary">
-                        <i className="fas fa-hands-helping"></i>&nbsp;&nbsp;
+                        <span
+                          className="fas fa-hands-helping"
+                          title="Trade item"
+                        ></span>
+                        &nbsp;&nbsp;
                         {m.title}
                       </h3>
                       {m.subtitle && (

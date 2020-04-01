@@ -10,14 +10,29 @@ const GroupCard = ({ group }) => {
     return images[0].imageUrl;
   }
 
-  function statusIcon(status) {
+  function renderStatus(status) {
     switch (status) {
       case 'approved':
-        return 'fas fa-check-circle text-success';
+        return (
+          <span
+            className="icon-tray-item fas fa-check-circle text-success"
+            title="Group has been approved"
+          ></span>
+        );
       case 'blocked':
-        return 'fas fa-times-circle text-danger';
+        return (
+          <span
+            className="icon-tray-item fas fa-times-circle text-danger"
+            title="Group has been blocked"
+          ></span>
+        );
       default:
-        return 'fas fa-question-circle text-warning';
+        return (
+          <span
+            className="icon-tray-item fas fa-question-circle text-warning"
+            title="Group has requested approval"
+          ></span>
+        );
     }
   }
 
@@ -46,11 +61,9 @@ const GroupCard = ({ group }) => {
       <article className="card card-link card-b1">
         <span className="icons-top-left pt-1">
           {appAdmin ? (
-            <Link to={`/groups/status/${_id}`}>
-              <span className={`icon-tray-item ${statusIcon(status)}`}></span>
-            </Link>
+            <Link to={`/groups/status/${_id}`}>{renderStatus(status)}</Link>
           ) : (
-            <span className={`icon-tray-item ${statusIcon(status)}`}></span>
+            renderStatus(status)
           )}
         </span>
         <span

@@ -167,6 +167,10 @@ const GroupForm = ({
             <a href={showGroupUrl} target="_blank" rel="noopener noreferrer">
               {showGroupUrl}
             </a>
+            <span
+              className="fas fa-external-link-alt pl-2"
+              title="Link will open a new tab"
+            ></span>
           </p>
           <hr />
           <div>

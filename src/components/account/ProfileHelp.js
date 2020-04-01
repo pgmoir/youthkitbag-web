@@ -34,7 +34,10 @@ const ProfileHelp = ({ flags, hideFlag }) => {
           role="alert"
         >
           <div className="pr-4">
-            <span className="fas fa-question-circle fa-2x"></span>
+            <span
+              className="fas fa-question-circle fa-2x"
+              title="Explanation of profile"
+            ></span>
           </div>
           <div className="w-100">
             <div className="h4 alert-heading">

@@ -30,7 +30,11 @@ const GroupIntroWanteds = ({ wanteds }) => {
                     />
                     <div className="card-body">
                       <h3 className="card-title text-micro ellipsis mb-0 text-secondary">
-                        <i className="fas fa-binoculars"></i>&nbsp;&nbsp;
+                        <span
+                          className="fas fa-binoculars"
+                          title="Wanted item"
+                        ></span>
+                        &nbsp;&nbsp;
                         {m.title}
                       </h3>
                       {m.subtitle && (

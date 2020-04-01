@@ -49,7 +49,10 @@ const Alert = ({ toast, resetToast }) => {
       role="alert"
     >
       <div className="pr-4">
-        <span className={`fas ${alertIcon(toast.currentStyle)} fa-2x`}></span>
+        <span
+          className={`fas ${alertIcon(toast.currentStyle)} fa-2x`}
+          title="Alert message"
+        ></span>
       </div>
       <div>
         <p className="my-0">{toast.currentMessage}</p>

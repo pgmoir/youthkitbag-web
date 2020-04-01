@@ -73,21 +73,53 @@ const GroupPage = ({ current, fetchGroup, match }) => {
     if (groupIsLoading() || !group._id || group.status !== 'approved')
       return null;
 
-    return 'fas fa-certificate';
+    return 'fas fa-certificate text-gold';
+  }
+
+  function getIconTitle() {
+    if (groupIsLoading() || !group._id || group.status !== 'approved')
+      return null;
+
+    return 'Certified group';
   }
 
   function getGroupMemberStateIcon() {
     switch (group.groupMemberState) {
       case 'requested':
-        return <span className="fas fa-meh pl-3 text-info"></span>;
+        return (
+          <span
+            className="fas fa-meh pl-3 text-info"
+            title="Membership has been requested"
+          ></span>
+        );
       case 'approved':
-        return <span className="fas fa-laugh pl-3 text-success"></span>;
+        return (
+          <span
+            className="fas fa-laugh pl-3 text-success"
+            title="Membership has been approved"
+          ></span>
+        );
       case 'rejected':
-        return <span className="fas fa-sad-tear pl-3 text-warning"></span>;
+        return (
+          <span
+            className="fas fa-sad-tear pl-3 text-warning"
+            title="Membership has been rejected"
+          ></span>
+        );
       case 'blocked':
-        return <span className="fas fa-meh-blank pl-3 text-danger"></span>;
+        return (
+          <span
+            className="fas fa-meh-blank pl-3 text-danger"
+            title="Membership has been blocked"
+          ></span>
+        );
       case 'left':
-        return <span className="fas fa-dizzy pl-3 text-danger"></span>;
+        return (
+          <span
+            className="fas fa-dizzy pl-3 text-danger"
+            title="Left membership"
+          ></span>
+        );
       default:
         break;
     }
@@ -95,7 +127,7 @@ const GroupPage = ({ current, fetchGroup, match }) => {
 
   return (
     <div>
-      <Title title={getTitle()} icon={getIcon()} />
+      <Title title={getTitle()} icon={getIcon()} iconTitle={getIconTitle()} />
       <section
         id="main"
         className="container-fluid"

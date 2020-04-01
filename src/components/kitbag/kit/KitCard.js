@@ -45,7 +45,10 @@ const KitCard = ({ kit, accountId }) => {
       <article className="card card-link card-b1">
         <span className="icons-top-left pt-1">
           <Link to={`/kitbag/kit/${accountId}/delete/${_id}`}>
-            <span className="icon-tray-item fas fa-trash-alt"></span>
+            <span
+              className="icon-tray-item fas fa-trash-alt"
+              title="Delete kit item"
+            ></span>
           </Link>
         </span>
         <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">

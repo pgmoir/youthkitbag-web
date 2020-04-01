@@ -28,7 +28,7 @@ const PackagePage = ({ userPackage }) => {
         <div className="row">
           <div className="col-12">
             <h5 className={`bg-${userPackage.theme} mb-0 p-3`}>
-              <i className={`fas fa-${userPackage.icon}`}></i> Package Usage and
+              <span className={`fas fa-${userPackage.icon} pr-2`} title={`${userPackage.icon} tier`}></span> Package Usage and
               Limits
             </h5>
             <table className="table bg-light">

@@ -51,7 +51,11 @@ const Header = ({ auth, user }) => {
                         to="/market?searchfor=&by=&page=1&pagesize=24"
                         aria-label="Market place"
                       >
-                        <span className="fas fa-th" aria-hidden="true"></span>{' '}
+                        <span
+                          className="fas fa-th"
+                          title="Market place"
+                          aria-hidden="true"
+                        ></span>{' '}
                       </Link>
                     </li>
                   )}
@@ -64,6 +68,7 @@ const Header = ({ auth, user }) => {
                       >
                         <span
                           className="fas fa-shopping-bag"
+                          title="Preferred kitbag"
                           aria-hidden="true"
                         ></span>{' '}
                       </Link>
@@ -90,6 +95,7 @@ const Header = ({ auth, user }) => {
                     >
                       <span
                         className="fas fa-sign-out-alt"
+                        title="Logout"
                         aria-hidden="true"
                       ></span>{' '}
                     </Link>
@@ -106,6 +112,7 @@ const Header = ({ auth, user }) => {
                     >
                       <span
                         className="fas fa-question-circle"
+                        title="Why was this website created?"
                         aria-hidden="true"
                       ></span>{' '}
                     </Link>
@@ -118,6 +125,7 @@ const Header = ({ auth, user }) => {
                     >
                       <span
                         className="fas fa-sign-in-alt"
+                        title="Login"
                         aria-hidden="true"
                       ></span>{' '}
                     </Link>

@@ -52,11 +52,16 @@ const MarketItemCard = ({ market }) => {
     }
 
     if (isStolen) {
-      return <i className="fas fa-volume-up"></i>;
+      return <span className="fas fa-volume-up" title="Stolen item"></span>;
     } else if (isWanted) {
-      return <i className="fas fa-binoculars"></i>;
+      return <span className="fas fa-binoculars" title="Wanted item"></span>;
     } else {
-      return <i className="fas fa-hands-helping"></i>;
+      return (
+        <span
+          className="fas fa-hands-helping"
+          title="Trade/Recycle item"
+        ></span>
+      );
     }
   }
 
@@ -84,7 +89,10 @@ const MarketItemCard = ({ market }) => {
         {isOwned && (
           <span className="icons-top-left pt-1">
             <Link to={`/kitbag/market/${account}/delete/${_id}`}>
-              <span className="icon-tray-item fas fa-trash-alt"></span>
+              <span
+                className="icon-tray-item fas fa-trash-alt"
+                title="Delete item"
+              ></span>
             </Link>
           </span>
         )}

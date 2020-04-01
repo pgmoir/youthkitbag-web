@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Title = ({ title, icon }) => {
+const Title = ({ title, icon, iconTitle }) => {
   function render() {
     if (title === '') {
       return <div className="container pb-3"></div>;
@@ -18,7 +18,10 @@ const Title = ({ title, icon }) => {
           <h1 className="h-standard pb-2">
             {title}
             {icon && (
-              <span className={`${icon} pl-3 text-center text-gold`}></span>
+              <span
+                className={`${icon} pl-3 text-center`}
+                title={iconTitle}
+              ></span>
             )}
           </h1>
         </div>

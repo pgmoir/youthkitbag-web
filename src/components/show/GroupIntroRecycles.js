@@ -33,7 +33,11 @@ const GroupIntroRecycles = ({ recycles }) => {
                     />
                     <div className="card-body">
                       <h3 className="card-title text-micro ellipsis mb-0 text-success">
-                        <i className="fas fa-hands-helping"></i>&nbsp;&nbsp;
+                        <span
+                          className="fas fa-hands-helping"
+                          title="Recycle item"
+                        ></span>
+                        &nbsp;&nbsp;
                         {m.title}
                       </h3>
                       {m.subtitle && (

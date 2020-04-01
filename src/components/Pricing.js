@@ -17,7 +17,8 @@ const Pricing = () => {
             <div className="col-12 col-md-4">
               <article className="card">
                 <div className="card-header h4 text-center bg-bronze">
-                  Free (Star) <i className="fas fa-star"></i>
+                  Free (Star){' '}
+                  <span className="fas fa-star" title="Star tier"></span>
                 </div>
                 <img className="card-img" src="" alt="" role="presentation" />
                 <div className="card-body">
@@ -43,7 +44,8 @@ const Pricing = () => {
             <div className="col-12 col-md-4">
               <article className="card">
                 <div className="card-header h4 text-center bg-silver">
-                  Standard (Medal) <i className="fas fa-medal"></i>
+                  Standard (Medal){' '}
+                  <span className="fas fa-medal" title="Medal tier"></span>
                 </div>
                 <img className="card-img" src="" alt="" role="presentation" />
                 <div className="card-body">
@@ -72,7 +74,8 @@ const Pricing = () => {
             <div className="col-12 col-md-4">
               <article className="card">
                 <div className="card-header h4 text-center bg-gold">
-                  Premium (Trophy) <i className="fas fa-trophy"></i>
+                  Premium (Trophy){' '}
+                  <span className="fas fa-trophy" title="Trophy tier"></span>
                 </div>
                 <img className="card-img" src="" alt="" role="presentation" />
                 <div className="card-body">
