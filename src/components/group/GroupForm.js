@@ -115,11 +115,12 @@ const GroupForm = ({
             handleChange={handleChange}
             error={errors.description}
           />
-          <TextForm
+          <TextAreaForm
             colFormat="3-9"
             label="Recommendation"
             value={values.recommendation}
             field="recommendation"
+            rows="3"
             handleChange={handleChange}
             error={errors.recommendation}
           />
@@ -148,11 +149,13 @@ const GroupForm = ({
             handleChange={handleChange}
             error={errors.website}
           />
-          <TextForm
+          <hr />
+          <TextAreaForm
             colFormat="3-9"
             label="Activities"
             value={values.activitys}
             field="activitys"
+            rows="2"
             handleChange={handleChange}
             error={errors.activitys}
           />

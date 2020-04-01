@@ -6,6 +6,7 @@ const TextAreaForm = ({
   label,
   value,
   field,
+  rows,
   readOnly,
   handleChange,
   error
@@ -21,6 +22,7 @@ const TextAreaForm = ({
             <TextAreaInput
               value={value}
               field={field}
+              rows={rows}
               readOnly={readOnly}
               handleChange={handleChange}
               error={error}
@@ -42,6 +44,7 @@ const TextAreaForm = ({
             <TextAreaInput
               value={value}
               field={field}
+              rows={rows}
               readOnly={readOnly}
               handleChange={handleChange}
               error={error}
