@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Title from '../includes/title/Title';
 import ProfileForm from './ProfileForm';
 import AccountsPage from './AccountsPage';

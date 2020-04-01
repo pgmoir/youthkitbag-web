@@ -14,7 +14,6 @@
 
 .card {
   margin-bottom: 1rem;
-  //background-color: $gallery;
   border: 1rem;
   border-bottom: 0.25rem solid $silver;
   &.card-b1 {
@@ -464,11 +463,22 @@ $jumbotron-h4-size: 1.1rem;
   background-color: $gray-900;
 }
 
-.list-group-item {
-  padding: 1rem 1rem 0.8rem 1rem;
-  &.active {
-    border-right: 0.5rem solid $dark;
-    background-color: $affair-20;
+.list-group {
+  .list-group-item {
+    &.active {
+      border-right: 0.25rem solid $dark;
+      background-color: $affair-20;
+    }
+  }
+}
+
+.list-group.list-group-horizontal {
+  .list-group-item {
+    &.active {
+      border-right: 1px solid $dark;
+      border-bottom: 0.25rem solid $dark;
+      background-color: $affair-20;
+    }
   }
 }
 
