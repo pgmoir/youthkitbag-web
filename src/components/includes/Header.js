@@ -136,7 +136,8 @@ const Header = ({ auth, user }) => {
         <div className="py-4">
           This website requires cookies to handle key features such as logging
           in and authentication. It currently does not use any marketing or
-          advertising cookies. If we introduce these we will advise you.
+          advertising cookies directly. Some third party tools do. If we
+          introduce these we will advise you.
         </div>
       </CookieConsent>
     </React.Fragment>
