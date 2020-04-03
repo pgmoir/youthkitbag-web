@@ -3,20 +3,20 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchKitbagMarketItems } from '../../actions/KitbagMarketActions';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   totalItems: state.kitbag.market.recycles.totalItems,
-  items: state.kitbag.market.recycles.items
+  items: state.kitbag.market.recycles.items,
 });
 
 const mapDispatchToProps = {
-  fetchKitbagMarketItems
+  fetchKitbagMarketItems,
 };
 
 const KitbagMarketRecycleAnnouncement = ({
   group,
   items,
   totalItems,
-  fetchKitbagMarketItems
+  fetchKitbagMarketItems,
 }) => {
   const [marketItems, setMarketItems] = useState([]);
 
@@ -56,7 +56,7 @@ const KitbagMarketRecycleAnnouncement = ({
               />
             </div>
             <div className="">
-              <h3 className="h6 ellipsis mb-0">{m.title}</h3>
+              <h3 className="h6 ellipsis mb-0 mr-3">{m.title}</h3>
               <p className="mb-0">
                 You have <strong>{m.threads.length}</strong> active threads
               </p>
@@ -71,7 +71,11 @@ const KitbagMarketRecycleAnnouncement = ({
     <div className="card border-0">
       <div className="alert alert-success mb-0" role="alert">
         <h2 className="alert-heading">Your recycling</h2>
-        <p>You currently have {totalItems} active recycle items.</p>
+        <p>
+          You currently have{' '}
+          <span className={`badge badge-pill badge-dark`}>{totalItems}</span>{' '}
+          active recycle items.
+        </p>
         <div className="mb-3">{renderList()}</div>
         <p>These are your most recently active recycling items.</p>
         <p className="mb-1">

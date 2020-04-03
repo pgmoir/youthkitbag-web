@@ -5,14 +5,16 @@ import {
   LOGOUT,
   CREATE_GROUP,
   EDIT_GROUP,
-  SEARCH_GROUPS
+  SEARCH_GROUPS,
+  FETCH_GROUPS_MEMBER_REQUESTS,
 } from '../actions/types';
 
 const initialState = {
   current: {},
   list: [],
   memberList: {},
-  search: { searchfor: '', by: '', page: 1, pagesize: 24, loading: true }
+  search: { searchfor: '', by: '', page: 1, pagesize: 24, loading: true },
+  memberRequests: [],
 };
 
 export default (state = initialState, action) => {
@@ -24,23 +26,25 @@ export default (state = initialState, action) => {
         ...state,
         current: {},
         list: action.payload.groups,
-        memberList: {}
+        memberList: {},
       };
     case FETCH_GROUP:
       return {
         ...state,
         current: action.payload,
-        memberList: {}
+        memberList: {},
       };
     case CREATE_GROUP:
     case EDIT_GROUP:
       return {
         ...state,
         current: {},
-        memberList: {}
+        memberList: {},
       };
     case FETCH_GROUP_MEMBERS:
       return { ...state, memberList: action.payload };
+    case FETCH_GROUPS_MEMBER_REQUESTS:
+      return { ...state, memberRequests: action.payload };
     case LOGOUT:
       return initialState;
     default:

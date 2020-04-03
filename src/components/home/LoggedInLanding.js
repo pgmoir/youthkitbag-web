@@ -4,7 +4,8 @@ import Title from '../includes/title/Title';
 import { connect } from 'react-redux';
 import {
   userHasGroupMembership,
-  userPreferredAccountId
+  userHasGroupAdministration,
+  userPreferredAccountId,
 } from '../../helpers/user';
 import ProfileAnnouncement from './ProfileAnnouncement';
 import KitbagKitAnnouncement from './KitbagKitAnnouncement';
@@ -16,36 +17,33 @@ import GroupAnnouncement from './GroupAnnouncement';
 import AccountAnnouncement from './AccountAnnouncement';
 import KitbagKitAddMoreAdvice from './KitbagKitAddMoreAdvice';
 import WelcomeAnnouncement from './WelcomeAnnouncement';
+import GroupsMemberRequestsAnnouncement from './GroupsMemberRequestsAnnouncement';
 
-const mapStateToProps = state => ({
-  user: state.user
+const mapStateToProps = (state) => ({
+  user: state.user,
 });
 
 const LoggedInLanding = ({ user }) => {
   const [loading, setLoading] = useState(true);
   const [preferredAccountId, setPreferredAccountId] = useState(null);
   const [hasGroupMembership, setHasGroupMembership] = useState(false);
+  const [hasGroupAdministration, setHasGroupAdministration] = useState(false);
 
   const group =
     user.profile.groups && user.profile.groups.length > 0
       ? user.profile.groups
-          .filter(g => g.status === 'approved')
-          .find(a => a.member.state === 'approved')
+          .filter((g) => g.status === 'approved')
+          .find((a) => a.member.state === 'approved')
       : undefined;
 
   useEffect(() => {
     if (user) {
       setPreferredAccountId(userPreferredAccountId(user));
-      setLoading(false);
-    }
-  }, [user, setPreferredAccountId]);
-
-  useEffect(() => {
-    if (user) {
       setHasGroupMembership(userHasGroupMembership(user));
+      setHasGroupAdministration(userHasGroupAdministration(user));
       setLoading(false);
     }
-  }, [user, setHasGroupMembership]);
+  }, [user]);
 
   return (
     <div>
@@ -69,6 +67,7 @@ const LoggedInLanding = ({ user }) => {
                 loading={loading}
                 hasGroupMembership={hasGroupMembership}
               />
+              {hasGroupAdministration && <GroupsMemberRequestsAnnouncement />}
               <KitbagKitAddMoreAdvice accountId={preferredAccountId} />
               <KitbagKitAnnouncement accountId={preferredAccountId} />
               <KitbagMarketTradeAnnouncement group={group} />

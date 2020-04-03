@@ -198,11 +198,20 @@ h4,
     border-bottom-left-radius: 0; }
   .youthkitbag a[disabled] {
     pointer-events: none; }
+  .youthkitbag .img-avatars {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    padding-left: 1.75rem; }
+  .youthkitbag .img-overlap-avatar {
+    margin-left: -2rem;
+    position: relative;
+    overflow: hidden; }
   .youthkitbag .img-avatar {
-    min-height: 30px;
-    min-width: 30px;
-    max-height: 30px;
-    max-width: 30px; }
+    height: 30px;
+    width: 30px; }
+  .youthkitbag .img-avatar-lg {
+    height: 50px;
+    width: 50px; }
   .youthkitbag .blank-circle {
     flex: 1;
     margin: 1%;

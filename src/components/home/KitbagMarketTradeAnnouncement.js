@@ -3,20 +3,20 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchKitbagMarketItems } from '../../actions/KitbagMarketActions';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   totalItems: state.kitbag.market.trades.totalItems,
-  items: state.kitbag.market.trades.items
+  items: state.kitbag.market.trades.items,
 });
 
 const mapDispatchToProps = {
-  fetchKitbagMarketItems
+  fetchKitbagMarketItems,
 };
 
 const KitbagMarketTradeAnnouncement = ({
   group,
   items,
   totalItems,
-  fetchKitbagMarketItems
+  fetchKitbagMarketItems,
 }) => {
   const [marketItems, setMarketItems] = useState([]);
 
@@ -30,14 +30,14 @@ const KitbagMarketTradeAnnouncement = ({
     fetchKitbagMarketItems('trade', 5);
   }, [fetchKitbagMarketItems]);
 
+  if (!group || !marketItems || totalItems === 0) return null;
+
   function topImage(images) {
     if (!images || images.length === 0) {
       return '/images/default.png';
     }
     return images[0].imageUrl;
   }
-
-  if (!group || !marketItems || totalItems === 0) return null;
 
   function renderList() {
     return marketItems.map((m, index) => {
@@ -56,7 +56,7 @@ const KitbagMarketTradeAnnouncement = ({
               />
             </div>
             <div className="">
-              <h3 className="h6 ellipsis mb-0">{m.title}</h3>
+              <h3 className="h6 ellipsis mb-0 mr-3">{m.title}</h3>
               <p className="mb-0">
                 You have <strong>{m.threads.length}</strong> active threads
               </p>
@@ -71,7 +71,11 @@ const KitbagMarketTradeAnnouncement = ({
     <div className="card border-0">
       <div className="alert alert-primary mb-0" role="alert">
         <h2 className="alert-heading">Your trades</h2>
-        <p>You currently have {totalItems} active trade items.</p>
+        <p>
+          You currently have{' '}
+          <span className={`badge badge-pill badge-dark`}>{totalItems}</span>{' '}
+          active trade items.
+        </p>
         <div className="mb-3">{renderList()}</div>
         <p>These are your most recently active trades.</p>
         <p className="mb-1">

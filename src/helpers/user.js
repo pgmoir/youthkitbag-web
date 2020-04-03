@@ -1,17 +1,28 @@
-export const userHasGroupMembership = user => {
+export const userHasGroupMembership = (user) => {
   return user.profile && user.profile.groups && user.profile.groups.length > 0
     ? user.profile.groups.filter(
-        g =>
+        (g) =>
           g.status === 'approved' &&
           (g.member.state === 'approved' || g.member.state === 'requested')
       ).length > 0
     : false;
 };
 
-export const userPreferredAccountId = user => {
+export const userHasGroupAdministration = (user) => {
+  return user.profile && user.profile.groups && user.profile.groups.length > 0
+    ? user.profile.groups.filter(
+        (g) =>
+          g.status === 'approved' &&
+          g.member.state === 'approved' &&
+          g.member.permissions.includes('admin')
+      ).length > 0
+    : false;
+};
+
+export const userPreferredAccountId = (user) => {
   return user.profile &&
     user.profile.accounts &&
     user.profile.accounts.length > 0
-    ? user.profile.accounts.find(a => a.preferred)._id
+    ? user.profile.accounts.find((a) => a.preferred)._id
     : null;
 };

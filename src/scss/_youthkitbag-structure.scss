@@ -166,11 +166,26 @@ a[disabled] {
   pointer-events: none;
 }
 
+.img-avatars {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  padding-left: 1.75rem;
+}
+
+.img-overlap-avatar {
+  margin-left: -2rem;
+  position: relative;
+  overflow: hidden;
+}
+
 .img-avatar {
-  min-height: 30px;
-  min-width: 30px;
-  max-height: 30px;
-  max-width: 30px;
+  height: 30px;
+  width: 30px;
+}
+
+.img-avatar-lg {
+  height: 50px;
+  width: 50px;
 }
 
 .blank-circle {
