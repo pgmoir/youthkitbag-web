@@ -8,12 +8,12 @@ import Alert from '../includes/Alert';
 import GroupsHelp from '../account/GroupsHelp';
 import GroupDisplay from './GroupDisplay';
 
-const mapStateToProps = state => ({
-  current: state.group.current
+const mapStateToProps = (state) => ({
+  current: state.group.current,
 });
 
 const mapDispatchToProps = {
-  fetchGroup
+  fetchGroup,
 };
 
 const GroupPage = ({ current, fetchGroup, match }) => {
@@ -31,7 +31,7 @@ const GroupPage = ({ current, fetchGroup, match }) => {
     activitys: '',
     images: [],
     topImage: '/images/default.png',
-    imagesToUpload: 0
+    imagesToUpload: 0,
   });
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const GroupPage = ({ current, fetchGroup, match }) => {
     if (current && current._id) {
       const newGroup = {
         ...current,
-        imagesToUpload: 0
+        imagesToUpload: 0,
       };
       setGroup(newGroup);
     }
@@ -146,35 +146,39 @@ const GroupPage = ({ current, fetchGroup, match }) => {
               )}
             </div>
             <div className="col-12 col-sm-4 mb-3 d-flex justify-content-end">
-              {group._id &&
-                group.status === 'approved' &&
-                (group.groupAdmin || group.groupMember) && (
+              <div>
+                {group._id &&
+                  group.status === 'approved' &&
+                  (group.groupAdmin || group.groupMember) && (
+                    <Link
+                      to={`/groups/${groupId}/members`}
+                      className="btn btn-primary"
+                    >
+                      Members
+                    </Link>
+                  )}
+                {group._id &&
+                  group.status === 'approved' &&
+                  !group.groupMember && (
+                    <Link
+                      to={`/groups/${groupId}/join`}
+                      className={`btn btn-primary ${
+                        group.groupMemberState ? 'disabled' : ''
+                      } ml-3`}
+                      disabled={group.groupMemberState}
+                    >
+                      Join
+                    </Link>
+                  )}
+                {group._id && group.status === 'approved' && group.groupMember && (
                   <Link
-                    to={`/groups/${groupId}/members`}
-                    className="btn btn-primary"
+                    to={`/groups/${groupId}/leave`}
+                    className="btn btn-primary ml-3"
                   >
-                    Members
+                    Leave
                   </Link>
                 )}
-              {group._id && group.status === 'approved' && !group.groupMember && (
-                <Link
-                  to={`/groups/${groupId}/join`}
-                  className={`btn btn-primary ${
-                    group.groupMemberState ? 'disabled' : ''
-                  } ml-3`}
-                  disabled={group.groupMemberState}
-                >
-                  Join
-                </Link>
-              )}
-              {group._id && group.status === 'approved' && group.groupMember && (
-                <Link
-                  to={`/groups/${groupId}/leave`}
-                  className="btn btn-primary ml-3"
-                >
-                  Leave
-                </Link>
-              )}
+              </div>
             </div>
           </div>
           {(group.groupAdmin || createGroup) && <GroupForm group={group} />}
