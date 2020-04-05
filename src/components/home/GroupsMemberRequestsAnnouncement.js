@@ -45,23 +45,38 @@ const GroupsMemberRequestsAnnouncement = ({
   }
 
   function renderMemberList(members) {
-    return members.map((m, index) => {
-      return (
-        <span key={index} className="img-overlap-avatar">
-          <img
-            className="img-avatar-lg img-thumbnail img-link rounded-circle p-0 m-1"
-            src={m.user.image}
-            alt={m.user.username}
-          />
-        </span>
-      );
-    });
+    return (
+      <>
+        <div className="img-avatars">
+          {members.map((m, index) => {
+            if (index < 5) {
+              return (
+                <span key={index} className="img-overlap-avatar">
+                  <img
+                    className="img-avatar-lg img-thumbnail img-link rounded-circle p-0 m-1"
+                    src={m.user.image}
+                    alt={m.user.username}
+                  />
+                </span>
+              );
+            } else {
+              return null;
+            }
+          })}
+        </div>
+        {members.length > 5 && <span>+ {members.length - 5}</span>}
+      </>
+    );
   }
 
   function renderList() {
     return groupsWithMemberRequests.map((g, index) => {
       return (
-        <Link className="a-inherit" key={index} to={`/groups/${g._id}/members`}>
+        <Link
+          className="a-inherit"
+          key={index}
+          to={`/groups/${g._id}/members?by=requested`}
+        >
           <div className="bg-white d-flex flex-row align-items-center mb-2">
             <div className="pl-1 py-1 pr-2">
               <img
@@ -72,7 +87,7 @@ const GroupsMemberRequestsAnnouncement = ({
             </div>
             <div className="">
               <h3 className="h6 ellipsis mb-0 mr-3">{g.name}</h3>
-              <div className="img-avatars">{renderMemberList(g.members)}</div>
+              {renderMemberList(g.members)}
             </div>
           </div>
         </Link>

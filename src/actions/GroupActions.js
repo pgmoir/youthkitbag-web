@@ -168,7 +168,7 @@ export const editGroupStatus = (groupId, status) => (dispatch) => {
     });
 };
 
-export const fetchGroupMembers = (groupId) => (dispatch) => {
+export const fetchGroupMembers = (groupId, by) => (dispatch) => {
   const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/group/${groupId}/members`, {
@@ -178,8 +178,8 @@ export const fetchGroupMembers = (groupId) => (dispatch) => {
       },
     })
     .then((response) => {
-      history.push(`/groups/${groupId}/members`);
       dispatch({ type: FETCH_GROUP_MEMBERS, payload: response.data });
+      history.push(`/groups/${groupId}/members?by=${by}`);
     })
     .catch((err) => {
       const { response } = err;

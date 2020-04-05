@@ -1,37 +1,48 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchGroupMembers } from '../../actions';
 import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 import GroupMember from './GroupMember';
+import queryString from 'query-string';
 
-const mapStateToProps = state => ({
-  memberList: state.group.memberList
+const mapStateToProps = (state) => ({
+  memberList: state.group.memberList,
 });
 
 const mapDispatchToProps = {
-  fetchGroupMembers
+  fetchGroupMembers,
 };
 
 const GroupMembers = ({ memberList, fetchGroupMembers, match }) => {
+  const { by } = queryString.parse(useLocation().search);
   const groupId = match.params.groupId;
+
   const [group, setGroup] = useState({});
 
   useEffect(() => {
     if (memberList) {
-      setGroup(memberList);
+      setGroup(selectGroupMembers(by, memberList));
     }
-  }, [memberList, setGroup]);
+  }, [memberList, by]);
 
   useEffect(() => {
     if (groupId) {
-      fetchGroupMembers(groupId);
+      fetchGroupMembers(groupId, by);
     }
-  }, [groupId, fetchGroupMembers]);
+  }, [groupId, by, fetchGroupMembers]);
+
+  function selectGroupMembers(by, memberList) {
+    if (memberList.members && by !== 'all') {
+      memberList.members = memberList.members.filter((m) => m.state === by);
+    }
+    return memberList;
+  }
 
   function getTitle() {
-    return `${group.name} - members (${
-      group.members.filter(m => m.state !== 'left').length
+    return `${group.name} (${
+      group.members.filter((m) => m.state !== 'left').length
     })`;
   }
 
@@ -66,6 +77,10 @@ const GroupMembers = ({ memberList, fetchGroupMembers, match }) => {
   }
 
   function renderList() {
+    if (group.members.length === 0) {
+      return <h2>There are no members identified</h2>;
+    }
+
     return group.members.map((member, index) => {
       return (
         <GroupMember
