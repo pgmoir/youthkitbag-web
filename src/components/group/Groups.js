@@ -10,15 +10,15 @@ import Alert from '../includes/Alert';
 import GroupsHelp from '../account/GroupsHelp';
 import queryString from 'query-string';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   search: state.group.search,
   items: Object.values(state.group.list),
   pagination: state.pagination,
-  userPackage: state.user.package
+  userPackage: state.user.package,
 });
 
 const mapDispatchToProps = {
-  fetchGroups
+  fetchGroups,
 };
 
 const Groups = ({ search, items, pagination, userPackage, fetchGroups }) => {
@@ -114,7 +114,11 @@ const Groups = ({ search, items, pagination, userPackage, fetchGroups }) => {
           <Alert />
           <div className="row">
             <div className="col-12 col-sm-9">
-              <SearchForm search={search} callback={fetchGroups} />
+              <SearchForm
+                search={search}
+                callback={fetchGroups}
+                incPagination={true}
+              />
             </div>
             {renderAddNewButton()}
           </div>

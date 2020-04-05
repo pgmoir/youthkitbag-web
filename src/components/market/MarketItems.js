@@ -9,14 +9,14 @@ import Pagination from '../includes/Pagination';
 import Alert from '../includes/Alert';
 import queryString from 'query-string';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   search: state.market.search,
   items: Object.values(state.market.list),
-  pagination: state.pagination
+  pagination: state.pagination,
 });
 
 const mapDispatchToProps = {
-  fetchMarketItems
+  fetchMarketItems,
 };
 
 const MarketItems = ({
@@ -24,7 +24,7 @@ const MarketItems = ({
   items,
   pagination,
   fetchMarketItems,
-  match
+  match,
 }) => {
   const query = useLocation().search;
   let {
@@ -34,7 +34,7 @@ const MarketItems = ({
     pagesize,
     excgroups,
     excaccounts,
-    loading
+    loading,
   } = search;
   if (query || loading) {
     const searchQuery = queryString.parse(query);
@@ -118,9 +118,10 @@ const MarketItems = ({
           <div className="row">
             <div className="col-12 col-sm-9">
               <SearchForm
-                accountId={accountId}
+                searchId={accountId}
                 search={search}
                 callback={fetchMarketItems}
+                incPagination={true}
               />
             </div>
           </div>

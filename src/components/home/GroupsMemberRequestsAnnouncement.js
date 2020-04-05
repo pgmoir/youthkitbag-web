@@ -75,7 +75,7 @@ const GroupsMemberRequestsAnnouncement = ({
         <Link
           className="a-inherit"
           key={index}
-          to={`/groups/${g._id}/members?by=requested`}
+          to={`/groups/${g._id}/members?searchfor=&by=requested`}
         >
           <div className="bg-white d-flex flex-row align-items-center mb-2">
             <div className="pl-1 py-1 pr-2">

@@ -3,15 +3,15 @@ import { useSelector } from 'react-redux';
 import useForm from '../hooks/useForm';
 import validate from './FormEmptyValidationRules';
 
-const SearchForm = ({ accountId, search, callback }) => {
+const SearchForm = ({ searchId, search, callback, incPagination }) => {
   const { searchfor, by } = search;
 
-  const filter = useSelector(state => state.filter);
-  const pagination = useSelector(state => state.pagination);
+  const filter = useSelector((state) => state.filter);
+  const pagination = useSelector((state) => state.pagination);
   const [isClearing, setIsClearing] = useState(false);
   const initialValues = {
     by: by,
-    searchfor: searchfor
+    searchfor: searchfor,
   };
 
   const { setValues, handleChange, handleSubmit, values } = useForm(
@@ -22,7 +22,11 @@ const SearchForm = ({ accountId, search, callback }) => {
 
   function searchItems() {
     const { by, searchfor } = values;
-    callback(searchfor, by, 1, pagination.itemsPerPage, accountId);
+    if (incPagination) {
+      callback(searchfor, by, 1, pagination.itemsPerPage, searchId);
+    } else {
+      callback(searchfor, by, searchId);
+    }
   }
 
   function clearSearch() {
@@ -50,7 +54,7 @@ const SearchForm = ({ accountId, search, callback }) => {
                 onBlur={handleChange}
                 value={values.by}
               >
-                {filter.options.map(o => (
+                {filter.options.map((o) => (
                   <option
                     key={o.key}
                     value={o.key}

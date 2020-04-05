@@ -9,15 +9,15 @@ import SearchForm from '../../includes/SearchForm';
 import Pagination from '../../includes/Pagination';
 import queryString from 'query-string';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   search: state.kitbag.kit.search,
   items: Object.values(state.kitbag.kit.list),
   pagination: state.pagination,
-  accounts: state.user.profile.accounts
+  accounts: state.user.profile.accounts,
 });
 
 const mapDispatchToProps = {
-  fetchKitbagKits
+  fetchKitbagKits,
 };
 
 const KitBag = ({
@@ -26,7 +26,7 @@ const KitBag = ({
   pagination,
   accounts,
   fetchKitbagKits,
-  match
+  match,
 }) => {
   const query = useLocation().search;
   let { searchfor, by, page, pagesize, loading } = search;
@@ -56,7 +56,7 @@ const KitBag = ({
     if (!accounts) {
       return 'Loading ...';
     }
-    const account = accounts.find(a => a.preferred);
+    const account = accounts.find((a) => a.preferred);
     return `${account.name} (${pagination.totalItems})`;
   }
 
@@ -114,9 +114,10 @@ const KitBag = ({
           <div className="row">
             <div className="col-12 col-sm-9">
               <SearchForm
-                accountId={accountId}
+                searchId={accountId}
                 search={search}
                 callback={fetchKitbagKits}
+                incPagination={true}
               />
             </div>
             <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">

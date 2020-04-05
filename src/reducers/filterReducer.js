@@ -2,12 +2,13 @@ import {
   FETCH_KITBAG_KITS,
   FETCH_MARKET_ITEMS,
   FETCH_GROUPS,
+  FETCH_GROUP_MEMBERS,
   RESET,
-  LOGOUT
+  LOGOUT,
 } from '../actions/types';
 
 const initialState = {
-  options: [{ key: '', value: 'All' }]
+  options: [{ key: '', value: 'All' }],
 };
 
 export default (state = initialState, action) => {
@@ -15,6 +16,7 @@ export default (state = initialState, action) => {
     case FETCH_KITBAG_KITS:
     case FETCH_MARKET_ITEMS:
     case FETCH_GROUPS:
+    case FETCH_GROUP_MEMBERS:
       return { ...state, ...action.payload.filter };
     case RESET:
     case LOGOUT:

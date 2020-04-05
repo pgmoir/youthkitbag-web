@@ -13,6 +13,7 @@ import {
   CREATE_GROUP_JOIN,
   EDIT_GROUP_LEAVE,
   SEARCH_GROUPS,
+  SEARCH_GROUP_MEMBERS,
   FETCH_GROUPS_MEMBER_REQUESTS,
 } from './types';
 import history from '../helpers/history';
@@ -168,10 +169,11 @@ export const editGroupStatus = (groupId, status) => (dispatch) => {
     });
 };
 
-export const fetchGroupMembers = (groupId, by) => (dispatch) => {
+export const fetchGroupMembers = (searchfor, by, groupId) => (dispatch) => {
   const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/group/${groupId}/members`, {
+      params: { searchfor, by },
       headers: {
         Authorization: `bearer ${token}`,
         'content-type': 'application/json',
@@ -179,7 +181,13 @@ export const fetchGroupMembers = (groupId, by) => (dispatch) => {
     })
     .then((response) => {
       dispatch({ type: FETCH_GROUP_MEMBERS, payload: response.data });
-      history.push(`/groups/${groupId}/members?by=${by}`);
+      dispatch({
+        type: SEARCH_GROUP_MEMBERS,
+        payload: { searchfor, by },
+      });
+      history.push(
+        `/groups/${groupId}/members?searchfor=${searchfor}&by=${by}`
+      );
     })
     .catch((err) => {
       const { response } = err;

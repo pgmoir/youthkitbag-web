@@ -6,8 +6,10 @@ import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 import GroupMember from './GroupMember';
 import queryString from 'query-string';
+import SearchForm from '../includes/SearchForm';
 
 const mapStateToProps = (state) => ({
+  search: state.group.searchMembers,
   memberList: state.group.memberList,
 });
 
@@ -15,8 +17,16 @@ const mapDispatchToProps = {
   fetchGroupMembers,
 };
 
-const GroupMembers = ({ memberList, fetchGroupMembers, match }) => {
-  const { by } = queryString.parse(useLocation().search);
+const GroupMembers = ({ search, memberList, fetchGroupMembers, match }) => {
+  const query = useLocation().search;
+  let { searchfor, by, loading } = search;
+  if (loading) {
+    const searchQuery = queryString.parse(query);
+    searchfor = searchQuery.searchfor;
+    by = searchQuery.by;
+    search = { searchfor, by };
+  }
+
   const groupId = match.params.groupId;
 
   const [group, setGroup] = useState({});
@@ -29,12 +39,12 @@ const GroupMembers = ({ memberList, fetchGroupMembers, match }) => {
 
   useEffect(() => {
     if (groupId) {
-      fetchGroupMembers(groupId, by);
+      fetchGroupMembers(searchfor, by, groupId);
     }
-  }, [groupId, by, fetchGroupMembers]);
+  }, [groupId, searchfor, by, fetchGroupMembers]);
 
   function selectGroupMembers(by, memberList) {
-    if (memberList.members && by !== 'all') {
+    if (memberList.members && by && by !== 'all') {
       memberList.members = memberList.members.filter((m) => m.state === by);
     }
     return memberList;
@@ -107,6 +117,16 @@ const GroupMembers = ({ memberList, fetchGroupMembers, match }) => {
         >
           <div className="container">
             <Alert />
+            <div className="row">
+              <div className="col-12 col-sm-9">
+                <SearchForm
+                  searchId={groupId}
+                  search={search}
+                  callback={fetchGroupMembers}
+                  incPagination={false}
+                />
+              </div>
+            </div>
             <div className="row">{renderList()}</div>
           </div>
         </section>

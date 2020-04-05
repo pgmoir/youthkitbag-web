@@ -7,6 +7,7 @@ import {
   EDIT_GROUP,
   SEARCH_GROUPS,
   FETCH_GROUPS_MEMBER_REQUESTS,
+  SEARCH_GROUP_MEMBERS,
 } from '../actions/types';
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   list: [],
   memberList: {},
   search: { searchfor: '', by: '', page: 1, pagesize: 24, loading: true },
+  searchMembers: { searchfor: '', by: '', loading: true },
   memberRequests: [],
 };
 
@@ -21,6 +23,8 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case SEARCH_GROUPS:
       return { ...state, search: action.payload };
+    case SEARCH_GROUP_MEMBERS:
+      return { ...state, searchMembers: action.payload };
     case FETCH_GROUPS:
       return {
         ...state,
@@ -42,7 +46,7 @@ export default (state = initialState, action) => {
         memberList: {},
       };
     case FETCH_GROUP_MEMBERS:
-      return { ...state, memberList: action.payload };
+      return { ...state, memberList: action.payload.members };
     case FETCH_GROUPS_MEMBER_REQUESTS:
       return { ...state, memberRequests: action.payload };
     case LOGOUT:
