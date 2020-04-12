@@ -10,13 +10,13 @@ $theme-colors: (
   secondary: #535a56,
   success: #1d7631,
   info: #c8e2fc,
-  dark: #31358e
+  dark: #31358e,
 );
 
 @import '../../node_modules/bootstrap/scss/variables';
 
 // /* 119 so that headers automatically grow smaller as screen size reduces */
-// $enable-responsive-font-sizes: true;
+$enable-responsive-font-sizes: true;
 
 // // Your variable overrides
 // $spacer: 1rem;
@@ -63,7 +63,7 @@ $container-max-widths: (
   sm: 719px,
   md: 959px,
   lg: 1139px,
-  xl: 1200px
+  xl: 1200px,
 );
 
 /* 222 */

@@ -10,7 +10,7 @@ const TradeResponse = ({ values, handleChange, errors, handleSubmit }) => {
           <h3>Are you interested in this item</h3>
           <p>
             If you are interested in aquiring this item, then please submit an
-            offer price you&apos;re willing to pay, or leave as 0 (zero) if te
+            offer price you&apos;re willing to pay, or leave as 0 (zero) hif te
             item is being offered for free and add any other relevant details
             below. The owner will get back to you as quickly as possible.
           </p>

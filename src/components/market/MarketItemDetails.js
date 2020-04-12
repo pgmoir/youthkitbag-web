@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
+import { capitalize } from '../../helpers/strings';
 import { respondMarketItem } from '../../actions/MarketActions';
-import { TextForm, TextAreaForm } from '../includes/forms';
 import FoundResponse from './response/FoundResponse';
 import LostResponse from './response/LostResponse';
 import StolenResponse from './response/StolenResponse';
@@ -10,13 +10,14 @@ import TradeResponse from './response/TradeResponse';
 import WantedResponse from './response/WantedResponse';
 import Threads from '../thread/threads/Threads';
 import validate from '../includes/FormEmptyValidationRules';
+import { ImagesDisplay } from '../includes/forms/ImagesDisplay';
 
-const mapStateToProps = state => ({
-  newErrors: state.toast.errors
+const mapStateToProps = (state) => ({
+  newErrors: state.toast.errors,
 });
 
 const mapDispatchToProps = {
-  respondMarketItem
+  respondMarketItem,
 };
 
 const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
@@ -24,17 +25,16 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
     _id: '',
     responseOn: '',
     details: '',
-    responsePrice: 0
+    responsePrice: 0,
   };
 
   const {
-    setChange,
     handleChange,
     handleSubmit,
     values,
     setValues,
     errors,
-    setErrors
+    setErrors,
   } = useForm(initialValues, updateMarket, validate);
 
   useEffect(() => {
@@ -46,42 +46,11 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
   useEffect(() => {
     if (market) {
       market.topImage =
-        market.images && market.images.filter(i => i.state !== 'D').length > 0
-          ? market.images.filter(i => i.state !== 'D')[0].imageUrl
+        market.images && market.images.filter((i) => i.state !== 'D').length > 0
+          ? market.images.filter((i) => i.state !== 'D')[0].imageUrl
           : '/images/default.png';
     }
   }, [market]);
-
-  function renderSecondaryImages() {
-    if (!market || !market.images) {
-      return null;
-    }
-
-    const { images } = market;
-    const items = [];
-
-    for (let i = 0; i < images.length; i++) {
-      items.push(
-        <div key={`image${i}`} className="carousel-thumbnail d-inline-flex">
-          <React.Fragment>
-            <img
-              className="img-fluid mb-3 img-link mini-img mr-1"
-              src={images[i].imageUrl}
-              alt=""
-              role="presentation"
-              onClick={renderTopImage.bind(null, images[i].imageUrl)}
-            />
-          </React.Fragment>
-        </div>
-      );
-    }
-
-    return <div>{items}</div>;
-  }
-
-  function renderTopImage(src) {
-    setChange('topImage', src);
-  }
 
   useEffect(() => {
     if (market) {
@@ -89,7 +58,7 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
         _id: market._id,
         responseOn: '',
         details: '',
-        responsePrice: 0
+        responsePrice: 0,
       });
     }
   }, [market, setValues]);
@@ -104,12 +73,11 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
     }
 
     return (
-      <TextForm
-        colFormat="3-9"
-        label="Condition"
-        value={market.condition}
-        readOnly={true}
-      />
+      <p>
+        <strong>Condition: </strong>
+        <br />
+        {market.condition}
+      </p>
     );
   };
 
@@ -118,30 +86,32 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
       return null;
     }
 
-    const label =
-      market.marketType === 'trade' ? 'Asking Price' : 'Offer Price';
+    const label = market.marketType === 'trade' ? 'Asking Price' : 'Offering';
     const price =
-      market.marketPrice === 0 ? 'FREE' : `£${market.marketPrice.toFixed(2)}`;
+      market.marketPrice === 0 ? 'free' : `£${market.marketPrice.toFixed(2)}`;
 
     return (
-      <TextForm colFormat="3-9" label={label} value={price} readOnly={true} />
+      <p>
+        <strong>{label}: </strong>
+        <br />
+        {price}
+      </p>
     );
   };
 
   const showStolenOn = () => {
-    if (!['stolen'].includes(market.marketType)) {
+    if (!['found', 'lost', 'stolen'].includes(market.marketType)) {
       return null;
     }
 
     const occurredOn = new Date(market.occurredOn).toDateString();
 
     return (
-      <TextForm
-        colFormat="3-9"
-        label="Stolen On"
-        value={occurredOn}
-        readOnly={true}
-      />
+      <p>
+        <strong>{capitalize(market.marketType)} on: </strong>
+        <br />
+        {occurredOn}
+      </p>
     );
   };
 
@@ -150,17 +120,14 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
       return null;
     }
 
-    const security = !market.security
-      ? 'Frame number not available'
-      : market.security;
+    if (!market.security || market.security.length === 0) return null;
 
     return (
-      <TextForm
-        colFormat="3-9"
-        label="Security"
-        value={security}
-        readOnly={true}
-      />
+      <p>
+        <strong>Security reference: </strong>
+        <br />
+        {market.security}
+      </p>
     );
   };
 
@@ -174,12 +141,11 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
       : market.tracking;
 
     return (
-      <TextForm
-        colFormat="3-9"
-        label="Incident Number"
-        value={tracking}
-        readOnly={true}
-      />
+      <p>
+        <strong>Incident Number: </strong>
+        <br />
+        {tracking}
+      </p>
     );
   };
 
@@ -188,63 +154,44 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
     lost: LostResponse,
     stolen: StolenResponse,
     trade: TradeResponse,
-    wanted: WantedResponse
+    wanted: WantedResponse,
   };
   const Response = responseComponents[market.marketType || 'trade'];
 
   return (
     <React.Fragment>
-      {market._id && (
-        <div className="row">
-          <div className="col-12 col-lg-6 order-1 order-lg-2" role="main">
-            <div>
-              <img
-                id="preview"
-                name="preview"
-                className="img-fluid mb-3"
-                src={market.topImage}
-                alt=""
-                role="presentation"
-              />
-            </div>
-            <div>{renderSecondaryImages()}</div>
-          </div>
-          <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
-            <TextForm
-              colFormat="3-9"
-              label="Subtitle"
-              value={market.subtitle}
-              readOnly={true}
+      <div className="row">
+        <ImagesDisplay images={market.images} />
+        <div className="col-12 col-lg-6 order-2 order-lg-1 pr-3" role="main">
+          {showStolenOn()}
+          <p>
+            <strong>Description: </strong>
+            <br />
+            {market.description}
+          </p>
+          {showCondition()}
+          {showPrice()}
+          {showSecurity()}
+          {showTracking()}
+          <p className="mb-0">
+            <strong>Activities: </strong>
+          </p>
+          <ul>
+            {market.activitys.map((m, i) => {
+              return <li key={i}>{m}</li>;
+            })}
+          </ul>
+          <hr />
+          {market.threads.length === 0 && (
+            <Response
+              values={values}
+              handleChange={handleChange}
+              errors={errors}
+              handleSubmit={handleSubmit}
             />
-            <TextAreaForm
-              colFormat="3-9"
-              label="Description"
-              value={market.description}
-              readOnly={true}
-            />
-            {showCondition()}
-            {showPrice()}
-            {showStolenOn()}
-            {showSecurity()}
-            {showTracking()}
-            <TextForm
-              colFormat="3-9"
-              label="Activities"
-              value={market.activitys}
-              readOnly={true}
-            />
-            <hr />
-            {market.threads.length === 0 && (
-              <Response
-                values={values}
-                handleChange={handleChange}
-                errors={errors}
-                handleSubmit={handleSubmit}
-              />
-            )}
-          </div>
+          )}
         </div>
-      )}
+      </div>
       {market._id && market.threads.length > 0 && (
         <React.Fragment>
           <div className="row">
@@ -252,7 +199,6 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
               <h4>{`Thread for "${market.title}"`}</h4>
             </div>
           </div>
-
           <Threads
             threads={market.threads}
             accountId={market.account}

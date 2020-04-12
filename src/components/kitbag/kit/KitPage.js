@@ -6,12 +6,12 @@ import KitForm from './KitForm';
 import Title from '../../includes/title/Title';
 import Alert from '../../includes/Alert';
 
-const mapStateToProps = state => ({
-  current: state.kitbag.kit.current
+const mapStateToProps = (state) => ({
+  current: state.kitbag.kit.current,
 });
 
 const mapDispatchToProps = {
-  fetchKitbagKit
+  fetchKitbagKit,
 };
 
 const KitPage = ({ current, fetchKitbagKit, match }) => {
@@ -31,7 +31,7 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
     active: true,
     images: [],
     topImage: '/images/default.png',
-    imagesToUpload: 0
+    imagesToUpload: 0,
   });
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
     if (current && current._id) {
       const newKit = {
         ...current,
-        imagesToUpload: 0
+        imagesToUpload: 0,
       };
       setKit(newKit);
     }
@@ -59,7 +59,7 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
       return 'Loading ...';
     }
 
-    return kit._id ? `Kit: ${kit.title}` : 'Create new kit';
+    return kit._id ? `${kit.title}` : 'Create new kit';
   }
 
   return (
@@ -79,7 +79,7 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
                   to={`/kitbag/market/${accountId}/add/${kitId}/trade`}
                   className="btn btn-primary mr-3"
                 >
-                  Trade
+                  Trade / Recycle
                 </Link>
                 <Link
                   to={`/kitbag/market/${accountId}/add/${kitId}/wanted`}
@@ -91,7 +91,7 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
                   to={`/kitbag/market/${accountId}/add/${kitId}/stolen`}
                   className="btn btn-danger"
                 >
-                  Stolen
+                  Lost / Stolen
                 </Link>
               </div>
             </div>

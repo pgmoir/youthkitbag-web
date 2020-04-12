@@ -10,7 +10,7 @@ const MarketItemCard = ({ market }) => {
     marketType,
     account,
     marketPrice,
-    threads
+    threads,
   } = market;
 
   const isStolen = marketType === 'stolen';
@@ -22,13 +22,24 @@ const MarketItemCard = ({ market }) => {
     if (!market) return null;
 
     const numberThreads = isOwned ? ` / ${threads.length}` : '';
-
+    let content;
     if (['trade', 'wanted'].includes(marketType)) {
-      if (!marketPrice || marketPrice === 0) return `Free${numberThreads}`;
-      return `£${marketPrice.toFixed(2)}${numberThreads}`;
+      if (!marketPrice || marketPrice === 0) {
+        content = `free${numberThreads}`;
+      } else {
+        content = `£${marketPrice.toFixed(2)}${numberThreads}`;
+      }
+    } else {
+      content = `${marketType}${numberThreads}`;
     }
 
-    return `${marketType}${numberThreads}`;
+    return (
+      <span
+        className={`badge badge-pill badge-${marketTypeStyle()} badge-fullsize badge-top-right`}
+      >
+        {content}
+      </span>
+    );
   }
 
   function topImage() {
@@ -96,9 +107,7 @@ const MarketItemCard = ({ market }) => {
             </Link>
           </span>
         )}
-        <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">
-          {renderNotification()}
-        </span>
+        {renderNotification()}
         <Link
           to={
             isOwned

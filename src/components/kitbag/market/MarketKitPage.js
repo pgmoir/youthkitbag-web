@@ -2,26 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
   fetchMarketKit,
-  fetchMarketKitFromKit
+  fetchMarketKitFromKit,
 } from '../../../actions/KitbagMarketActions';
 import MarketKitForm from './MarketKitForm';
 import Title from '../../includes/title/Title';
 import Alert from '../../includes/Alert';
+import PreMarketTitle from '../../includes/title/PreMarketTitle';
 
-const mapStateToProps = state => ({
-  current: state.kitbag.market.current
+const mapStateToProps = (state) => ({
+  current: state.kitbag.market.current,
 });
 
 const mapDispatchToProps = {
   fetchMarketKit,
-  fetchMarketKitFromKit
+  fetchMarketKitFromKit,
 };
 
 const MarketKitPage = ({
   current,
   fetchMarketKit,
   fetchMarketKitFromKit,
-  match
+  match,
 }) => {
   const accountId = match.params.accountId;
   const marketId = match.params.marketId;
@@ -43,7 +44,7 @@ const MarketKitPage = ({
     groups: [],
     marketDetails: [],
     topImage: '/images/default.png',
-    imagesToUpload: 0
+    imagesToUpload: 0,
   });
 
   useEffect(() => {
@@ -62,7 +63,7 @@ const MarketKitPage = ({
     if (current && (current._id || current.sourceId)) {
       const newMarketKit = {
         ...current,
-        imagesToUpload: 0
+        imagesToUpload: 0,
       };
       setMarketKit(newMarketKit);
     }
@@ -74,17 +75,15 @@ const MarketKitPage = ({
 
   function getTitle() {
     if (itemIsLoading()) {
-      return 'Loading ...';
+      return <Title title="Loading ..." />;
     }
 
-    return market._id || market.sourceId
-      ? `${market.marketType.toUpperCase()} - ${market.title}`
-      : `Add ${market.marketType} item to the market`;
+    return <PreMarketTitle market={market} />;
   }
 
   return (
     <div>
-      <Title title={getTitle()} />
+      {getTitle()}
       <section
         id="main"
         className="container-fluid"
@@ -99,7 +98,4 @@ const MarketKitPage = ({
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MarketKitPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MarketKitPage);
