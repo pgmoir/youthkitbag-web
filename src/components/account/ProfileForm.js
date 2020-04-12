@@ -6,8 +6,8 @@ import { TextForm, ImagesForm } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
 import { getImages } from '../../helpers/image';
 
-const mapStateToProps = state => ({
-  newErrors: state.toast.errors
+const mapStateToProps = (state) => ({
+  newErrors: state.toast.errors,
 });
 
 const mapDispatchToProps = { editProfile, loadSettingsPage };
@@ -23,7 +23,7 @@ const ProfileForm = ({ profile, newErrors, editProfile, loadSettingsPage }) => {
     values,
     setValues,
     errors,
-    setErrors
+    setErrors,
   } = useForm(initialValues, updateProfile, validate);
 
   useEffect(() => {
@@ -36,8 +36,9 @@ const ProfileForm = ({ profile, newErrors, editProfile, loadSettingsPage }) => {
     if (profile) {
       profile.images = getImages(profile.images);
       profile.topImage =
-        profile.images && profile.images.filter(i => i.state !== 'D').length > 0
-          ? profile.images.filter(i => i.state !== 'D')[0].imageUrl
+        profile.images &&
+        profile.images.filter((i) => i.state !== 'D').length > 0
+          ? profile.images.filter((i) => i.state !== 'D')[0].imageUrl
           : '/images/default.png';
       setValues(profile);
     }
@@ -57,6 +58,7 @@ const ProfileForm = ({ profile, newErrors, editProfile, loadSettingsPage }) => {
         values={values}
         setChange={setChange}
         addArrayItem={addArrayItem}
+        error={errors.images}
       />
       <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
         <form className="mb-3" onSubmit={handleSubmit}>

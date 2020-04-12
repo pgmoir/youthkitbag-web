@@ -41,6 +41,8 @@ const MarketKitPage = ({
     marketd: false,
     sourceId: '',
     userId: '',
+    security: '',
+    tracking: '',
     groups: [],
     marketDetails: [],
     topImage: '/images/default.png',

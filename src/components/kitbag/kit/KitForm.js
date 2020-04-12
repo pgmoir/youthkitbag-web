@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import {
   createKitbagKit,
-  editKitbagKit
+  editKitbagKit,
 } from '../../../actions/KitbagKitActions';
 import {
   DateForm,
@@ -15,19 +15,19 @@ import {
   AddArrayButtonForm,
   RemoveArrayButtonForm,
   CheckboxForm,
-  ImagesForm
+  ImagesForm,
 } from '../../includes/forms';
 import validate from '../../includes/FormEmptyValidationRules';
 import { getImages } from '../../../helpers/image';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   kitbagLists: state.kitbag.kit.lists,
-  newErrors: state.toast.errors
+  newErrors: state.toast.errors,
 });
 
 const mapDispatchToProps = {
   createKitbagKit,
-  editKitbagKit
+  editKitbagKit,
 };
 
 const KitForm = ({
@@ -36,7 +36,7 @@ const KitForm = ({
   kitbagLists,
   newErrors,
   createKitbagKit,
-  editKitbagKit
+  editKitbagKit,
 }) => {
   const initialValues = { ...kit, images: getImages(kit.images) };
   const initialPurchase = { from: '', quantity: 0, ondate: '', price: 0.0 };
@@ -54,7 +54,7 @@ const KitForm = ({
     'Donated',
     'Lost',
     'Found',
-    'Other'
+    'Other',
   ];
   const conditionItems = ['Used', 'New', 'Almost New', 'Other'];
 
@@ -67,7 +67,7 @@ const KitForm = ({
     values,
     setValues,
     errors,
-    setErrors
+    setErrors,
   } = useForm(initialValues, updateKit, validate);
 
   useEffect(() => {
@@ -80,8 +80,8 @@ const KitForm = ({
     if (kit) {
       kit.images = getImages(kit.images);
       kit.topImage =
-        kit.images && kit.images.filter(i => i.state !== 'D').length > 0
-          ? kit.images.filter(i => i.state !== 'D')[0].imageUrl
+        kit.images && kit.images.filter((i) => i.state !== 'D').length > 0
+          ? kit.images.filter((i) => i.state !== 'D')[0].imageUrl
           : '/images/default.png';
       setValues(kit);
     }
@@ -102,6 +102,7 @@ const KitForm = ({
         values={values}
         setChange={setChange}
         addArrayItem={addArrayItem}
+        error={errors.images}
       />
       <div className="col-12 col-md-6 order-2 order-md-1" role="main">
         <form className="mb-3" onSubmit={handleSubmit}>

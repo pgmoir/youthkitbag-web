@@ -79,7 +79,7 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
                   to={`/kitbag/market/${accountId}/add/${kitId}/trade`}
                   className="btn btn-primary mr-3"
                 >
-                  Trade / Recycle
+                  Trade Recycle
                 </Link>
                 <Link
                   to={`/kitbag/market/${accountId}/add/${kitId}/wanted`}
@@ -91,7 +91,7 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
                   to={`/kitbag/market/${accountId}/add/${kitId}/stolen`}
                   className="btn btn-danger"
                 >
-                  Lost / Stolen
+                  Found Lost Stolen
                 </Link>
               </div>
             </div>

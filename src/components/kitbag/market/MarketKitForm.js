@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import useForm from '../../hooks/useForm';
 import {
   createMarketKit,
-  editMarketKit
+  editMarketKit,
 } from '../../../actions/KitbagMarketActions';
 import {
   DateForm,
@@ -13,19 +13,19 @@ import {
   RemoveArrayButtonForm,
   ImagesForm,
   CheckboxForm,
-  SelectForm
+  SelectForm,
 } from '../../includes/forms';
 import Threads from '../../thread/threads/Threads';
 import validate from '../../includes/FormEmptyValidationRules';
 import { getImages } from '../../../helpers/image';
 
-const mapStateToProps = state => ({
-  newErrors: state.toast.errors
+const mapStateToProps = (state) => ({
+  newErrors: state.toast.errors,
 });
 
 const mapDispatchToProps = {
   createMarketKit,
-  editMarketKit
+  editMarketKit,
 };
 
 const MarketForm = ({
@@ -33,7 +33,7 @@ const MarketForm = ({
   market,
   newErrors,
   createMarketKit,
-  editMarketKit
+  editMarketKit,
 }) => {
   const initialValues = { ...market, images: getImages(market.images) };
 
@@ -46,7 +46,7 @@ const MarketForm = ({
     values,
     setValues,
     errors,
-    setErrors
+    setErrors,
   } = useForm(initialValues, updateMarket, validate);
 
   useEffect(() => {
@@ -59,8 +59,8 @@ const MarketForm = ({
     if (market) {
       market.images = getImages(market.images);
       market.topImage =
-        market.images && market.images.filter(i => i.state !== 'D').length > 0
-          ? market.images.filter(i => i.state !== 'D')[0].imageUrl
+        market.images && market.images.filter((i) => i.state !== 'D').length > 0
+          ? market.images.filter((i) => i.state !== 'D')[0].imageUrl
           : '/images/default.png';
       setValues(market);
     }
@@ -73,6 +73,24 @@ const MarketForm = ({
       createMarketKit(accountId, values);
     }
   }
+
+  const showMarketType = () => {
+    if (!['found', 'lost', 'stolen'].includes(market.marketType)) return null;
+
+    const typeItems = ['Found', 'Lost', 'Stolen'];
+
+    return (
+      <SelectForm
+        colFormat="3-9"
+        label="Type"
+        value={values.marketType}
+        field="marketType"
+        handleChange={handleChange}
+        error={errors.marketType}
+        items={typeItems}
+      />
+    );
+  };
 
   const showCondition = () => {
     if (!['trade'].includes(market.marketType)) {
@@ -134,7 +152,7 @@ const MarketForm = ({
   };
 
   const showStolenOn = () => {
-    if (!['stolen'].includes(market.marketType)) {
+    if (!['found', 'lost', 'stolen'].includes(values.marketType)) {
       return null;
     }
 
@@ -142,7 +160,7 @@ const MarketForm = ({
       <DateForm
         colFormat="3-9"
         value={values.occurredOn}
-        label="Stolen On"
+        label="Occurred On"
         field="occurredOn"
         setChange={setChange}
         error={errors.occurredOn}
@@ -152,7 +170,7 @@ const MarketForm = ({
   };
 
   const showSecurity = () => {
-    if (!['stolen'].includes(market.marketType)) {
+    if (!['found', 'lost', 'stolen'].includes(values.marketType)) {
       return null;
     }
 
@@ -170,7 +188,7 @@ const MarketForm = ({
   };
 
   const showTracking = () => {
-    if (!['stolen'].includes(market.marketType)) {
+    if (!['stolen'].includes(values.marketType)) {
       return null;
     }
 
@@ -239,7 +257,7 @@ const MarketForm = ({
     }
     const closedThreadStates = ['withdraw', 'reject'];
     return (
-      market.threads.filter(m => closedThreadStates.includes(m.responseState))
+      market.threads.filter((m) => closedThreadStates.includes(m.responseState))
         .length > 0
     );
   };
@@ -252,9 +270,11 @@ const MarketForm = ({
           setChange={setChange}
           addArrayItem={addArrayItem}
           readOnly={isReadOnly()}
+          error={errors.images}
         />
         <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
           <form className="mb-3" onSubmit={handleSubmit}>
+            {showMarketType()}
             <TextForm
               colFormat="3-9"
               label="Title"

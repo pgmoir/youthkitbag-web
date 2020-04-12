@@ -3,8 +3,6 @@ import React from 'react';
 const PreMarketTitle = ({ market }) => {
   const { title, subtitle, marketType, marketPrice } = market;
 
-  const isTrade = marketType === 'trade' && marketPrice > 0;
-  const isRecycle = marketType === 'trade' && marketPrice === 0;
   const isWanted = marketType === 'wanted' && marketPrice > 0;
   const isWantRecycle = marketType === 'wanted' && marketPrice === 0;
   const isFound = marketType === 'found';
