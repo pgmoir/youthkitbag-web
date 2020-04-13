@@ -81,7 +81,7 @@ const GroupsMemberRequestsAnnouncement = ({
             <div className="pl-1 py-1 pr-2">
               <img
                 src={topImage(g.images)}
-                alt="{g.name}"
+                alt=""
                 className="img-fluid img-thumbnail img-small"
               />
             </div>

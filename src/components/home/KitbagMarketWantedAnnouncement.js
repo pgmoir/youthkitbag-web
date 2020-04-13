@@ -51,7 +51,7 @@ const KitbagMarketWantedAnnouncement = ({
             <div className="pl-1 py-1 pr-2">
               <img
                 src={topImage(m.images)}
-                alt="{m.title}"
+                alt=""
                 className="img-fluid img-thumbnail img-small"
               />
             </div>
