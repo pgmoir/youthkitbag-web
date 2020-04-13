@@ -10,7 +10,7 @@
     },
     {
       "style": "p",
-      "content": "<strong>Owner contact email:</strong>admin@youthkitbag.com"
+      "content": "<strong>Owner contact email:</strong><a href=\"mailto:admin@youthkitbag.com\">admin@youthkitbag.com</a>"
     },
     { "style": "h2", "content": "Types of Data collected" },
     {
@@ -582,7 +582,7 @@
     },
     {
       "style": "p",
-      "content": "<strong>Owner contact email:</strong>admin@youthkitbag.com"
+      "content": "<strong>Owner contact email:</strong><a href=\"mailto:admin@youthkitbag.com\">admin@youthkitbag.com</a>"
     },
     {
       "style": "p",

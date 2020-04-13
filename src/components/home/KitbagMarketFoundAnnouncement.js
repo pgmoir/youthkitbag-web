@@ -79,7 +79,10 @@ const KitbagMarketFoundAnnouncement = ({
         <div className="mb-3">{renderList()}</div>
         <p>These are your most recently active found items.</p>
         <p className="mb-1">
-          <Link to="/market?searchfor=&by=found&page=1&pagesize=24">
+          <Link
+            to="/market?searchfor=&by=found&page=1&pagesize=24"
+            className="a11y-highlight"
+          >
             View all your found items
           </Link>
         </p>

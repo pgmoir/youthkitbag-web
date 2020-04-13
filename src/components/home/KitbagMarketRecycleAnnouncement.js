@@ -79,7 +79,10 @@ const KitbagMarketRecycleAnnouncement = ({
         <div className="mb-3">{renderList()}</div>
         <p>These are your most recently active recycling items.</p>
         <p className="mb-1">
-          <Link to={`/market?searchfor=&by=recycle&page=1&pagesize=24`}>
+          <Link
+            to={`/market?searchfor=&by=recycle&page=1&pagesize=24`}
+            className="a11y-highlight"
+          >
             View all your recycling
           </Link>
         </p>

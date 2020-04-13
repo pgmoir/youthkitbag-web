@@ -16,7 +16,7 @@ const Privacy = () => {
               <h1>Privacy Policy</h1>
               <h2>Owner and Data Controller</h2>
               <p>Moir Consultancy Limited, 10 Forest Way, Woodford Green<br/>Essex IG8 0QE</p>
-              <p><strong>Owner contact email:</strong>admin@youthkitbag.com</p>
+              <p><strong>Owner contact email:</strong><a href="mailto:admin@youthkitbag.com">admin@youthkitbag.com</a></p>
               <h2>Types of Data collected</h2>
               <p>Among the types of Personal Data that this Website collects, by itself or through third parties, there are: Cookies; Usage Data; email address; first name; last name; phone number; company name; unique device identifiers for advertising (Google Advertiser ID or IDFA, for example); Data communicated while using the service.</p>
               <p>Complete details on each type of Personal Data collected are provided in the dedicated sections of this privacy policy or by specific explanation texts displayed prior to the Data collection. Personal Data may be freely provided by the User, or, in case of Usage Data, collected automatically when using this Website.</p>
@@ -195,7 +195,7 @@ const Privacy = () => {
               <p>Notwithstanding the above, the Owner informs that Users may follow the instructions provided on the subsequently linked initiatives by the EDAA (EU), the Network Advertising Initiative (US) and the Digital Advertising Alliance (US), DAAC (Canada), DDAI (Japan) or other similar services. Such initiatives allow Users to select their tracking preferences for most of the advertising tools. The Owner thus recommends that Users make use of these resources in addition to the information provided in this document.</p>
               <h2>Owner and Data Controller</h2>
               <p>Moir Consultancy Limited, 10 Forest Way, Woodford Green<br/>Essex IG8 0QE</p>
-              <p><strong>Owner contact email:</strong>admin@youthkitbag.com</p>
+              <p><strong>Owner contact email:</strong><a href="mailto:admin@youthkitbag.com">admin@youthkitbag.com</a></p>
               <p>Since the installation of third-party Cookies and other tracking systems through the services used within this Website cannot be technically controlled by the Owner, any specific references to Cookies and tracking systems installed by third parties are to be considered indicative. In order to obtain complete information, the User is kindly requested to consult the privacy policy for the respective third-party services listed in this document.</p>
               <p>Given the objective complexity surrounding the identification of technologies based on Cookies, Users are encouraged to contact the Owner should they wish to receive any further information on the use of Cookies by this Website.</p>
               <h3>Additional information about Data collection and processing</h3>

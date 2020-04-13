@@ -79,7 +79,10 @@ const KitbagMarketLostAnnouncement = ({
         <div className="mb-3">{renderList()}</div>
         <p>These are your most recently active lost items.</p>
         <p className="mb-1">
-          <Link to="/market?searchfor=&by=lost&page=1&pagesize=24">
+          <Link
+            to="/market?searchfor=&by=lost&page=1&pagesize=24"
+            className="a11y-highlight"
+          >
             View all your lost items
           </Link>
         </p>

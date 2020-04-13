@@ -73,7 +73,7 @@ const GroupsMemberRequestsAnnouncement = ({
     return groupsWithMemberRequests.map((g, index) => {
       return (
         <Link
-          className="a-inherit"
+          className="a-inherit a11y-highlight"
           key={index}
           to={`/groups/${g._id}/members?searchfor=&by=requested`}
         >

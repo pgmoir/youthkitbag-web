@@ -26,10 +26,17 @@ const Footer = () => {
               </h3>
               <ul className="links">
                 <li>
-                  <Link to="/help-and-contact/index">Help &amp; contacts</Link>
+                  <Link
+                    to="/help-and-contact/index"
+                    className="text-light a11y-highlight"
+                  >
+                    Help &amp; contacts
+                  </Link>
                 </li>
                 <li className="links">
-                  <Link to="/pricing">Pricing</Link>
+                  <Link to="/pricing" className="text-light a11y-highlight">
+                    Pricing
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -40,14 +47,19 @@ const Footer = () => {
               </h3>
               <ul className="links">
                 <li>
-                  <Link to="/info-for/media/index">Media</Link>
+                  <Link
+                    to="/info-for/media/index"
+                    className="text-light a11y-highlight"
+                  >
+                    Media
+                  </Link>
                 </li>
               </ul>
             </div>
             <hr className="w-100 clearfix d-md-none mx-3" />
             <div className="col-md-4 mx-auto">
               <h3 className="sr-only">Contact details</h3>
-              <p>
+              <p className="text-light">
                 <span
                   aria-hidden="true"
                   className="fas fa-home mr-3"
@@ -63,7 +75,12 @@ const Footer = () => {
                   title="Contact email"
                 ></span>
                 <span className="sr-only">Our contact email address is:</span>
-                admin@youthkitbag.com
+                <a
+                  href="mailto:admin@youthkitbag.com"
+                  className="text-light a11y-highlight"
+                >
+                  admin@youthkitbag.com
+                </a>
               </p>
             </div>
           </div>
@@ -82,19 +99,29 @@ const Footer = () => {
             <div className="col-md-8">
               <div className="d-flex flex-column flex-md-row">
                 <div className="p-2">
-                  <Link to="/site/terms">Terms &amp; conditions </Link>
+                  <Link to="/site/terms" className="a11y-highlight">
+                    Terms &amp; conditions{' '}
+                  </Link>
                 </div>
                 <div className="p-2">
-                  <Link to="/site/privacy">Privacy Policy</Link>
+                  <Link to="/site/privacy" className="a11y-highlight">
+                    Privacy Policy
+                  </Link>
                 </div>
                 <div className="p-2">
-                  <Link to="/site/cookiesy">Cookies</Link>
+                  <Link to="/site/cookiesy" className="a11y-highlight">
+                    Cookies
+                  </Link>
                 </div>
                 <div className="p-2">
-                  <Link to="/site/security">Security</Link>
+                  <Link to="/site/security" className="a11y-highlight">
+                    Security
+                  </Link>
                 </div>
                 <div className="p-2">
-                  <Link to="/site/accessibility">Accessibility</Link>
+                  <Link to="/site/accessibility" className="a11y-highlight">
+                    Accessibility
+                  </Link>
                 </div>
               </div>
             </div>

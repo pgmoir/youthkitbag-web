@@ -79,7 +79,10 @@ const KitbagMarketTradeAnnouncement = ({
         <div className="mb-3">{renderList()}</div>
         <p>These are your most recently active trades.</p>
         <p className="mb-1">
-          <Link to="/market?searchfor=&by=trade&page=1&pagesize=24&excgroups=true">
+          <Link
+            to="/market?searchfor=&by=trade&page=1&pagesize=24&excgroups=true"
+            className="a11y-highlight"
+          >
             View all your trades
           </Link>
         </p>

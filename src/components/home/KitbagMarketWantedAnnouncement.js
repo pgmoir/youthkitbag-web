@@ -79,7 +79,10 @@ const KitbagMarketWantedAnnouncement = ({
         <div className="mb-1">{renderList()}</div>
         <p>These are your most recently active wanted items.</p>
         <p className="mb-1">
-          <Link to="/market?searchfor=&by=wanted&page=1&pagesize=24">
+          <Link
+            to="/market?searchfor=&by=wanted&page=1&pagesize=24"
+            className="a11y-highlight"
+          >
             View all your wanted items
           </Link>
         </p>

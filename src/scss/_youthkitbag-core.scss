@@ -32,6 +32,16 @@ footer {
   flex-shrink: 0;
 }
 
+a.a11y-highlight {
+  text-decoration: underline;
+  border: solid 3px #e1b50600;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0 0.5rem 0;
+  &:hover {
+    border: solid 3px #e1b506;
+  }
+}
+
 .purple-gradient {
   background: -webkit-linear-gradient(
     330.58deg,

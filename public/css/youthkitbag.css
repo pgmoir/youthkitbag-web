@@ -27,6 +27,14 @@ main {
 footer {
   flex-shrink: 0; }
 
+a.a11y-highlight {
+  text-decoration: underline;
+  border: solid 3px #e1b50600;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0 0.5rem 0; }
+  a.a11y-highlight:hover {
+    border: solid 3px #e1b506; }
+
 .purple-gradient {
   background: -webkit-linear-gradient(330.58deg, #8d3396, #7d4198 8.69%, #31358e 59.71%);
   background: -o-linear-gradient(330.58deg, #8d3396 0, #7d4198 8.69%, #31358e 59.71%);
@@ -170,9 +178,6 @@ h4,
       padding: 0; }
       .youthkitbag .footer ul.links li {
         padding-bottom: 0.35rem; }
-        .youthkitbag .footer ul.links li a {
-          color: inherit;
-          text-decoration: none; }
       .youthkitbag .footer ul.links.inline li {
         display: inline;
         padding-right: 1rem; }
