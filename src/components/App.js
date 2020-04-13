@@ -85,17 +85,19 @@ const App = ({ auth }) => {
             <Route path="/site/security" exact component={Security} />
             <Route path="/site/accessibility" exact component={Accessibility} />
 
-            <Route path="/auth/signup" exact component={SignUp} />
+            <Route path="/auth/signup" exact>
+              {auth.loggedIn ? <Redirect to="/" /> : <SignUp />}
+            </Route>
             <Route path="/auth/login" exact>
               {auth.loggedIn ? <Redirect to="/" /> : <Login />}
             </Route>
-            <Route path="/auth/reset" exact component={Reset} />
+            <Route path="/auth/reset" exact>
+              {auth.loggedIn ? <Redirect to="/" /> : <Reset />}
+            </Route>
             <Route path="/auth/token/:token" exact component={Token} />
-            <Route
-              path="/auth/newpassword/:token"
-              exact
-              component={NewPassword}
-            />
+            <Route path="/auth/newpassword/:token" exact>
+              {auth.loggedIn ? <Redirect to="/" /> : <NewPassword />}
+            </Route>
             <Route path="/auth/logout" exact component={Logout} />
 
             <PrivateRoute
