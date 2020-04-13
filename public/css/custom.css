@@ -139,7 +139,7 @@ sup {
   top: -.5em; }
 
 a {
-  color: #006adb;
+  color: #004c9e;
   text-decoration: none;
   background-color: transparent; }
   a:hover {
@@ -2309,7 +2309,7 @@ fieldset:disabled a.btn {
 
 .btn-link {
   font-weight: 400;
-  color: #006adb;
+  color: #004c9e;
   text-decoration: none; }
   .btn-link:hover {
     color: #002752;

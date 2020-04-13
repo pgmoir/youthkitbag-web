@@ -38,9 +38,9 @@ $enable-responsive-font-sizes: true;
 $body-bg: #7d419830;
 
 // /* 172 required to bring link color to AAA standards, but this fails to A link contrast */
-// //$link-color: #004C9E;
+$link-color: #004c9e;
 // /* 172 required to bring link color to AA standards to contrast ratio with other text */
-$link-color: #006adb;
+//$link-color: #006adb;
 
 $font-family-base: PrentonRPPro-Regular, PrentonRPProLight-Regular,
   PrentonRPProMedium-Regular, PrentonRPPro-Italic, PrentonRPPro-Bold, sans-serif,
