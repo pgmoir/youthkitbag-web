@@ -59,7 +59,9 @@ const MarketItemCard = ({ market }) => {
           </span>
         )}
         <span
-          className={`badge badge-pill badge-${color} badge-fullsize badge-top-right`}
+          className={`badge badge-pill ${
+            isOwned ? `badge-light text-${color}` : `badge-${color}`
+          } badge-fullsize badge-top-right`}
         >
           {`${pill}${isOwned ? ` / ${threads.length}` : ''}`}
         </span>
