@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Router, Route, Switch } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import PrivateRoute from '../helpers/privateRoute';
 import history from '../helpers/history';
 import User from './auth/User';
@@ -47,6 +48,11 @@ import DeleteUser from './account/DeleteUser';
 const App = () => {
   return (
     <div className="react-body">
+      <Helmet>
+        <title>
+          YouthKitbag - Inventory, Trade, Aquire, Reporting for all youth kit
+        </title>
+      </Helmet>
       <Router history={history}>
         <User />
         <Header />
