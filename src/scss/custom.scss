@@ -82,6 +82,9 @@ $headings-line-height: 1.4;
 $navbar-dark-color: rgba(255, 255, 255, 0.8);
 $navbar-dark-hover-color: rgba(255, 255, 255, 0.9);
 
+/* 925 badge font size is too small on announcements - trying at 100% */
+$badge-font-size: 100%;
+
 // /* 1046 the active breadcrumb is too light when on white background */
 // $breadcrumb-active-color: #535A56;
 

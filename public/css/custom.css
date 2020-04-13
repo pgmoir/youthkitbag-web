@@ -6,6 +6,7 @@
 /* 222 */
 /* 313 */
 /* 727,728 required to bring dark navbar to AAA standards */
+/* 925 badge font size is too small on announcements - trying at 100% */
 /* finally, import Bootstrap to set the changes! */
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
@@ -3703,7 +3704,7 @@ input[type="button"].btn-block {
 .badge {
   display: inline-block;
   padding: 0.25em 0.4em;
-  font-size: 75%;
+  font-size: 100%;
   font-weight: 700;
   line-height: 1;
   text-align: center;
