@@ -5,20 +5,22 @@ import {
   GETALL_FAILURE,
   FETCH_SHOW_MARKET_TRADES,
   FETCH_SHOW_MARKET_RECYCLES,
+  FETCH_SHOW_MARKET_FOUNDS,
+  FETCH_SHOW_MARKET_LOSTS,
   FETCH_SHOW_MARKET_STOLENS,
-  FETCH_SHOW_MARKET_WANTEDS
+  FETCH_SHOW_MARKET_WANTEDS,
 } from './types';
 import history from '../helpers/history';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
-export const fetchShowGroup = groupId => dispatch => {
+export const fetchShowGroup = (groupId) => (dispatch) => {
   axios
     .get(`${baseUrl}/show/group/${groupId}`)
-    .then(response => {
+    .then((response) => {
       dispatch({ type: FETCH_SHOW_GROUP, payload: response.data });
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -29,38 +31,50 @@ export const fetchShowGroup = groupId => dispatch => {
     });
 };
 
-export const fetchShowGroupMarket = (groupId, by) => dispatch => {
+export const fetchShowGroupMarket = (groupId, by) => (dispatch) => {
   axios
     .get(`${baseUrl}/show/group/market/${groupId}/${by}`)
-    .then(response => {
+    .then((response) => {
       switch (by) {
         case 'recycle':
           dispatch({
             type: FETCH_SHOW_MARKET_RECYCLES,
-            payload: response.data
+            payload: response.data,
+          });
+          break;
+        case 'found':
+          dispatch({
+            type: FETCH_SHOW_MARKET_FOUNDS,
+            payload: response.data,
+          });
+          break;
+        case 'lost':
+          dispatch({
+            type: FETCH_SHOW_MARKET_LOSTS,
+            payload: response.data,
           });
           break;
         case 'stolen':
           dispatch({
             type: FETCH_SHOW_MARKET_STOLENS,
-            payload: response.data
+            payload: response.data,
           });
           break;
         case 'wanted':
           dispatch({
             type: FETCH_SHOW_MARKET_WANTEDS,
-            payload: response.data
+            payload: response.data,
           });
           break;
         default:
           dispatch({
             type: FETCH_SHOW_MARKET_TRADES,
-            payload: response.data
+            payload: response.data,
           });
           break;
       }
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();

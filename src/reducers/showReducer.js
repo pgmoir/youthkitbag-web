@@ -3,12 +3,14 @@ import {
   LOGOUT,
   FETCH_SHOW_MARKET_TRADES,
   FETCH_SHOW_MARKET_RECYCLES,
+  FETCH_SHOW_MARKET_FOUNDS,
+  FETCH_SHOW_MARKET_LOSTS,
   FETCH_SHOW_MARKET_STOLENS,
-  FETCH_SHOW_MARKET_WANTEDS
+  FETCH_SHOW_MARKET_WANTEDS,
 } from '../actions/types';
 
 const initialState = {
-  group: {}
+  group: {},
 };
 
 export default (state = initialState, action) => {
@@ -19,6 +21,10 @@ export default (state = initialState, action) => {
       return { ...state, trades: action.payload };
     case FETCH_SHOW_MARKET_RECYCLES:
       return { ...state, recycles: action.payload };
+    case FETCH_SHOW_MARKET_FOUNDS:
+      return { ...state, founds: action.payload };
+    case FETCH_SHOW_MARKET_LOSTS:
+      return { ...state, losts: action.payload };
     case FETCH_SHOW_MARKET_STOLENS:
       return { ...state, stolens: action.payload };
     case FETCH_SHOW_MARKET_WANTEDS:

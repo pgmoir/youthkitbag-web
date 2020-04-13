@@ -11,6 +11,8 @@ import ProfileAnnouncement from './ProfileAnnouncement';
 import KitbagKitAnnouncement from './KitbagKitAnnouncement';
 import KitbagMarketTradeAnnouncement from './KitbagMarketTradeAnnouncement';
 import KitbagMarketRecycleAnnouncement from './KitbagMarketRecycleAnnouncement';
+import KitbagMarketFoundAnnouncement from './KitbagMarketFoundAnnouncement';
+import KitbagMarketLostAnnouncement from './KitbagMarketLostAnnouncement';
 import KitbagMarketStolenAnnouncement from './KitbagMarketStolenAnnouncement';
 import KitbagMarketWantedAnnouncement from './KitbagMarketWantedAnnouncement';
 import GroupAnnouncement from './GroupAnnouncement';
@@ -72,6 +74,8 @@ const LoggedInLanding = ({ user }) => {
               <KitbagKitAnnouncement accountId={preferredAccountId} />
               <KitbagMarketTradeAnnouncement group={group} />
               <KitbagMarketRecycleAnnouncement group={group} />
+              <KitbagMarketFoundAnnouncement group={group} />
+              <KitbagMarketLostAnnouncement group={group} />
               <KitbagMarketStolenAnnouncement group={group} />
               <KitbagMarketWantedAnnouncement group={group} />
             </div>

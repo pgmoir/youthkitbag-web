@@ -3,8 +3,36 @@ import GroupIntroMarkets from './GroupIntroMarkets';
 import Alert from '../includes/Alert';
 import SignUpForm from '../auth/SignUpForm';
 
-const GroupIntro = ({ group, trades, recycles, stolens, wanteds }) => {
+const GroupIntro = ({
+  group,
+  trades,
+  recycles,
+  founds,
+  losts,
+  stolens,
+  wanteds,
+}) => {
   if (!group._id) return null;
+
+  const foundloststolens = {
+    items: [],
+    totalItems: 0,
+  };
+
+  if (founds && founds.totalItems > 0) {
+    foundloststolens.items = [...foundloststolens.items, ...founds.items];
+    foundloststolens.totalItems += founds.totalItems;
+  }
+
+  if (losts && losts.totalItems > 0) {
+    foundloststolens.items = [...foundloststolens.items, ...losts.items];
+    foundloststolens.totalItems += losts.totalItems;
+  }
+
+  if (stolens && stolens.totalItems > 0) {
+    foundloststolens.items = [...foundloststolens.items, ...stolens.items];
+    foundloststolens.totalItems += stolens.totalItems;
+  }
 
   return (
     <div className="row" role="main">
@@ -81,7 +109,7 @@ const GroupIntro = ({ group, trades, recycles, stolens, wanteds }) => {
       <div className="col-12 col-md-6">
         <GroupIntroMarkets type="recycle" markets={recycles} />
         <GroupIntroMarkets type="trade" markets={trades} />
-        <GroupIntroMarkets type="foundloststolen" markets={stolens} />
+        <GroupIntroMarkets type="foundloststolen" markets={foundloststolens} />
         <GroupIntroMarkets type="wanted" markets={wanteds} />
       </div>
     </div>

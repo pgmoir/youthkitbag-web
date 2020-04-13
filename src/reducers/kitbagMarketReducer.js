@@ -10,6 +10,8 @@ import {
   FETCH_KITBAG_MARKET_ITEMS,
   FETCH_KITBAG_MARKET_TRADES,
   FETCH_KITBAG_MARKET_RECYCLES,
+  FETCH_KITBAG_MARKET_FOUNDS,
+  FETCH_KITBAG_MARKET_LOSTS,
   FETCH_KITBAG_MARKET_STOLENS,
   FETCH_KITBAG_MARKET_WANTEDS,
 } from '../actions/types';
@@ -19,6 +21,8 @@ const initialState = {
   list: [],
   trades: [],
   recycles: [],
+  founds: [],
+  losts: [],
   stolens: [],
   wanteds: [],
 };
@@ -41,6 +45,10 @@ export default (state = initialState, action) => {
       return { ...state, trades: action.payload };
     case FETCH_KITBAG_MARKET_RECYCLES:
       return { ...state, recycles: action.payload };
+    case FETCH_KITBAG_MARKET_FOUNDS:
+      return { ...state, founds: action.payload };
+    case FETCH_KITBAG_MARKET_LOSTS:
+      return { ...state, losts: action.payload };
     case FETCH_KITBAG_MARKET_STOLENS:
       return { ...state, stolens: action.payload };
     case FETCH_KITBAG_MARKET_WANTEDS:

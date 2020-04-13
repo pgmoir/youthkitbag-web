@@ -10,26 +10,28 @@ import {
   FETCH_KITBAG_MARKET_ITEMS,
   FETCH_KITBAG_MARKET_TRADES,
   FETCH_KITBAG_MARKET_RECYCLES,
+  FETCH_KITBAG_MARKET_FOUNDS,
+  FETCH_KITBAG_MARKET_LOSTS,
   FETCH_KITBAG_MARKET_STOLENS,
-  FETCH_KITBAG_MARKET_WANTEDS
+  FETCH_KITBAG_MARKET_WANTEDS,
 } from './types';
 import history from '../helpers/history';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
-export const fetchMarketKit = (accountId, marketId) => dispatch => {
+export const fetchMarketKit = (accountId, marketId) => (dispatch) => {
   const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/kitbag/market/${accountId}/${marketId}`, {
       headers: {
         Authorization: `bearer ${token}`,
-        'content-type': 'application/json'
-      }
+        'content-type': 'application/json',
+      },
     })
-    .then(response => {
+    .then((response) => {
       dispatch({ type: FETCH_MARKET_KIT, payload: response.data });
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -40,23 +42,21 @@ export const fetchMarketKit = (accountId, marketId) => dispatch => {
     });
 };
 
-export const fetchMarketKitFromKit = (
-  accountId,
-  kitId,
-  marketType
-) => dispatch => {
+export const fetchMarketKitFromKit = (accountId, kitId, marketType) => (
+  dispatch
+) => {
   const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/kitbag/market/${accountId}/add/${kitId}/${marketType}`, {
       headers: {
         Authorization: `bearer ${token}`,
-        'content-type': 'application/json'
-      }
+        'content-type': 'application/json',
+      },
     })
-    .then(response => {
+    .then((response) => {
       dispatch({ type: FETCH_MARKET_KIT, payload: response.data });
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -67,7 +67,7 @@ export const fetchMarketKitFromKit = (
     });
 };
 
-export const createMarketKit = (accountId, formValues) => dispatch => {
+export const createMarketKit = (accountId, formValues) => (dispatch) => {
   const token = localStorage.getItem('token');
   axios
     .post(
@@ -76,15 +76,15 @@ export const createMarketKit = (accountId, formValues) => dispatch => {
       {
         headers: {
           Authorization: `bearer ${token}`,
-          'content-type': 'application/json'
-        }
+          'content-type': 'application/json',
+        },
       }
     )
-    .then(response => {
+    .then((response) => {
       history.push(`/market/${accountId}`);
       dispatch({ type: CREATE_MARKET_KIT, payload: response.data });
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -95,7 +95,9 @@ export const createMarketKit = (accountId, formValues) => dispatch => {
     });
 };
 
-export const editMarketKit = (accountId, marketId, formValues) => dispatch => {
+export const editMarketKit = (accountId, marketId, formValues) => (
+  dispatch
+) => {
   const token = localStorage.getItem('token');
   axios
     .put(
@@ -104,15 +106,15 @@ export const editMarketKit = (accountId, marketId, formValues) => dispatch => {
       {
         headers: {
           Authorization: `bearer ${token}`,
-          'content-type': 'application/json'
-        }
+          'content-type': 'application/json',
+        },
       }
     )
-    .then(response => {
+    .then((response) => {
       history.push(`/market/${accountId}`);
       dispatch({ type: EDIT_MARKET_KIT, payload: response.data });
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -128,7 +130,7 @@ export const respondToMarketKitThread = (
   marketId,
   threadId,
   formValues
-) => dispatch => {
+) => (dispatch) => {
   const token = localStorage.getItem('token');
   axios
     .put(
@@ -137,15 +139,15 @@ export const respondToMarketKitThread = (
       {
         headers: {
           Authorization: `bearer ${token}`,
-          'content-type': 'application/json'
-        }
+          'content-type': 'application/json',
+        },
       }
     )
     .then(() => {
       dispatch({ type: RESET_TOAST });
       dispatch(fetchMarketKit(accountId, marketId));
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -158,20 +160,20 @@ export const respondToMarketKitThread = (
     });
 };
 
-export const deleteMarketKit = (accountId, marketId) => dispatch => {
+export const deleteMarketKit = (accountId, marketId) => (dispatch) => {
   const token = localStorage.getItem('token');
   axios
     .delete(`${baseUrl}/kitbag/market/${accountId}/${marketId}`, {
       headers: {
         Authorization: `bearer ${token}`,
-        'content-type': 'application/json'
-      }
+        'content-type': 'application/json',
+      },
     })
-    .then(response => {
+    .then((response) => {
       history.push(`/market/${accountId}`);
       dispatch({ type: DELETE_MARKET_KIT, payload: response.data });
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -182,39 +184,51 @@ export const deleteMarketKit = (accountId, marketId) => dispatch => {
     });
 };
 
-export const fetchKitbagMarketItems = (by, pagesize) => dispatch => {
+export const fetchKitbagMarketItems = (by, pagesize) => (dispatch) => {
   const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/kitbag/market?by=${by}&pagesize=${pagesize}`, {
       headers: {
         Authorization: `bearer ${token}`,
-        'content-type': 'application/json'
-      }
+        'content-type': 'application/json',
+      },
     })
-    .then(response => {
+    .then((response) => {
       switch (by) {
         case 'trade':
           dispatch({
             type: FETCH_KITBAG_MARKET_TRADES,
-            payload: response.data
+            payload: response.data,
           });
           break;
         case 'recycle':
           dispatch({
             type: FETCH_KITBAG_MARKET_RECYCLES,
-            payload: response.data
+            payload: response.data,
+          });
+          break;
+        case 'found':
+          dispatch({
+            type: FETCH_KITBAG_MARKET_FOUNDS,
+            payload: response.data,
+          });
+          break;
+        case 'lost':
+          dispatch({
+            type: FETCH_KITBAG_MARKET_LOSTS,
+            payload: response.data,
           });
           break;
         case 'stolen':
           dispatch({
             type: FETCH_KITBAG_MARKET_STOLENS,
-            payload: response.data
+            payload: response.data,
           });
           break;
         case 'wanted':
           dispatch({
             type: FETCH_KITBAG_MARKET_WANTEDS,
-            payload: response.data
+            payload: response.data,
           });
           break;
         default:
@@ -222,7 +236,7 @@ export const fetchKitbagMarketItems = (by, pagesize) => dispatch => {
           break;
       }
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
