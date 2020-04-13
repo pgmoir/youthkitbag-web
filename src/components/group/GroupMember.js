@@ -106,18 +106,21 @@ const GroupMember = ({ groupId, member, groupMember, groupAdmin }) => {
             {groupAdmin && state !== 'left' && (
               <>
                 <Link to={`/groups/${groupId}/members/${user._id}/approved`}>
+                  <span className="sr-only">Approve membership</span>
                   <span
                     className={`fas fa-laugh w-25 text-center ${isApproved()}`}
                     title="Approve membership"
                   ></span>
                 </Link>
                 <Link to={`/groups/${groupId}/members/${user._id}/rejected`}>
+                  <span className="sr-only">Reject membership</span>
                   <span
                     className={`fas fa-sad-tear w-25 text-center ${isRejected()}`}
                     title="Reject membership"
                   ></span>
                 </Link>
                 <Link to={`/groups/${groupId}/members/${user._id}/suspended`}>
+                  <span className="sr-only">Suspend membership</span>
                   <span
                     className={`fas fa-meh-blank w-25 text-center ${isSuspended()}`}
                     title="Suspend membership"
