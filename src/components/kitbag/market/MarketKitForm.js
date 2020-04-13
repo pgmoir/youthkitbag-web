@@ -28,7 +28,7 @@ const mapDispatchToProps = {
   editMarketKit,
 };
 
-const MarketForm = ({
+const MarketKitForm = ({
   accountId,
   market,
   newErrors,
@@ -76,6 +76,18 @@ const MarketForm = ({
 
   const showMarketType = () => {
     if (!['found', 'lost', 'stolen'].includes(market.marketType)) return null;
+
+    if (isReadOnly()) {
+      return (
+        <TextForm
+          colFormat="3-9"
+          label="Type"
+          value={values.marketType}
+          field="marketType"
+          readOnly={true}
+        />
+      );
+    }
 
     const typeItems = ['Found', 'Lost', 'Stolen'];
 
@@ -258,7 +270,7 @@ const MarketForm = ({
     const closedThreadStates = ['withdraw', 'reject'];
     return (
       market.threads.filter((m) => closedThreadStates.includes(m.responseState))
-        .length > 0
+        .length === 0
     );
   };
 
@@ -440,4 +452,4 @@ const MarketForm = ({
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MarketForm);
+export default connect(mapStateToProps, mapDispatchToProps)(MarketKitForm);

@@ -26,7 +26,7 @@ const MarketItemViewPage = ({ market, fetchMarketItem, match }) => {
       return <Title title="Loading ..." />;
     }
 
-    return <MarketTitle market={market} />;
+    return <MarketTitle market={market} isOwned={false} />;
   }
 
   return (

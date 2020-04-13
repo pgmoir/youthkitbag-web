@@ -16,7 +16,9 @@ const MarketItemCard = ({ market }) => {
 
   const { icon, iconTitle, color, pill } = useMarketType(
     marketType,
-    marketPrice
+    marketPrice,
+    threads,
+    isOwned
   );
 
   function topImage() {
@@ -63,7 +65,7 @@ const MarketItemCard = ({ market }) => {
             isOwned ? `badge-light text-${color}` : `badge-${color}`
           } badge-fullsize badge-top-right`}
         >
-          {`${pill}${isOwned ? ` / ${threads.length}` : ''}`}
+          {pill}
         </span>
         <Link
           to={

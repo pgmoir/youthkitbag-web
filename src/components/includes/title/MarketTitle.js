@@ -2,12 +2,14 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import useMarketType from '../../hooks/useMarketType';
 
-const MarketTitle = ({ market }) => {
-  const { title, subtitle, marketType, marketPrice } = market;
+const MarketTitle = ({ market, isOwned }) => {
+  const { title, subtitle, marketType, marketPrice, threads } = market;
 
   const { icon, iconTitle, color, pill } = useMarketType(
     marketType,
-    marketPrice
+    marketPrice,
+    threads,
+    isOwned
   );
 
   function render() {
@@ -42,7 +44,11 @@ const MarketTitle = ({ market }) => {
             </div>
             <div className="d-flex flex-column">
               <div className="p-3 h1">
-                <span className={`badge badge-pill badge-${color}`}>
+                <span
+                  className={`badge badge-pill ${
+                    isOwned ? `badge-light text-${color}` : `badge-${color}`
+                  }`}
+                >
                   {pill}
                 </span>
               </div>

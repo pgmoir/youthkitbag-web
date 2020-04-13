@@ -7,7 +7,7 @@ import {
 import MarketKitForm from './MarketKitForm';
 import Title from '../../includes/title/Title';
 import Alert from '../../includes/Alert';
-import PreMarketTitle from '../../includes/title/PreMarketTitle';
+import MarketTitle from '../../includes/title/MarketTitle';
 
 const mapStateToProps = (state) => ({
   current: state.kitbag.market.current,
@@ -30,6 +30,7 @@ const MarketKitPage = ({
   const marketType = match.params.marketType;
 
   const [market, setMarketKit] = useState({
+    marketType: '',
     title: '',
     subtitle: '',
     description: '',
@@ -80,7 +81,7 @@ const MarketKitPage = ({
       return <Title title="Loading ..." />;
     }
 
-    return <PreMarketTitle market={market} />;
+    return <MarketTitle market={market} isOwned={true} />;
   }
 
   return (
