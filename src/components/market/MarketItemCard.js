@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import useMarketType from '../hooks/useMarketType';
 
 const MarketItemCard = ({ market }) => {
   const {
@@ -13,34 +14,10 @@ const MarketItemCard = ({ market }) => {
     threads,
   } = market;
 
-  const isStolen = marketType === 'stolen';
-  const isTrade = marketType === 'trade' && marketPrice > 0;
-  const isRecycle = marketType === 'trade' && marketPrice === 0;
-  const isWanted = marketType === 'wanted';
-
-  function renderNotification() {
-    if (!market) return null;
-
-    const numberThreads = isOwned ? ` / ${threads.length}` : '';
-    let content;
-    if (['trade', 'wanted'].includes(marketType)) {
-      if (!marketPrice || marketPrice === 0) {
-        content = `free${numberThreads}`;
-      } else {
-        content = `£${marketPrice.toFixed(2)}${numberThreads}`;
-      }
-    } else {
-      content = `${marketType}${numberThreads}`;
-    }
-
-    return (
-      <span
-        className={`badge badge-pill badge-${marketTypeStyle()} badge-fullsize badge-top-right`}
-      >
-        {content}
-      </span>
-    );
-  }
+  const { icon, iconTitle, color, pill } = useMarketType(
+    marketType,
+    marketPrice
+  );
 
   function topImage() {
     const { images } = market;
@@ -48,32 +25,6 @@ const MarketItemCard = ({ market }) => {
       return '/images/default.png';
     }
     return images[0].imageUrl;
-  }
-
-  function marketTypeStyle() {
-    if (isStolen) return 'danger';
-    if (isRecycle) return 'success';
-    if (isTrade) return 'primary';
-    return 'secondary';
-  }
-
-  function marketTypeIcon() {
-    if (!marketType) {
-      return null;
-    }
-
-    if (isStolen) {
-      return <span className="fas fa-volume-up" title="Stolen item"></span>;
-    } else if (isWanted) {
-      return <span className="fas fa-binoculars" title="Wanted item"></span>;
-    } else {
-      return (
-        <span
-          className="fas fa-hands-helping"
-          title="Trade/Recycle item"
-        ></span>
-      );
-    }
   }
 
   function renderBlank() {
@@ -107,7 +58,11 @@ const MarketItemCard = ({ market }) => {
             </Link>
           </span>
         )}
-        {renderNotification()}
+        <span
+          className={`badge badge-pill badge-${color} badge-fullsize badge-top-right`}
+        >
+          {`${pill}${isOwned ? ` / ${threads.length}` : ''}`}
+        </span>
         <Link
           to={
             isOwned
@@ -122,8 +77,8 @@ const MarketItemCard = ({ market }) => {
             role="presentation"
           />
           <div className="card-body">
-            <h3 className={`card-title h6 ellipsis text-${marketTypeStyle()}`}>
-              {marketTypeIcon()}&nbsp;&nbsp;
+            <h3 className={`card-title h6 ellipsis text-${color}`}>
+              <span className={`${icon} pr-2`} title={iconTitle}></span>
               {title}
             </h3>
             {subtitle && <p className="card-text ellipsis">{subtitle}</p>}

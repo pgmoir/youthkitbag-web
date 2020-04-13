@@ -1,8 +1,5 @@
 import React from 'react';
-import GroupIntroTrades from './GroupIntroTrades';
-import GroupIntroRecycles from './GroupIntroRecycles';
-import GroupIntroStolens from './GroupIntroStolens';
-import GroupIntroWanteds from './GroupIntroWanteds';
+import GroupIntroMarkets from './GroupIntroMarkets';
 import Alert from '../includes/Alert';
 import SignUpForm from '../auth/SignUpForm';
 
@@ -82,10 +79,10 @@ const GroupIntro = ({ group, trades, recycles, stolens, wanteds }) => {
       </div>
 
       <div className="col-12 col-md-6">
-        <GroupIntroRecycles recycles={recycles} />
-        <GroupIntroTrades trades={trades} />
-        <GroupIntroStolens stolens={stolens} />
-        <GroupIntroWanteds wanteds={wanteds} />
+        <GroupIntroMarkets type="recycle" markets={recycles} />
+        <GroupIntroMarkets type="trade" markets={trades} />
+        <GroupIntroMarkets type="foundloststolen" markets={stolens} />
+        <GroupIntroMarkets type="wanted" markets={wanteds} />
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ import {
   FETCH_KITBAG_MARKET_TRADES,
   FETCH_KITBAG_MARKET_RECYCLES,
   FETCH_KITBAG_MARKET_STOLENS,
-  FETCH_KITBAG_MARKET_WANTEDS
+  FETCH_KITBAG_MARKET_WANTEDS,
 } from '../actions/types';
 
 const initialState = {
@@ -20,7 +20,7 @@ const initialState = {
   trades: [],
   recycles: [],
   stolens: [],
-  wanteds: []
+  wanteds: [],
 };
 
 export default (state = initialState, action) => {

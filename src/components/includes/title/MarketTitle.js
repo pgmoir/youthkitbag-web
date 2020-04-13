@@ -1,40 +1,13 @@
 import React from 'react';
+import useMarketType from '../../hooks/useMarketType';
 
 const MarketTitle = ({ market }) => {
   const { title, subtitle, marketType, marketPrice } = market;
 
-  const isTrade = marketType === 'trade' && marketPrice > 0;
-  const isRecycle = marketType === 'trade' && marketPrice === 0;
-  const isWanted = marketType === 'wanted' && marketPrice > 0;
-  const isWantRecycle = marketType === 'wanted' && marketPrice === 0;
-  const isFound = marketType === 'found';
-  const isLost = marketType === 'lost';
-  const isStolen = marketType === 'stolen';
-
-  const icon =
-    isFound || isLost || isStolen
-      ? 'fas fa-volume-up'
-      : isWanted || isWantRecycle
-      ? 'fas fa-binoculars'
-      : 'fas fa-hands-helping';
-
-  const iconTitle = `${marketType} item`;
-
-  const textColor =
-    isFound || isLost || isStolen
-      ? 'danger'
-      : isWanted || isWantRecycle
-      ? 'secondary'
-      : isRecycle
-      ? 'success'
-      : 'primary';
-
-  const pill =
-    isTrade || isWanted
-      ? `£${marketPrice.toFixed(2)}`
-      : isRecycle || isWantRecycle
-      ? 'free'
-      : marketType;
+  const { icon, iconTitle, color, pill } = useMarketType(
+    marketType,
+    marketPrice
+  );
 
   function render() {
     if (title === '') {
@@ -49,12 +22,12 @@ const MarketTitle = ({ market }) => {
         aria-label="breadcrumb navigation and page title"
       >
         <div className="container d-flex border-bottom-1">
-          <div className={`p-3 align-self-center text-${textColor} h1`}>
+          <div className={`p-3 align-self-center text-${color} h1`}>
             <span className={`${icon} text-center`} title={iconTitle}></span>
           </div>
           <div className="w-100">
             <div className="py-3">
-              <h1 className={`m-0 text-${textColor}`}>{title}</h1>
+              <h1 className={`m-0 text-${color}`}>{title}</h1>
             </div>
             {subtitle && (
               <div className="pb-3">
@@ -64,9 +37,7 @@ const MarketTitle = ({ market }) => {
           </div>
           <div className="d-flex flex-column">
             <div className="p-3 h1">
-              <span className={`badge badge-pill badge-${textColor}`}>
-                {pill}
-              </span>
+              <span className={`badge badge-pill badge-${color}`}>{pill}</span>
             </div>
           </div>
         </div>
