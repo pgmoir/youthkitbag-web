@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Router, Route, Switch } from 'react-router-dom';
+import { Link, Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import PrivateRoute from '../helpers/privateRoute';
 import history from '../helpers/history';
@@ -44,8 +44,13 @@ import LearnMore from './learn/LearnMore';
 import BetaAnnouncement from './home/BetaAnnouncement';
 import GroupMemberDelete from './group/GroupMemberDelete';
 import DeleteUser from './account/DeleteUser';
+import { connect } from 'react-redux';
 
-const App = () => {
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+const App = ({ auth }) => {
   return (
     <div className="react-body">
       <Helmet>
@@ -81,7 +86,9 @@ const App = () => {
             <Route path="/site/accessibility" exact component={Accessibility} />
 
             <Route path="/auth/signup" exact component={SignUp} />
-            <Route path="/auth/login" exact component={Login} />
+            <Route path="/auth/login" exact>
+              {auth.loggedIn ? <Redirect to="/" /> : <Login />}
+            </Route>
             <Route path="/auth/reset" exact component={Reset} />
             <Route path="/auth/token/:token" exact component={Token} />
             <Route
@@ -203,4 +210,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default connect(mapStateToProps)(App);
