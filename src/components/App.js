@@ -63,7 +63,9 @@ const App = ({ auth }) => {
         <Header />
         <BetaAnnouncement />
         <main>
-          <noscript>You need to enable JavaScript to run this app.</noscript>
+          <noscript>
+            You need to enable JavaScript to run this application.
+          </noscript>
           <Link
             id="main-acc-jump"
             className="sr-only sr-only-focusable"
