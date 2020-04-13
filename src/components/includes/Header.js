@@ -3,22 +3,22 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CookieConsent from 'react-cookie-consent';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  user: state.user
+  user: state.user,
 });
 
 const Header = ({ auth, user }) => {
   const { loggedIn } = auth;
 
   const account = user.profile.accounts
-    ? user.profile.accounts.find(a => a.preferred)
+    ? user.profile.accounts.find((a) => a.preferred)
     : undefined;
 
   const group = user.profile.groups
     ? user.profile.groups
-        .filter(g => g.status === 'approved')
-        .find(a => a.member.state === 'approved')
+        .filter((g) => g.status === 'approved')
+        .find((a) => a.member.state === 'approved')
     : undefined;
 
   return (
@@ -83,7 +83,7 @@ const Header = ({ auth, user }) => {
                             : '/images/defaultthumb.png'
                         }
                         className="img-avatar img-thumbnail img-link rounded-circle p-0 m-1"
-                        alt=""
+                        alt="Link to profile page"
                       />
                     </Link>
                   </li>
