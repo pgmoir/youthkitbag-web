@@ -2,26 +2,31 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { hideFlag } from '../../actions/UserActions';
 
-const mapStateToProps = state => ({
-  flags: state.user.flags
+const mapStateToProps = (state) => ({
+  flags: state.user.flags,
 });
 
 const mapDispatchToProps = {
-  hideFlag
+  hideFlag,
 };
 
 const BetaAnnouncement = ({ flags, hideFlag }) => {
   const [betaAnnouncement, setBetaAnnouncement] = useState(false);
+  const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
     if (!flags) return setBetaAnnouncement(false);
 
-    var found = flags.find(e => e.name === 'betaAnnouncement');
+    var found = flags.find((e) => e.name === 'betaAnnouncement');
     setBetaAnnouncement(!found ? false : found.hide);
   }, [flags, setBetaAnnouncement]);
 
   function hideBetaAnnouncement() {
     hideFlag('betaAnnouncement', true);
+  }
+
+  function toggleMore() {
+    setShowMore(!showMore);
   }
 
   if (betaAnnouncement) return null;
@@ -58,19 +63,30 @@ const BetaAnnouncement = ({ flags, hideFlag }) => {
               )}
               <p>
                 This software is currently in final stages of testing, and I
-                have made this exclusively available to a limited set of groups.
+                have made this exclusively available to a limited set of groups.{' '}
+                <button
+                  className="btn btn-link a11y-highlight"
+                  onClick={() => toggleMore()}
+                >
+                  Show more
+                </button>
               </p>
-              <p>
-                Anyone registering and approved as a member of one of these
-                groups during this phase will be given free premium access for
-                ever.
-              </p>
-              <p>
-                PLEASE - If you find a problem with the website, or you would
-                like to request a feature, then please use the UserReport
-                feature in the bottom right corner of the screen. Together we
-                can make this the perfect tool for managing all your kit.
-              </p>
+              {showMore && (
+                <>
+                  <p>
+                    Anyone registering and approved as a member of one of these
+                    groups during this phase will be given free premium access
+                    for ever.
+                  </p>
+                  <p>
+                    PLEASE - If you find a problem with the website, or you
+                    would like to request a feature, then please use the
+                    UserReport feature in the bottom right corner of the screen.
+                    Together we can make this the perfect tool for managing all
+                    your kit.
+                  </p>
+                </>
+              )}
               {flags && (
                 <>
                   <hr />
