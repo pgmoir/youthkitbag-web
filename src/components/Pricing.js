@@ -73,7 +73,9 @@ const Pricing = ({ auth, user }) => {
                   <p className="card-text text-center">join 5 groups</p>
                   <hr />
                   <h5 className="text-center mb-3">Cost</h5>
-                  <p className="card-text text-center">£20 / year</p>
+                  <p className="card-text text-center text-linethru">
+                    £20 / year
+                  </p>
                   <hr />
                   <div className="d-flex">
                     <Link
@@ -82,7 +84,7 @@ const Pricing = ({ auth, user }) => {
                         loggedIn && (isStandard || isPremium) ? 'disabled' : ''
                       }`}
                     >
-                      Purchase
+                      Currently Free
                     </Link>
                   </div>
                 </div>
@@ -110,7 +112,7 @@ const Pricing = ({ auth, user }) => {
                   <div className="d-flex">
                     <Link
                       to="/purchase/subscription/premium"
-                      className={`btn btn-primary mx-auto ${
+                      className={`btn btn-outline-primary mx-auto ${
                         loggedIn && isPremium ? 'disabled' : ''
                       }`}
                     >

@@ -525,6 +525,8 @@ h4,
     color: #343a40; }
   .youthkitbag .text-gray-900 {
     color: #212529; }
+  .youthkitbag .text-linethru {
+    text-decoration: line-through !important; }
   .youthkitbag .bg-gray-100 {
     background-color: #f8f9fa; }
   .youthkitbag .bg-gray-200 {

@@ -434,6 +434,10 @@ $jumbotron-h4-size: 1.1rem;
   color: $gray-900;
 }
 
+.text-linethru {
+  text-decoration: line-through !important;
+}
+
 // gray bg
 .bg-gray-100 {
   background-color: $gray-100;
