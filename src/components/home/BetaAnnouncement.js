@@ -68,7 +68,7 @@ const BetaAnnouncement = ({ flags, hideFlag }) => {
                   className="btn btn-link a11y-highlight"
                   onClick={() => toggleMore()}
                 >
-                  Show more
+                  {!showMore ? 'Show more' : 'Show less'}
                 </button>
               </p>
               {showMore && (
