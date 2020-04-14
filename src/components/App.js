@@ -8,7 +8,7 @@ import Header from './includes/Header';
 import Footer from './includes/Footer';
 import Home from './Home';
 import Why from './Why';
-import Pricing from './Pricing';
+import Packages from './Packages';
 import Terms from './site/Terms';
 import Privacy from './site/Privacy';
 import Security from './site/Security';
@@ -19,7 +19,7 @@ import Reset from './auth/ResetPage';
 import NewPassword from './auth/NewPasswordPage';
 import Logout from './auth/Logout';
 import Token from './auth/Token';
-import PurchaseSubscriptionPage from './PurchaseSubscriptionPage';
+import PackagePurchasePage from './PackagePurchasePage';
 import Groups from './group/Groups';
 import GroupPage from './group/GroupPage';
 import ShowGroupPage from './show/ShowGroupPage';
@@ -78,7 +78,7 @@ const App = ({ auth }) => {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/why" exact component={Why} />
-            <Route path="/pricing" exact component={Pricing} />
+            <Route path="/packages" exact component={Packages} />
 
             <Route path="/learn/:activity" component={LearnMore} />
 
@@ -103,9 +103,9 @@ const App = ({ auth }) => {
             <Route path="/auth/logout" exact component={Logout} />
 
             <PrivateRoute
-              path="/purchase/subscription/:subscriptionId"
+              path="/packages/purchase/:packageId"
               exact
-              component={PurchaseSubscriptionPage}
+              component={PackagePurchasePage}
             />
 
             <PrivateRoute

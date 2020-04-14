@@ -85,7 +85,7 @@ const PackagePage = ({ userPackage }) => {
       )}
       <div className="row mb-3">
         <div className="col-12">
-          <Link to="/pricing" className="btn btn-primary">
+          <Link to="/packages" className="btn btn-primary">
             Choose Package Upgrade
           </Link>
         </div>

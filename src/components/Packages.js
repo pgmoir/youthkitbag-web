@@ -1,23 +1,107 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Title from './includes/title/Title';
 import { connect } from 'react-redux';
+import { fetchSubscriptionPackages } from '../actions/PackagesActions';
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
   user: state.user,
+  packages: state.packages.items,
 });
 
-const Pricing = ({ auth, user }) => {
+const mapDispatchToProps = {
+  fetchSubscriptionPackages,
+};
+
+const Packages = ({ auth, user, packages, fetchSubscriptionPackages }) => {
+  useEffect(() => {
+    fetchSubscriptionPackages();
+  }, [fetchSubscriptionPackages]);
+
+  const themes = ['bronze', 'silver', 'gold'];
+
   const { loggedIn } = auth;
-  const isStandard =
-    user && user.package && user.package.name === 'standard' ? true : false;
-  const isPremium =
-    user && user.package && user.package.name === 'premium' ? true : false;
+  // const isStandard =
+  //   user && user.package && user.package.name === 'standard' ? true : false;
+  // const isPremium =
+  //   user && user.package && user.package.name === 'premium' ? true : false;
+
+  if (!packages || packages.length === 0) return null;
+
+  function renderPackage(p) {
+    const {
+      _id,
+      level,
+      icon,
+      name,
+      kit,
+      market,
+      photos,
+      kitbagadmins,
+      kitbags,
+      groupadmins,
+      groups,
+      cost,
+      defaultcost,
+    } = p;
+
+    const theme =
+      !user || !user.package || !user.package.theme ? null : user.package.theme;
+    console.log('THEME', theme, themes, level, themes.indexOf(theme));
+    const disabledButton = !theme
+      ? false
+      : level <= themes.indexOf(user.package.theme);
+
+    return (
+      <div className="col-12 col-sm-4" key={_id}>
+        <article className="card">
+          <div className={`card-header h4 text-center bg-${themes[level]}`}>
+            {name} <span className={icon} title={`${name} tier`}></span>
+          </div>
+          <img className="card-img" src="" alt="" role="presentation" />
+          <div className="card-body">
+            <p className="card-text text-center">add {kit} kitbag items</p>
+            <p className="card-text text-center">add {market} market items</p>
+            <p className="card-text text-center">upload {photos} photos</p>
+            <p className="card-text text-center">
+              admin {kitbagadmins} kitbags
+            </p>
+            <p className="card-text text-center">join {kitbags} kitbags</p>
+            <p className="card-text text-center">admin {groupadmins} groups</p>
+            <p className="card-text text-center">join {groups} groups</p>
+            <hr />
+            <h5 className="text-center mb-3">Cost</h5>
+            <p
+              className={`card-text text-center ${cost ? 'text-linethru' : ''}`}
+            >
+              £{Number(defaultcost).toFixed(2)} / year
+            </p>
+            {cost && (
+              <p className="card-text text-center">
+                Reduced to £{Number(cost).toFixed(2)} / year
+              </p>
+            )}
+            <hr />
+            <div className="d-flex">
+              <Link
+                to="/auth/signup"
+                className={`btn btn-primary mx-auto ${
+                  disabledButton ? 'disabled' : ''
+                }`}
+              >
+                {level === 0 ? 'Sign Up' : 'Upgrade'}
+              </Link>
+            </div>
+          </div>
+        </article>
+      </div>
+    );
+  }
 
   return (
     <div>
-      <Title title="Pricing & User Limitations" />
+      <Title title="Packages & Benefits" />
       <section
         id="main"
         className="container-fluid"
@@ -25,7 +109,8 @@ const Pricing = ({ auth, user }) => {
       >
         <div className="container">
           <div className="row">
-            <div className="col-12 col-sm-4">
+            {packages.map((p) => renderPackage(p))}
+            {/* <div className="col-12 col-sm-4">
               <article className="card">
                 <div className="card-header h4 text-center bg-bronze">
                   Free <span className="fas fa-star" title="Star tier"></span>
@@ -79,7 +164,7 @@ const Pricing = ({ auth, user }) => {
                   <hr />
                   <div className="d-flex">
                     <Link
-                      to="/purchase/subscription/standard"
+                      to={`/purchase/package/${p.packageId}`}
                       className={`btn btn-primary mx-auto ${
                         loggedIn && (isStandard || isPremium) ? 'disabled' : ''
                       }`}
@@ -111,7 +196,7 @@ const Pricing = ({ auth, user }) => {
                   <hr />
                   <div className="d-flex">
                     <Link
-                      to="/purchase/subscription/premium"
+                      to={`/purchase/package/${p.packageId}`}
                       className={`btn btn-outline-primary mx-auto ${
                         loggedIn && isPremium ? 'disabled' : ''
                       }`}
@@ -121,7 +206,7 @@ const Pricing = ({ auth, user }) => {
                   </div>
                 </div>
               </article>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
@@ -129,4 +214,4 @@ const Pricing = ({ auth, user }) => {
   );
 };
 
-export default connect(mapStateToProps)(Pricing);
+export default connect(mapStateToProps, mapDispatchToProps)(Packages);

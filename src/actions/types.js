@@ -23,7 +23,8 @@ export const RESET_USER_FLAGS = 'RESET_USER_FLAGS';
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
 
-export const FETCH_SUBSCRIPTION_PACKAGE = 'FETCH_SUBSCRIPTION_PACKAGE';
+export const FETCH_PACKAGE = 'FETCH_PACKAGE';
+export const FETCH_PACKAGES = 'FETCH_PACKAGES';
 
 export const RESET_TOAST = 'RESET_TOAST';
 export const SET_ERROR = 'SET_ERROR';

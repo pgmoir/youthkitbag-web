@@ -9,7 +9,7 @@ import marketReducer from './marketReducer';
 import filterReducer from './filterReducer';
 import paginationReducer from './paginationReducer';
 import toastReducer from './toastReducer';
-import subscriptionReducer from './subscriptionReducer';
+import packagesReducer from './packagesReducer';
 import imageReducer from './imageReducer';
 import showReducer from './showReducer';
 
@@ -23,7 +23,7 @@ export default combineReducers({
   filter: filterReducer,
   pagination: paginationReducer,
   toast: toastReducer,
-  subscription: subscriptionReducer,
+  packages: packagesReducer,
   images: imageReducer,
-  show: showReducer
+  show: showReducer,
 });
