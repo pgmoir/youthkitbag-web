@@ -1,9 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import Title from './includes/title/Title';
+import { connect } from 'react-redux';
 
-const Pricing = () => {
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  user: state.user,
+});
+
+const Pricing = ({ auth, user }) => {
+  const { loggedIn } = auth;
+  const isStandard =
+    user && user.package && user.package.name === 'standard' ? true : false;
+  const isPremium =
+    user && user.package && user.package.name === 'premium' ? true : false;
+
   return (
     <div>
       <Title title="Pricing & User Limitations" />
@@ -14,11 +25,10 @@ const Pricing = () => {
       >
         <div className="container">
           <div className="row">
-            <div className="col-12 col-md-4">
+            <div className="col-12 col-sm-4">
               <article className="card">
                 <div className="card-header h4 text-center bg-bronze">
-                  Free (Star){' '}
-                  <span className="fas fa-star" title="Star tier"></span>
+                  Free <span className="fas fa-star" title="Star tier"></span>
                 </div>
                 <img className="card-img" src="" alt="" role="presentation" />
                 <div className="card-body">
@@ -34,17 +44,22 @@ const Pricing = () => {
                   <p className="card-text text-center">Absolutely nothing</p>
                   <hr />
                   <div className="d-flex">
-                    <Link to="/auth/signup" className="btn btn-primary mx-auto">
+                    <Link
+                      to="/auth/signup"
+                      className={`btn btn-primary mx-auto ${
+                        loggedIn ? 'disabled' : ''
+                      }`}
+                    >
                       Sign Up
                     </Link>
                   </div>
                 </div>
               </article>
             </div>
-            <div className="col-12 col-md-4">
+            <div className="col-12 col-sm-4">
               <article className="card">
                 <div className="card-header h4 text-center bg-silver">
-                  Standard (Medal){' '}
+                  Standard{' '}
                   <span className="fas fa-medal" title="Medal tier"></span>
                 </div>
                 <img className="card-img" src="" alt="" role="presentation" />
@@ -63,7 +78,9 @@ const Pricing = () => {
                   <div className="d-flex">
                     <Link
                       to="/purchase/subscription/standard"
-                      className="btn btn-primary mx-auto"
+                      className={`btn btn-primary mx-auto ${
+                        loggedIn && (isStandard || isPremium) ? 'disabled' : ''
+                      }`}
                     >
                       Purchase
                     </Link>
@@ -71,10 +88,10 @@ const Pricing = () => {
                 </div>
               </article>
             </div>
-            <div className="col-12 col-md-4">
+            <div className="col-12 col-sm-4">
               <article className="card">
                 <div className="card-header h4 text-center bg-gold">
-                  Premium (Trophy){' '}
+                  Premium{' '}
                   <span className="fas fa-trophy" title="Trophy tier"></span>
                 </div>
                 <img className="card-img" src="" alt="" role="presentation" />
@@ -93,7 +110,9 @@ const Pricing = () => {
                   <div className="d-flex">
                     <Link
                       to="/purchase/subscription/premium"
-                      className="btn btn-primary mx-auto"
+                      className={`btn btn-primary mx-auto ${
+                        loggedIn && isPremium ? 'disabled' : ''
+                      }`}
                     >
                       Purchase
                     </Link>
@@ -108,4 +127,4 @@ const Pricing = () => {
   );
 };
 
-export default Pricing;
+export default connect(mapStateToProps)(Pricing);

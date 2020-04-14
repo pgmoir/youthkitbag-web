@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const mapStateToProps = state => ({
-  userPackage: state.user.package
+const mapStateToProps = (state) => ({
+  userPackage: state.user.package,
 });
 
 const PackagePage = ({ userPackage }) => {
@@ -28,8 +28,11 @@ const PackagePage = ({ userPackage }) => {
         <div className="row">
           <div className="col-12">
             <h5 className={`bg-${userPackage.theme} mb-0 p-3`}>
-              <span className={`fas fa-${userPackage.icon} pr-2`} title={`${userPackage.icon} tier`}></span> Package Usage and
-              Limits
+              <span
+                className={`fas fa-${userPackage.icon} pr-2`}
+                title={`${userPackage.icon} tier`}
+              ></span>{' '}
+              Package Usage and Limits
             </h5>
             <table className="table bg-light">
               <thead>
@@ -82,8 +85,8 @@ const PackagePage = ({ userPackage }) => {
       )}
       <div className="row mb-3">
         <div className="col-12">
-          <Link to="/package" className="btn btn-primary">
-            Upgrade Package
+          <Link to="/pricing" className="btn btn-primary">
+            Choose Package Upgrade
           </Link>
         </div>
       </div>
