@@ -61,9 +61,9 @@ const Packages = ({ auth, user, packages, fetchSubscriptionPackages }) => {
           </div>
           <img className="card-img" src="" alt="" role="presentation" />
           <div className="card-body">
-            <p className="card-text text-center">add {kit} kitbag items</p>
-            <p className="card-text text-center">add {market} market items</p>
-            <p className="card-text text-center">upload {photos} photos</p>
+            <p className="card-text text-center">up to {kit} kitbag items</p>
+            <p className="card-text text-center">up to {market} market items</p>
+            <p className="card-text text-center">up to {photos} photos</p>
             <p className="card-text text-center">
               admin {kitbagadmins} kitbags
             </p>
@@ -73,19 +73,22 @@ const Packages = ({ auth, user, packages, fetchSubscriptionPackages }) => {
             <hr />
             <h5 className="text-center mb-3">Cost</h5>
             <p
-              className={`card-text text-center ${cost ? 'text-linethru' : ''}`}
+              className={`card-text text-center ${
+                cost || cost === 0 ? 'text-linethru' : ''
+              }`}
             >
               £{Number(defaultcost).toFixed(2)} / year
             </p>
-            {cost && (
-              <p className="card-text text-center">
-                Reduced to £{Number(cost).toFixed(2)} / year
-              </p>
-            )}
+            {cost ||
+              (cost === 0 && (
+                <p className="card-text text-center">
+                  Reduced to £{Number(cost).toFixed(2)} / year
+                </p>
+              ))}
             <hr />
             <div className="d-flex">
               <Link
-                to="/auth/signup"
+                to={!loggedIn ? '/auth/signup' : `/packages/purchase/${_id}`}
                 className={`btn btn-primary mx-auto ${
                   disabledButton ? 'disabled' : ''
                 }`}
