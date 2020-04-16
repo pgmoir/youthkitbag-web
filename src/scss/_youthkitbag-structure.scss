@@ -225,3 +225,10 @@ td {
 .display-linebreak {
   white-space: pre-line;
 }
+
+.offer-highlight {
+  background-color: $starship;
+  border: solid 3px $cardinal;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}

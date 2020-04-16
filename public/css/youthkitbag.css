@@ -248,6 +248,11 @@ h4,
     max-width: 3rem; }
   .youthkitbag .display-linebreak {
     white-space: pre-line; }
+  .youthkitbag .offer-highlight {
+    background-color: #f0f15b;
+    border: solid 3px #c42127;
+    border-radius: 0.5rem;
+    padding: 1rem; }
   .youthkitbag .alert {
     border-left-width: 0.45rem; }
     .youthkitbag .alert.alert-callout {
