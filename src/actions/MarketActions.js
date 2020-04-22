@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getHeaders, updateTokens } from '../helpers/ykbApi';
 import {
   FETCH_MARKET_ITEMS,
   FETCH_MARKET_ITEM,
@@ -6,7 +7,7 @@ import {
   GETALL_FAILURE,
   RESPOND_MARKET_ITEM,
   SEARCH_MARKET_ITEMS,
-  RESET_TOAST
+  RESET_TOAST,
 } from './types';
 import history from '../helpers/history';
 
@@ -20,27 +21,24 @@ export const fetchMarketItems = (
   accountId,
   excgroups = false,
   excaccounts = false
-) => dispatch => {
-  const token = localStorage.getItem('token');
+) => (dispatch) => {
   axios
     .get(`${baseUrl}/market`, {
       params: { searchfor, by, page, pagesize, excgroups, excaccounts },
-      headers: {
-        Authorization: `bearer ${token}`,
-        'content-type': 'application/json'
-      }
+      headers: getHeaders(),
     })
-    .then(response => {
+    .then((response) => {
+      updateTokens(response.headers);
       dispatch({ type: FETCH_MARKET_ITEMS, payload: response.data });
       dispatch({
         type: SEARCH_MARKET_ITEMS,
-        payload: { searchfor, by, page, pagesize, excgroups, excaccounts }
+        payload: { searchfor, by, page, pagesize, excgroups, excaccounts },
       });
       history.push(
         `/market?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}&excgroups=${excgroups}&excaccounts=${excaccounts}`
       );
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -51,19 +49,16 @@ export const fetchMarketItems = (
     });
 };
 
-export const fetchMarketItem = marketId => dispatch => {
-  const token = localStorage.getItem('token');
+export const fetchMarketItem = (marketId) => (dispatch) => {
   axios
     .get(`${baseUrl}/market/${marketId}`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-        'content-type': 'application/json'
-      }
+      headers: getHeaders(),
     })
-    .then(response => {
+    .then((response) => {
+      updateTokens(response.headers);
       dispatch({ type: FETCH_MARKET_ITEM, payload: response.data });
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -74,25 +69,22 @@ export const fetchMarketItem = marketId => dispatch => {
     });
 };
 
-export const respondMarketItem = (marketId, formValues) => dispatch => {
-  const token = localStorage.getItem('token');
+export const respondMarketItem = (marketId, formValues) => (dispatch) => {
   axios
     .post(
       `${baseUrl}/market/respond/${marketId}`,
       { ...formValues },
       {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'content-type': 'application/json'
-        }
+        headers: getHeaders(),
       }
     )
-    .then(response => {
+    .then((response) => {
+      updateTokens(response.headers);
       history.push(`/market/${marketId}`);
       dispatch({ type: RESET_TOAST });
       dispatch({ type: RESPOND_MARKET_ITEM, payload: response.data });
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -103,28 +95,22 @@ export const respondMarketItem = (marketId, formValues) => dispatch => {
     });
 };
 
-export const respondToMarketThread = (
-  marketId,
-  threadId,
-  formValues
-) => dispatch => {
-  const token = localStorage.getItem('token');
+export const respondToMarketThread = (marketId, threadId, formValues) => (
+  dispatch
+) => {
   axios
     .put(
       `${baseUrl}/market/respond/${marketId}/${threadId}`,
       { ...formValues },
       {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'content-type': 'application/json'
-        }
+        headers: getHeaders(),
       }
     )
     .then(() => {
       dispatch({ type: RESET_TOAST });
       dispatch(fetchMarketItem(marketId));
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();

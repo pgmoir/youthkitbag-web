@@ -6,11 +6,11 @@ import {
   GETALL_SUCCESS,
   GETALL_FAILURE,
   LOGOUT,
-  PASSWORD_RESET_CHECK
+  PASSWORD_RESET_CHECK,
 } from '../actions/types';
 
 const isLogin = !!(
-  localStorage.getItem('token') && localStorage.getItem('authentication')
+  localStorage.getItem('auth-token') && localStorage.getItem('authentication')
 );
 const initialState = isLogin ? { loggedIn: true } : { loggedIn: false };
 
@@ -20,40 +20,40 @@ export default function authentication(state = initialState, action) {
       return {
         token: action.payload.token,
         loader: true,
-        loggedIn: true
+        loggedIn: true,
       };
     case LOGIN_FAILURE:
       return {
         loggedIn: false,
-        loginFailed: true
+        loginFailed: true,
       };
     case SIGNUP_SUCCESS:
       return {
-        signedUp: true
+        signedUp: true,
       };
     case SIGNUP_FAILURE:
       return {
-        signupFailed: true
+        signupFailed: true,
       };
     case GETALL_SUCCESS:
       return {
         loggedIn: true,
-        loader: false
+        loader: false,
       };
     case GETALL_FAILURE:
       return {
         errorOccurred: true,
         loginFailed: true,
-        loginError: action.payload
+        loginError: action.payload,
       };
     case LOGOUT:
       return {
-        loggedIn: false
+        loggedIn: false,
       };
     case PASSWORD_RESET_CHECK:
       return {
         userId: action.payload.userId,
-        loggedIn: false
+        loggedIn: false,
       };
     default:
       return state;

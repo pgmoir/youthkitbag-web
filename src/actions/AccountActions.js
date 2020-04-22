@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getHeaders, updateTokens } from '../helpers/ykbApi';
 import {
   CLEAR_ACCOUNT,
   FETCH_ACCOUNT,
@@ -6,26 +7,23 @@ import {
   API_KITBAG_ERROR,
   GETALL_FAILURE,
   CREATE_ACCOUNT_INVITE,
-  EDIT_ACCOUNT_LEAVE
+  EDIT_ACCOUNT_LEAVE,
 } from './types';
 import history from '../helpers/history';
 import { getUser } from './UserActions';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
-export const fetchAccount = accountId => dispatch => {
-  const token = localStorage.getItem('token');
+export const fetchAccount = (accountId) => (dispatch) => {
   axios
     .get(`${baseUrl}/account/${accountId}`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-        'content-type': 'application/json'
-      }
+      headers: getHeaders(),
     })
-    .then(response => {
+    .then((response) => {
+      updateTokens(response.headers);
       dispatch({ type: FETCH_ACCOUNT, payload: response.data });
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -36,17 +34,13 @@ export const fetchAccount = accountId => dispatch => {
     });
 };
 
-export const createAccount = formValues => dispatch => {
-  const token = localStorage.getItem('token');
+export const createAccount = (formValues) => (dispatch) => {
   axios
     .post(
       `${baseUrl}/account`,
       { ...formValues },
       {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'content-type': 'application/json'
-        }
+        headers: getHeaders(),
       }
     )
     .then(() => {
@@ -54,7 +48,7 @@ export const createAccount = formValues => dispatch => {
       dispatch({ type: CLEAR_ACCOUNT });
       dispatch(getUser());
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -65,17 +59,13 @@ export const createAccount = formValues => dispatch => {
     });
 };
 
-export const editAccount = (accountId, formValues) => dispatch => {
-  const token = localStorage.getItem('token');
+export const editAccount = (accountId, formValues) => (dispatch) => {
   axios
     .put(
       `${baseUrl}/account/${accountId}`,
       { ...formValues },
       {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'content-type': 'application/json'
-        }
+        headers: getHeaders(),
       }
     )
     .then(() => {
@@ -83,7 +73,7 @@ export const editAccount = (accountId, formValues) => dispatch => {
       dispatch({ type: CLEAR_ACCOUNT });
       dispatch(getUser());
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -94,24 +84,21 @@ export const editAccount = (accountId, formValues) => dispatch => {
     });
 };
 
-export const editAccountStatus = (accountId, status) => dispatch => {
-  const token = localStorage.getItem('token');
+export const editAccountStatus = (accountId, status) => (dispatch) => {
   axios
     .put(
       `${baseUrl}/account/${accountId}/status`,
       { status: status },
       {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'content-type': 'application/json'
-        }
+        headers: getHeaders(),
       }
     )
-    .then(response => {
+    .then((response) => {
+      updateTokens(response.headers);
       history.push('/settings/accounts');
       dispatch({ type: EDIT_ACCOUNT_STATUS, payload: response.data });
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -122,24 +109,21 @@ export const editAccountStatus = (accountId, status) => dispatch => {
     });
 };
 
-export const inviteToAccount = (accountId, email) => dispatch => {
-  const token = localStorage.getItem('token');
+export const inviteToAccount = (accountId, email) => (dispatch) => {
   axios
     .put(
       `${baseUrl}/account/${accountId}/member/invite/${email}`,
       {},
       {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'content-type': 'application/json'
-        }
+        headers: getHeaders(),
       }
     )
-    .then(response => {
+    .then((response) => {
+      updateTokens(response.headers);
       history.push(`/settings/accounts`);
       dispatch({ type: CREATE_ACCOUNT_INVITE, payload: response.data });
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -151,23 +135,19 @@ export const inviteToAccount = (accountId, email) => dispatch => {
     });
 };
 
-export const requestToJoinAccount = email => dispatch => {
-  const token = localStorage.getItem('token');
+export const requestToJoinAccount = (email) => (dispatch) => {
   axios
     .post(
       `${baseUrl}/account/requesttojoin/${email}`,
       {},
       {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'content-type': 'application/json'
-        }
+        headers: getHeaders(),
       }
     )
     .then(() => {
       history.push(`/`);
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -179,24 +159,21 @@ export const requestToJoinAccount = email => dispatch => {
     });
 };
 
-export const requestAccountLeave = accountId => dispatch => {
-  const token = localStorage.getItem('token');
+export const requestAccountLeave = (accountId) => (dispatch) => {
   axios
     .put(
       `${baseUrl}/account/${accountId}/members/leave`,
       {},
       {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'content-type': 'application/json'
-        }
+        headers: getHeaders(),
       }
     )
-    .then(response => {
+    .then((response) => {
+      updateTokens(response.headers);
       history.push(`/settings/accounts`);
       dispatch({ type: EDIT_ACCOUNT_LEAVE, payload: response.data });
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -207,6 +184,6 @@ export const requestAccountLeave = accountId => dispatch => {
     });
 };
 
-export const clearAccount = () => dispatch => {
+export const clearAccount = () => (dispatch) => {
   dispatch({ type: CLEAR_ACCOUNT });
 };

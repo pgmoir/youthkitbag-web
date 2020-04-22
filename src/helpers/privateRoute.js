@@ -2,20 +2,20 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const token = localStorage.getItem('token');
+  const authToken = localStorage.getItem('auth-token');
   const isloggedin = localStorage.getItem('isloggedin');
   const user = localStorage.getItem('user');
   return (
     <Route
       {...rest}
-      render={props =>
-        isloggedin && token && user ? (
+      render={(props) =>
+        isloggedin && authToken && user ? (
           <Component {...props} />
         ) : (
           <Redirect
             to={{
               pathname: '/auth/login',
-              state: { from: props.location }
+              state: { from: props.location },
             }}
           />
         )

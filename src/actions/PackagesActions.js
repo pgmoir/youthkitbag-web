@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getHeaders, updateTokens } from '../helpers/ykbApi';
 import {
   FETCH_PACKAGE,
   FETCH_PACKAGES,
@@ -10,15 +11,12 @@ import history from '../helpers/history';
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchSubscriptionPackages = () => (dispatch) => {
-  const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/packages`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-        'content-type': 'application/json',
-      },
+      headers: getHeaders(),
     })
     .then((response) => {
+      updateTokens(response.headers);
       dispatch({ type: FETCH_PACKAGES, payload: response.data });
     })
     .catch((err) => {
@@ -33,15 +31,12 @@ export const fetchSubscriptionPackages = () => (dispatch) => {
 };
 
 export const fetchSubscriptionPackage = (packageId) => (dispatch) => {
-  const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/packages/${packageId}`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-        'content-type': 'application/json',
-      },
+      headers: getHeaders(),
     })
     .then((response) => {
+      updateTokens(response.headers);
       dispatch({ type: FETCH_PACKAGE, payload: response.data });
     })
     .catch((err) => {
