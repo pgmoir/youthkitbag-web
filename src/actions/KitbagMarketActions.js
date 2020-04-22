@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getHeaders, updateTokens } from '../helpers/ykbApi';
 import {
   CREATE_MARKET_KIT,
   FETCH_MARKET_KIT,
@@ -20,15 +21,12 @@ import history from '../helpers/history';
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchMarketKit = (accountId, marketId) => (dispatch) => {
-  const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/kitbag/market/${accountId}/${marketId}`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-        'content-type': 'application/json',
-      },
+      headers: getHeaders(),
     })
     .then((response) => {
+      updateTokens(response.headers);
       dispatch({ type: FETCH_MARKET_KIT, payload: response.data });
     })
     .catch((err) => {
@@ -45,15 +43,12 @@ export const fetchMarketKit = (accountId, marketId) => (dispatch) => {
 export const fetchMarketKitFromKit = (accountId, kitId, marketType) => (
   dispatch
 ) => {
-  const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/kitbag/market/${accountId}/add/${kitId}/${marketType}`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-        'content-type': 'application/json',
-      },
+      headers: getHeaders(),
     })
     .then((response) => {
+      updateTokens(response.headers);
       dispatch({ type: FETCH_MARKET_KIT, payload: response.data });
     })
     .catch((err) => {
@@ -68,19 +63,16 @@ export const fetchMarketKitFromKit = (accountId, kitId, marketType) => (
 };
 
 export const createMarketKit = (accountId, formValues) => (dispatch) => {
-  const token = localStorage.getItem('token');
   axios
     .post(
       `${baseUrl}/kitbag/market/${accountId}`,
       { ...formValues },
       {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'content-type': 'application/json',
-        },
+        headers: getHeaders(),
       }
     )
     .then((response) => {
+      updateTokens(response.headers);
       history.push(`/market/${accountId}`);
       dispatch({ type: CREATE_MARKET_KIT, payload: response.data });
     })
@@ -98,19 +90,16 @@ export const createMarketKit = (accountId, formValues) => (dispatch) => {
 export const editMarketKit = (accountId, marketId, formValues) => (
   dispatch
 ) => {
-  const token = localStorage.getItem('token');
   axios
     .put(
       `${baseUrl}/kitbag/market/${accountId}/${marketId}`,
       { ...formValues },
       {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'content-type': 'application/json',
-        },
+        headers: getHeaders(),
       }
     )
     .then((response) => {
+      updateTokens(response.headers);
       history.push(`/market/${accountId}`);
       dispatch({ type: EDIT_MARKET_KIT, payload: response.data });
     })
@@ -131,16 +120,12 @@ export const respondToMarketKitThread = (
   threadId,
   formValues
 ) => (dispatch) => {
-  const token = localStorage.getItem('token');
   axios
     .put(
       `${baseUrl}/kitbag/market/${accountId}/respond/${marketId}/${threadId}`,
       { ...formValues },
       {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'content-type': 'application/json',
-        },
+        headers: getHeaders(),
       }
     )
     .then(() => {
@@ -161,15 +146,12 @@ export const respondToMarketKitThread = (
 };
 
 export const deleteMarketKit = (accountId, marketId) => (dispatch) => {
-  const token = localStorage.getItem('token');
   axios
     .delete(`${baseUrl}/kitbag/market/${accountId}/${marketId}`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-        'content-type': 'application/json',
-      },
+      headers: getHeaders(),
     })
     .then((response) => {
+      updateTokens(response.headers);
       history.push(`/market/${accountId}`);
       dispatch({ type: DELETE_MARKET_KIT, payload: response.data });
     })
@@ -185,15 +167,12 @@ export const deleteMarketKit = (accountId, marketId) => (dispatch) => {
 };
 
 export const fetchKitbagMarketItems = (by, pagesize) => (dispatch) => {
-  const token = localStorage.getItem('token');
   axios
     .get(`${baseUrl}/kitbag/market?by=${by}&pagesize=${pagesize}`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-        'content-type': 'application/json',
-      },
+      headers: getHeaders(),
     })
     .then((response) => {
+      updateTokens(response.headers);
       switch (by) {
         case 'trade':
           dispatch({

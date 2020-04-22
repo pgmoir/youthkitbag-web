@@ -6,25 +6,23 @@ import {
   API_KITBAG_ERROR,
   GETALL_FAILURE,
   RESET,
-  RESET_TOAST
+  RESET_TOAST,
 } from './types';
 import axios from 'axios';
+import { getHeaders, updateTokens } from '../helpers/ykbApi';
 import history from '../helpers/history';
 
 const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
-export const getUser = () => dispatch => {
-  const token = localStorage.getItem('token');
+export const getUser = () => (dispatch) => {
   const userId = localStorage.getItem('user');
 
   axios
     .get(`${baseUrl}/user/${userId}`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-        'content-type': 'application/json'
-      }
+      headers: getHeaders(),
     })
-    .then(response => {
+    .then((response) => {
+      updateTokens(response.headers);
       const { data } = response;
       dispatch({ type: GETALL_SUCCESS });
       dispatch({ type: GET_USER, payload: data });
@@ -32,25 +30,22 @@ export const getUser = () => dispatch => {
     .catch(() => {});
 };
 
-export const editProfile = (userId, formValues) => dispatch => {
-  const token = localStorage.getItem('token');
+export const editProfile = (userId, formValues) => (dispatch) => {
   axios
     .put(
       `${baseUrl}/user/${userId}/profile`,
       { ...formValues },
       {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'content-type': 'application/json'
-        }
+        headers: getHeaders(),
       }
     )
-    .then(response => {
+    .then((response) => {
+      updateTokens(response.headers);
       history.push('/settings/profile');
       dispatch({ type: EDIT_USER_PROFILE, payload: response.data });
       dispatch(getUser());
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -61,17 +56,13 @@ export const editProfile = (userId, formValues) => dispatch => {
     });
 };
 
-export const deleteUser = (userId, formValues) => dispatch => {
-  const token = localStorage.getItem('token');
+export const deleteUser = (userId, formValues) => (dispatch) => {
   axios
     .put(
       `${baseUrl}/user/${userId}/delete`,
       { ...formValues },
       {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'content-type': 'application/json'
-        }
+        headers: getHeaders(),
       }
     )
     .then(() => {
@@ -79,7 +70,7 @@ export const deleteUser = (userId, formValues) => dispatch => {
       dispatch({ type: RESET });
       history.push('/auth/login?return=/settings/profile');
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -90,26 +81,25 @@ export const deleteUser = (userId, formValues) => dispatch => {
     });
 };
 
-export const editProfilePreferredAccount = (userId, accountId) => dispatch => {
-  const token = localStorage.getItem('token');
+export const editProfilePreferredAccount = (userId, accountId) => (
+  dispatch
+) => {
   axios
     .put(
       `${baseUrl}/user/${userId}/profile/account/${accountId}`,
       {},
       {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'content-type': 'application/json'
-        }
+        headers: getHeaders(),
       }
     )
-    .then(response => {
+    .then((response) => {
+      updateTokens(response.headers);
       history.push('/settings/accounts');
       dispatch({ type: EDIT_USER_PROFILE, payload: response.data });
       dispatch({ type: RESET });
       dispatch(getUser());
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -120,25 +110,21 @@ export const editProfilePreferredAccount = (userId, accountId) => dispatch => {
     });
 };
 
-export const hideFlag = (name, hide) => dispatch => {
+export const hideFlag = (name, hide) => (dispatch) => {
   const userId = localStorage.getItem('user');
-  const token = localStorage.getItem('token');
   axios
     .put(
       `${baseUrl}/user/${userId}/flags/${name}/${hide}`,
       {},
       {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'content-type': 'application/json'
-        }
+        headers: getHeaders(),
       }
     )
     .then(() => {
       dispatch({ type: RESET });
       dispatch(getUser());
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -149,25 +135,22 @@ export const hideFlag = (name, hide) => dispatch => {
     });
 };
 
-export const resetFlags = () => dispatch => {
+export const resetFlags = () => (dispatch) => {
   const userId = localStorage.getItem('user');
-  const token = localStorage.getItem('token');
   axios
     .put(
       `${baseUrl}/user/${userId}/flags/reset`,
       {},
       {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'content-type': 'application/json'
-        }
+        headers: getHeaders(),
       }
     )
-    .then(response => {
+    .then((response) => {
+      updateTokens(response.headers);
       dispatch({ type: RESET_USER_FLAGS, payload: response.data });
       dispatch(getUser());
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -178,7 +161,7 @@ export const resetFlags = () => dispatch => {
     });
 };
 
-export const loadSettingsPage = url => dispatch => {
+export const loadSettingsPage = (url) => (dispatch) => {
   dispatch({ type: RESET_TOAST });
   history.push(url);
 };

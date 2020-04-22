@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getHeaders, updateTokens } from '../helpers/ykbApi';
 import {
   CREATE_KITBAG_KIT,
   FETCH_KITBAG_KITS,
@@ -8,7 +9,7 @@ import {
   API_KITBAG_ERROR,
   FETCH_KITBAG_LISTS,
   GETALL_FAILURE,
-  SEARCH_KITBAG_KITS
+  SEARCH_KITBAG_KITS,
 } from './types';
 import history from '../helpers/history';
 
@@ -20,27 +21,24 @@ export const fetchKitbagKits = (
   page = 1,
   pagesize = 24,
   accountId = null
-) => dispatch => {
-  const token = localStorage.getItem('token');
+) => (dispatch) => {
   axios
     .get(`${baseUrl}/kitbag/kit/${accountId}`, {
       params: { searchfor, by, page, pagesize },
-      headers: {
-        Authorization: `bearer ${token}`,
-        'content-type': 'application/json'
-      }
+      headers: getHeaders(),
     })
-    .then(response => {
+    .then((response) => {
+      updateTokens(response.headers);
       dispatch({ type: FETCH_KITBAG_KITS, payload: response.data });
       dispatch({
         type: SEARCH_KITBAG_KITS,
-        payload: { searchfor, by, page, pagesize }
+        payload: { searchfor, by, page, pagesize },
       });
       history.push(
         `/kitbag/kit/${accountId}?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}`
       );
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -51,19 +49,16 @@ export const fetchKitbagKits = (
     });
 };
 
-export const fetchKitbagKit = (accountId, kitId) => dispatch => {
-  const token = localStorage.getItem('token');
+export const fetchKitbagKit = (accountId, kitId) => (dispatch) => {
   axios
     .get(`${baseUrl}/kitbag/kit/${accountId}/${kitId}`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-        'content-type': 'application/json'
-      }
+      headers: getHeaders(),
     })
-    .then(response => {
+    .then((response) => {
+      updateTokens(response.headers);
       dispatch({ type: FETCH_KITBAG_KIT, payload: response.data });
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -74,24 +69,21 @@ export const fetchKitbagKit = (accountId, kitId) => dispatch => {
     });
 };
 
-export const createKitbagKit = (accountId, formValues) => dispatch => {
-  const token = localStorage.getItem('token');
+export const createKitbagKit = (accountId, formValues) => (dispatch) => {
   axios
     .post(
       `${baseUrl}/kitbag/kit/${accountId}`,
       { ...formValues },
       {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'content-type': 'application/json'
-        }
+        headers: getHeaders(),
       }
     )
-    .then(response => {
+    .then((response) => {
+      updateTokens(response.headers);
       history.push(`/kitbag/kit/${accountId}`);
       dispatch({ type: CREATE_KITBAG_KIT, payload: response.data });
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -102,24 +94,21 @@ export const createKitbagKit = (accountId, formValues) => dispatch => {
     });
 };
 
-export const editKitbagKit = (accountId, kitId, formValues) => dispatch => {
-  const token = localStorage.getItem('token');
+export const editKitbagKit = (accountId, kitId, formValues) => (dispatch) => {
   axios
     .put(
       `${baseUrl}/kitbag/kit/${accountId}/${kitId}`,
       { ...formValues },
       {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'content-type': 'application/json'
-        }
+        headers: getHeaders(),
       }
     )
-    .then(response => {
+    .then((response) => {
+      updateTokens(response.headers);
       history.push(`/kitbag/kit/${accountId}`);
       dispatch({ type: EDIT_KITBAG_KIT, payload: response.data });
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -130,20 +119,17 @@ export const editKitbagKit = (accountId, kitId, formValues) => dispatch => {
     });
 };
 
-export const deleteKitbagKit = (accountId, kitId) => dispatch => {
-  const token = localStorage.getItem('token');
+export const deleteKitbagKit = (accountId, kitId) => (dispatch) => {
   axios
     .delete(`${baseUrl}/kitbag/kit/${accountId}/${kitId}`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-        'content-type': 'application/json'
-      }
+      headers: getHeaders(),
     })
-    .then(response => {
+    .then((response) => {
+      updateTokens(response.headers);
       history.push(`/kitbag/kit/${accountId}`);
       dispatch({ type: DELETE_KITBAG_KIT, payload: response.data });
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
@@ -154,19 +140,16 @@ export const deleteKitbagKit = (accountId, kitId) => dispatch => {
     });
 };
 
-export const fetchKitbagLists = (accountId = null) => dispatch => {
-  const token = localStorage.getItem('token');
+export const fetchKitbagLists = (accountId = null) => (dispatch) => {
   axios
     .get(`${baseUrl}/kitbag/kit/${accountId}/lists`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-        'content-type': 'application/json'
-      }
+      headers: getHeaders(),
     })
-    .then(response => {
+    .then((response) => {
+      updateTokens(response.headers);
       dispatch({ type: FETCH_KITBAG_LISTS, payload: response.data });
     })
-    .catch(err => {
+    .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
