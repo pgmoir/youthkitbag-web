@@ -260,11 +260,12 @@ const MarketKitForm = ({
     return `Have you managed to ${helpText}? If yes, great! Check this box so that it won't be included amongst the active market items anymore.`;
   };
 
+  // convert to state
   const isReadOnly = () => {
     if (market.completed) {
       return true;
     }
-    if (!market.threads) {
+    if (!market.threads || market.threads.length === 0) {
       return false;
     }
     const closedThreadStates = ['withdraw', 'reject'];
