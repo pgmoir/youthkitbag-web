@@ -28,6 +28,7 @@ export const login = (email, password, referrer) => (dispatch) => {
     .then((response) => {
       const { data } = response;
       localStorage.setItem('auth-token', data.authToken);
+      localStorage.setItem('refresh-token', data.refreshToken);
       localStorage.setItem('user', data.userId);
       localStorage.setItem('isloggedin', true);
       dispatch({ type: LOGIN_SUCCESS, payload: data });
