@@ -12,6 +12,7 @@ import toastReducer from './toastReducer';
 import packagesReducer from './packagesReducer';
 import imageReducer from './imageReducer';
 import showReducer from './showReducer';
+import contentReducer from './contentReducer';
 
 export default combineReducers({
   account: accountReducer,
@@ -26,4 +27,5 @@ export default combineReducers({
   packages: packagesReducer,
   images: imageReducer,
   show: showReducer,
+  content: contentReducer,
 });
