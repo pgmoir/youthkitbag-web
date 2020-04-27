@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { fetchContent } from '../../actions/ContentActions';
 import { connect } from 'react-redux';
 import Title from '../includes/title/Title';
-
-const termsAndConditionsId = '6Z9bv6CbhyLRB48NzYlCer';
+import useContentful from '../hooks/useContentful';
 
 const mapStateToProps = (state) => ({
   content: state.content.data,
@@ -13,10 +12,8 @@ const mapDispatchToProps = {
   fetchContent,
 };
 
-const Terms = ({ content, fetchContent }) => {
-  useEffect(() => {
-    fetchContent(termsAndConditionsId);
-  }, [fetchContent]);
+const Content = ({ contentId, content, fetchContent }) => {
+  const { renderAllConent } = useContentful(contentId, fetchContent);
 
   if (!content) {
     return (
@@ -38,27 +35,6 @@ const Terms = ({ content, fetchContent }) => {
     );
   }
 
-  function renderContent(item, index) {
-    if (item.nodeType === 'heading-2') {
-      return (
-        <h2 key={index}>{item.content.map((c, i) => renderContent(c, i))}</h2>
-      );
-    }
-    if (item.nodeType === 'paragraph') {
-      return (
-        <p key={index}>{item.content.map((c, i) => renderContent(c, i))}</p>
-      );
-    }
-    if (item.nodeType === 'text') {
-      return item.value;
-    }
-    return null;
-  }
-
-  function renderAllConent() {
-    return content.fields.body.content.map((c, i) => renderContent(c, i));
-  }
-
   return (
     <div>
       <Title title={content.fields.title} />
@@ -78,7 +54,7 @@ const Terms = ({ content, fetchContent }) => {
                   })}
                 </em>
               </p>
-              {renderAllConent()}
+              {renderAllConent(content)}
             </div>
           </div>
         </div>
@@ -87,4 +63,4 @@ const Terms = ({ content, fetchContent }) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Terms);
+export default connect(mapStateToProps, mapDispatchToProps)(Content);

@@ -9,8 +9,7 @@ import Footer from './includes/Footer';
 import Home from './Home';
 import Why from './Why';
 import Packages from './Packages';
-import Terms from './site/Terms';
-import Privacy from './site/Privacy';
+import Content from './site/Content';
 import Security from './site/Security';
 import Accessibility from './site/Accessibility';
 import SignUp from './auth/SignUpPage';
@@ -45,6 +44,7 @@ import BetaAnnouncement from './home/BetaAnnouncement';
 import GroupMemberDelete from './group/GroupMemberDelete';
 import DeleteUser from './account/DeleteUser';
 import { connect } from 'react-redux';
+import { TERMSCONDITIONS, PRIVACYPOLICY } from './site/content-types';
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
@@ -82,8 +82,20 @@ const App = ({ auth }) => {
 
             <Route path="/learn/:activity" component={LearnMore} />
 
-            <Route path="/site/terms" exact component={Terms} />
-            <Route path="/site/privacy" exact component={Privacy} />
+            <Route
+              path="/site/terms"
+              exact
+              render={(props) => (
+                <Content {...props} contentId={TERMSCONDITIONS} />
+              )}
+            />
+            <Route
+              path="/site/privacy"
+              exact
+              render={(props) => (
+                <Content {...props} contentId={PRIVACYPOLICY} />
+              )}
+            />
             <Route path="/site/security" exact component={Security} />
             <Route path="/site/accessibility" exact component={Accessibility} />
 

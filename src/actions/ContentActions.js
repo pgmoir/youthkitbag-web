@@ -13,11 +13,9 @@ export const fetchContent = (contentId) => (dispatch) => {
       `${baseUrl}/spaces/${spaceId}/entries/${contentId}?access_token=${accessToken}`
     )
     .then((response) => {
-      console.log(response);
       dispatch({ type: FETCH_CONTENT, payload: response.data });
     })
     .catch((err) => {
-      console.log(err);
       dispatch({ type: ERR_CONTENT, payload: err });
     });
 };
