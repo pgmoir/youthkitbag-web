@@ -3,7 +3,13 @@ import { useSelector } from 'react-redux';
 import useForm from '../hooks/useForm';
 import validate from './FormEmptyValidationRules';
 
-const SearchForm = ({ searchId, search, callback, incPagination }) => {
+const SearchForm = ({
+  searchId,
+  search,
+  callback,
+  incPagination,
+  containers,
+}) => {
   const { searchfor, by } = search;
 
   const filter = useSelector((state) => state.filter);
@@ -65,15 +71,35 @@ const SearchForm = ({ searchId, search, callback, incPagination }) => {
                 ))}
               </select>
             </div>
-            <input
-              name="searchfor"
-              className="form-control"
-              type="text"
-              onChange={handleChange}
-              value={values.searchfor}
-              id="searchfor"
-              arialabel="Search by text"
-            />
+            {values.by === 'container' && (
+              <select
+                className="custom-select"
+                name="searchfor"
+                onChange={handleChange}
+                onBlur={handleChange}
+                value={values.searchfor}
+                arialabel="Search by container"
+              >
+                {containers.map((item, index) => {
+                  return (
+                    <option key={index} value={item}>
+                      {item}
+                    </option>
+                  );
+                })}
+              </select>
+            )}
+            {values.by !== 'container' && (
+              <input
+                name="searchfor"
+                className="form-control"
+                type="text"
+                onChange={handleChange}
+                value={values.searchfor}
+                id="searchfor"
+                arialabel="Search by text"
+              />
+            )}
             <div className="input-group-append">
               <button className="btn btn-outline-primary" type="submit">
                 Search
