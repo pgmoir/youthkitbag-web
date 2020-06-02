@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchMarketItems } from '../../actions/MarketActions';
 import Title from '../includes/title/Title';
@@ -7,10 +6,9 @@ import MarketItemCard from './MarketItemCard';
 import SearchForm from '../includes/SearchForm';
 import Pagination from '../includes/Pagination';
 import Alert from '../includes/Alert';
-import queryString from 'query-string';
 
 const mapStateToProps = (state) => ({
-  search: state.market.search,
+  stateSearch: state.market.search,
   items: Object.values(state.market.list),
   pagination: state.pagination,
 });
@@ -20,33 +18,13 @@ const mapDispatchToProps = {
 };
 
 const MarketItems = ({
-  search,
+  stateSearch,
   items,
   pagination,
   fetchMarketItems,
   match,
 }) => {
-  const query = useLocation().search;
-  let {
-    searchfor,
-    by,
-    page,
-    pagesize,
-    excgroups,
-    excaccounts,
-    loading,
-  } = search;
-  if (query || loading) {
-    const searchQuery = queryString.parse(query);
-    searchfor = searchQuery.searchfor;
-    by = searchQuery.by;
-    page = +searchQuery.page;
-    pagesize = +searchQuery.pagesize;
-    excgroups = searchQuery.excgroups === 'true';
-    excaccounts = searchQuery.excaccounts === 'true';
-    search = { searchfor, by, page, pagesize };
-  }
-
+  const [search, setSearch] = useState(stateSearch);
   const accountId = match.params.accountId;
   const [marketItems, setMarketItems] = useState([]);
 
@@ -57,8 +35,8 @@ const MarketItems = ({
   }, [items]);
 
   useEffect(() => {
-    fetchMarketItems(searchfor, by, page, pagesize, excgroups, excaccounts);
-  }, [searchfor, by, page, pagesize, excgroups, excaccounts, fetchMarketItems]);
+    fetchMarketItems({ ...search, pushHistory: true });
+  }, [search, fetchMarketItems]);
 
   function getTitle() {
     return `Market place items (${pagination.totalItems})`;
@@ -120,8 +98,7 @@ const MarketItems = ({
               <SearchForm
                 searchId={accountId}
                 search={search}
-                callback={fetchMarketItems}
-                incPagination={true}
+                callback={setSearch}
               />
             </div>
           </div>
@@ -129,7 +106,7 @@ const MarketItems = ({
           <Pagination
             accountId={accountId}
             search={search}
-            callback={fetchMarketItems}
+            callback={setSearch}
           />
         </div>
       </section>

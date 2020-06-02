@@ -5,17 +5,17 @@ import { Link } from 'react-router-dom';
 import { fetchAccount, inviteToAccount } from '../../actions/AccountActions';
 import { TextForm } from '../includes/forms';
 import ModalWithForm from '../includes/ModalWithForm';
-import history from '../../helpers/history';
+import history from '../../utils/history';
 import validate from '../includes/FormEmptyValidationRules';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   account: state.account.current,
-  newErrors: state.toast.errors
+  newErrors: state.toast.errors,
 });
 
 const mapDispatchToProps = {
   fetchAccount,
-  inviteToAccount
+  inviteToAccount,
 };
 
 const AccountMemberInvite = ({
@@ -23,7 +23,7 @@ const AccountMemberInvite = ({
   newErrors,
   fetchAccount,
   inviteToAccount,
-  match
+  match,
 }) => {
   const accountId = match.params.accountId;
   const invite = { email: '' };

@@ -5,16 +5,16 @@ import { createGroup, editGroup } from '../../actions/GroupActions';
 import { TextForm, TextAreaForm, ImagesForm } from '../includes/forms';
 import { connect } from 'react-redux';
 import validate from '../includes/FormEmptyValidationRules';
-import { getImages } from '../../helpers/image';
+import { getImages } from '../../utils/image';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   userPackage: state.user.package,
-  newErrors: state.toast.errors
+  newErrors: state.toast.errors,
 });
 
 const mapDispatchToProps = {
   createGroup,
-  editGroup
+  editGroup,
 };
 
 const GroupForm = ({
@@ -22,7 +22,7 @@ const GroupForm = ({
   userPackage,
   newErrors,
   createGroup,
-  editGroup
+  editGroup,
 }) => {
   const initialValues = { ...group, images: getImages(group.images) };
 
@@ -34,7 +34,7 @@ const GroupForm = ({
     values,
     setValues,
     errors,
-    setErrors
+    setErrors,
   } = useForm(initialValues, updateGroup, validate);
 
   const showGroupUrl = `${window.location
@@ -51,8 +51,8 @@ const GroupForm = ({
     if (group) {
       group.images = getImages(group.images);
       group.topImage =
-        group.images && group.images.filter(i => i.state !== 'D').length > 0
-          ? group.images.filter(i => i.state !== 'D')[0].imageUrl
+        group.images && group.images.filter((i) => i.state !== 'D').length > 0
+          ? group.images.filter((i) => i.state !== 'D')[0].imageUrl
           : '/images/default.png';
       setValues(group);
     }

@@ -5,16 +5,16 @@ import { Link } from 'react-router-dom';
 import { deleteUser } from '../../actions/UserActions';
 import { TextForm } from '../includes/forms';
 import ModalWithForm from '../includes/ModalWithForm';
-import history from '../../helpers/history';
+import history from '../../utils/history';
 import validate from '../includes/FormEmptyValidationRules';
 import Alert from '../includes/Alert';
 
-const mapStateToProps = state => ({
-  newErrors: state.toast.errors
+const mapStateToProps = (state) => ({
+  newErrors: state.toast.errors,
 });
 
 const mapDispatchToProps = {
-  deleteUser
+  deleteUser,
 };
 
 const DeleteUser = ({ newErrors, deleteUser, match }) => {

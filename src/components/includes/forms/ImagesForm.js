@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
-import { resize, dataURItoBlob } from '../../../helpers/imageResize';
+import { resize, dataURItoBlob } from '../../../utils/imageResize';
 
 const ImagesForm = ({
   accountId,
@@ -9,7 +9,7 @@ const ImagesForm = ({
   readOnly,
   setChange,
   addArrayItem,
-  error
+  error,
 }) => {
   const MAXWIDTH = 720;
   const MAXHEIGHT = 720;
@@ -21,7 +21,7 @@ const ImagesForm = ({
     }
     setChange('imagesToUpload', files.length);
     for (let i = 0; i < files.length; i++) {
-      resize(files[i], MAXWIDTH, MAXHEIGHT, function(resizedDataUrl) {
+      resize(files[i], MAXWIDTH, MAXHEIGHT, function (resizedDataUrl) {
         let formData = new FormData();
         formData.append('photo', dataURItoBlob(resizedDataUrl), files[i].name);
         dispatch(addImage(accountId, formData));
@@ -31,7 +31,7 @@ const ImagesForm = ({
   }
 
   const dispatch = useDispatch();
-  const newImages = useSelector(state => state.images.newImages);
+  const newImages = useSelector((state) => state.images.newImages);
 
   function renderSecondaryImages() {
     if (!values || !values.images) {
@@ -121,7 +121,7 @@ const ImagesForm = ({
 
   function deleteImage(id) {
     if (id && values.images) {
-      let images = values.images.map(i => {
+      let images = values.images.map((i) => {
         if (i._id === id) {
           i.state = 'D';
         }
@@ -130,8 +130,8 @@ const ImagesForm = ({
       setChange('images', images);
       setChange(
         'topImage',
-        images && images.filter(i => i.state !== 'D').length > 0
-          ? images.filter(i => i.state !== 'D')[0].imageUrl
+        images && images.filter((i) => i.state !== 'D').length > 0
+          ? images.filter((i) => i.state !== 'D')[0].imageUrl
           : '/images/default.png'
       );
     }
@@ -139,7 +139,7 @@ const ImagesForm = ({
 
   function reinstateImage(id) {
     if (id && values.images) {
-      let images = values.images.map(i => {
+      let images = values.images.map((i) => {
         if (i._id === id) {
           i.state = 'N';
         }
@@ -151,14 +151,14 @@ const ImagesForm = ({
 
   function setPrimaryImage(id) {
     if (id && values.images) {
-      const primaryImage = values.images.filter(i => i._id === id);
-      const otherImages = values.images.filter(i => i._id !== id);
+      const primaryImage = values.images.filter((i) => i._id === id);
+      const otherImages = values.images.filter((i) => i._id !== id);
       const images = primaryImage.concat(otherImages);
       setChange('images', images);
       setChange(
         'topImage',
-        images && images.filter(i => i.state !== 'D').length > 0
-          ? images.filter(i => i.state !== 'D')[0].imageUrl
+        images && images.filter((i) => i.state !== 'D').length > 0
+          ? images.filter((i) => i.state !== 'D')[0].imageUrl
           : '/images/default.png'
       );
     }
@@ -171,14 +171,14 @@ const ImagesForm = ({
       newImages.length === values.imagesToUpload
     ) {
       const imagesToAdd = [
-        ...newImages.map(i => {
+        ...newImages.map((i) => {
           let image = {};
           image._id = i._id;
           image.image = i.image;
           image.imageUrl = i.imageUrl;
           image.state = 'N';
           return image;
-        })
+        }),
       ];
       dispatch(clearNewImages());
       addArrayItem('images', imagesToAdd);
@@ -213,7 +213,7 @@ const ImagesForm = ({
                   className={`custom-file-input${error ? ' is-invalid' : ''}`}
                   id="photos"
                   aria-describedby="photos"
-                  onChange={e => onFileChanged(e)}
+                  onChange={(e) => onFileChanged(e)}
                 />
                 <label className="custom-file-label" htmlFor="photos">
                   Choose image(s)

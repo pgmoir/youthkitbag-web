@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { deleteGroupMember } from '../../actions/GroupActions';
 import Modal from '../includes/Modal';
-import history from '../../helpers/history';
+import history from '../../utils/history';
 
 const mapDispatchToProps = {
-  deleteGroupMember
+  deleteGroupMember,
 };
 
 const GroupMemberDelete = ({ deleteGroupMember, match }) => {

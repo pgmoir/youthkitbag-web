@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../utils/axios';
 import {
   FETCH_SHOW_GROUP,
   API_KITBAG_ERROR,
@@ -10,13 +10,11 @@ import {
   FETCH_SHOW_MARKET_STOLENS,
   FETCH_SHOW_MARKET_WANTEDS,
 } from './types';
-import history from '../helpers/history';
-
-const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
+import history from '../utils/history';
 
 export const fetchShowGroup = (groupId) => (dispatch) => {
   axios
-    .get(`${baseUrl}/show/group/${groupId}`)
+    .get(`/show/group/${groupId}`)
     .then((response) => {
       dispatch({ type: FETCH_SHOW_GROUP, payload: response.data });
     })
@@ -33,7 +31,7 @@ export const fetchShowGroup = (groupId) => (dispatch) => {
 
 export const fetchShowGroupMarket = (groupId, by) => (dispatch) => {
   axios
-    .get(`${baseUrl}/show/group/market/${groupId}/${by}`)
+    .get(`/show/group/market/${groupId}/${by}`)
     .then((response) => {
       switch (by) {
         case 'recycle':

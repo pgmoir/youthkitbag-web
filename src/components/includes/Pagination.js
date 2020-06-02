@@ -1,23 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const mapStateToProps = state => ({
-  pagination: state.pagination
+const mapStateToProps = (state) => ({
+  pagination: state.pagination,
 });
 
 const Pagination = ({ accountId, search, callback, pagination }) => {
-  const { searchfor, by, pagesize, excgroups, excaccounts } = search;
+  const {
+    searchfor,
+    by,
+    pagesize,
+    order,
+    direction,
+    excgroups,
+    excaccounts,
+  } = search;
 
   function changePage(moveToPage) {
-    callback(
-      searchfor,
+    callback({
       by,
-      moveToPage,
+      searchfor,
+      page: moveToPage,
       pagesize,
+      order,
+      direction,
       accountId,
       excgroups,
-      excaccounts
-    );
+      excaccounts,
+    });
   }
 
   function isFirstPageDisabled() {

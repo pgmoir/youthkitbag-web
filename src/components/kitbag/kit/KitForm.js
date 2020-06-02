@@ -18,7 +18,7 @@ import {
   ImagesForm,
 } from '../../includes/forms';
 import validate from '../../includes/FormEmptyValidationRules';
-import { getImages } from '../../../helpers/image';
+import { getImages } from '../../../utils/image';
 
 const mapStateToProps = (state) => ({
   kitbagLists: state.kitbag.kit.lists,

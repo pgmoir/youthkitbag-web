@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchGroup, requestGroupLeave } from '../../actions/GroupActions';
 import Modal from '../includes/Modal';
-import history from '../../helpers/history';
+import history from '../../utils/history';
 
-const mapStateToProps = state => ({
-  group: state.group.current
+const mapStateToProps = (state) => ({
+  group: state.group.current,
 });
 
 const mapDispatchToProps = {
   fetchGroup,
-  requestGroupLeave
+  requestGroupLeave,
 };
 
 const GroupMemberLeave = ({ group, fetchGroup, requestGroupLeave, match }) => {

@@ -5,15 +5,15 @@ import { Link } from 'react-router-dom';
 import { requestToJoinAccount } from '../../actions/AccountActions';
 import { TextForm } from '../includes/forms';
 import ModalWithForm from '../includes/ModalWithForm';
-import history from '../../helpers/history';
+import history from '../../utils/history';
 import validate from '../includes/FormEmptyValidationRules';
 
-const mapStateToProps = state => ({
-  newErrors: state.toast.errors
+const mapStateToProps = (state) => ({
+  newErrors: state.toast.errors,
 });
 
 const mapDispatchToProps = {
-  requestToJoinAccount
+  requestToJoinAccount,
 };
 
 const AccountMemberJoin = ({ newErrors, requestToJoinAccount }) => {

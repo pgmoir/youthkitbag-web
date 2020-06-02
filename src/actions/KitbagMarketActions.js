@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { getHeaders, updateTokens } from '../helpers/ykbApi';
+import axios from '../utils/axios';
 import {
   CREATE_MARKET_KIT,
   FETCH_MARKET_KIT,
@@ -16,17 +15,12 @@ import {
   FETCH_KITBAG_MARKET_STOLENS,
   FETCH_KITBAG_MARKET_WANTEDS,
 } from './types';
-import history from '../helpers/history';
-
-const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
+import history from '../utils/history';
 
 export const fetchMarketKit = (accountId, marketId) => (dispatch) => {
   axios
-    .get(`${baseUrl}/kitbag/market/${accountId}/${marketId}`, {
-      headers: getHeaders(),
-    })
+    .get(`/kitbag/market/${accountId}/${marketId}`, {})
     .then((response) => {
-      updateTokens(response.headers);
       dispatch({ type: FETCH_MARKET_KIT, payload: response.data });
     })
     .catch((err) => {
@@ -44,11 +38,8 @@ export const fetchMarketKitFromKit = (accountId, kitId, marketType) => (
   dispatch
 ) => {
   axios
-    .get(`${baseUrl}/kitbag/market/${accountId}/add/${kitId}/${marketType}`, {
-      headers: getHeaders(),
-    })
+    .get(`/kitbag/market/${accountId}/add/${kitId}/${marketType}`, {})
     .then((response) => {
-      updateTokens(response.headers);
       dispatch({ type: FETCH_MARKET_KIT, payload: response.data });
     })
     .catch((err) => {
@@ -64,15 +55,8 @@ export const fetchMarketKitFromKit = (accountId, kitId, marketType) => (
 
 export const createMarketKit = (accountId, formValues) => (dispatch) => {
   axios
-    .post(
-      `${baseUrl}/kitbag/market/${accountId}`,
-      { ...formValues },
-      {
-        headers: getHeaders(),
-      }
-    )
+    .post(`/kitbag/market/${accountId}`, { ...formValues }, {})
     .then((response) => {
-      updateTokens(response.headers);
       history.push(`/market/${accountId}`);
       dispatch({ type: CREATE_MARKET_KIT, payload: response.data });
     })
@@ -91,15 +75,8 @@ export const editMarketKit = (accountId, marketId, formValues) => (
   dispatch
 ) => {
   axios
-    .put(
-      `${baseUrl}/kitbag/market/${accountId}/${marketId}`,
-      { ...formValues },
-      {
-        headers: getHeaders(),
-      }
-    )
+    .put(`/kitbag/market/${accountId}/${marketId}`, { ...formValues }, {})
     .then((response) => {
-      updateTokens(response.headers);
       history.push(`/market/${accountId}`);
       dispatch({ type: EDIT_MARKET_KIT, payload: response.data });
     })
@@ -122,11 +99,9 @@ export const respondToMarketKitThread = (
 ) => (dispatch) => {
   axios
     .put(
-      `${baseUrl}/kitbag/market/${accountId}/respond/${marketId}/${threadId}`,
+      `/kitbag/market/${accountId}/respond/${marketId}/${threadId}`,
       { ...formValues },
-      {
-        headers: getHeaders(),
-      }
+      {}
     )
     .then(() => {
       dispatch({ type: RESET_TOAST });
@@ -147,11 +122,8 @@ export const respondToMarketKitThread = (
 
 export const deleteMarketKit = (accountId, marketId) => (dispatch) => {
   axios
-    .delete(`${baseUrl}/kitbag/market/${accountId}/${marketId}`, {
-      headers: getHeaders(),
-    })
+    .delete(`/kitbag/market/${accountId}/${marketId}`, {})
     .then((response) => {
-      updateTokens(response.headers);
       history.push(`/market/${accountId}`);
       dispatch({ type: DELETE_MARKET_KIT, payload: response.data });
     })
@@ -168,11 +140,8 @@ export const deleteMarketKit = (accountId, marketId) => (dispatch) => {
 
 export const fetchKitbagMarketItems = (by, pagesize) => (dispatch) => {
   axios
-    .get(`${baseUrl}/kitbag/market?by=${by}&pagesize=${pagesize}`, {
-      headers: getHeaders(),
-    })
+    .get(`/kitbag/market?by=${by}&pagesize=${pagesize}`, {})
     .then((response) => {
-      updateTokens(response.headers);
       switch (by) {
         case 'trade':
           dispatch({

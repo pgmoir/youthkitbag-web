@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import PrivateRoute from '../helpers/privateRoute';
-import history from '../helpers/history';
+import PrivateRoute from '../utils/privateRoute';
+import history from '../utils/history';
 import User from './auth/User';
 import Header from './includes/Header';
 import Footer from './includes/Footer';

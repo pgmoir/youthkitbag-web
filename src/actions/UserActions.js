@@ -1,3 +1,4 @@
+import axios from '../utils/axios';
 import {
   GETALL_SUCCESS,
   GET_USER,
@@ -8,21 +9,14 @@ import {
   RESET,
   RESET_TOAST,
 } from './types';
-import axios from 'axios';
-import { getHeaders, updateTokens } from '../helpers/ykbApi';
-import history from '../helpers/history';
-
-const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
+import history from '../utils/history';
 
 export const getUser = () => (dispatch) => {
   const userId = localStorage.getItem('user');
 
   axios
-    .get(`${baseUrl}/user/${userId}`, {
-      headers: getHeaders(),
-    })
+    .get(`/user/${userId}`, {})
     .then((response) => {
-      updateTokens(response.headers);
       const { data } = response;
       dispatch({ type: GETALL_SUCCESS });
       dispatch({ type: GET_USER, payload: data });
@@ -32,15 +26,8 @@ export const getUser = () => (dispatch) => {
 
 export const editProfile = (userId, formValues) => (dispatch) => {
   axios
-    .put(
-      `${baseUrl}/user/${userId}/profile`,
-      { ...formValues },
-      {
-        headers: getHeaders(),
-      }
-    )
+    .put(`/user/${userId}/profile`, { ...formValues }, {})
     .then((response) => {
-      updateTokens(response.headers);
       history.push('/settings/profile');
       dispatch({ type: EDIT_USER_PROFILE, payload: response.data });
       dispatch(getUser());
@@ -58,13 +45,7 @@ export const editProfile = (userId, formValues) => (dispatch) => {
 
 export const deleteUser = (userId, formValues) => (dispatch) => {
   axios
-    .put(
-      `${baseUrl}/user/${userId}/delete`,
-      { ...formValues },
-      {
-        headers: getHeaders(),
-      }
-    )
+    .put(`/user/${userId}/delete`, { ...formValues }, {})
     .then(() => {
       window.localStorage.clear();
       dispatch({ type: RESET });
@@ -85,15 +66,8 @@ export const editProfilePreferredAccount = (userId, accountId) => (
   dispatch
 ) => {
   axios
-    .put(
-      `${baseUrl}/user/${userId}/profile/account/${accountId}`,
-      {},
-      {
-        headers: getHeaders(),
-      }
-    )
+    .put(`/user/${userId}/profile/account/${accountId}`, {}, {})
     .then((response) => {
-      updateTokens(response.headers);
       history.push('/settings/accounts');
       dispatch({ type: EDIT_USER_PROFILE, payload: response.data });
       dispatch({ type: RESET });
@@ -113,13 +87,7 @@ export const editProfilePreferredAccount = (userId, accountId) => (
 export const hideFlag = (name, hide) => (dispatch) => {
   const userId = localStorage.getItem('user');
   axios
-    .put(
-      `${baseUrl}/user/${userId}/flags/${name}/${hide}`,
-      {},
-      {
-        headers: getHeaders(),
-      }
-    )
+    .put(`/user/${userId}/flags/${name}/${hide}`, {}, {})
     .then(() => {
       dispatch({ type: RESET });
       dispatch(getUser());
@@ -138,15 +106,8 @@ export const hideFlag = (name, hide) => (dispatch) => {
 export const resetFlags = () => (dispatch) => {
   const userId = localStorage.getItem('user');
   axios
-    .put(
-      `${baseUrl}/user/${userId}/flags/reset`,
-      {},
-      {
-        headers: getHeaders(),
-      }
-    )
+    .put(`/user/${userId}/flags/reset`, {}, {})
     .then((response) => {
-      updateTokens(response.headers);
       dispatch({ type: RESET_USER_FLAGS, payload: response.data });
       dispatch(getUser());
     })

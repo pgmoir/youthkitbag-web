@@ -5,12 +5,12 @@ import { login } from '../../actions/AuthActions';
 import { TextForm } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
 
-const mapStateToProps = state => ({
-  newErrors: state.toast.errors
+const mapStateToProps = (state) => ({
+  newErrors: state.toast.errors,
 });
 
 const mapDispatchToProps = {
-  login
+  login,
 };
 
 const LoginForm = ({ referrer, newErrors, login }) => {
@@ -18,7 +18,7 @@ const LoginForm = ({ referrer, newErrors, login }) => {
 
   const initialValues = {
     email: '',
-    password: ''
+    password: '',
   };
 
   const { values, handleChange, handleSubmit, errors, setErrors } = useForm(

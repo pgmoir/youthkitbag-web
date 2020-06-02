@@ -4,7 +4,7 @@ import useForm from '../hooks/useForm';
 import { editProfile, loadSettingsPage } from '../../actions/UserActions';
 import { TextForm, ImagesForm } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
-import { getImages } from '../../helpers/image';
+import { getImages } from '../../utils/image';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,

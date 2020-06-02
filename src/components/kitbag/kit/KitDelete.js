@@ -3,18 +3,18 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   fetchKitbagKit,
-  deleteKitbagKit
+  deleteKitbagKit,
 } from '../../../actions/KitbagKitActions';
 import Modal from '../../includes/Modal';
-import history from '../../../helpers/history';
+import history from '../../../utils/history';
 
-const mapStateToProps = state => ({
-  item: state.kitbag.kit.current
+const mapStateToProps = (state) => ({
+  item: state.kitbag.kit.current,
 });
 
 const mapDispatchToProps = {
   fetchKitbagKit,
-  deleteKitbagKit
+  deleteKitbagKit,
 };
 
 const KitDelete = ({ item, fetchKitbagKit, deleteKitbagKit, match }) => {

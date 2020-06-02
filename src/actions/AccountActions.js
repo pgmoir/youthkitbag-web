@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { getHeaders, updateTokens } from '../helpers/ykbApi';
+import axios from '../utils/axios';
 import {
   CLEAR_ACCOUNT,
   FETCH_ACCOUNT,
@@ -9,18 +8,13 @@ import {
   CREATE_ACCOUNT_INVITE,
   EDIT_ACCOUNT_LEAVE,
 } from './types';
-import history from '../helpers/history';
+import history from '../utils/history';
 import { getUser } from './UserActions';
-
-const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const fetchAccount = (accountId) => (dispatch) => {
   axios
-    .get(`${baseUrl}/account/${accountId}`, {
-      headers: getHeaders(),
-    })
+    .get(`/account/${accountId}`, {})
     .then((response) => {
-      updateTokens(response.headers);
       dispatch({ type: FETCH_ACCOUNT, payload: response.data });
     })
     .catch((err) => {
@@ -36,13 +30,7 @@ export const fetchAccount = (accountId) => (dispatch) => {
 
 export const createAccount = (formValues) => (dispatch) => {
   axios
-    .post(
-      `${baseUrl}/account`,
-      { ...formValues },
-      {
-        headers: getHeaders(),
-      }
-    )
+    .post(`/account`, { ...formValues }, {})
     .then(() => {
       history.push('/settings/accounts');
       dispatch({ type: CLEAR_ACCOUNT });
@@ -61,13 +49,7 @@ export const createAccount = (formValues) => (dispatch) => {
 
 export const editAccount = (accountId, formValues) => (dispatch) => {
   axios
-    .put(
-      `${baseUrl}/account/${accountId}`,
-      { ...formValues },
-      {
-        headers: getHeaders(),
-      }
-    )
+    .put(`/account/${accountId}`, { ...formValues }, {})
     .then(() => {
       history.push('/settings/accounts');
       dispatch({ type: CLEAR_ACCOUNT });
@@ -86,15 +68,8 @@ export const editAccount = (accountId, formValues) => (dispatch) => {
 
 export const editAccountStatus = (accountId, status) => (dispatch) => {
   axios
-    .put(
-      `${baseUrl}/account/${accountId}/status`,
-      { status: status },
-      {
-        headers: getHeaders(),
-      }
-    )
+    .put(`/account/${accountId}/status`, { status: status }, {})
     .then((response) => {
-      updateTokens(response.headers);
       history.push('/settings/accounts');
       dispatch({ type: EDIT_ACCOUNT_STATUS, payload: response.data });
     })
@@ -111,15 +86,8 @@ export const editAccountStatus = (accountId, status) => (dispatch) => {
 
 export const inviteToAccount = (accountId, email) => (dispatch) => {
   axios
-    .put(
-      `${baseUrl}/account/${accountId}/member/invite/${email}`,
-      {},
-      {
-        headers: getHeaders(),
-      }
-    )
+    .put(`/account/${accountId}/member/invite/${email}`, {}, {})
     .then((response) => {
-      updateTokens(response.headers);
       history.push(`/settings/accounts`);
       dispatch({ type: CREATE_ACCOUNT_INVITE, payload: response.data });
     })
@@ -137,13 +105,7 @@ export const inviteToAccount = (accountId, email) => (dispatch) => {
 
 export const requestToJoinAccount = (email) => (dispatch) => {
   axios
-    .post(
-      `${baseUrl}/account/requesttojoin/${email}`,
-      {},
-      {
-        headers: getHeaders(),
-      }
-    )
+    .post(`/account/requesttojoin/${email}`, {}, {})
     .then(() => {
       history.push(`/`);
     })
@@ -161,15 +123,8 @@ export const requestToJoinAccount = (email) => (dispatch) => {
 
 export const requestAccountLeave = (accountId) => (dispatch) => {
   axios
-    .put(
-      `${baseUrl}/account/${accountId}/members/leave`,
-      {},
-      {
-        headers: getHeaders(),
-      }
-    )
+    .put(`/account/${accountId}/members/leave`, {}, {})
     .then((response) => {
-      updateTokens(response.headers);
       history.push(`/settings/accounts`);
       dispatch({ type: EDIT_ACCOUNT_LEAVE, payload: response.data });
     })

@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { getHeaders, updateTokens } from '../helpers/ykbApi';
+import axios from '../utils/axios';
 import {
   FETCH_MARKET_ITEMS,
   FETCH_MARKET_ITEM,
@@ -9,34 +8,43 @@ import {
   SEARCH_MARKET_ITEMS,
   RESET_TOAST,
 } from './types';
-import history from '../helpers/history';
+import history from '../utils/history';
 
-const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
-
-export const fetchMarketItems = (
+export const fetchMarketItems = ({
   searchfor = '',
   by = '',
   page = 1,
   pagesize = 24,
-  accountId,
+  order,
+  direction,
   excgroups = false,
-  excaccounts = false
-) => (dispatch) => {
+  excaccounts = false,
+  pushHistory,
+}) => (dispatch) => {
   axios
-    .get(`${baseUrl}/market`, {
-      params: { searchfor, by, page, pagesize, excgroups, excaccounts },
-      headers: getHeaders(),
+    .get(`/market`, {
+      params: {
+        searchfor,
+        by,
+        page,
+        pagesize,
+        order,
+        direction,
+        excgroups,
+        excaccounts,
+      },
     })
     .then((response) => {
-      updateTokens(response.headers);
       dispatch({ type: FETCH_MARKET_ITEMS, payload: response.data });
-      dispatch({
-        type: SEARCH_MARKET_ITEMS,
-        payload: { searchfor, by, page, pagesize, excgroups, excaccounts },
-      });
-      history.push(
-        `/market?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}&excgroups=${excgroups}&excaccounts=${excaccounts}`
-      );
+      if (pushHistory) {
+        dispatch({
+          type: SEARCH_MARKET_ITEMS,
+          payload: { searchfor, by, page, pagesize, excgroups, excaccounts },
+        });
+        history.push(
+          `/market?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}&excgroups=${excgroups}&excaccounts=${excaccounts}`
+        );
+      }
     })
     .catch((err) => {
       const { response } = err;
@@ -51,11 +59,8 @@ export const fetchMarketItems = (
 
 export const fetchMarketItem = (marketId) => (dispatch) => {
   axios
-    .get(`${baseUrl}/market/${marketId}`, {
-      headers: getHeaders(),
-    })
+    .get(`/market/${marketId}`, {})
     .then((response) => {
-      updateTokens(response.headers);
       dispatch({ type: FETCH_MARKET_ITEM, payload: response.data });
     })
     .catch((err) => {
@@ -71,15 +76,8 @@ export const fetchMarketItem = (marketId) => (dispatch) => {
 
 export const respondMarketItem = (marketId, formValues) => (dispatch) => {
   axios
-    .post(
-      `${baseUrl}/market/respond/${marketId}`,
-      { ...formValues },
-      {
-        headers: getHeaders(),
-      }
-    )
+    .post(`/market/respond/${marketId}`, { ...formValues }, {})
     .then((response) => {
-      updateTokens(response.headers);
       history.push(`/market/${marketId}`);
       dispatch({ type: RESET_TOAST });
       dispatch({ type: RESPOND_MARKET_ITEM, payload: response.data });
@@ -99,13 +97,7 @@ export const respondToMarketThread = (marketId, threadId, formValues) => (
   dispatch
 ) => {
   axios
-    .put(
-      `${baseUrl}/market/respond/${marketId}/${threadId}`,
-      { ...formValues },
-      {
-        headers: getHeaders(),
-      }
-    )
+    .put(`/market/respond/${marketId}/${threadId}`, { ...formValues }, {})
     .then(() => {
       dispatch({ type: RESET_TOAST });
       dispatch(fetchMarketItem(marketId));

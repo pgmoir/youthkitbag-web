@@ -6,7 +6,7 @@ import {
   userHasGroupMembership,
   userHasGroupAdministration,
   userPreferredAccountId,
-} from '../../helpers/user';
+} from '../../utils/user';
 import ProfileAnnouncement from './ProfileAnnouncement';
 import KitbagKitAnnouncement from './KitbagKitAnnouncement';
 import KitbagMarketTradeAnnouncement from './KitbagMarketTradeAnnouncement';

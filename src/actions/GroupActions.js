@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { getHeaders, updateTokens } from '../helpers/ykbApi';
+import axios from '../utils/axios';
 import {
   FETCH_GROUPS,
   CREATE_GROUP,
@@ -17,24 +16,17 @@ import {
   SEARCH_GROUP_MEMBERS,
   FETCH_GROUPS_MEMBER_REQUESTS,
 } from './types';
-import history from '../helpers/history';
+import history from '../utils/history';
 import { getUser } from './UserActions';
 
-const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
-
-export const fetchGroups = (
-  searchfor = '',
-  by = '',
-  page = 1,
-  pagesize = 24
-) => (dispatch) => {
+export const fetchGroups = ({ by, searchfor, page, pagesize, pushHistory }) => (
+  dispatch
+) => {
   axios
-    .get(`${baseUrl}/group/search`, {
+    .get(`/group/search`, {
       params: { searchfor, by, page, pagesize },
-      headers: getHeaders(),
     })
     .then((response) => {
-      updateTokens(response.headers);
       dispatch({ type: FETCH_GROUPS, payload: response.data });
       dispatch({
         type: SEARCH_GROUPS,
@@ -57,11 +49,8 @@ export const fetchGroups = (
 
 export const fetchGroup = (groupId) => (dispatch) => {
   axios
-    .get(`${baseUrl}/group/${groupId}`, {
-      headers: getHeaders(),
-    })
+    .get(`/group/${groupId}`, {})
     .then((response) => {
-      updateTokens(response.headers);
       dispatch({ type: FETCH_GROUP, payload: response.data });
     })
     .catch((err) => {
@@ -77,16 +66,9 @@ export const fetchGroup = (groupId) => (dispatch) => {
 
 export const createGroup = (formValues) => (dispatch) => {
   axios
-    .post(
-      `${baseUrl}/group`,
-      { ...formValues },
-      {
-        headers: getHeaders(),
-      }
-    )
+    .post(`/group`, { ...formValues }, {})
     .then((response) => {
-      updateTokens(response.headers);
-      history.push('/groups?searchfor=&by=&page=1&pagesize=24');
+      history.push('/groups');
       dispatch({ type: CREATE_GROUP, payload: response.data });
       dispatch(getUser());
     })
@@ -95,9 +77,7 @@ export const createGroup = (formValues) => (dispatch) => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(
-          '/auth/login?return=/groups?searchfor=&by=&page=1&pagesize=24'
-        );
+        history.push('/auth/login?return=/groups');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: err.response });
     });
@@ -105,15 +85,8 @@ export const createGroup = (formValues) => (dispatch) => {
 
 export const editGroup = (groupId, formValues) => (dispatch) => {
   axios
-    .put(
-      `${baseUrl}/group/${groupId}`,
-      { ...formValues },
-      {
-        headers: getHeaders(),
-      }
-    )
+    .put(`/group/${groupId}`, { ...formValues }, {})
     .then((response) => {
-      updateTokens(response.headers);
       history.push('/groups');
       dispatch({ type: EDIT_GROUP, payload: response.data });
     })
@@ -130,15 +103,8 @@ export const editGroup = (groupId, formValues) => (dispatch) => {
 
 export const editGroupStatus = (groupId, status) => (dispatch) => {
   axios
-    .put(
-      `${baseUrl}/group/${groupId}/status`,
-      { status: status },
-      {
-        headers: getHeaders(),
-      }
-    )
+    .put(`/group/${groupId}/status`, { status: status }, {})
     .then((response) => {
-      updateTokens(response.headers);
       history.push('/groups?searchfor=&by=&page=1&pagesize=24');
       dispatch({ type: EDIT_GROUP_STATUS, payload: response.data });
     })
@@ -155,22 +121,31 @@ export const editGroupStatus = (groupId, status) => (dispatch) => {
     });
 };
 
-export const fetchGroupMembers = (searchfor, by, groupId) => (dispatch) => {
+export const fetchGroupMembers = ({
+  by,
+  searchfor,
+  page,
+  pagesize,
+  order,
+  direction,
+  groupId,
+  pushHistory,
+}) => (dispatch) => {
   axios
-    .get(`${baseUrl}/group/${groupId}/members`, {
-      params: { searchfor, by },
-      headers: getHeaders(),
+    .get(`/group/${groupId}/members`, {
+      params: { by, searchfor, page, pagesize, order, direction },
     })
     .then((response) => {
-      updateTokens(response.headers);
       dispatch({ type: FETCH_GROUP_MEMBERS, payload: response.data });
-      dispatch({
-        type: SEARCH_GROUP_MEMBERS,
-        payload: { searchfor, by },
-      });
-      history.push(
-        `/groups/${groupId}/members?searchfor=${searchfor}&by=${by}`
-      );
+      if (pushHistory) {
+        dispatch({
+          type: SEARCH_GROUP_MEMBERS,
+          payload: { searchfor, by },
+        });
+        history.push(
+          `/groups/${groupId}/members?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}&order=${order}&direction=${direction}`
+        );
+      }
     })
     .catch((err) => {
       const { response } = err;
@@ -187,15 +162,8 @@ export const editGroupMemberState = (groupId, memberId, state) => (
   dispatch
 ) => {
   axios
-    .put(
-      `${baseUrl}/group/${groupId}/members/${memberId}/${state}`,
-      {},
-      {
-        headers: getHeaders(),
-      }
-    )
+    .put(`/group/${groupId}/members/${memberId}/${state}`, {}, {})
     .then((response) => {
-      updateTokens(response.headers);
       history.push(`/groups/${groupId}/members`);
       dispatch({ type: EDIT_GROUP_MEMBER_STATE, payload: response.data });
     })
@@ -212,11 +180,8 @@ export const editGroupMemberState = (groupId, memberId, state) => (
 
 export const deleteGroupMember = (groupId, memberId) => (dispatch) => {
   axios
-    .delete(`${baseUrl}/group/${groupId}/members/${memberId}/delete`, {
-      headers: getHeaders(),
-    })
+    .delete(`/group/${groupId}/members/${memberId}/delete`, {})
     .then((response) => {
-      updateTokens(response.headers);
       history.push(`/groups/${groupId}/members`);
       dispatch({ type: DELETE_GROUP_MEMBER, payload: response.data });
     })
@@ -233,15 +198,8 @@ export const deleteGroupMember = (groupId, memberId) => (dispatch) => {
 
 export const requestGroupJoin = (groupId) => (dispatch) => {
   axios
-    .post(
-      `${baseUrl}/group/${groupId}/members/join`,
-      {},
-      {
-        headers: getHeaders(),
-      }
-    )
+    .post(`/group/${groupId}/members/join`, {}, {})
     .then((response) => {
-      updateTokens(response.headers);
       history.push(`/groups/${groupId}`);
       dispatch({ type: CREATE_GROUP_JOIN, payload: response.data });
       dispatch(getUser());
@@ -260,15 +218,8 @@ export const requestGroupJoin = (groupId) => (dispatch) => {
 
 export const requestGroupLeave = (groupId) => (dispatch) => {
   axios
-    .put(
-      `${baseUrl}/group/${groupId}/members/leave`,
-      {},
-      {
-        headers: getHeaders(),
-      }
-    )
+    .put(`/group/${groupId}/members/leave`, {}, {})
     .then((response) => {
-      updateTokens(response.headers);
       history.push(`/groups/${groupId}`);
       dispatch({ type: EDIT_GROUP_LEAVE, payload: response.data });
     })
@@ -285,11 +236,8 @@ export const requestGroupLeave = (groupId) => (dispatch) => {
 
 export const fetchGroupsMemberRequests = () => (dispatch) => {
   axios
-    .get(`${baseUrl}/groups/memberrequests`, {
-      headers: getHeaders(),
-    })
+    .get(`/groups/memberrequests`, {})
     .then((response) => {
-      updateTokens(response.headers);
       dispatch({ type: FETCH_GROUPS_MEMBER_REQUESTS, payload: response.data });
     })
     .catch((err) => {

@@ -5,12 +5,12 @@ import { connect } from 'react-redux';
 import { TextForm } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
 
-const mapStateToProps = state => ({
-  newErrors: state.toast.errors
+const mapStateToProps = (state) => ({
+  newErrors: state.toast.errors,
 });
 
 const mapDispatchToProps = {
-  signup
+  signup,
 };
 
 const SignUpForm = ({ newErrors, signup }) => {
@@ -19,7 +19,7 @@ const SignUpForm = ({ newErrors, signup }) => {
   const initialValues = {
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
   };
 
   const { values, handleChange, handleSubmit, errors, setErrors } = useForm(

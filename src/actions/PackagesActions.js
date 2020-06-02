@@ -1,22 +1,16 @@
-import axios from 'axios';
-import { getHeaders, updateTokens } from '../helpers/ykbApi';
+import axios from '../utils/axios';
 import {
   FETCH_PACKAGE,
   FETCH_PACKAGES,
   API_KITBAG_ERROR,
   GETALL_FAILURE,
 } from './types';
-import history from '../helpers/history';
-
-const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
+import history from '../utils/history';
 
 export const fetchSubscriptionPackages = () => (dispatch) => {
   axios
-    .get(`${baseUrl}/packages`, {
-      headers: getHeaders(),
-    })
+    .get(`/packages`, {})
     .then((response) => {
-      updateTokens(response.headers);
       dispatch({ type: FETCH_PACKAGES, payload: response.data });
     })
     .catch((err) => {
@@ -32,11 +26,8 @@ export const fetchSubscriptionPackages = () => (dispatch) => {
 
 export const fetchSubscriptionPackage = (packageId) => (dispatch) => {
   axios
-    .get(`${baseUrl}/packages/${packageId}`, {
-      headers: getHeaders(),
-    })
+    .get(`/packages/${packageId}`, {})
     .then((response) => {
-      updateTokens(response.headers);
       dispatch({ type: FETCH_PACKAGE, payload: response.data });
     })
     .catch((err) => {

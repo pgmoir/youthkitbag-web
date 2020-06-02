@@ -2,15 +2,15 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchGroup, editGroupStatus } from './../../actions/GroupActions';
 import Modal from './../includes/Modal';
-import history from './../../helpers/history';
+import history from './../../utils/history';
 
 const mapStateToProps = (state, ownProps) => ({
-  group: state.group[ownProps.match.params.groupId]
+  group: state.group[ownProps.match.params.groupId],
 });
 
 const mapDispatchToProps = {
   fetchGroup,
-  editGroupStatus
+  editGroupStatus,
 };
 
 const GroupStatus = ({ group, fetchGroup, editGroupStatus, match }) => {

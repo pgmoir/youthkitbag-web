@@ -1,3 +1,4 @@
+import axios from '../utils/axios';
 import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
@@ -9,17 +10,14 @@ import {
   PASSWORD_RESET_CHECK,
   PASSWORD_RESET,
 } from './types';
-import axios from 'axios';
-import history from '../helpers/history';
+import history from '../utils/history';
 import { getUser } from './UserActions';
-
-const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
 export const login = (email, password, referrer) => (dispatch) => {
   window.localStorage.clear();
   axios
     .post(
-      `${baseUrl}/auth/login`,
+      `/auth/login`,
       { email, password },
       {
         'content-type': 'application/json',
@@ -44,7 +42,7 @@ export const authenticateToken = (token) => (dispatch) => {
   window.localStorage.clear();
   axios
     .post(
-      `${baseUrl}/auth/authenticate`,
+      `/auth/authenticate`,
       { token },
       {
         'content-type': 'application/json',
@@ -69,7 +67,7 @@ export const signup = (email, password, confirmPassword) => (dispatch) => {
   window.localStorage.clear();
   axios
     .post(
-      `${baseUrl}/auth/signup`,
+      `/auth/signup`,
       { email, password, confirmPassword },
       {
         'content-type': 'application/json',
@@ -100,7 +98,7 @@ export const reset = (email) => (dispatch) => {
   window.localStorage.clear();
   axios
     .post(
-      `${baseUrl}/auth/reset`,
+      `/auth/reset`,
       { email },
       {
         'content-type': 'application/json',
@@ -119,7 +117,7 @@ export const reset = (email) => (dispatch) => {
 export const checkNewPassword = (token) => (dispatch) => {
   window.localStorage.clear();
   axios
-    .get(`${baseUrl}/auth/reset/${token}`)
+    .get(`/auth/reset/${token}`)
     .then((response) => {
       dispatch({ type: PASSWORD_RESET_CHECK, payload: response.data });
     })
@@ -134,7 +132,7 @@ export const setNewPassword = (userId, passwordToken, password) => (
   window.localStorage.clear();
   axios
     .post(
-      `${baseUrl}/auth/new-password`,
+      `/auth/new-password`,
       { userId, passwordToken, password },
       {
         'content-type': 'application/json',

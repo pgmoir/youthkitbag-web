@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { getHeaders, updateTokens } from '../helpers/ykbApi';
+import axios from '../utils/axios';
 import {
   CREATE_KITBAG_KIT,
   FETCH_KITBAG_KITS,
@@ -11,32 +10,33 @@ import {
   GETALL_FAILURE,
   SEARCH_KITBAG_KITS,
 } from './types';
-import history from '../helpers/history';
+import history from '../utils/history';
 
-const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
-
-export const fetchKitbagKits = (
-  searchfor = '',
-  by = '',
-  page = 1,
-  pagesize = 24,
-  accountId = null
-) => (dispatch) => {
+export const fetchKitbagKits = ({
+  by,
+  searchfor,
+  page,
+  pagesize,
+  order,
+  direction,
+  accountId,
+  pushHistory,
+}) => (dispatch) => {
   axios
-    .get(`${baseUrl}/kitbag/kit/${accountId}`, {
-      params: { searchfor, by, page, pagesize },
-      headers: getHeaders(),
+    .get(`/kitbag/kit/${accountId}`, {
+      params: { by, searchfor, page, pagesize, order, direction },
     })
     .then((response) => {
-      updateTokens(response.headers);
       dispatch({ type: FETCH_KITBAG_KITS, payload: response.data });
-      dispatch({
-        type: SEARCH_KITBAG_KITS,
-        payload: { searchfor, by, page, pagesize },
-      });
-      history.push(
-        `/kitbag/kit/${accountId}?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}`
-      );
+      if (pushHistory) {
+        dispatch({
+          type: SEARCH_KITBAG_KITS,
+          payload: { searchfor, by, page, pagesize, order, direction },
+        });
+        history.push(
+          `/kitbag/kit/${accountId}?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}&order=${order}&direction=${direction}`
+        );
+      }
     })
     .catch((err) => {
       const { response } = err;
@@ -51,11 +51,8 @@ export const fetchKitbagKits = (
 
 export const fetchKitbagKit = (accountId, kitId) => (dispatch) => {
   axios
-    .get(`${baseUrl}/kitbag/kit/${accountId}/${kitId}`, {
-      headers: getHeaders(),
-    })
+    .get(`/kitbag/kit/${accountId}/${kitId}`, {})
     .then((response) => {
-      updateTokens(response.headers);
       dispatch({ type: FETCH_KITBAG_KIT, payload: response.data });
     })
     .catch((err) => {
@@ -71,15 +68,8 @@ export const fetchKitbagKit = (accountId, kitId) => (dispatch) => {
 
 export const createKitbagKit = (accountId, formValues) => (dispatch) => {
   axios
-    .post(
-      `${baseUrl}/kitbag/kit/${accountId}`,
-      { ...formValues },
-      {
-        headers: getHeaders(),
-      }
-    )
+    .post(`/kitbag/kit/${accountId}`, { ...formValues }, {})
     .then((response) => {
-      updateTokens(response.headers);
       history.push(`/kitbag/kit/${accountId}`);
       dispatch({ type: CREATE_KITBAG_KIT, payload: response.data });
     })
@@ -96,15 +86,8 @@ export const createKitbagKit = (accountId, formValues) => (dispatch) => {
 
 export const editKitbagKit = (accountId, kitId, formValues) => (dispatch) => {
   axios
-    .put(
-      `${baseUrl}/kitbag/kit/${accountId}/${kitId}`,
-      { ...formValues },
-      {
-        headers: getHeaders(),
-      }
-    )
+    .put(`/kitbag/kit/${accountId}/${kitId}`, { ...formValues }, {})
     .then((response) => {
-      updateTokens(response.headers);
       history.push(`/kitbag/kit/${accountId}`);
       dispatch({ type: EDIT_KITBAG_KIT, payload: response.data });
     })
@@ -121,11 +104,8 @@ export const editKitbagKit = (accountId, kitId, formValues) => (dispatch) => {
 
 export const deleteKitbagKit = (accountId, kitId) => (dispatch) => {
   axios
-    .delete(`${baseUrl}/kitbag/kit/${accountId}/${kitId}`, {
-      headers: getHeaders(),
-    })
+    .delete(`/kitbag/kit/${accountId}/${kitId}`, {})
     .then((response) => {
-      updateTokens(response.headers);
       history.push(`/kitbag/kit/${accountId}`);
       dispatch({ type: DELETE_KITBAG_KIT, payload: response.data });
     })
@@ -142,11 +122,8 @@ export const deleteKitbagKit = (accountId, kitId) => (dispatch) => {
 
 export const fetchKitbagLists = (accountId = null) => (dispatch) => {
   axios
-    .get(`${baseUrl}/kitbag/kit/${accountId}/lists`, {
-      headers: getHeaders(),
-    })
+    .get(`/kitbag/kit/${accountId}/lists`, {})
     .then((response) => {
-      updateTokens(response.headers);
       dispatch({ type: FETCH_KITBAG_LISTS, payload: response.data });
     })
     .catch((err) => {

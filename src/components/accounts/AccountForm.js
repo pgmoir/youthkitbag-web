@@ -7,19 +7,19 @@ import {
   TextForm,
   TextAreaForm,
   ImagesForm,
-  RemoveArrayButtonForm
+  RemoveArrayButtonForm,
 } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
-import { getImages } from '../../helpers/image';
+import { getImages } from '../../utils/image';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   userPackage: state.user.package,
-  newErrors: state.toast.errors
+  newErrors: state.toast.errors,
 });
 
 const mapDispatchToProps = {
   createAccount,
-  editAccount
+  editAccount,
 };
 
 const AccountForm = ({
@@ -27,7 +27,7 @@ const AccountForm = ({
   userPackage,
   newErrors,
   createAccount,
-  editAccount
+  editAccount,
 }) => {
   const [isReadOnly, setIsReadOnly] = useState(true);
   const [hasAccountAdmin, setHasAccountAdmin] = useState(false);
@@ -36,7 +36,7 @@ const AccountForm = ({
     ...account,
     images: getImages(account.images),
     accountAdmin: true,
-    exists: false
+    exists: false,
   };
 
   const {
@@ -48,7 +48,7 @@ const AccountForm = ({
     values,
     setValues,
     errors,
-    setErrors
+    setErrors,
   } = useForm(initialValues, updateAccount, validate);
 
   useEffect(() => {
@@ -61,8 +61,9 @@ const AccountForm = ({
     if (account) {
       account.images = getImages(account.images);
       account.topImage =
-        account.images && account.images.filter(i => i.state !== 'D').length > 0
-          ? account.images.filter(i => i.state !== 'D')[0].imageUrl
+        account.images &&
+        account.images.filter((i) => i.state !== 'D').length > 0
+          ? account.images.filter((i) => i.state !== 'D')[0].imageUrl
           : '/images/default.png';
       setValues(account);
     }

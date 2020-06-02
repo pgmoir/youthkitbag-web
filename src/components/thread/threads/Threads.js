@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ThreadLink from '../threadlink/ThreadLink';
 import ThreadMessageChain from '../threadMessageChain/ThreadMessageChain';
-import { compareForSameDate } from '../../../helpers/date';
+import { compareForSameDate } from '../../../utils/date';
 
 const Threads = ({ threads, accountId, source, marketType }) => {
   const [threadDisplayed, setThreadDisplayed] = useState();
@@ -29,7 +29,7 @@ const Threads = ({ threads, accountId, source, marketType }) => {
         toSourceAccount,
         fromUser,
         sentOn: sourceDate,
-        content
+        content,
       });
     }
     return newThread;

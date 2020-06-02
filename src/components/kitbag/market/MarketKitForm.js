@@ -17,7 +17,7 @@ import {
 } from '../../includes/forms';
 import Threads from '../../thread/threads/Threads';
 import validate from '../../includes/FormEmptyValidationRules';
-import { getImages } from '../../../helpers/image';
+import { getImages } from '../../../utils/image';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,

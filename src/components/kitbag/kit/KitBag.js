@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchKitbagKits } from '../../../actions';
 import Alert from '../../includes/Alert';
@@ -7,11 +7,10 @@ import Title from '../../includes/title/Title';
 import KitCard from './KitCard';
 import SearchForm from '../../includes/SearchForm';
 import Pagination from '../../includes/Pagination';
-import queryString from 'query-string';
 
 const mapStateToProps = (state) => ({
-  search: state.kitbag.kit.search,
-  items: Object.values(state.kitbag.kit.list),
+  stateSearch: state.kitbag.kit.search,
+  items: state.kitbag.kit.list,
   pagination: state.pagination,
   accounts: state.user.profile.accounts,
   containers: state.kitbag.kit.lists.containers,
@@ -22,7 +21,7 @@ const mapDispatchToProps = {
 };
 
 const KitBag = ({
-  search,
+  stateSearch,
   items,
   pagination,
   accounts,
@@ -30,17 +29,7 @@ const KitBag = ({
   fetchKitbagKits,
   match,
 }) => {
-  const query = useLocation().search;
-  let { searchfor, by, page, pagesize, loading } = search;
-  if (loading && query) {
-    const searchQuery = queryString.parse(query);
-    searchfor = searchQuery.searchfor;
-    by = searchQuery.by;
-    page = searchQuery.page;
-    pagesize = searchQuery.pagesize;
-    search = { searchfor, by, page, pagesize };
-  }
-
+  const [search, setSearch] = useState(stateSearch);
   const [accountId] = useState(match.params.accountId);
   const [kits, setKits] = useState(items);
 
@@ -51,8 +40,12 @@ const KitBag = ({
   }, [items]);
 
   useEffect(() => {
-    fetchKitbagKits(searchfor, by, page, pagesize, accountId);
-  }, [searchfor, by, page, pagesize, fetchKitbagKits, accountId]);
+    fetchKitbagKits({
+      ...search,
+      accountId,
+      pushHistory: true,
+    });
+  }, [search, fetchKitbagKits, accountId]);
 
   function getTitle() {
     if (!accounts) {
@@ -118,8 +111,7 @@ const KitBag = ({
               <SearchForm
                 searchId={accountId}
                 search={search}
-                callback={fetchKitbagKits}
-                incPagination={true}
+                callback={setSearch}
                 containers={containers}
               />
             </div>
@@ -136,7 +128,7 @@ const KitBag = ({
           <Pagination
             accountId={accountId}
             search={search}
-            callback={fetchKitbagKits}
+            callback={setSearch}
           />
         </div>
       </section>

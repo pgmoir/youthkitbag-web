@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
-import { capitalize } from '../../helpers/strings';
+import { capitalize } from '../../utils/strings';
 import { respondMarketItem } from '../../actions/MarketActions';
 import FoundResponse from './response/FoundResponse';
 import LostResponse from './response/LostResponse';

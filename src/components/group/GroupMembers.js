@@ -1,53 +1,43 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchGroupMembers } from '../../actions';
 import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 import GroupMember from './GroupMember';
-import queryString from 'query-string';
 import SearchForm from '../includes/SearchForm';
 
 const mapStateToProps = (state) => ({
-  search: state.group.searchMembers,
-  memberList: state.group.memberList,
+  stateSearch: state.group.searchMembers,
+  items: state.group.memberList,
 });
 
 const mapDispatchToProps = {
   fetchGroupMembers,
 };
 
-const GroupMembers = ({ search, memberList, fetchGroupMembers, match }) => {
-  const query = useLocation().search;
-  let { searchfor, by, loading } = search;
-  if (loading) {
-    const searchQuery = queryString.parse(query);
-    searchfor = searchQuery.searchfor;
-    by = searchQuery.by;
-    search = { searchfor, by };
-  }
-
-  const groupId = match.params.groupId;
+const GroupMembers = ({ stateSearch, items, fetchGroupMembers, match }) => {
+  const [search, setSearch] = useState(stateSearch);
+  const [groupId] = useState(match.params.groupId);
 
   const [group, setGroup] = useState({});
 
   useEffect(() => {
-    if (memberList) {
-      setGroup(selectGroupMembers(by, memberList));
+    if (items) {
+      setGroup(selectGroupMembers(search.by, items));
     }
-  }, [memberList, by]);
+  }, [items, search]);
 
   useEffect(() => {
     if (groupId) {
-      fetchGroupMembers(searchfor, by, groupId);
+      fetchGroupMembers({ ...search, groupId, pushHistory: true });
     }
-  }, [groupId, searchfor, by, fetchGroupMembers]);
+  }, [search, fetchGroupMembers, groupId]);
 
-  function selectGroupMembers(by, memberList) {
-    if (memberList.members && by && by !== 'all') {
-      memberList.members = memberList.members.filter((m) => m.state === by);
+  function selectGroupMembers(by, items) {
+    if (items.members && by && by !== 'all') {
+      items.members = items.members.filter((m) => m.state === by);
     }
-    return memberList;
+    return items;
   }
 
   function getTitle() {
@@ -122,7 +112,7 @@ const GroupMembers = ({ search, memberList, fetchGroupMembers, match }) => {
                 <SearchForm
                   searchId={groupId}
                   search={search}
-                  callback={fetchGroupMembers}
+                  callback={setSearch}
                   incPagination={false}
                 />
               </div>

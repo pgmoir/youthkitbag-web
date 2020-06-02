@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchGroups } from '../../actions';
 import Title from '../includes/title/Title';
@@ -8,10 +8,9 @@ import SearchForm from '../includes/SearchForm';
 import Pagination from '../includes/Pagination';
 import Alert from '../includes/Alert';
 import GroupsHelp from '../account/GroupsHelp';
-import queryString from 'query-string';
 
 const mapStateToProps = (state) => ({
-  search: state.group.search,
+  stateSearch: state.group.search,
   items: Object.values(state.group.list),
   pagination: state.pagination,
   userPackage: state.user.package,
@@ -21,18 +20,14 @@ const mapDispatchToProps = {
   fetchGroups,
 };
 
-const Groups = ({ search, items, pagination, userPackage, fetchGroups }) => {
-  const query = useLocation().search;
-  let { searchfor, by, page, pagesize, loading } = search;
-  if (loading) {
-    const searchQuery = queryString.parse(query);
-    searchfor = searchQuery.searchfor;
-    by = searchQuery.by;
-    page = searchQuery.page;
-    pagesize = searchQuery.pagesize;
-    search = { searchfor, by, page, pagesize };
-  }
-
+const Groups = ({
+  stateSearch,
+  items,
+  pagination,
+  userPackage,
+  fetchGroups,
+}) => {
+  const [search, setSearch] = useState(stateSearch);
   const [groups, setGroups] = useState([]);
 
   useEffect(() => {
@@ -42,8 +37,8 @@ const Groups = ({ search, items, pagination, userPackage, fetchGroups }) => {
   }, [items]);
 
   useEffect(() => {
-    fetchGroups(searchfor, by, page, pagesize);
-  }, [searchfor, by, page, pagesize, fetchGroups]);
+    fetchGroups({ ...search, pushHistory: true });
+  }, [search, fetchGroups]);
 
   function getTitle() {
     return `Found groups (${pagination.totalItems})`;
@@ -114,16 +109,12 @@ const Groups = ({ search, items, pagination, userPackage, fetchGroups }) => {
           <Alert />
           <div className="row">
             <div className="col-12 col-sm-9">
-              <SearchForm
-                search={search}
-                callback={fetchGroups}
-                incPagination={true}
-              />
+              <SearchForm search={search} callback={setSearch} />
             </div>
             {renderAddNewButton()}
           </div>
           <div className="row">{renderList()}</div>
-          <Pagination search={search} callback={fetchGroups} />
+          <Pagination search={search} callback={setSearch} />
         </div>
       </section>
     </div>

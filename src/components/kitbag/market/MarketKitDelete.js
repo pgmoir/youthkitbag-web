@@ -3,18 +3,18 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   fetchMarketKit,
-  deleteMarketKit
+  deleteMarketKit,
 } from '../../../actions/KitbagMarketActions';
 import Modal from '../../includes/Modal';
-import history from '../../../helpers/history';
+import history from '../../../utils/history';
 
-const mapStateToProps = state => ({
-  item: state.kitbag.market.current
+const mapStateToProps = (state) => ({
+  item: state.kitbag.market.current,
 });
 
 const mapDispatchToProps = {
   fetchMarketKit,
-  deleteMarketKit
+  deleteMarketKit,
 };
 
 const KitDelete = ({ item, fetchMarketKit, deleteMarketKit, match }) => {
