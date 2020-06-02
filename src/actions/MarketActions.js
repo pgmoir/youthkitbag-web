@@ -6,6 +6,7 @@ import {
   GETALL_FAILURE,
   RESPOND_MARKET_ITEM,
   SEARCH_MARKET_ITEMS,
+  FETCH_MARKET_LISTS,
   RESET_TOAST,
 } from './types';
 import history from '../utils/history';
@@ -110,5 +111,22 @@ export const respondToMarketThread = (marketId, threadId, formValues) => (
         history.push(`/auth/login?return=/market/${marketId}`);
       }
       dispatch({ type: API_MARKET_ERROR, payload: err.response });
+    });
+};
+
+export const fetchMarketLists = () => (dispatch) => {
+  axios
+    .get(`/market/lists`, {})
+    .then((response) => {
+      dispatch({ type: FETCH_MARKET_LISTS, payload: response.data });
+    })
+    .catch((err) => {
+      const { response } = err;
+      if (response.status === 401) {
+        window.localStorage.clear();
+        dispatch({ type: GETALL_FAILURE, payload: response });
+        history.push(`/auth/login`);
+      }
+      dispatch({ type: API_MARKET_ERROR, payload: response });
     });
 };

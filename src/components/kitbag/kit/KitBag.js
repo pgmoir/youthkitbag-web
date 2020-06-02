@@ -13,7 +13,7 @@ const mapStateToProps = (state) => ({
   items: state.kitbag.kit.list,
   pagination: state.pagination,
   accounts: state.user.profile.accounts,
-  containers: state.kitbag.kit.lists.containers,
+  lists: state.kitbag.kit.lists,
 });
 
 const mapDispatchToProps = {
@@ -25,7 +25,7 @@ const KitBag = ({
   items,
   pagination,
   accounts,
-  containers,
+  lists,
   fetchKitbagKits,
   match,
 }) => {
@@ -112,7 +112,7 @@ const KitBag = ({
                 searchId={accountId}
                 search={search}
                 callback={setSearch}
-                containers={containers}
+                collections={lists}
               />
             </div>
             <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">

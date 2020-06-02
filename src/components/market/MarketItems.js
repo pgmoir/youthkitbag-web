@@ -11,6 +11,7 @@ const mapStateToProps = (state) => ({
   stateSearch: state.market.search,
   items: Object.values(state.market.list),
   pagination: state.pagination,
+  lists: state.kitbag.kit.lists,
 });
 
 const mapDispatchToProps = {
@@ -21,6 +22,7 @@ const MarketItems = ({
   stateSearch,
   items,
   pagination,
+  lists,
   fetchMarketItems,
   match,
 }) => {
@@ -99,6 +101,7 @@ const MarketItems = ({
                 searchId={accountId}
                 search={search}
                 callback={setSearch}
+                collections={lists}
               />
             </div>
           </div>

@@ -3,10 +3,12 @@ import { useSelector } from 'react-redux';
 import useForm from '../hooks/useForm';
 import validate from './FormEmptyValidationRules';
 
-const SearchForm = ({ search, callback, placeholderText, containers }) => {
+const SearchForm = ({ search, callback, placeholderText, collections }) => {
   const filter = useSelector((state) => state.filter);
   const pagination = useSelector((state) => state.pagination);
   const [isClearing, setIsClearing] = useState(false);
+  const [useCollection, setUseCollection] = useState(false);
+  const [collection, setCollection] = useState([]);
 
   const { setValues, handleChange, handleSubmit, values } = useForm(
     search,
@@ -30,6 +32,15 @@ const SearchForm = ({ search, callback, placeholderText, containers }) => {
     });
   }, [search, setValues]);
 
+  useEffect(() => {
+    if (collections) {
+      setUseCollection(collections[values.by] ? true : false);
+      if (collections[values.by]) {
+        setCollection(collections[values.by]);
+      }
+    }
+  }, [values, collections, setUseCollection, setCollection]);
+
   function searchItems() {
     const { by, searchfor, order, direction } = values;
     callback({
@@ -42,13 +53,27 @@ const SearchForm = ({ search, callback, placeholderText, containers }) => {
     });
   }
 
-  function instantSearch(event) {
+  function instantSearchBy(event) {
     const { searchfor, order, direction } = values;
     handleChange(event);
     const { value } = event.target;
     callback({
       by: value,
       searchfor,
+      page: 1,
+      pagesize: pagination.itemsPerPage,
+      order,
+      direction,
+    });
+  }
+
+  function instantSearchFor(event) {
+    const { by, order, direction } = values;
+    handleChange(event);
+    const { value } = event.target;
+    callback({
+      by,
+      searchfor: value,
       page: 1,
       pagesize: pagination.itemsPerPage,
       order,
@@ -70,8 +95,8 @@ const SearchForm = ({ search, callback, placeholderText, containers }) => {
               <select
                 name="by"
                 className="custom-select"
-                onChange={(e) => instantSearch(e)}
-                onBlur={(e) => instantSearch(e)}
+                onChange={(e) => instantSearchBy(e)}
+                onBlur={(e) => instantSearchBy(e)}
                 value={values.by}
               >
                 {filter.options.map((o) => (
@@ -85,16 +110,16 @@ const SearchForm = ({ search, callback, placeholderText, containers }) => {
                 ))}
               </select>
             </div>
-            {values.by === 'container' && (
+            {useCollection && (
               <select
                 className="custom-select"
                 name="searchfor"
-                onChange={handleChange}
-                onBlur={handleChange}
+                onChange={(e) => instantSearchFor(e)}
+                onBlur={(e) => instantSearchFor(e)}
                 value={values.searchfor}
-                arialabel="Search by container"
+                arialabel={`Search by ${values.by}`}
               >
-                {containers.map((item, index) => {
+                {collection.map((item, index) => {
                   return (
                     <option key={index} value={item}>
                       {item}
@@ -103,7 +128,7 @@ const SearchForm = ({ search, callback, placeholderText, containers }) => {
                 })}
               </select>
             )}
-            {values.by !== 'container' && (
+            {!useCollection && (
               <input
                 name="searchfor"
                 className="form-control"
