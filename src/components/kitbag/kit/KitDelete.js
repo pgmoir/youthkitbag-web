@@ -18,8 +18,7 @@ const mapDispatchToProps = {
 };
 
 const KitDelete = ({ item, fetchKitbagKit, deleteKitbagKit, match }) => {
-  const accountId = match.params.accountId;
-  const kitId = match.params.kitId;
+  const { accountId, kitId } = match.params;
   const [kit, setKit] = useState({});
 
   useEffect(() => {
