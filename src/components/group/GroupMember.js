@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const GroupMember = ({ groupId, member, groupMember, groupAdmin }) => {
-  const { user, permissions, state } = member;
+  const { user, roles, state } = member;
 
   function getThumbnail() {
     return member.user.image;
@@ -96,7 +96,7 @@ const GroupMember = ({ groupId, member, groupMember, groupAdmin }) => {
             {user.username ? user.username : 'Username ?'}
           </h4>
           <p className="card-text">
-            {permissions.length > 0 ? permissions.join(', ') : '-'}
+            {roles.length > 0 ? roles.join(', ') : '-'}
           </p>
           <span className="icons-bottom-left">
             <span

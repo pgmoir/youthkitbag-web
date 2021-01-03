@@ -8,7 +8,7 @@ import Header from './includes/Header';
 import Footer from './includes/Footer';
 import Home from './Home';
 import Why from './Why';
-import Packages from './Packages';
+import Bundles from './Bundles';
 import Content from './site/Content';
 import Security from './site/Security';
 import Accessibility from './site/Accessibility';
@@ -18,7 +18,7 @@ import Reset from './auth/ResetPage';
 import NewPassword from './auth/NewPasswordPage';
 import Logout from './auth/Logout';
 import Token from './auth/Token';
-import PackagePurchasePage from './PackagePurchasePage';
+import BundlePurchasePage from './BundlePurchasePage';
 import Groups from './group/Groups';
 import GroupPage from './group/GroupPage';
 import ShowGroupPage from './show/ShowGroupPage';
@@ -78,7 +78,7 @@ const App = ({ auth }) => {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/why" exact component={Why} />
-            <Route path="/packages" exact component={Packages} />
+            <Route path="/bundles" exact component={Bundles} />
 
             <Route path="/learn/:activity" component={LearnMore} />
 
@@ -115,9 +115,9 @@ const App = ({ auth }) => {
             <Route path="/auth/logout" exact component={Logout} />
 
             <PrivateRoute
-              path="/packages/purchase/:packageId"
+              path="/bundles/purchase/:bundleId"
               exact
-              component={PackagePurchasePage}
+              component={BundlePurchasePage}
             />
 
             <PrivateRoute

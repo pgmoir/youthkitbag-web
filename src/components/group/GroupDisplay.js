@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ImagesDisplay } from '../includes/forms/ImagesDisplay';
 
-const mapStateToProps = state => ({
-  userPackage: state.user.package,
-  newErrors: state.toast.errors
+const mapStateToProps = (state) => ({
+  userBundle: state.user.bundle,
+  newErrors: state.toast.errors,
 });
 
 const GroupDisplay = ({ group }) => {

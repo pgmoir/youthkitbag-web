@@ -13,7 +13,7 @@ const GroupsPage = ({ user }) => {
         <div className="col-12">
           <p>
             As a user of YouthKitbag, you can join as many kitbags as allowed
-            within your chosen package limits. The default Star kitbag (free)
+            within your chosen bundle limits. The default Star kitbag (free)
             allows you to join 3 groups.
           </p>
           <p>
@@ -32,7 +32,7 @@ const GroupsPage = ({ user }) => {
                   <th scope="col"></th>
                   <th scope="col">Group</th>
                   <th scope="col">State</th>
-                  <th scope="col">Permissions</th>
+                  <th scope="col">Roles</th>
                 </tr>
               </thead>
               <tbody>
@@ -55,9 +55,7 @@ const GroupsPage = ({ user }) => {
                       <Link to={`/groups/${item._id}`}>{item.name}</Link>
                     </td>
                     <td className="valign-m">{item.member.state}</td>
-                    <td className="valign-m">
-                      {item.member.permissions.join(', ')}
-                    </td>
+                    <td className="valign-m">{item.member.roles.join(', ')}</td>
                   </tr>
                 ))}
               </tbody>

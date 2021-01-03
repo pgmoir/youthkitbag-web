@@ -13,7 +13,7 @@ import validate from '../includes/FormEmptyValidationRules';
 import { getImages } from '../../utils/image';
 
 const mapStateToProps = (state) => ({
-  userPackage: state.user.package,
+  userBundle: state.user.bundle,
   newErrors: state.toast.errors,
 });
 
@@ -24,7 +24,7 @@ const mapDispatchToProps = {
 
 const KitbagForm = ({
   kitbag,
-  userPackage,
+  userBundle,
   newErrors,
   createKitbag,
   editKitbag,
@@ -86,15 +86,15 @@ const KitbagForm = ({
   }, [values, setIsReadOnly]);
 
   useEffect(() => {
-    if (userPackage && userPackage.max && userPackage.size) {
+    if (userBundle && userBundle.max && userBundle.size) {
       setHasKitbagAdmin(
-        userPackage.max.kitbagadmins > userPackage.size.kitbagadmins
+        userBundle.max.kitbagadmins > userBundle.size.kitbagadmins
       );
     }
-  }, [userPackage, setHasKitbagAdmin]);
+  }, [userBundle, setHasKitbagAdmin]);
 
   function showSaveCancelButtons() {
-    if (!userPackage || !values) return null;
+    if (!userBundle || !values) return null;
 
     return (
       <div>
@@ -171,9 +171,9 @@ const KitbagForm = ({
                     />
                     <TextForm
                       colFormat="a-3"
-                      value={values.members[index].permissions}
-                      label="Permissions"
-                      field={`members[${index}].permissions`}
+                      value={values.members[index].roles}
+                      label="Roles"
+                      field={`members[${index}].roles`}
                       handleChange={handleChange}
                       readOnly={isReadOnly}
                       index={index}

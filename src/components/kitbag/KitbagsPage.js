@@ -14,7 +14,7 @@ const KitbagsPage = ({ user }) => {
         <div className="col-12">
           <p>
             As a user of YouthKitbag, you can create as many kitbags as allowed
-            within your chosen package limits. The default Star kitbag (free)
+            within your chosen bundle limits. The default Star kitbag (free)
             allows you to create 3 kitbags.
           </p>
           <Link to="/kitbags/new" className="btn btn-primary mb-3">

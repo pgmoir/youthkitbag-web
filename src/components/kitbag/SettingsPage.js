@@ -5,7 +5,7 @@ import Title from '../includes/title/Title';
 import ProfileForm from './ProfileForm';
 import KitbagsPage from './KitbagsPage';
 import GroupsPage from './GroupsPage';
-import PackagePage from './PackagePage';
+import BundlePage from './BundlePage';
 import Alert from '../includes/Alert';
 import ProfileHelp from './ProfileHelp';
 import KitbagsHelp from './KitbagsHelp';
@@ -53,12 +53,12 @@ const SettingsPage = ({ profile }) => {
     );
   };
 
-  const Package = () => {
-    setPage('package');
+  const Bundle = () => {
+    setPage('bundle');
     return (
       <div className="container">
-        <h2>Package</h2>
-        <PackagePage />
+        <h2>Bundle</h2>
+        <BundlePage />
       </div>
     );
   };
@@ -91,7 +91,7 @@ const SettingsPage = ({ profile }) => {
             <Route path="/settings/profile" component={Profile} />
             <Route path="/settings/kitbags" component={Kitbags} />
             <Route path="/settings/groups" component={Groups} />
-            <Route path="/settings/package" component={Package} />
+            <Route path="/settings/bundle" component={Bundle} />
             <Route path="/settings/configuration" component={Configuration} />
           </div>
         </div>

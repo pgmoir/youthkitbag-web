@@ -70,7 +70,7 @@ const KitbagMemberJoin = ({ newErrors, requestToJoinKitbag }) => {
           Cancel
         </Link>
         <button type="submit" className="btn btn-success">
-          Invite to Join
+          Request to Join
         </button>
       </React.Fragment>
     );

@@ -34,8 +34,8 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li className="links">
-                  <Link to="/packages" className="text-light a11y-highlight">
-                    Packages
+                  <Link to="/bundles" className="text-light a11y-highlight">
+                    Bundles
                   </Link>
                 </li>
               </ul>

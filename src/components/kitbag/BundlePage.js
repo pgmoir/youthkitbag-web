@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
-  userPackage: state.user.package,
+  userBundle: state.user.bundle,
 });
 
-const PackagePage = ({ userPackage }) => {
+const BundlePage = ({ userBundle }) => {
   return (
     <React.Fragment>
       <div className="row">
@@ -14,25 +14,25 @@ const PackagePage = ({ userPackage }) => {
           <p>
             As a user of YouthKitbag, you can add, create, trade and join
             different aspects of the YouthKitbag application, within the limits
-            of your chosen package.
+            of your chosen bundle.
           </p>
           <p>
             If you are reaching or have reached the limits of your chosen
-            package, you have the ability to upgrade to a very low cost paid
-            package that will increase your limits and give you access to
-            premium features.
+            bundle, you have the ability to upgrade to a very low cost paid
+            bundle that will increase your limits and give you access to premium
+            features.
           </p>
         </div>
       </div>
-      {userPackage && (
+      {userBundle && (
         <div className="row">
           <div className="col-12">
-            <h5 className={`bg-${userPackage.theme} mb-0 p-3`}>
+            <h5 className={`bg-${userBundle.theme} mb-0 p-3`}>
               <span
-                className={`fas fa-${userPackage.icon} pr-2`}
-                title={`${userPackage.icon} tier`}
+                className={`fas fa-${userBundle.icon} pr-2`}
+                title={`${userBundle.icon} tier`}
               ></span>{' '}
-              Package Usage and Limits
+              Bundle Usage and Limits
             </h5>
             <table className="table bg-light">
               <thead>
@@ -45,38 +45,38 @@ const PackagePage = ({ userPackage }) => {
               <tbody>
                 <tr>
                   <td>Kit</td>
-                  <td>{userPackage.size.kit}</td>
-                  <td>{userPackage.max.kit}</td>
+                  <td>{userBundle.size.kit}</td>
+                  <td>{userBundle.max.kit}</td>
                 </tr>
                 <tr>
                   <td>Market</td>
-                  <td>{userPackage.size.market}</td>
-                  <td>{userPackage.max.market}</td>
+                  <td>{userBundle.size.market}</td>
+                  <td>{userBundle.max.market}</td>
                 </tr>
                 <tr>
                   <td>Photos</td>
-                  <td>{userPackage.size.photos}</td>
-                  <td>{userPackage.max.photos}</td>
+                  <td>{userBundle.size.photos}</td>
+                  <td>{userBundle.max.photos}</td>
                 </tr>
                 <tr>
                   <td>Groups</td>
-                  <td>{userPackage.size.groups}</td>
-                  <td>{userPackage.max.groups}</td>
+                  <td>{userBundle.size.groups}</td>
+                  <td>{userBundle.max.groups}</td>
                 </tr>
                 <tr>
                   <td>Group Admins</td>
-                  <td>{userPackage.size.groupadmins}</td>
-                  <td>{userPackage.max.groupadmins}</td>
+                  <td>{userBundle.size.groupadmins}</td>
+                  <td>{userBundle.max.groupadmins}</td>
                 </tr>
                 <tr>
                   <td>Kitbags</td>
-                  <td>{userPackage.size.kitbags}</td>
-                  <td>{userPackage.max.kitbags}</td>
+                  <td>{userBundle.size.kitbags}</td>
+                  <td>{userBundle.max.kitbags}</td>
                 </tr>
                 <tr>
                   <td>Kitbag Admins</td>
-                  <td>{userPackage.size.kitbagadmins}</td>
-                  <td>{userPackage.max.kitbagadmins}</td>
+                  <td>{userBundle.size.kitbagadmins}</td>
+                  <td>{userBundle.max.kitbagadmins}</td>
                 </tr>
               </tbody>
             </table>
@@ -85,8 +85,8 @@ const PackagePage = ({ userPackage }) => {
       )}
       <div className="row mb-3">
         <div className="col-12">
-          <Link to="/packages" className="btn btn-primary">
-            Choose Package Upgrade
+          <Link to="/bundles" className="btn btn-primary">
+            Choose Bundle Upgrade
           </Link>
         </div>
       </div>
@@ -94,4 +94,4 @@ const PackagePage = ({ userPackage }) => {
   );
 };
 
-export default connect(mapStateToProps)(PackagePage);
+export default connect(mapStateToProps)(BundlePage);

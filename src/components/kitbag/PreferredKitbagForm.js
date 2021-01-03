@@ -52,7 +52,7 @@ const PreferredKitbagForm = ({
                 <th scope="col"></th>
                 <th scope="col">Kitbag</th>
                 <th scope="col">State</th>
-                <th scope="col">Permissions</th>
+                <th scope="col">Roles</th>
                 <th scope="col" className="text-center">
                   Preferred
                 </th>
@@ -78,9 +78,7 @@ const PreferredKitbagForm = ({
                     <Link to={`/kitbags/${item._id}`}>{item.name}</Link>
                   </td>
                   <td className="valign-m">{item.member.state}</td>
-                  <td className="valign-m">
-                    {item.member.permissions.join(', ')}
-                  </td>
+                  <td className="valign-m">{item.member.roles.join(', ')}</td>
                   <td className="valign-m text-center">
                     <input
                       className=""

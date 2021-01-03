@@ -13,7 +13,7 @@ const mapStateToProps = (state) => ({
   stateSearch: state.group.search,
   items: Object.values(state.group.list),
   pagination: state.pagination,
-  userPackage: state.user.package,
+  userBundle: state.user.bundle,
 });
 
 const mapDispatchToProps = {
@@ -24,7 +24,7 @@ const Groups = ({
   stateSearch,
   items,
   pagination,
-  userPackage,
+  userBundle,
   fetchGroups,
 }) => {
   const [search, setSearch] = useState(stateSearch);
@@ -82,8 +82,8 @@ const Groups = ({
 
   function renderAddNewButton() {
     if (
-      !userPackage ||
-      userPackage.max.groupadmins <= userPackage.size.groupadmins
+      !userBundle ||
+      userBundle.max.groupadmins <= userBundle.size.groupadmins
     )
       return null;
 

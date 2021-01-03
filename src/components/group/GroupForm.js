@@ -8,7 +8,7 @@ import validate from '../includes/FormEmptyValidationRules';
 import { getImages } from '../../utils/image';
 
 const mapStateToProps = (state) => ({
-  userPackage: state.user.package,
+  userBundle: state.user.bundle,
   newErrors: state.toast.errors,
 });
 
@@ -19,7 +19,7 @@ const mapDispatchToProps = {
 
 const GroupForm = ({
   group,
-  userPackage,
+  userBundle,
   newErrors,
   createGroup,
   editGroup,
@@ -67,7 +67,7 @@ const GroupForm = ({
   }
 
   function showSaveCancelButtons() {
-    if (!userPackage || !values) return null;
+    if (!userBundle || !values) return null;
 
     return (
       <div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchSubscriptionPackage } from '../actions/PackagesActions';
+import { fetchSubscriptionBundle } from '../actions/BundlesActions';
 import Title from './includes/title/Title';
 import Alert from './includes/Alert';
 
@@ -10,10 +10,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  fetchSubscriptionPackage,
+  fetchSubscriptionBundle,
 };
 
-const PackagePurchasePage = ({ selected, fetchSubscriptionPackage, match }) => {
+const BundlePurchasePage = ({ selected, fetchSubscriptionBundle, match }) => {
   const subscriptionId = match.params.subscriptionId;
 
   const [subscription, setSubscription] = useState({
@@ -24,8 +24,8 @@ const PackagePurchasePage = ({ selected, fetchSubscriptionPackage, match }) => {
   });
 
   useEffect(() => {
-    fetchSubscriptionPackage(subscriptionId);
-  }, [fetchSubscriptionPackage, subscriptionId]);
+    fetchSubscriptionBundle(subscriptionId);
+  }, [fetchSubscriptionBundle, subscriptionId]);
 
   useEffect(() => {
     if (selected && selected._id) {
@@ -52,7 +52,7 @@ const PackagePurchasePage = ({ selected, fetchSubscriptionPackage, match }) => {
           <hr />
           <div className="row pb-3">
             <div className="col-12 d-flex justify-content-end">
-              <Link to="/packages" className="btn btn-secondary mr-3">
+              <Link to="/bundles" className="btn btn-secondary mr-3">
                 Cancel and Return to Shop
               </Link>
               {/* <form onSubmit={this.onFormSubmit}>
@@ -76,7 +76,4 @@ const PackagePurchasePage = ({ selected, fetchSubscriptionPackage, match }) => {
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PackagePurchasePage);
+export default connect(mapStateToProps, mapDispatchToProps)(BundlePurchasePage);

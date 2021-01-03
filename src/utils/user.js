@@ -14,7 +14,7 @@ export const userHasGroupAdministration = (user) => {
         (g) =>
           g.status === 'approved' &&
           g.member.state === 'approved' &&
-          g.member.permissions.includes('admin')
+          g.member.roles.includes('admin')
       ).length > 0
     : false;
 };

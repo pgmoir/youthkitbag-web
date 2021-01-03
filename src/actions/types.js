@@ -24,8 +24,8 @@ export const API_USER_ERROR = 'API_USER_ERROR';
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
 
-export const FETCH_PACKAGE = 'FETCH_PACKAGE';
-export const FETCH_PACKAGES = 'FETCH_PACKAGES';
+export const FETCH_BUNDLE = 'FETCH_BUNDLE';
+export const FETCH_BUNDLES = 'FETCH_BUNDLES';
 
 export const RESET_TOAST = 'RESET_TOAST';
 export const SET_TOAST = 'SET_TOAST';

@@ -2,30 +2,30 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Title from './includes/title/Title';
 import { connect } from 'react-redux';
-import { fetchSubscriptionPackages } from '../actions/PackagesActions';
+import { fetchSubscriptionBundles } from '../actions/BundlesActions';
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
   user: state.user,
-  packages: state.packages.items,
+  bundles: state.bundles.items,
 });
 
 const mapDispatchToProps = {
-  fetchSubscriptionPackages,
+  fetchSubscriptionBundles,
 };
 
-const Packages = ({ auth, user, packages, fetchSubscriptionPackages }) => {
+const Bundles = ({ auth, user, bundles, fetchSubscriptionBundles }) => {
   useEffect(() => {
-    fetchSubscriptionPackages();
-  }, [fetchSubscriptionPackages]);
+    fetchSubscriptionBundles();
+  }, [fetchSubscriptionBundles]);
 
   const themes = ['bronze', 'silver', 'gold'];
 
   const { loggedIn } = auth;
 
-  if (!packages || packages.length === 0) return null;
+  if (!bundles || bundles.length === 0) return null;
 
-  function renderPackage(p) {
+  function renderBundle(p) {
     const {
       _id,
       level,
@@ -44,11 +44,11 @@ const Packages = ({ auth, user, packages, fetchSubscriptionPackages }) => {
     } = p;
 
     const theme =
-      !user || !user.package || !user.package.theme ? null : user.package.theme;
+      !user || !user.bundle || !user.bundle.theme ? null : user.bundle.theme;
 
     const disabledButton = !theme
       ? false
-      : level <= themes.indexOf(user.package.theme);
+      : level <= themes.indexOf(user.bundle.theme);
 
     return (
       <div className="col-12 col-sm-4" key={_id}>
@@ -95,7 +95,7 @@ const Packages = ({ auth, user, packages, fetchSubscriptionPackages }) => {
             <hr />
             <div className="d-flex">
               <Link
-                to={!loggedIn ? '/auth/signup' : `/packages/purchase/${_id}`}
+                to={!loggedIn ? '/auth/signup' : `/bundles/purchase/${_id}`}
                 className={`btn btn-primary mx-auto ${
                   disabledButton ? 'disabled' : ''
                 }`}
@@ -111,18 +111,18 @@ const Packages = ({ auth, user, packages, fetchSubscriptionPackages }) => {
 
   return (
     <div>
-      <Title title="Packages & Benefits" />
+      <Title title="Bundles & Benefits" />
       <section
         id="main"
         className="container-fluid"
         aria-label="main body of content plus related links and features"
       >
         <div className="container">
-          <div className="row">{packages.map((p) => renderPackage(p))}</div>
+          <div className="row">{bundles.map((p) => renderBundle(p))}</div>
         </div>
       </section>
     </div>
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Packages);
+export default connect(mapStateToProps, mapDispatchToProps)(Bundles);

@@ -9,7 +9,7 @@ import KitbagsHelp from '../kitbag/KitbagsHelp';
 
 const mapStateToProps = (state) => ({
   current: state.kitbag.current,
-  profile: state.user.profile,
+  kitbags: state.user.kitbags,
 });
 
 const mapDispatchToProps = {
@@ -17,7 +17,7 @@ const mapDispatchToProps = {
   clearKitbag,
 };
 
-const KitbagPage = ({ current, profile, fetchKitbag, clearKitbag, match }) => {
+const KitbagPage = ({ current, kitbags, fetchKitbag, clearKitbag, match }) => {
   const { kitbagId } = match.params;
   const [kitbag, setKitbag] = useState({
     name: '',
@@ -57,8 +57,8 @@ const KitbagPage = ({ current, profile, fetchKitbag, clearKitbag, match }) => {
   }
 
   function renderNoKitbagIntro() {
-    if (!profile.kitbags) return null;
-    if (!profile.kitbags || profile.kitbags.length > 0) return null;
+    if (!kitbags) return null;
+    if (!kitbags || kitbags.length > 0) return null;
 
     return <KitbagsHelp />;
   }

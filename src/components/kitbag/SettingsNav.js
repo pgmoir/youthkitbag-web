@@ -27,10 +27,10 @@ const SettingsNav = ({ page, fill }) => {
       </div>
       <div
         className={`list-group-item ${fill} ${
-          page === 'package' ? 'active' : ''
+          page === 'bundle' ? 'active' : ''
         }`}
       >
-        <Link to="/settings/package">Package</Link>
+        <Link to="/settings/bundle">Bundle</Link>
       </div>
       <div
         className={`list-group-item ${fill} ${
