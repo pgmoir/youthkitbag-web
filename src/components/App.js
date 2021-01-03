@@ -27,7 +27,7 @@ import GroupMembers from './group/GroupMembers';
 import GroupMemberState from './group/GroupMemberState';
 import GroupMemberJoin from './group/GroupMemberJoin';
 import GroupMemberLeave from './group/GroupMemberLeave';
-import KitBag from './kitbag/kit/KitbagBigger';
+import Kitbag from './kitbag/kit/Kitbag';
 import KitPage from './kitbag/kit/KitPage';
 import KitDelete from './kitbag/kit/KitDelete';
 import MarketKitPage from './kitbag/market/MarketKitPage';
@@ -139,7 +139,7 @@ const App = ({ auth }) => {
               exact
               component={KitDelete}
             />
-            <PrivateRoute path="/kitbag/kit/:kitbagId" component={KitBag} />
+            <PrivateRoute path="/kitbag/kit/:kitbagId" component={Kitbag} />
 
             <PrivateRoute
               path="/kitbag/market/:kitbagId/new"

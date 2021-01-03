@@ -20,7 +20,7 @@ const mapDispatchToProps = {
   fetchKitbagKits,
 };
 
-const KitBag = ({
+const Kitbag = ({
   stateSearch,
   items,
   pagination,
@@ -132,4 +132,4 @@ const KitBag = ({
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(KitBag);
+export default connect(mapStateToProps, mapDispatchToProps)(Kitbag);

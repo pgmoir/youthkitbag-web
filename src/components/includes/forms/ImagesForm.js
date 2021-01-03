@@ -172,11 +172,12 @@ const ImagesForm = ({
     ) {
       const imagesToAdd = [
         ...newImages.map((i) => {
-          let image = {};
-          image._id = i._id;
-          image.image = i.image;
-          image.imageUrl = i.imageUrl;
-          image.state = 'N';
+          let image = {
+            photo: i._id,
+            imageUrl: i.imageUrl,
+            state: 'N',
+          };
+
           return image;
         }),
       ];
