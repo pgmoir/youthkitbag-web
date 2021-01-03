@@ -12,7 +12,7 @@ const mapStateToProps = (state) => ({
   stateSearch: state.kitbag.kit.search,
   items: state.kitbag.kit.list,
   pagination: state.pagination,
-  kitbags: state.user.profile.kitbags,
+  kitbags: state.user.kitbags,
   lists: state.kitbag.kit.lists,
 });
 

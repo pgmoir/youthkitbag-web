@@ -1,6 +1,6 @@
 export const userHasGroupMembership = (user) => {
-  return user.profile && user.profile.groups && user.profile.groups.length > 0
-    ? user.profile.groups.filter(
+  return user && user.groups && user.groups.length > 0
+    ? user.groups.filter(
         (g) =>
           g.status === 'approved' &&
           (g.member.state === 'approved' || g.member.state === 'requested')
@@ -9,8 +9,8 @@ export const userHasGroupMembership = (user) => {
 };
 
 export const userHasGroupAdministration = (user) => {
-  return user.profile && user.profile.groups && user.profile.groups.length > 0
-    ? user.profile.groups.filter(
+  return user && user.groups && user.groups.length > 0
+    ? user.groups.filter(
         (g) =>
           g.status === 'approved' &&
           g.member.state === 'approved' &&
@@ -20,7 +20,7 @@ export const userHasGroupAdministration = (user) => {
 };
 
 export const userPreferredKitbagId = (user) => {
-  return user.profile && user.profile.kitbags && user.profile.kitbags.length > 0
-    ? user.profile.kitbags.find((a) => a.preferred)._id
+  return user && user.kitbags && user.kitbags.length > 0
+    ? user.kitbags.find((a) => a.preferred)._id
     : null;
 };

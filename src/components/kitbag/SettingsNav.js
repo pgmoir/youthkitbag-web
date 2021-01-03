@@ -5,11 +5,9 @@ const SettingsNav = ({ page, fill }) => {
   return (
     <>
       <div
-        className={`list-group-item ${fill} ${
-          page === 'profile' ? 'active' : ''
-        }`}
+        className={`list-group-item ${fill} ${page === 'user' ? 'active' : ''}`}
       >
-        <Link to="/settings/profile">Profile</Link>
+        <Link to="/settings/user">User</Link>
       </div>
       <div
         className={`list-group-item ${fill} ${

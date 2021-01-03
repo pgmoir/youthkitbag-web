@@ -10,21 +10,21 @@ const mapDispatchToProps = {
   hideFlag,
 };
 
-const ProfileHelp = ({ flags, hideFlag }) => {
-  const [ProfileHelp, setProfileHelp] = useState(true);
+const UserHelp = ({ flags, hideFlag }) => {
+  const [UserHelp, setUserHelp] = useState(true);
 
   useEffect(() => {
-    if (!flags) return setProfileHelp(true);
+    if (!flags) return setUserHelp(true);
 
-    var found = flags.find((e) => e.name === 'profileHelp');
-    setProfileHelp(!found ? false : found.hide);
-  }, [flags, setProfileHelp]);
+    var found = flags.find((e) => e.name === 'userHelp');
+    setUserHelp(!found ? false : found.hide);
+  }, [flags, setUserHelp]);
 
-  function hideProfileHelp() {
-    hideFlag('profileHelp', true);
+  function hideUserHelp() {
+    hideFlag('userHelp', true);
   }
 
-  if (ProfileHelp) return null;
+  if (UserHelp) return null;
 
   return (
     <div className="row">
@@ -36,12 +36,12 @@ const ProfileHelp = ({ flags, hideFlag }) => {
           <div className="pr-4">
             <span
               className="fas fa-question-circle fa-2x"
-              title="Explanation of profile"
+              title="Explanation of user"
             ></span>
           </div>
           <div className="w-100">
             <div className="h4 alert-heading">
-              Why should you complete your profile?
+              Why should you complete your user?
             </div>
             <hr />
             <button
@@ -49,7 +49,7 @@ const ProfileHelp = ({ flags, hideFlag }) => {
               className="close"
               data-dismiss="alert"
               aria-label="Close"
-              onClick={() => hideProfileHelp()}
+              onClick={() => hideUserHelp()}
             >
               <span aria-hidden="true">×</span>
             </button>
@@ -77,4 +77,4 @@ const ProfileHelp = ({ flags, hideFlag }) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileHelp);
+export default connect(mapStateToProps, mapDispatchToProps)(UserHelp);

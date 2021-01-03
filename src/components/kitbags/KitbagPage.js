@@ -8,7 +8,7 @@ import Alert from '../includes/Alert';
 import KitbagsHelp from '../kitbag/KitbagsHelp';
 
 const mapStateToProps = (state) => ({
-  current: state.kitbag.current,
+  current: state.kitbag.kitbags.current,
   kitbags: state.user.kitbags,
 });
 

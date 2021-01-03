@@ -1,6 +1,6 @@
 import { GET_USER, LOGOUT } from '../actions/types';
 
-const initialState = { profile: {} };
+const initialState = {};
 
 export default function authentication(state = initialState, action) {
   switch (action.type) {

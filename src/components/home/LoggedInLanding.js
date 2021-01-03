@@ -7,7 +7,7 @@ import {
   userHasGroupAdministration,
   userPreferredKitbagId,
 } from '../../utils/user';
-import ProfileAnnouncement from './ProfileAnnouncement';
+import UserAnnouncement from './UserAnnouncement';
 import KitbagKitAnnouncement from './KitbagKitAnnouncement';
 import KitbagMarketTradeAnnouncement from './KitbagMarketTradeAnnouncement';
 import KitbagMarketRecycleAnnouncement from './KitbagMarketRecycleAnnouncement';
@@ -64,7 +64,7 @@ const LoggedInLanding = ({ user }) => {
                 loading={loading}
                 kitbagId={preferredKitbagId}
               />
-              <ProfileAnnouncement user={user} />
+              <UserAnnouncement user={user} />
               <GroupAnnouncement
                 loading={loading}
                 hasGroupMembership={hasGroupMembership}

@@ -44,7 +44,7 @@ export const fetchKitbag = (kitbagId) => (dispatch) => {
   axios
     .get(`/kitbag/${kitbagId}`, {})
     .then((response) => {
-      dispatch({ type: FETCH_KITBAG, payload: response.data });
+      dispatch({ type: FETCH_KITBAG, payload: response.data.data });
     })
     .catch((err) => {
       const { response } = err;

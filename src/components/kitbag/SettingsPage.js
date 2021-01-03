@@ -2,31 +2,31 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import Title from '../includes/title/Title';
-import ProfileForm from './ProfileForm';
+import UserForm from './UserForm';
 import KitbagsPage from './KitbagsPage';
 import GroupsPage from './GroupsPage';
 import BundlePage from './BundlePage';
 import Alert from '../includes/Alert';
-import ProfileHelp from './ProfileHelp';
+import UserHelp from './UserHelp';
 import KitbagsHelp from './KitbagsHelp';
 import GroupsHelp from './GroupsHelp';
 import ConfigurationPage from './ConfigurationPage';
 import SettingsNav from './SettingsNav';
 
 const mapStateToProps = (state) => ({
-  profile: state.user.profile,
+  user: state.user,
 });
 
-const SettingsPage = ({ profile }) => {
+const SettingsPage = ({ user }) => {
   const [page, setPage] = useState(null);
 
-  const Profile = () => {
-    setPage('profile');
+  const User = () => {
+    setPage('user');
     return (
       <div className="container">
-        <h2>Profile</h2>
-        <ProfileHelp />
-        <ProfileForm profile={profile} />
+        <h2>User</h2>
+        <UserHelp />
+        <UserForm user={user} />
       </div>
     );
   };
@@ -68,7 +68,7 @@ const SettingsPage = ({ profile }) => {
     return (
       <div className="container">
         <h2>Configuration</h2>
-        <ConfigurationPage userId={profile._id} />
+        <ConfigurationPage userId={user._id} />
       </div>
     );
   };
@@ -88,7 +88,7 @@ const SettingsPage = ({ profile }) => {
             </div>
           </div>
           <div className="col-12 col-md-10">
-            <Route path="/settings/profile" component={Profile} />
+            <Route path="/settings/user" component={User} />
             <Route path="/settings/kitbags" component={Kitbags} />
             <Route path="/settings/groups" component={Groups} />
             <Route path="/settings/bundle" component={Bundle} />

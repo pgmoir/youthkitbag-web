@@ -83,7 +83,7 @@ const Header = ({ auth, user }) => {
                             : '/images/defaultthumb.png'
                         }
                         className="img-avatar img-thumbnail img-link rounded-circle p-0 m-1"
-                        alt="Link to profile page"
+                        alt="Link to user page"
                       />
                     </Link>
                   </li>

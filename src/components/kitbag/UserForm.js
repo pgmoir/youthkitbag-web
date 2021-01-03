@@ -12,7 +12,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = { editUser, loadSettingsPage };
 
-const ProfileForm = ({ user, newErrors, editUser, loadSettingsPage }) => {
+const UserForm = ({ user, newErrors, editUser, loadSettingsPage }) => {
   const initialValues = { ...user, images: getImages(user.images) };
 
   const {
@@ -151,4 +151,4 @@ const ProfileForm = ({ user, newErrors, editUser, loadSettingsPage }) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm);
+export default connect(mapStateToProps, mapDispatchToProps)(UserForm);
