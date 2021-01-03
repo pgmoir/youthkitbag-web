@@ -42,7 +42,7 @@ const KitForm = ({
   const initialPurchase = { from: '', quantity: 0, ondate: '', price: 0.0 };
   const initialInbag = { location: '', condition: 'used', quantity: 0 };
 
-  const statusItems = [
+  const stateItems = [
     'Owned',
     'Trade',
     'Sold',
@@ -132,12 +132,12 @@ const KitForm = ({
           />
           <SelectForm
             colFormat="3-9"
-            label="Status"
-            value={values.status}
-            field="status"
+            label="State"
+            value={values.state}
+            field="state"
             handleChange={handleChange}
-            error={errors.status}
-            items={statusItems}
+            error={errors.state}
+            items={stateItems}
             useItem={false}
           />
           <hr />
@@ -300,7 +300,7 @@ const KitForm = ({
             field="active"
             onChange={handleChange}
             error={errors.active}
-            help="This item is automatically switched off when status is changed to Sold, Stolen, Recycled, Trashed or Donated, but can be changed so that it remains included in standard search."
+            help="This item is automatically switched off when state is changed to Sold, Stolen, Recycled, Trashed or Donated, but can be changed so that it remains included in standard search."
           />
           <hr />
           <div>

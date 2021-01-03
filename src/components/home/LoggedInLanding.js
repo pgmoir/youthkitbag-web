@@ -34,7 +34,7 @@ const LoggedInLanding = ({ user }) => {
   const group =
     user.groups && user.groups.length > 0
       ? user.groups
-          .filter((g) => g.status === 'approved')
+          .filter((g) => g.state === 'approved')
           .find((a) => a.member.state === 'approved')
       : undefined;
 

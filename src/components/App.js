@@ -22,12 +22,12 @@ import BundlePurchasePage from './BundlePurchasePage';
 import Groups from './group/Groups';
 import GroupPage from './group/GroupPage';
 import ShowGroupPage from './show/ShowGroupPage';
-import GroupStatus from './group/GroupStatus';
+import GroupState from './group/GroupState';
 import GroupMembers from './group/GroupMembers';
 import GroupMemberState from './group/GroupMemberState';
 import GroupMemberJoin from './group/GroupMemberJoin';
 import GroupMemberLeave from './group/GroupMemberLeave';
-import KitBag from './kitbag/kit/KitBag';
+import KitBag from './kitbag/kit/KitbagBigger';
 import KitPage from './kitbag/kit/KitPage';
 import KitDelete from './kitbag/kit/KitDelete';
 import MarketKitPage from './kitbag/market/MarketKitPage';
@@ -40,7 +40,6 @@ import KitbagMemberInvite from './kitbags/KitbagMemberInvite';
 import KitbagMemberAccept from './kitbags/KitbagMemberAccept';
 import KitbagMemberJoin from './kitbags/KitbagMemberJoin';
 import LearnMore from './learn/LearnMore';
-import BetaAnnouncement from './home/BetaAnnouncement';
 import GroupMemberDelete from './group/GroupMemberDelete';
 import DeleteUser from './kitbag/DeleteUser';
 import { connect } from 'react-redux';
@@ -61,7 +60,6 @@ const App = ({ auth }) => {
       <Router history={history}>
         <User />
         <Header />
-        <BetaAnnouncement />
         <main>
           <noscript>
             You need to enable JavaScript to run this application.
@@ -169,9 +167,9 @@ const App = ({ auth }) => {
               component={ShowGroupPage}
             />
             <PrivateRoute
-              path="/groups/status/:groupId"
+              path="/groups/state/:groupId"
               exact
-              component={GroupStatus}
+              component={GroupState}
             />
             <PrivateRoute
               path="/groups/:groupId/members/:memberId/delete"

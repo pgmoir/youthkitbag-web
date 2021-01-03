@@ -106,7 +106,7 @@ const Reports = ({ stateSearch, items, pagination, style, fetchReports }) => {
                 </th>
                 <th>Client</th>
                 <th>Type</th>
-                <th>Status</th>
+                <th>State</th>
                 <th className="text-nowrap">
                   <button
                     className="btn btn-link text-white font-weight-bold p-0 border-0"

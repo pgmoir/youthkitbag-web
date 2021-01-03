@@ -7,7 +7,7 @@ import {
   DELETE_MARKET_KIT,
   DELETE_KITBAG_KIT,
   LOGIN_FAILURE,
-  EDIT_GROUP_STATUS,
+  EDIT_GROUP_STATE,
   EDIT_GROUP_MEMBER_STATE,
   DELETE_GROUP_MEMBER,
   EDIT_USER,
@@ -34,7 +34,7 @@ export default (state = initialState, action) => {
     case CREATE_KITBAG_KIT:
     case CREATE_MARKET_KIT:
     case EDIT_GROUP:
-    case EDIT_GROUP_STATUS:
+    case EDIT_GROUP_STATE:
     case EDIT_GROUP_MEMBER_STATE:
     case EDIT_USER:
     case RESET_USER_FLAGS:
@@ -53,7 +53,6 @@ export default (state = initialState, action) => {
         currentStyle: 'warning',
       };
     case API_USER_ERROR:
-    case API_KITBAG_ERROR:
     case API_KITBAG_ERROR:
     case API_MARKET_ERROR:
     case SIGNUP_FAILURE:

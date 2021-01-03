@@ -13,11 +13,11 @@ const GroupMemberState = ({ editGroupMemberState, match }) => {
   const { groupId } = match.params;
 
   function renderTitle() {
-    return 'Change status of member';
+    return 'Change state of member';
   }
 
   function renderContent() {
-    return 'Are you sure you want to change the status of this member?';
+    return 'Are you sure you want to change the state of this member?';
   }
 
   function capitalizeFirstLetter(string) {

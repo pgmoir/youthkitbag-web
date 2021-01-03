@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { fetchGroup, editGroupStatus } from './../../actions/GroupActions';
-import Modal from './../includes/Modal';
-import history from './../../utils/history';
+import { fetchGroup, editGroupState } from '../../actions/GroupActions';
+import Modal from '../includes/Modal';
+import history from '../../utils/history';
 
 const mapStateToProps = (state, ownProps) => ({
   group: state.group[ownProps.match.params.groupId],
@@ -10,10 +10,10 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = {
   fetchGroup,
-  editGroupStatus,
+  editGroupState,
 };
 
-const GroupStatus = ({ group, fetchGroup, editGroupStatus, match }) => {
+const GroupState = ({ group, fetchGroup, editGroupState, match }) => {
   const groupId = match.params.groupId;
 
   useEffect(() => {
@@ -24,16 +24,16 @@ const GroupStatus = ({ group, fetchGroup, editGroupStatus, match }) => {
 
   function renderTitle() {
     if (!group) {
-      return 'Update status of group';
+      return 'Update state of group';
     }
-    return `Update status of "${group.name}"`;
+    return `Update state of "${group.name}"`;
   }
 
   function renderContent() {
     if (!group) {
-      return 'Are you sure you want to change the status of this group. Any change may impact existing members or market items.';
+      return 'Are you sure you want to change the state of this group. Any change may impact existing members or market items.';
     }
-    return `How do you want to change the status of "${group.name}"? You can either approve or block this group. Any change may impact existing members or market items.`;
+    return `How do you want to change the state of "${group.name}"? You can either approve or block this group. Any change may impact existing members or market items.`;
   }
 
   function renderActions() {
@@ -43,14 +43,14 @@ const GroupStatus = ({ group, fetchGroup, editGroupStatus, match }) => {
         <button
           type="button"
           className="btn btn-danger"
-          onClick={() => editGroupStatus(groupId, 'blocked')}
+          onClick={() => editGroupState(groupId, 'blocked')}
         >
           Block
         </button>
         <button
           type="button"
           className="btn btn-success"
-          onClick={() => editGroupStatus(groupId, 'approved')}
+          onClick={() => editGroupState(groupId, 'approved')}
         >
           Approve
         </button>
@@ -68,4 +68,4 @@ const GroupStatus = ({ group, fetchGroup, editGroupStatus, match }) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupStatus);
+export default connect(mapStateToProps, mapDispatchToProps)(GroupState);

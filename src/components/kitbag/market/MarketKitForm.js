@@ -127,7 +127,7 @@ const MarketKitForm = ({
       <SelectForm
         colFormat="3-9"
         label="Condition"
-        value={values.status}
+        value={values.state}
         field="condition"
         handleChange={handleChange}
         error={errors.condition}

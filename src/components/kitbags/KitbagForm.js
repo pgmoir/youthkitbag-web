@@ -36,8 +36,8 @@ const KitbagForm = ({
     ...kitbag,
     images: getImages(kitbag.images),
     kitbagAdmin: true,
-    exists: false,
   };
+  console.log('IV', initialValues);
 
   const {
     setChange,
@@ -50,6 +50,7 @@ const KitbagForm = ({
     errors,
     setErrors,
   } = useForm(initialValues, updateKitbag, validate);
+  console.log('V', values);
 
   useEffect(() => {
     if (newErrors) {
@@ -78,9 +79,11 @@ const KitbagForm = ({
 
   useEffect(() => {
     if (values) {
+      console.log('VKA', values.kitbagAdmin);
+      console.log('VS', values.state);
       const newKitbag = !values._id;
       const admin =
-        (values.kitbagAdmin && values.status !== 'blocked') || values.appAdmin;
+        (values.kitbagAdmin && values.state !== 'blocked') || values.appAdmin;
       setIsReadOnly(!newKitbag && !admin);
     }
   }, [values, setIsReadOnly]);

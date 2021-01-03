@@ -4,7 +4,7 @@ import {
   CREATE_GROUP,
   FETCH_GROUP,
   EDIT_GROUP,
-  EDIT_GROUP_STATUS,
+  EDIT_GROUP_STATE,
   DELETE_GROUP_MEMBER,
   FETCH_GROUP_MEMBERS,
   EDIT_GROUP_MEMBER_STATE,
@@ -101,12 +101,12 @@ export const editGroup = (groupId, formValues) => (dispatch) => {
     });
 };
 
-export const editGroupStatus = (groupId, status) => (dispatch) => {
+export const editGroupState = (groupId, state) => (dispatch) => {
   axios
-    .put(`/group/${groupId}/status`, { status: status }, {})
+    .put(`/group/${groupId}/state`, { state: state }, {})
     .then((response) => {
       history.push('/groups?searchfor=&by=&page=1&pagesize=24');
-      dispatch({ type: EDIT_GROUP_STATUS, payload: response.data });
+      dispatch({ type: EDIT_GROUP_STATE, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;

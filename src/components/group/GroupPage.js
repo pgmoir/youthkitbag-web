@@ -70,14 +70,14 @@ const GroupPage = ({ current, fetchGroup, match }) => {
   }
 
   function getIcon() {
-    if (groupIsLoading() || !group._id || group.status !== 'approved')
+    if (groupIsLoading() || !group._id || group.state !== 'approved')
       return null;
 
     return 'fas fa-certificate text-gold';
   }
 
   function getIconTitle() {
-    if (groupIsLoading() || !group._id || group.status !== 'approved')
+    if (groupIsLoading() || !group._id || group.state !== 'approved')
       return null;
 
     return 'Certified group';
@@ -139,7 +139,7 @@ const GroupPage = ({ current, fetchGroup, match }) => {
           <div className="row pb-3">
             <div className="col-12 col-sm-8">
               {group.groupMemberState && (
-                <h2>Your member status {getGroupMemberStateIcon()}</h2>
+                <h2>Your member state {getGroupMemberStateIcon()}</h2>
               )}
               {!group.groupMemberState && (
                 <h2>You are not a member of this group</h2>
@@ -148,7 +148,7 @@ const GroupPage = ({ current, fetchGroup, match }) => {
             <div className="col-12 col-sm-4 mb-3 d-flex justify-content-end">
               <div>
                 {group._id &&
-                  group.status === 'approved' &&
+                  group.state === 'approved' &&
                   (group.groupAdmin || group.groupMember) && (
                     <Link
                       to={`/groups/${groupId}/members`}
@@ -157,20 +157,18 @@ const GroupPage = ({ current, fetchGroup, match }) => {
                       Members
                     </Link>
                   )}
-                {group._id &&
-                  group.status === 'approved' &&
-                  !group.groupMember && (
-                    <Link
-                      to={`/groups/${groupId}/join`}
-                      className={`btn btn-primary ${
-                        group.groupMemberState ? 'disabled' : ''
-                      } ml-3`}
-                      disabled={group.groupMemberState}
-                    >
-                      Join
-                    </Link>
-                  )}
-                {group._id && group.status === 'approved' && group.groupMember && (
+                {group._id && group.state === 'approved' && !group.groupMember && (
+                  <Link
+                    to={`/groups/${groupId}/join`}
+                    className={`btn btn-primary ${
+                      group.groupMemberState ? 'disabled' : ''
+                    } ml-3`}
+                    disabled={group.groupMemberState}
+                  >
+                    Join
+                  </Link>
+                )}
+                {group._id && group.state === 'approved' && group.groupMember && (
                   <Link
                     to={`/groups/${groupId}/leave`}
                     className="btn btn-primary ml-3"

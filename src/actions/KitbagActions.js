@@ -3,14 +3,11 @@ import {
   CLEAR_KITBAG,
   FETCH_KITBAG,
   EDIT_KITBAG,
-  EDIT_KITBAG_STATUS,
+  EDIT_KITBAG_STATE,
   API_KITBAG_ERROR,
   GETALL_FAILURE,
   CREATE_KITBAG_INVITE,
   EDIT_KITBAG_LEAVE,
-  FETCH_KITBAG_MEMBER,
-  DELETE_KITBAG_MEMBER,
-  EDIT_KITBAG_MEMBER,
   FETCH_PREFERRED_KITBAG,
   RESET_TOAST,
 } from './types';
@@ -148,12 +145,12 @@ export const editKitbagCustomisation = (kitbagId, formValues) => (dispatch) => {
     });
 };
 
-export const editKitbagStatus = (kitbagId, status) => (dispatch) => {
+export const editKitbagState = (kitbagId, state) => (dispatch) => {
   axios
-    .put(`/kitbag/${kitbagId}/status`, { status: status }, {})
+    .put(`/kitbag/${kitbagId}/state`, { state: state }, {})
     .then((response) => {
       history.push('/settings/kitbags');
-      dispatch({ type: EDIT_KITBAG_STATUS, payload: response.data });
+      dispatch({ type: EDIT_KITBAG_STATE, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;

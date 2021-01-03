@@ -10,8 +10,8 @@ const GroupCard = ({ group }) => {
     return images[0].imageUrl;
   }
 
-  function renderStatus(status) {
-    switch (status) {
+  function renderState(state) {
+    switch (state) {
       case 'approved':
         return (
           <span
@@ -52,7 +52,7 @@ const GroupCard = ({ group }) => {
     );
   }
 
-  const { _id, name, activitys, status, memberCount, appAdmin } = group;
+  const { _id, name, activitys, state, memberCount, appAdmin } = group;
 
   if (!_id) return renderBlank();
 
@@ -61,9 +61,9 @@ const GroupCard = ({ group }) => {
       <article className="card card-link card-b1">
         <span className="icons-top-left pt-1">
           {appAdmin ? (
-            <Link to={`/groups/status/${_id}`}>{renderStatus(status)}</Link>
+            <Link to={`/groups/state/${_id}`}>{renderState(state)}</Link>
           ) : (
-            renderStatus(status)
+            renderState(state)
           )}
         </span>
         <span

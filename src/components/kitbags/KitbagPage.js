@@ -82,7 +82,7 @@ const KitbagPage = ({ current, kitbags, fetchKitbag, clearKitbag, match }) => {
           <Alert />
           <div className="row">
             <div className="col-12 mb-3 d-flex justify-content-end">
-              {kitbagId && kitbag.kitbagAdmin && kitbag.status !== 'blocked' && (
+              {kitbagId && kitbag.kitbagAdmin && kitbag.state !== 'blocked' && (
                 <Link
                   to={`/kitbags/${kitbagId}/invite`}
                   className="btn btn-primary"
@@ -92,7 +92,7 @@ const KitbagPage = ({ current, kitbags, fetchKitbag, clearKitbag, match }) => {
               )}
               {kitbagId &&
                 !kitbag.kitbagAdmin &&
-                kitbag.status !== 'blocked' &&
+                kitbag.state !== 'blocked' &&
                 kitbag.kitbagMember && (
                   <Link
                     to={`/kitbags/${kitbagId}/leave`}

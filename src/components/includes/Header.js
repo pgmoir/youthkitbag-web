@@ -17,7 +17,7 @@ const Header = ({ auth, user }) => {
 
   const group = user.groups
     ? user.groups
-        .filter((g) => g.status === 'approved')
+        .filter((g) => g.state === 'approved')
         .find((a) => a.member.state === 'approved')
     : undefined;
 
