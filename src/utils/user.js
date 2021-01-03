@@ -19,10 +19,8 @@ export const userHasGroupAdministration = (user) => {
     : false;
 };
 
-export const userPreferredAccountId = (user) => {
-  return user.profile &&
-    user.profile.accounts &&
-    user.profile.accounts.length > 0
-    ? user.profile.accounts.find((a) => a.preferred)._id
+export const userPreferredKitbagId = (user) => {
+  return user.profile && user.profile.kitbags && user.profile.kitbags.length > 0
+    ? user.profile.kitbags.find((a) => a.preferred)._id
     : null;
 };

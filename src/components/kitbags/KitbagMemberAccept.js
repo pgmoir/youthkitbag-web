@@ -2,9 +2,9 @@ import React from 'react';
 import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 
-const AccountMemebrAccept = ({ match }) => {
-  // const { accountId } = match.params;
-  // const [account, setAccount] = useState({
+const KitbagMemebrAccept = ({ match }) => {
+  // const { kitbagId } = match.params;
+  // const [kitbag, setKitbag] = useState({
   //   name: '',
   //   description: '',
   //   images: [],
@@ -14,31 +14,31 @@ const AccountMemebrAccept = ({ match }) => {
   // });
 
   // useEffect(() => {
-  //   if (accountId) {
-  //     fetchAccount(accountId);
+  //   if (kitbagId) {
+  //     fetchKitbag(kitbagId);
   //   }
-  // }, [fetchAccount, accountId]);
+  // }, [fetchKitbag, kitbagId]);
 
   // useEffect(() => {
   //   if (current && current._id) {
-  //     const newAccount = {
+  //     const newKitbag = {
   //       ...current,
   //       imagesToUpload: 0
   //     };
-  //     setAccount(newAccount);
+  //     setKitbag(newKitbag);
   //   }
   // }, [current]);
 
-  // function accountIsLoading() {
-  //   return accountId && !account._id;
+  // function kitbagIsLoading() {
+  //   return kitbagId && !kitbag._id;
   // }
 
   // function getTitle() {
-  //   if (accountIsLoading()) {
+  //   if (kitbagIsLoading()) {
   //     return 'Loading ...';
   //   }
-  //   const leftState = account.accountMemberState === 'left' ? ' (left)' : '';
-  //   return account._id ? `${account.name}${leftState}` : 'Create new account';
+  //   const leftState = kitbag.kitbagMemberState === 'left' ? ' (left)' : '';
+  //   return kitbag._id ? `${kitbag.name}${leftState}` : 'Create new kitbag';
   // }
 
   return (
@@ -60,4 +60,4 @@ const AccountMemebrAccept = ({ match }) => {
   );
 };
 
-export default AccountMemebrAccept;
+export default KitbagMemebrAccept;

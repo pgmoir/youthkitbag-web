@@ -69,14 +69,14 @@ const PackagePage = ({ userPackage }) => {
                   <td>{userPackage.max.groupadmins}</td>
                 </tr>
                 <tr>
-                  <td>Accounts</td>
-                  <td>{userPackage.size.accounts}</td>
-                  <td>{userPackage.max.accounts}</td>
+                  <td>Kitbags</td>
+                  <td>{userPackage.size.kitbags}</td>
+                  <td>{userPackage.max.kitbags}</td>
                 </tr>
                 <tr>
-                  <td>Account Admins</td>
-                  <td>{userPackage.size.accountadmins}</td>
-                  <td>{userPackage.max.accountadmins}</td>
+                  <td>Kitbag Admins</td>
+                  <td>{userPackage.size.kitbagadmins}</td>
+                  <td>{userPackage.max.kitbagadmins}</td>
                 </tr>
               </tbody>
             </table>

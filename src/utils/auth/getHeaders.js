@@ -1,9 +1,9 @@
 export const getHeaders = () => {
-  const authToken = localStorage.getItem('auth-token');
-  const refreshToken = localStorage.getItem('refresh-token');
+  const authToken = localStorage.getItem('authToken');
+  const refreshToken = localStorage.getItem('refreshToken');
 
   return {
-    Authorization: `bearer ${authToken}`,
+    Authorization: `Bearer ${authToken}`,
     'refresh-token': refreshToken,
     'content-type': 'application/json',
   };

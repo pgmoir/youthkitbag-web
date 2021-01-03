@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { hideFlag } from '../../actions/UserActions';
 import Title from '../includes/title/Title';
 
-const mapStateToProps = state => ({
-  flags: state.user.flags
+const mapStateToProps = (state) => ({
+  flags: state.user.flags,
 });
 
 const mapDispatchToProps = {
-  hideFlag
+  hideFlag,
 };
 
 const WelcomeAnnouncement = ({ flags, hideFlag }) => {
@@ -18,7 +18,7 @@ const WelcomeAnnouncement = ({ flags, hideFlag }) => {
   useEffect(() => {
     if (!flags) return setWelcomeAnnouncement(true);
 
-    var found = flags.find(e => e.name === 'welcomeAnnouncement');
+    var found = flags.find((e) => e.name === 'welcomeAnnouncement');
     setWelcomeAnnouncement(!found ? false : found.hide);
   }, [flags, setWelcomeAnnouncement]);
 
@@ -59,7 +59,7 @@ const WelcomeAnnouncement = ({ flags, hideFlag }) => {
           >
             Hide this message
           </button>
-        </div>{' '}
+        </div>
       </div>
     </section>
   );

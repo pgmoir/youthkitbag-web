@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const mapStateToProps = state => ({
-  profile: state.user.profile
+const mapStateToProps = (state) => ({
+  user: state.user,
 });
 
-const BadgesPage = ({ profile }) => {
+const BadgesPage = ({ user }) => {
   return (
     <React.Fragment>
       <div className="row">
@@ -17,11 +17,11 @@ const BadgesPage = ({ profile }) => {
           </p>
         </div>
       </div>
-      {profile && profile.badges && profile.badges.length > 0 && (
+      {user && user.badges && user.badges.length > 0 && (
         <div className="row">
           <div className="col-12">
             <h5>Awarded Badges and Trophies</h5>
-            {profile.badges.map((item, index) => (
+            {user.badges.map((item, index) => (
               <div key={`${item._id}-${index}`}></div>
             ))}
           </div>

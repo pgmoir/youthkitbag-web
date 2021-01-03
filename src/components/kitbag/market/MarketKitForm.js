@@ -29,7 +29,7 @@ const mapDispatchToProps = {
 };
 
 const MarketKitForm = ({
-  accountId,
+  kitbagId,
   market,
   newErrors,
   createMarketKit,
@@ -68,9 +68,9 @@ const MarketKitForm = ({
 
   function updateMarket() {
     if (values._id) {
-      editMarketKit(accountId, values._id, values);
+      editMarketKit(kitbagId, values._id, values);
     } else {
-      createMarketKit(accountId, values);
+      createMarketKit(kitbagId, values);
     }
   }
 
@@ -443,7 +443,7 @@ const MarketKitForm = ({
           </div>
           <Threads
             threads={market.threads}
-            accountId={market.account}
+            kitbagId={market.kitbag}
             source="kitbag"
             marketType={market.marketType}
           />

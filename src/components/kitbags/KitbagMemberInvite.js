@@ -2,30 +2,43 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { Link } from 'react-router-dom';
-import { deleteUser } from '../../actions/UserActions';
+import { fetchKitbag, inviteToKitbag } from '../../actions/KitbagActions';
 import { TextForm } from '../includes/forms';
 import ModalWithForm from '../includes/ModalWithForm';
 import history from '../../utils/history';
 import validate from '../includes/FormEmptyValidationRules';
-import Alert from '../includes/Alert';
 
 const mapStateToProps = (state) => ({
+  kitbag: state.kitbag.current,
   newErrors: state.toast.errors,
 });
 
 const mapDispatchToProps = {
-  deleteUser,
+  fetchKitbag,
+  inviteToKitbag,
 };
 
-const DeleteUser = ({ newErrors, deleteUser, match }) => {
-  const { userId } = match.params;
-  const authenticate = { email: '', password: '' };
+const KitbagMemberInvite = ({
+  kitbag,
+  newErrors,
+  fetchKitbag,
+  inviteToKitbag,
+  match,
+}) => {
+  const kitbagId = match.params.kitbagId;
+  const invite = { email: '' };
 
   const { handleChange, handleSubmit, values, errors, setErrors } = useForm(
-    authenticate,
-    performDeletUser,
+    invite,
+    sendInvite,
     validate
   );
+
+  useEffect(() => {
+    if (kitbagId) {
+      fetchKitbag(kitbagId);
+    }
+  }, [fetchKitbag, kitbagId]);
 
   useEffect(() => {
     if (newErrors) {
@@ -33,31 +46,34 @@ const DeleteUser = ({ newErrors, deleteUser, match }) => {
     }
   }, [newErrors, setErrors]);
 
-  function performDeletUser() {
-    deleteUser(userId, values);
+  function sendInvite() {
+    if (values.email) {
+      inviteToKitbag(kitbagId, values.email);
+    }
   }
   function renderTitle() {
-    return 'Delete User - Are you really sure?';
+    if (!kitbag) {
+      return 'Invite to kitbag';
+    }
+    return `Invite to "${kitbag.name}"`;
   }
 
   function renderContent() {
+    if (!kitbag) {
+      return 'Invite option not available.';
+    }
     return (
       <React.Fragment>
-        <Alert />
         <p>
-          You must enter your current email and password to complete the
-          deletion of your user account, and all associated data. Please be
-          fully aware that there is no reversal of this action.
+          Enter an email for a person you want to give access to this kitbag
         </p>
         <TextForm
           colFormat="3-9"
-          type="email"
           label="Email"
           value={values.email}
           field="email"
           handleChange={handleChange}
           error={errors.email}
-          autoComplete="username email"
         />
       </React.Fragment>
     );
@@ -67,14 +83,14 @@ const DeleteUser = ({ newErrors, deleteUser, match }) => {
     return (
       <React.Fragment>
         <Link
-          to={`/settings/configuration`}
+          to={`/kitbags/${kitbagId}`}
           className="btn btn-outline-secondary"
           data-dismiss="modal"
         >
           Cancel
         </Link>
-        <button type="submit" className="btn btn-danger">
-          Delete User
+        <button type="submit" className="btn btn-success">
+          Invite to Join
         </button>
       </React.Fragment>
     );
@@ -86,9 +102,9 @@ const DeleteUser = ({ newErrors, deleteUser, match }) => {
       content={renderContent()}
       actions={renderActions()}
       handleSubmit={handleSubmit}
-      onDismiss={() => history.push(`/settings/configuration`)}
+      onDismiss={() => history.push(`/kitbags/${kitbagId}`)}
     />
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DeleteUser);
+export default connect(mapStateToProps, mapDispatchToProps)(KitbagMemberInvite);

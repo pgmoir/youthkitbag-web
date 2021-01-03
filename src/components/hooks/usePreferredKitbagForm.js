@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const usePreferredAccountForm = (initiaValues, callback) => {
+const usePreferredKitbagForm = (initiaValues, callback) => {
   const [values, setValues] = useState(initiaValues);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -11,20 +11,20 @@ const usePreferredAccountForm = (initiaValues, callback) => {
     }
   }, [callback, isSubmitting]);
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     if (event) event.preventDefault();
     setIsSubmitting(true);
   };
 
-  const setPreferred = event => {
+  const setPreferred = (event) => {
     event.persist();
     const { id } = event.target;
-    const newValues = values.map(a => {
+    const newValues = values.map((a) => {
       return {
         _id: a._id,
         preferred: id === a._id ? true : false,
         name: a.name,
-        members: a.members
+        members: a.members,
       };
     });
     setValues(newValues);
@@ -34,8 +34,8 @@ const usePreferredAccountForm = (initiaValues, callback) => {
     setPreferred,
     handleSubmit,
     values,
-    setValues
+    setValues,
   };
 };
 
-export default usePreferredAccountForm;
+export default usePreferredKitbagForm;

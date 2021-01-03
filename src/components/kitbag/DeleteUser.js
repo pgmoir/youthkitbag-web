@@ -2,43 +2,30 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { Link } from 'react-router-dom';
-import { fetchAccount, inviteToAccount } from '../../actions/AccountActions';
+import { deleteUser } from '../../actions/UserActions';
 import { TextForm } from '../includes/forms';
 import ModalWithForm from '../includes/ModalWithForm';
 import history from '../../utils/history';
 import validate from '../includes/FormEmptyValidationRules';
+import Alert from '../includes/Alert';
 
 const mapStateToProps = (state) => ({
-  account: state.account.current,
   newErrors: state.toast.errors,
 });
 
 const mapDispatchToProps = {
-  fetchAccount,
-  inviteToAccount,
+  deleteUser,
 };
 
-const AccountMemberInvite = ({
-  account,
-  newErrors,
-  fetchAccount,
-  inviteToAccount,
-  match,
-}) => {
-  const accountId = match.params.accountId;
-  const invite = { email: '' };
+const DeleteUser = ({ newErrors, deleteUser, match }) => {
+  const { userId } = match.params;
+  const authenticate = { email: '', password: '' };
 
   const { handleChange, handleSubmit, values, errors, setErrors } = useForm(
-    invite,
-    sendInvite,
+    authenticate,
+    performDeletUser,
     validate
   );
-
-  useEffect(() => {
-    if (accountId) {
-      fetchAccount(accountId);
-    }
-  }, [fetchAccount, accountId]);
 
   useEffect(() => {
     if (newErrors) {
@@ -46,34 +33,31 @@ const AccountMemberInvite = ({
     }
   }, [newErrors, setErrors]);
 
-  function sendInvite() {
-    if (values.email) {
-      inviteToAccount(accountId, values.email);
-    }
+  function performDeletUser() {
+    deleteUser(userId, values);
   }
   function renderTitle() {
-    if (!account) {
-      return 'Invite to account';
-    }
-    return `Invite to "${account.name}"`;
+    return 'Delete User - Are you really sure?';
   }
 
   function renderContent() {
-    if (!account) {
-      return 'Invite option not available.';
-    }
     return (
       <React.Fragment>
+        <Alert />
         <p>
-          Enter an email for a person you want to give access to this account
+          You must enter your current email and password to complete the
+          deletion of your user kitbag, and all associated data. Please be fully
+          aware that there is no reversal of this action.
         </p>
         <TextForm
           colFormat="3-9"
+          type="email"
           label="Email"
           value={values.email}
           field="email"
           handleChange={handleChange}
           error={errors.email}
+          autoComplete="username email"
         />
       </React.Fragment>
     );
@@ -83,14 +67,14 @@ const AccountMemberInvite = ({
     return (
       <React.Fragment>
         <Link
-          to={`/accounts/${accountId}`}
+          to={`/settings/configuration`}
           className="btn btn-outline-secondary"
           data-dismiss="modal"
         >
           Cancel
         </Link>
-        <button type="submit" className="btn btn-success">
-          Invite to Join
+        <button type="submit" className="btn btn-danger">
+          Delete User
         </button>
       </React.Fragment>
     );
@@ -102,12 +86,9 @@ const AccountMemberInvite = ({
       content={renderContent()}
       actions={renderActions()}
       handleSubmit={handleSubmit}
-      onDismiss={() => history.push(`/accounts/${accountId}`)}
+      onDismiss={() => history.push(`/settings/configuration`)}
     />
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AccountMemberInvite);
+export default connect(mapStateToProps, mapDispatchToProps)(DeleteUser);

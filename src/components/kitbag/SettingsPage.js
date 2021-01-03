@@ -3,18 +3,18 @@ import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import Title from '../includes/title/Title';
 import ProfileForm from './ProfileForm';
-import AccountsPage from './AccountsPage';
+import KitbagsPage from './KitbagsPage';
 import GroupsPage from './GroupsPage';
 import PackagePage from './PackagePage';
 import Alert from '../includes/Alert';
 import ProfileHelp from './ProfileHelp';
-import AccountsHelp from './AccountsHelp';
+import KitbagsHelp from './KitbagsHelp';
 import GroupsHelp from './GroupsHelp';
 import ConfigurationPage from './ConfigurationPage';
 import SettingsNav from './SettingsNav';
 
-const mapStateToProps = state => ({
-  profile: state.user.profile
+const mapStateToProps = (state) => ({
+  profile: state.user.profile,
 });
 
 const SettingsPage = ({ profile }) => {
@@ -31,13 +31,13 @@ const SettingsPage = ({ profile }) => {
     );
   };
 
-  const Accounts = () => {
-    setPage('accounts');
+  const Kitbags = () => {
+    setPage('kitbags');
     return (
       <div className="container">
-        <h2>Accounts</h2>
-        <AccountsHelp />
-        <AccountsPage />
+        <h2>Kitbags</h2>
+        <KitbagsHelp />
+        <KitbagsPage />
       </div>
     );
   };
@@ -89,7 +89,7 @@ const SettingsPage = ({ profile }) => {
           </div>
           <div className="col-12 col-md-10">
             <Route path="/settings/profile" component={Profile} />
-            <Route path="/settings/accounts" component={Accounts} />
+            <Route path="/settings/kitbags" component={Kitbags} />
             <Route path="/settings/groups" component={Groups} />
             <Route path="/settings/package" component={Package} />
             <Route path="/settings/configuration" component={Configuration} />

@@ -2,18 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const mapStateToProps = state => ({
-  profile: state.user.profile
+const mapStateToProps = (state) => ({
+  user: state.user,
 });
 
-const GroupsPage = ({ profile }) => {
+const GroupsPage = ({ user }) => {
   return (
     <React.Fragment>
       <div className="row">
         <div className="col-12">
           <p>
-            As a user of YouthKitbag, you can join as many accounts as allowed
-            within your chosen package limits. The default Star account (free)
+            As a user of YouthKitbag, you can join as many kitbags as allowed
+            within your chosen package limits. The default Star kitbag (free)
             allows you to join 3 groups.
           </p>
           <p>
@@ -22,7 +22,7 @@ const GroupsPage = ({ profile }) => {
           </p>
         </div>
       </div>
-      {profile && profile.groups && profile.groups.length > 0 && (
+      {user && user.groups && user.groups.length > 0 && (
         <div className="row">
           <div className="col-12">
             <h5>Group Membership</h5>
@@ -36,7 +36,7 @@ const GroupsPage = ({ profile }) => {
                 </tr>
               </thead>
               <tbody>
-                {profile.groups.map((item, index) => (
+                {user.groups.map((item, index) => (
                   <tr key={`${item._id}-${index}`}>
                     <td className="valign-m mw-3rem">
                       <Link to={`/groups/${item._id}`}>

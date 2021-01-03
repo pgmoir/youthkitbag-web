@@ -4,7 +4,7 @@ import { addImage, clearNewImages } from '../../../actions/ImageActions';
 import { resize, dataURItoBlob } from '../../../utils/imageResize';
 
 const ImagesForm = ({
-  accountId,
+  kitbagId,
   values,
   readOnly,
   setChange,
@@ -24,7 +24,7 @@ const ImagesForm = ({
       resize(files[i], MAXWIDTH, MAXHEIGHT, function (resizedDataUrl) {
         let formData = new FormData();
         formData.append('photo', dataURItoBlob(resizedDataUrl), files[i].name);
-        dispatch(addImage(accountId, formData));
+        dispatch(addImage(kitbagId, formData));
       });
     }
     return;

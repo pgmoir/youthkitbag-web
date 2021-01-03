@@ -11,15 +11,15 @@ const mapDispatchToProps = {
 };
 
 const BetaAnnouncement = ({ flags, hideFlag }) => {
-  const [betaAnnouncement, setBetaAnnouncement] = useState(false);
+  const [betaAnnouncement, setBetaAnnouncement] = useState(true);
   const [showMore, setShowMore] = useState(false);
 
-  useEffect(() => {
-    if (!flags) return setBetaAnnouncement(false);
+  // useEffect(() => {
+  //   if (!flags) return setBetaAnnouncement(false);
 
-    var found = flags.find((e) => e.name === 'betaAnnouncement');
-    setBetaAnnouncement(!found ? false : found.hide);
-  }, [flags, setBetaAnnouncement]);
+  //   var found = flags.find((e) => e.name === 'betaAnnouncement');
+  //   setBetaAnnouncement(!found ? false : found.hide);
+  // }, [flags, setBetaAnnouncement]);
 
   function hideBetaAnnouncement() {
     hideFlag('betaAnnouncement', true);

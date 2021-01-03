@@ -12,7 +12,7 @@ const mapStateToProps = (state) => ({
   stateSearch: state.kitbag.kit.search,
   items: state.kitbag.kit.list,
   pagination: state.pagination,
-  accounts: state.user.profile.accounts,
+  kitbags: state.user.profile.kitbags,
   lists: state.kitbag.kit.lists,
 });
 
@@ -24,13 +24,13 @@ const KitBag = ({
   stateSearch,
   items,
   pagination,
-  accounts,
+  kitbags,
   lists,
   fetchKitbagKits,
   match,
 }) => {
   const [search, setSearch] = useState(stateSearch);
-  const [accountId] = useState(match.params.accountId);
+  const [kitbagId] = useState(match.params.kitbagId);
   const [kits, setKits] = useState(items);
 
   useEffect(() => {
@@ -42,17 +42,17 @@ const KitBag = ({
   useEffect(() => {
     fetchKitbagKits({
       ...search,
-      accountId,
+      kitbagId,
       pushHistory: true,
     });
-  }, [search, fetchKitbagKits, accountId]);
+  }, [search, fetchKitbagKits, kitbagId]);
 
   function getTitle() {
-    if (!accounts) {
+    if (!kitbags) {
       return 'Loading ...';
     }
-    const account = accounts.find((a) => a.preferred);
-    return `${account.name} (${pagination.totalItems})`;
+    const kitbag = kitbags.find((a) => a.preferred);
+    return `${kitbag.name} (${pagination.totalItems})`;
   }
 
   function renderBlankList() {
@@ -87,11 +87,7 @@ const KitBag = ({
   function renderList() {
     return kits.map((item, index) => {
       return (
-        <KitCard
-          key={`${item._id}-${index}`}
-          kit={item}
-          accountId={accountId}
-        />
+        <KitCard key={`${item._id}-${index}`} kit={item} kitbagId={kitbagId} />
       );
     });
   }
@@ -109,7 +105,7 @@ const KitBag = ({
           <div className="row">
             <div className="col-12 col-sm-9">
               <SearchForm
-                searchId={accountId}
+                searchId={kitbagId}
                 search={search}
                 callback={setSearch}
                 collections={lists}
@@ -117,7 +113,7 @@ const KitBag = ({
             </div>
             <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
               <Link
-                to={`/kitbag/kit/${accountId}/new`}
+                to={`/kitbag/kit/${kitbagId}/new`}
                 className="btn btn-primary"
               >
                 Add new kit
@@ -126,7 +122,7 @@ const KitBag = ({
           </div>
           <div className="row">{renderList()}</div>
           <Pagination
-            accountId={accountId}
+            kitbagId={kitbagId}
             search={search}
             callback={setSearch}
           />

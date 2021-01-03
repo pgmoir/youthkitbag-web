@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { resetFlags } from '../../actions/UserActions';
 import { Link } from 'react-router-dom';
 
-const mapStateToProps = state => ({
-  flags: state.user.flags
+const mapStateToProps = (state) => ({
+  flags: state.user.flags,
 });
 
 const mapDispatchToProps = {
-  resetFlags
+  resetFlags,
 };
 
 const ConfigurationPage = ({ userId, flags, resetFlags }) => {
@@ -25,7 +25,7 @@ const ConfigurationPage = ({ userId, flags, resetFlags }) => {
       <h3>Flags</h3>
       <p>
         These are all the flags you have seen and dismissed. Resetting will
-        flags will remove them all from your user account and the various alerts
+        flags will remove them all from your user kitbag and the various alerts
         and announcements that can be dismissed will magically reappear.
       </p>
       {(!flags || flags.length === 0) && (
@@ -35,7 +35,7 @@ const ConfigurationPage = ({ userId, flags, resetFlags }) => {
         <>
           <h4>Flags that have already been dismissed</h4>
           <ul>
-            {flags.map(f => {
+            {flags.map((f) => {
               return <li key={f._id}>{f.name}</li>;
             })}
           </ul>

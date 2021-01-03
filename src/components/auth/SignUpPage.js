@@ -16,8 +16,8 @@ const SignUpPage = () => {
       >
         <div className="container">
           <p className="lead">
-            If you already have an account,{' '}
-            <Link to="/auth/login">then login to access your account</Link>.
+            If you already have an kitbag,{' '}
+            <Link to="/auth/login">then login to access your kitbag</Link>.
           </p>
           <div className="row">
             <div className="col-12 col-md-6 mb-3 mx-auto">

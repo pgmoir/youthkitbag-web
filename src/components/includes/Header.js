@@ -11,12 +11,12 @@ const mapStateToProps = (state) => ({
 const Header = ({ auth, user }) => {
   const { loggedIn } = auth;
 
-  const account = user.profile.accounts
-    ? user.profile.accounts.find((a) => a.preferred)
+  const kitbag = user.kitbags
+    ? user.kitbags.find((a) => a.preferred)
     : undefined;
 
-  const group = user.profile.groups
-    ? user.profile.groups
+  const group = user.groups
+    ? user.groups
         .filter((g) => g.status === 'approved')
         .find((a) => a.member.state === 'approved')
     : undefined;
@@ -59,12 +59,12 @@ const Header = ({ auth, user }) => {
                       </Link>
                     </li>
                   )}
-                  {account && (
+                  {kitbag && (
                     <li className="nav-item">
                       <Link
                         className="btn btn-info text-nowrap mr-1"
-                        to={`/kitbag/kit/${account._id}`}
-                        aria-label={`${account.name}`}
+                        to={`/kitbag/kit/${kitbag._id}`}
+                        aria-label={`${kitbag.name}`}
                       >
                         <span
                           className="fas fa-shopping-bag"
@@ -75,11 +75,11 @@ const Header = ({ auth, user }) => {
                     </li>
                   )}
                   <li className="nav-item">
-                    <Link className="nav-link d-inline" to="/settings/profile">
+                    <Link className="nav-link d-inline" to="/settings">
                       <img
                         src={
-                          user.profile.images && user.profile.images.length > 0
-                            ? user.profile.images[0].imageUrl
+                          user.images && user.images.length > 0
+                            ? user.images[0].imageUrl
                             : '/images/defaultthumb.png'
                         }
                         className="img-avatar img-thumbnail img-link rounded-circle p-0 m-1"

@@ -7,7 +7,7 @@ import GroupCard from './GroupCard';
 import SearchForm from '../includes/SearchForm';
 import Pagination from '../includes/Pagination';
 import Alert from '../includes/Alert';
-import GroupsHelp from '../account/GroupsHelp';
+import GroupsHelp from '../kitbag/GroupsHelp';
 
 const mapStateToProps = (state) => ({
   stateSearch: state.group.search,

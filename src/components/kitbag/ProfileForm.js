@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
-import { editProfile, loadSettingsPage } from '../../actions/UserActions';
+import { editUser, loadSettingsPage } from '../../actions/UserActions';
 import { TextForm, ImagesForm } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
 import { getImages } from '../../utils/image';
@@ -10,10 +10,10 @@ const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
 });
 
-const mapDispatchToProps = { editProfile, loadSettingsPage };
+const mapDispatchToProps = { editUser, loadSettingsPage };
 
-const ProfileForm = ({ profile, newErrors, editProfile, loadSettingsPage }) => {
-  const initialValues = { ...profile, images: getImages(profile.images) };
+const ProfileForm = ({ user, newErrors, editUser, loadSettingsPage }) => {
+  const initialValues = { ...user, images: getImages(user.images) };
 
   const {
     setChange,
@@ -24,7 +24,7 @@ const ProfileForm = ({ profile, newErrors, editProfile, loadSettingsPage }) => {
     setValues,
     errors,
     setErrors,
-  } = useForm(initialValues, updateProfile, validate);
+  } = useForm(initialValues, updateUser, validate);
 
   useEffect(() => {
     if (newErrors) {
@@ -33,23 +33,22 @@ const ProfileForm = ({ profile, newErrors, editProfile, loadSettingsPage }) => {
   }, [newErrors, setErrors]);
 
   useEffect(() => {
-    if (profile) {
-      profile.images = getImages(profile.images);
-      profile.topImage =
-        profile.images &&
-        profile.images.filter((i) => i.state !== 'D').length > 0
-          ? profile.images.filter((i) => i.state !== 'D')[0].imageUrl
+    if (user) {
+      user.images = getImages(user.images);
+      user.topImage =
+        user.images && user.images.filter((i) => i.state !== 'D').length > 0
+          ? user.images.filter((i) => i.state !== 'D')[0].imageUrl
           : '/images/default.png';
-      setValues(profile);
+      setValues(user);
     }
-  }, [profile, setValues]);
+  }, [user, setValues]);
 
-  function updateProfile() {
-    editProfile(values._id, values);
+  function updateUser() {
+    editUser(values._id, values);
   }
 
   function cancelPage() {
-    loadSettingsPage('/settings/profile');
+    loadSettingsPage('/settings');
   }
 
   return (

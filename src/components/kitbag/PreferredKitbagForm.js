@@ -1,56 +1,56 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import usePreferredAccountForm from '../hooks/usePreferredAccountForm';
+import usePreferredKitbagForm from '../hooks/usePreferredKitbagForm';
 import {
-  editProfilePreferredAccount,
-  loadSettingsPage
+  editPreferredKitbag,
+  loadSettingsPage,
 } from '../../actions/UserActions';
 import { connect } from 'react-redux';
 
 const mapDispatchToProps = {
-  editProfilePreferredAccount,
-  loadSettingsPage
+  editPreferredKitbag,
+  loadSettingsPage,
 };
 
-const PreferredAccountForm = ({
+const PreferredKitbagForm = ({
   userId,
-  accounts,
-  editProfilePreferredAccount,
-  loadSettingsPage
+  kitbags,
+  editPreferredKitbag,
+  loadSettingsPage,
 }) => {
   const {
     setPreferred,
     handleSubmit,
     values,
-    setValues
-  } = usePreferredAccountForm(accounts, updatePreferredAccount);
+    setValues,
+  } = usePreferredKitbagForm(kitbags, updatePreferredKitbag);
 
   useEffect(() => {
-    if (accounts) {
-      setValues(accounts);
+    if (kitbags) {
+      setValues(kitbags);
     }
-  }, [accounts, setValues]);
+  }, [kitbags, setValues]);
 
-  function updatePreferredAccount() {
-    accounts = undefined;
-    const accountId = values.find(a => a.preferred)._id;
-    editProfilePreferredAccount(userId, accountId);
+  function updatePreferredKitbag() {
+    kitbags = undefined;
+    const kitbagId = values.find((a) => a.preferred)._id;
+    editPreferredKitbag(userId, kitbagId);
   }
 
   function cancelPage() {
-    loadSettingsPage('/settings/accounts');
+    loadSettingsPage('/settings/kitbags');
   }
 
   return (
     <div className="row">
       <div className="col-12">
-        <h5>Account Membership</h5>
+        <h5>Kitbag Membership</h5>
         <form className="mb-3" onSubmit={handleSubmit}>
           <table className="table bg-light">
             <thead>
               <tr>
                 <th scope="col"></th>
-                <th scope="col">Account</th>
+                <th scope="col">Kitbag</th>
                 <th scope="col">State</th>
                 <th scope="col">Permissions</th>
                 <th scope="col" className="text-center">
@@ -59,10 +59,10 @@ const PreferredAccountForm = ({
               </tr>
             </thead>
             <tbody>
-              {accounts.map((item, index) => (
+              {kitbags.map((item, index) => (
                 <tr key={index}>
                   <td className="valign-m mw-3rem">
-                    <Link to={`/accounts/${item._id}`}>
+                    <Link to={`/kitbags/${item._id}`}>
                       <img
                         src={
                           item.images && item.images.length > 0
@@ -75,7 +75,7 @@ const PreferredAccountForm = ({
                     </Link>
                   </td>
                   <td className="valign-m">
-                    <Link to={`/accounts/${item._id}`}>{item.name}</Link>
+                    <Link to={`/kitbags/${item._id}`}>{item.name}</Link>
                   </td>
                   <td className="valign-m">{item.member.state}</td>
                   <td className="valign-m">
@@ -85,7 +85,7 @@ const PreferredAccountForm = ({
                     <input
                       className=""
                       type="radio"
-                      name="AccountPreference"
+                      name="KitbagPreference"
                       id={item._id}
                       value={values[index].preferred}
                       onChange={setPreferred}
@@ -110,4 +110,4 @@ const PreferredAccountForm = ({
   );
 };
 
-export default connect(null, mapDispatchToProps)(PreferredAccountForm);
+export default connect(null, mapDispatchToProps)(PreferredKitbagForm);

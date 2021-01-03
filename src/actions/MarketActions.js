@@ -19,7 +19,7 @@ export const fetchMarketItems = ({
   order,
   direction,
   excgroups = false,
-  excaccounts = false,
+  exckitbags = false,
   pushHistory,
 }) => (dispatch) => {
   axios
@@ -32,7 +32,7 @@ export const fetchMarketItems = ({
         order,
         direction,
         excgroups,
-        excaccounts,
+        exckitbags,
       },
     })
     .then((response) => {
@@ -40,10 +40,10 @@ export const fetchMarketItems = ({
       if (pushHistory) {
         dispatch({
           type: SEARCH_MARKET_ITEMS,
-          payload: { searchfor, by, page, pagesize, excgroups, excaccounts },
+          payload: { searchfor, by, page, pagesize, excgroups, exckitbags },
         });
         history.push(
-          `/market?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}&excgroups=${excgroups}&excaccounts=${excaccounts}`
+          `/market?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}&excgroups=${excgroups}&exckitbags=${exckitbags}`
         );
       }
     })
@@ -71,7 +71,7 @@ export const fetchMarketItem = (marketId) => (dispatch) => {
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push('/auth/login?return=/market');
       }
-      dispatch({ type: API_MARKET_ERROR, payload: err.response });
+      dispatch({ type: API_MARKET_ERROR, payload: response.data });
     });
 };
 
@@ -90,7 +90,7 @@ export const respondMarketItem = (marketId, formValues) => (dispatch) => {
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(`/auth/login?return=/market/${marketId}`);
       }
-      dispatch({ type: API_MARKET_ERROR, payload: err.response });
+      dispatch({ type: API_MARKET_ERROR, payload: response.data });
     });
 };
 
@@ -110,7 +110,7 @@ export const respondToMarketThread = (marketId, threadId, formValues) => (
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(`/auth/login?return=/market/${marketId}`);
       }
-      dispatch({ type: API_MARKET_ERROR, payload: err.response });
+      dispatch({ type: API_MARKET_ERROR, payload: response.data });
     });
 };
 

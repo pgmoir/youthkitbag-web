@@ -20,7 +20,7 @@ export const fetchSubscriptionPackages = () => (dispatch) => {
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push('/auth/login?return=/packages');
       }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
     });
 };
 
@@ -37,6 +37,6 @@ export const fetchSubscriptionPackage = (packageId) => (dispatch) => {
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push('/auth/login?return=/packages');
       }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
     });
 };

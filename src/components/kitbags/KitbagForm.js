@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
-import { createAccount, editAccount } from '../../actions/AccountActions';
+import { createKitbag, editKitbag } from '../../actions/KitbagActions';
 import {
   TextForm,
   TextAreaForm,
@@ -18,24 +18,24 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  createAccount,
-  editAccount,
+  createKitbag,
+  editKitbag,
 };
 
-const AccountForm = ({
-  account,
+const KitbagForm = ({
+  kitbag,
   userPackage,
   newErrors,
-  createAccount,
-  editAccount,
+  createKitbag,
+  editKitbag,
 }) => {
   const [isReadOnly, setIsReadOnly] = useState(true);
-  const [hasAccountAdmin, setHasAccountAdmin] = useState(false);
+  const [hasKitbagAdmin, setHasKitbagAdmin] = useState(false);
 
   const initialValues = {
-    ...account,
-    images: getImages(account.images),
-    accountAdmin: true,
+    ...kitbag,
+    images: getImages(kitbag.images),
+    kitbagAdmin: true,
     exists: false,
   };
 
@@ -49,7 +49,7 @@ const AccountForm = ({
     setValues,
     errors,
     setErrors,
-  } = useForm(initialValues, updateAccount, validate);
+  } = useForm(initialValues, updateKitbag, validate);
 
   useEffect(() => {
     if (newErrors) {
@@ -58,53 +58,52 @@ const AccountForm = ({
   }, [newErrors, setErrors]);
 
   useEffect(() => {
-    if (account) {
-      account.images = getImages(account.images);
-      account.topImage =
-        account.images &&
-        account.images.filter((i) => i.state !== 'D').length > 0
-          ? account.images.filter((i) => i.state !== 'D')[0].imageUrl
+    if (kitbag) {
+      kitbag.images = getImages(kitbag.images);
+      kitbag.topImage =
+        kitbag.images && kitbag.images.filter((i) => i.state !== 'D').length > 0
+          ? kitbag.images.filter((i) => i.state !== 'D')[0].imageUrl
           : '/images/default.png';
-      setValues(account);
+      setValues(kitbag);
     }
-  }, [account, setValues]);
+  }, [kitbag, setValues]);
 
-  function updateAccount() {
+  function updateKitbag() {
     if (values._id) {
-      editAccount(values._id, values);
+      editKitbag(values._id, values);
     } else {
-      createAccount(values);
+      createKitbag(values);
     }
   }
 
   useEffect(() => {
     if (values) {
-      const newAccount = !values._id;
+      const newKitbag = !values._id;
       const admin =
-        (values.accountAdmin && values.status !== 'blocked') || values.appAdmin;
-      setIsReadOnly(!newAccount && !admin);
+        (values.kitbagAdmin && values.status !== 'blocked') || values.appAdmin;
+      setIsReadOnly(!newKitbag && !admin);
     }
   }, [values, setIsReadOnly]);
 
   useEffect(() => {
     if (userPackage && userPackage.max && userPackage.size) {
-      setHasAccountAdmin(
-        userPackage.max.accountadmins > userPackage.size.accountadmins
+      setHasKitbagAdmin(
+        userPackage.max.kitbagadmins > userPackage.size.kitbagadmins
       );
     }
-  }, [userPackage, setHasAccountAdmin]);
+  }, [userPackage, setHasKitbagAdmin]);
 
   function showSaveCancelButtons() {
     if (!userPackage || !values) return null;
 
     return (
       <div>
-        {((!values._id && hasAccountAdmin) || !isReadOnly) && (
+        {((!values._id && hasKitbagAdmin) || !isReadOnly) && (
           <button className="btn btn-primary" type="submit">
             Save
           </button>
         )}
-        <Link className="btn btn-link" to="/settings/accounts">
+        <Link className="btn btn-link" to="/settings/kitbags">
           Cancel
         </Link>
       </div>
@@ -251,4 +250,4 @@ const AccountForm = ({
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountForm);
+export default connect(mapStateToProps, mapDispatchToProps)(KitbagForm);

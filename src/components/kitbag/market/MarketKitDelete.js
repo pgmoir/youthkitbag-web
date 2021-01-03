@@ -18,7 +18,7 @@ const mapDispatchToProps = {
 };
 
 const KitDelete = ({ item, fetchMarketKit, deleteMarketKit, match }) => {
-  const { accountId, marketId } = match.params;
+  const { kitbagId, marketId } = match.params;
   const [kit, setKit] = useState({});
 
   useEffect(() => {
@@ -28,10 +28,10 @@ const KitDelete = ({ item, fetchMarketKit, deleteMarketKit, match }) => {
   }, [item, setKit]);
 
   useEffect(() => {
-    if (accountId && marketId) {
-      fetchMarketKit(accountId, marketId);
+    if (kitbagId && marketId) {
+      fetchMarketKit(kitbagId, marketId);
     }
-  }, [accountId, marketId, fetchMarketKit]);
+  }, [kitbagId, marketId, fetchMarketKit]);
 
   function renderTitle() {
     if (!kit._id) {
@@ -60,7 +60,7 @@ const KitDelete = ({ item, fetchMarketKit, deleteMarketKit, match }) => {
         <button
           type="button"
           className="btn btn-danger"
-          onClick={() => deleteMarketKit(accountId, marketId)}
+          onClick={() => deleteMarketKit(kitbagId, marketId)}
         >
           Delete
         </button>

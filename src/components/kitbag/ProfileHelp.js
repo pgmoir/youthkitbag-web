@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { hideFlag } from '../../actions/UserActions';
 
-const mapStateToProps = state => ({
-  flags: state.user.flags
+const mapStateToProps = (state) => ({
+  flags: state.user.flags,
 });
 
 const mapDispatchToProps = {
-  hideFlag
+  hideFlag,
 };
 
 const ProfileHelp = ({ flags, hideFlag }) => {
@@ -16,7 +16,7 @@ const ProfileHelp = ({ flags, hideFlag }) => {
   useEffect(() => {
     if (!flags) return setProfileHelp(true);
 
-    var found = flags.find(e => e.name === 'profileHelp');
+    var found = flags.find((e) => e.name === 'profileHelp');
     setProfileHelp(!found ? false : found.hide);
   }, [flags, setProfileHelp]);
 
@@ -54,7 +54,7 @@ const ProfileHelp = ({ flags, hideFlag }) => {
               <span aria-hidden="true">×</span>
             </button>
             <p>
-              I know you&apos;ve already created an account with your email
+              I know you&apos;ve already created an kitbag with your email
               address. But, it is always nicer to deal with people using real
               names, or at least a username. A photo of yourself or something
               personal to you adds a bit of colour. And finally letting us know

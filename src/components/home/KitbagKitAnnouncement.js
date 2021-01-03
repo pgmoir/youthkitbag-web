@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const KitbagKitAnnouncement = ({ accountId, doNotShow }) => {
-  if (!accountId || !doNotShow) return null;
+const KitbagKitAnnouncement = ({ kitbagId, doNotShow }) => {
+  if (!kitbagId || !doNotShow) return null;
 
   return (
     <div className="card border-0">
@@ -13,7 +13,7 @@ const KitbagKitAnnouncement = ({ accountId, doNotShow }) => {
           The following items have recently been added, edited or traded in your
           kitbag.
         </p>
-        <Link className="btn btn-warning" to={`/kitbag/kit/${accountId}`}>
+        <Link className="btn btn-warning" to={`/kitbag/kit/${kitbagId}`}>
           View kitbag
         </Link>
       </div>

@@ -201,7 +201,7 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
           </div>
           <Threads
             threads={market.threads}
-            accountId={market.account}
+            kitbagId={market.kitbag}
             source="market"
             marketType={market.marketType}
           />

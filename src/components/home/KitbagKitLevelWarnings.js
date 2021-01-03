@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const KitbagKitLevelWarnings = ({ accountId, doNotShow }) => {
-  if (!accountId || !doNotShow) return null;
+const KitbagKitLevelWarnings = ({ kitbagId, doNotShow }) => {
+  if (!kitbagId || !doNotShow) return null;
 
   return (
     <div className="card border-0">

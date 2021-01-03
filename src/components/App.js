@@ -34,15 +34,15 @@ import MarketKitPage from './kitbag/market/MarketKitPage';
 import MarketItems from './market/MarketItems';
 import MarketItemViewPage from './market/MarketItemViewPage';
 import MarketKitDelete from './kitbag/market/MarketKitDelete';
-import SettingsPage from './account/SettingsPage';
-import AccountPage from './accounts/AccountPage';
-import AccountMemberInvite from './accounts/AccountMemberInvite';
-import AccountMemberAccept from './accounts/AccountMemberAccept';
-import AccountMemberJoin from './accounts/AccountMemberJoin';
+import SettingsPage from './kitbag/SettingsPage';
+import KitbagPage from './kitbags/KitbagPage';
+import KitbagMemberInvite from './kitbags/KitbagMemberInvite';
+import KitbagMemberAccept from './kitbags/KitbagMemberAccept';
+import KitbagMemberJoin from './kitbags/KitbagMemberJoin';
 import LearnMore from './learn/LearnMore';
 import BetaAnnouncement from './home/BetaAnnouncement';
 import GroupMemberDelete from './group/GroupMemberDelete';
-import DeleteUser from './account/DeleteUser';
+import DeleteUser from './kitbag/DeleteUser';
 import { connect } from 'react-redux';
 import { TERMSCONDITIONS, PRIVACYPOLICY } from './site/content-types';
 
@@ -128,38 +128,38 @@ const App = ({ auth }) => {
             <Route path="/market" component={MarketItems} />
 
             <PrivateRoute
-              path="/kitbag/kit/:accountId/new"
+              path="/kitbag/kit/:kitbagId/new"
               component={KitPage}
             />
             <PrivateRoute
-              path="/kitbag/kit/:accountId/edit/:kitId"
+              path="/kitbag/kit/:kitbagId/edit/:kitId"
               exact
               component={KitPage}
             />
             <PrivateRoute
-              path="/kitbag/kit/:accountId/delete/:kitId"
+              path="/kitbag/kit/:kitbagId/delete/:kitId"
               exact
               component={KitDelete}
             />
-            <PrivateRoute path="/kitbag/kit/:accountId" component={KitBag} />
+            <PrivateRoute path="/kitbag/kit/:kitbagId" component={KitBag} />
 
             <PrivateRoute
-              path="/kitbag/market/:accountId/new"
+              path="/kitbag/market/:kitbagId/new"
               exact
               component={MarketKitPage}
             />
             <PrivateRoute
-              path="/kitbag/market/:accountId/add/:kitId/:marketType"
+              path="/kitbag/market/:kitbagId/add/:kitId/:marketType"
               exact
               component={MarketKitPage}
             />
             <PrivateRoute
-              path="/kitbag/market/:accountId/edit/:marketId"
+              path="/kitbag/market/:kitbagId/edit/:marketId"
               exact
               component={MarketKitPage}
             />
             <PrivateRoute
-              path="/kitbag/market/:accountId/delete/:marketId"
+              path="/kitbag/market/:kitbagId/delete/:marketId"
               exact
               component={MarketKitDelete}
             />
@@ -201,17 +201,17 @@ const App = ({ auth }) => {
             <PrivateRoute path="/groups/:groupId" exact component={GroupPage} />
             <PrivateRoute path="/groups" component={Groups} />
 
-            <PrivateRoute path="/accounts/new" component={AccountPage} />
-            <PrivateRoute path="/accounts/join" component={AccountMemberJoin} />
+            <PrivateRoute path="/kitbags/new" component={KitbagPage} />
+            <PrivateRoute path="/kitbags/join" component={KitbagMemberJoin} />
             <PrivateRoute
-              path="/accounts/:accountId/invite"
-              component={AccountMemberInvite}
+              path="/kitbags/:kitbagId/invite"
+              component={KitbagMemberInvite}
             />
             <PrivateRoute
-              path="/accounts/:accountId/member/accept/:email/:token"
-              component={AccountMemberAccept}
+              path="/kitbags/:kitbagId/member/accept/:email/:token"
+              component={KitbagMemberAccept}
             />
-            <PrivateRoute path="/accounts/:accountId" component={AccountPage} />
+            <PrivateRoute path="/kitbags/:kitbagId" component={KitbagPage} />
 
             <PrivateRoute
               path="/settings/user/:userId/delete"

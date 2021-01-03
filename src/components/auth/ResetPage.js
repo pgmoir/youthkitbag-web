@@ -19,7 +19,7 @@ const ResetPage = () => {
             you will be sent a link to create a new password. Please be aware
             that this link is time limited, and will expire in an hour after
             sending. If actually you know you&apos;re password,{' '}
-            <Link to="/auth/login">login direct to your account</Link>.
+            <Link to="/auth/login">login direct to your kitbag</Link>.
           </p>
           <div className="row">
             <div className="col-12 col-md-6 mb-3 mx-auto">

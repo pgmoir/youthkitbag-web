@@ -25,7 +25,7 @@ export const fetchShowGroup = (groupId) => (dispatch) => {
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push('/auth/login?return=/groups/view');
       }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
     });
 };
 
@@ -79,6 +79,6 @@ export const fetchShowGroupMarket = (groupId, by) => (dispatch) => {
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push('/auth/login?return=/groups/view');
       }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
     });
 };

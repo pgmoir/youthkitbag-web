@@ -1,9 +1,9 @@
 import axios from '../utils/axios';
 import { ADD_IMAGE, CLEAR_NEW_IMAGES, API_KITBAG_ERROR } from './types';
 
-export const addImage = (accountId, formData) => (dispatch) => {
+export const addImage = (kitbagId, formData) => (dispatch) => {
   axios
-    .post(`/image/${accountId}/add`, formData, {})
+    .post(`/image/${kitbagId}/add`, formData, {})
     .then((response) => {
       dispatch({ type: ADD_IMAGE, payload: response.data });
     })

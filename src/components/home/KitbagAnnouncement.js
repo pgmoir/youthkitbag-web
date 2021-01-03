@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 /* 
-  For users that have neither set up an account, or do not belong to an account, then 
+  For users that have neither set up an kitbag, or do not belong to an kitbag, then 
   we recommend setting up or joining one.
 */
-const AccountAnnouncement = ({ accountId, loading }) => {
-  if (accountId) return null;
+const KitbagAnnouncement = ({ kitbagId, loading }) => {
+  if (kitbagId) return null;
 
   if (loading) {
     return (
@@ -37,11 +37,11 @@ const AccountAnnouncement = ({ accountId, loading }) => {
           You can either set one up for just yourself, or for your family, or
           there may be one you&apos;d like to join.
         </p>
-        <Link className="btn btn-success" to="/accounts/new">
+        <Link className="btn btn-success" to="/kitbags/new">
           Create a kitbag
         </Link>
         <span className="ml-3">or</span>
-        <Link className="btn btn-link" to="/accounts/join">
+        <Link className="btn btn-link" to="/kitbags/join">
           Join a kitbag
         </Link>
       </div>
@@ -49,4 +49,4 @@ const AccountAnnouncement = ({ accountId, loading }) => {
   );
 };
 
-export default AccountAnnouncement;
+export default KitbagAnnouncement;

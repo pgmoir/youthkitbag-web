@@ -3,27 +3,27 @@ import { connect } from 'react-redux';
 import { getUser } from '../../actions/UserActions';
 import { fetchKitbagLists } from '../../actions/KitbagKitActions';
 
-const mapStateToProps = state => ({
-  accounts: state.user.profile.accounts
+const mapStateToProps = (state) => ({
+  kitbags: state.user.kitbags,
 });
 
 const mapDispatchToProps = {
   getUser,
-  fetchKitbagLists
+  fetchKitbagLists,
 };
 
-const User = ({ accounts, getUser, fetchKitbagLists }) => {
-  const accountId =
-    accounts && accounts.length > 0
-      ? accounts.find(a => a.preferred)._id
+const User = ({ kitbags, getUser, fetchKitbagLists }) => {
+  const kitbagId =
+    kitbags && kitbags.length > 0
+      ? kitbags.find((a) => a.preferred)._id
       : undefined;
 
   useEffect(() => {
     getUser();
-    if (accountId) {
-      fetchKitbagLists(accountId);
+    if (kitbagId) {
+      fetchKitbagLists(kitbagId);
     }
-  }, [getUser, fetchKitbagLists, accountId]);
+  }, [getUser, fetchKitbagLists, kitbagId]);
 
   return null;
 };

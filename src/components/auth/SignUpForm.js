@@ -17,6 +17,9 @@ const SignUpForm = ({ newErrors, signup }) => {
   const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
   const initialValues = {
+    firstName: '',
+    lastName: '',
+    userName: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -35,12 +38,36 @@ const SignUpForm = ({ newErrors, signup }) => {
   }, [newErrors, setErrors]);
 
   function resetSubmit() {
-    const { email, password, confirmPassword } = values;
-    signup(email, password, confirmPassword);
+    signup(values);
   }
 
   return (
     <form className="w-100 d-block" onSubmit={handleSubmit}>
+      <TextForm
+        colFormat="3-9"
+        label="First Name"
+        value={values.firstName}
+        field="firstName"
+        handleChange={handleChange}
+        error={errors.firstName}
+      />
+      <TextForm
+        colFormat="3-9"
+        label="Last Name"
+        value={values.lastName}
+        field="lastName"
+        handleChange={handleChange}
+        error={errors.lastName}
+      />
+      <TextForm
+        colFormat="3-9"
+        label="User Name"
+        value={values.userName}
+        field="userName"
+        handleChange={handleChange}
+        error={errors.userName}
+        autoComplete="username"
+      />
       <TextForm
         colFormat="3-9"
         label="Email"
@@ -49,7 +76,6 @@ const SignUpForm = ({ newErrors, signup }) => {
         field="email"
         handleChange={handleChange}
         error={errors.email}
-        autoComplete="username"
       />
       <TextForm
         colFormat="3-9"

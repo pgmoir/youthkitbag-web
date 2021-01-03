@@ -17,9 +17,9 @@ import {
 } from './types';
 import history from '../utils/history';
 
-export const fetchMarketKit = (accountId, marketId) => (dispatch) => {
+export const fetchMarketKit = (kitbagId, marketId) => (dispatch) => {
   axios
-    .get(`/kitbag/market/${accountId}/${marketId}`, {})
+    .get(`/kitbag/market/${kitbagId}/${marketId}`, {})
     .then((response) => {
       dispatch({ type: FETCH_MARKET_KIT, payload: response.data });
     })
@@ -30,15 +30,15 @@ export const fetchMarketKit = (accountId, marketId) => (dispatch) => {
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(`/auth/login?return=/market`);
       }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
     });
 };
 
-export const fetchMarketKitFromKit = (accountId, kitId, marketType) => (
+export const fetchMarketKitFromKit = (kitbagId, kitId, marketType) => (
   dispatch
 ) => {
   axios
-    .get(`/kitbag/market/${accountId}/add/${kitId}/${marketType}`, {})
+    .get(`/kitbag/market/${kitbagId}/add/${kitId}/${marketType}`, {})
     .then((response) => {
       dispatch({ type: FETCH_MARKET_KIT, payload: response.data });
     })
@@ -47,17 +47,17 @@ export const fetchMarketKitFromKit = (accountId, kitId, marketType) => (
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/market/${accountId}`);
+        history.push(`/auth/login?return=/market/${kitbagId}`);
       }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
     });
 };
 
-export const createMarketKit = (accountId, formValues) => (dispatch) => {
+export const createMarketKit = (kitbagId, formValues) => (dispatch) => {
   axios
-    .post(`/kitbag/market/${accountId}`, { ...formValues }, {})
+    .post(`/kitbag/market/${kitbagId}`, { ...formValues }, {})
     .then((response) => {
-      history.push(`/market/${accountId}`);
+      history.push(`/market/${kitbagId}`);
       dispatch({ type: CREATE_MARKET_KIT, payload: response.data });
     })
     .catch((err) => {
@@ -65,19 +65,17 @@ export const createMarketKit = (accountId, formValues) => (dispatch) => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/market/${accountId}`);
+        history.push(`/auth/login?return=/market/${kitbagId}`);
       }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
     });
 };
 
-export const editMarketKit = (accountId, marketId, formValues) => (
-  dispatch
-) => {
+export const editMarketKit = (kitbagId, marketId, formValues) => (dispatch) => {
   axios
-    .put(`/kitbag/market/${accountId}/${marketId}`, { ...formValues }, {})
+    .put(`/kitbag/market/${kitbagId}/${marketId}`, { ...formValues }, {})
     .then((response) => {
-      history.push(`/market/${accountId}`);
+      history.push(`/market/${kitbagId}`);
       dispatch({ type: EDIT_MARKET_KIT, payload: response.data });
     })
     .catch((err) => {
@@ -87,25 +85,25 @@ export const editMarketKit = (accountId, marketId, formValues) => (
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push('/auth/login?return=/market');
       }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
     });
 };
 
 export const respondToMarketKitThread = (
-  accountId,
+  kitbagId,
   marketId,
   threadId,
   formValues
 ) => (dispatch) => {
   axios
     .put(
-      `/kitbag/market/${accountId}/respond/${marketId}/${threadId}`,
+      `/kitbag/market/${kitbagId}/respond/${marketId}/${threadId}`,
       { ...formValues },
       {}
     )
     .then(() => {
       dispatch({ type: RESET_TOAST });
-      dispatch(fetchMarketKit(accountId, marketId));
+      dispatch(fetchMarketKit(kitbagId, marketId));
     })
     .catch((err) => {
       const { response } = err;
@@ -113,18 +111,18 @@ export const respondToMarketKitThread = (
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(
-          `/auth/login?return=/kitbag/market/${accountId}/edit/${marketId}`
+          `/auth/login?return=/kitbag/market/${kitbagId}/edit/${marketId}`
         );
       }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
     });
 };
 
-export const deleteMarketKit = (accountId, marketId) => (dispatch) => {
+export const deleteMarketKit = (kitbagId, marketId) => (dispatch) => {
   axios
-    .delete(`/kitbag/market/${accountId}/${marketId}`, {})
+    .delete(`/kitbag/market/${kitbagId}/${marketId}`, {})
     .then((response) => {
-      history.push(`/market/${accountId}`);
+      history.push(`/market/${kitbagId}`);
       dispatch({ type: DELETE_MARKET_KIT, payload: response.data });
     })
     .catch((err) => {
@@ -132,9 +130,9 @@ export const deleteMarketKit = (accountId, marketId) => (dispatch) => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/market/${accountId}`);
+        history.push(`/auth/login?return=/market/${kitbagId}`);
       }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
     });
 };
 

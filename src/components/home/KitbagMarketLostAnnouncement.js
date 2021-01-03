@@ -45,7 +45,7 @@ const KitbagMarketLostAnnouncement = ({
         <Link
           className="a-inherit"
           key={index}
-          to={`/kitbag/market/${m.account}/edit/${m._id}`}
+          to={`/kitbag/market/${m.kitbag}/edit/${m._id}`}
         >
           <div className="bg-white d-flex flex-row align-items-center mb-2">
             <div className="pl-1 py-1 pr-2">

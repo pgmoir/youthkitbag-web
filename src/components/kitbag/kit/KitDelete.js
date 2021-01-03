@@ -18,7 +18,7 @@ const mapDispatchToProps = {
 };
 
 const KitDelete = ({ item, fetchKitbagKit, deleteKitbagKit, match }) => {
-  const { accountId, kitId } = match.params;
+  const { kitbagId, kitId } = match.params;
   const [kit, setKit] = useState({});
 
   useEffect(() => {
@@ -28,10 +28,10 @@ const KitDelete = ({ item, fetchKitbagKit, deleteKitbagKit, match }) => {
   }, [item, setKit]);
 
   useEffect(() => {
-    if (accountId && kitId) {
-      fetchKitbagKit(accountId, kitId);
+    if (kitbagId && kitId) {
+      fetchKitbagKit(kitbagId, kitId);
     }
-  }, [accountId, kitId, fetchKitbagKit]);
+  }, [kitbagId, kitId, fetchKitbagKit]);
 
   function renderTitle() {
     if (!kit._id) {
@@ -51,7 +51,7 @@ const KitDelete = ({ item, fetchKitbagKit, deleteKitbagKit, match }) => {
     return (
       <React.Fragment>
         <Link
-          to={`/kitbag/kit/${accountId}`}
+          to={`/kitbag/kit/${kitbagId}`}
           className="btn btn-outline-secondary"
           data-dismiss="modal"
         >
@@ -60,7 +60,7 @@ const KitDelete = ({ item, fetchKitbagKit, deleteKitbagKit, match }) => {
         <button
           type="button"
           className="btn btn-danger"
-          onClick={() => deleteKitbagKit(accountId, kitId)}
+          onClick={() => deleteKitbagKit(kitbagId, kitId)}
         >
           Delete
         </button>
@@ -73,7 +73,7 @@ const KitDelete = ({ item, fetchKitbagKit, deleteKitbagKit, match }) => {
       title={renderTitle()}
       content={renderContent()}
       actions={renderActions()}
-      onDismiss={() => history.push(`/kitbag/kit/${accountId}`)}
+      onDismiss={() => history.push(`/kitbag/kit/${kitbagId}`)}
     />
   );
 };

@@ -60,7 +60,7 @@ export const fetchGroup = (groupId) => (dispatch) => {
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push('/auth/login?return=/groups/view');
       }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
     });
 };
 
@@ -79,7 +79,7 @@ export const createGroup = (formValues) => (dispatch) => {
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push('/auth/login?return=/groups');
       }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
     });
 };
 
@@ -97,7 +97,7 @@ export const editGroup = (groupId, formValues) => (dispatch) => {
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push('/auth/login?return=/groups');
       }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
     });
 };
 
@@ -117,7 +117,7 @@ export const editGroupStatus = (groupId, status) => (dispatch) => {
           '/auth/login?return=/groups?searchfor=&by=&page=1&pagesize=24'
         );
       }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
     });
 };
 
@@ -174,7 +174,7 @@ export const editGroupMemberState = (groupId, memberId, state) => (
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(`/auth/login?return=/groups/${groupId}/members`);
       }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
     });
 };
 
@@ -192,7 +192,7 @@ export const deleteGroupMember = (groupId, memberId) => (dispatch) => {
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(`/auth/login?return=/groups/${groupId}/members`);
       }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
     });
 };
 
@@ -211,7 +211,7 @@ export const requestGroupJoin = (groupId) => (dispatch) => {
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(`/auth/login?return=/groups/${groupId}`);
       }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
       history.push(`/groups/${groupId}`);
     });
 };
@@ -230,7 +230,7 @@ export const requestGroupLeave = (groupId) => (dispatch) => {
         dispatch({ type: GETALL_FAILURE, payload: response });
         history.push(`/auth/login?return=/groups/${groupId}`);
       }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
     });
 };
 

@@ -1,22 +1,22 @@
 import {
-  FETCH_ACCOUNT,
-  FETCH_ACCOUNT_MEMBERS,
+  FETCH_KITBAG,
+  FETCH_KITBAG_MEMBERS,
   LOGOUT,
-  CLEAR_ACCOUNT
+  CLEAR_KITBAG,
 } from '../actions/types';
 
 const initialState = { current: {}, memberList: {} };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_ACCOUNT:
+    case FETCH_KITBAG:
       return {
         current: action.payload,
-        memberList: {}
+        memberList: {},
       };
-    case FETCH_ACCOUNT_MEMBERS:
+    case FETCH_KITBAG_MEMBERS:
       return { ...state, memberList: action.payload };
-    case CLEAR_ACCOUNT:
+    case CLEAR_KITBAG:
     case LOGOUT:
       return initialState;
     default:

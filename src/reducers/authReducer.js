@@ -10,7 +10,7 @@ import {
 } from '../actions/types';
 
 const isLogin = !!(
-  localStorage.getItem('auth-token') && localStorage.getItem('authentication')
+  localStorage.getItem('authToken') && localStorage.getItem('authentication')
 );
 const initialState = isLogin ? { loggedIn: true } : { loggedIn: false };
 

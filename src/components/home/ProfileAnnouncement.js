@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ProfileAnnouncement = ({ profile }) => {
+const ProfileAnnouncement = ({ user }) => {
   function profileComplete() {
-    const { firstname, lastname, username, activitys } = profile;
-    return firstname && lastname && username && activitys.length > 0;
+    const { firstname, lastname, username, custom } = user;
+    return firstname && lastname && username && custom.activitys.length > 0;
   }
 
   if (profileComplete()) return null;
@@ -19,7 +19,7 @@ const ProfileAnnouncement = ({ profile }) => {
           It always helps to add a few extra details, so that we can identify
           more relevant resources to show you.
         </p>
-        <Link className="btn btn-warning" to="/settings/profile">
+        <Link className="btn btn-warning" to="/settings">
           Update profile
         </Link>
       </div>

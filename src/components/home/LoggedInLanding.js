@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {
   userHasGroupMembership,
   userHasGroupAdministration,
-  userPreferredAccountId,
+  userPreferredKitbagId,
 } from '../../utils/user';
 import ProfileAnnouncement from './ProfileAnnouncement';
 import KitbagKitAnnouncement from './KitbagKitAnnouncement';
@@ -16,7 +16,7 @@ import KitbagMarketLostAnnouncement from './KitbagMarketLostAnnouncement';
 import KitbagMarketStolenAnnouncement from './KitbagMarketStolenAnnouncement';
 import KitbagMarketWantedAnnouncement from './KitbagMarketWantedAnnouncement';
 import GroupAnnouncement from './GroupAnnouncement';
-import AccountAnnouncement from './AccountAnnouncement';
+import KitbagAnnouncement from './KitbagAnnouncement';
 import KitbagKitAddMoreAdvice from './KitbagKitAddMoreAdvice';
 import WelcomeAnnouncement from './WelcomeAnnouncement';
 import GroupsMemberRequestsAnnouncement from './GroupsMemberRequestsAnnouncement';
@@ -27,20 +27,20 @@ const mapStateToProps = (state) => ({
 
 const LoggedInLanding = ({ user }) => {
   const [loading, setLoading] = useState(true);
-  const [preferredAccountId, setPreferredAccountId] = useState(null);
+  const [preferredKitbagId, setPreferredKitbagId] = useState(null);
   const [hasGroupMembership, setHasGroupMembership] = useState(false);
   const [hasGroupAdministration, setHasGroupAdministration] = useState(false);
 
   const group =
-    user.profile.groups && user.profile.groups.length > 0
-      ? user.profile.groups
+    user.groups && user.groups.length > 0
+      ? user.groups
           .filter((g) => g.status === 'approved')
           .find((a) => a.member.state === 'approved')
       : undefined;
 
   useEffect(() => {
     if (user) {
-      setPreferredAccountId(userPreferredAccountId(user));
+      setPreferredKitbagId(userPreferredKitbagId(user));
       setHasGroupMembership(userHasGroupMembership(user));
       setHasGroupAdministration(userHasGroupAdministration(user));
       setLoading(false);
@@ -60,18 +60,18 @@ const LoggedInLanding = ({ user }) => {
           <Alert />
           <div className="row">
             <div className="card-columns">
-              <AccountAnnouncement
+              <KitbagAnnouncement
                 loading={loading}
-                accountId={preferredAccountId}
+                kitbagId={preferredKitbagId}
               />
-              <ProfileAnnouncement profile={user.profile} />
+              <ProfileAnnouncement user={user} />
               <GroupAnnouncement
                 loading={loading}
                 hasGroupMembership={hasGroupMembership}
               />
               {hasGroupAdministration && <GroupsMemberRequestsAnnouncement />}
-              <KitbagKitAddMoreAdvice accountId={preferredAccountId} />
-              <KitbagKitAnnouncement accountId={preferredAccountId} />
+              <KitbagKitAddMoreAdvice kitbagId={preferredKitbagId} />
+              <KitbagKitAnnouncement kitbagId={preferredKitbagId} />
               <KitbagMarketTradeAnnouncement group={group} />
               <KitbagMarketRecycleAnnouncement group={group} />
               <KitbagMarketFoundAnnouncement group={group} />

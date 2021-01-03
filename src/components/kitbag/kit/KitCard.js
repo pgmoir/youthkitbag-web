@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const KitCard = ({ kit, accountId }) => {
+const KitCard = ({ kit, kitbagId }) => {
   function totalQuantity() {
     const { inbag } = kit;
     if (!inbag) {
       return 0;
     }
-    return inbag.reduce(function(x, y) {
+    return inbag.reduce(function (x, y) {
       return x + y.quantity;
     }, 0);
   }
@@ -44,7 +44,7 @@ const KitCard = ({ kit, accountId }) => {
     <div className="col-6 col-sm-4 col-md-3 mb-3">
       <article className="card card-link card-b1">
         <span className="icons-top-left pt-1">
-          <Link to={`/kitbag/kit/${accountId}/delete/${_id}`}>
+          <Link to={`/kitbag/kit/${kitbagId}/delete/${_id}`}>
             <span
               className="icon-tray-item fas fa-trash-alt"
               title="Delete kit item"
@@ -54,7 +54,7 @@ const KitCard = ({ kit, accountId }) => {
         <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">
           {totalQuantity()}
         </span>
-        <Link to={`/kitbag/kit/${accountId}/edit/${_id}`}>
+        <Link to={`/kitbag/kit/${kitbagId}/edit/${_id}`}>
           <img
             className="card-img-top"
             src={topImage()}

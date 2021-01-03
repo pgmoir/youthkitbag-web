@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { Link } from 'react-router-dom';
-import { requestToJoinAccount } from '../../actions/AccountActions';
+import { requestToJoinKitbag } from '../../actions/KitbagActions';
 import { TextForm } from '../includes/forms';
 import ModalWithForm from '../includes/ModalWithForm';
 import history from '../../utils/history';
@@ -13,10 +13,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  requestToJoinAccount,
+  requestToJoinKitbag,
 };
 
-const AccountMemberJoin = ({ newErrors, requestToJoinAccount }) => {
+const KitbagMemberJoin = ({ newErrors, requestToJoinKitbag }) => {
   const request = { email: '' };
 
   const { handleChange, handleSubmit, values, errors, setErrors } = useForm(
@@ -33,18 +33,18 @@ const AccountMemberJoin = ({ newErrors, requestToJoinAccount }) => {
 
   function sendRequest() {
     if (values.email) {
-      requestToJoinAccount(values.email);
+      requestToJoinKitbag(values.email);
     }
   }
   function renderTitle() {
-    return 'Request to join account';
+    return 'Request to join kitbag';
   }
 
   function renderContent() {
     return (
       <React.Fragment>
         <p>
-          Enter the email of the person who has the account to which you&apos;d
+          Enter the email of the person who has the kitbag to which you&apos;d
           like to join.
         </p>
         <TextForm
@@ -87,4 +87,4 @@ const AccountMemberJoin = ({ newErrors, requestToJoinAccount }) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountMemberJoin);
+export default connect(mapStateToProps, mapDispatchToProps)(KitbagMemberJoin);

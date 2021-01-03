@@ -5,7 +5,7 @@ import { fetchGroup } from '../../actions/GroupActions';
 import GroupForm from './GroupForm';
 import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
-import GroupsHelp from '../account/GroupsHelp';
+import GroupsHelp from '../kitbag/GroupsHelp';
 import GroupDisplay from './GroupDisplay';
 
 const mapStateToProps = (state) => ({

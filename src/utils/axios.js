@@ -2,11 +2,8 @@ import axios from 'axios';
 import { getHeaders } from './auth/getHeaders';
 import { updateTokens } from './auth/updateTokens';
 
-// https://github.com/axios/axios/issues/1383
-const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
-
 const customAxios = axios.create({
-  baseURL: baseUrl,
+  baseURL: process.env.REACT_APP_YKBAPI,
 });
 
 customAxios.interceptors.response.use((response) => {

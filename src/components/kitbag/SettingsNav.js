@@ -13,10 +13,10 @@ const SettingsNav = ({ page, fill }) => {
       </div>
       <div
         className={`list-group-item ${fill} ${
-          page === 'accounts' ? 'active' : ''
+          page === 'kitbags' ? 'active' : ''
         }`}
       >
-        <Link to="/settings/accounts">Accounts</Link>
+        <Link to="/settings/kitbags">Kitbags</Link>
       </div>
       <div
         className={`list-group-item ${fill} ${

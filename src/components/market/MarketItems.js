@@ -27,7 +27,7 @@ const MarketItems = ({
   match,
 }) => {
   const [search, setSearch] = useState(stateSearch);
-  const accountId = match.params.accountId;
+  const kitbagId = match.params.kitbagId;
   const [marketItems, setMarketItems] = useState([]);
 
   useEffect(() => {
@@ -79,7 +79,7 @@ const MarketItems = ({
         <MarketItemCard
           key={`${item._id}-${index}`}
           market={item}
-          accountId={accountId}
+          kitbagId={kitbagId}
         />
       );
     });
@@ -98,7 +98,7 @@ const MarketItems = ({
           <div className="row">
             <div className="col-12 col-sm-9">
               <SearchForm
-                searchId={accountId}
+                searchId={kitbagId}
                 search={search}
                 callback={setSearch}
                 collections={lists}
@@ -107,7 +107,7 @@ const MarketItems = ({
           </div>
           <div className="row">{renderList()}</div>
           <Pagination
-            accountId={accountId}
+            kitbagId={kitbagId}
             search={search}
             callback={setSearch}
           />

@@ -31,7 +31,7 @@ const mapDispatchToProps = {
 };
 
 const KitForm = ({
-  accountId,
+  kitbagId,
   kit,
   kitbagLists,
   newErrors,
@@ -89,16 +89,16 @@ const KitForm = ({
 
   function updateKit() {
     if (values._id) {
-      editKitbagKit(accountId, values._id, values);
+      editKitbagKit(kitbagId, values._id, values);
     } else {
-      createKitbagKit(accountId, values);
+      createKitbagKit(kitbagId, values);
     }
   }
 
   return (
     <div className="row">
       <ImagesForm
-        accountId={accountId}
+        kitbagId={kitbagId}
         values={values}
         setChange={setChange}
         addArrayItem={addArrayItem}
@@ -349,7 +349,7 @@ const KitForm = ({
             <button className="btn btn-primary" type="submit">
               Save
             </button>
-            <Link className="btn btn-link" to={`/kitbag/kit/${accountId}`}>
+            <Link className="btn btn-link" to={`/kitbag/kit/${kitbagId}`}>
               Cancel
             </Link>
           </div>
