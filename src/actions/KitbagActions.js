@@ -125,26 +125,6 @@ export const editKitbag = (kitbagId, formValues) => (dispatch) => {
     });
 };
 
-export const editKitbagCustomisation = (kitbagId, formValues) => (dispatch) => {
-  axios
-    .put(`/kitbag/${kitbagId}/customisation`, { ...formValues }, {})
-    .then((response) => {
-      history.push(`/kitbag/${kitbagId}/customisation`);
-      dispatch({ type: EDIT_KITBAG, payload: response.data });
-      dispatch(fetchKitbag(kitbagId));
-      dispatch(getUser());
-    })
-    .catch((err) => {
-      const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/settings/kitbags');
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
-    });
-};
-
 export const editKitbagState = (kitbagId, state) => (dispatch) => {
   axios
     .put(`/kitbag/${kitbagId}/state`, { state: state }, {})

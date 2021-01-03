@@ -28,7 +28,7 @@ const GroupPage = ({ current, fetchGroup, match }) => {
     email: '',
     website: '',
     location: '',
-    activitys: '',
+    activitys: [],
     images: [],
     topImage: '/images/default.png',
     imagesToUpload: 0,

@@ -59,10 +59,16 @@ const GroupForm = ({
   }, [group, setValues]);
 
   function updateGroup() {
+    const formValues = {
+      ...values,
+      activitys: Array.isArray(values.activitys)
+        ? values.activitys
+        : values.activitys.split(','),
+    };
     if (values._id) {
-      editGroup(values._id, values);
+      editGroup(formValues._id, formValues);
     } else {
-      createGroup(values);
+      createGroup(formValues);
     }
   }
 
@@ -89,6 +95,7 @@ const GroupForm = ({
         addArrayItem={addArrayItem}
         error={errors.images}
       />
+      .
       <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
         <form className="mb-3" onSubmit={handleSubmit}>
           <TextForm
