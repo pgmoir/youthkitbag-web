@@ -27,7 +27,7 @@ export const fetchGroups = ({ by, searchfor, page, pagesize, pushHistory }) => (
       params: { searchfor, by, page, pagesize },
     })
     .then((response) => {
-      dispatch({ type: FETCH_GROUPS, payload: response.data });
+      dispatch({ type: FETCH_GROUPS, payload: response.data.data });
       dispatch({
         type: SEARCH_GROUPS,
         payload: { searchfor, by, page, pagesize },

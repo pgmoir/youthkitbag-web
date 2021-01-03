@@ -79,7 +79,7 @@ const LoginForm = ({ referrer, newErrors, login }) => {
           field="email"
           handleChange={handleChange}
           error={errors.email}
-          autoComplete="username email"
+          autoComplete="userName email"
         />
         <TextForm
           colFormat="3-9"

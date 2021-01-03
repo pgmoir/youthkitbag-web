@@ -55,7 +55,7 @@ const GroupsMemberRequestsAnnouncement = ({
                   <img
                     className="img-avatar-lg img-thumbnail img-link rounded-circle p-0 m-1"
                     src={m.user.image}
-                    alt={m.user.username}
+                    alt={m.user.userName}
                   />
                 </span>
               );

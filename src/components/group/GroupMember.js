@@ -88,12 +88,12 @@ const GroupMember = ({ groupId, member, groupMember, groupAdmin }) => {
         </div>
         <div className="card-body">
           <h3 className="card-title h4 text-truncate">
-            {user.lastname
-              ? `${user.lastname.toUpperCase()}, ${user.firstname}`
+            {user.lastName
+              ? `${user.lastName.toUpperCase()}, ${user.firstName}`
               : 'UNKNOWN'}
           </h3>
           <h4 className="card-title h5 ellipsis">
-            {user.username ? user.username : 'Username ?'}
+            {user.userName ? user.userName : 'Username ?'}
           </h4>
           <p className="card-text">
             {roles.length > 0 ? roles.join(', ') : '-'}

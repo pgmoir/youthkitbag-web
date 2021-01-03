@@ -44,11 +44,17 @@ const UserForm = ({ user, newErrors, editUser, loadSettingsPage }) => {
   }, [user, setValues]);
 
   function updateUser() {
-    editUser(values._id, values);
+    const formValues = {
+      ...values,
+      activitys: Array.isArray(values.activitys)
+        ? values.activitys
+        : values.activitys.split(','),
+    };
+    editUser(formValues);
   }
 
   function cancelPage() {
-    loadSettingsPage('/settings');
+    loadSettingsPage('/settings/user');
   }
 
   return (
@@ -64,26 +70,26 @@ const UserForm = ({ user, newErrors, editUser, loadSettingsPage }) => {
           <TextForm
             colFormat="3-9"
             label="First Name"
-            value={values.firstname}
-            field="firstname"
+            value={values.firstName}
+            field="firstName"
             handleChange={handleChange}
-            error={errors.firstname}
+            error={errors.firstName}
           />
           <TextForm
             colFormat="3-9"
             label="Last Name"
-            value={values.lastname}
-            field="lastname"
+            value={values.lastName}
+            field="lastName"
             handleChange={handleChange}
-            error={errors.lastname}
+            error={errors.lastName}
           />
           <TextForm
             colFormat="3-9"
             label="Username"
-            value={values.username}
-            field="username"
+            value={values.userName}
+            field="userName"
             handleChange={handleChange}
-            error={errors.username}
+            error={errors.userName}
           />
           <hr />
           <TextForm

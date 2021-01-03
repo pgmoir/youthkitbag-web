@@ -66,7 +66,7 @@ const GroupForm = ({
         : values.activitys.split(','),
     };
     if (values._id) {
-      editGroup(formValues._id, formValues);
+      editGroup(values._id, formValues);
     } else {
       createGroup(formValues);
     }

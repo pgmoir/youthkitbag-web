@@ -66,7 +66,7 @@ const SignUpForm = ({ newErrors, signup }) => {
         field="userName"
         handleChange={handleChange}
         error={errors.userName}
-        autoComplete="username"
+        autoComplete="userName"
       />
       <TextForm
         colFormat="3-9"

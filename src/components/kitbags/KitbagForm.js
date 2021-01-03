@@ -160,11 +160,11 @@ const KitbagForm = ({
                       colFormat="a-2"
                       value={
                         values.members[index].user
-                          ? values.members[index].user.username
+                          ? values.members[index].user.userName
                           : ''
                       }
                       label="Username"
-                      field={`members[${index}].user.username`}
+                      field={`members[${index}].user.userName`}
                       readOnly={true}
                       index={index}
                     />

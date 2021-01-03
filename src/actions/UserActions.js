@@ -16,9 +16,8 @@ export const getUser = () => (dispatch) => {
   axios
     .get(`/user`, {})
     .then((response) => {
-      const { data } = response;
       dispatch({ type: GETALL_SUCCESS });
-      dispatch({ type: GET_USER, payload: data.data });
+      dispatch({ type: GET_USER, payload: response.data.data });
       dispatch(fetchPreferredKitbag());
     })
     .catch(() => {});
@@ -28,16 +27,15 @@ export const editUser = (formValues) => (dispatch) => {
   axios
     .put('/user', { ...formValues }, {})
     .then((response) => {
-      history.push('/settings');
-      dispatch({ type: EDIT_USER, payload: response.data });
-      dispatch(getUser());
+      history.push('/settings/user');
+      dispatch({ type: EDIT_USER, payload: response.data.data });
     })
     .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/settings');
+        history.push('/auth/login?return=/settings/user');
       }
       dispatch({ type: API_USER_ERROR, payload: response.data });
     });
@@ -49,14 +47,14 @@ export const deleteUser = (formValues) => (dispatch) => {
     .then(() => {
       window.localStorage.clear();
       dispatch({ type: RESET });
-      history.push('/auth/login?return=/settings');
+      history.push('/auth/login?return=/settings/user');
     })
     .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/settings');
+        history.push('/auth/login?return=/settings/user');
       }
       dispatch({ type: API_USER_ERROR, payload: response.data });
     });
@@ -66,10 +64,7 @@ export const editPreferredKitbag = ({ kitbagId }, { url }) => (dispatch) => {
   axios
     .put(`/user/kitbag/${kitbagId}`, {}, {})
     .then((response) => {
-      dispatch({ type: EDIT_USER, payload: response.data });
-      //TODO: Im really not sure why we need to reset here - Ive removed it from hideFlag action
-      dispatch({ type: RESET });
-      dispatch(getUser());
+      dispatch({ type: EDIT_USER, payload: response.data.data });
       if (url) history.push(url);
     })
     .catch((err) => {
@@ -94,7 +89,7 @@ export const hideFlag = (name, hide) => (dispatch) => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/settings');
+        history.push('/auth/login?return=/settings/user');
       }
       dispatch({ type: API_USER_ERROR, payload: response.data });
     });
@@ -112,7 +107,7 @@ export const resetFlags = () => (dispatch) => {
       if (response.status === 401) {
         window.localStorage.clear();
         dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/settings');
+        history.push('/auth/login?return=/settings/user');
       }
       dispatch({ type: API_USER_ERROR, payload: response.data });
     });

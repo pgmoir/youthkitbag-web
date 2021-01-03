@@ -57,7 +57,7 @@ const DeleteUser = ({ newErrors, deleteUser, match }) => {
           field="email"
           handleChange={handleChange}
           error={errors.email}
-          autoComplete="username email"
+          autoComplete="userName email"
         />
       </React.Fragment>
     );

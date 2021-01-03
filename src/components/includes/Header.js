@@ -75,7 +75,7 @@ const Header = ({ auth, user }) => {
                     </li>
                   )}
                   <li className="nav-item">
-                    <Link className="nav-link d-inline" to="/settings">
+                    <Link className="nav-link d-inline" to="/settings/user">
                       <img
                         src={
                           user.images && user.images.length > 0
