@@ -66,7 +66,6 @@ export const authenticateToken = (token) => (dispatch) => {
 };
 
 export const signup = (formValues) => (dispatch) => {
-  console.log('FV', formValues);
   window.localStorage.clear();
   const { kitbagId } = formValues;
   const signupUrl = kitbagId ? `/auth/signup/${kitbagId}` : 'auth/signup';
