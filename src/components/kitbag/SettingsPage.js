@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
 import Title from '../includes/title/Title';
@@ -18,10 +18,7 @@ const mapStateToProps = (state) => ({
 });
 
 const SettingsPage = ({ user }) => {
-  const [page, setPage] = useState(null);
-
   const User = () => {
-    setPage('user');
     return (
       <div className="container">
         <h2>User</h2>
@@ -32,7 +29,6 @@ const SettingsPage = ({ user }) => {
   };
 
   const Kitbags = () => {
-    setPage('kitbags');
     return (
       <div className="container">
         <h2>Kitbags</h2>
@@ -43,7 +39,6 @@ const SettingsPage = ({ user }) => {
   };
 
   const Groups = () => {
-    setPage('groups');
     return (
       <div className="container">
         <h2>Groups</h2>
@@ -54,7 +49,6 @@ const SettingsPage = ({ user }) => {
   };
 
   const Bundle = () => {
-    setPage('bundle');
     return (
       <div className="container">
         <h2>Bundle</h2>
@@ -64,7 +58,6 @@ const SettingsPage = ({ user }) => {
   };
 
   const Configuration = () => {
-    setPage('configuration');
     return (
       <div className="container">
         <h2>Configuration</h2>
@@ -81,10 +74,10 @@ const SettingsPage = ({ user }) => {
         <div className="row">
           <div className="col-12 col-md-2 mb-3">
             <div className="d-flex d-md-none list-group list-group-horizontal">
-              <SettingsNav page={page} fill="flex-fill" />
+              <SettingsNav fill="flex-fill" />
             </div>
             <div className="d-none d-md-flex list-group">
-              <SettingsNav page={page} />
+              <SettingsNav />
             </div>
           </div>
           <div className="col-12 col-md-10">

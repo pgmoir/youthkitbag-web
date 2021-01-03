@@ -470,6 +470,7 @@ $jumbotron-h4-size: 1.1rem;
 .list-group {
   .list-group-item {
     &.active {
+      color: $dark;
       border-right: 0.25rem solid $dark;
       background-color: $affair-20;
     }
@@ -479,6 +480,7 @@ $jumbotron-h4-size: 1.1rem;
 .list-group.list-group-horizontal {
   .list-group-item {
     &.active {
+      color: $dark;
       border-right: 1px solid $dark;
       border-bottom: 0.25rem solid $dark;
       background-color: $affair-20;

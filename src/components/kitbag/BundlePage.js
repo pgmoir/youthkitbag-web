@@ -65,8 +65,8 @@ const BundlePage = ({ userBundle }) => {
                 </tr>
                 <tr>
                   <td>Group Admins</td>
-                  <td>{userBundle.size.groupadmins}</td>
-                  <td>{userBundle.max.groupadmins}</td>
+                  <td>{userBundle.size.groupAdmins}</td>
+                  <td>{userBundle.max.groupAdmins}</td>
                 </tr>
                 <tr>
                   <td>Kitbags</td>
@@ -75,8 +75,8 @@ const BundlePage = ({ userBundle }) => {
                 </tr>
                 <tr>
                   <td>Kitbag Admins</td>
-                  <td>{userBundle.size.kitbagadmins}</td>
-                  <td>{userBundle.max.kitbagadmins}</td>
+                  <td>{userBundle.size.kitbagAdmins}</td>
+                  <td>{userBundle.max.kitbagAdmins}</td>
                 </tr>
               </tbody>
             </table>

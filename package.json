@@ -5,7 +5,10 @@
   "dependencies": {
     "autotrack": "^2.4.1",
     "axios": "^0.19.2",
-    "lodash": "^4.17.15",
+    "bson-objectid": "^1.3.1",
+    "classnames": "^2.2.6",
+    "lodash": "^4.17.20",
+    "node-sass": "^4.14.1",
     "query-string": "^6.11.1",
     "react": "^16.13.1",
     "react-cookie-consent": "^3.0.0",
@@ -16,14 +19,16 @@
     "react-scripts": "^3.4.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "serve": "^11.3.0"
+    "serve": "^11.3.2",
+    "uuid": "^8.3.1"
   },
   "scripts": {
     "format": "prettier \"src/**/*.{js,html}\" --write",
     "lint": "eslint \"src/**/*.{js,jsx}\"",
     "start": "serve -s build",
-    "dev": "react-scripts start",
-    "build": "react-scripts build",
+    "dev": "REACT_APP_ENV=development react-scripts start",
+    "build": "REACT_APP_ENV=production GENERATE_SOURCEMAP=false react-scripts build",
+    "build:test": "REACT_APP_ENV=test GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sass": "sass src/scss/youthkitbag.scss public/css/youthkitbag.css & sass src/scss/custom.scss public/css/custom.css"
@@ -44,6 +49,8 @@
     ]
   },
   "devDependencies": {
+    "@commitlint/cli": "^9.1.2",
+    "@commitlint/config-conventional": "^9.1.2",
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@testing-library/react": "^10.0.2",
     "babel-eslint": "^10.1.0",
@@ -53,10 +60,17 @@
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
-    "jquery": "^3.4.1",
+    "husky": "^4.2.5",
+    "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
     "prettier": "^2.0.2",
+    "react-router-hash-link": "^1.2.2",
     "react-test-renderer": "^16.13.1",
     "typescript": "^3.8.3"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   }
 }

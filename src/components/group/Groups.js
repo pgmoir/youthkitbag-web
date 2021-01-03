@@ -83,7 +83,7 @@ const Groups = ({
   function renderAddNewButton() {
     if (
       !userBundle ||
-      userBundle.max.groupadmins <= userBundle.size.groupadmins
+      userBundle.max.groupAdmins <= userBundle.size.groupAdmins
     )
       return null;
 

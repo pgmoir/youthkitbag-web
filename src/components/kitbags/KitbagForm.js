@@ -87,7 +87,7 @@ const KitbagForm = ({
   useEffect(() => {
     if (userBundle && userBundle.max && userBundle.size) {
       setHasKitbagAdmin(
-        userBundle.max.kitbagadmins > userBundle.size.kitbagadmins
+        userBundle.max.kitbagAdmins > userBundle.size.kitbagAdmins
       );
     }
   }, [userBundle, setHasKitbagAdmin]);

@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { trackEvent } from '../../utils/analytics';
 
 const SettingsNav = ({ fill }) => {
   return (
@@ -7,38 +8,26 @@ const SettingsNav = ({ fill }) => {
       <NavLink
         className={`list-group-item ${fill || ''}`}
         activeClassName="active"
-        to="/settings/user"
+        to="/settings/profile"
+        onClick={() => trackEvent('Click profile tab')}
       >
-        User
+        Profile
       </NavLink>
       <NavLink
         className={`list-group-item ${fill || ''}`}
         activeClassName="active"
-        to="/settings/kitbags"
+        to="/settings/workspaces"
       >
-        Kitbags
+        Workspaces
       </NavLink>
-      <NavLink
-        className={`list-group-item ${fill || ''}`}
-        activeClassName="active"
-        to="/settings/groups"
-      >
-        Groups
-      </NavLink>
-      <NavLink
-        className={`list-group-item ${fill || ''}`}
-        activeClassName="active"
-        to="/settings/bundle"
-      >
-        Bundle
-      </NavLink>
-      <NavLink
+      {/* <NavLink
         className={`list-group-item ${fill || ''}`}
         activeClassName="active"
         to="/settings/configuration"
+        onClick={() => trackEvent('Click configure tab')}
       >
         Configuration
-      </NavLink>
+      </NavLink> */}
     </>
   );
 };

@@ -34,9 +34,9 @@ const Bundles = ({ auth, user, bundles, fetchSubscriptionBundles }) => {
       kit,
       market,
       photos,
-      kitbagadmins,
+      kitbagAdmins,
       kitbags,
-      groupadmins,
+      groupAdmins,
       groups,
       name,
       icon,
@@ -71,10 +71,10 @@ const Bundles = ({ auth, user, bundles, fetchSubscriptionBundles }) => {
             <p className="card-text text-center">up to {market} market items</p>
             <p className="card-text text-center">up to {photos} photos</p>
             <p className="card-text text-center">
-              admin {kitbagadmins} kitbags
+              admin {kitbagAdmins} kitbags
             </p>
             <p className="card-text text-center">join {kitbags} kitbags</p>
-            <p className="card-text text-center">admin {groupadmins} groups</p>
+            <p className="card-text text-center">admin {groupAdmins} groups</p>
             <p className="card-text text-center">join {groups} groups</p>
             <hr />
             <h5 className="text-center mb-3">Cost</h5>
