@@ -109,7 +109,7 @@ export const editKitbag = (kitbagId, formValues) => (dispatch) => {
   axios
     .put(`/kitbag/${kitbagId}`, { ...formValues }, {})
     .then((response) => {
-      history.push(`/kitbag/${kitbagId}`);
+      history.push('/settings/kitbag');
       dispatch({ type: EDIT_KITBAG, payload: response.data });
       dispatch(fetchKitbag(kitbagId));
       dispatch(getUser());
