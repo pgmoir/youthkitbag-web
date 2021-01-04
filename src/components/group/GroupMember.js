@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 const GroupMember = ({ groupId, member, groupMember, groupAdmin }) => {
   const { user, roles, state } = member;
 
+  //TODO: fix this
+  groupAdmin = true;
+
   function getThumbnail() {
     return member.user.image;
   }

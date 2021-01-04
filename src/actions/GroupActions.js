@@ -136,7 +136,7 @@ export const fetchGroupMembers = ({
       params: { by, searchfor, page, pagesize, order, direction },
     })
     .then((response) => {
-      dispatch({ type: FETCH_GROUP_MEMBERS, payload: response.data });
+      dispatch({ type: FETCH_GROUP_MEMBERS, payload: response.data.data });
       if (pushHistory) {
         dispatch({
           type: SEARCH_GROUP_MEMBERS,
