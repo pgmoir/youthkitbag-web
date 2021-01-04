@@ -95,7 +95,6 @@ const GroupForm = ({
         addArrayItem={addArrayItem}
         error={errors.images}
       />
-      .
       <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
         <form className="mb-3" onSubmit={handleSubmit}>
           <TextForm
@@ -105,14 +104,6 @@ const GroupForm = ({
             field="name"
             handleChange={handleChange}
             error={errors.name}
-          />
-          <TextForm
-            colFormat="3-9"
-            label="Tagline"
-            value={values.tagline}
-            field="tagline"
-            handleChange={handleChange}
-            error={errors.tagline}
           />
           <TextAreaForm
             colFormat="3-9"
