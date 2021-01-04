@@ -51,7 +51,7 @@ export const fetchGroup = (groupId) => (dispatch) => {
   axios
     .get(`/group/${groupId}`, {})
     .then((response) => {
-      dispatch({ type: FETCH_GROUP, payload: response.data });
+      dispatch({ type: FETCH_GROUP, payload: response.data.data });
     })
     .catch((err) => {
       const { response } = err;
