@@ -21,7 +21,6 @@ const GroupPage = ({ current, fetchGroup, match }) => {
   const [createGroup, setCreateGroup] = useState(false);
   const [group, setGroup] = useState({
     name: '',
-    tagline: '',
     description: '',
     recommendation: '',
     recommendationBy: '',
