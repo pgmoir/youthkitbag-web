@@ -150,10 +150,10 @@ export const setNewPassword = (
     )
     .then((response) => {
       history.push('/auth/login');
-      dispatch({ type: PASSWORD_RESET, payload: response.data });
+      dispatch({ type: PASSWORD_RESET, payload: response.data.data });
     })
     .catch((err) => {
       const { response } = err;
-      dispatch({ type: SIGNUP_FAILURE, payload: response.data.data });
+      dispatch({ type: SIGNUP_FAILURE, payload: response.data });
     });
 };

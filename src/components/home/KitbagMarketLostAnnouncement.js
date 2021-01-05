@@ -37,7 +37,7 @@ const KitbagMarketLostAnnouncement = ({
     return images[0].imageUrl;
   }
 
-  if (!group || !marketItems || totalItems === 0) return null;
+  if (!group || !marketItems) return null;
 
   function renderList() {
     return marketItems.map((m, index) => {

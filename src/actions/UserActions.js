@@ -71,7 +71,7 @@ export const editPreferredKitbag = ({ kitbagId }, { url }) => (dispatch) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
+        dispatch({ type: GETALL_FAILURE, payload: response.data });
         history.push('/auth/login?return=/settings/kitbags');
       }
       dispatch({ type: API_USER_ERROR, payload: response.data });
@@ -88,7 +88,7 @@ export const hideFlag = (name, hide) => (dispatch) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
+        dispatch({ type: GETALL_FAILURE, payload: response.data });
         history.push('/auth/login?return=/settings/user');
       }
       dispatch({ type: API_USER_ERROR, payload: response.data });
@@ -99,14 +99,14 @@ export const resetFlags = () => (dispatch) => {
   axios
     .put('/user/flags/reset', {}, {})
     .then((response) => {
-      dispatch({ type: RESET_USER_FLAGS, payload: response.data });
+      dispatch({ type: RESET_USER_FLAGS, payload: response.data.data });
       dispatch(getUser());
     })
     .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
+        dispatch({ type: GETALL_FAILURE, payload: response.data });
         history.push('/auth/login?return=/settings/user');
       }
       dispatch({ type: API_USER_ERROR, payload: response.data });

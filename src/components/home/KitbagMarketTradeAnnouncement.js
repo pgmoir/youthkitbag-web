@@ -30,7 +30,7 @@ const KitbagMarketTradeAnnouncement = ({
     fetchKitbagMarketItems('trade', 5);
   }, [fetchKitbagMarketItems]);
 
-  if (!group || !marketItems || totalItems === 0) return null;
+  if (!group || !marketItems) return null;
 
   function topImage(images) {
     if (!images || images.length === 0) {

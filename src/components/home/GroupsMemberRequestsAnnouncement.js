@@ -29,8 +29,8 @@ const GroupsMemberRequestsAnnouncement = ({
     }
   }, [groupsMemberRequests]);
 
-  if (!groupsWithMemberRequests || groupsWithMemberRequests.length === 0)
-    return null;
+  // if (!groupsWithMemberRequests || groupsWithMemberRequests.length === 0)
+  //   return null;
 
   const groupsCount = groupsWithMemberRequests.length;
   const requestsCount = groupsWithMemberRequests.reduce(function (total, g) {

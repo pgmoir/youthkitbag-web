@@ -59,7 +59,7 @@ export const fetchKitbagKit = (kitbagId, kitId) => (dispatch) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
+        dispatch({ type: GETALL_FAILURE, payload: response.data });
         history.push(`/auth/login?return=/kitbag/kit/${kitbagId}`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: response.data });
@@ -71,13 +71,13 @@ export const createKitbagKit = (kitbagId, formValues) => (dispatch) => {
     .post(`/kitbag/kit/${kitbagId}`, { ...formValues }, {})
     .then((response) => {
       history.push(`/kitbag/kit/${kitbagId}`);
-      dispatch({ type: CREATE_KITBAG_KIT, payload: response.data });
+      dispatch({ type: CREATE_KITBAG_KIT, payload: response.data.data });
     })
     .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
+        dispatch({ type: GETALL_FAILURE, payload: response.data });
         history.push(`/auth/login?return=/kitbag/kit/${kitbagId}`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: response.data });
@@ -89,13 +89,13 @@ export const editKitbagKit = (kitbagId, kitId, formValues) => (dispatch) => {
     .put(`/kitbag/kit/${kitbagId}/${kitId}`, { ...formValues }, {})
     .then((response) => {
       history.push(`/kitbag/kit/${kitbagId}`);
-      dispatch({ type: EDIT_KITBAG_KIT, payload: response.data });
+      dispatch({ type: EDIT_KITBAG_KIT, payload: response.data.data });
     })
     .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
+        dispatch({ type: GETALL_FAILURE, payload: response.data });
         history.push(`/auth/login?return=/kitbag/kit/${kitbagId}`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: response.data });
@@ -107,13 +107,13 @@ export const deleteKitbagKit = (kitbagId, kitId) => (dispatch) => {
     .delete(`/kitbag/kit/${kitbagId}/${kitId}`, {})
     .then((response) => {
       history.push(`/kitbag/kit/${kitbagId}`);
-      dispatch({ type: DELETE_KITBAG_KIT, payload: response.data });
+      dispatch({ type: DELETE_KITBAG_KIT, payload: response.data.data });
     })
     .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
+        dispatch({ type: GETALL_FAILURE, payload: response.data });
         history.push(`/auth/login?return=/kitbag/kit/${kitbagId}`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: response.data });
@@ -124,15 +124,15 @@ export const fetchKitbagLists = (kitbagId = null) => (dispatch) => {
   axios
     .get(`/kitbag/kit/${kitbagId}/lists`, {})
     .then((response) => {
-      dispatch({ type: FETCH_KITBAG_LISTS, payload: response.data });
+      dispatch({ type: FETCH_KITBAG_LISTS, payload: response.data.data });
     })
     .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
+        dispatch({ type: GETALL_FAILURE, payload: response.data });
         history.push(`/auth/login`);
       }
-      dispatch({ type: API_KITBAG_ERROR, payload: response });
+      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
     });
 };

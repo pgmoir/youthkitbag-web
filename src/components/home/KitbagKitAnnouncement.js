@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const KitbagKitAnnouncement = ({ kitbagId, doNotShow }) => {
-  if (!kitbagId || !doNotShow) return null;
+  if (!kitbagId) return null;
 
   return (
     <div className="card border-0">

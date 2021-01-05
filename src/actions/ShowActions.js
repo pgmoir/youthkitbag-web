@@ -16,13 +16,13 @@ export const fetchShowGroup = (groupId) => (dispatch) => {
   axios
     .get(`/show/group/${groupId}`)
     .then((response) => {
-      dispatch({ type: FETCH_SHOW_GROUP, payload: response.data });
+      dispatch({ type: FETCH_SHOW_GROUP, payload: response.data.data });
     })
     .catch((err) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
+        dispatch({ type: GETALL_FAILURE, payload: response.data });
         history.push('/auth/login?return=/groups/view');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: response.data });
@@ -37,37 +37,37 @@ export const fetchShowGroupMarket = (groupId, by) => (dispatch) => {
         case 'recycle':
           dispatch({
             type: FETCH_SHOW_MARKET_RECYCLES,
-            payload: response.data,
+            payload: response.data.data,
           });
           break;
         case 'found':
           dispatch({
             type: FETCH_SHOW_MARKET_FOUNDS,
-            payload: response.data,
+            payload: response.data.data,
           });
           break;
         case 'lost':
           dispatch({
             type: FETCH_SHOW_MARKET_LOSTS,
-            payload: response.data,
+            payload: response.data.data,
           });
           break;
         case 'stolen':
           dispatch({
             type: FETCH_SHOW_MARKET_STOLENS,
-            payload: response.data,
+            payload: response.data.data,
           });
           break;
         case 'wanted':
           dispatch({
             type: FETCH_SHOW_MARKET_WANTEDS,
-            payload: response.data,
+            payload: response.data.data,
           });
           break;
         default:
           dispatch({
             type: FETCH_SHOW_MARKET_TRADES,
-            payload: response.data,
+            payload: response.data.data,
           });
           break;
       }
@@ -76,7 +76,7 @@ export const fetchShowGroupMarket = (groupId, by) => (dispatch) => {
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
+        dispatch({ type: GETALL_FAILURE, payload: response.data });
         history.push('/auth/login?return=/groups/view');
       }
       dispatch({ type: API_KITBAG_ERROR, payload: response.data });
