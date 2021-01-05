@@ -70,12 +70,12 @@ const Threads = ({ threads, kitbagId, source, marketType }) => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <div className="row pb-3">
         <div className="col-4">{renderThreadLinks()}</div>
         <div className="col-8">{renderThreadMessages()}</div>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

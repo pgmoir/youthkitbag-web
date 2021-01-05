@@ -124,7 +124,7 @@ const GroupMembers = ({ stateSearch, items, fetchGroupMembers, match }) => {
     );
   }
 
-  return <React.Fragment>{render()}</React.Fragment>;
+  return <>{render()}</>;
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroupMembers);

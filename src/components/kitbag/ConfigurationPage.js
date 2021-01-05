@@ -13,7 +13,7 @@ const mapDispatchToProps = {
 
 const ConfigurationPage = ({ userId, flags, resetFlags }) => {
   return (
-    <React.Fragment>
+    <>
       <div className="row">
         <div className="col-12">
           <p>
@@ -67,7 +67,7 @@ const ConfigurationPage = ({ userId, flags, resetFlags }) => {
           </Link>
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

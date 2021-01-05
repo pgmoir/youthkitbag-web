@@ -2,7 +2,7 @@ import React from 'react';
 
 const SelectInput = ({ value, field, handleChange, items, useItem }) => {
   return (
-    <React.Fragment>
+    <>
       <select
         className="custom-select"
         name={field}
@@ -11,7 +11,7 @@ const SelectInput = ({ value, field, handleChange, items, useItem }) => {
         value={value}
         aria-describedby={field}
       >
-        {items.map(item => {
+        {items.map((item) => {
           const regex = /\s/g;
           const id = item.replace(regex, '').toLowerCase();
           return (
@@ -21,7 +21,7 @@ const SelectInput = ({ value, field, handleChange, items, useItem }) => {
           );
         })}
       </select>
-    </React.Fragment>
+    </>
   );
 };
 

@@ -17,7 +17,7 @@ export const getUser = () => (dispatch) => {
     .get(`/user`, {})
     .then((response) => {
       dispatch({ type: GETALL_SUCCESS });
-      dispatch({ type: GET_USER, payload: response.data.data });
+      dispatch({ type: GET_USER, payload: response.data });
       dispatch(fetchPreferredKitbag());
     })
     .catch(() => {});
@@ -28,7 +28,7 @@ export const editUser = (formValues) => (dispatch) => {
     .put('/user', { ...formValues }, {})
     .then((response) => {
       history.push('/settings/user');
-      dispatch({ type: EDIT_USER, payload: response.data.data });
+      dispatch({ type: EDIT_USER, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
@@ -64,7 +64,7 @@ export const editPreferredKitbag = ({ kitbagId }, { url }) => (dispatch) => {
   axios
     .put(`/user/kitbag/${kitbagId}`, {}, {})
     .then((response) => {
-      dispatch({ type: EDIT_USER, payload: response.data.data });
+      dispatch({ type: EDIT_USER, payload: response.data });
       if (url) history.push(url);
     })
     .catch((err) => {
@@ -99,7 +99,7 @@ export const resetFlags = () => (dispatch) => {
   axios
     .put('/user/flags/reset', {}, {})
     .then((response) => {
-      dispatch({ type: RESET_USER_FLAGS, payload: response.data.data });
+      dispatch({ type: RESET_USER_FLAGS, payload: response.data });
       dispatch(getUser());
     })
     .catch((err) => {

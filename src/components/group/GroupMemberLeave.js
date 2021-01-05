@@ -39,7 +39,7 @@ const GroupMemberLeave = ({ group, fetchGroup, requestGroupLeave, match }) => {
 
   function renderActions() {
     return (
-      <React.Fragment>
+      <>
         <Link
           to={`/groups/${groupId}`}
           className="btn btn-outline-secondary"
@@ -54,7 +54,7 @@ const GroupMemberLeave = ({ group, fetchGroup, requestGroupLeave, match }) => {
         >
           Request to Leave
         </button>
-      </React.Fragment>
+      </>
     );
   }
 

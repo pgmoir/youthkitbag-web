@@ -9,10 +9,9 @@ import {
   CREATE_KITBAG_INVITE,
   EDIT_KITBAG_LEAVE,
   FETCH_PREFERRED_KITBAG,
-  RESET_TOAST,
+  CREATE_KITBAG,
 } from './types';
 import history from '../utils/history';
-import { editPreferredKitbag, getUser } from './UserActions';
 
 export const fetchPreferredKitbag = () => (dispatch) => {
   axios
@@ -20,7 +19,7 @@ export const fetchPreferredKitbag = () => (dispatch) => {
     .then((response) => {
       dispatch({
         type: FETCH_PREFERRED_KITBAG,
-        payload: response.data.data,
+        payload: response.data,
       });
     })
     .catch((err) => {
@@ -41,7 +40,7 @@ export const fetchKitbag = (kitbagId) => (dispatch) => {
   axios
     .get(`/kitbag/${kitbagId}`, {})
     .then((response) => {
-      dispatch({ type: FETCH_KITBAG, payload: response.data.data });
+      dispatch({ type: FETCH_KITBAG, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
@@ -58,7 +57,7 @@ export const fetchKitbagName = (kitbagId) => (dispatch) => {
   axios
     .get(`/kitbag/${kitbagId}/name`, {})
     .then((response) => {
-      dispatch({ type: FETCH_KITBAG, payload: response.data.data });
+      dispatch({ type: FETCH_KITBAG, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
@@ -71,28 +70,11 @@ export const fetchKitbagName = (kitbagId) => (dispatch) => {
     });
 };
 
-export const createKitbag = (
-  formValues,
-  { pushHistory = true, forState } = {}
-) => (dispatch) => {
+export const createKitbag = (formValues) => (dispatch) => {
   axios
     .post(`/kitbag`, { ...formValues }, {})
     .then((response) => {
-      const { creator, _id } = response.data.data;
-
-      if (pushHistory) {
-        switch (forState) {
-          case 'invite-team':
-            history.push('/kitbag/inviteteam');
-            break;
-          default:
-            history.push('/settings/kitbags');
-            break;
-        }
-      }
-      dispatch({ type: RESET_TOAST });
-      dispatch({ type: CLEAR_KITBAG });
-      dispatch(editPreferredKitbag({ userId: creator, kitbagId: _id }, {}));
+      dispatch({ type: CREATE_KITBAG, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
@@ -109,10 +91,9 @@ export const editKitbag = (kitbagId, formValues) => (dispatch) => {
   axios
     .put(`/kitbag/${kitbagId}`, { ...formValues }, {})
     .then((response) => {
-      history.push('/settings/kitbag');
-      dispatch({ type: EDIT_KITBAG, payload: response.data.data });
-      dispatch(fetchKitbag(kitbagId));
-      dispatch(getUser());
+      //history.push('/settings/kitbag');
+      dispatch({ type: EDIT_KITBAG, payload: response.data });
+      //dispatch(getUser());
     })
     .catch((err) => {
       const { response } = err;
@@ -130,7 +111,7 @@ export const editKitbagState = (kitbagId, state) => (dispatch) => {
     .put(`/kitbag/${kitbagId}/state`, { state: state }, {})
     .then((response) => {
       history.push('/settings/kitbags');
-      dispatch({ type: EDIT_KITBAG_STATE, payload: response.data.data });
+      dispatch({ type: EDIT_KITBAG_STATE, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
@@ -143,12 +124,12 @@ export const editKitbagState = (kitbagId, state) => (dispatch) => {
     });
 };
 
-export const inviteToKitbag = (kitbagId, email) => (dispatch) => {
+export const inviteToKitbag = (kitbagId, formValues) => (dispatch) => {
   axios
-    .put(`/kitbag/${kitbagId}/member/invite/${email}`, {}, {})
+    .post(`/kitbag/${kitbagId}/member/invite`, { ...formValues }, {})
     .then((response) => {
-      history.push(`/settings/kitbags`);
-      dispatch({ type: CREATE_KITBAG_INVITE, payload: response.data.data });
+      history.push(`/kitbags/${kitbagId}`);
+      dispatch({ type: CREATE_KITBAG_INVITE, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
@@ -185,7 +166,7 @@ export const requestKitbagLeave = (kitbagId) => (dispatch) => {
     .put(`/kitbag/${kitbagId}/members/leave`, {}, {})
     .then((response) => {
       history.push(`/settings/kitbags`);
-      dispatch({ type: EDIT_KITBAG_LEAVE, payload: response.data.data });
+      dispatch({ type: EDIT_KITBAG_LEAVE, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;

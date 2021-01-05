@@ -27,7 +27,7 @@ const GroupMemberState = ({ editGroupMemberState, match }) => {
   function renderActions() {
     const { groupId, memberId, state } = match.params;
     return (
-      <React.Fragment>
+      <>
         <Link
           to={`/groups/${groupId}/members`}
           className="btn btn-outline-secondary"
@@ -42,7 +42,7 @@ const GroupMemberState = ({ editGroupMemberState, match }) => {
         >
           {capitalizeFirstLetter(state)}
         </button>
-      </React.Fragment>
+      </>
     );
   }
 

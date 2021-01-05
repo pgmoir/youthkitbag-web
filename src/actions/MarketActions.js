@@ -36,7 +36,7 @@ export const fetchMarketItems = ({
       },
     })
     .then((response) => {
-      dispatch({ type: FETCH_MARKET_ITEMS, payload: response.data });
+      dispatch({ type: FETCH_MARKET_ITEMS, payload: response.data.data });
       if (pushHistory) {
         dispatch({
           type: SEARCH_MARKET_ITEMS,
@@ -48,10 +48,11 @@ export const fetchMarketItems = ({
       }
     })
     .catch((err) => {
+      console.log('ERR', err);
       const { response } = err;
       if (response.status === 401) {
         window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response.data });
+        dispatch({ type: GETALL_FAILURE, payload: response });
         history.push('/auth/login?return=/market');
       }
       dispatch({ type: API_MARKET_ERROR, payload: response.data });
@@ -62,7 +63,7 @@ export const fetchMarketItem = (marketId) => (dispatch) => {
   axios
     .get(`/market/${marketId}`, {})
     .then((response) => {
-      dispatch({ type: FETCH_MARKET_ITEM, payload: response.data.data });
+      dispatch({ type: FETCH_MARKET_ITEM, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
@@ -81,7 +82,7 @@ export const respondMarketItem = (marketId, formValues) => (dispatch) => {
     .then((response) => {
       history.push(`/market/${marketId}`);
       dispatch({ type: RESET_TOAST });
-      dispatch({ type: RESPOND_MARKET_ITEM, payload: response.data.data });
+      dispatch({ type: RESPOND_MARKET_ITEM, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
@@ -90,7 +91,7 @@ export const respondMarketItem = (marketId, formValues) => (dispatch) => {
         dispatch({ type: GETALL_FAILURE, payload: response.data });
         history.push(`/auth/login?return=/market/${marketId}`);
       }
-      dispatch({ type: API_MARKET_ERROR, payload: response.data.data });
+      dispatch({ type: API_MARKET_ERROR, payload: response.data });
     });
 };
 
@@ -118,7 +119,7 @@ export const fetchMarketLists = () => (dispatch) => {
   axios
     .get(`/market/lists`, {})
     .then((response) => {
-      dispatch({ type: FETCH_MARKET_LISTS, payload: response.data.data });
+      dispatch({ type: FETCH_MARKET_LISTS, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;

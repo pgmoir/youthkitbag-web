@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
 
 const BadgesPage = ({ user }) => {
   return (
-    <React.Fragment>
+    <>
       <div className="row">
         <div className="col-12">
           <p>
@@ -34,7 +34,7 @@ const BadgesPage = ({ user }) => {
           </Link>
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

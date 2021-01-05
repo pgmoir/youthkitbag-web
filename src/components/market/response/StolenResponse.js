@@ -4,9 +4,9 @@ import { TextAreaForm } from '../../includes/forms';
 
 const StolenResponse = ({ values, handleChange, errors, handleSubmit }) => {
   return (
-    <React.Fragment>
+    <>
       {values && (
-        <React.Fragment>
+        <>
           <h3>Do you have any information about this theft</h3>
           <p>
             If you can help with any information that could help recover this
@@ -36,9 +36,9 @@ const StolenResponse = ({ values, handleChange, errors, handleSubmit }) => {
               </Link>
             </div>
           </form>
-        </React.Fragment>
+        </>
       )}
-    </React.Fragment>
+    </>
   );
 };
 

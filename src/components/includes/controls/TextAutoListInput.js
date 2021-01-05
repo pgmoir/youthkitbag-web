@@ -13,10 +13,10 @@ const TextAutoListInput = ({
   autoComplete,
   addClassName,
   placeHolder,
-  autoList
+  autoList,
 }) => {
   return (
-    <React.Fragment>
+    <>
       <input
         className={`form-control${error ? ' is-invalid' : ''} ${
           addClassName ? addClassName : ''
@@ -36,7 +36,7 @@ const TextAutoListInput = ({
         placeholder={placeHolder}
       />
       {error && <div className="invalid-feedback">{error}</div>}
-    </React.Fragment>
+    </>
   );
 };
 

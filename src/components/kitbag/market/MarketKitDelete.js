@@ -49,7 +49,7 @@ const KitDelete = ({ item, fetchMarketKit, deleteMarketKit, match }) => {
 
   function renderActions() {
     return (
-      <React.Fragment>
+      <>
         <Link
           to={`/market`}
           className="btn btn-outline-secondary"
@@ -64,7 +64,7 @@ const KitDelete = ({ item, fetchMarketKit, deleteMarketKit, match }) => {
         >
           Delete
         </button>
-      </React.Fragment>
+      </>
     );
   }
 

@@ -42,7 +42,7 @@ const KitbagMemberJoin = ({ newErrors, requestToJoinKitbag }) => {
 
   function renderContent() {
     return (
-      <React.Fragment>
+      <>
         <p>
           Enter the email of the person who has the kitbag to which you&apos;d
           like to join.
@@ -55,13 +55,13 @@ const KitbagMemberJoin = ({ newErrors, requestToJoinKitbag }) => {
           handleChange={handleChange}
           error={errors.email}
         />
-      </React.Fragment>
+      </>
     );
   }
 
   function renderActions() {
     return (
-      <React.Fragment>
+      <>
         <Link
           to={`/`}
           className="btn btn-outline-secondary"
@@ -72,7 +72,7 @@ const KitbagMemberJoin = ({ newErrors, requestToJoinKitbag }) => {
         <button type="submit" className="btn btn-success">
           Request to Join
         </button>
-      </React.Fragment>
+      </>
     );
   }
 

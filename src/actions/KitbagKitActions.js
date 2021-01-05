@@ -53,7 +53,7 @@ export const fetchKitbagKit = (kitbagId, kitId) => (dispatch) => {
   axios
     .get(`/kitbag/kit/${kitbagId}/${kitId}`, {})
     .then((response) => {
-      dispatch({ type: FETCH_KITBAG_KIT, payload: response.data.data });
+      dispatch({ type: FETCH_KITBAG_KIT, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
@@ -71,7 +71,7 @@ export const createKitbagKit = (kitbagId, formValues) => (dispatch) => {
     .post(`/kitbag/kit/${kitbagId}`, { ...formValues }, {})
     .then((response) => {
       history.push(`/kitbag/kit/${kitbagId}`);
-      dispatch({ type: CREATE_KITBAG_KIT, payload: response.data.data });
+      dispatch({ type: CREATE_KITBAG_KIT, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
@@ -89,7 +89,7 @@ export const editKitbagKit = (kitbagId, kitId, formValues) => (dispatch) => {
     .put(`/kitbag/kit/${kitbagId}/${kitId}`, { ...formValues }, {})
     .then((response) => {
       history.push(`/kitbag/kit/${kitbagId}`);
-      dispatch({ type: EDIT_KITBAG_KIT, payload: response.data.data });
+      dispatch({ type: EDIT_KITBAG_KIT, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
@@ -107,7 +107,7 @@ export const deleteKitbagKit = (kitbagId, kitId) => (dispatch) => {
     .delete(`/kitbag/kit/${kitbagId}/${kitId}`, {})
     .then((response) => {
       history.push(`/kitbag/kit/${kitbagId}`);
-      dispatch({ type: DELETE_KITBAG_KIT, payload: response.data.data });
+      dispatch({ type: DELETE_KITBAG_KIT, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
@@ -124,7 +124,7 @@ export const fetchKitbagLists = (kitbagId = null) => (dispatch) => {
   axios
     .get(`/kitbag/kit/${kitbagId}/lists`, {})
     .then((response) => {
-      dispatch({ type: FETCH_KITBAG_LISTS, payload: response.data.data });
+      dispatch({ type: FETCH_KITBAG_LISTS, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;

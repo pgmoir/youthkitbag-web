@@ -152,9 +152,9 @@ const ThreadMessageChain = ({
   };
 
   return (
-    <React.Fragment>
+    <>
       {thread._id === displayed && (
-        <React.Fragment>
+        <>
           <div className="thread-message-chain mb-2 bg-light border rounded-sm">
             {renderMessages()}
           </div>
@@ -183,9 +183,9 @@ const ThreadMessageChain = ({
               </div>
             </div>
           </form>
-        </React.Fragment>
+        </>
       )}
-    </React.Fragment>
+    </>
   );
 };
 

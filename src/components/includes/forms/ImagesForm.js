@@ -46,7 +46,7 @@ const ImagesForm = ({
       items.push(
         <div key={`image${i}`} className="carousel-thumbnail d-inline-flex">
           {images[i].state !== 'D' && (
-            <React.Fragment>
+            <>
               {!readOnly && (
                 <span className="icons-top-left">
                   <button
@@ -82,10 +82,10 @@ const ImagesForm = ({
                 role="presentation"
                 onClick={renderTopImage.bind(null, images[i].imageUrl)}
               />
-            </React.Fragment>
+            </>
           )}
           {images[i].state === 'D' && (
-            <React.Fragment>
+            <>
               <span className="icons-top-left">
                 <button
                   aria-label="Undo image deletion"
@@ -106,7 +106,7 @@ const ImagesForm = ({
                 alt=""
                 role="presentation"
               />
-            </React.Fragment>
+            </>
           )}
         </div>
       );
@@ -188,7 +188,7 @@ const ImagesForm = ({
   }, [newImages, addArrayItem, setChange, values, dispatch]);
 
   return (
-    <React.Fragment>
+    <>
       <div className="col-12 col-md-6 order-1 order-md-2" role="main">
         <div>
           <img
@@ -225,7 +225,7 @@ const ImagesForm = ({
           </div>
         )}
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

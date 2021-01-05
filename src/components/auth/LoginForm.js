@@ -38,7 +38,7 @@ const LoginForm = ({ referrer, newErrors, login }) => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <div className="mb-3">
         <div className="row mb-3 mx-0">
           <a
@@ -98,7 +98,7 @@ const LoginForm = ({ referrer, newErrors, login }) => {
           Login to YouthKitbag
         </button>
       </form>
-    </React.Fragment>
+    </>
   );
 };
 

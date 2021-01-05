@@ -6,14 +6,14 @@ import {
   FETCH_KITBAG_KITS,
   RESET,
   LOGOUT,
-  FETCH_KITBAG_LISTS
+  FETCH_KITBAG_LISTS,
 } from '../actions/types';
 
 const initialState = {
   current: {},
   list: [],
   lists: [],
-  search: { searchfor: '', by: '', page: 1, pagesize: 24, loading: true }
+  search: { searchfor: '', by: '', page: 1, pagesize: 24, loading: true },
 };
 
 export default (state = initialState, action) => {
@@ -23,12 +23,11 @@ export default (state = initialState, action) => {
     case FETCH_KITBAG_KITS:
       return { ...state, current: {}, list: action.payload.kits };
     case FETCH_KITBAG_KIT:
-      return { ...state, current: action.payload };
     case CREATE_KITBAG_KIT:
     case EDIT_KITBAG_KIT:
-      return { ...state, current: {} };
+      return { ...state, current: action.payload.data };
     case FETCH_KITBAG_LISTS:
-      return { ...state, lists: action.payload };
+      return { ...state, lists: action.payload.data };
     case RESET:
     case LOGOUT:
       return initialState;

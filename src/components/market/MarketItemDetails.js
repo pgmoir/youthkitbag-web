@@ -159,7 +159,7 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
   const Response = responseComponents[market.marketType || 'trade'];
 
   return (
-    <React.Fragment>
+    <>
       <div className="row">
         <ImagesDisplay images={market.images} />
         <div className="col-12 col-lg-6 order-2 order-lg-1 pr-3" role="main">
@@ -193,7 +193,7 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
         </div>
       </div>
       {market._id && market.threads.length > 0 && (
-        <React.Fragment>
+        <>
           <div className="row">
             <div className="col-12">
               <h4>{`Thread for "${market.title}"`}</h4>
@@ -205,9 +205,9 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
             source="market"
             marketType={market.marketType}
           />
-        </React.Fragment>
+        </>
       )}
-    </React.Fragment>
+    </>
   );
 };
 

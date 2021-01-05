@@ -15,11 +15,11 @@ const TextAutoListForm = ({
   index,
   error,
   autoComplete,
-  autoList
+  autoList,
 }) => {
   const columns = colFormat.split('-');
   return (
-    <React.Fragment>
+    <>
       {colFormat === '3-9' && (
         <div className="form-group row">
           <label htmlFor="{field}" className="col-sm-3 col-form-label">
@@ -60,7 +60,7 @@ const TextAutoListForm = ({
           />
         </div>
       )}
-    </React.Fragment>
+    </>
   );
 };
 

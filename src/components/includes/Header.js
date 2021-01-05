@@ -22,7 +22,7 @@ const Header = ({ auth, user }) => {
     : undefined;
 
   return (
-    <React.Fragment>
+    <>
       <header>
         <Link
           id="header-acc-jump"
@@ -43,7 +43,7 @@ const Header = ({ auth, user }) => {
             </Link>
             <ul className="navbar-nav navbar-expand ml-auto">
               {loggedIn && (
-                <React.Fragment>
+                <>
                   {group && (
                     <li className="nav-item">
                       <Link
@@ -100,10 +100,10 @@ const Header = ({ auth, user }) => {
                       ></span>{' '}
                     </Link>
                   </li>
-                </React.Fragment>
+                </>
               )}
               {!loggedIn && (
-                <React.Fragment>
+                <>
                   <li className="nav-item">
                     <Link
                       className="btn btn-info text-nowrap mr-3"
@@ -130,7 +130,7 @@ const Header = ({ auth, user }) => {
                       ></span>{' '}
                     </Link>
                   </li>
-                </React.Fragment>
+                </>
               )}
             </ul>
           </div>
@@ -148,7 +148,7 @@ const Header = ({ auth, user }) => {
           introduce these we will advise you.
         </div>
       </CookieConsent>
-    </React.Fragment>
+    </>
   );
 };
 

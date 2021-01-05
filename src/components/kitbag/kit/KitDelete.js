@@ -49,7 +49,7 @@ const KitDelete = ({ item, fetchKitbagKit, deleteKitbagKit, match }) => {
 
   function renderActions() {
     return (
-      <React.Fragment>
+      <>
         <Link
           to={`/kitbag/kit/${kitbagId}`}
           className="btn btn-outline-secondary"
@@ -64,7 +64,7 @@ const KitDelete = ({ item, fetchKitbagKit, deleteKitbagKit, match }) => {
         >
           Delete
         </button>
-      </React.Fragment>
+      </>
     );
   }
 

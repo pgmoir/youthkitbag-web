@@ -276,7 +276,7 @@ const MarketKitForm = ({
   };
 
   return (
-    <React.Fragment>
+    <>
       <div className="row">
         <ImagesForm
           values={values}
@@ -434,7 +434,7 @@ const MarketKitForm = ({
         </div>
       </div>
       {market._id && market.threads.length > 0 && (
-        <React.Fragment>
+        <>
           <hr />
           <div className="row">
             <div className="col-12">
@@ -447,9 +447,9 @@ const MarketKitForm = ({
             source="kitbag"
             marketType={market.marketType}
           />
-        </React.Fragment>
+        </>
       )}
-    </React.Fragment>
+    </>
   );
 };
 

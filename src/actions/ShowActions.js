@@ -16,7 +16,7 @@ export const fetchShowGroup = (groupId) => (dispatch) => {
   axios
     .get(`/show/group/${groupId}`)
     .then((response) => {
-      dispatch({ type: FETCH_SHOW_GROUP, payload: response.data.data });
+      dispatch({ type: FETCH_SHOW_GROUP, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
@@ -37,37 +37,37 @@ export const fetchShowGroupMarket = (groupId, by) => (dispatch) => {
         case 'recycle':
           dispatch({
             type: FETCH_SHOW_MARKET_RECYCLES,
-            payload: response.data.data,
+            payload: response.data,
           });
           break;
         case 'found':
           dispatch({
             type: FETCH_SHOW_MARKET_FOUNDS,
-            payload: response.data.data,
+            payload: response.data,
           });
           break;
         case 'lost':
           dispatch({
             type: FETCH_SHOW_MARKET_LOSTS,
-            payload: response.data.data,
+            payload: response.data,
           });
           break;
         case 'stolen':
           dispatch({
             type: FETCH_SHOW_MARKET_STOLENS,
-            payload: response.data.data,
+            payload: response.data,
           });
           break;
         case 'wanted':
           dispatch({
             type: FETCH_SHOW_MARKET_WANTEDS,
-            payload: response.data.data,
+            payload: response.data,
           });
           break;
         default:
           dispatch({
             type: FETCH_SHOW_MARKET_TRADES,
-            payload: response.data.data,
+            payload: response.data,
           });
           break;
       }

@@ -4,9 +4,9 @@ import { TextAreaForm, TextForm } from '../../includes/forms';
 
 const WantedResponse = ({ values, handleChange, errors, handleSubmit }) => {
   return (
-    <React.Fragment>
+    <>
       {values && (
-        <React.Fragment>
+        <>
           <h3>Are you able to supply this item</h3>
           <p>
             If you can help fulfill this wanted request, then please submit an
@@ -47,9 +47,9 @@ const WantedResponse = ({ values, handleChange, errors, handleSubmit }) => {
               </Link>
             </div>
           </form>
-        </React.Fragment>
+        </>
       )}
-    </React.Fragment>
+    </>
   );
 };
 

@@ -5,11 +5,11 @@ const RemoveArrayButtonForm = ({
   title,
   onClick,
   index,
-  disabled
+  disabled,
 }) => {
   const columnFormat = colFormat.split('-');
   return (
-    <React.Fragment>
+    <>
       {columnFormat[0] === 'a' && (
         <div className={`form-group col-sm-${columnFormat[1]}`}>
           {index === 0 && (
@@ -35,7 +35,7 @@ const RemoveArrayButtonForm = ({
           </button>
         </div>
       )}
-    </React.Fragment>
+    </>
   );
 };
 

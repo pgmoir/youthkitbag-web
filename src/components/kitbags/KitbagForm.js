@@ -140,7 +140,7 @@ const KitbagForm = ({
           />
           <hr />
           {values.members && values.members.length > 0 && (
-            <React.Fragment>
+            <>
               <div>
                 {values.members.map((item, index) => (
                   <div className="form-row" key={index}>
@@ -196,7 +196,7 @@ const KitbagForm = ({
                 ))}
               </div>
               <hr />
-            </React.Fragment>
+            </>
           )}
           {!isReadOnly && (
             <div>

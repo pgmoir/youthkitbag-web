@@ -56,7 +56,7 @@ const PreMarketTitle = ({ market }) => {
     );
   }
 
-  return <React.Fragment>{render()}</React.Fragment>;
+  return <>{render()}</>;
 };
 
 export default PreMarketTitle;

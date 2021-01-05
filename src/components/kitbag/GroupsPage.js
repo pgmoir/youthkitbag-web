@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
 
 const GroupsPage = ({ user }) => {
   return (
-    <React.Fragment>
+    <>
       <div className="row">
         <div className="col-12">
           <p>
@@ -73,7 +73,7 @@ const GroupsPage = ({ user }) => {
           </Link>
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

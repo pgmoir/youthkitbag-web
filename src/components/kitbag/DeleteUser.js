@@ -42,7 +42,7 @@ const DeleteUser = ({ newErrors, deleteUser, match }) => {
 
   function renderContent() {
     return (
-      <React.Fragment>
+      <>
         <Alert />
         <p>
           You must enter your current email and password to complete the
@@ -59,13 +59,13 @@ const DeleteUser = ({ newErrors, deleteUser, match }) => {
           error={errors.email}
           autoComplete="userName email"
         />
-      </React.Fragment>
+      </>
     );
   }
 
   function renderActions() {
     return (
-      <React.Fragment>
+      <>
         <Link
           to={`/settings/configuration`}
           className="btn btn-outline-secondary"
@@ -76,7 +76,7 @@ const DeleteUser = ({ newErrors, deleteUser, match }) => {
         <button type="submit" className="btn btn-danger">
           Delete User
         </button>
-      </React.Fragment>
+      </>
     );
   }
 

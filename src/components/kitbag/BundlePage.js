@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
 
 const BundlePage = ({ userBundle }) => {
   return (
-    <React.Fragment>
+    <>
       <div className="row">
         <div className="col-12">
           <p>
@@ -90,7 +90,7 @@ const BundlePage = ({ userBundle }) => {
           </Link>
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

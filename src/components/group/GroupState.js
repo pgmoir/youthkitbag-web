@@ -39,7 +39,7 @@ const GroupState = ({ group, fetchGroup, editGroupState, match }) => {
   function renderActions() {
     const { groupId } = match.params;
     return (
-      <React.Fragment>
+      <>
         <button
           type="button"
           className="btn btn-danger"
@@ -54,7 +54,7 @@ const GroupState = ({ group, fetchGroup, editGroupState, match }) => {
         >
           Approve
         </button>
-      </React.Fragment>
+      </>
     );
   }
 

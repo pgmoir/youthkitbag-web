@@ -20,6 +20,8 @@ import {
   EDIT_GROUP,
   API_USER_ERROR,
   API_KITBAG_ERROR,
+  CREATE_KITBAG,
+  EDIT_KITBAG,
 } from '../actions/types';
 
 const initialState = {
@@ -31,6 +33,8 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case CREATE_GROUP:
+    case CREATE_KITBAG:
+    case EDIT_KITBAG:
     case CREATE_KITBAG_KIT:
     case CREATE_MARKET_KIT:
     case EDIT_GROUP:

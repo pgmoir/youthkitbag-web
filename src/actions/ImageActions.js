@@ -5,7 +5,7 @@ export const addImage = (kitbagId, formData) => (dispatch) => {
   axios
     .post(`/image/${kitbagId}/add`, formData, {})
     .then((response) => {
-      dispatch({ type: ADD_IMAGE, payload: response.data.data });
+      dispatch({ type: ADD_IMAGE, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;

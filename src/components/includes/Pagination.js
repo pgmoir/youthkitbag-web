@@ -47,7 +47,7 @@ const Pagination = ({ kitbagId, search, callback, pagination }) => {
   }
 
   return (
-    <React.Fragment>
+    <>
       {pagination && pagination.totalItems > pagination.itemsPerPage && (
         <nav aria-label="Page navigation">
           <ul className="pagination">
@@ -91,7 +91,7 @@ const Pagination = ({ kitbagId, search, callback, pagination }) => {
           </ul>
         </nav>
       )}
-    </React.Fragment>
+    </>
   );
 };
 

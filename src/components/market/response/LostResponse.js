@@ -4,9 +4,9 @@ import { TextAreaForm } from '../../includes/forms';
 
 const LostResponse = ({ values, handleChange, errors, handleSubmit }) => {
   return (
-    <React.Fragment>
+    <>
       {values && (
-        <React.Fragment>
+        <>
           <h3>Have any information about this item</h3>
           <p>
             If you can help with any information that could help recover this
@@ -35,9 +35,9 @@ const LostResponse = ({ values, handleChange, errors, handleSubmit }) => {
               </Link>
             </div>
           </form>
-        </React.Fragment>
+        </>
       )}
-    </React.Fragment>
+    </>
   );
 };
 

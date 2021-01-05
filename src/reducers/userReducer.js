@@ -6,7 +6,7 @@ export default function authentication(state = initialState, action) {
   switch (action.type) {
     case GET_USER:
     case EDIT_USER:
-      return { ...action.payload };
+      return { ...action.payload.data };
     case LOGOUT:
       return initialState;
     default:

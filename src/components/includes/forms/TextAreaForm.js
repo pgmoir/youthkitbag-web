@@ -9,10 +9,10 @@ const TextAreaForm = ({
   rows,
   readOnly,
   handleChange,
-  error
+  error,
 }) => {
   return (
-    <React.Fragment>
+    <>
       {colFormat === '3-9' && (
         <div className="form-group row">
           <label htmlFor="{field}" className="col-sm-3 col-form-label">
@@ -53,7 +53,7 @@ const TextAreaForm = ({
         </div>
       )}
       {colFormat === 'a-4' && <div className="form-group col-sm-4"></div>}
-    </React.Fragment>
+    </>
   );
 };
 

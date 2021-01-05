@@ -9,7 +9,7 @@ const mapStateToProps = (state) => ({
 
 const KitbagsPage = ({ user }) => {
   return (
-    <React.Fragment>
+    <>
       <div className="row">
         <div className="col-12">
           <p>
@@ -36,7 +36,7 @@ const KitbagsPage = ({ user }) => {
       {user && user.kitbags && user.kitbags.length > 0 && (
         <PreferredKitbagForm userId={user._id} kitbags={user.kitbags} />
       )}
-    </React.Fragment>
+    </>
   );
 };
 
