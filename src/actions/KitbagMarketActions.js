@@ -16,6 +16,7 @@ import {
   FETCH_KITBAG_MARKET_WANTEDS,
 } from './types';
 import history from '../utils/history';
+import { MarketTypes } from '../enums/marketTypes.enum';
 
 export const fetchKitbagMarketItems = ({
   by,
@@ -31,19 +32,19 @@ export const fetchKitbagMarketItems = ({
     })
     .then((response) => {
       switch (by) {
-        case 'trade':
+        case MarketTypes.TRADE:
           dispatch({
             type: FETCH_KITBAG_MARKET_TRADES,
             payload: response.data.data,
           });
           break;
-        case 'recycle':
+        case MarketTypes.RECYCLE:
           dispatch({
             type: FETCH_KITBAG_MARKET_RECYCLES,
             payload: response.data.data,
           });
           break;
-        case 'found':
+        case MarketTypes.FOUND:
           dispatch({
             type: FETCH_KITBAG_MARKET_FOUNDS,
             payload: response.data.data,
@@ -55,13 +56,13 @@ export const fetchKitbagMarketItems = ({
             payload: response.data.data,
           });
           break;
-        case 'stolen':
+        case MarketTypes.STOLEN:
           dispatch({
             type: FETCH_KITBAG_MARKET_STOLENS,
             payload: response.data.data,
           });
           break;
-        case 'wanted':
+        case MarketTypes.WANTED:
           dispatch({
             type: FETCH_KITBAG_MARKET_WANTEDS,
             payload: response.data.data,

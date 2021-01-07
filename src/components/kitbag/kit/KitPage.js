@@ -20,7 +20,7 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
     title: '',
     subtitle: '',
     description: '',
-    state: 'owned',
+    status: 'Owned',
     purchases: [],
     inbag: [],
     security: [],

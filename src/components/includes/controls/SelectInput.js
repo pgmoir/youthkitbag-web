@@ -15,7 +15,7 @@ const SelectInput = ({ value, field, handleChange, items, useItem }) => {
           const regex = /\s/g;
           const id = item.replace(regex, '').toLowerCase();
           return (
-            <option key={id} value={useItem ? item : id}>
+            <option key={id} value={item}>
               {item}
             </option>
           );

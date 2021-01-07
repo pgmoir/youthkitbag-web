@@ -5,11 +5,11 @@ import { Helmet } from 'react-helmet';
 const PreMarketTitle = ({ market }) => {
   const { title, subtitle, marketType, marketPrice } = market;
 
-  const isWanted = marketType === 'wanted' && marketPrice > 0;
-  const isWantRecycle = marketType === 'wanted' && marketPrice === 0;
-  const isFound = marketType === 'found';
-  const isLost = marketType === 'lost';
-  const isStolen = marketType === 'stolen';
+  const isWanted = marketType === MarketTypes.WANTED && marketPrice > 0;
+  const isWantRecycle = marketType === MarketTypes.WANTED && marketPrice === 0;
+  const isFound = marketType === MarketTypes.FOUND;
+  const isLost = marketType === MarketTypes.LOST;
+  const isStolen = marketType === MarketTypes.STOLEN;
 
   const icon =
     isFound || isLost || isStolen

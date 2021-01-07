@@ -18,6 +18,7 @@ import {
 import Threads from '../../thread/threads/Threads';
 import validate from '../../includes/FormEmptyValidationRules';
 import { getImages } from '../../../utils/image';
+import { MarketTypes } from '../../../enums/marketTypes.enum';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -75,7 +76,12 @@ const MarketKitForm = ({
   }
 
   const showMarketType = () => {
-    if (!['found', 'lost', 'stolen'].includes(market.marketType)) return null;
+    if (
+      ![MarketTypes.FOUND, MarketTypes.LOST, MarketTypes.STOLEN].includes(
+        market.marketType
+      )
+    )
+      return null;
 
     if (isReadOnly()) {
       return (
@@ -89,7 +95,7 @@ const MarketKitForm = ({
       );
     }
 
-    const typeItems = ['Found', 'Lost', 'Stolen'];
+    const typeItems = [MarketTypes.FOUND, MarketTypes.LOST, MarketTypes.STOLEN];
 
     return (
       <SelectForm
@@ -105,7 +111,7 @@ const MarketKitForm = ({
   };
 
   const showCondition = () => {
-    if (!['trade'].includes(market.marketType)) {
+    if (![MarketTypes.TRADE].includes(market.marketType)) {
       return null;
     }
 
@@ -139,12 +145,12 @@ const MarketKitForm = ({
   };
 
   const showPrice = () => {
-    if (!['trade', 'wanted'].includes(market.marketType)) {
+    if (![MarketTypes.TRADE, MarketTypes.WANTED].includes(market.marketType)) {
       return null;
     }
 
     const label =
-      market.marketType === 'trade' ? 'Asking Price' : 'Offer Price';
+      market.marketType === MarketTypes.TRADE ? 'Asking Price' : 'Offer Price';
 
     return (
       <TextForm
@@ -164,7 +170,11 @@ const MarketKitForm = ({
   };
 
   const showStolenOn = () => {
-    if (!['found', 'lost', 'stolen'].includes(values.marketType)) {
+    if (
+      ![MarketTypes.FOUND, MarketTypes.LOST, MarketTypes.STOLEN].includes(
+        values.marketType
+      )
+    ) {
       return null;
     }
 
@@ -182,7 +192,11 @@ const MarketKitForm = ({
   };
 
   const showSecurity = () => {
-    if (!['found', 'lost', 'stolen'].includes(values.marketType)) {
+    if (
+      ![MarketTypes.FOUND, MarketTypes.LOST, MarketTypes.STOLEN].includes(
+        values.marketType
+      )
+    ) {
       return null;
     }
 
@@ -200,7 +214,7 @@ const MarketKitForm = ({
   };
 
   const showTracking = () => {
-    if (!['stolen'].includes(values.marketType)) {
+    if (![MarketTypes.STOLEN].includes(values.marketType)) {
       return null;
     }
 
@@ -222,12 +236,12 @@ const MarketKitForm = ({
     }
 
     switch (market.marketType) {
-      case 'stolen':
-      case 'lost':
+      case MarketTypes.STOLEN:
+      case MarketTypes.LOST:
         return 'Recovered';
-      case 'found':
+      case MarketTypes.FOUND:
         return 'Returned';
-      case 'wanted':
+      case MarketTypes.WANTED:
         return 'Aquired';
       default:
         return 'Completed';
@@ -239,16 +253,16 @@ const MarketKitForm = ({
 
     if (market.marketType) {
       switch (market.marketType) {
-        case 'stolen':
+        case MarketTypes.STOLEN:
           helpText = 'recover this stolen item';
           break;
-        case 'lost':
+        case MarketTypes.LOST:
           helpText = 'recover this lost item';
           break;
-        case 'found':
+        case MarketTypes.FOUND:
           helpText = 'return this lost item';
           break;
-        case 'wanted':
+        case MarketTypes.WANTED:
           helpText = 'aquire this item';
           break;
         default:

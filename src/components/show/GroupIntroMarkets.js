@@ -1,11 +1,12 @@
 import React from 'react';
+import { MarketTypes } from '../../enums/marketTypes.enum';
 
 const GroupIntroMarkets = ({ type, markets }) => {
   if (!markets) return null;
 
   let marketElements = {};
 
-  if (type === 'trade') {
+  if (type === MarketTypes.TRADE) {
     marketElements = {
       title: 'Trades / Sales',
       color: 'primary',
@@ -15,7 +16,7 @@ const GroupIntroMarkets = ({ type, markets }) => {
       footer:
         'There are no active trades posted in this group. Get things started by posting your own sales.',
     };
-  } else if (type === 'recycle') {
+  } else if (type === MarketTypes.RECYCLE) {
     marketElements = {
       title: 'Recycling / Free',
       color: 'success',
@@ -35,7 +36,7 @@ const GroupIntroMarkets = ({ type, markets }) => {
       footer:
         'Great to report, that no one has listed anything found, lost or stolen. But if you needed to this should be the first place to list it.',
     };
-  } else if (type === 'wanted') {
+  } else if (type === MarketTypes.WANTED) {
     marketElements = {
       title: 'Wanted / Looking for',
       color: 'secondary',
@@ -63,7 +64,7 @@ const GroupIntroMarkets = ({ type, markets }) => {
   }
 
   function itemPill(item) {
-    if (['trade', 'wanted'].includes(item.marketType)) {
+    if ([MarketTypes.TRADE, MarketTypes.WANTED].includes(item.marketType)) {
       if (item.marketPrice > 0) {
         return `£${item.marketPrice.toFixed(2)}`;
       } else {

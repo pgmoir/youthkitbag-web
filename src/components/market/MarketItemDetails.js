@@ -11,6 +11,7 @@ import WantedResponse from './response/WantedResponse';
 import Threads from '../thread/threads/Threads';
 import validate from '../includes/FormEmptyValidationRules';
 import { ImagesDisplay } from '../includes/forms/ImagesDisplay';
+import { MarketTypes } from '../../enums/marketTypes.enum';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -68,7 +69,7 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
   }
 
   const showCondition = () => {
-    if (!['trade'].includes(market.marketType)) {
+    if (![MarketTypes.TRADE].includes(market.marketType)) {
       return null;
     }
 
@@ -82,11 +83,12 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
   };
 
   const showPrice = () => {
-    if (!['trade', 'wanted'].includes(market.marketType)) {
+    if (![MarketTypes.TRADE, MarketTypes.WANTED].includes(market.marketType)) {
       return null;
     }
 
-    const label = market.marketType === 'trade' ? 'Asking Price' : 'Offering';
+    const label =
+      market.marketType === MarketTypes.TRADE ? 'Asking Price' : 'Offering';
     const price =
       market.marketPrice === 0 ? 'free' : `£${market.marketPrice.toFixed(2)}`;
 
@@ -100,7 +102,11 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
   };
 
   const showStolenOn = () => {
-    if (!['found', 'lost', 'stolen'].includes(market.marketType)) {
+    if (
+      ![MarketTypes.FOUND, MarketTypes.LOST, MarketTypes.STOLEN].includes(
+        market.marketType
+      )
+    ) {
       return null;
     }
 
@@ -116,7 +122,7 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
   };
 
   const showSecurity = () => {
-    if (!['stolen'].includes(market.marketType)) {
+    if (![MarketTypes.STOLEN].includes(market.marketType)) {
       return null;
     }
 
@@ -132,7 +138,7 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
   };
 
   const showTracking = () => {
-    if (!['stolen'].includes(market.marketType)) {
+    if (![MarketTypes.STOLEN].includes(market.marketType)) {
       return null;
     }
 
@@ -156,7 +162,7 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
     trade: TradeResponse,
     wanted: WantedResponse,
   };
-  const Response = responseComponents[market.marketType || 'trade'];
+  const Response = responseComponents[market.marketType || MarketTypes.TRADE];
 
   return (
     <>

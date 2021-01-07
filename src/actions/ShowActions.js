@@ -11,6 +11,7 @@ import {
   FETCH_SHOW_MARKET_WANTEDS,
 } from './types';
 import history from '../utils/history';
+import { MarketTypes } from '../enums/marketTypes.enum';
 
 export const fetchShowGroup = (groupId) => (dispatch) => {
   axios
@@ -34,31 +35,31 @@ export const fetchShowGroupMarket = (groupId, by) => (dispatch) => {
     .get(`/show/group/market/${groupId}/${by}`)
     .then((response) => {
       switch (by) {
-        case 'recycle':
+        case MarketTypes.RECYCLE:
           dispatch({
             type: FETCH_SHOW_MARKET_RECYCLES,
             payload: response.data,
           });
           break;
-        case 'found':
+        case MarketTypes.FOUND:
           dispatch({
             type: FETCH_SHOW_MARKET_FOUNDS,
             payload: response.data,
           });
           break;
-        case 'lost':
+        case MarketTypes.LOST:
           dispatch({
             type: FETCH_SHOW_MARKET_LOSTS,
             payload: response.data,
           });
           break;
-        case 'stolen':
+        case MarketTypes.STOLEN:
           dispatch({
             type: FETCH_SHOW_MARKET_STOLENS,
             payload: response.data,
           });
           break;
-        case 'wanted':
+        case MarketTypes.WANTED:
           dispatch({
             type: FETCH_SHOW_MARKET_WANTEDS,
             payload: response.data,

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchKitbagMarketItems } from '../../actions/KitbagMarketActions';
+import { MarketTypes } from '../../enums/marketTypes.enum';
 
 const mapStateToProps = (state) => ({
   totalItems: state.kitbag.market.wanteds.totalItems,
@@ -27,7 +28,7 @@ const KitbagMarketWantedAnnouncement = ({
   }, [items]);
 
   useEffect(() => {
-    fetchKitbagMarketItems('wanted', 5);
+    fetchKitbagMarketItems(MarketTypes.WANTED, 5);
   }, [fetchKitbagMarketItems]);
 
   function topImage(images) {

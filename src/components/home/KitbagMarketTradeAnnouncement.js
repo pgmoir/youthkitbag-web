@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchKitbagMarketItems } from '../../actions/KitbagMarketActions';
+import { MarketTypes } from '../../enums/marketTypes.enum';
 
 const mapStateToProps = (state) => ({
   totalItems: state.kitbag.market.trades.totalItems,
@@ -27,7 +28,7 @@ const KitbagMarketTradeAnnouncement = ({
   }, [items]);
 
   useEffect(() => {
-    fetchKitbagMarketItems('trade', 5);
+    fetchKitbagMarketItems(MarketTypes.TRADE, 5);
   }, [fetchKitbagMarketItems]);
 
   if (!group || !marketItems) return null;

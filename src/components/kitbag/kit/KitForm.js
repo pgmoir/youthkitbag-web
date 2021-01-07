@@ -42,7 +42,7 @@ const KitForm = ({
   const initialPurchase = { from: '', quantity: 0, ondate: '', price: 0.0 };
   const initialInbag = { location: '', condition: 'used', quantity: 0 };
 
-  const stateItems = [
+  const statusItems = [
     'Owned',
     'Trade',
     'Sold',
@@ -56,6 +56,7 @@ const KitForm = ({
     'Found',
     'Other',
   ];
+
   const conditionItems = ['Used', 'New', 'Almost New', 'Other'];
 
   const {
@@ -132,12 +133,12 @@ const KitForm = ({
           />
           <SelectForm
             colFormat="3-9"
-            label="State"
-            value={values.state}
-            field="state"
+            label="Status"
+            value={values.status}
+            field="status"
             handleChange={handleChange}
-            error={errors.state}
-            items={stateItems}
+            error={errors.status}
+            items={statusItems}
             useItem={false}
           />
           <hr />
