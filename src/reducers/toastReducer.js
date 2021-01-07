@@ -12,14 +12,13 @@ import {
   DELETE_GROUP_MEMBER,
   EDIT_USER,
   RESET_USER_FLAGS,
-  API_MARKET_ERROR,
+  API_ERROR,
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
   EDIT_KITBAG_KIT,
   EDIT_MARKET_KIT,
   EDIT_GROUP,
   API_USER_ERROR,
-  API_KITBAG_ERROR,
   CREATE_KITBAG,
   EDIT_KITBAG,
 } from '../actions/types';
@@ -57,8 +56,7 @@ export default (state = initialState, action) => {
         currentStyle: 'warning',
       };
     case API_USER_ERROR:
-    case API_KITBAG_ERROR:
-    case API_MARKET_ERROR:
+    case API_ERROR:
     case SIGNUP_FAILURE:
     case LOGIN_FAILURE:
       return {

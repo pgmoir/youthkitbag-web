@@ -5,9 +5,8 @@ import {
   FETCH_KITBAG_KIT,
   EDIT_KITBAG_KIT,
   DELETE_KITBAG_KIT,
-  API_KITBAG_ERROR,
+  API_ERROR,
   FETCH_KITBAG_LISTS,
-  GETALL_FAILURE,
   SEARCH_KITBAG_KITS,
 } from './types';
 import history from '../utils/history';
@@ -40,12 +39,7 @@ export const fetchKitbagKits = ({
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/kitbag/kit/${kitbagId}`);
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: response });
+      dispatch({ type: API_ERROR, payload: response });
     });
 };
 
@@ -57,12 +51,7 @@ export const fetchKitbagKit = (kitbagId, kitId) => (dispatch) => {
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response.data });
-        history.push(`/auth/login?return=/kitbag/kit/${kitbagId}`);
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };
 
@@ -75,12 +64,7 @@ export const createKitbagKit = (kitbagId, formValues) => (dispatch) => {
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response.data });
-        history.push(`/auth/login?return=/kitbag/kit/${kitbagId}`);
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };
 
@@ -93,12 +77,7 @@ export const editKitbagKit = (kitbagId, kitId, formValues) => (dispatch) => {
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response.data });
-        history.push(`/auth/login?return=/kitbag/kit/${kitbagId}`);
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };
 
@@ -111,12 +90,7 @@ export const deleteKitbagKit = (kitbagId, kitId) => (dispatch) => {
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response.data });
-        history.push(`/auth/login?return=/kitbag/kit/${kitbagId}`);
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };
 
@@ -128,11 +102,6 @@ export const fetchKitbagLists = (kitbagId = null) => (dispatch) => {
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response.data });
-        history.push(`/auth/login`);
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };

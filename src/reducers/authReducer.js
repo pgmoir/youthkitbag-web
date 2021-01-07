@@ -4,9 +4,9 @@ import {
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
   GETALL_SUCCESS,
-  GETALL_FAILURE,
   LOGOUT,
   PASSWORD_RESET_CHECK,
+  GETALL_FAILURE,
 } from '../actions/types';
 
 const isLogin = !!(

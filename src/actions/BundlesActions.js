@@ -1,11 +1,5 @@
 import axios from '../utils/axios';
-import {
-  FETCH_BUNDLE,
-  FETCH_BUNDLES,
-  API_KITBAG_ERROR,
-  GETALL_FAILURE,
-} from './types';
-import history from '../utils/history';
+import { FETCH_BUNDLE, FETCH_BUNDLES, API_ERROR } from './types';
 
 export const fetchSubscriptionBundles = () => (dispatch) => {
   axios
@@ -15,12 +9,7 @@ export const fetchSubscriptionBundles = () => (dispatch) => {
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response.data });
-        history.push('/auth/login?return=/bundles');
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };
 
@@ -32,11 +21,6 @@ export const fetchSubscriptionBundle = (bundleId) => (dispatch) => {
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response.data });
-        history.push('/auth/login?return=/bundles');
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };

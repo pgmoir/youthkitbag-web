@@ -34,7 +34,7 @@ export const login = (email, password, referrer) => (dispatch) => {
     })
     .catch((err) => {
       const { response } = err;
-      dispatch({ type: LOGIN_FAILURE, payload: response.data.data });
+      dispatch({ type: LOGIN_FAILURE, payload: response.data });
     });
 };
 

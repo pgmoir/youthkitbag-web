@@ -1,8 +1,7 @@
 import axios from '../utils/axios';
 import {
   FETCH_SHOW_GROUP,
-  API_KITBAG_ERROR,
-  GETALL_FAILURE,
+  API_ERROR,
   FETCH_SHOW_MARKET_TRADES,
   FETCH_SHOW_MARKET_RECYCLES,
   FETCH_SHOW_MARKET_FOUNDS,
@@ -10,7 +9,6 @@ import {
   FETCH_SHOW_MARKET_STOLENS,
   FETCH_SHOW_MARKET_WANTEDS,
 } from './types';
-import history from '../utils/history';
 import { MarketTypes } from '../enums/marketTypes.enum';
 
 export const fetchShowGroup = (groupId) => (dispatch) => {
@@ -21,12 +19,7 @@ export const fetchShowGroup = (groupId) => (dispatch) => {
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response.data });
-        history.push('/auth/login?return=/groups/view');
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };
 
@@ -75,11 +68,6 @@ export const fetchShowGroupMarket = (groupId, by) => (dispatch) => {
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response.data });
-        history.push('/auth/login?return=/groups/view');
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };

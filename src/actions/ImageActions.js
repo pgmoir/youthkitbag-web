@@ -1,5 +1,5 @@
 import axios from '../utils/axios';
-import { ADD_IMAGE, CLEAR_NEW_IMAGES, API_KITBAG_ERROR } from './types';
+import { ADD_IMAGE, CLEAR_NEW_IMAGES, API_ERROR } from './types';
 
 export const addImage = (kitbagId, formData) => (dispatch) => {
   axios
@@ -9,7 +9,7 @@ export const addImage = (kitbagId, formData) => (dispatch) => {
     })
     .catch((err) => {
       const { response } = err;
-      dispatch({ type: API_KITBAG_ERROR, payload: response.data });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };
 

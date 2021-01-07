@@ -4,7 +4,6 @@ import {
   EDIT_USER,
   RESET_USER_FLAGS,
   API_USER_ERROR,
-  GETALL_FAILURE,
   RESET,
   RESET_TOAST,
 } from './types';
@@ -32,11 +31,6 @@ export const editUser = (formValues) => (dispatch) => {
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/settings/user');
-      }
       dispatch({ type: API_USER_ERROR, payload: response.data });
     });
 };
@@ -51,11 +45,6 @@ export const deleteUser = (formValues) => (dispatch) => {
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/settings/user');
-      }
       dispatch({ type: API_USER_ERROR, payload: response.data });
     });
 };
@@ -69,11 +58,6 @@ export const editPreferredKitbag = ({ kitbagId }, { url }) => (dispatch) => {
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response.data });
-        history.push('/auth/login?return=/settings/kitbags');
-      }
       dispatch({ type: API_USER_ERROR, payload: response.data });
     });
 };
@@ -86,11 +70,6 @@ export const hideFlag = (name, hide) => (dispatch) => {
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response.data });
-        history.push('/auth/login?return=/settings/user');
-      }
       dispatch({ type: API_USER_ERROR, payload: response.data });
     });
 };
@@ -104,11 +83,6 @@ export const resetFlags = () => (dispatch) => {
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response.data });
-        history.push('/auth/login?return=/settings/user');
-      }
       dispatch({ type: API_USER_ERROR, payload: response.data });
     });
 };
