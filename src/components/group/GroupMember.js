@@ -73,7 +73,7 @@ const GroupMember = ({ groupId, member, groupMember, groupAdmin }) => {
       <article className="card card-b1">
         {groupAdmin && (
           <span className="icons-top-left pt-1">
-            <Link to={`/groups/${groupId}/members/${user._id}/delete`}>
+            <Link to={`/groups/${groupId}/members/${member._id}/delete`}>
               <span
                 className="icon-tray-item fas fa-trash-alt"
                 title="Delete member"
@@ -108,21 +108,21 @@ const GroupMember = ({ groupId, member, groupMember, groupAdmin }) => {
             ></span>
             {groupAdmin && state !== 'left' && (
               <>
-                <Link to={`/groups/${groupId}/members/${user._id}/approved`}>
+                <Link to={`/groups/${groupId}/members/${member._id}/approved`}>
                   <span className="sr-only">Approve membership</span>
                   <span
                     className={`fas fa-laugh w-25 text-center ${isApproved()}`}
                     title="Approve membership"
                   ></span>
                 </Link>
-                <Link to={`/groups/${groupId}/members/${user._id}/rejected`}>
+                <Link to={`/groups/${groupId}/members/${member._id}/rejected`}>
                   <span className="sr-only">Reject membership</span>
                   <span
                     className={`fas fa-sad-tear w-25 text-center ${isRejected()}`}
                     title="Reject membership"
                   ></span>
                 </Link>
-                <Link to={`/groups/${groupId}/members/${user._id}/suspended`}>
+                <Link to={`/groups/${groupId}/members/${member._id}/suspended`}>
                   <span className="sr-only">Suspend membership</span>
                   <span
                     className={`fas fa-meh-blank w-25 text-center ${isSuspended()}`}

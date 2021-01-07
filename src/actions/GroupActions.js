@@ -160,14 +160,15 @@ export const fetchGroupMembers = ({
         history.push(`/auth/login?return=/groups/${groupId}/members`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: response.data });
+      history.push(`/groups/${groupId}/members`);
     });
 };
 
-export const editGroupMemberState = (groupId, memberId, state) => (
+export const editGroupMember = ({ groupId, memberId, formValues }) => (
   dispatch
 ) => {
   axios
-    .put(`/group/${groupId}/members/${memberId}`, { state }, {})
+    .put(`/group/${groupId}/members/${memberId}`, { ...formValues }, {})
     .then((response) => {
       history.push(`/groups/${groupId}/members`);
       dispatch({ type: EDIT_GROUP_MEMBER_STATE, payload: response.data });
@@ -180,6 +181,7 @@ export const editGroupMemberState = (groupId, memberId, state) => (
         history.push(`/auth/login?return=/groups/${groupId}/members`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: response.data });
+      history.push(`/groups/${groupId}/members`);
     });
 };
 
@@ -198,6 +200,7 @@ export const deleteGroupMember = (groupId, memberId) => (dispatch) => {
         history.push(`/auth/login?return=/groups/${groupId}/members`);
       }
       dispatch({ type: API_KITBAG_ERROR, payload: response.data });
+      history.push(`/groups/${groupId}/members`);
     });
 };
 
