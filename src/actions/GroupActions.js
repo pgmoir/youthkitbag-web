@@ -141,7 +141,7 @@ export const fetchGroupMembers = ({
       params: { by, searchfor, page, pagesize, order, direction },
     })
     .then((response) => {
-      dispatch({ type: FETCH_GROUP_MEMBERS, payload: response.data });
+      dispatch({ type: FETCH_GROUP_MEMBERS, payload: response.data.data });
       if (pushHistory) {
         dispatch({
           type: SEARCH_GROUP_MEMBERS,
@@ -167,7 +167,7 @@ export const editGroupMemberState = (groupId, memberId, state) => (
   dispatch
 ) => {
   axios
-    .put(`/group/${groupId}/members/${memberId}/${state}`, {}, {})
+    .put(`/group/${groupId}/members/${memberId}`, { state }, {})
     .then((response) => {
       history.push(`/groups/${groupId}/members`);
       dispatch({ type: EDIT_GROUP_MEMBER_STATE, payload: response.data });
