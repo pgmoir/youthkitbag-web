@@ -1,11 +1,12 @@
 import axios from '../utils/axios';
 import { FETCH_BUNDLE, FETCH_BUNDLES, API_ERROR } from './types';
 
-export const fetchSubscriptionBundles = () => (dispatch) => {
+export const fetchBundles = ({ user }) => (dispatch) => {
+  const defaultBundles = user && user._id ? '' : '/default';
   axios
-    .get(`/bundles`, {})
+    .get(`/bundle${defaultBundles}`, {})
     .then((response) => {
-      dispatch({ type: FETCH_BUNDLES, payload: response.data });
+      dispatch({ type: FETCH_BUNDLES, payload: response.data.data });
     })
     .catch((err) => {
       const { response } = err;
@@ -15,9 +16,9 @@ export const fetchSubscriptionBundles = () => (dispatch) => {
 
 export const fetchSubscriptionBundle = (bundleId) => (dispatch) => {
   axios
-    .get(`/bundles/${bundleId}`, {})
+    .get(`/bundle/${bundleId}`, {})
     .then((response) => {
-      dispatch({ type: FETCH_BUNDLE, payload: response.data });
+      dispatch({ type: FETCH_BUNDLE, payload: response.data.data });
     })
     .catch((err) => {
       const { response } = err;

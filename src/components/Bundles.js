@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Title from './includes/title/Title';
 import { connect } from 'react-redux';
-import { fetchSubscriptionBundles } from '../actions/BundlesActions';
+import { fetchBundles } from '../actions/BundlesActions';
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
@@ -11,13 +11,13 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  fetchSubscriptionBundles,
+  fetchBundles,
 };
 
-const Bundles = ({ auth, user, bundles, fetchSubscriptionBundles }) => {
+const Bundles = ({ auth, user, bundles, fetchBundles }) => {
   useEffect(() => {
-    fetchSubscriptionBundles();
-  }, [fetchSubscriptionBundles]);
+    fetchBundles({ user });
+  }, [user, fetchBundles]);
 
   const themes = ['bronze', 'silver', 'gold'];
 
