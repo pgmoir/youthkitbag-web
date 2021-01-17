@@ -28,7 +28,7 @@ const KitbagMarketRecycleAnnouncement = ({
   }, [items]);
 
   useEffect(() => {
-    fetchKitbagMarketItems(MarketTypes.RECYCLE, 5);
+    fetchKitbagMarketItems({ by: MarketTypes.RECYCLE, pagesize: 5 });
   }, [fetchKitbagMarketItems]);
 
   function topImage(images) {

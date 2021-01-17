@@ -91,7 +91,6 @@ const ThreadMessageChain = ({
       .filter((m) => m.content.length > 0)
       .map((message, index) => {
         const { fromKitbag, author, content } = message;
-        console.log('AUTH', author);
         return (
           <div className="bg-white" key={`${index}`}>
             {displaySentOn(message.sentOn)}

@@ -49,7 +49,7 @@ export const fetchKitbagMarketItems = ({
             payload: response.data.data,
           });
           break;
-        case 'lost':
+        case MarketTypes.LOST:
           dispatch({
             type: FETCH_KITBAG_MARKET_LOSTS,
             payload: response.data.data,

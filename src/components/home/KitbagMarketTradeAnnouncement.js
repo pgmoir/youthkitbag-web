@@ -28,7 +28,7 @@ const KitbagMarketTradeAnnouncement = ({
   }, [items]);
 
   useEffect(() => {
-    fetchKitbagMarketItems(MarketTypes.TRADE, 5);
+    fetchKitbagMarketItems({ by: MarketTypes.TRADE, pagesize: 5 });
   }, [fetchKitbagMarketItems]);
 
   if (!group || !marketItems) return null;

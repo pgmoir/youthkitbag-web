@@ -28,7 +28,7 @@ const KitbagMarketStolenAnnouncement = ({
   }, [items]);
 
   useEffect(() => {
-    fetchKitbagMarketItems(MarketTypes.STOLEN, 5);
+    fetchKitbagMarketItems({ by: MarketTypes.STOLEN, pagesize: 5 });
   }, [fetchKitbagMarketItems]);
 
   function topImage(images) {
