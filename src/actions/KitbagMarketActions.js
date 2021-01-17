@@ -85,7 +85,7 @@ export const fetchMarketKit = (kitbagId, marketId) => (dispatch) => {
   axios
     .get(`/kitbag/market/${kitbagId}/${marketId}`, {})
     .then((response) => {
-      dispatch({ type: FETCH_MARKET_KIT, payload: response.data });
+      dispatch({ type: FETCH_MARKET_KIT, payload: response.data.data });
     })
     .catch((err) => {
       const { response } = err;

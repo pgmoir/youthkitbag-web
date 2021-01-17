@@ -2,7 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { TextAreaForm } from '../../includes/forms';
 
-const StolenResponse = ({ values, handleChange, errors, handleSubmit }) => {
+export const StolenResponse = ({
+  values,
+  handleChange,
+  errors,
+  handleSubmit,
+}) => {
   return (
     <>
       {values && (
@@ -41,5 +46,3 @@ const StolenResponse = ({ values, handleChange, errors, handleSubmit }) => {
     </>
   );
 };
-
-export default StolenResponse;

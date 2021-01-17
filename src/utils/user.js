@@ -20,7 +20,10 @@ export const userHasGroupAdministration = (user) => {
 };
 
 export const userPreferredKitbagId = (user) => {
-  return user && user.kitbags && user.kitbags.length > 0
+  return user &&
+    user.kitbags &&
+    user.kitbags.length > 0 &&
+    user.kitbags.filter((k) => k.preferred).length > 0
     ? user.kitbags.find((a) => a.preferred)._id
     : null;
 };

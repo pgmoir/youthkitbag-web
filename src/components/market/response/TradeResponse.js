@@ -2,7 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { TextAreaForm, TextForm } from '../../includes/forms';
 
-const TradeResponse = ({ values, handleChange, errors, handleSubmit }) => {
+export const TradeResponse = ({
+  values,
+  handleChange,
+  errors,
+  handleSubmit,
+}) => {
   return (
     <>
       {values && (
@@ -52,5 +57,3 @@ const TradeResponse = ({ values, handleChange, errors, handleSubmit }) => {
     </>
   );
 };
-
-export default TradeResponse;

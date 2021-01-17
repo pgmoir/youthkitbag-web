@@ -29,7 +29,7 @@ const ThreadMessageChain = ({
 }) => {
   const initialMessage = {
     kitbagId: kitbagId,
-    marketId: thread.source,
+    marketId: thread.sourceItem,
     threadId: thread._id,
     content: '',
     responseState: thread.responseState,
@@ -90,33 +90,32 @@ const ThreadMessageChain = ({
     return messages
       .filter((m) => m.content.length > 0)
       .map((message, index) => {
-        const { toSourceKitbag, fromUser, content } = message;
+        const { fromKitbag, author, content } = message;
+        console.log('AUTH', author);
         return (
           <div className="bg-white" key={`${index}`}>
             {displaySentOn(message.sentOn)}
             <div className="pb-3">
               <div
                 className={`d-block ${
-                  toSourceKitbag ? 'float-right' : 'float-left'
+                  fromKitbag ? 'float-left' : 'float-right'
                 } px-2 pb-3`}
               >
                 <img
-                  src={fromUser.image}
+                  src={author.image}
                   className="img-avatar img-thumbnail img-link rounded-circle p-0 m-1"
-                  alt=""
+                  alt="ALTER"
                 />
               </div>
               <div>
                 <div
                   className={`d-flex ${
-                    toSourceKitbag
-                      ? 'justify-content-end'
-                      : 'justify-content-start'
+                    fromKitbag ? 'justify-content-start' : 'justify-content-end'
                   }`}
                 >
                   <div
                     className={`p-2 w-75 bg-affair-30 rounded-lg position-relative display-linebreak  ${
-                      toSourceKitbag ? 'speech-right' : 'speech-left'
+                      fromKitbag ? 'speech-left' : 'speech-right'
                     }`}
                   >
                     {content}

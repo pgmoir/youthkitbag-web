@@ -24,7 +24,6 @@ const ThreadLink = ({ thread, source, changeThreadDisplayed }) => {
         return 'bg-light';
     }
   }
-
   const { _id, sourceKitbag, responseUser, responseState } = thread;
   const lastMessage = _id ? getLastMessage() : {};
   const isMarket = source === 'market';

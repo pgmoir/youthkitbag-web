@@ -14,7 +14,9 @@ const mapDispatchToProps = {
 
 const User = ({ kitbags, getUser, fetchKitbagLists }) => {
   const kitbagId =
-    kitbags && kitbags.length > 0
+    kitbags &&
+    kitbags.length > 0 &&
+    kitbags.filter((k) => k.preferred).length > 0
       ? kitbags.find((a) => a.preferred)._id
       : undefined;
 

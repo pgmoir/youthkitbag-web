@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { capitalize } from '../../utils/strings';
 import { respondMarketItem } from '../../actions/MarketActions';
-import FoundResponse from './response/FoundResponse';
-import LostResponse from './response/LostResponse';
-import StolenResponse from './response/StolenResponse';
-import TradeResponse from './response/TradeResponse';
-import WantedResponse from './response/WantedResponse';
+import { FoundResponse } from './response/FoundResponse';
+import { LostResponse } from './response/LostResponse';
+import { StolenResponse } from './response/StolenResponse';
+import { TradeResponse } from './response/TradeResponse';
+import { WantedResponse } from './response/WantedResponse';
 import Threads from '../thread/threads/Threads';
 import validate from '../includes/FormEmptyValidationRules';
 import { ImagesDisplay } from '../includes/forms/ImagesDisplay';
@@ -162,7 +162,9 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
     trade: TradeResponse,
     wanted: WantedResponse,
   };
-  const Response = responseComponents[market.marketType || MarketTypes.TRADE];
+
+  const Response =
+    responseComponents[market.marketType.toLowerCase() || MarketTypes.TRADE];
 
   return (
     <>

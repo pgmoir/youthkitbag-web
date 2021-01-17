@@ -56,7 +56,7 @@ export const fetchMarketItem = (marketId) => (dispatch) => {
   axios
     .get(`/market/${marketId}`, {})
     .then((response) => {
-      dispatch({ type: FETCH_MARKET_ITEM, payload: response.data });
+      dispatch({ type: FETCH_MARKET_ITEM, payload: response.data.data });
     })
     .catch((err) => {
       const { response } = err;

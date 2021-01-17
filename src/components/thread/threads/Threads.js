@@ -18,7 +18,7 @@ const Threads = ({ threads, kitbagId, source, marketType }) => {
     const { messages } = thread;
     let previousDate;
     for (var i = 0; i < messages.length; i++) {
-      const { toSourceKitbag, fromUser, content, sentOn } = messages[i];
+      const { fromKitbag, author, content, sentOn } = messages[i];
       const { sourceDate, newPreviousDate } = compareForSameDate(
         sentOn,
         previousDate
@@ -26,8 +26,8 @@ const Threads = ({ threads, kitbagId, source, marketType }) => {
       previousDate = newPreviousDate;
       newThread.messages.push({
         _id: i,
-        toSourceKitbag,
-        fromUser,
+        fromKitbag,
+        author,
         sentOn: sourceDate,
         content,
       });
