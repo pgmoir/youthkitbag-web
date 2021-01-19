@@ -17,7 +17,7 @@ const KitCard = ({ kit, kitbagId }) => {
     if (!images || images.length === 0) {
       return '/images/default.png';
     }
-    return images[0].photo.imageUrl;
+    return images[0].imageUrl;
   }
 
   function renderBlank() {

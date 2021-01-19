@@ -19,7 +19,7 @@ const UserAnnouncement = ({ user }) => {
           profile. It always helps to add a few extra details, so that we can
           identify more relevant resources to show you.
         </p>
-        <Link className="btn btn-warning" to="/settings">
+        <Link className="btn btn-warning" to="/settings/user">
           Update user profile
         </Link>
       </div>
