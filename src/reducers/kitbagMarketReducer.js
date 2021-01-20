@@ -29,16 +29,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_MARKET_KIT:
-      return { ...state, current: action.payload };
-    case CREATE_MARKET_KIT:
-      return { current: action.payload.market };
-    case EDIT_MARKET_KIT:
-      return { ...state, current: action.payload };
-    case RESPOND_MARKET_KIT:
-      return { ...state, current: action.payload };
-    case DELETE_MARKET_KIT:
-      return { ...state };
+    case FETCH_MARKET_ITEMS:
     case FETCH_KITBAG_MARKET_ITEMS:
       return { ...state, list: action.payload };
     case FETCH_KITBAG_MARKET_TRADES:
@@ -53,7 +44,13 @@ export default (state = initialState, action) => {
       return { ...state, stolens: action.payload };
     case FETCH_KITBAG_MARKET_WANTEDS:
       return { ...state, wanteds: action.payload };
-    case FETCH_MARKET_ITEMS:
+    case FETCH_MARKET_KIT:
+    case CREATE_MARKET_KIT:
+    case EDIT_MARKET_KIT:
+    case RESPOND_MARKET_KIT:
+      return { ...state, current: action.payload };
+    case DELETE_MARKET_KIT:
+      return { ...state };
     case RESET:
     case LOGOUT:
       return initialState;

@@ -9,7 +9,7 @@ const MarketItemCard = ({ market }) => {
     subtitle,
     isOwned,
     marketType,
-    account,
+    kitbag,
     marketPrice,
     threads,
   } = market;
@@ -52,7 +52,7 @@ const MarketItemCard = ({ market }) => {
       <article className="card card-link card-b1">
         {isOwned && (
           <span className="icons-top-left pt-1">
-            <Link to={`/kitbag/market/${account}/delete/${_id}`}>
+            <Link to={`/kitbag/market/${kitbag}/delete/${_id}`}>
               <span
                 className="icon-tray-item fas fa-trash-alt"
                 title="Delete item"
@@ -70,7 +70,7 @@ const MarketItemCard = ({ market }) => {
         <Link
           to={
             isOwned
-              ? `/kitbag/market/${account}/edit/${_id}`
+              ? `/kitbag/market/${kitbag}/edit/${_id}`
               : `/market/view/${_id}`
           }
         >

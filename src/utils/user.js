@@ -1,28 +1,29 @@
 export const userHasGroupMembership = (user) => {
-  return user.profile && user.profile.groups && user.profile.groups.length > 0
-    ? user.profile.groups.filter(
+  return user && user.groups && user.groups.length > 0
+    ? user.groups.filter(
         (g) =>
-          g.status === 'approved' &&
+          g.state === 'approved' &&
           (g.member.state === 'approved' || g.member.state === 'requested')
       ).length > 0
     : false;
 };
 
 export const userHasGroupAdministration = (user) => {
-  return user.profile && user.profile.groups && user.profile.groups.length > 0
-    ? user.profile.groups.filter(
+  return user && user.groups && user.groups.length > 0
+    ? user.groups.filter(
         (g) =>
-          g.status === 'approved' &&
+          g.state === 'approved' &&
           g.member.state === 'approved' &&
-          g.member.permissions.includes('admin')
+          g.member.roles.includes('admin')
       ).length > 0
     : false;
 };
 
-export const userPreferredAccountId = (user) => {
-  return user.profile &&
-    user.profile.accounts &&
-    user.profile.accounts.length > 0
-    ? user.profile.accounts.find((a) => a.preferred)._id
+export const userPreferredKitbagId = (user) => {
+  return user &&
+    user.kitbags &&
+    user.kitbags.length > 0 &&
+    user.kitbags.filter((k) => k.preferred).length > 0
+    ? user.kitbags.find((a) => a.preferred)._id
     : null;
 };

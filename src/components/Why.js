@@ -57,7 +57,7 @@ const Why = () => {
                 Bikes, clothes, inner tubes, cassettes, wheels, tools and more.
                 So much equipment, and so easy to forget what and where. I
                 couldn&apos;t keep track of it all. With YouthKitbag, I can! And
-                because it is based on group accounts, so can the rest of the
+                because it is based on group kitbags, so can the rest of the
                 family.
               </p>
             </div>

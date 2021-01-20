@@ -4,13 +4,13 @@ import {
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
   GETALL_SUCCESS,
-  GETALL_FAILURE,
   LOGOUT,
   PASSWORD_RESET_CHECK,
+  GETALL_FAILURE,
 } from '../actions/types';
 
 const isLogin = !!(
-  localStorage.getItem('auth-token') && localStorage.getItem('authentication')
+  localStorage.getItem('authToken') && localStorage.getItem('authentication')
 );
 const initialState = isLogin ? { loggedIn: true } : { loggedIn: false };
 

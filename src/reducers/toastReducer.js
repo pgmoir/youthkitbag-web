@@ -1,6 +1,5 @@
 import {
   RESET_TOAST,
-  API_KITBAG_ERROR,
   LOGOUT,
   CREATE_GROUP,
   CREATE_MARKET_KIT,
@@ -8,57 +7,62 @@ import {
   DELETE_MARKET_KIT,
   DELETE_KITBAG_KIT,
   LOGIN_FAILURE,
-  EDIT_GROUP_STATUS,
+  EDIT_GROUP_STATE,
   EDIT_GROUP_MEMBER_STATE,
   DELETE_GROUP_MEMBER,
-  EDIT_USER_PROFILE,
+  EDIT_USER,
   RESET_USER_FLAGS,
-  API_MARKET_ERROR,
+  API_ERROR,
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
   EDIT_KITBAG_KIT,
   EDIT_MARKET_KIT,
-  EDIT_GROUP
+  EDIT_GROUP,
+  API_USER_ERROR,
+  CREATE_KITBAG,
+  EDIT_KITBAG,
 } from '../actions/types';
 
 const initialState = {
   currentMessage: '',
   currentStyle: '',
-  errors: []
+  errors: [],
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case CREATE_GROUP:
+    case CREATE_KITBAG:
+    case EDIT_KITBAG:
     case CREATE_KITBAG_KIT:
     case CREATE_MARKET_KIT:
     case EDIT_GROUP:
-    case EDIT_GROUP_STATUS:
+    case EDIT_GROUP_STATE:
     case EDIT_GROUP_MEMBER_STATE:
-    case EDIT_USER_PROFILE:
+    case EDIT_USER:
     case RESET_USER_FLAGS:
     case EDIT_KITBAG_KIT:
     case EDIT_MARKET_KIT:
     case SIGNUP_SUCCESS:
       return {
         currentMessage: action.payload.message,
-        currentStyle: 'success'
+        currentStyle: 'success',
       };
     case DELETE_KITBAG_KIT:
     case DELETE_MARKET_KIT:
     case DELETE_GROUP_MEMBER:
       return {
         currentMessage: action.payload.message,
-        currentStyle: 'warning'
+        currentStyle: 'warning',
       };
-    case API_KITBAG_ERROR:
-    case API_MARKET_ERROR:
+    case API_USER_ERROR:
+    case API_ERROR:
     case SIGNUP_FAILURE:
     case LOGIN_FAILURE:
       return {
-        currentMessage: action.payload.data.message,
+        currentMessage: action.payload.message,
         currentStyle: 'error',
-        errors: action.payload.data.errors
+        errors: action.payload.errors,
       };
     case RESET_TOAST:
     case LOGOUT:

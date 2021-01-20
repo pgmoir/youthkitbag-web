@@ -10,11 +10,11 @@ const SelectForm = ({
   index,
   error,
   items,
-  useItem
+  useItem,
 }) => {
   const columns = colFormat.split('-');
   return (
-    <React.Fragment>
+    <>
       {colFormat === '3-9' && (
         <div className="form-group row">
           <label htmlFor={field} className="col-sm-3 col-form-label">
@@ -45,7 +45,7 @@ const SelectForm = ({
           />
         </div>
       )}
-    </React.Fragment>
+    </>
   );
 };
 

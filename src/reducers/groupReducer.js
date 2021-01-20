@@ -33,22 +33,17 @@ export default (state = initialState, action) => {
         memberList: {},
       };
     case FETCH_GROUP:
-      return {
-        ...state,
-        current: action.payload,
-        memberList: {},
-      };
     case CREATE_GROUP:
     case EDIT_GROUP:
       return {
         ...state,
-        current: {},
+        current: action.payload.data,
         memberList: {},
       };
     case FETCH_GROUP_MEMBERS:
       return { ...state, memberList: action.payload.members };
     case FETCH_GROUPS_MEMBER_REQUESTS:
-      return { ...state, memberRequests: action.payload };
+      return { ...state, memberRequests: action.payload.data };
     case LOGOUT:
       return initialState;
     default:

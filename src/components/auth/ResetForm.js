@@ -5,17 +5,17 @@ import { reset } from '../../actions/AuthActions';
 import { TextForm } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
 
-const mapStateToProps = state => ({
-  newErrors: state.toast.errors
+const mapStateToProps = (state) => ({
+  newErrors: state.toast.errors,
 });
 
 const mapDispatchToProps = {
-  reset
+  reset,
 };
 
 const ResetForm = ({ newErrors, reset }) => {
   const initialValues = {
-    email: ''
+    email: '',
   };
 
   const { values, handleChange, handleSubmit, errors, setErrors } = useForm(
@@ -44,7 +44,7 @@ const ResetForm = ({ newErrors, reset }) => {
         field="email"
         handleChange={handleChange}
         error={errors.email}
-        autoComplete="username email"
+        autoComplete="userName email"
       />
       <button
         className="d-block btn btn-success btn-lg py-3 px-5 mt-3 mx-auto"

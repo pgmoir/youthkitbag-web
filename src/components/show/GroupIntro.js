@@ -38,7 +38,7 @@ const GroupIntro = ({
     <div className="row" role="main">
       <div className="col-12 col-md-6 pr-2">
         <p className="f-lg">
-          {group.status === 'approved' && (
+          {group.state === 'approved' && (
             <>
               <a href={group.website}>
                 <em>{group.name}</em>
@@ -51,7 +51,7 @@ const GroupIntro = ({
               active members.
             </>
           )}
-          {group.status === 'requested' && (
+          {group.state === 'requested' && (
             <>
               <em>{group.name}</em> has been registered as an official group on
               YouthKitbag, and is currently awaiting approval to accept member

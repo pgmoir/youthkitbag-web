@@ -1,11 +1,12 @@
-import { GET_USER, LOGOUT } from '../actions/types';
+import { EDIT_USER, GET_USER, LOGOUT } from '../actions/types';
 
-const initialState = { profile: {} };
+const initialState = {};
 
 export default function authentication(state = initialState, action) {
   switch (action.type) {
     case GET_USER:
-      return { ...action.payload };
+    case EDIT_USER:
+      return { ...action.payload.data };
     case LOGOUT:
       return initialState;
     default:

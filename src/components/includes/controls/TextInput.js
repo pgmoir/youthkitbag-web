@@ -12,10 +12,10 @@ const TextInput = ({
   error,
   autoComplete,
   addClassName,
-  placeHolder
+  placeHolder,
 }) => {
   return (
-    <React.Fragment>
+    <>
       <input
         className={`form-control${error ? ' is-invalid' : ''} ${
           addClassName ? addClassName : ''
@@ -35,7 +35,7 @@ const TextInput = ({
         placeholder={placeHolder}
       />
       {error && <div className="invalid-feedback">{error}</div>}
-    </React.Fragment>
+    </>
   );
 };
 

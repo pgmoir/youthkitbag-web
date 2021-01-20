@@ -3,7 +3,7 @@ import ThreadLink from '../threadlink/ThreadLink';
 import ThreadMessageChain from '../threadMessageChain/ThreadMessageChain';
 import { compareForSameDate } from '../../../utils/date';
 
-const Threads = ({ threads, accountId, source, marketType }) => {
+const Threads = ({ threads, kitbagId, source, marketType }) => {
   const [threadDisplayed, setThreadDisplayed] = useState();
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const Threads = ({ threads, accountId, source, marketType }) => {
     const { messages } = thread;
     let previousDate;
     for (var i = 0; i < messages.length; i++) {
-      const { toSourceAccount, fromUser, content, sentOn } = messages[i];
+      const { fromKitbag, author, content, sentOn } = messages[i];
       const { sourceDate, newPreviousDate } = compareForSameDate(
         sentOn,
         previousDate
@@ -26,8 +26,8 @@ const Threads = ({ threads, accountId, source, marketType }) => {
       previousDate = newPreviousDate;
       newThread.messages.push({
         _id: i,
-        toSourceAccount,
-        fromUser,
+        fromKitbag,
+        author,
         sentOn: sourceDate,
         content,
       });
@@ -61,7 +61,7 @@ const Threads = ({ threads, accountId, source, marketType }) => {
           key={`${thisThread._id}-${index}`}
           thread={thisThread}
           source={source}
-          accountId={accountId}
+          kitbagId={kitbagId}
           marketType={marketType}
           displayed={threadDisplayed}
         />
@@ -70,12 +70,12 @@ const Threads = ({ threads, accountId, source, marketType }) => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <div className="row pb-3">
         <div className="col-4">{renderThreadLinks()}</div>
         <div className="col-8">{renderThreadMessages()}</div>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

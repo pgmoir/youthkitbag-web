@@ -4,8 +4,7 @@ import {
   FETCH_MARKET_KIT,
   EDIT_MARKET_KIT,
   DELETE_MARKET_KIT,
-  API_KITBAG_ERROR,
-  GETALL_FAILURE,
+  API_ERROR,
   RESET_TOAST,
   FETCH_KITBAG_MARKET_ITEMS,
   FETCH_KITBAG_MARKET_TRADES,
@@ -16,181 +15,155 @@ import {
   FETCH_KITBAG_MARKET_WANTEDS,
 } from './types';
 import history from '../utils/history';
+import { MarketTypes } from '../enums/marketTypes.enum';
 
-export const fetchMarketKit = (accountId, marketId) => (dispatch) => {
+export const fetchKitbagMarketItems = ({
+  by,
+  searchfor,
+  page,
+  pagesize,
+  order,
+  direction,
+}) => (dispatch) => {
   axios
-    .get(`/kitbag/market/${accountId}/${marketId}`, {})
+    .get(`/kitbag/market`, {
+      params: { by, searchfor, page, pagesize, order, direction },
+    })
     .then((response) => {
-      dispatch({ type: FETCH_MARKET_KIT, payload: response.data });
+      switch (by) {
+        case MarketTypes.TRADE:
+          dispatch({
+            type: FETCH_KITBAG_MARKET_TRADES,
+            payload: response.data.data,
+          });
+          break;
+        case MarketTypes.RECYCLE:
+          dispatch({
+            type: FETCH_KITBAG_MARKET_RECYCLES,
+            payload: response.data.data,
+          });
+          break;
+        case MarketTypes.FOUND:
+          dispatch({
+            type: FETCH_KITBAG_MARKET_FOUNDS,
+            payload: response.data.data,
+          });
+          break;
+        case MarketTypes.LOST:
+          dispatch({
+            type: FETCH_KITBAG_MARKET_LOSTS,
+            payload: response.data.data,
+          });
+          break;
+        case MarketTypes.STOLEN:
+          dispatch({
+            type: FETCH_KITBAG_MARKET_STOLENS,
+            payload: response.data.data,
+          });
+          break;
+        case MarketTypes.WANTED:
+          dispatch({
+            type: FETCH_KITBAG_MARKET_WANTEDS,
+            payload: response.data.data,
+          });
+          break;
+        default:
+          dispatch({
+            type: FETCH_KITBAG_MARKET_ITEMS,
+            payload: response.data.data,
+          });
+          break;
+      }
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/market`);
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };
 
-export const fetchMarketKitFromKit = (accountId, kitId, marketType) => (
+export const fetchMarketKit = (kitbagId, marketId) => (dispatch) => {
+  axios
+    .get(`/kitbag/market/${kitbagId}/${marketId}`, {})
+    .then((response) => {
+      dispatch({ type: FETCH_MARKET_KIT, payload: response.data.data });
+    })
+    .catch((err) => {
+      const { response } = err;
+      dispatch({ type: API_ERROR, payload: response.data });
+    });
+};
+
+export const fetchMarketKitFromKit = (kitbagId, kitId, marketType) => (
   dispatch
 ) => {
   axios
-    .get(`/kitbag/market/${accountId}/add/${kitId}/${marketType}`, {})
+    .get(`/kitbag/market/${kitbagId}/add/${kitId}/${marketType}`, {})
     .then((response) => {
-      dispatch({ type: FETCH_MARKET_KIT, payload: response.data });
+      dispatch({ type: FETCH_MARKET_KIT, payload: response.data.data });
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/market/${accountId}`);
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };
 
-export const createMarketKit = (accountId, formValues) => (dispatch) => {
+export const createMarketKit = (kitbagId, formValues) => (dispatch) => {
   axios
-    .post(`/kitbag/market/${accountId}`, { ...formValues }, {})
+    .post(`/kitbag/market/${kitbagId}`, { ...formValues }, {})
     .then((response) => {
-      history.push(`/market/${accountId}`);
+      history.push(`/market/${kitbagId}`);
       dispatch({ type: CREATE_MARKET_KIT, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/market/${accountId}`);
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };
 
-export const editMarketKit = (accountId, marketId, formValues) => (
-  dispatch
-) => {
+export const editMarketKit = (kitbagId, marketId, formValues) => (dispatch) => {
   axios
-    .put(`/kitbag/market/${accountId}/${marketId}`, { ...formValues }, {})
+    .put(`/kitbag/market/${kitbagId}/${marketId}`, { ...formValues }, {})
     .then((response) => {
-      history.push(`/market/${accountId}`);
+      history.push(`/market/${kitbagId}`);
       dispatch({ type: EDIT_MARKET_KIT, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/market');
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };
 
 export const respondToMarketKitThread = (
-  accountId,
+  kitbagId,
   marketId,
   threadId,
   formValues
 ) => (dispatch) => {
   axios
     .put(
-      `/kitbag/market/${accountId}/respond/${marketId}/${threadId}`,
+      `/kitbag/market/${kitbagId}/respond/${marketId}/${threadId}`,
       { ...formValues },
       {}
     )
     .then(() => {
       dispatch({ type: RESET_TOAST });
-      dispatch(fetchMarketKit(accountId, marketId));
+      dispatch(fetchMarketKit(kitbagId, marketId));
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(
-          `/auth/login?return=/kitbag/market/${accountId}/edit/${marketId}`
-        );
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };
 
-export const deleteMarketKit = (accountId, marketId) => (dispatch) => {
+export const deleteMarketKit = (kitbagId, marketId) => (dispatch) => {
   axios
-    .delete(`/kitbag/market/${accountId}/${marketId}`, {})
+    .delete(`/kitbag/market/${kitbagId}/${marketId}`, {})
     .then((response) => {
-      history.push(`/market/${accountId}`);
+      history.push(`/market/${kitbagId}`);
       dispatch({ type: DELETE_MARKET_KIT, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/market/${accountId}`);
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
-    });
-};
-
-export const fetchKitbagMarketItems = (by, pagesize) => (dispatch) => {
-  axios
-    .get(`/kitbag/market?by=${by}&pagesize=${pagesize}`, {})
-    .then((response) => {
-      switch (by) {
-        case 'trade':
-          dispatch({
-            type: FETCH_KITBAG_MARKET_TRADES,
-            payload: response.data,
-          });
-          break;
-        case 'recycle':
-          dispatch({
-            type: FETCH_KITBAG_MARKET_RECYCLES,
-            payload: response.data,
-          });
-          break;
-        case 'found':
-          dispatch({
-            type: FETCH_KITBAG_MARKET_FOUNDS,
-            payload: response.data,
-          });
-          break;
-        case 'lost':
-          dispatch({
-            type: FETCH_KITBAG_MARKET_LOSTS,
-            payload: response.data,
-          });
-          break;
-        case 'stolen':
-          dispatch({
-            type: FETCH_KITBAG_MARKET_STOLENS,
-            payload: response.data,
-          });
-          break;
-        case 'wanted':
-          dispatch({
-            type: FETCH_KITBAG_MARKET_WANTEDS,
-            payload: response.data,
-          });
-          break;
-        default:
-          dispatch({ type: FETCH_KITBAG_MARKET_ITEMS, payload: response.data });
-          break;
-      }
-    })
-    .catch((err) => {
-      const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/market');
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: response });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };

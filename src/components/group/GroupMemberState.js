@@ -1,23 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { editGroupMemberState } from '../../actions/GroupActions';
+import { editGroupMember } from '../../actions/GroupActions';
 import Modal from '../includes/Modal';
 import history from '../../utils/history';
 
 const mapDispatchToProps = {
-  editGroupMemberState,
+  editGroupMember,
 };
 
-const GroupMemberState = ({ editGroupMemberState, match }) => {
+const GroupMemberState = ({ editGroupMember, match }) => {
   const { groupId } = match.params;
 
   function renderTitle() {
-    return 'Change status of member';
+    return 'Change state of member';
   }
 
   function renderContent() {
-    return 'Are you sure you want to change the status of this member?';
+    return 'Are you sure you want to change the state of this member?';
   }
 
   function capitalizeFirstLetter(string) {
@@ -27,7 +27,7 @@ const GroupMemberState = ({ editGroupMemberState, match }) => {
   function renderActions() {
     const { groupId, memberId, state } = match.params;
     return (
-      <React.Fragment>
+      <>
         <Link
           to={`/groups/${groupId}/members`}
           className="btn btn-outline-secondary"
@@ -38,11 +38,13 @@ const GroupMemberState = ({ editGroupMemberState, match }) => {
         <button
           type="button"
           className="btn btn-danger"
-          onClick={() => editGroupMemberState(groupId, memberId, state)}
+          onClick={() =>
+            editGroupMember({ groupId, memberId, formValues: { state } })
+          }
         >
           {capitalizeFirstLetter(state)}
         </button>
-      </React.Fragment>
+      </>
     );
   }
 

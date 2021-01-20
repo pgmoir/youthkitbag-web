@@ -59,7 +59,7 @@ const MarketTitle = ({ market, isOwned }) => {
     );
   }
 
-  return <React.Fragment>{render()}</React.Fragment>;
+  return <>{render()}</>;
 };
 
 export default MarketTitle;

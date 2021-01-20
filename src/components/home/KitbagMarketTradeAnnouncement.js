@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchKitbagMarketItems } from '../../actions/KitbagMarketActions';
+import { MarketTypes } from '../../enums/marketTypes.enum';
 
 const mapStateToProps = (state) => ({
   totalItems: state.kitbag.market.trades.totalItems,
@@ -27,10 +28,10 @@ const KitbagMarketTradeAnnouncement = ({
   }, [items]);
 
   useEffect(() => {
-    fetchKitbagMarketItems('trade', 5);
+    fetchKitbagMarketItems({ by: MarketTypes.TRADE, pagesize: 5 });
   }, [fetchKitbagMarketItems]);
 
-  if (!group || !marketItems || totalItems === 0) return null;
+  if (!group || !marketItems) return null;
 
   function topImage(images) {
     if (!images || images.length === 0) {
@@ -45,7 +46,7 @@ const KitbagMarketTradeAnnouncement = ({
         <Link
           className="a-inherit"
           key={index}
-          to={`/kitbag/market/${m.account}/edit/${m._id}`}
+          to={`/kitbag/market/${m.kitbag}/edit/${m._id}`}
         >
           <div className="bg-white d-flex flex-row align-items-center mb-2">
             <div className="pl-1 py-1 pr-2">

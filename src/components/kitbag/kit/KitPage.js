@@ -15,12 +15,12 @@ const mapDispatchToProps = {
 };
 
 const KitPage = ({ current, fetchKitbagKit, match }) => {
-  const { kitId, accountId } = match.params;
+  const { kitId, kitbagId } = match.params;
   const [kit, setKit] = useState({
     title: '',
     subtitle: '',
     description: '',
-    status: 'owned',
+    status: 'Owned',
     purchases: [],
     inbag: [],
     security: [],
@@ -34,10 +34,10 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
   });
 
   useEffect(() => {
-    if (accountId && kitId) {
-      fetchKitbagKit(accountId, kitId);
+    if (kitbagId && kitId) {
+      fetchKitbagKit(kitbagId, kitId);
     }
-  }, [fetchKitbagKit, accountId, kitId]);
+  }, [fetchKitbagKit, kitbagId, kitId]);
 
   useEffect(() => {
     if (current && current._id) {
@@ -75,19 +75,19 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
             <div className="row">
               <div className="col-12 mb-3 d-flex justify-content-end">
                 <Link
-                  to={`/kitbag/market/${accountId}/add/${kitId}/trade`}
+                  to={`/kitbag/market/${kitbagId}/add/${kitId}/trade`}
                   className="btn btn-primary mr-3"
                 >
                   Trade Recycle
                 </Link>
                 <Link
-                  to={`/kitbag/market/${accountId}/add/${kitId}/wanted`}
+                  to={`/kitbag/market/${kitbagId}/add/${kitId}/wanted`}
                   className="btn btn-secondary mr-3"
                 >
                   Wanted
                 </Link>
                 <Link
-                  to={`/kitbag/market/${accountId}/add/${kitId}/stolen`}
+                  to={`/kitbag/market/${kitbagId}/add/${kitId}/stolen`}
                   className="btn btn-danger"
                 >
                   Found Lost Stolen
@@ -95,7 +95,7 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
               </div>
             </div>
           )}
-          <KitForm accountId={accountId} kit={kit} />
+          <KitForm kitbagId={kitbagId} kit={kit} />
         </div>
       </section>
     </div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 const CheckboxInput = ({ value, field, onChange }) => {
   return (
-    <React.Fragment>
+    <>
       <input
         className="form-check-input"
         type="checkbox"
@@ -11,7 +11,7 @@ const CheckboxInput = ({ value, field, onChange }) => {
         checked={value}
         aria-describedby={field}
       />
-    </React.Fragment>
+    </>
   );
 };
 

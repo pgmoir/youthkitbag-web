@@ -3,7 +3,7 @@ import CheckboxInput from '../controls/CheckboxInput';
 
 const CheckboxForm = ({ colFormat, label, value, field, onChange, help }) => {
   return (
-    <React.Fragment>
+    <>
       {colFormat === '3-1-8' && (
         <div className="form-group row">
           <label className="col-sm-3" htmlFor={field}>
@@ -31,7 +31,7 @@ const CheckboxForm = ({ colFormat, label, value, field, onChange, help }) => {
           </div>
         </div>
       )}
-    </React.Fragment>
+    </>
   );
 };
 

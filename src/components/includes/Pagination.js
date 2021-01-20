@@ -5,7 +5,7 @@ const mapStateToProps = (state) => ({
   pagination: state.pagination,
 });
 
-const Pagination = ({ accountId, search, callback, pagination }) => {
+const Pagination = ({ kitbagId, search, callback, pagination }) => {
   const {
     searchfor,
     by,
@@ -13,7 +13,7 @@ const Pagination = ({ accountId, search, callback, pagination }) => {
     order,
     direction,
     excgroups,
-    excaccounts,
+    exckitbags,
   } = search;
 
   function changePage(moveToPage) {
@@ -24,9 +24,9 @@ const Pagination = ({ accountId, search, callback, pagination }) => {
       pagesize,
       order,
       direction,
-      accountId,
+      kitbagId,
       excgroups,
-      excaccounts,
+      exckitbags,
     });
   }
 
@@ -47,7 +47,7 @@ const Pagination = ({ accountId, search, callback, pagination }) => {
   }
 
   return (
-    <React.Fragment>
+    <>
       {pagination && pagination.totalItems > pagination.itemsPerPage && (
         <nav aria-label="Page navigation">
           <ul className="pagination">
@@ -91,7 +91,7 @@ const Pagination = ({ accountId, search, callback, pagination }) => {
           </ul>
         </nav>
       )}
-    </React.Fragment>
+    </>
   );
 };
 

@@ -16,19 +16,19 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_SHOW_GROUP:
-      return { ...state, group: action.payload };
+      return { ...state, group: action.payload.data };
     case FETCH_SHOW_MARKET_TRADES:
-      return { ...state, trades: action.payload };
+      return { ...state, trades: action.payload.data };
     case FETCH_SHOW_MARKET_RECYCLES:
-      return { ...state, recycles: action.payload };
+      return { ...state, recycles: action.payload.data };
     case FETCH_SHOW_MARKET_FOUNDS:
-      return { ...state, founds: action.payload };
+      return { ...state, founds: action.payload.data };
     case FETCH_SHOW_MARKET_LOSTS:
-      return { ...state, losts: action.payload };
+      return { ...state, losts: action.payload.data };
     case FETCH_SHOW_MARKET_STOLENS:
-      return { ...state, stolens: action.payload };
+      return { ...state, stolens: action.payload.data };
     case FETCH_SHOW_MARKET_WANTEDS:
-      return { ...state, wanteds: action.payload };
+      return { ...state, wanteds: action.payload.data };
     case LOGOUT:
       return initialState;
     default:

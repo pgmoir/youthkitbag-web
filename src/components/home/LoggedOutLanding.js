@@ -73,9 +73,9 @@ const LoggedOutLanding = () => {
                     role="presentation"
                   />
                   <div className="card-body">
-                    <h2 className="card-title">Family Account</h2>
+                    <h2 className="card-title">Family Kitbag</h2>
                     <p className="card-text">
-                      Set up family or group account, so that multiple members
+                      Set up family or group kitbag, so that multiple members
                       can access view and store equipment details. Share with
                       family members. Help the kids find and manage their own
                       kit!

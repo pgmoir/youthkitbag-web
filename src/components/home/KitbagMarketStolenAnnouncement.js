@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchKitbagMarketItems } from '../../actions/KitbagMarketActions';
+import { MarketTypes } from '../../enums/marketTypes.enum';
 
 const mapStateToProps = (state) => ({
   totalItems: state.kitbag.market.stolens.totalItems,
@@ -27,7 +28,7 @@ const KitbagMarketStolenAnnouncement = ({
   }, [items]);
 
   useEffect(() => {
-    fetchKitbagMarketItems('stolen', 5);
+    fetchKitbagMarketItems({ by: MarketTypes.STOLEN, pagesize: 5 });
   }, [fetchKitbagMarketItems]);
 
   function topImage(images) {
@@ -37,7 +38,7 @@ const KitbagMarketStolenAnnouncement = ({
     return images[0].imageUrl;
   }
 
-  if (!group || !marketItems || totalItems === 0) return null;
+  if (!group || !marketItems) return null;
 
   function renderList() {
     return marketItems.map((m, index) => {
@@ -45,7 +46,7 @@ const KitbagMarketStolenAnnouncement = ({
         <Link
           className="a-inherit"
           key={index}
-          to={`/kitbag/market/${m.account}/edit/${m._id}`}
+          to={`/kitbag/market/${m.kitbag}/edit/${m._id}`}
         >
           <div className="bg-white d-flex flex-row align-items-center mb-2">
             <div className="pl-1 py-1 pr-2">

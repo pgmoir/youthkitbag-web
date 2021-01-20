@@ -2,9 +2,9 @@ import React from 'react';
 
 const RadioGroupInput = ({ options, value, field, handleChange }) => {
   return (
-    <React.Fragment>
+    <>
       <div className="col-auto mt-2">
-        {options.map(option => {
+        {options.map((option) => {
           return (
             <div className="form-check form-check-inline" key={option}>
               <input
@@ -23,7 +23,7 @@ const RadioGroupInput = ({ options, value, field, handleChange }) => {
           );
         })}
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

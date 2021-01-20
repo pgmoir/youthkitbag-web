@@ -6,7 +6,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case ADD_IMAGE:
       return {
-        newImages: [...state.newImages, action.payload.photo]
+        newImages: [...state.newImages, action.payload.data],
       };
     case CLEAR_NEW_IMAGES:
       return { newImages: [] };

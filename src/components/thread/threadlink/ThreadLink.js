@@ -24,17 +24,16 @@ const ThreadLink = ({ thread, source, changeThreadDisplayed }) => {
         return 'bg-light';
     }
   }
-
-  const { _id, sourceAccount, responseUser, responseState } = thread;
+  const { _id, sourceKitbag, responseUser, responseState } = thread;
   const lastMessage = _id ? getLastMessage() : {};
   const isMarket = source === 'market';
-  const threadWith = isMarket ? sourceAccount : responseUser;
+  const threadWith = isMarket ? sourceKitbag : responseUser;
 
   return (
     <div
       className="thread-link mb-2"
       role="button"
-      onClick={e => changeThreadDisplayed(thread._id)}
+      onClick={(e) => changeThreadDisplayed(thread._id)}
       tabIndex="0"
     >
       <div className="d-block float-left">

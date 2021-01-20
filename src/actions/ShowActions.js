@@ -1,8 +1,7 @@
 import axios from '../utils/axios';
 import {
   FETCH_SHOW_GROUP,
-  API_KITBAG_ERROR,
-  GETALL_FAILURE,
+  API_ERROR,
   FETCH_SHOW_MARKET_TRADES,
   FETCH_SHOW_MARKET_RECYCLES,
   FETCH_SHOW_MARKET_FOUNDS,
@@ -10,7 +9,7 @@ import {
   FETCH_SHOW_MARKET_STOLENS,
   FETCH_SHOW_MARKET_WANTEDS,
 } from './types';
-import history from '../utils/history';
+import { MarketTypes } from '../enums/marketTypes.enum';
 
 export const fetchShowGroup = (groupId) => (dispatch) => {
   axios
@@ -20,12 +19,7 @@ export const fetchShowGroup = (groupId) => (dispatch) => {
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/groups/view');
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };
 
@@ -34,31 +28,31 @@ export const fetchShowGroupMarket = (groupId, by) => (dispatch) => {
     .get(`/show/group/market/${groupId}/${by}`)
     .then((response) => {
       switch (by) {
-        case 'recycle':
+        case MarketTypes.RECYCLE:
           dispatch({
             type: FETCH_SHOW_MARKET_RECYCLES,
             payload: response.data,
           });
           break;
-        case 'found':
+        case MarketTypes.FOUND:
           dispatch({
             type: FETCH_SHOW_MARKET_FOUNDS,
             payload: response.data,
           });
           break;
-        case 'lost':
+        case MarketTypes.LOST:
           dispatch({
             type: FETCH_SHOW_MARKET_LOSTS,
             payload: response.data,
           });
           break;
-        case 'stolen':
+        case MarketTypes.STOLEN:
           dispatch({
             type: FETCH_SHOW_MARKET_STOLENS,
             payload: response.data,
           });
           break;
-        case 'wanted':
+        case MarketTypes.WANTED:
           dispatch({
             type: FETCH_SHOW_MARKET_WANTEDS,
             payload: response.data,
@@ -74,11 +68,6 @@ export const fetchShowGroupMarket = (groupId, by) => (dispatch) => {
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/groups/view');
-      }
-      dispatch({ type: API_KITBAG_ERROR, payload: err.response });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };

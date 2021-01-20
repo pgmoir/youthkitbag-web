@@ -8,10 +8,10 @@ const TextAreaInput = ({
   error,
   addClassName,
   rows,
-  placeholder
+  placeholder,
 }) => {
   return (
-    <React.Fragment>
+    <>
       <textarea
         className={`form-control${error ? ' is-invalid' : ''} ${
           addClassName ? addClassName : ''
@@ -27,7 +27,7 @@ const TextAreaInput = ({
         placeholder={placeholder}
       ></textarea>
       {error && <div className="invalid-feedback">{error}</div>}
-    </React.Fragment>
+    </>
   );
 };
 

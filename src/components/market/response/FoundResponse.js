@@ -2,11 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { TextAreaForm } from '../../includes/forms';
 
-const FoundResponse = ({ values, handleChange, errors, handleSubmit }) => {
+export const FoundResponse = ({
+  values,
+  handleChange,
+  errors,
+  handleSubmit,
+}) => {
   return (
-    <React.Fragment>
+    <>
       {values && (
-        <React.Fragment>
+        <>
           <h3>Does this item belong to you</h3>
           <p>
             If you have lost this item, then please leave details below. The
@@ -34,10 +39,8 @@ const FoundResponse = ({ values, handleChange, errors, handleSubmit }) => {
               </Link>
             </div>
           </form>
-        </React.Fragment>
+        </>
       )}
-    </React.Fragment>
+    </>
   );
 };
-
-export default FoundResponse;

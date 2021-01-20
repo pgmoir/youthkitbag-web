@@ -23,7 +23,7 @@ const GroupMemberDelete = ({ deleteGroupMember, match }) => {
   function renderActions() {
     const { groupId, memberId } = match.params;
     return (
-      <React.Fragment>
+      <>
         <Link
           to={`/groups/${groupId}/members`}
           className="btn btn-outline-secondary"
@@ -38,7 +38,7 @@ const GroupMemberDelete = ({ deleteGroupMember, match }) => {
         >
           Delete
         </button>
-      </React.Fragment>
+      </>
     );
   }
 

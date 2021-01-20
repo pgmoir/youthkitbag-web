@@ -29,8 +29,8 @@ const GroupsMemberRequestsAnnouncement = ({
     }
   }, [groupsMemberRequests]);
 
-  if (!groupsWithMemberRequests || groupsWithMemberRequests.length === 0)
-    return null;
+  // if (!groupsWithMemberRequests || groupsWithMemberRequests.length === 0)
+  //   return null;
 
   const groupsCount = groupsWithMemberRequests.length;
   const requestsCount = groupsWithMemberRequests.reduce(function (total, g) {
@@ -55,7 +55,7 @@ const GroupsMemberRequestsAnnouncement = ({
                   <img
                     className="img-avatar-lg img-thumbnail img-link rounded-circle p-0 m-1"
                     src={m.user.image}
-                    alt={m.user.username}
+                    alt={m.user.userName}
                   />
                 </span>
               );

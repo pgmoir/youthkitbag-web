@@ -3,7 +3,7 @@ import {
   FETCH_MARKET_ITEMS,
   FETCH_GROUPS,
   RESET,
-  LOGOUT
+  LOGOUT,
 } from '../actions/types';
 
 const initialState = { totalItems: 0, itemsPerPage: 24, currentPage: 1 };

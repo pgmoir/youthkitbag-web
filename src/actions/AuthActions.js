@@ -3,7 +3,6 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
   SET_ERROR,
-  SIGNUP_SUCCESS,
   LOGOUT,
   RESET_REQUESTED,
   SIGNUP_FAILURE,
@@ -25,16 +24,17 @@ export const login = (email, password, referrer) => (dispatch) => {
     )
     .then((response) => {
       const { data } = response;
-      localStorage.setItem('auth-token', data.authToken);
-      localStorage.setItem('refresh-token', data.refreshToken);
-      localStorage.setItem('user', data.userId);
+      localStorage.setItem('authToken', data.data.authToken);
+      localStorage.setItem('refreshToken', data.data.refreshToken);
+      localStorage.setItem('user', data.data.userId);
       localStorage.setItem('isloggedin', true);
       dispatch({ type: LOGIN_SUCCESS, payload: data });
       dispatch(getUser());
       history.push(referrer ? referrer : '/');
     })
     .catch((err) => {
-      dispatch({ type: LOGIN_FAILURE, payload: err.response });
+      const { response } = err;
+      dispatch({ type: LOGIN_FAILURE, payload: response.data });
     });
 };
 
@@ -50,35 +50,40 @@ export const authenticateToken = (token) => (dispatch) => {
     )
     .then((response) => {
       const { data } = response;
-      localStorage.setItem('auth-token', data.authToken);
-      localStorage.setItem('refresh-token', data.refreshToken);
-      localStorage.setItem('user', data.userId);
+      localStorage.setItem('authToken', data.data.authToken);
+      localStorage.setItem('refreshToken', data.data.refreshToken);
+      localStorage.setItem('user', data.data.userId);
       localStorage.setItem('isloggedin', true);
       dispatch({ type: LOGIN_SUCCESS, payload: data });
       dispatch(getUser());
       history.push('/');
     })
     .catch((err) => {
-      dispatch({ type: LOGIN_FAILURE, payload: err.response });
+      const { response } = err;
+      dispatch({ type: LOGIN_FAILURE, payload: response.data.data });
+      history.push('/');
     });
 };
 
-export const signup = (email, password, confirmPassword) => (dispatch) => {
+export const signup = (formValues) => (dispatch) => {
   window.localStorage.clear();
+  const { kitbagId } = formValues;
+  const signupUrl = kitbagId ? `/auth/signup/${kitbagId}` : 'auth/signup';
   axios
-    .post(
-      `/auth/signup`,
-      { email, password, confirmPassword },
-      {
-        'content-type': 'application/json',
-      }
-    )
+    .post(signupUrl, { ...formValues }, {})
     .then((response) => {
-      history.push('/auth/login', { signup: 'success' });
-      dispatch({ type: SIGNUP_SUCCESS, payload: response.data });
+      const { data } = response;
+      localStorage.setItem('authToken', data.data.authToken);
+      localStorage.setItem('refreshToken', data.data.refreshToken);
+      localStorage.setItem('user', data.data.userId);
+      localStorage.setItem('isloggedin', true);
+      dispatch({ type: LOGIN_SUCCESS, payload: data });
+      dispatch(getUser());
+      history.push('/');
     })
     .catch((err) => {
-      dispatch({ type: SIGNUP_FAILURE, payload: err.response });
+      const { response } = err;
+      dispatch({ type: SIGNUP_FAILURE, payload: response.data });
     });
 };
 
@@ -104,13 +109,14 @@ export const reset = (email) => (dispatch) => {
         'content-type': 'application/json',
       }
     )
-    .then(() => {
-      dispatch({ type: RESET_REQUESTED });
+    .then((response) => {
       history.push('/auth/login');
+      dispatch({ type: RESET_REQUESTED, payload: response.data });
     })
     .catch((err) => {
-      dispatch({ type: SIGNUP_FAILURE, payload: err.response });
-      dispatch({ type: SET_ERROR, payload: err.response });
+      const { response } = err;
+      dispatch({ type: SIGNUP_FAILURE, payload: response.data });
+      dispatch({ type: SET_ERROR, payload: response.data });
     });
 };
 
@@ -119,30 +125,35 @@ export const checkNewPassword = (token) => (dispatch) => {
   axios
     .get(`/auth/reset/${token}`)
     .then((response) => {
-      dispatch({ type: PASSWORD_RESET_CHECK, payload: response.data });
+      dispatch({ type: PASSWORD_RESET_CHECK, payload: response.data.data });
     })
     .catch((err) => {
-      dispatch({ type: SIGNUP_FAILURE, payload: err.response });
+      const { response } = err;
+      dispatch({ type: SIGNUP_FAILURE, payload: response.data });
     });
 };
 
-export const setNewPassword = (userId, passwordToken, password) => (
-  dispatch
-) => {
+export const setNewPassword = (
+  userId,
+  passwordToken,
+  password,
+  confirmPassword
+) => (dispatch) => {
   window.localStorage.clear();
   axios
     .post(
       `/auth/new-password`,
-      { userId, passwordToken, password },
+      { userId, passwordToken, password, confirmPassword },
       {
         'content-type': 'application/json',
       }
     )
-    .then(() => {
-      dispatch({ type: PASSWORD_RESET });
+    .then((response) => {
       history.push('/auth/login');
+      dispatch({ type: PASSWORD_RESET, payload: response.data.data });
     })
     .catch((err) => {
-      dispatch({ type: SIGNUP_FAILURE, payload: err.response });
+      const { response } = err;
+      dispatch({ type: SIGNUP_FAILURE, payload: response.data });
     });
 };

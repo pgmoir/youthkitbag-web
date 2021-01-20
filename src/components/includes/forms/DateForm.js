@@ -8,10 +8,10 @@ const DateForm = ({
   field,
   readOnly,
   setChange,
-  index
+  index,
 }) => {
   return (
-    <React.Fragment>
+    <>
       {colFormat === '3-9' && (
         <div className="form-group row">
           <label htmlFor={field} className="col-sm-3 col-form-label">
@@ -38,7 +38,7 @@ const DateForm = ({
           />
         </div>
       )}
-    </React.Fragment>
+    </>
   );
 };
 

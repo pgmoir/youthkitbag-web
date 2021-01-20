@@ -3,14 +3,15 @@ import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { capitalize } from '../../utils/strings';
 import { respondMarketItem } from '../../actions/MarketActions';
-import FoundResponse from './response/FoundResponse';
-import LostResponse from './response/LostResponse';
-import StolenResponse from './response/StolenResponse';
-import TradeResponse from './response/TradeResponse';
-import WantedResponse from './response/WantedResponse';
+import { FoundResponse } from './response/FoundResponse';
+import { LostResponse } from './response/LostResponse';
+import { StolenResponse } from './response/StolenResponse';
+import { TradeResponse } from './response/TradeResponse';
+import { WantedResponse } from './response/WantedResponse';
 import Threads from '../thread/threads/Threads';
 import validate from '../includes/FormEmptyValidationRules';
 import { ImagesDisplay } from '../includes/forms/ImagesDisplay';
+import { MarketTypes } from '../../enums/marketTypes.enum';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -68,7 +69,7 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
   }
 
   const showCondition = () => {
-    if (!['trade'].includes(market.marketType)) {
+    if (![MarketTypes.TRADE].includes(market.marketType)) {
       return null;
     }
 
@@ -82,11 +83,12 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
   };
 
   const showPrice = () => {
-    if (!['trade', 'wanted'].includes(market.marketType)) {
+    if (![MarketTypes.TRADE, MarketTypes.WANTED].includes(market.marketType)) {
       return null;
     }
 
-    const label = market.marketType === 'trade' ? 'Asking Price' : 'Offering';
+    const label =
+      market.marketType === MarketTypes.TRADE ? 'Asking Price' : 'Offering';
     const price =
       market.marketPrice === 0 ? 'free' : `£${market.marketPrice.toFixed(2)}`;
 
@@ -100,7 +102,11 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
   };
 
   const showStolenOn = () => {
-    if (!['found', 'lost', 'stolen'].includes(market.marketType)) {
+    if (
+      ![MarketTypes.FOUND, MarketTypes.LOST, MarketTypes.STOLEN].includes(
+        market.marketType
+      )
+    ) {
       return null;
     }
 
@@ -116,7 +122,7 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
   };
 
   const showSecurity = () => {
-    if (!['stolen'].includes(market.marketType)) {
+    if (![MarketTypes.STOLEN].includes(market.marketType)) {
       return null;
     }
 
@@ -132,7 +138,7 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
   };
 
   const showTracking = () => {
-    if (!['stolen'].includes(market.marketType)) {
+    if (![MarketTypes.STOLEN].includes(market.marketType)) {
       return null;
     }
 
@@ -156,10 +162,12 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
     trade: TradeResponse,
     wanted: WantedResponse,
   };
-  const Response = responseComponents[market.marketType || 'trade'];
+
+  const Response =
+    responseComponents[market.marketType.toLowerCase() || MarketTypes.TRADE];
 
   return (
-    <React.Fragment>
+    <>
       <div className="row">
         <ImagesDisplay images={market.images} />
         <div className="col-12 col-lg-6 order-2 order-lg-1 pr-3" role="main">
@@ -193,7 +201,7 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
         </div>
       </div>
       {market._id && market.threads.length > 0 && (
-        <React.Fragment>
+        <>
           <div className="row">
             <div className="col-12">
               <h4>{`Thread for "${market.title}"`}</h4>
@@ -201,13 +209,13 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
           </div>
           <Threads
             threads={market.threads}
-            accountId={market.account}
+            kitbagId={market.kitbag}
             source="market"
             marketType={market.marketType}
           />
-        </React.Fragment>
+        </>
       )}
-    </React.Fragment>
+    </>
   );
 };
 

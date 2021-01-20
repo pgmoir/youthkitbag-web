@@ -6,6 +6,7 @@ import {
 } from '../../actions/ShowActions';
 import GroupIntro from './GroupIntro';
 import ShowTitle from './ShowTitle';
+import { MarketTypes } from '../../enums/marketTypes.enum';
 
 const mapStateToProps = (state) => ({
   current: state.show.group,
@@ -45,12 +46,12 @@ const ShowGroupPage = ({
 
   useEffect(() => {
     if (groupId) {
-      fetchShowGroupMarket(groupId, 'trade');
-      fetchShowGroupMarket(groupId, 'recycle');
-      fetchShowGroupMarket(groupId, 'found');
-      fetchShowGroupMarket(groupId, 'lost');
-      fetchShowGroupMarket(groupId, 'stolen');
-      fetchShowGroupMarket(groupId, 'wanted');
+      fetchShowGroupMarket(groupId, MarketTypes.TRADE);
+      fetchShowGroupMarket(groupId, MarketTypes.RECYCLE);
+      fetchShowGroupMarket(groupId, MarketTypes.FOUND);
+      fetchShowGroupMarket(groupId, MarketTypes.LOST);
+      fetchShowGroupMarket(groupId, MarketTypes.STOLEN);
+      fetchShowGroupMarket(groupId, MarketTypes.WANTED);
     }
   }, [fetchShowGroupMarket, groupId]);
 

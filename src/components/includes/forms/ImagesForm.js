@@ -4,7 +4,7 @@ import { addImage, clearNewImages } from '../../../actions/ImageActions';
 import { resize, dataURItoBlob } from '../../../utils/imageResize';
 
 const ImagesForm = ({
-  accountId,
+  kitbagId,
   values,
   readOnly,
   setChange,
@@ -24,7 +24,7 @@ const ImagesForm = ({
       resize(files[i], MAXWIDTH, MAXHEIGHT, function (resizedDataUrl) {
         let formData = new FormData();
         formData.append('photo', dataURItoBlob(resizedDataUrl), files[i].name);
-        dispatch(addImage(accountId, formData));
+        dispatch(addImage(kitbagId, formData));
       });
     }
     return;
@@ -46,7 +46,7 @@ const ImagesForm = ({
       items.push(
         <div key={`image${i}`} className="carousel-thumbnail d-inline-flex">
           {images[i].state !== 'D' && (
-            <React.Fragment>
+            <>
               {!readOnly && (
                 <span className="icons-top-left">
                   <button
@@ -82,10 +82,10 @@ const ImagesForm = ({
                 role="presentation"
                 onClick={renderTopImage.bind(null, images[i].imageUrl)}
               />
-            </React.Fragment>
+            </>
           )}
           {images[i].state === 'D' && (
-            <React.Fragment>
+            <>
               <span className="icons-top-left">
                 <button
                   aria-label="Undo image deletion"
@@ -106,7 +106,7 @@ const ImagesForm = ({
                 alt=""
                 role="presentation"
               />
-            </React.Fragment>
+            </>
           )}
         </div>
       );
@@ -172,11 +172,12 @@ const ImagesForm = ({
     ) {
       const imagesToAdd = [
         ...newImages.map((i) => {
-          let image = {};
-          image._id = i._id;
-          image.image = i.image;
-          image.imageUrl = i.imageUrl;
-          image.state = 'N';
+          let image = {
+            photo: i._id,
+            imageUrl: i.imageUrl,
+            state: 'N',
+          };
+
           return image;
         }),
       ];
@@ -187,7 +188,7 @@ const ImagesForm = ({
   }, [newImages, addArrayItem, setChange, values, dispatch]);
 
   return (
-    <React.Fragment>
+    <>
       <div className="col-12 col-md-6 order-1 order-md-2" role="main">
         <div>
           <img
@@ -224,7 +225,7 @@ const ImagesForm = ({
           </div>
         )}
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

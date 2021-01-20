@@ -2,11 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { TextAreaForm, TextForm } from '../../includes/forms';
 
-const TradeResponse = ({ values, handleChange, errors, handleSubmit }) => {
+export const TradeResponse = ({
+  values,
+  handleChange,
+  errors,
+  handleSubmit,
+}) => {
   return (
-    <React.Fragment>
+    <>
       {values && (
-        <React.Fragment>
+        <>
           <h3>Are you interested in this item</h3>
           <p>
             If you are interested in aquiring this item, then please submit an
@@ -47,10 +52,8 @@ const TradeResponse = ({ values, handleChange, errors, handleSubmit }) => {
               </Link>
             </div>
           </form>
-        </React.Fragment>
+        </>
       )}
-    </React.Fragment>
+    </>
   );
 };
-
-export default TradeResponse;

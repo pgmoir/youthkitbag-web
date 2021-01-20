@@ -8,7 +8,7 @@ import validate from '../includes/FormEmptyValidationRules';
 import { getImages } from '../../utils/image';
 
 const mapStateToProps = (state) => ({
-  userPackage: state.user.package,
+  userBundle: state.user.bundle,
   newErrors: state.toast.errors,
 });
 
@@ -19,7 +19,7 @@ const mapDispatchToProps = {
 
 const GroupForm = ({
   group,
-  userPackage,
+  userBundle,
   newErrors,
   createGroup,
   editGroup,
@@ -59,15 +59,21 @@ const GroupForm = ({
   }, [group, setValues]);
 
   function updateGroup() {
+    const formValues = {
+      ...values,
+      activitys: Array.isArray(values.activitys)
+        ? values.activitys
+        : values.activitys.split(','),
+    };
     if (values._id) {
-      editGroup(values._id, values);
+      editGroup(values._id, formValues);
     } else {
-      createGroup(values);
+      createGroup(formValues);
     }
   }
 
   function showSaveCancelButtons() {
-    if (!userPackage || !values) return null;
+    if (!userBundle || !values) return null;
 
     return (
       <div>
@@ -98,14 +104,6 @@ const GroupForm = ({
             field="name"
             handleChange={handleChange}
             error={errors.name}
-          />
-          <TextForm
-            colFormat="3-9"
-            label="Tagline"
-            value={values.tagline}
-            field="tagline"
-            handleChange={handleChange}
-            error={errors.tagline}
           />
           <TextAreaForm
             colFormat="3-9"

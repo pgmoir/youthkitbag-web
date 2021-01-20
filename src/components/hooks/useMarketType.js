@@ -1,13 +1,14 @@
 import React from 'react';
+import { MarketTypes } from '../../enums/marketTypes.enum';
 
 const useMarketType = (marketType, marketPrice, threads, isOwned) => {
-  const isTrade = marketType === 'trade' && marketPrice > 0;
-  const isRecycle = marketType === 'trade' && marketPrice === 0;
-  const isWanted = marketType === 'wanted' && marketPrice > 0;
-  const isWantRecycle = marketType === 'wanted' && marketPrice === 0;
-  const isFound = marketType === 'found';
-  const isLost = marketType === 'lost';
-  const isStolen = marketType === 'stolen';
+  const isTrade = marketType === MarketTypes.TRADE && marketPrice > 0;
+  const isRecycle = marketType === MarketTypes.TRADE && marketPrice === 0;
+  const isWanted = marketType === MarketTypes.WANTED && marketPrice > 0;
+  const isWantRecycle = marketType === MarketTypes.WANTED && marketPrice === 0;
+  const isFound = marketType === MarketTypes.FOUND;
+  const isLost = marketType === MarketTypes.LOST;
+  const isStolen = marketType === MarketTypes.STOLEN;
 
   const icon =
     isFound || isLost || isStolen

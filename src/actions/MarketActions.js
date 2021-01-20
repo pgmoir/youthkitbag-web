@@ -2,8 +2,7 @@ import axios from '../utils/axios';
 import {
   FETCH_MARKET_ITEMS,
   FETCH_MARKET_ITEM,
-  API_MARKET_ERROR,
-  GETALL_FAILURE,
+  API_ERROR,
   RESPOND_MARKET_ITEM,
   SEARCH_MARKET_ITEMS,
   FETCH_MARKET_LISTS,
@@ -19,7 +18,7 @@ export const fetchMarketItems = ({
   order,
   direction,
   excgroups = false,
-  excaccounts = false,
+  exckitbags = false,
   pushHistory,
 }) => (dispatch) => {
   axios
@@ -32,29 +31,24 @@ export const fetchMarketItems = ({
         order,
         direction,
         excgroups,
-        excaccounts,
+        exckitbags,
       },
     })
     .then((response) => {
-      dispatch({ type: FETCH_MARKET_ITEMS, payload: response.data });
+      dispatch({ type: FETCH_MARKET_ITEMS, payload: response.data.data });
       if (pushHistory) {
         dispatch({
           type: SEARCH_MARKET_ITEMS,
-          payload: { searchfor, by, page, pagesize, excgroups, excaccounts },
+          payload: { searchfor, by, page, pagesize, excgroups, exckitbags },
         });
         history.push(
-          `/market?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}&excgroups=${excgroups}&excaccounts=${excaccounts}`
+          `/market?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}&excgroups=${excgroups}&exckitbags=${exckitbags}`
         );
       }
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/market');
-      }
-      dispatch({ type: API_MARKET_ERROR, payload: response });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };
 
@@ -62,16 +56,11 @@ export const fetchMarketItem = (marketId) => (dispatch) => {
   axios
     .get(`/market/${marketId}`, {})
     .then((response) => {
-      dispatch({ type: FETCH_MARKET_ITEM, payload: response.data });
+      dispatch({ type: FETCH_MARKET_ITEM, payload: response.data.data });
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push('/auth/login?return=/market');
-      }
-      dispatch({ type: API_MARKET_ERROR, payload: err.response });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };
 
@@ -85,12 +74,7 @@ export const respondMarketItem = (marketId, formValues) => (dispatch) => {
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/market/${marketId}`);
-      }
-      dispatch({ type: API_MARKET_ERROR, payload: err.response });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };
 
@@ -105,12 +89,7 @@ export const respondToMarketThread = (marketId, threadId, formValues) => (
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login?return=/market/${marketId}`);
-      }
-      dispatch({ type: API_MARKET_ERROR, payload: err.response });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };
 
@@ -122,11 +101,6 @@ export const fetchMarketLists = () => (dispatch) => {
     })
     .catch((err) => {
       const { response } = err;
-      if (response.status === 401) {
-        window.localStorage.clear();
-        dispatch({ type: GETALL_FAILURE, payload: response });
-        history.push(`/auth/login`);
-      }
-      dispatch({ type: API_MARKET_ERROR, payload: response });
+      dispatch({ type: API_ERROR, payload: response.data });
     });
 };

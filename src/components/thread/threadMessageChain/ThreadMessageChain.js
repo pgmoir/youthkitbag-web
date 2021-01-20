@@ -8,31 +8,31 @@ import Alert from '../../includes/Alert';
 import { connect } from 'react-redux';
 import validate from '../../includes/FormEmptyValidationRules';
 
-const mapStateToProps = state => ({
-  newErrors: state.toast.errors
+const mapStateToProps = (state) => ({
+  newErrors: state.toast.errors,
 });
 
 const mapDispatchToProps = {
   respondToMarketThread,
-  respondToMarketKitThread
+  respondToMarketKitThread,
 };
 
 const ThreadMessageChain = ({
   thread,
   source,
-  accountId,
+  kitbagId,
   marketType,
   displayed,
   newErrors,
   respondToMarketThread,
-  respondToMarketKitThread
+  respondToMarketKitThread,
 }) => {
   const initialMessage = {
-    accountId: accountId,
-    marketId: thread.source,
+    kitbagId: kitbagId,
+    marketId: thread.sourceItem,
     threadId: thread._id,
     content: '',
-    responseState: thread.responseState
+    responseState: thread.responseState,
   };
 
   const { handleChange, handleSubmit, values, errors, setErrors } = useForm(
@@ -45,13 +45,13 @@ const ThreadMessageChain = ({
     market: {
       trade: ['open', 'withdraw'],
       wanted: ['open', 'withdraw'],
-      default: ['open', 'close']
+      default: ['open', 'close'],
     },
     kitbag: {
       trade: ['open', 'accept', 'reject'],
       wanted: ['open', 'accept', 'reject'],
-      default: ['open', 'close']
-    }
+      default: ['open', 'close'],
+    },
   };
 
   function respondToThread() {
@@ -59,7 +59,7 @@ const ThreadMessageChain = ({
       respondToMarketThread(values.marketId, values.threadId, values);
     } else {
       respondToMarketKitThread(
-        accountId,
+        kitbagId,
         values.marketId,
         values.threadId,
         values
@@ -74,7 +74,7 @@ const ThreadMessageChain = ({
     }
   }, [newErrors, setErrors]);
 
-  const displaySentOn = sentOn => {
+  const displaySentOn = (sentOn) => {
     if (!sentOn) return <div className="bg-white pb-1"></div>;
     const sentOnDate = new Date(sentOn);
     return (
@@ -88,35 +88,33 @@ const ThreadMessageChain = ({
     const { messages } = thread;
 
     return messages
-      .filter(m => m.content.length > 0)
+      .filter((m) => m.content.length > 0)
       .map((message, index) => {
-        const { toSourceAccount, fromUser, content } = message;
+        const { fromKitbag, author, content } = message;
         return (
           <div className="bg-white" key={`${index}`}>
             {displaySentOn(message.sentOn)}
             <div className="pb-3">
               <div
                 className={`d-block ${
-                  toSourceAccount ? 'float-right' : 'float-left'
+                  fromKitbag ? 'float-left' : 'float-right'
                 } px-2 pb-3`}
               >
                 <img
-                  src={fromUser.image}
+                  src={author.image}
                   className="img-avatar img-thumbnail img-link rounded-circle p-0 m-1"
-                  alt=""
+                  alt="ALTER"
                 />
               </div>
               <div>
                 <div
                   className={`d-flex ${
-                    toSourceAccount
-                      ? 'justify-content-end'
-                      : 'justify-content-start'
+                    fromKitbag ? 'justify-content-start' : 'justify-content-end'
                   }`}
                 >
                   <div
                     className={`p-2 w-75 bg-affair-30 rounded-lg position-relative display-linebreak  ${
-                      toSourceAccount ? 'speech-right' : 'speech-left'
+                      fromKitbag ? 'speech-left' : 'speech-right'
                     }`}
                   >
                     {content}
@@ -152,9 +150,9 @@ const ThreadMessageChain = ({
   };
 
   return (
-    <React.Fragment>
+    <>
       {thread._id === displayed && (
-        <React.Fragment>
+        <>
           <div className="thread-message-chain mb-2 bg-light border rounded-sm">
             {renderMessages()}
           </div>
@@ -183,9 +181,9 @@ const ThreadMessageChain = ({
               </div>
             </div>
           </form>
-        </React.Fragment>
+        </>
       )}
-    </React.Fragment>
+    </>
   );
 };
 
