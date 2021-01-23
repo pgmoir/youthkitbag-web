@@ -5,11 +5,13 @@ const MarketAnnouncement = ({ group, doNotShow }) => {
   // if (!group || !doNotShow) return null;
 
   return (
-    <article className="tile is-child">
-      <h2 className="title is-4">Market watches</h2>
-      <p>You have received responses to your trade offers.</p>
+    <article className="tile is-child notification is-danger">
+      <p className="title">Market watches</p>
+      <div className="content">
+        <p>You have received responses to your trade offers.</p>
+      </div>
       <div className="buttons">
-        <Link className="button is-info" to="/market">
+        <Link className="button is-danger is-inverted" to="/market">
           Check the market
         </Link>
       </div>

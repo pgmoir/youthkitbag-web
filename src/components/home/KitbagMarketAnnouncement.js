@@ -10,7 +10,6 @@ const mapDispatchToProps = {
 const KitbagMarketAnnouncement = ({
   description,
   marketType,
-  group,
   fetchKitbagMarketItems,
 }) => {
   const marketItems = useSelector(
@@ -63,19 +62,20 @@ const KitbagMarketAnnouncement = ({
   }
 
   return (
-    <article className="tile is-child">
-      <h2 className="title is-4">Your {description}</h2>
-      <p>
-        You currently have{' '}
-        <span className={`badge badge-pill badge-dark`}>{totalItems}</span>{' '}
-        active {description}.
-      </p>
-      {/* <div>{renderList()}</div> */}
-      <p>These are your most recently active {description}.</p>
+    <article className="tile is-child notification is-success">
+      <p className="title">Your {description}</p>
+      <div className="content">
+        <p>
+          You currently have <span className="tag is-rounded">{0}</span> active{' '}
+          {description}.
+        </p>
+        {/* <div>{renderList()}</div> */}
+        <p>These are your most recently active {description}.</p>
+      </div>
       <div className="buttons">
         <Link
           to="/market?searchfor=&by=trade&page=1&pagesize=24&excgroups=true"
-          className="button"
+          className="button is-success is-inverted"
         >
           View all your {description}
         </Link>

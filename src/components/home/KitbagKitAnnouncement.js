@@ -5,14 +5,19 @@ const KitbagKitAnnouncement = ({ kitbagId, doNotShow }) => {
   if (!kitbagId) return null;
 
   return (
-    <article className="tile is-child notification box is-4">
+    <article className="tile is-child notification is-danger">
       <p className="title">Kitbag activity</p>
-      <p>
-        The following items have recently been added, edited or traded in your
-        kitbag.
-      </p>
+      <div className="content">
+        <p>
+          The following items have recently been added, edited or traded in your
+          kitbag.
+        </p>
+      </div>
       <div className="buttons">
-        <Link className="button" to={`/kitbag/kit/${kitbagId}`}>
+        <Link
+          className="button is-danger is-inverted"
+          to={`/kitbag/kit/${kitbagId}`}
+        >
           View kitbag
         </Link>
       </div>

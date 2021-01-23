@@ -29,14 +29,9 @@ const WelcomeAnnouncement = ({ flags, hideFlag }) => {
   if (welcomeAnnouncement) return <Title title="Your Kitbag essentials" />;
 
   return (
-    <section
-      id="title"
-      className="container-fluid"
-      role="banner"
-      aria-label="breadcrumb navigation and page title"
-    >
-      <div className="box">
-        <h1 className="title is-1">Welcome to YouthKitbag!</h1>
+    <div className="box is-primary">
+      <h1 className="title is-1">Welcome to YouthKitbag!</h1>
+      <div className="content">
         <p>
           Thank you for signing up to YouthKitbag, the simple and easy way to
           log, find and trade or recycle your child&apos;s sports, musical,
@@ -48,19 +43,19 @@ const WelcomeAnnouncement = ({ flags, hideFlag }) => {
           to do to get the most out of YouthKitbag, but you may find it useful
           to watch this short video guide.
         </p>
-        <div className="buttons">
-          <Link to="/learn/intro" className="button is-primary">
-            Watch our guide to YouthKitbag
-          </Link>
-          <button
-            className="button is-primary is-outlined"
-            onClick={() => hideWelcomeAnnouncement()}
-          >
-            Hide this message
-          </button>
-        </div>
       </div>
-    </section>
+      <div className="buttons">
+        <Link to="/learn/intro" className="button is-primary">
+          Watch our guide to YouthKitbag
+        </Link>
+        <button
+          className="button is-primary is-outlined"
+          onClick={() => hideWelcomeAnnouncement()}
+        >
+          Hide this message
+        </button>
+      </div>
+    </div>
   );
 };
 

@@ -9,12 +9,6 @@ import {
 } from '../../utils/user';
 import UserAnnouncement from './UserAnnouncement';
 import KitbagKitAnnouncement from './KitbagKitAnnouncement';
-import KitbagMarketTradeAnnouncement from './KitbagMarketTradeAnnouncement';
-import KitbagMarketRecycleAnnouncement from './KitbagMarketRecycleAnnouncement';
-import KitbagMarketFoundAnnouncement from './KitbagMarketFoundAnnouncement';
-import KitbagMarketLostAnnouncement from './KitbagMarketLostAnnouncement';
-import KitbagMarketStolenAnnouncement from './KitbagMarketStolenAnnouncement';
-import KitbagMarketWantedAnnouncement from './KitbagMarketWantedAnnouncement';
 import GroupAnnouncement from './GroupAnnouncement';
 import KitbagAnnouncement from './KitbagAnnouncement';
 import KitbagKitAddMoreAdvice from './KitbagKitAddMoreAdvice';
@@ -55,7 +49,6 @@ const LoggedInLanding = ({ user }) => {
       id="main"
       aria-label="main body of content plus related links and features"
     >
-      <Title title="" />
       <WelcomeAnnouncement />
       <Alert />
       <div className="tile is-ancestor">
@@ -66,29 +59,48 @@ const LoggedInLanding = ({ user }) => {
                 loading={loading}
                 kitbagId={preferredKitbagId}
               />
+              <UserAnnouncement user={user} />
+            </div>
+            <div class="tile is-parent is-vertical">
+              <GroupAnnouncement
+                loading={loading}
+                hasGroupMembership={hasGroupMembership}
+              />
+              <GroupsMemberRequestsAnnouncement />
             </div>
           </div>
+          <div class="tile is-parent is-vertical">
+            <KitbagKitAddMoreAdvice kitbagId={preferredKitbagId} />
+            <KitbagKitAnnouncement kitbagId={preferredKitbagId} />
+            <MarketAnnouncement group={group} />
+          </div>
         </div>
-        {/* <UserAnnouncement user={user} />
-        <GroupAnnouncement
-          loading={loading}
-          hasGroupMembership={hasGroupMembership}
-        />
-        {hasGroupAdministration && <GroupsMemberRequestsAnnouncement />}
-        <KitbagKitAddMoreAdvice kitbagId={preferredKitbagId} />
-        <KitbagKitAnnouncement kitbagId={preferredKitbagId} />
-        <KitbagMarketAnnouncement
-          group={group}
-          description={'trades'}
-          marketType={MarketTypes.TRADE}
-        />
-        <KitbagMarketTradeAnnouncement group={group} />
-        <KitbagMarketRecycleAnnouncement group={group} />
-        <KitbagMarketFoundAnnouncement group={group} />
-        <KitbagMarketLostAnnouncement group={group} />
-        <KitbagMarketStolenAnnouncement group={group} />
-        <KitbagMarketWantedAnnouncement group={group} />
-        <MarketAnnouncement group={group} /> */}
+        <div class="tile is-parent is-vertical">
+          <KitbagMarketAnnouncement
+            description={'trades'}
+            marketType={MarketTypes.TRADE}
+          />
+          <KitbagMarketAnnouncement
+            description={'recycle items'}
+            marketType={MarketTypes.RECYCLE}
+          />
+          <KitbagMarketAnnouncement
+            description={'found items'}
+            marketType={MarketTypes.FOUND}
+          />
+          <KitbagMarketAnnouncement
+            description={'lost items'}
+            marketType={MarketTypes.LOST}
+          />
+          <KitbagMarketAnnouncement
+            description={'stolen items'}
+            marketType={MarketTypes.STOLEN}
+          />
+          <KitbagMarketAnnouncement
+            description={'wanted items'}
+            marketType={MarketTypes.WANTED}
+          />
+        </div>
       </div>
     </section>
   );

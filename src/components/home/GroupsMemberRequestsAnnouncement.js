@@ -96,22 +96,23 @@ const GroupsMemberRequestsAnnouncement = ({
   }
 
   return (
-    <div className="card border-0">
-      <div className="alert alert-primary mb-0" role="alert">
-        <h2 className="alert-heading">Member requests</h2>
+    <article className="tile is-child notification is-info">
+      <p className="title">Member requests</p>
+      <div className="content">
         <p>
-          You have{' '}
-          <span className={`badge badge-pill badge-dark`}>{requestsCount}</span>{' '}
+          You have <span className="tag is-rounded">{requestsCount}</span>{' '}
           outstanding member requests in{' '}
-          <span className={`badge badge-pill badge-dark`}>{groupsCount}</span>{' '}
-          of the groups you administer.
-        </p>
-        <div className="mb-3">{renderList()}</div>
-        <p className="mb-1">
-          <Link to="/groups">View all your groups</Link>
+          <span className="tag is-rounded">{groupsCount}</span> of the groups
+          you administer.
         </p>
       </div>
-    </div>
+      {/* <div className="mb-3">{renderList()}</div> */}
+      <div className="buttons">
+        <Link className="button is-info is-inverted" to="/groups">
+          View all your groups
+        </Link>
+      </div>
+    </article>
   );
 };
 
