@@ -5,24 +5,8 @@ import { Link } from 'react-router-dom';
   For users that have neither set up an kitbag, or do not belong to an kitbag, then 
   we recommend setting up or joining one.
 */
-const KitbagAnnouncement = ({ kitbagId, loading }) => {
+const KitbagAnnouncement = ({ kitbagId }) => {
   // if (kitbagId) return null;
-
-  // if (loading) {
-  //   return (
-  //     <div className="card border-0">
-  //       <div className="alert alert-success mb-0" role="alert">
-  //         <h2 className="alert-heading">Loading ...</h2>
-  //         <hr />
-  //         <p className="card-text">
-  //           Identifying if you currently have any kitbags
-  //         </p>
-  //         <p className="card-text ellipsis bg-light hgt-3">&nbsp;</p>
-  //         <p className="card-text ellipsis bg-light hgt-3">&nbsp;</p>
-  //       </div>
-  //     </div>
-  //   );
-  // }
 
   return (
     <article className="tile is-child notification is-primary">

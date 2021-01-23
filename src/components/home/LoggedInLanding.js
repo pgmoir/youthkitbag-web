@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Alert from '../includes/Alert';
-import Title from '../includes/title/Title';
 import { connect } from 'react-redux';
 import {
   userHasGroupMembership,
@@ -17,6 +16,8 @@ import GroupsMemberRequestsAnnouncement from './GroupsMemberRequestsAnnouncement
 import MarketAnnouncement from './MarketAnnouncement';
 import { MarketTypes } from '../../enums/marketTypes.enum';
 import KitbagMarketAnnouncement from './KitbagMarketAnnouncement';
+import KitbagKitLevelWarnings from './KitbagKitLevelWarnings';
+import LoadingAnnouncement from './LoadingAnnouncement';
 
 const mapStateToProps = (state) => ({
   user: state.user,
@@ -55,18 +56,14 @@ const LoggedInLanding = ({ user }) => {
         <div class="tile is-vertical is-8">
           <div class="tile">
             <div class="tile is-parent is-vertical">
-              <KitbagAnnouncement
-                loading={loading}
-                kitbagId={preferredKitbagId}
-              />
+              <LoadingAnnouncement />
+              <KitbagAnnouncement kitbagId={preferredKitbagId} />
               <UserAnnouncement user={user} />
             </div>
             <div class="tile is-parent is-vertical">
-              <GroupAnnouncement
-                loading={loading}
-                hasGroupMembership={hasGroupMembership}
-              />
+              <GroupAnnouncement hasGroupMembership={hasGroupMembership} />
               <GroupsMemberRequestsAnnouncement />
+              <KitbagKitLevelWarnings kitbagId={preferredKitbagId} />
             </div>
           </div>
           <div class="tile is-parent is-vertical">

@@ -2,22 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const KitbagKitLevelWarnings = ({ kitbagId, doNotShow }) => {
-  if (!kitbagId || !doNotShow) return null;
+  // if (!kitbagId || !doNotShow) return null;
 
   return (
-    <div className="card border-0">
-      <div className="alert alert-danger mb-0" role="alert">
-        <h2 className="alert-heading">Kit level warnings</h2>
-        <hr />
+    <article className="tile is-child notification is-danger">
+      <p className="title">Kit level warnings</p>
+      <div className="content">
         <p>
           You have the following items at warning level. Please order new stock
           to ensure you&apos;re not caught out.
         </p>
-        <Link className="btn btn-danger" to="/kitbag">
+      </div>
+      <div className="buttons">
+        <Link className="button is-danger is-inverted" to="/kitbag">
           Go to kitbag
         </Link>
       </div>
-    </div>
+    </article>
   );
 };
 

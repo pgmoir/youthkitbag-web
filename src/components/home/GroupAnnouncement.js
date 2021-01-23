@@ -1,17 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const GroupAnnouncement = ({ hasGroupMembership, loading }) => {
+const GroupAnnouncement = ({ hasGroupMembership }) => {
   // if (hasGroupMembership) return null;
-
-  // if (loading) {
-  //   return (
-  //     <article className="tile is-child notification box is-4">
-  //       <p className="title">Loading ...</p>
-  //       <p>Identifying if you are currently a member of any group</p>
-  //     </article>
-  //   );
-  // }
 
   return (
     <article className="tile is-child notification is-info">

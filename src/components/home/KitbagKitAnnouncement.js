@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const KitbagKitAnnouncement = ({ kitbagId, doNotShow }) => {
-  if (!kitbagId) return null;
+const KitbagKitAnnouncement = ({ kitbagId }) => {
+  // if (!kitbagId) return null;
 
   return (
     <article className="tile is-child notification is-danger">
