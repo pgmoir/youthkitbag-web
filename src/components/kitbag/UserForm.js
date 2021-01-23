@@ -57,7 +57,7 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
   }
 
   return (
-    <div className="is-flex is-flex-direction-row-reverse-mobile is-flex-direction-column has-background-primary">
+    <div className="is-flex flex-col-touch flex-row-desktop-reverse has-background-primary">
       <div className="is-flex-grow-1">
         <ImagesForm
           values={values}

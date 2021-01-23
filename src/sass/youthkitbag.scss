@@ -11,3 +11,27 @@ body,
 #wrapper {
   flex: 1;
 }
+
+@include touch {
+  .flex-row-touch {
+    flex-direction: row;
+  }
+
+  .flex-col-touch {
+    flex-direction: column;
+  }
+}
+
+@include desktop {
+  .flex-row-desktop {
+    flex-direction: row;
+  }
+
+  .flex-row-desktop-reverse {
+    flex-direction: row-reverse;
+  }
+
+  .flex-col-desktop {
+    flex-direction: column;
+  }
+}

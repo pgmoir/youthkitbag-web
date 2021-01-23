@@ -7710,3 +7710,17 @@ body,
 
 #wrapper {
   flex: 1; }
+
+@media screen and (max-width: 1023px) {
+  .flex-row-touch {
+    flex-direction: row; }
+  .flex-col-touch {
+    flex-direction: column; } }
+
+@media screen and (min-width: 1024px) {
+  .flex-row-desktop {
+    flex-direction: row; }
+  .flex-row-desktop-reverse {
+    flex-direction: row-reverse; }
+  .flex-col-desktop {
+    flex-direction: column; } }
