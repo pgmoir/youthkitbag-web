@@ -48,41 +48,31 @@ const LoggedInLanding = ({ user }) => {
   }, [user]);
 
   return (
-    <div>
-      <section
-        id="main"
-        className="container-fluid"
-        aria-label="main body of content plus related links and features"
-      >
-        <Title title="" />
-        <WelcomeAnnouncement />
-        <div className="container">
-          <Alert />
-          <div className="row">
-            <div className="card-columns">
-              <KitbagAnnouncement
-                loading={loading}
-                kitbagId={preferredKitbagId}
-              />
-              <UserAnnouncement user={user} />
-              <GroupAnnouncement
-                loading={loading}
-                hasGroupMembership={hasGroupMembership}
-              />
-              {hasGroupAdministration && <GroupsMemberRequestsAnnouncement />}
-              <KitbagKitAddMoreAdvice kitbagId={preferredKitbagId} />
-              <KitbagKitAnnouncement kitbagId={preferredKitbagId} />
-              <KitbagMarketTradeAnnouncement group={group} />
-              <KitbagMarketRecycleAnnouncement group={group} />
-              <KitbagMarketFoundAnnouncement group={group} />
-              <KitbagMarketLostAnnouncement group={group} />
-              <KitbagMarketStolenAnnouncement group={group} />
-              <KitbagMarketWantedAnnouncement group={group} />
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+    <section
+      id="main"
+      aria-label="main body of content plus related links and features"
+    >
+      <Title title="" />
+      <WelcomeAnnouncement />
+      <Alert />
+      <div className="tile is-ancestor">
+        <KitbagAnnouncement loading={loading} kitbagId={preferredKitbagId} />
+        <UserAnnouncement user={user} />
+        <GroupAnnouncement
+          loading={loading}
+          hasGroupMembership={hasGroupMembership}
+        />
+        {hasGroupAdministration && <GroupsMemberRequestsAnnouncement />}
+        <KitbagKitAddMoreAdvice kitbagId={preferredKitbagId} />
+        <KitbagKitAnnouncement kitbagId={preferredKitbagId} />
+        <KitbagMarketTradeAnnouncement group={group} />
+        <KitbagMarketRecycleAnnouncement group={group} />
+        <KitbagMarketFoundAnnouncement group={group} />
+        <KitbagMarketLostAnnouncement group={group} />
+        <KitbagMarketStolenAnnouncement group={group} />
+        <KitbagMarketWantedAnnouncement group={group} />
+      </div>
+    </section>
   );
 };
 

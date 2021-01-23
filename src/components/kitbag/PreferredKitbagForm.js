@@ -63,15 +63,17 @@ const PreferredKitbagForm = ({
                 <tr key={index}>
                   <td className="valign-m mw-3rem">
                     <Link to={`/kitbags/${item._id}`}>
-                      <img
-                        src={
-                          item.images && item.images.length > 0
-                            ? item.images[0].imageUrl
-                            : '/images/defaultthumb.png'
-                        }
-                        className="img-avatar img-thumbnail img-link rounded-circle p-0 m-1"
-                        alt=""
-                      />
+                      <figure className="image is-48x48 is-square">
+                        <img
+                          src={
+                            item.images && item.images.length > 0
+                              ? item.images[0].imageUrl
+                              : '/images/defaultthumb.png'
+                          }
+                          className="is-rounded"
+                          alt=""
+                        />
+                      </figure>
                     </Link>
                   </td>
                   <td className="valign-m">
@@ -94,11 +96,11 @@ const PreferredKitbagForm = ({
               ))}
             </tbody>
           </table>
-          <div>
-            <button className="btn btn-primary" type="submit">
+          <div className="buttons">
+            <button className="button is-primary" type="submit">
               Save
             </button>
-            <button className="btn btn-link" onClick={() => cancelPage()}>
+            <button className="button is-link" onClick={() => cancelPage()}>
               Cancel
             </button>
           </div>

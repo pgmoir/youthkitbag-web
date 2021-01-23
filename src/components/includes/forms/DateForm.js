@@ -6,7 +6,7 @@ const DateForm = ({
   label,
   value,
   field,
-  readOnly,
+  disabled,
   setChange,
   index,
 }) => {
@@ -21,7 +21,7 @@ const DateForm = ({
             <DateInput
               value={value}
               field={field}
-              readOnly={readOnly}
+              disabled={disabled}
               setChange={setChange}
             />
           </div>
@@ -33,7 +33,7 @@ const DateForm = ({
           <DateInput
             value={value}
             field={field}
-            readOnly={readOnly}
+            disabled={disabled}
             setChange={setChange}
           />
         </div>

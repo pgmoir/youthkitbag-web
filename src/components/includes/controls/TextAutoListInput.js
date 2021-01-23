@@ -7,7 +7,7 @@ const TextAutoListInput = ({
   step,
   min,
   max,
-  readOnly,
+  disabled,
   handleChange,
   error,
   autoComplete,
@@ -26,13 +26,13 @@ const TextAutoListInput = ({
         step={step}
         min={min}
         max={max}
-        readOnly={readOnly}
+        disabled={disabled}
         onChange={handleChange}
         onBlur={handleChange}
         value={value}
         aria-describedby={field}
         autoComplete={autoComplete}
-        tabIndex={readOnly ? -1 : 0}
+        tabIndex={disabled ? -1 : 0}
         placeholder={placeHolder}
       />
       {error && <div className="invalid-feedback">{error}</div>}

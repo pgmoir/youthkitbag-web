@@ -58,15 +58,15 @@ const UserForm = ({ user, newErrors, editUser, loadSettingsPage }) => {
   }
 
   return (
-    <div className="row">
+    <div>
       <ImagesForm
         values={values}
         setChange={setChange}
         addArrayItem={addArrayItem}
         error={errors.images}
       />
-      <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
-        <form className="mb-3" onSubmit={handleSubmit}>
+      <div role="main">
+        <form onSubmit={handleSubmit}>
           <TextForm
             colFormat="3-9"
             label="First Name"

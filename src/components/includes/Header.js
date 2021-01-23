@@ -23,116 +23,59 @@ const Header = ({ auth, user }) => {
 
   return (
     <>
-      <header>
-        <Link
-          id="header-acc-jump"
-          className="sr-only sr-only-focusable"
-          to="#main-acc-jump"
-        >
-          <div className="container">
-            <span className="skiplink-text">Skip to content</span>
-          </div>
-        </Link>
-        <nav
-          className="navbar navbar-expand navbar-dark purple-gradient"
-          aria-label="primary navigation"
-        >
-          <div className="container">
-            <Link className="navbar-brand navbar-logo" to="/">
-              YouthKitbag
+      <header className="container is-fluid">
+        <nav className="navbar" role="navigation" aria-label="main navigation">
+          <div className="navbar-brand">
+            <Link className="navbar-item" to="/">
+              <strong>YouthKitbag</strong>
             </Link>
-            <ul className="navbar-nav navbar-expand ml-auto">
-              {loggedIn && (
-                <>
-                  {group && (
-                    <li className="nav-item">
-                      <Link
-                        className="btn btn-info text-nowrap mr-1"
-                        to="/market?searchfor=&by=&page=1&pagesize=24"
-                        aria-label="Market place"
-                      >
-                        <span
-                          className="fas fa-th"
-                          title="Market place"
-                          aria-hidden="true"
-                        ></span>{' '}
+          </div>
+          <div id="navbarBasic" className="navbar-menu">
+            <div className="navbar-start"></div>
+            <div className="navbar-end">
+              <div className="navbar-item">
+                <div className="buttons">
+                  {loggedIn && (
+                    <>
+                      {group && (
+                        <Link
+                          className="button is-light"
+                          to="/market?searchfor=&by=&page=1&pagesize=24"
+                          aria-label="Market place"
+                        >
+                          Market
+                        </Link>
+                      )}
+                      {kitbag && (
+                        <Link
+                          className="button is-light"
+                          to={`/kitbag/kit/${kitbag._id}`}
+                          aria-label={`${kitbag.name}`}
+                        >
+                          Kitbag
+                        </Link>
+                      )}
+                      <Link className="button is-light" to="/settings/user">
+                        Settings
                       </Link>
-                    </li>
-                  )}
-                  {kitbag && (
-                    <li className="nav-item">
-                      <Link
-                        className="btn btn-info text-nowrap mr-1"
-                        to={`/kitbag/kit/${kitbag._id}`}
-                        aria-label={`${kitbag.name}`}
-                      >
-                        <span
-                          className="fas fa-shopping-bag"
-                          title="Preferred kitbag"
-                          aria-hidden="true"
-                        ></span>{' '}
+                      <Link className="button is-primary" to="/auth/logout">
+                        <strong>Log out</strong>
                       </Link>
-                    </li>
+                    </>
                   )}
-                  <li className="nav-item">
-                    <Link className="nav-link d-inline" to="/settings/user">
-                      <img
-                        src={
-                          user.images && user.images.length > 0
-                            ? user.images[0].imageUrl
-                            : '/images/defaultthumb.png'
-                        }
-                        className="img-avatar img-thumbnail img-link rounded-circle p-0 m-1"
-                        alt="Link to user page"
-                      />
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="btn btn-danger text-nowrap"
-                      to="/auth/logout"
-                      aria-label="Logout from application"
-                    >
-                      <span
-                        className="fas fa-sign-out-alt"
-                        title="Logout"
-                        aria-hidden="true"
-                      ></span>{' '}
-                    </Link>
-                  </li>
-                </>
-              )}
-              {!loggedIn && (
-                <>
-                  <li className="nav-item">
-                    <Link
-                      className="btn btn-info text-nowrap mr-3"
-                      to="/why#created"
-                      aria-label="Why did I create YouthKitbag"
-                    >
-                      <span
-                        className="fas fa-question-circle"
-                        title="Why was this website created?"
-                        aria-hidden="true"
-                      ></span>{' '}
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="btn btn-success text-nowrap"
-                      to="/auth/login"
-                      aria-label="Login to use personalised features"
-                    >
-                      <span
-                        className="fas fa-sign-in-alt"
-                        title="Login"
-                        aria-hidden="true"
-                      ></span>{' '}
-                    </Link>
-                  </li>
-                </>
-              )}
-            </ul>
+                  {!loggedIn && (
+                    <>
+                      <Link className="button is-primary" to="/auth/signup">
+                        <strong>Sign up</strong>
+                      </Link>
+                      <Link className="button is-light" to="/auth/login">
+                        Log in
+                      </Link>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </nav>
       </header>

@@ -51,7 +51,7 @@ const mapStateToProps = (state) => ({
 
 const App = ({ auth }) => {
   return (
-    <div className="react-body">
+    <>
       <Helmet>
         <title>
           YouthKitbag - Inventory, Trade, Aquire, Reporting for all youth kit
@@ -60,19 +60,10 @@ const App = ({ auth }) => {
       <Router history={history}>
         <User />
         <Header />
-        <main>
+        <main id="wrapper" className="container is-fluid">
           <noscript>
             You need to enable JavaScript to run this application.
           </noscript>
-          <Link
-            id="main-acc-jump"
-            className="sr-only sr-only-focusable"
-            to="#footer-acc-jump"
-          >
-            <div className="container">
-              <span className="skiplink-text">Skip to footer content</span>
-            </div>
-          </Link>
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/why" exact component={Why} />
@@ -220,7 +211,7 @@ const App = ({ auth }) => {
         </main>
         <Footer />
       </Router>
-    </div>
+    </>
   );
 };
 
