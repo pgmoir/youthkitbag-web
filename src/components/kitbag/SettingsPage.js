@@ -7,10 +7,11 @@ import KitbagsPage from './KitbagsPage';
 import GroupsPage from './GroupsPage';
 import BundlePage from './BundlePage';
 import Alert from '../includes/Alert';
-import KitbagsHelp from './KitbagsHelp';
 import GroupsHelp from './GroupsHelp';
 import ConfigurationPage from './ConfigurationPage';
 import SettingsNav from './SettingsNav';
+import KitbagsHelp from './KitbagsHelp';
+import UserHelp from './UserHelp';
 
 const mapStateToProps = (state) => ({
   user: state.user,
@@ -21,7 +22,7 @@ const SettingsPage = ({ user }) => {
     return (
       <>
         <h2 className="subtitle">User</h2>
-        {/* <UserHelp /> */}
+        <UserHelp />
         <UserForm user={user} />
       </>
     );
@@ -30,7 +31,7 @@ const SettingsPage = ({ user }) => {
   const Kitbags = () => {
     return (
       <div className="container">
-        <h2>Kitbags</h2>
+        <h2 className="subtitle">Kitbags</h2>
         <KitbagsHelp />
         <KitbagsPage />
       </div>
@@ -40,7 +41,7 @@ const SettingsPage = ({ user }) => {
   const Groups = () => {
     return (
       <div className="container">
-        <h2>Groups</h2>
+        <h2 className="subtitle">Groups</h2>
         <GroupsHelp />
         <GroupsPage />
       </div>
@@ -50,7 +51,7 @@ const SettingsPage = ({ user }) => {
   const Bundle = () => {
     return (
       <div className="container">
-        <h2>Bundle</h2>
+        <h2 className="subtitle">Bundle</h2>
         <BundlePage />
       </div>
     );
@@ -59,7 +60,7 @@ const SettingsPage = ({ user }) => {
   const Configuration = () => {
     return (
       <div className="container">
-        <h2>Configuration</h2>
+        <h2 className="subtitle">Configuration</h2>
         <ConfigurationPage userId={user._id} />
       </div>
     );
