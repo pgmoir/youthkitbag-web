@@ -4,6 +4,7 @@ import useForm from '../hooks/useForm';
 import { login } from '../../actions/AuthActions';
 import { TextForm } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
+import TextInputStd from '../includes/controls/TextInputStd';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -71,30 +72,27 @@ const LoginForm = ({ referrer, newErrors, login }) => {
         <span className="centre-line"></span>
       </p>
       <form className="w-100 d-block" onSubmit={handleSubmit}>
-        <TextForm
-          colFormat="3-9"
+        <TextInputStd
           type="email"
-          label="Email"
           value={values.email}
           field="email"
           handleChange={handleChange}
           error={errors.email}
           autoComplete="userName email"
+          placeHolder="Email"
+          iconLeft="fas fa-envelope"
         />
-        <TextForm
-          colFormat="3-9"
+        <TextInputStd
           type="password"
-          label="Password"
           value={values.password}
           field="password"
           handleChange={handleChange}
           error={errors.password}
           autoComplete="current-password"
+          placeHolder="Password"
+          iconLeft="fas fa-lock"
         />
-        <button
-          className="d-block btn btn-success btn-lg py-3 px-5 mt-3 mx-auto"
-          type="submit"
-        >
+        <button className="button is-success" type="submit">
           Login to YouthKitbag
         </button>
       </form>

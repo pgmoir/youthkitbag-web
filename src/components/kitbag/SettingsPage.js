@@ -20,11 +20,11 @@ const mapStateToProps = (state) => ({
 const SettingsPage = ({ user }) => {
   const User = () => {
     return (
-      <div className="container">
-        <h2>User</h2>
-        <UserHelp />
+      <>
+        <h2 className="subtitle">User</h2>
+        {/* <UserHelp /> */}
         <UserForm user={user} />
-      </div>
+      </>
     );
   };
 
@@ -69,24 +69,17 @@ const SettingsPage = ({ user }) => {
   return (
     <div>
       <Title title="Personal Settings" />
-      <div className="container">
-        <Alert />
-        <div className="row">
-          <div className="col-12 col-md-2 mb-3">
-            <div className="d-flex d-md-none list-group list-group-horizontal">
-              <SettingsNav fill="flex-fill" />
-            </div>
-            <div className="d-none d-md-flex list-group">
-              <SettingsNav />
-            </div>
-          </div>
-          <div className="col-12 col-md-10">
-            <Route path="/settings/user" component={User} />
-            <Route path="/settings/kitbags" component={Kitbags} />
-            <Route path="/settings/groups" component={Groups} />
-            <Route path="/settings/bundle" component={Bundle} />
-            <Route path="/settings/configuration" component={Configuration} />
-          </div>
+      <Alert />
+      <div className="columns">
+        <div className="column is-one-fifth">
+          <SettingsNav />
+        </div>
+        <div className="column">
+          <Route path="/settings/user" component={User} />
+          <Route path="/settings/kitbags" component={Kitbags} />
+          <Route path="/settings/groups" component={Groups} />
+          <Route path="/settings/bundle" component={Bundle} />
+          <Route path="/settings/configuration" component={Configuration} />
         </div>
       </div>
     </div>

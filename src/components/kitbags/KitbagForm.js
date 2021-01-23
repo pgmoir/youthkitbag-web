@@ -29,7 +29,7 @@ const KitbagForm = ({
   createKitbag,
   editKitbag,
 }) => {
-  const [isReadOnly, setIsReadOnly] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(true);
   const [hasKitbagAdmin, setHasKitbagAdmin] = useState(false);
 
   const initialValues = {
@@ -80,9 +80,9 @@ const KitbagForm = ({
       const newKitbag = !values._id;
       const admin =
         (values.kitbagAdmin && values.state !== 'blocked') || values.appAdmin;
-      setIsReadOnly(!newKitbag && !admin);
+      setIsDisabled(!newKitbag && !admin);
     }
-  }, [values, setIsReadOnly]);
+  }, [values, setIsDisabled]);
 
   useEffect(() => {
     if (userBundle && userBundle.max && userBundle.size) {
@@ -97,7 +97,7 @@ const KitbagForm = ({
 
     return (
       <div>
-        {((!values._id && hasKitbagAdmin) || !isReadOnly) && (
+        {((!values._id && hasKitbagAdmin) || !isDisabled) && (
           <button className="btn btn-primary" type="submit">
             Save
           </button>
@@ -113,7 +113,7 @@ const KitbagForm = ({
     <div className="row">
       <ImagesForm
         values={values}
-        readOnly={isReadOnly}
+        disabled={isDisabled}
         setChange={setChange}
         addArrayItem={addArrayItem}
         error={errors.images}
@@ -125,7 +125,7 @@ const KitbagForm = ({
             label="Name"
             value={values.name}
             field="name"
-            readOnly={isReadOnly}
+            disabled={isDisabled}
             handleChange={handleChange}
             error={errors.name}
           />
@@ -134,7 +134,7 @@ const KitbagForm = ({
             label="Description"
             value={values.description}
             field="description"
-            readOnly={isReadOnly}
+            disabled={isDisabled}
             handleChange={handleChange}
             error={errors.description}
           />
@@ -153,7 +153,7 @@ const KitbagForm = ({
                       }
                       label="Email"
                       field={`members[${index}].user.email`}
-                      readOnly={true}
+                      disabled={true}
                       index={index}
                     />
                     <TextForm
@@ -165,7 +165,7 @@ const KitbagForm = ({
                       }
                       label="Username"
                       field={`members[${index}].user.userName`}
-                      readOnly={true}
+                      disabled={true}
                       index={index}
                     />
                     <TextForm
@@ -174,7 +174,7 @@ const KitbagForm = ({
                       label="Roles"
                       field={`members[${index}].roles`}
                       handleChange={handleChange}
-                      readOnly={isReadOnly}
+                      disabled={isDisabled}
                       index={index}
                     />
                     <TextForm
@@ -183,7 +183,7 @@ const KitbagForm = ({
                       label="State"
                       field={`members[${index}].state`}
                       handleChange={handleChange}
-                      readOnly={isReadOnly}
+                      disabled={isDisabled}
                       index={index}
                     />
                     <RemoveArrayButtonForm
@@ -198,7 +198,7 @@ const KitbagForm = ({
               <hr />
             </>
           )}
-          {!isReadOnly && (
+          {!isDisabled && (
             <div>
               {values.images &&
                 values.images.map((item, index) => (

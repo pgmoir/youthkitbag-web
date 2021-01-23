@@ -41,9 +41,9 @@ const KitCard = ({ kit, kitbagId }) => {
   if (!_id) return renderBlank();
 
   return (
-    <div className="col-6 col-sm-4 col-md-3 mb-3">
-      <article className="card card-link card-b1">
-        <span className="icons-top-left pt-1">
+    <div className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop is-one-fifth-fullhd">
+      <article className="card">
+        {/* <span className="icons-top-left pt-1">
           <Link to={`/kitbag/kit/${kitbagId}/delete/${_id}`}>
             <span
               className="icon-tray-item fas fa-trash-alt"
@@ -53,19 +53,22 @@ const KitCard = ({ kit, kitbagId }) => {
         </span>
         <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">
           {totalQuantity()}
-        </span>
+        </span> */}
+
         <Link to={`/kitbag/kit/${kitbagId}/edit/${_id}`}>
-          <img
-            className="card-img-top"
-            src={topImage()}
-            alt={title}
-            role="presentation"
-          />
-          <div className="card-body">
-            <h3 className="card-title h6 ellipsis">{title}</h3>
-            {subtitle && <p className="card-text ellipsis">{subtitle}</p>}
+          <div class="card-image">
+            <figure class="image is-4by3">
+              <img src={topImage()} alt={title} role="presentation" />
+            </figure>
           </div>
         </Link>
+
+        <div className="card-content">
+          <p>
+            <strong>{title}</strong>
+          </p>
+          {subtitle && <p>{subtitle}</p>}
+        </div>
       </article>
     </div>
   );

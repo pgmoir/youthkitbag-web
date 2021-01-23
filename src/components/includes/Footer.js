@@ -3,17 +3,8 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="purple-gradient">
-      <Link
-        id="footer-acc-jump"
-        className="sr-only sr-only-focusable"
-        to="#header-acc-jump"
-      >
-        <div className="container">
-          <span className="skiplink-text">Skip to header</span>
-        </div>
-      </Link>
-      <section className="footer" aria-label="secondary navigation">
+    <footer className="footer">
+      {/* <section className="footer" aria-label="secondary navigation">
         <div className="container text-center text-md-left p-4">
           <h2 className="sr-only">
             Supplementary navigation to key corporate and informational sections
@@ -132,7 +123,13 @@ const Footer = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
+      <div class="content has-text-centered">
+        <p>
+          <strong>YouthKitbag</strong> by{' '}
+          <a href="">Moir Consultancy Limited</a>
+        </p>
+      </div>
     </footer>
   );
 };

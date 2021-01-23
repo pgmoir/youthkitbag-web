@@ -6,7 +6,7 @@ import { resize, dataURItoBlob } from '../../../utils/imageResize';
 const ImagesForm = ({
   kitbagId,
   values,
-  readOnly,
+  disabled,
   setChange,
   addArrayItem,
   error,
@@ -47,7 +47,7 @@ const ImagesForm = ({
         <div key={`image${i}`} className="carousel-thumbnail d-inline-flex">
           {images[i].state !== 'D' && (
             <>
-              {!readOnly && (
+              {/* {!disabled && (
                 <span className="icons-top-left">
                   <button
                     aria-label="Delete image"
@@ -74,19 +74,20 @@ const ImagesForm = ({
                     ></i>
                   </button>
                 </span>
-              )}
-              <img
-                className="img-fluid mb-3 img-link mini-img mr-1"
-                src={images[i].imageUrl}
-                alt=""
-                role="presentation"
-                onClick={renderTopImage.bind(null, images[i].imageUrl)}
-              />
+              )} */}
+              <figure className="image is-128x128">
+                <img
+                  src={images[i].imageUrl}
+                  alt=""
+                  role="presentation"
+                  onClick={renderTopImage.bind(null, images[i].imageUrl)}
+                />
+              </figure>
             </>
           )}
           {images[i].state === 'D' && (
             <>
-              <span className="icons-top-left">
+              {/* <span className="icons-top-left">
                 <button
                   aria-label="Undo image deletion"
                   className="btn btn-link p-0 icon-tray-item"
@@ -99,13 +100,10 @@ const ImagesForm = ({
                     title="Undo image deletion"
                   ></i>
                 </button>
-              </span>
-              <img
-                className="img-fluid mb-3 img-link mini-img mr-1"
-                src={images[i].imageUrl}
-                alt=""
-                role="presentation"
-              />
+              </span> */}
+              <figure className="image is-128x128">
+                <img src={images[i].imageUrl} alt="" role="presentation" />
+              </figure>
             </>
           )}
         </div>
@@ -189,39 +187,43 @@ const ImagesForm = ({
 
   return (
     <>
-      <div className="col-12 col-md-6 order-1 order-md-2" role="main">
-        <div>
+      <div className="" role="main">
+        <figure class="image">
           <img
             id="preview"
             name="preview"
-            className="img-fluid mb-3"
             src={values.topImage}
             alt=""
             role="presentation"
           />
-        </div>
+        </figure>
         <div>{renderSecondaryImages()}</div>
-        {!readOnly && (
-          <div className="form-group row">
-            <label className="col-sm-3 col-form-label" htmlFor="photos">
+        {!disabled && (
+          <div className="field">
+            <label className="label" htmlFor="photos">
               Images
             </label>
-            <div className="col-sm-9">
-              <div className="custom-file">
-                <input
-                  type="file"
-                  multiple
-                  className={`custom-file-input${error ? ' is-invalid' : ''}`}
-                  id="photos"
-                  aria-describedby="photos"
-                  onChange={(e) => onFileChanged(e)}
-                />
-                <label className="custom-file-label" htmlFor="photos">
-                  Choose image(s)
+            <div className="control">
+              <div className="file">
+                <label className="file-label" htmlFor="photos">
+                  <input
+                    type="file"
+                    multiple
+                    className={`file-input${error ? ' is-danger' : ''}`}
+                    id="photos"
+                    aria-describedby="photos"
+                    onChange={(e) => onFileChanged(e)}
+                  />
+                  <span class="file-cta">
+                    <span class="file-icon">
+                      <i class="fas fa-upload"></i>
+                    </span>
+                    <span class="file-label">Choose image(s)</span>
+                  </span>
                 </label>
-                {error && <div className="invalid-feedback">{error}</div>}
               </div>
             </div>
+            {error && <p className="help is-danger">{error}</p>}
           </div>
         )}
       </div>

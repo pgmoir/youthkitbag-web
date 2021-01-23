@@ -7,7 +7,7 @@ const TextInput = ({
   step,
   min,
   max,
-  readOnly,
+  disabled,
   handleChange,
   error,
   autoComplete,
@@ -16,25 +16,32 @@ const TextInput = ({
 }) => {
   return (
     <>
-      <input
-        className={`form-control${error ? ' is-invalid' : ''} ${
-          addClassName ? addClassName : ''
-        }`}
-        name={field}
-        type={type ? type : 'text'}
-        step={step}
-        min={min}
-        max={max}
-        readOnly={readOnly}
-        onChange={handleChange}
-        onBlur={handleChange}
-        value={value}
-        aria-describedby={field}
-        autoComplete={autoComplete}
-        tabIndex={readOnly ? -1 : 0}
-        placeholder={placeHolder}
-      />
-      {error && <div className="invalid-feedback">{error}</div>}
+      <div className="control has-icons-right">
+        <input
+          className={`input${error ? ' is-danger' : ''} ${
+            addClassName ? addClassName : ''
+          }`}
+          name={field}
+          type={type ? type : 'text'}
+          step={step}
+          min={min}
+          max={max}
+          disabled={disabled}
+          onChange={handleChange}
+          onBlur={handleChange}
+          value={value}
+          aria-describedby={field}
+          autoComplete={autoComplete}
+          tabIndex={disabled ? -1 : 0}
+          placeholder={placeHolder}
+        />
+        {error && (
+          <span class="icon is-small is-right">
+            <i class="fas fa-exclamation-triangle"></i>
+          </span>
+        )}
+      </div>
+      {error && <p className="help is-danger">{error}</p>}
     </>
   );
 };

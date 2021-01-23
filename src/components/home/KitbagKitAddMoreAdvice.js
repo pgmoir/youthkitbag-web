@@ -5,25 +5,24 @@ const KitbagKitAddMoreAdvice = ({ kitbagId }) => {
   if (!kitbagId) return null;
 
   return (
-    <div className="card border-0">
-      <div className="alert alert-info mb-0" role="alert">
-        <h2 className="alert-heading">Add more kit</h2>
-        <hr />
-        <p>
-          You only have <span className={`badge badge-pill badge-dark`}>X</span>{' '}
-          items stored in your preferred kitbag. Remember to record all kit now
-          while it&apos;s fresh and new, and easier to trade or order new when
-          the time comes.
-        </p>
-        <Link className="btn btn-info" to={`/kitbag/kit/${kitbagId}/new`}>
+    <article className="tile is-child notification box is-4">
+      <p className="title">Add more kit</p>
+      <p>
+        You only have <span className={`badge badge-pill badge-dark`}>X</span>{' '}
+        items stored in your preferred kitbag. Remember to record all kit now
+        while it&apos;s fresh and new, and easier to trade or order new when the
+        time comes.
+      </p>
+      <div className="buttons">
+        <Link className="button" to={`/kitbag/kit/${kitbagId}/new`}>
           Add more kit
         </Link>
-        <span className="ml-3">or</span>
-        <Link className="btn btn-link" to={`/kitbag/kit/${kitbagId}`}>
+        <span>or</span>
+        <Link className="button" to={`/kitbag/kit/${kitbagId}`}>
           View kitbag
         </Link>
       </div>
-    </div>
+    </article>
   );
 };
 

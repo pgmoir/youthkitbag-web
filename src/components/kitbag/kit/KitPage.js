@@ -64,40 +64,30 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
   return (
     <div>
       <Title title={getTitle()} />
-      <section
-        id="main"
-        className="container-fluid"
-        aria-label="main body of content plus related links and features"
-      >
-        <div className="container">
-          <Alert />
-          {kitId && (
-            <div className="row">
-              <div className="col-12 mb-3 d-flex justify-content-end">
-                <Link
-                  to={`/kitbag/market/${kitbagId}/add/${kitId}/trade`}
-                  className="btn btn-primary mr-3"
-                >
-                  Trade Recycle
-                </Link>
-                <Link
-                  to={`/kitbag/market/${kitbagId}/add/${kitId}/wanted`}
-                  className="btn btn-secondary mr-3"
-                >
-                  Wanted
-                </Link>
-                <Link
-                  to={`/kitbag/market/${kitbagId}/add/${kitId}/stolen`}
-                  className="btn btn-danger"
-                >
-                  Found Lost Stolen
-                </Link>
-              </div>
-            </div>
-          )}
-          <KitForm kitbagId={kitbagId} kit={kit} />
+      <Alert />
+      {kitId && (
+        <div className="buttons">
+          <Link
+            to={`/kitbag/market/${kitbagId}/add/${kitId}/trade`}
+            className="button"
+          >
+            Trade Recycle
+          </Link>
+          <Link
+            to={`/kitbag/market/${kitbagId}/add/${kitId}/wanted`}
+            className="button"
+          >
+            Wanted
+          </Link>
+          <Link
+            to={`/kitbag/market/${kitbagId}/add/${kitId}/stolen`}
+            className="button"
+          >
+            Found Lost Stolen
+          </Link>
         </div>
-      </section>
+      )}
+      <KitForm kitbagId={kitbagId} kit={kit} />
     </div>
   );
 };

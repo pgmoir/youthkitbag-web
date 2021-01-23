@@ -83,14 +83,14 @@ const MarketKitForm = ({
     )
       return null;
 
-    if (isReadOnly()) {
+    if (isDisabled()) {
       return (
         <TextForm
           colFormat="3-9"
           label="Type"
           value={values.marketType}
           field="marketType"
-          readOnly={true}
+          disabled={true}
         />
       );
     }
@@ -115,14 +115,14 @@ const MarketKitForm = ({
       return null;
     }
 
-    if (isReadOnly()) {
+    if (isDisabled()) {
       return (
         <TextForm
           colFormat="3-9"
           label="Condition"
           value={values.condition}
           field="condition"
-          readOnly={true}
+          disabled={true}
         />
       );
     }
@@ -138,7 +138,7 @@ const MarketKitForm = ({
         handleChange={handleChange}
         error={errors.condition}
         items={conditionItems}
-        readOnly={isReadOnly()}
+        disabled={isDisabled()}
         useItem={false}
       />
     );
@@ -164,7 +164,7 @@ const MarketKitForm = ({
         max="29999.99"
         handleChange={handleChange}
         error={errors.marketPrice}
-        readOnly={isReadOnly()}
+        disabled={isDisabled()}
       />
     );
   };
@@ -186,7 +186,7 @@ const MarketKitForm = ({
         field="occurredOn"
         setChange={setChange}
         error={errors.occurredOn}
-        readOnly={isReadOnly()}
+        disabled={isDisabled()}
       />
     );
   };
@@ -208,7 +208,7 @@ const MarketKitForm = ({
         field="security"
         handleChange={handleChange}
         error={errors.security}
-        readOnly={isReadOnly()}
+        disabled={isDisabled()}
       />
     );
   };
@@ -275,7 +275,7 @@ const MarketKitForm = ({
   };
 
   // convert to state
-  const isReadOnly = () => {
+  const isDisabled = () => {
     if (market.completed) {
       return true;
     }
@@ -296,7 +296,7 @@ const MarketKitForm = ({
           values={values}
           setChange={setChange}
           addArrayItem={addArrayItem}
-          readOnly={isReadOnly()}
+          disabled={isDisabled()}
           error={errors.images}
         />
         <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
@@ -309,7 +309,7 @@ const MarketKitForm = ({
               field="title"
               handleChange={handleChange}
               error={errors.title}
-              readOnly={isReadOnly()}
+              disabled={isDisabled()}
             />
             <TextForm
               colFormat="3-9"
@@ -318,7 +318,7 @@ const MarketKitForm = ({
               field="subtitle"
               handleChange={handleChange}
               error={errors.subtitle}
-              readOnly={isReadOnly()}
+              disabled={isDisabled()}
             />
             <TextAreaForm
               colFormat="3-9"
@@ -327,7 +327,7 @@ const MarketKitForm = ({
               field="description"
               handleChange={handleChange}
               error={errors.description}
-              readOnly={isReadOnly()}
+              disabled={isDisabled()}
             />
             {showCondition()}
             {showPrice()}
@@ -341,7 +341,7 @@ const MarketKitForm = ({
               field="activitys"
               handleChange={handleChange}
               error={errors.activitys}
-              readOnly={isReadOnly()}
+              disabled={isDisabled()}
             />
             {values._id && (
               <CheckboxForm
@@ -364,7 +364,7 @@ const MarketKitForm = ({
                       value={values.groups[index].name}
                       label="Name"
                       field={`groups[${index}].name`}
-                      readOnly={true}
+                      disabled={true}
                       index={index}
                     />
                     <DateForm

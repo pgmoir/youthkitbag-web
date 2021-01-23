@@ -95,39 +95,26 @@ const Kitbag = ({
   return (
     <div>
       <Title title={getTitle()} />
-      <section
-        id="main"
-        className="container-fluid"
-        aria-label="main body of content plus related links and features"
-      >
-        <div className="container">
-          <Alert />
-          <div className="row">
-            <div className="col-12 col-sm-9">
-              <SearchForm
-                searchId={kitbagId}
-                search={search}
-                callback={setSearch}
-                collections={lists}
-              />
-            </div>
-            <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
-              <Link
-                to={`/kitbag/kit/${kitbagId}/new`}
-                className="btn btn-primary"
-              >
-                Add new kit
-              </Link>
-            </div>
-          </div>
-          <div className="row">{renderList()}</div>
-          <Pagination
-            kitbagId={kitbagId}
+      <Alert />
+      <div className="columns">
+        <div className="column is-three-quarters">
+          <SearchForm
+            searchId={kitbagId}
             search={search}
             callback={setSearch}
+            collections={lists}
           />
         </div>
-      </section>
+        <div className="column is-one-quarter">
+          <Link to={`/kitbag/kit/${kitbagId}/new`} className="button">
+            Add new kit
+          </Link>
+        </div>
+      </div>
+      <div className="column is-full columns is-multiline">{renderList()}</div>
+      <div className="column is-full">
+        <Pagination kitbagId={kitbagId} search={search} callback={setSearch} />
+      </div>
     </div>
   );
 };

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-const DateInput = ({ value, field, readOnly, setChange }) => {
-  const getDate = value => {
+const DateInput = ({ value, field, disabled, setChange }) => {
+  const getDate = (value) => {
     if (!value) {
       const today = new Date();
       return {
         day: today.getDate(),
         month: today.getMonth() + 1,
-        year: today.getFullYear()
+        year: today.getFullYear(),
       };
     }
     const date = value.split('T')[0].split('-');
@@ -16,8 +16,8 @@ const DateInput = ({ value, field, readOnly, setChange }) => {
 
   const [actualDate, setDate] = useState(getDate(value));
 
-  const handleDayChange = event => {
-    if (readOnly) return;
+  const handleDayChange = (event) => {
+    if (disabled) return;
     const { value } = event.target;
     if (!value) {
       return updateDate({ ...actualDate, day: '' });
@@ -28,8 +28,8 @@ const DateInput = ({ value, field, readOnly, setChange }) => {
     }
   };
 
-  const handleMonthChange = event => {
-    if (readOnly) return;
+  const handleMonthChange = (event) => {
+    if (disabled) return;
     const { value } = event.target;
     if (!value) {
       return updateDate({ ...actualDate, month: '' });
@@ -40,8 +40,8 @@ const DateInput = ({ value, field, readOnly, setChange }) => {
     }
   };
 
-  const handleYearChange = event => {
-    if (readOnly) return;
+  const handleYearChange = (event) => {
+    if (disabled) return;
     const { value } = event.target;
     if (!value) {
       return updateDate({ ...actualDate, year: '' });
@@ -52,7 +52,7 @@ const DateInput = ({ value, field, readOnly, setChange }) => {
     }
   };
 
-  const updateDate = newDate => {
+  const updateDate = (newDate) => {
     setChange(
       field,
       `${newDate.year}-${newDate.month}-${newDate.day}T00:00:00.000Z`
@@ -80,10 +80,10 @@ const DateInput = ({ value, field, readOnly, setChange }) => {
         maxLength="2"
         min="1"
         max="31"
-        readOnly={readOnly}
-        onChange={e => handleDayChange(e)}
-        onBlur={e => handleDayChange(e)}
-        tabIndex={readOnly ? -1 : 0}
+        disabled={disabled}
+        onChange={(e) => handleDayChange(e)}
+        onBlur={(e) => handleDayChange(e)}
+        tabIndex={disabled ? -1 : 0}
       />
       <input
         className={`form-control group-control-center date-input-w2`}
@@ -97,10 +97,10 @@ const DateInput = ({ value, field, readOnly, setChange }) => {
         maxLength="2"
         min="1"
         max="12"
-        readOnly={readOnly}
-        onChange={e => handleMonthChange(e)}
-        onBlur={e => handleMonthChange(e)}
-        tabIndex={readOnly ? -1 : 0}
+        disabled={disabled}
+        onChange={(e) => handleMonthChange(e)}
+        onBlur={(e) => handleMonthChange(e)}
+        tabIndex={disabled ? -1 : 0}
       />
       <input
         className={`form-control group-control-right date-input-w4`}
@@ -114,10 +114,10 @@ const DateInput = ({ value, field, readOnly, setChange }) => {
         maxLength="4"
         min="2000"
         max="2025"
-        readOnly={readOnly}
-        onChange={e => handleYearChange(e)}
-        onBlur={e => handleYearChange(e)}
-        tabIndex={readOnly ? -1 : 0}
+        disabled={disabled}
+        onChange={(e) => handleYearChange(e)}
+        onBlur={(e) => handleYearChange(e)}
+        tabIndex={disabled ? -1 : 0}
       />
     </div>
   );

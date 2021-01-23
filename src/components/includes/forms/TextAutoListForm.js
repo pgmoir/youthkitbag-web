@@ -10,7 +10,7 @@ const TextAutoListForm = ({
   step,
   min,
   max,
-  readOnly,
+  disabled,
   handleChange,
   index,
   error,
@@ -33,7 +33,7 @@ const TextAutoListForm = ({
               step={step}
               min={min}
               max={max}
-              readOnly={readOnly}
+              disabled={disabled}
               handleChange={handleChange}
               error={error}
               autoComplete={autoComplete}
@@ -52,7 +52,7 @@ const TextAutoListForm = ({
             step={step}
             min={min}
             max={max}
-            readOnly={readOnly}
+            disabled={disabled}
             handleChange={handleChange}
             error={error}
             autoComplete={autoComplete}

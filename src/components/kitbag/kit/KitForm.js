@@ -97,7 +97,7 @@ const KitForm = ({
   }
 
   return (
-    <div className="row">
+    <div className="">
       <ImagesForm
         kitbagId={kitbagId}
         values={values}
@@ -105,7 +105,7 @@ const KitForm = ({
         addArrayItem={addArrayItem}
         error={errors.images}
       />
-      <div className="col-12 col-md-6 order-2 order-md-1" role="main">
+      <div className="" role="main">
         <form className="mb-3" onSubmit={handleSubmit}>
           <TextForm
             colFormat="3-9"
