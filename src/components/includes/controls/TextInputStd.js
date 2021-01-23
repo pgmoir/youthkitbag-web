@@ -10,6 +10,7 @@ const TextInputStd = ({
   min,
   max,
   disabled,
+  readonly,
   handleChange,
   error,
   autoComplete,
@@ -45,12 +46,13 @@ const TextInputStd = ({
           min={min}
           max={max}
           disabled={disabled}
+          readonly={readonly}
           onChange={handleChange}
           onBlur={handleChange}
           value={value}
           aria-describedby={field}
           autoComplete={autoComplete}
-          tabIndex={disabled ? -1 : 0}
+          tabIndex={disabled || readonly ? -1 : 0}
           placeholder={placeHolder}
         />
         {iconLeft && (

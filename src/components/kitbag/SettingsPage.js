@@ -66,7 +66,7 @@ const SettingsPage = ({ user }) => {
   };
 
   return (
-    <div>
+    <div class="container">
       <Title title="Personal Settings" />
       <Alert />
       <div className="columns">

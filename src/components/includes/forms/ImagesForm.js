@@ -33,7 +33,7 @@ const ImagesForm = ({
   const dispatch = useDispatch();
   const newImages = useSelector((state) => state.images.newImages);
 
-  function renderSecondaryImages() {
+  function renderThumbnails() {
     if (!values || !values.images) {
       return null;
     }
@@ -41,19 +41,17 @@ const ImagesForm = ({
     const { images } = values;
     const items = [];
 
-    // ?? use .map
-    for (let i = 0; i < images.length; i++) {
-      items.push(
-        <div key={`image${i}`} className="carousel-thumbnail d-inline-flex">
-          {images[i].state !== 'D' && (
-            <>
-              {/* {!disabled && (
-                <span className="icons-top-left">
+    return images.map((image, index) => {
+      return (
+        <div key={index} className="is-flex is-flex-direction-row m-3">
+          {image.state !== 'D' ? (
+            <figure className="image is-128x128">
+              {!disabled && (
+                <span className="is-overlay">
                   <button
-                    aria-label="Delete image"
-                    className="btn btn-link p-0 icon-tray-item"
+                    className="button"
                     href="#"
-                    onClick={deleteImage.bind(null, images[i]._id)}
+                    onClick={deleteImage.bind(null, image._id)}
                   >
                     <i
                       aria-hidden="true"
@@ -62,10 +60,9 @@ const ImagesForm = ({
                     ></i>
                   </button>
                   <button
-                    aria-label="Set as primary image"
-                    className="btn btn-link p-0 icon-tray-item"
+                    className="button"
                     href="#"
-                    onClick={setPrimaryImage.bind(null, images[i]._id)}
+                    onClick={setPrimaryImage.bind(null, image._id)}
                   >
                     <i
                       aria-hidden="true"
@@ -74,25 +71,21 @@ const ImagesForm = ({
                     ></i>
                   </button>
                 </span>
-              )} */}
-              <figure className="image is-128x128">
-                <img
-                  src={images[i].imageUrl}
-                  alt=""
-                  role="presentation"
-                  onClick={renderTopImage.bind(null, images[i].imageUrl)}
-                />
-              </figure>
-            </>
-          )}
-          {images[i].state === 'D' && (
-            <>
-              {/* <span className="icons-top-left">
+              )}
+              <img
+                src={image.imageUrl}
+                alt=""
+                role="presentation"
+                onClick={renderTopImage.bind(null, image.imageUrl)}
+              />
+            </figure>
+          ) : (
+            <figure className="image is-128x128">
+              <span className="is-overlay">
                 <button
-                  aria-label="Undo image deletion"
-                  className="btn btn-link p-0 icon-tray-item"
+                  className="button"
                   href="#"
-                  onClick={reinstateImage.bind(null, images[i]._id)}
+                  onClick={reinstateImage.bind(null, image._id)}
                 >
                   <i
                     aria-hidden="true"
@@ -100,17 +93,13 @@ const ImagesForm = ({
                     title="Undo image deletion"
                   ></i>
                 </button>
-              </span> */}
-              <figure className="image is-128x128">
-                <img src={images[i].imageUrl} alt="" role="presentation" />
-              </figure>
-            </>
+              </span>
+              <img src={image.imageUrl} alt="" role="presentation" />
+            </figure>
           )}
         </div>
       );
-    }
-
-    return <div>{items}</div>;
+    });
   }
 
   function renderTopImage(src) {
@@ -188,7 +177,7 @@ const ImagesForm = ({
   return (
     <>
       <div className="" role="main">
-        <figure class="image">
+        <figure class="image mb-3">
           <img
             id="preview"
             name="preview"
@@ -197,7 +186,7 @@ const ImagesForm = ({
             role="presentation"
           />
         </figure>
-        <div>{renderSecondaryImages()}</div>
+        <div className="columns is-multiline">{renderThumbnails()}</div>
         {!disabled && (
           <div className="field">
             <label className="label" htmlFor="photos">

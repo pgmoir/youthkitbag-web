@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { editUser, loadSettingsPage } from '../../actions/UserActions';
-import { TextForm, ImagesForm } from '../includes/forms';
+import { ImagesForm } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
 import { getImages } from '../../utils/image';
 import TextInputStd from '../includes/controls/TextInputStd';
@@ -57,7 +57,7 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
   }
 
   return (
-    <div className="is-flex flex-col-touch flex-row-desktop-reverse has-background-primary">
+    <div className="is-flex flex-col-touch flex-row-desktop-reverse">
       <div className="is-flex-grow-1">
         <ImagesForm
           values={values}
@@ -66,7 +66,7 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
           error={errors.images}
         />
       </div>
-      <div className="is-flex-grow-1" role="main">
+      <div className="is-flex-grow-1 mr-3" role="main">
         <form onSubmit={handleSubmit}>
           <TextInputStd
             label="First Name"
@@ -75,16 +75,20 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
             handleChange={handleChange}
             error={errors.firstName}
           />
-          <TextForm
-            colFormat="3-9"
+          <TextInputStd
             label="Last Name"
             value={values.lastName}
             field="lastName"
             handleChange={handleChange}
             error={errors.lastName}
           />
-          <TextForm
-            colFormat="3-9"
+          <TextInputStd
+            label="Email"
+            value={values.email}
+            field="email"
+            readonly={true}
+          />
+          <TextInputStd
             label="Username"
             value={values.userName}
             field="userName"
@@ -92,8 +96,7 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
             error={errors.userName}
           />
           <hr />
-          <TextForm
-            colFormat="3-9"
+          <TextInputStd
             label="Activities"
             value={values.activitys}
             field="activitys"
@@ -143,11 +146,14 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
                 </div>
               ))}
           </div>
-          <div>
-            <button className="btn btn-primary" type="submit">
+          <div className="buttons">
+            <button className="button is-primary" type="submit">
               Save
             </button>
-            <button className="btn btn-link" onClick={() => cancelPage()}>
+            <button
+              className="button is-primary is-outlined"
+              onClick={() => cancelPage()}
+            >
               Cancel
             </button>
           </div>

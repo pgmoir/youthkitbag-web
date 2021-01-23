@@ -23,7 +23,7 @@ const KitbagKitAddMoreAdvice = ({ kitbagId }) => {
           Add more kit
         </Link>
         <Link
-          className="button is-danger is-inverted is-outline"
+          className="button is-danger is-inverted is-outlined"
           to={`/kitbag/kit/${kitbagId}`}
         >
           View kitbag
