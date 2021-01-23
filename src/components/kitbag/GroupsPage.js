@@ -9,18 +9,16 @@ const mapStateToProps = (state) => ({
 const GroupsPage = ({ user }) => {
   return (
     <>
-      <div className="row">
-        <div className="col-12">
-          <p>
-            As a user of YouthKitbag, you can join as many kitbags as allowed
-            within your chosen bundle limits. The default Star kitbag (free)
-            allows you to join 3 groups.
-          </p>
-          <p>
-            Groups are clubs, sports teams, organisations within which you can
-            trade kit items. Membership is granted by a group administrator.
-          </p>
-        </div>
+      <div className="content">
+        <p>
+          As a user of YouthKitbag, you can join as many kitbags as allowed
+          within your chosen bundle limits. The default Star kitbag (free)
+          allows you to join 3 groups.
+        </p>
+        <p>
+          Groups are clubs, sports teams, organisations within which you can
+          trade kit items. Membership is granted by a group administrator.
+        </p>
       </div>
       {user && user.groups && user.groups.length > 0 && (
         <div className="row">
@@ -63,15 +61,13 @@ const GroupsPage = ({ user }) => {
           </div>
         </div>
       )}
-      <div className="row mb-3">
-        <div className="col-12">
-          <Link to="/groups" className="btn btn-primary mr-3">
-            Join Group
-          </Link>
-          <Link to="/groups/new" className="btn btn-outline-primary">
-            Create Group
-          </Link>
-        </div>
+      <div className="buttons">
+        <Link to="/groups" className="button is-primary">
+          Join Group
+        </Link>
+        <Link to="/groups/new" className="button is-primary is-outlined">
+          Create Group
+        </Link>
       </div>
     </>
   );

@@ -5,7 +5,7 @@ const KitbagsHelp = () => {
   return (
     <HelpNotification nameOf="kitbagsHelp" title="Explanation of kitbags">
       <p className="title is-5">Why should you create or join an kitbag?</p>
-      <div classname="content">
+      <div className="content">
         <p>
           An kitbag allows you to create details of the kit (clothing,
           equipement, instruments, paraphenalia, etc.) that you own, that you

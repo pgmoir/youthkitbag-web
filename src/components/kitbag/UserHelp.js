@@ -5,7 +5,7 @@ const UserHelp = () => {
   return (
     <HelpNotification nameOf="userHelp" title="Explanation of user">
       <p className="title is-5">Why should you complete your user?</p>
-      <div classname="content">
+      <div className="content">
         <p>
           I know you&apos;ve already created an kitbag with your email address.
           But, it is always nicer to deal with people using real names, or at

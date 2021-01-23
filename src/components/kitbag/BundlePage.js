@@ -9,24 +9,21 @@ const mapStateToProps = (state) => ({
 const BundlePage = ({ userBundle }) => {
   return (
     <>
-      <div className="row">
-        <div className="col-12">
-          <p>
-            As a user of YouthKitbag, you can add, create, trade and join
-            different aspects of the YouthKitbag application, within the limits
-            of your chosen bundle.
-          </p>
-          <p>
-            If you are reaching or have reached the limits of your chosen
-            bundle, you have the ability to upgrade to a very low cost paid
-            bundle that will increase your limits and give you access to premium
-            features.
-          </p>
-        </div>
+      <div className="content">
+        <p>
+          As a user of YouthKitbag, you can add, create, trade and join
+          different aspects of the YouthKitbag application, within the limits of
+          your chosen bundle.
+        </p>
+        <p>
+          If you are reaching or have reached the limits of your chosen bundle,
+          you have the ability to upgrade to a very low cost paid bundle that
+          will increase your limits and give you access to premium features.
+        </p>
       </div>
       {userBundle && (
-        <div className="row">
-          <div className="col-12">
+        <div className="columns">
+          <div className="column">
             <h5 className={`bg-${userBundle.theme} mb-0 p-3`}>
               <span
                 className={`fas fa-${userBundle.icon} pr-2`}
@@ -34,12 +31,12 @@ const BundlePage = ({ userBundle }) => {
               ></span>{' '}
               Bundle Usage and Limits
             </h5>
-            <table className="table bg-light">
+            <table className="table is-striped is-fullwidth">
               <thead>
                 <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Current Usage</th>
-                  <th scope="col">Current Limits</th>
+                  <th>Name</th>
+                  <th>Current Usage</th>
+                  <th>Current Limits</th>
                 </tr>
               </thead>
               <tbody>
@@ -83,12 +80,10 @@ const BundlePage = ({ userBundle }) => {
           </div>
         </div>
       )}
-      <div className="row mb-3">
-        <div className="col-12">
-          <Link to="/bundles" className="btn btn-primary">
-            Choose Bundle Upgrade
-          </Link>
-        </div>
+      <div className="buttons">
+        <Link to="/bundles" className="button is-primary">
+          Choose Bundle Upgrade
+        </Link>
       </div>
     </>
   );

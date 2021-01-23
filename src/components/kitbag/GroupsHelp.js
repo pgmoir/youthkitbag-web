@@ -5,7 +5,7 @@ const GroupsHelp = () => {
   return (
     <HelpNotification nameOf="groupsHelp" title="Explanation of groups">
       <p className="title is-5">Why should you join or create a group?</p>
-      <div classname="content">
+      <div className="content">
         <p>
           A group is where you trade, recycle, or search for available items.
           You can only do these activities within groups. Groups are YouthKitbag
