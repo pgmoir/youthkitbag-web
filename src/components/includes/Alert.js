@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { resetToast } from '../../actions/ToastActions';
 
-const mapStateToProps = state => ({
-  toast: state.toast
+const mapStateToProps = (state) => ({
+  toast: state.toast,
 });
 
 const mapDispatchToProps = {
-  resetToast
+  resetToast,
 };
 
 const Alert = ({ toast, resetToast }) => {
@@ -20,11 +20,11 @@ const Alert = ({ toast, resetToast }) => {
   function alertStyle(style) {
     switch (style) {
       case 'error':
-        return 'alert-danger';
+        return 'is-danger';
       case 'warning':
-        return 'alert-warning';
+        return 'is-warning';
       default:
-        return 'alert-success';
+        return 'is-success';
     }
   }
 
@@ -43,9 +43,9 @@ const Alert = ({ toast, resetToast }) => {
 
   return (
     <div
-      className={`alert ${alertStyle(
+      className={`notification is-light is-flex ${alertStyle(
         toast.currentStyle
-      )} d-flex flex-row align-items-center`}
+      )}`}
       role="alert"
     >
       <div className="pr-4">
@@ -54,8 +54,8 @@ const Alert = ({ toast, resetToast }) => {
           title="Alert message"
         ></span>
       </div>
-      <div>
-        <p className="my-0">{toast.currentMessage}</p>
+      <div className="flex-grow">
+        <p>{toast.currentMessage}</p>
       </div>
     </div>
   );

@@ -175,48 +175,43 @@ const ImagesForm = ({
   }, [newImages, addArrayItem, setChange, values, dispatch]);
 
   return (
-    <>
-      <div className="" role="main">
-        <figure class="image mb-3">
-          <img
-            id="preview"
-            name="preview"
-            src={values.topImage}
-            alt=""
-            role="presentation"
-          />
-        </figure>
-        <div className="columns is-multiline">{renderThumbnails()}</div>
-        {!disabled && (
-          <div className="field">
-            <label className="label" htmlFor="photos">
-              Images
-            </label>
-            <div className="control">
-              <div className="file">
-                <label className="file-label" htmlFor="photos">
-                  <input
-                    type="file"
-                    multiple
-                    className={`file-input${error ? ' is-danger' : ''}`}
-                    id="photos"
-                    aria-describedby="photos"
-                    onChange={(e) => onFileChanged(e)}
-                  />
-                  <span class="file-cta">
-                    <span class="file-icon">
-                      <i class="fas fa-upload"></i>
-                    </span>
-                    <span class="file-label">Choose image(s)</span>
+    <div className="" role="main">
+      <figure class="image mb-3">
+        <img
+          id="preview"
+          name="preview"
+          src={values.topImage}
+          alt=""
+          role="presentation"
+        />
+      </figure>
+      <div className="columns is-multiline mb-0">{renderThumbnails()}</div>
+      {!disabled && (
+        <div className="field mb-3">
+          <div className="control">
+            <div className="file">
+              <label className="file-label" htmlFor="photos">
+                <input
+                  type="file"
+                  multiple
+                  className={`file-input${error ? ' is-danger' : ''}`}
+                  id="photos"
+                  aria-describedby="photos"
+                  onChange={(e) => onFileChanged(e)}
+                />
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <i class="fas fa-upload"></i>
                   </span>
-                </label>
-              </div>
+                  <span class="file-label">Choose image(s)</span>
+                </span>
+              </label>
             </div>
-            {error && <p className="help is-danger">{error}</p>}
           </div>
-        )}
-      </div>
-    </>
+          {error && <p className="help is-danger">{error}</p>}
+        </div>
+      )}
+    </div>
   );
 };
 

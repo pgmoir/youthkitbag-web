@@ -146,7 +146,7 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
                 </div>
               ))}
           </div>
-          <div className="buttons">
+          <div className="buttons mb-3">
             <button className="button is-primary" type="submit">
               Save
             </button>
