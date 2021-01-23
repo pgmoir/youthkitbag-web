@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
 import { fetchKitbagMarketItems } from '../../actions/KitbagMarketActions';

@@ -31,62 +31,83 @@ const Pagination = ({ kitbagId, search, callback, pagination }) => {
   }
 
   function isFirstPageDisabled() {
-    return pagination.currentPage === 1 ? 'disabled' : '';
+    return pagination.currentPage === 1;
   }
 
   function isPreviousPageDisabled() {
-    return !pagination.hasPreviousPage ? 'disabled' : '';
+    return !pagination.hasPreviousPage;
   }
 
   function isNextPageDisabled() {
-    return !pagination.hasNextPage ? 'disabled' : '';
+    return !pagination.hasNextPage;
   }
 
   function isLastPageDisabled() {
-    return pagination.lastPage === pagination.currentPage ? 'disabled' : '';
+    return pagination.lastPage === pagination.currentPage;
   }
 
   return (
     <>
       {pagination && pagination.totalItems > pagination.itemsPerPage && (
-        <nav aria-label="Page navigation">
-          <ul className="pagination">
-            <li className={`page-item ${isFirstPageDisabled()}`}>
-              <button className="page-link" onClick={() => changePage(1)}>
+        <nav
+          class="pagination is-centered"
+          role="navigation"
+          aria-label="pagination"
+        >
+          <ul class="pagination-list">
+            <li>
+              <a
+                class="pagination-link"
+                aria-label="Goto page 1"
+                disabled={isFirstPageDisabled()}
+                onClick={() => changePage(1)}
+              >
                 First
-              </button>
+              </a>
             </li>
-            <li className={`page-item ${isPreviousPageDisabled()}`}>
-              <button
-                className="page-link"
+            <li>
+              <span class="pagination-ellipsis">&hellip;</span>
+            </li>
+            <li>
+              <a
+                class="pagination-previous"
+                disabled={isPreviousPageDisabled()}
                 onClick={() => changePage(pagination.previousPage)}
               >
                 Previous
-              </button>
+              </a>
             </li>
-            <li className="page-item active">
-              <button
-                className="page-link"
+            <li>
+              <a
+                class="pagination-link is-current"
+                aria-label={`Page ${pagination.currentPage}`}
+                aria-current="page"
                 onClick={() => changePage(pagination.currentPage)}
               >
                 {pagination.currentPage}
-              </button>
+              </a>
             </li>
-            <li className={`page-item ${isNextPageDisabled()}`}>
-              <button
-                className="page-link"
+            <li>
+              <a
+                class="pagination-next"
+                disabled={isNextPageDisabled()}
                 onClick={() => changePage(pagination.nextPage)}
               >
-                Next
-              </button>
+                Next page
+              </a>
             </li>
-            <li className={`page-item ${isLastPageDisabled()}`}>
-              <button
-                className="page-link"
+            <li>
+              <span class="pagination-ellipsis">&hellip;</span>
+            </li>
+            <li>
+              <a
+                class="pagination-link"
+                aria-label={`Goto page ${pagination.lastPage}`}
+                disabled={isLastPageDisabled()}
                 onClick={() => changePage(pagination.lastPage)}
               >
                 Last
-              </button>
+              </a>
             </li>
           </ul>
         </nav>

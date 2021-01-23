@@ -7,7 +7,6 @@ import KitbagsPage from './KitbagsPage';
 import GroupsPage from './GroupsPage';
 import BundlePage from './BundlePage';
 import Alert from '../includes/Alert';
-import UserHelp from './UserHelp';
 import KitbagsHelp from './KitbagsHelp';
 import GroupsHelp from './GroupsHelp';
 import ConfigurationPage from './ConfigurationPage';
