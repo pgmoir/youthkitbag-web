@@ -87,32 +87,32 @@ const SearchForm = ({ search, callback, placeholderText, collections }) => {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <div className="input-group">
-            <div className="input-group-prepend">
+    <form onSubmit={handleSubmit}>
+      <div class="field has-addons">
+        <p class="control">
+          <span class="select">
+            <select
+              name="by"
+              onChange={(e) => instantSearchBy(e)}
+              onBlur={(e) => instantSearchBy(e)}
+              value={values.by}
+            >
+              {filter.options.map((o) => (
+                <option
+                  key={o.key}
+                  value={o.key}
+                  defaultValue={o.key === values.by ? 'true' : ''}
+                >
+                  {o.value}
+                </option>
+              ))}
+            </select>
+          </span>
+        </p>
+        <p class="control">
+          {useCollection ? (
+            <span class="select">
               <select
-                name="by"
-                className="custom-select"
-                onChange={(e) => instantSearchBy(e)}
-                onBlur={(e) => instantSearchBy(e)}
-                value={values.by}
-              >
-                {filter.options.map((o) => (
-                  <option
-                    key={o.key}
-                    value={o.key}
-                    defaultValue={o.key === values.by ? 'true' : ''}
-                  >
-                    {o.value}
-                  </option>
-                ))}
-              </select>
-            </div>
-            {useCollection && (
-              <select
-                className="custom-select"
                 name="searchfor"
                 onChange={(e) => instantSearchFor(e)}
                 onBlur={(e) => instantSearchFor(e)}
@@ -127,35 +127,32 @@ const SearchForm = ({ search, callback, placeholderText, collections }) => {
                   );
                 })}
               </select>
-            )}
-            {!useCollection && (
-              <input
-                name="searchfor"
-                className="form-control"
-                type="text"
-                onChange={handleChange}
-                value={values.searchfor}
-                id="searchfor"
-                arialabel="Search by text"
-                placeholder={placeholderText}
-              />
-            )}
-            <div className="input-group-append">
-              <button className="btn btn-outline-primary" type="submit">
-                Search
-              </button>
-              <button
-                className="btn btn-outline-secondary"
-                type="button"
-                onClick={clearSearch}
-              >
-                Clear
-              </button>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
+            </span>
+          ) : (
+            <input
+              name="searchfor"
+              className="input"
+              type="text"
+              onChange={handleChange}
+              value={values.searchfor}
+              id="searchfor"
+              arialabel="Search by text"
+              placeholder={placeholderText}
+            />
+          )}
+        </p>
+        <p class="control">
+          <button className="button is-primary" type="submit">
+            Search
+          </button>
+        </p>
+        <p class="control">
+          <button className="button" type="button" onClick={clearSearch}>
+            Clear
+          </button>
+        </p>
+      </div>
+    </form>
   );
 };
 
