@@ -125,16 +125,22 @@ const GroupPage = ({ current, fetchGroup, match }) => {
   }
 
   return (
-    <div>
+    <div className="container">
       <Title title={getTitle()} icon={getIcon()} iconTitle={getIconTitle()} />
-      <section
+      <Alert />
+      <GroupsHelp />
+      <div className="columns">
+        <div className="column">
+          {(group.groupAdmin || createGroup) && <GroupForm group={group} />}
+          {!group.groupAdmin && !createGroup && <GroupDisplay group={group} />}
+        </div>
+      </div>
+      {/* <section
         id="main"
         className="container-fluid"
         aria-label="main body of content plus related links and features"
       >
         <div className="container">
-          <GroupsHelp />
-          <Alert />
           <div className="row pb-3">
             <div className="col-12 col-sm-8">
               {group.groupMemberState && (
@@ -178,10 +184,8 @@ const GroupPage = ({ current, fetchGroup, match }) => {
               </div>
             </div>
           </div>
-          {(group.groupAdmin || createGroup) && <GroupForm group={group} />}
-          {!group.groupAdmin && !createGroup && <GroupDisplay group={group} />}
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

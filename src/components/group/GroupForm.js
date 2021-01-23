@@ -2,10 +2,12 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useForm from '../hooks/useForm';
 import { createGroup, editGroup } from '../../actions/GroupActions';
-import { TextForm, TextAreaForm, ImagesForm } from '../includes/forms';
+import { ImagesForm } from '../includes/forms';
 import { connect } from 'react-redux';
 import validate from '../includes/FormEmptyValidationRules';
 import { getImages } from '../../utils/image';
+import TextInputStd from '../includes/controls/TextInputStd';
+import TextAreaInputStd from '../includes/controls/TextAreaInputStd';
 
 const mapStateToProps = (state) => ({
   userBundle: state.user.bundle,
@@ -76,11 +78,11 @@ const GroupForm = ({
     if (!userBundle || !values) return null;
 
     return (
-      <div>
-        <button className="btn btn-primary" type="submit">
+      <div className="buttons mb-3">
+        <button className="button is-primary" type="submit">
           Save
         </button>
-        <Link className="btn btn-link" to="/groups">
+        <Link className="button is-primary is-outlined" to="/groups">
           Cancel
         </Link>
       </div>
@@ -88,50 +90,32 @@ const GroupForm = ({
   }
 
   return (
-    <div className="row">
-      <ImagesForm
-        values={values}
-        setChange={setChange}
-        addArrayItem={addArrayItem}
-        error={errors.images}
-      />
-      <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
-        <form className="mb-3" onSubmit={handleSubmit}>
-          <TextForm
-            colFormat="3-9"
+    <div className="is-flex flex-col-touch flex-row-desktop-reverse">
+      <div className="is-flex-grow-1">
+        <ImagesForm
+          values={values}
+          setChange={setChange}
+          addArrayItem={addArrayItem}
+          error={errors.images}
+        />
+      </div>
+      <div className="is-flex-grow-1 mr-3" role="main">
+        <form onSubmit={handleSubmit}>
+          <TextInputStd
             label="Name"
             value={values.name}
             field="name"
             handleChange={handleChange}
             error={errors.name}
           />
-          <TextAreaForm
-            colFormat="3-9"
+          <TextAreaInputStd
             label="Description"
             value={values.description}
             field="description"
             handleChange={handleChange}
             error={errors.description}
           />
-          <TextAreaForm
-            colFormat="3-9"
-            label="Recommendation"
-            value={values.recommendation}
-            field="recommendation"
-            rows="3"
-            handleChange={handleChange}
-            error={errors.recommendation}
-          />
-          <TextForm
-            colFormat="3-9"
-            label="Recommendation by"
-            value={values.recommendationBy}
-            field="recommendationBy"
-            handleChange={handleChange}
-            error={errors.recommendationBy}
-          />
-          <TextForm
-            colFormat="3-9"
+          <TextInputStd
             type="email"
             label="Email"
             value={values.email}
@@ -139,8 +123,7 @@ const GroupForm = ({
             handleChange={handleChange}
             error={errors.email}
           />
-          <TextForm
-            colFormat="3-9"
+          <TextInputStd
             label="Website"
             value={values.website}
             field="website"
@@ -148,29 +131,51 @@ const GroupForm = ({
             error={errors.website}
           />
           <hr />
-          <TextAreaForm
-            colFormat="3-9"
+          <TextInputStd
             label="Activities"
             value={values.activitys}
             field="activitys"
-            rows="2"
             handleChange={handleChange}
             error={errors.activitys}
           />
           <hr />
-          <h2 className="h5">
-            Copy and share the link below to promote this group
-          </h2>
-          <p>
-            <a href={showGroupUrl} target="_blank" rel="noopener noreferrer">
-              {showGroupUrl}
-            </a>
-            <span
-              className="fas fa-external-link-alt pl-2"
-              title="Link will open a new tab"
-            ></span>
-          </p>
+          <TextAreaInputStd
+            label="Recommendation"
+            value={values.recommendation}
+            field="recommendation"
+            rows="3"
+            handleChange={handleChange}
+            error={errors.recommendation}
+          />
+          <TextInputStd
+            label="Recommendation by"
+            value={values.recommendationBy}
+            field="recommendationBy"
+            handleChange={handleChange}
+            error={errors.recommendationBy}
+          />
           <hr />
+          {group._id && (
+            <>
+              <h2 className="h5">
+                Copy and share the link below to promote this group
+              </h2>
+              <p>
+                <a
+                  href={showGroupUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {showGroupUrl}
+                </a>
+                <span
+                  className="fas fa-external-link-alt pl-2"
+                  title="Link will open a new tab"
+                ></span>
+              </p>
+              <hr />
+            </>
+          )}
           <div>
             {values.images &&
               values.images.map((item, index) => (

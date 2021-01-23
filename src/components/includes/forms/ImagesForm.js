@@ -34,14 +34,13 @@ const ImagesForm = ({
   const newImages = useSelector((state) => state.images.newImages);
 
   function renderThumbnails() {
-    if (!values || !values.images) {
-      return null;
-    }
+    if (!values) return null;
 
     const { images } = values;
-    const items = [];
 
-    return images.map((image, index) => {
+    if (!images?.length) return null;
+
+    const thumbnails = images.map((image, index) => {
       return (
         <div key={index} className="is-flex is-flex-direction-row m-3">
           {image.state !== 'D' ? (
@@ -108,6 +107,8 @@ const ImagesForm = ({
         </div>
       );
     });
+
+    return <div className="columns is-multiline mb-0">{thumbnails}</div>;
   }
 
   function renderTopImage(src) {
@@ -193,7 +194,7 @@ const ImagesForm = ({
           role="presentation"
         />
       </figure>
-      <div className="columns is-multiline mb-0">{renderThumbnails()}</div>
+      {renderThumbnails()}
       {!disabled && (
         <div className="field mb-3">
           <div className="control">

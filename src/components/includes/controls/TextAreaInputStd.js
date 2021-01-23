@@ -1,31 +1,20 @@
 import React from 'react';
 import classNames from 'classnames';
 
-const TextInputStd = ({
-  type,
+const TextAreaInputStd = ({
   label,
   value,
   field,
-  step,
-  min,
-  max,
   disabled,
   readOnly,
   handleChange,
   error,
-  autoComplete,
   addClassName,
-  placeHolder,
-  iconLeft,
+  rows,
+  placeholder,
 }) => {
-  const wrapperClassNames = classNames({
-    control: true,
-    'has-icons-left': iconLeft,
-    'has-icons-right': true,
-  });
-
-  const inputClassNames = classNames({
-    input: true,
+  const textareaClassNames = classNames({
+    textarea: true,
     'is-danger': error,
     addClassName: addClassName,
   });
@@ -37,29 +26,20 @@ const TextInputStd = ({
           {label}
         </label>
       )}
-      <div className={wrapperClassNames}>
-        <input
-          className={inputClassNames}
+      <div className="control has-icons-right">
+        <textarea
+          className={textareaClassNames}
           name={field}
-          type={type ? type : 'text'}
-          step={step}
-          min={min}
-          max={max}
+          rows={rows ? rows : 5}
           disabled={disabled}
           readonly={readOnly}
           onChange={handleChange}
           onBlur={handleChange}
           value={value}
           aria-describedby={field}
-          autoComplete={autoComplete}
-          tabIndex={disabled || readOnly ? -1 : 0}
-          placeholder={placeHolder}
-        />
-        {iconLeft && (
-          <span className="icon is-small is-left">
-            <i className={iconLeft}></i>
-          </span>
-        )}
+          tabIndex={disabled ? -1 : 0}
+          placeholder={placeholder}
+        ></textarea>
         {error && (
           <span className="icon is-small is-right">
             <i className="fas fa-exclamation-triangle"></i>
@@ -71,4 +51,4 @@ const TextInputStd = ({
   );
 };
 
-export default TextInputStd;
+export default TextAreaInputStd;
