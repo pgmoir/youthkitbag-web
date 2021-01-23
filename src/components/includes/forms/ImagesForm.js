@@ -45,57 +45,65 @@ const ImagesForm = ({
       return (
         <div key={index} className="is-flex is-flex-direction-row m-3">
           {image.state !== 'D' ? (
-            <figure className="image is-128x128">
-              {!disabled && (
-                <span className="is-overlay">
-                  <button
-                    className="button"
-                    href="#"
-                    onClick={deleteImage.bind(null, image._id)}
-                  >
-                    <i
-                      aria-hidden="true"
-                      className="fas fa-trash"
-                      title="Delete this image?"
-                    ></i>
-                  </button>
-                  <button
-                    className="button"
-                    href="#"
-                    onClick={setPrimaryImage.bind(null, image._id)}
-                  >
-                    <i
-                      aria-hidden="true"
-                      className="fas fa-star"
-                      title="Set as primary image"
-                    ></i>
-                  </button>
-                </span>
-              )}
-              <img
-                src={image.imageUrl}
-                alt=""
-                role="presentation"
-                onClick={renderTopImage.bind(null, image.imageUrl)}
-              />
-            </figure>
+            <div className="card">
+              <div className="card-image">
+                <figure className="image is-square is-128x128">
+                  <img
+                    src={image.imageUrl}
+                    alt=""
+                    role="presentation"
+                    onClick={renderTopImage.bind(null, image.imageUrl)}
+                  />
+                </figure>
+                {!disabled && (
+                  <div className="is-overlay">
+                    <button
+                      className="button is-danger is-outlined"
+                      href="#"
+                      onClick={deleteImage.bind(null, image._id)}
+                    >
+                      <i
+                        aria-hidden="true"
+                        className="fas fa-trash"
+                        title="Delete this image?"
+                      ></i>
+                    </button>
+                    <button
+                      className="button is-success is-outlined"
+                      href="#"
+                      onClick={setPrimaryImage.bind(null, image._id)}
+                    >
+                      <i
+                        aria-hidden="true"
+                        className="fas fa-star"
+                        title="Set as primary image"
+                      ></i>
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
           ) : (
-            <figure className="image is-128x128">
-              <span className="is-overlay">
-                <button
-                  className="button"
-                  href="#"
-                  onClick={reinstateImage.bind(null, image._id)}
-                >
-                  <i
-                    aria-hidden="true"
-                    className="fas fa-undo"
-                    title="Undo image deletion"
-                  ></i>
-                </button>
-              </span>
-              <img src={image.imageUrl} alt="" role="presentation" />
-            </figure>
+            <div className="card">
+              <div className="card-image">
+                <figure className="image is-square is-128x128">
+                  <img src={image.imageUrl} alt="" role="presentation" />
+                </figure>
+                <div className="is-overlay">
+                  <button
+                    className="button is-warning is-outlined"
+                    href="#"
+                    onClick={reinstateImage.bind(null, image._id)}
+                  >
+                    <i
+                      aria-hidden="true"
+                      className="fas fa-undo"
+                      title="Undo image deletion"
+                    ></i>
+                  </button>
+                </div>
+              </div>
+            </div>
           )}
         </div>
       );
