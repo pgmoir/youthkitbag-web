@@ -103,6 +103,7 @@ const Kitbag = ({
             search={search}
             callback={setSearch}
             collections={lists}
+            placeholderText="Search for kit"
           />
         </div>
         <div className="column is-one-quarter">

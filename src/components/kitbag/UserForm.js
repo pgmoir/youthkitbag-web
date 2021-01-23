@@ -1,19 +1,18 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { editUser, loadSettingsPage } from '../../actions/UserActions';
 import { TextForm, ImagesForm } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
 import { getImages } from '../../utils/image';
-
-const mapStateToProps = (state) => ({
-  newErrors: state.toast.errors,
-});
+import TextInputStd from '../includes/controls/TextInputStd';
 
 const mapDispatchToProps = { editUser, loadSettingsPage };
 
-const UserForm = ({ user, newErrors, editUser, loadSettingsPage }) => {
+const UserForm = ({ user, editUser, loadSettingsPage }) => {
   const initialValues = { ...user, images: getImages(user.images) };
+
+  const newErrors = useSelector((state) => state.toast.errors);
 
   const {
     setChange,
@@ -58,17 +57,18 @@ const UserForm = ({ user, newErrors, editUser, loadSettingsPage }) => {
   }
 
   return (
-    <div>
-      <ImagesForm
-        values={values}
-        setChange={setChange}
-        addArrayItem={addArrayItem}
-        error={errors.images}
-      />
-      <div role="main">
+    <div className="is-flex is-flex-direction-row-reverse-mobile is-flex-direction-column has-background-primary">
+      <div className="is-flex-grow-1">
+        <ImagesForm
+          values={values}
+          setChange={setChange}
+          addArrayItem={addArrayItem}
+          error={errors.images}
+        />
+      </div>
+      <div className="is-flex-grow-1" role="main">
         <form onSubmit={handleSubmit}>
-          <TextForm
-            colFormat="3-9"
+          <TextInputStd
             label="First Name"
             value={values.firstName}
             field="firstName"
@@ -157,4 +157,4 @@ const UserForm = ({ user, newErrors, editUser, loadSettingsPage }) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserForm);
+export default connect(null, mapDispatchToProps)(UserForm);
