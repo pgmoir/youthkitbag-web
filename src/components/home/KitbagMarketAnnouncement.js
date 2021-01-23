@@ -1,35 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { fetchKitbagMarketItems } from '../../actions/KitbagMarketActions';
-import { MarketTypes } from '../../enums/marketTypes.enum';
-
-const mapStateToProps = (state) => ({
-  totalItems: state.kitbag.market.trades.totalItems,
-  items: state.kitbag.market.trades.items,
-});
 
 const mapDispatchToProps = {
   fetchKitbagMarketItems,
 };
 
-const KitbagMarketTradeAnnouncement = ({
+const KitbagMarketAnnouncement = ({
+  description,
+  marketType,
   group,
-  items,
-  totalItems,
   fetchKitbagMarketItems,
 }) => {
-  const [marketItems, setMarketItems] = useState([]);
+  const marketItems = useSelector(
+    (state) => state.kitbag.market[marketType]?.items
+  );
+  const totalItems = useSelector(
+    (state) => state.kitbag.market[marketType]?.totalItems
+  );
 
   useEffect(() => {
-    if (items) {
-      setMarketItems(items);
-    }
-  }, [items]);
-
-  useEffect(() => {
-    fetchKitbagMarketItems({ by: MarketTypes.TRADE, pagesize: 5 });
-  }, [fetchKitbagMarketItems]);
+    fetchKitbagMarketItems({ by: marketType, pagesize: 5 });
+  }, [marketType, fetchKitbagMarketItems]);
 
   // if (!group || !marketItems) return null;
 
@@ -71,27 +64,24 @@ const KitbagMarketTradeAnnouncement = ({
 
   return (
     <article className="tile is-child">
-      <h2 className="title is-4">Your trades</h2>
+      <h2 className="title is-4">Your {description}</h2>
       <p>
         You currently have{' '}
         <span className={`badge badge-pill badge-dark`}>{totalItems}</span>{' '}
-        active trade items.
+        active {description}.
       </p>
-      <div>{renderList()}</div>
-      <p>These are your most recently active trades.</p>
+      {/* <div>{renderList()}</div> */}
+      <p>These are your most recently active {description}.</p>
       <div className="buttons">
         <Link
           to="/market?searchfor=&by=trade&page=1&pagesize=24&excgroups=true"
-          className="a11y-highlight"
+          className="button"
         >
-          View all your trades
+          View all your {description}
         </Link>
       </div>
     </article>
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(KitbagMarketTradeAnnouncement);
+export default connect(null, mapDispatchToProps)(KitbagMarketAnnouncement);

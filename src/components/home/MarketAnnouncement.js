@@ -1,26 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-
-const mapStateToProps = state => ({});
-
-const mapDispatchToProps = {};
 
 const MarketAnnouncement = ({ group, doNotShow }) => {
-  if (!group || !doNotShow) return null;
+  // if (!group || !doNotShow) return null;
 
   return (
-    <div className="card border-0">
-      <div className="alert alert-info mb-0" role="alert">
-        <h2 className="alert-heading">Market watches</h2>
-        <hr />
-        <p>You have received responses to your trade offers.</p>
-        <Link className="btn btn-info" to="/market">
+    <article className="tile is-child">
+      <h2 className="title is-4">Market watches</h2>
+      <p>You have received responses to your trade offers.</p>
+      <div className="buttons">
+        <Link className="button is-info" to="/market">
           Check the market
         </Link>
       </div>
-    </div>
+    </article>
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MarketAnnouncement);
+export default MarketAnnouncement;

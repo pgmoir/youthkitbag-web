@@ -20,6 +20,9 @@ import KitbagAnnouncement from './KitbagAnnouncement';
 import KitbagKitAddMoreAdvice from './KitbagKitAddMoreAdvice';
 import WelcomeAnnouncement from './WelcomeAnnouncement';
 import GroupsMemberRequestsAnnouncement from './GroupsMemberRequestsAnnouncement';
+import MarketAnnouncement from './MarketAnnouncement';
+import { MarketTypes } from '../../enums/marketTypes.enum';
+import KitbagMarketAnnouncement from './KitbagMarketAnnouncement';
 
 const mapStateToProps = (state) => ({
   user: state.user,
@@ -56,8 +59,17 @@ const LoggedInLanding = ({ user }) => {
       <WelcomeAnnouncement />
       <Alert />
       <div className="tile is-ancestor">
-        <KitbagAnnouncement loading={loading} kitbagId={preferredKitbagId} />
-        <UserAnnouncement user={user} />
+        <div class="tile is-vertical is-8">
+          <div class="tile">
+            <div class="tile is-parent is-vertical">
+              <KitbagAnnouncement
+                loading={loading}
+                kitbagId={preferredKitbagId}
+              />
+            </div>
+          </div>
+        </div>
+        {/* <UserAnnouncement user={user} />
         <GroupAnnouncement
           loading={loading}
           hasGroupMembership={hasGroupMembership}
@@ -65,12 +77,18 @@ const LoggedInLanding = ({ user }) => {
         {hasGroupAdministration && <GroupsMemberRequestsAnnouncement />}
         <KitbagKitAddMoreAdvice kitbagId={preferredKitbagId} />
         <KitbagKitAnnouncement kitbagId={preferredKitbagId} />
+        <KitbagMarketAnnouncement
+          group={group}
+          description={'trades'}
+          marketType={MarketTypes.TRADE}
+        />
         <KitbagMarketTradeAnnouncement group={group} />
         <KitbagMarketRecycleAnnouncement group={group} />
         <KitbagMarketFoundAnnouncement group={group} />
         <KitbagMarketLostAnnouncement group={group} />
         <KitbagMarketStolenAnnouncement group={group} />
         <KitbagMarketWantedAnnouncement group={group} />
+        <MarketAnnouncement group={group} /> */}
       </div>
     </section>
   );

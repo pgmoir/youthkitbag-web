@@ -26,35 +26,34 @@ const WelcomeAnnouncement = ({ flags, hideFlag }) => {
     hideFlag('welcomeAnnouncement', true);
   }
 
-  if (welcomeAnnouncement) return <Title title="Dashboard" />;
+  if (welcomeAnnouncement) return <Title title="Your Kitbag essentials" />;
 
   return (
     <section
       id="title"
-      className="container-fluid px-0"
+      className="container-fluid"
       role="banner"
       aria-label="breadcrumb navigation and page title"
     >
-      <div className="container">
-        <div className="jumbotron">
-          <h1 className="display-4">Welcome to YouthKitbag!</h1>
-          <p className="lead">
-            Thank you for signing up to YouthKitbag, the simple and easy way to
-            log, find and trade or recycle your child&apos;s sports, musical,
-            activity or school gear after they grow out of it.
-          </p>
-          <hr className="my-4"></hr>
-          <p>
-            We will do our best to guide you on this page to the things you need
-            to do to get the most out of YouthKitbag, but you may find it useful
-            to watch this short video guide.
-          </p>
-          <Link to="/learn/intro" className="btn btn-primary btn-lg">
+      <div className="box">
+        <h1 className="title is-1">Welcome to YouthKitbag!</h1>
+        <p>
+          Thank you for signing up to YouthKitbag, the simple and easy way to
+          log, find and trade or recycle your child&apos;s sports, musical,
+          activity or school gear after they grow out of it.
+        </p>
+        <hr></hr>
+        <p>
+          We will do our best to guide you on this page to the things you need
+          to do to get the most out of YouthKitbag, but you may find it useful
+          to watch this short video guide.
+        </p>
+        <div className="buttons">
+          <Link to="/learn/intro" className="button is-primary">
             Watch our guide to YouthKitbag
           </Link>
-          <span className="ml-3">or</span>
           <button
-            className="btn btn-link"
+            className="button is-primary is-outlined"
             onClick={() => hideWelcomeAnnouncement()}
           >
             Hide this message
