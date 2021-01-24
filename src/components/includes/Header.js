@@ -30,7 +30,7 @@ const Header = ({ auth, user }) => {
               <strong>YouthKitbag</strong>
             </Link>
           </div>
-          <div id="navbarBasic" className="navbar-menu">
+          <div id="navbarBasic" className="navbar-menuoff">
             <div className="navbar-start"></div>
             <div className="navbar-end">
               <div className="navbar-item">
