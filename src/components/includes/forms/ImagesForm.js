@@ -185,7 +185,7 @@ const ImagesForm = ({
 
   return (
     <div className="" role="main">
-      <figure class="image mb-3">
+      <figure className="image mb-3">
         <img
           id="preview"
           name="preview"
@@ -208,11 +208,11 @@ const ImagesForm = ({
                   aria-describedby="photos"
                   onChange={(e) => onFileChanged(e)}
                 />
-                <span class="file-cta">
-                  <span class="file-icon">
-                    <i class="fas fa-upload"></i>
+                <span className="file-cta">
+                  <span className="file-icon">
+                    <i className="fas fa-upload"></i>
                   </span>
-                  <span class="file-label">Choose image(s)</span>
+                  <span className="file-label">Choose image(s)</span>
                 </span>
               </label>
             </div>

@@ -88,36 +88,34 @@ const Groups = ({
       return null;
 
     return (
-      <div className="col-12 col-sm-3 mb-3 d-flex justify-content-end">
-        <Link to="/groups/new" className="btn btn-primary">
-          Add new group
-        </Link>
-      </div>
+      <Link to="/groups/new" className="button is-primary">
+        Add new group
+      </Link>
     );
   }
 
   return (
-    <div>
+    <>
       <Title title={getTitle()} />
-      <section
-        id="main"
-        className="container-fluid"
-        aria-label="main body of content plus related links and features"
-      >
-        <div className="container">
-          <GroupsHelp />
-          <Alert />
-          <div className="row">
-            <div className="col-12 col-sm-9">
-              <SearchForm search={search} callback={setSearch} />
-            </div>
-            {renderAddNewButton()}
-          </div>
-          <div className="row">{renderList()}</div>
-          <Pagination search={search} callback={setSearch} />
+      <Alert />
+      <GroupsHelp />
+      <div className="columns">
+        <div className="column is-three-quarters">
+          <SearchForm
+            search={search}
+            callback={setSearch}
+            placeholderText="Search groups"
+          />
         </div>
-      </section>
-    </div>
+        <div className="column is-one-quarter">{renderAddNewButton()}</div>
+      </div>
+      <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
+        {renderList()}
+      </div>
+      <div className="mb-3">
+        <Pagination search={search} callback={setSearch} />
+      </div>
+    </>
   );
 };
 

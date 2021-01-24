@@ -6,7 +6,7 @@ const SettingsNav = ({ fill }) => {
   return (
     <aside className="menu">
       <p className="menu-label">General</p>
-      <ul class="menu-list">
+      <ul className="menu-list">
         <li>
           <NavLink activeClassName="is-active" to="/settings/user">
             User

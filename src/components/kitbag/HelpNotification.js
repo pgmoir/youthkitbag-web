@@ -25,7 +25,7 @@ const HelpNotification = ({ nameOf, hideFlag, title, children }) => {
 
   return (
     <div className="notification is-info is-flex">
-      <button class="delete" onClick={() => hideHelp()}></button>
+      <button className="delete" onClick={() => hideHelp()}></button>
       <div className="pr-4">
         <span className="fas fa-question-circle fa-2x" title={title}></span>
       </div>

@@ -36,8 +36,8 @@ const TextInput = ({
           placeholder={placeHolder}
         />
         {error && (
-          <span class="icon is-small is-right">
-            <i class="fas fa-exclamation-triangle"></i>
+          <span className="icon is-small is-right">
+            <i className="fas fa-exclamation-triangle"></i>
           </span>
         )}
       </div>

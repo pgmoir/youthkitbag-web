@@ -124,7 +124,7 @@ const Footer = () => {
           </div>
         </div>
       </section> */}
-      <div class="content has-text-centered">
+      <div className="content has-text-centered">
         <p>
           <strong>YouthKitbag</strong> by{' '}
           <a href="">Moir Consultancy Limited</a>

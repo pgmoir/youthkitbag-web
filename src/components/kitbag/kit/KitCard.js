@@ -41,7 +41,7 @@ const KitCard = ({ kit, kitbagId }) => {
   if (!_id) return renderBlank();
 
   return (
-    <div className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop is-one-fifth-fullhd">
+    <div className="column is-6-mobile is-4-tablet is-3-desktop is-2-fullhd">
       <article className="card">
         {/* <span className="icons-top-left pt-1">
           <Link to={`/kitbag/kit/${kitbagId}/delete/${_id}`}>
@@ -56,8 +56,8 @@ const KitCard = ({ kit, kitbagId }) => {
         </span> */}
 
         <Link to={`/kitbag/kit/${kitbagId}/edit/${_id}`}>
-          <div class="card-image">
-            <figure class="image is-4by3">
+          <div className="card-image">
+            <figure className="image is-4by3">
               <img src={topImage()} alt={title} role="presentation" />
             </figure>
           </div>

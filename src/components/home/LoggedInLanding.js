@@ -53,26 +53,26 @@ const LoggedInLanding = ({ user }) => {
       <WelcomeAnnouncement />
       <Alert />
       <div className="tile is-ancestor">
-        <div class="tile is-vertical is-8">
-          <div class="tile">
-            <div class="tile is-parent is-vertical">
+        <div className="tile is-vertical is-8">
+          <div className="tile">
+            <div className="tile is-parent is-vertical">
               <LoadingAnnouncement />
               <KitbagAnnouncement kitbagId={preferredKitbagId} />
               <UserAnnouncement user={user} />
             </div>
-            <div class="tile is-parent is-vertical">
+            <div className="tile is-parent is-vertical">
               <GroupAnnouncement hasGroupMembership={hasGroupMembership} />
               <GroupsMemberRequestsAnnouncement />
               <KitbagKitLevelWarnings kitbagId={preferredKitbagId} />
             </div>
           </div>
-          <div class="tile is-parent is-vertical">
+          <div className="tile is-parent is-vertical">
             <KitbagKitAddMoreAdvice kitbagId={preferredKitbagId} />
             <KitbagKitAnnouncement kitbagId={preferredKitbagId} />
             <MarketAnnouncement group={group} />
           </div>
         </div>
-        <div class="tile is-parent is-vertical">
+        <div className="tile is-parent is-vertical">
           <KitbagMarketAnnouncement
             description={'trades'}
             marketType={MarketTypes.TRADE}

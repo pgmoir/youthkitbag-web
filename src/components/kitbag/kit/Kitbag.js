@@ -93,7 +93,7 @@ const Kitbag = ({
   }
 
   return (
-    <div>
+    <>
       <Title title={getTitle()} />
       <Alert />
       <div className="columns">
@@ -107,16 +107,18 @@ const Kitbag = ({
           />
         </div>
         <div className="column is-one-quarter">
-          <Link to={`/kitbag/kit/${kitbagId}/new`} className="button">
+          <Link to={`/kitbag/kit/${kitbagId}/new`} className="buttonis-primary">
             Add new kit
           </Link>
         </div>
       </div>
-      <div className="column is-full columns is-multiline">{renderList()}</div>
-      <div className="column is-full">
+      <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
+        {renderList()}
+      </div>
+      <div className="mb-3">
         <Pagination kitbagId={kitbagId} search={search} callback={setSearch} />
       </div>
-    </div>
+    </>
   );
 };
 

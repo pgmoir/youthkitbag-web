@@ -88,9 +88,9 @@ const SearchForm = ({ search, callback, placeholderText, collections }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div class="field has-addons">
-        <p class="control">
-          <span class="select">
+      <div className="field has-addons">
+        <p className="control">
+          <span className="select">
             <select
               name="by"
               onChange={(e) => instantSearchBy(e)}
@@ -109,9 +109,9 @@ const SearchForm = ({ search, callback, placeholderText, collections }) => {
             </select>
           </span>
         </p>
-        <p class="control">
+        <p className="control">
           {useCollection ? (
-            <span class="select">
+            <span className="select">
               <select
                 name="searchfor"
                 onChange={(e) => instantSearchFor(e)}
@@ -141,12 +141,12 @@ const SearchForm = ({ search, callback, placeholderText, collections }) => {
             />
           )}
         </p>
-        <p class="control">
+        <p className="control">
           <button className="button is-primary" type="submit">
             Search
           </button>
         </p>
-        <p class="control">
+        <p className="control">
           <button className="button" type="button" onClick={clearSearch}>
             Clear
           </button>

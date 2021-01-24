@@ -50,14 +50,14 @@ const Pagination = ({ kitbagId, search, callback, pagination }) => {
     <>
       {pagination && pagination.totalItems > pagination.itemsPerPage && (
         <nav
-          class="pagination is-centered"
+          className="pagination is-centered"
           role="navigation"
           aria-label="pagination"
         >
-          <ul class="pagination-list">
+          <ul className="pagination-list">
             <li>
               <a
-                class="pagination-link"
+                className="pagination-link"
                 aria-label="Goto page 1"
                 disabled={isFirstPageDisabled()}
                 onClick={() => changePage(1)}
@@ -66,11 +66,11 @@ const Pagination = ({ kitbagId, search, callback, pagination }) => {
               </a>
             </li>
             <li>
-              <span class="pagination-ellipsis">&hellip;</span>
+              <span className="pagination-ellipsis">&hellip;</span>
             </li>
             <li>
               <a
-                class="pagination-previous"
+                className="pagination-previous"
                 disabled={isPreviousPageDisabled()}
                 onClick={() => changePage(pagination.previousPage)}
               >
@@ -79,7 +79,7 @@ const Pagination = ({ kitbagId, search, callback, pagination }) => {
             </li>
             <li>
               <a
-                class="pagination-link is-current"
+                className="pagination-link is-current"
                 aria-label={`Page ${pagination.currentPage}`}
                 aria-current="page"
                 onClick={() => changePage(pagination.currentPage)}
@@ -89,7 +89,7 @@ const Pagination = ({ kitbagId, search, callback, pagination }) => {
             </li>
             <li>
               <a
-                class="pagination-next"
+                className="pagination-next"
                 disabled={isNextPageDisabled()}
                 onClick={() => changePage(pagination.nextPage)}
               >
@@ -97,11 +97,11 @@ const Pagination = ({ kitbagId, search, callback, pagination }) => {
               </a>
             </li>
             <li>
-              <span class="pagination-ellipsis">&hellip;</span>
+              <span className="pagination-ellipsis">&hellip;</span>
             </li>
             <li>
               <a
-                class="pagination-link"
+                className="pagination-link"
                 aria-label={`Goto page ${pagination.lastPage}`}
                 disabled={isLastPageDisabled()}
                 onClick={() => changePage(pagination.lastPage)}

@@ -57,9 +57,9 @@ const GroupCard = ({ group }) => {
   if (!_id) return renderBlank();
 
   return (
-    <div className="col-6 col-md-4 col-lg-3 mb-3">
-      <article className="card card-link card-b1">
-        <span className="icons-top-left pt-1">
+    <div className="column is-6-mobile is-4-tablet is-3-desktop is-2-fullhd">
+      <article className="card">
+        {/* <span className="icons-top-left pt-1">
           {appAdmin ? (
             <Link to={`/groups/state/${_id}`}>{renderState(state)}</Link>
           ) : (
@@ -70,21 +70,22 @@ const GroupCard = ({ group }) => {
           className={`badge badge-pill badge-dark badge-fullsize badge-top-right`}
         >
           {memberCount}
-        </span>
+        </span> */}
+
         <Link to={`/groups/${_id}`}>
-          <img
-            className="card-img-top"
-            src={topImage()}
-            alt={name}
-            role="presentation"
-          />
-          <div className="card-body">
-            <h3 className="card-title h6 ellipsis">{name}</h3>
-            {activitys && (
-              <p className="card-text ellipsis">{activitys.join(', ')}</p>
-            )}
+          <div className="card-image">
+            <figure className="image is-4by3">
+              <img src={topImage()} alt={name} role="presentation" />
+            </figure>
           </div>
         </Link>
+
+        <div className="card-content">
+          <p>
+            <strong>{name}</strong>
+          </p>
+          {activitys && <p>{activitys.join(', ')}</p>}
+        </div>
       </article>
     </div>
   );
