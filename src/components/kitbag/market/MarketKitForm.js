@@ -11,7 +11,6 @@ import {
   TextForm,
   TextAreaForm,
   ImagesForm,
-  CheckboxForm,
   SelectForm,
 } from '../../includes/forms';
 import Threads from '../../thread/threads/Threads';
@@ -19,6 +18,7 @@ import validate from '../../includes/FormEmptyValidationRules';
 import { getImages } from '../../../utils/image';
 import { MarketTypes } from '../../../enums/marketTypes.enum';
 import ArrayButtonRemove from '../../includes/controls/ArrayButtonRemove';
+import CheckboxInput from '../../includes/controls/CheckboxInput';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -344,8 +344,7 @@ const MarketKitForm = ({
               disabled={isDisabled()}
             />
             {values._id && (
-              <CheckboxForm
-                colFormat="3-1-8"
+              <CheckboxInput
                 label={completedLabel()}
                 value={values.completed}
                 field="completed"

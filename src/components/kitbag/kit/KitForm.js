@@ -6,7 +6,7 @@ import {
   createKitbagKit,
   editKitbagKit,
 } from '../../../actions/KitbagKitActions';
-import { DateForm, CheckboxForm, ImagesForm } from '../../includes/forms';
+import { DateForm, ImagesForm } from '../../includes/forms';
 import validate from '../../includes/FormEmptyValidationRules';
 import { getImages } from '../../../utils/image';
 import TextInputStd from '../../includes/controls/TextInputStd';
@@ -16,6 +16,7 @@ import SelectInputCol from '../../includes/controls/SelectInputCol';
 import TextInputCol from '../../includes/controls/TextInputCol';
 import ArrayButtonAdd from '../../includes/controls/ArrayButtonAdd';
 import ArrayButtonRemove from '../../includes/controls/ArrayButtonRemove';
+import CheckboxInput from '../../includes/controls/CheckboxInput';
 
 const mapStateToProps = (state) => ({
   kitbagLists: state.kitbag.kit.lists,
@@ -283,8 +284,7 @@ const KitForm = ({
             handleChange={handleChange}
             error={errors.security}
           />
-          <CheckboxForm
-            colFormat="3-1-8"
+          <CheckboxInput
             label="Active"
             value={values.active}
             field="active"
