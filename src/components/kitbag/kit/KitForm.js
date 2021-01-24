@@ -6,19 +6,16 @@ import {
   createKitbagKit,
   editKitbagKit,
 } from '../../../actions/KitbagKitActions';
-import {
-  DateForm,
-  TextForm,
-  TextAutoListForm,
-  TextAreaForm,
-  SelectForm,
-  AddArrayButtonForm,
-  RemoveArrayButtonForm,
-  CheckboxForm,
-  ImagesForm,
-} from '../../includes/forms';
+import { DateForm, CheckboxForm, ImagesForm } from '../../includes/forms';
 import validate from '../../includes/FormEmptyValidationRules';
 import { getImages } from '../../../utils/image';
+import TextInputStd from '../../includes/controls/TextInputStd';
+import TextAreaInputStd from '../../includes/controls/TextAreaInputStd';
+import SelectInputStd from '../../includes/controls/SelectInputStd';
+import SelectInputCol from '../../includes/controls/SelectInputCol';
+import TextInputCol from '../../includes/controls/TextInputCol';
+import ArrayButtonAdd from '../../includes/controls/ArrayButtonAdd';
+import ArrayButtonRemove from '../../includes/controls/ArrayButtonRemove';
 
 const mapStateToProps = (state) => ({
   kitbagLists: state.kitbag.kit.lists,
@@ -97,66 +94,62 @@ const KitForm = ({
   }
 
   return (
-    <div className="">
-      <ImagesForm
-        kitbagId={kitbagId}
-        values={values}
-        setChange={setChange}
-        addArrayItem={addArrayItem}
-        error={errors.images}
-      />
-      <div className="" role="main">
-        <form className="mb-3" onSubmit={handleSubmit}>
-          <TextForm
-            colFormat="3-9"
+    <div className="columns mb-3">
+      <div className="column">
+        <ImagesForm
+          kitbagId={kitbagId}
+          values={values}
+          setChange={setChange}
+          addArrayItem={addArrayItem}
+          error={errors.images}
+        />
+      </div>
+      <div className="column">
+        <form onSubmit={handleSubmit}>
+          <TextInputStd
             label="Title"
             value={values.title}
             field="title"
             handleChange={handleChange}
             error={errors.title}
           />
-          <TextForm
-            colFormat="3-9"
+          <TextInputStd
             label="Subtitle"
             value={values.subtitle}
             field="subtitle"
             handleChange={handleChange}
             error={errors.subtitle}
           />
-          <TextAreaForm
-            colFormat="3-9"
+          <TextAreaInputStd
             label="Description"
             value={values.description}
             field="description"
             handleChange={handleChange}
             error={errors.description}
           />
-          <SelectForm
-            colFormat="3-9"
+          <SelectInputStd
             label="Status"
             value={values.status}
             field="status"
             handleChange={handleChange}
             error={errors.status}
             items={statusItems}
-            useItem={false}
           />
           <hr />
           <div>
             {values.purchases &&
               values.purchases.map((item, index) => (
-                <div className="form-row" key={index}>
-                  <TextAutoListForm
-                    colFormat="a-3"
+                <div className="columns" key={index}>
+                  <TextInputCol
                     value={values.purchases[index].from}
                     label="Purchased from"
                     field={`purchases[${index}].from`}
                     handleChange={handleChange}
                     index={index}
                     autoList={kitbagLists.purchasesFroms}
+                    width="3"
                   />
-                  <TextForm
-                    colFormat="a-2"
+                  <TextInputCol
                     type="number"
                     value={values.purchases[index].quantity}
                     label="Quantity"
@@ -166,6 +159,7 @@ const KitForm = ({
                     max="9999"
                     handleChange={handleChange}
                     index={index}
+                    width="2"
                   />
                   <DateForm
                     colFormat="a-4"
@@ -175,8 +169,7 @@ const KitForm = ({
                     setChange={setChange}
                     index={index}
                   />
-                  <TextForm
-                    colFormat="a-2"
+                  <TextInputCol
                     type="number"
                     value={values.purchases[index].price}
                     label="Price"
@@ -186,16 +179,17 @@ const KitForm = ({
                     max="29999.99"
                     handleChange={handleChange}
                     index={index}
+                    width="2"
                   />
-                  <RemoveArrayButtonForm
-                    colFormat="a-1"
+                  <ArrayButtonRemove
                     title="Remove Purchase"
                     onClick={() => removeArrayItem('purchases', index)}
                     index={index}
+                    width="1"
                   />
                 </div>
               ))}
-            <AddArrayButtonForm
+            <ArrayButtonAdd
               label="Add a new purchase"
               onClick={() => addArrayItem('purchases', [initialPurchase])}
             />
@@ -204,27 +198,25 @@ const KitForm = ({
           <div>
             {values.inbag &&
               values.inbag.map((item, index) => (
-                <div className="form-row" key={index}>
-                  <TextForm
-                    colFormat="a-4"
+                <div className="columns" key={index}>
+                  <TextInputCol
                     value={values.inbag[index].location}
                     label="Storage location"
                     field={`inbag[${index}].location`}
                     handleChange={handleChange}
                     index={index}
+                    width="4"
                   />
-                  <SelectForm
-                    colFormat="a-4"
+                  <SelectInputCol
                     label="Condition"
                     value={values.inbag[index].condition}
                     field={`inbag[${index}].condition`}
                     handleChange={handleChange}
                     items={conditionItems}
                     index={index}
-                    useItem={false}
+                    width="4"
                   />
-                  <TextForm
-                    colFormat="a-3"
+                  <TextInputCol
                     type="number"
                     value={values.inbag[index].quantity}
                     label="Quantity"
@@ -234,23 +226,23 @@ const KitForm = ({
                     max="9999"
                     handleChange={handleChange}
                     index={index}
+                    width="3"
                   />
-                  <RemoveArrayButtonForm
-                    colFormat="a-1"
+                  <ArrayButtonRemove
                     title="Remove Inbag"
                     onClick={() => removeArrayItem('inbag', index)}
                     index={index}
+                    width="1"
                   />
                 </div>
               ))}
-            <AddArrayButtonForm
+            <ArrayButtonAdd
               label="Add a new storage location"
               onClick={() => addArrayItem('inbag', [initialInbag])}
             />
           </div>
           <hr />
-          <TextForm
-            colFormat="3-9"
+          <TextInputStd
             type="number"
             value={values.warning}
             label="Warning Level"
@@ -270,24 +262,21 @@ const KitForm = ({
             You can add activity names, personal tags and security numbers to
             your kit. Enter names separate by commas. (e.g. football, cycling)
           </small>
-          <TextForm
-            colFormat="3-9"
+          <TextInputStd
             label="Activities"
             value={values.activitys}
             field="activitys"
             handleChange={handleChange}
             error={errors.activitys}
           />
-          <TextForm
-            colFormat="3-9"
+          <TextInputStd
             label="Tags"
             value={values.tags}
             field="tags"
             handleChange={handleChange}
             error={errors.tags}
           />
-          <TextForm
-            colFormat="3-9"
+          <TextInputStd
             label="Security"
             value={values.security}
             field="security"
@@ -346,11 +335,14 @@ const KitForm = ({
                 </div>
               ))}
           </div>
-          <div>
-            <button className="btn btn-primary" type="submit">
+          <div className="buttons">
+            <button className="button is-primary" type="submit">
               Save
             </button>
-            <Link className="btn btn-link" to={`/kitbag/kit/${kitbagId}`}>
+            <Link
+              className="button is-primary is-outlined"
+              to={`/kitbag/kit/${kitbagId}`}
+            >
               Cancel
             </Link>
           </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-const TextInputStd = ({
+const TextInputCol = ({
   type,
   label,
   value,
@@ -18,7 +18,11 @@ const TextInputStd = ({
   placeHolder,
   autoList,
   iconLeft,
+  width,
+  index,
 }) => {
+  const columnClasses = classNames('column', `is-${width}`);
+
   const controlClasses = classNames({
     control: true,
     'has-icons-left': iconLeft,
@@ -32,8 +36,8 @@ const TextInputStd = ({
   });
 
   return (
-    <div className="field">
-      {label && (
+    <div className={columnClasses}>
+      {index === 0 && label && (
         <label htmlFor="{field}" className="label">
           {label}
         </label>
@@ -72,4 +76,4 @@ const TextInputStd = ({
   );
 };
 
-export default TextInputStd;
+export default TextInputCol;

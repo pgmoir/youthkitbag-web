@@ -10,7 +10,6 @@ import {
   DateForm,
   TextForm,
   TextAreaForm,
-  RemoveArrayButtonForm,
   ImagesForm,
   CheckboxForm,
   SelectForm,
@@ -19,6 +18,7 @@ import Threads from '../../thread/threads/Threads';
 import validate from '../../includes/FormEmptyValidationRules';
 import { getImages } from '../../../utils/image';
 import { MarketTypes } from '../../../enums/marketTypes.enum';
+import ArrayButtonRemove from '../../includes/controls/ArrayButtonRemove';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -380,12 +380,12 @@ const MarketKitForm = ({
                       type="hidden"
                       value={values.groups[index].include}
                     />
-                    <RemoveArrayButtonForm
-                      colFormat="a-2"
+                    <ArrayButtonRemove
                       title="Remove Purchase"
                       onClick={() => removeArrayItem('groups', index)}
                       index={index}
                       disabled={values.groups.length <= 1}
+                      width="2"
                     />
                   </div>
                 ))}

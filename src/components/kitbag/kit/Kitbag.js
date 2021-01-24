@@ -106,8 +106,11 @@ const Kitbag = ({
             placeholderText="Search for kit"
           />
         </div>
-        <div className="column is-one-quarter">
-          <Link to={`/kitbag/kit/${kitbagId}/new`} className="buttonis-primary">
+        <div className="column is-one-quarter has-text-right">
+          <Link
+            to={`/kitbag/kit/${kitbagId}/new`}
+            className="button is-primary"
+          >
             Add new kit
           </Link>
         </div>

@@ -107,7 +107,9 @@ const Groups = ({
             placeholderText="Search groups"
           />
         </div>
-        <div className="column is-one-quarter">{renderAddNewButton()}</div>
+        <div className="column is-one-quarter has-text-right">
+          {renderAddNewButton()}
+        </div>
       </div>
       <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
         {renderList()}

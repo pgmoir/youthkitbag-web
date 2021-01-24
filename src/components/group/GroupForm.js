@@ -218,7 +218,16 @@ const GroupForm = ({
                 </div>
               ))}
           </div>
-          {showSaveCancelButtons()}
+          {userBundle && values && (
+            <div className="buttons mb-3">
+              <button className="button is-primary" type="submit">
+                Save
+              </button>
+              <Link className="button is-primary is-outlined" to="/groups">
+                Cancel
+              </Link>
+            </div>
+          )}
         </form>
       </div>
     </div>

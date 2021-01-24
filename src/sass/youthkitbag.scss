@@ -4,7 +4,8 @@ $card-content-padding: 1rem;
 
 @import '../../node_modules/bulma/bulma.sass';
 
-body {
+body,
+#root {
   display: flex;
   min-height: 100vh;
   flex-direction: column;

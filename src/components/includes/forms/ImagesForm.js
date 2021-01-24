@@ -184,7 +184,7 @@ const ImagesForm = ({
   }, [newImages, addArrayItem, setChange, values, dispatch]);
 
   return (
-    <div className="" role="main">
+    <>
       <figure className="image mb-3">
         <img
           id="preview"
@@ -220,7 +220,7 @@ const ImagesForm = ({
           {error && <p className="help is-danger">{error}</p>}
         </div>
       )}
-    </div>
+    </>
   );
 };
 

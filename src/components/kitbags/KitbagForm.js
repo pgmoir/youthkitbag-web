@@ -3,14 +3,10 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { createKitbag, editKitbag } from '../../actions/KitbagActions';
-import {
-  TextForm,
-  TextAreaForm,
-  ImagesForm,
-  RemoveArrayButtonForm,
-} from '../includes/forms';
+import { TextForm, TextAreaForm, ImagesForm } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
 import { getImages } from '../../utils/image';
+import ArrayButtonRemove from '../includes/controls/ArrayButtonRemove';
 
 const mapStateToProps = (state) => ({
   userBundle: state.user.bundle,
@@ -118,7 +114,7 @@ const KitbagForm = ({
         addArrayItem={addArrayItem}
         error={errors.images}
       />
-      <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
+      <div className="col-12 col-lg-6 order-2 order-lg-1">
         <form className="mb-3" onSubmit={handleSubmit}>
           <TextForm
             colFormat="3-9"
@@ -186,11 +182,11 @@ const KitbagForm = ({
                       disabled={isDisabled}
                       index={index}
                     />
-                    <RemoveArrayButtonForm
-                      colFormat="a-1"
+                    <ArrayButtonRemove
                       title="Remove Member"
                       onClick={() => removeArrayItem('members', index)}
                       index={index}
+                      width="1"
                     />
                   </div>
                 ))}

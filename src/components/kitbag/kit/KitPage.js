@@ -62,10 +62,10 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
   }
 
   return (
-    <div>
+    <div className="container">
       <Title title={getTitle()} />
       <Alert />
-      {kitId && (
+      {/* {kitId && (
         <div className="buttons">
           <Link
             to={`/kitbag/market/${kitbagId}/add/${kitId}/trade`}
@@ -86,7 +86,7 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
             Found Lost Stolen
           </Link>
         </div>
-      )}
+      )} */}
       <KitForm kitbagId={kitbagId} kit={kit} />
     </div>
   );
