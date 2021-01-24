@@ -59,156 +59,169 @@ const App = ({ auth }) => {
       </Helmet>
       <Router history={history}>
         <User />
-        <Header />
-        <main id="wrapper" className="container is-fluid">
-          <noscript>
-            You need to enable JavaScript to run this application.
-          </noscript>
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/why" exact component={Why} />
-            <Route path="/bundles" exact component={Bundles} />
+        <div id="wrapper">
+          <Header />
+          <main className="container is-fluid">
+            <noscript>
+              You need to enable JavaScript to run this application.
+            </noscript>
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/why" exact component={Why} />
+              <Route path="/bundles" exact component={Bundles} />
 
-            <Route path="/learn/:activity" component={LearnMore} />
+              <Route path="/learn/:activity" component={LearnMore} />
 
-            <Route
-              path="/site/terms"
-              exact
-              render={(props) => (
-                <Content {...props} contentId={TERMSCONDITIONS} />
-              )}
-            />
-            <Route
-              path="/site/privacy"
-              exact
-              render={(props) => (
-                <Content {...props} contentId={PRIVACYPOLICY} />
-              )}
-            />
-            <Route path="/site/security" exact component={Security} />
-            <Route path="/site/accessibility" exact component={Accessibility} />
+              <Route
+                path="/site/terms"
+                exact
+                render={(props) => (
+                  <Content {...props} contentId={TERMSCONDITIONS} />
+                )}
+              />
+              <Route
+                path="/site/privacy"
+                exact
+                render={(props) => (
+                  <Content {...props} contentId={PRIVACYPOLICY} />
+                )}
+              />
+              <Route path="/site/security" exact component={Security} />
+              <Route
+                path="/site/accessibility"
+                exact
+                component={Accessibility}
+              />
 
-            <Route path="/auth/signup" exact>
-              {auth.loggedIn ? <Redirect to="/" /> : <SignUp />}
-            </Route>
-            <Route path="/auth/login" exact>
-              {auth.loggedIn ? <Redirect to="/" /> : <Login />}
-            </Route>
-            <Route path="/auth/reset" exact>
-              {auth.loggedIn ? <Redirect to="/" /> : <Reset />}
-            </Route>
-            <Route path="/auth/token/:token" exact component={Token} />
-            <Route path="/auth/newpassword/:token" exact>
-              {auth.loggedIn ? <Redirect to="/" /> : <NewPassword />}
-            </Route>
-            <Route path="/auth/logout" exact component={Logout} />
+              <Route path="/auth/signup" exact>
+                {auth.loggedIn ? <Redirect to="/" /> : <SignUp />}
+              </Route>
+              <Route path="/auth/login" exact>
+                {auth.loggedIn ? <Redirect to="/" /> : <Login />}
+              </Route>
+              <Route path="/auth/reset" exact>
+                {auth.loggedIn ? <Redirect to="/" /> : <Reset />}
+              </Route>
+              <Route path="/auth/token/:token" exact component={Token} />
+              <Route path="/auth/newpassword/:token" exact>
+                {auth.loggedIn ? <Redirect to="/" /> : <NewPassword />}
+              </Route>
+              <Route path="/auth/logout" exact component={Logout} />
 
-            <PrivateRoute
-              path="/bundles/purchase/:bundleId"
-              exact
-              component={BundlePurchasePage}
-            />
+              <PrivateRoute
+                path="/bundles/purchase/:bundleId"
+                exact
+                component={BundlePurchasePage}
+              />
 
-            <PrivateRoute
-              path="/market/view/:marketId"
-              exact
-              component={MarketItemViewPage}
-            />
-            <Route path="/market" component={MarketItems} />
+              <PrivateRoute
+                path="/market/view/:marketId"
+                exact
+                component={MarketItemViewPage}
+              />
+              <Route path="/market" component={MarketItems} />
 
-            <PrivateRoute
-              path="/kitbag/kit/:kitbagId/new"
-              component={KitPage}
-            />
-            <PrivateRoute
-              path="/kitbag/kit/:kitbagId/edit/:kitId"
-              exact
-              component={KitPage}
-            />
-            <PrivateRoute
-              path="/kitbag/kit/:kitbagId/delete/:kitId"
-              exact
-              component={KitDelete}
-            />
-            <PrivateRoute path="/kitbag/kit/:kitbagId" component={Kitbag} />
+              <PrivateRoute
+                path="/kitbag/kit/:kitbagId/new"
+                component={KitPage}
+              />
+              <PrivateRoute
+                path="/kitbag/kit/:kitbagId/edit/:kitId"
+                exact
+                component={KitPage}
+              />
+              <PrivateRoute
+                path="/kitbag/kit/:kitbagId/delete/:kitId"
+                exact
+                component={KitDelete}
+              />
+              <PrivateRoute path="/kitbag/kit/:kitbagId" component={Kitbag} />
 
-            <PrivateRoute
-              path="/kitbag/market/:kitbagId/new"
-              exact
-              component={MarketKitPage}
-            />
-            <PrivateRoute
-              path="/kitbag/market/:kitbagId/add/:kitId/:marketType"
-              exact
-              component={MarketKitPage}
-            />
-            <PrivateRoute
-              path="/kitbag/market/:kitbagId/edit/:marketId"
-              exact
-              component={MarketKitPage}
-            />
-            <PrivateRoute
-              path="/kitbag/market/:kitbagId/delete/:marketId"
-              exact
-              component={MarketKitDelete}
-            />
-            <Route
-              path="/show/group/:groupId"
-              exact
-              component={ShowGroupPage}
-            />
-            <PrivateRoute
-              path="/groups/state/:groupId"
-              exact
-              component={GroupState}
-            />
-            <PrivateRoute
-              path="/groups/:groupId/members/:memberId/delete"
-              exact
-              component={GroupMemberDelete}
-            />
-            <PrivateRoute
-              path="/groups/:groupId/members/:memberId/:state"
-              exact
-              component={GroupMemberState}
-            />
-            <PrivateRoute
-              path="/groups/:groupId/members"
-              exact
-              component={GroupMembers}
-            />
-            <PrivateRoute
-              path="/groups/:groupId/join"
-              exact
-              component={GroupMemberJoin}
-            />
-            <PrivateRoute
-              path="/groups/:groupId/leave"
-              exact
-              component={GroupMemberLeave}
-            />
-            <PrivateRoute path="/groups/:groupId" exact component={GroupPage} />
-            <PrivateRoute path="/groups" component={Groups} />
+              <PrivateRoute
+                path="/kitbag/market/:kitbagId/new"
+                exact
+                component={MarketKitPage}
+              />
+              <PrivateRoute
+                path="/kitbag/market/:kitbagId/add/:kitId/:marketType"
+                exact
+                component={MarketKitPage}
+              />
+              <PrivateRoute
+                path="/kitbag/market/:kitbagId/edit/:marketId"
+                exact
+                component={MarketKitPage}
+              />
+              <PrivateRoute
+                path="/kitbag/market/:kitbagId/delete/:marketId"
+                exact
+                component={MarketKitDelete}
+              />
+              <Route
+                path="/show/group/:groupId"
+                exact
+                component={ShowGroupPage}
+              />
+              <PrivateRoute
+                path="/groups/state/:groupId"
+                exact
+                component={GroupState}
+              />
+              <PrivateRoute
+                path="/groups/:groupId/members/:memberId/delete"
+                exact
+                component={GroupMemberDelete}
+              />
+              <PrivateRoute
+                path="/groups/:groupId/members/:memberId/:state"
+                exact
+                component={GroupMemberState}
+              />
+              <PrivateRoute
+                path="/groups/:groupId/members"
+                exact
+                component={GroupMembers}
+              />
+              <PrivateRoute
+                path="/groups/:groupId/join"
+                exact
+                component={GroupMemberJoin}
+              />
+              <PrivateRoute
+                path="/groups/:groupId/leave"
+                exact
+                component={GroupMemberLeave}
+              />
+              <PrivateRoute
+                path="/groups/:groupId"
+                exact
+                component={GroupPage}
+              />
+              <PrivateRoute path="/groups" component={Groups} />
 
-            <PrivateRoute path="/kitbags/new" component={KitbagPage} />
-            <PrivateRoute path="/kitbags/join" component={KitbagMemberJoin} />
-            <PrivateRoute
-              path="/kitbags/:kitbagId/invite"
-              component={KitbagMemberInvite}
-            />
-            <PrivateRoute
-              path="/kitbags/:kitbagId/member/accept/:email/:token"
-              component={KitbagMemberAccept}
-            />
-            <PrivateRoute path="/kitbags/:kitbagId" component={KitbagPage} />
+              <PrivateRoute path="/kitbags/new" component={KitbagPage} />
+              <PrivateRoute path="/kitbags/join" component={KitbagMemberJoin} />
+              <PrivateRoute
+                path="/kitbags/:kitbagId/invite"
+                component={KitbagMemberInvite}
+              />
+              <PrivateRoute
+                path="/kitbags/:kitbagId/member/accept/:email/:token"
+                component={KitbagMemberAccept}
+              />
+              <PrivateRoute path="/kitbags/:kitbagId" component={KitbagPage} />
 
-            <PrivateRoute
-              path="/settings/user/:userId/delete"
-              component={DeleteUser}
-            />
-            <PrivateRoute path="/settings/:setting" component={SettingsPage} />
-          </Switch>
-        </main>
+              <PrivateRoute
+                path="/settings/user/:userId/delete"
+                component={DeleteUser}
+              />
+              <PrivateRoute
+                path="/settings/:setting"
+                component={SettingsPage}
+              />
+            </Switch>
+          </main>
+        </div>
         <Footer />
       </Router>
     </>
