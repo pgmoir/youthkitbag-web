@@ -65,28 +65,32 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
     <div className="container">
       <Title title={getTitle()} />
       <Alert />
-      {/* {kitId && (
-        <div className="buttons">
-          <Link
-            to={`/kitbag/market/${kitbagId}/add/${kitId}/trade`}
-            className="button"
-          >
-            Trade Recycle
-          </Link>
-          <Link
-            to={`/kitbag/market/${kitbagId}/add/${kitId}/wanted`}
-            className="button"
-          >
-            Wanted
-          </Link>
-          <Link
-            to={`/kitbag/market/${kitbagId}/add/${kitId}/stolen`}
-            className="button"
-          >
-            Found Lost Stolen
-          </Link>
+      {kitId && (
+        <div className="columns">
+          <div className="column is-fullwidth">
+            <div className="buttons is-justify-content-flex-end">
+              <Link
+                to={`/kitbag/market/${kitbagId}/add/${kitId}/trade`}
+                className="button is-info"
+              >
+                Trade Recycle
+              </Link>
+              <Link
+                to={`/kitbag/market/${kitbagId}/add/${kitId}/wanted`}
+                className="button is-success"
+              >
+                Wanted
+              </Link>
+              <Link
+                to={`/kitbag/market/${kitbagId}/add/${kitId}/stolen`}
+                className="button is-warning"
+              >
+                Found Lost Stolen
+              </Link>
+            </div>
+          </div>
         </div>
-      )} */}
+      )}
       <KitForm kitbagId={kitbagId} kit={kit} />
     </div>
   );

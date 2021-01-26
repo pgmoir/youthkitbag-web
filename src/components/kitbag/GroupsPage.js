@@ -21,51 +21,53 @@ const GroupsPage = ({ user }) => {
         </p>
       </div>
       {user && user.groups && user.groups.length > 0 && (
-        <div className="row">
-          <div className="col-12">
-            <h5>Group Membership</h5>
-            <table className="table bg-light">
-              <thead>
-                <tr>
-                  <th scope="col"></th>
-                  <th scope="col">Group</th>
-                  <th scope="col">State</th>
-                  <th scope="col">Roles</th>
-                </tr>
-              </thead>
-              <tbody>
-                {user.groups.map((item, index) => (
-                  <tr key={`${item._id}-${index}`}>
-                    <td className="valign-m mw-3rem">
-                      <Link to={`/groups/${item._id}`}>
+        <>
+          <h5>Group Membership</h5>{' '}
+          <table className="table bg-light is-fullwidth">
+            <thead>
+              <tr>
+                <th className="is-4"></th>
+                <th>Group</th>
+                <th className="is-hidden-mobile">State</th>
+                <th className="is-hidden-mobile">Roles</th>
+              </tr>
+            </thead>
+            <tbody>
+              {user.groups.map((item, index) => (
+                <tr key={index}>
+                  <td>
+                    <Link to={`/groups/${item._id}`}>
+                      <figure className="image is-1by1">
                         <img
                           src={
                             item.images && item.images.length > 0
                               ? item.images[0].imageUrl
                               : '/images/defaultthumb.png'
                           }
-                          className="img-avatar img-thumbnail img-link rounded-circle p-0 m-1"
+                          className="is-rounded"
                           alt=""
                         />
-                      </Link>
-                    </td>
-                    <td className="valign-m">
-                      <Link to={`/groups/${item._id}`}>{item.name}</Link>
-                    </td>
-                    <td className="valign-m">{item.member.state}</td>
-                    <td className="valign-m">{item.member.roles.join(', ')}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+                      </figure>
+                    </Link>
+                  </td>
+                  <td>
+                    <Link to={`/groups/${item._id}`}>{item.name}</Link>
+                  </td>
+                  <td className="is-hidden-mobile">{item.member.state}</td>
+                  <td className="is-hidden-mobile">
+                    {item.member.roles.join(', ')}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
       )}
       <div className="buttons">
         <Link to="/groups" className="button is-primary">
           Join Group
         </Link>
-        <Link to="/groups/new" className="button is-primary is-outlined">
+        <Link to="/groups/new" className="button is-info">
           Create Group
         </Link>
       </div>

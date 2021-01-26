@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { createKitbag, editKitbag } from '../../actions/KitbagActions';
-import { TextForm, TextAreaForm, ImagesForm } from '../includes/forms';
+import { ImagesForm } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
 import { getImages } from '../../utils/image';
+import TextInputStd from '../includes/controls/TextInputStd';
+import TextAreaInputStd from '../includes/controls/TextAreaInputStd';
+import TextInputCol from '../includes/controls/TextInputCol';
 import ArrayButtonRemove from '../includes/controls/ArrayButtonRemove';
 
 const mapStateToProps = (state) => ({
@@ -92,13 +95,13 @@ const KitbagForm = ({
     if (!userBundle || !values) return null;
 
     return (
-      <div>
+      <div className="buttons">
         {((!values._id && hasKitbagAdmin) || !isDisabled) && (
-          <button className="btn btn-primary" type="submit">
+          <button className="button is-primary" type="submit">
             Save
           </button>
         )}
-        <Link className="btn btn-link" to="/settings/kitbags">
+        <Link className="button is-warning" to="/settings/kitbags">
           Cancel
         </Link>
       </div>
@@ -106,18 +109,19 @@ const KitbagForm = ({
   }
 
   return (
-    <div className="row">
-      <ImagesForm
-        values={values}
-        disabled={isDisabled}
-        setChange={setChange}
-        addArrayItem={addArrayItem}
-        error={errors.images}
-      />
-      <div className="col-12 col-lg-6 order-2 order-lg-1">
-        <form className="mb-3" onSubmit={handleSubmit}>
-          <TextForm
-            colFormat="3-9"
+    <div className="columns mb-3">
+      <div className="column">
+        <ImagesForm
+          values={values}
+          disabled={isDisabled}
+          setChange={setChange}
+          addArrayItem={addArrayItem}
+          error={errors.images}
+        />
+      </div>
+      <div className="column">
+        <form onSubmit={handleSubmit}>
+          <TextInputStd
             label="Name"
             value={values.name}
             field="name"
@@ -125,8 +129,7 @@ const KitbagForm = ({
             handleChange={handleChange}
             error={errors.name}
           />
-          <TextAreaForm
-            colFormat="3-9"
+          <TextAreaInputStd
             label="Description"
             value={values.description}
             field="description"
@@ -139,9 +142,8 @@ const KitbagForm = ({
             <>
               <div>
                 {values.members.map((item, index) => (
-                  <div className="form-row" key={index}>
-                    <TextForm
-                      colFormat="a-4"
+                  <div className="columns" key={index}>
+                    <TextInputCol
                       value={
                         values.members[index].user
                           ? values.members[index].user.email
@@ -151,9 +153,9 @@ const KitbagForm = ({
                       field={`members[${index}].user.email`}
                       disabled={true}
                       index={index}
+                      width="4"
                     />
-                    <TextForm
-                      colFormat="a-2"
+                    <TextInputCol
                       value={
                         values.members[index].user
                           ? values.members[index].user.userName
@@ -163,24 +165,25 @@ const KitbagForm = ({
                       field={`members[${index}].user.userName`}
                       disabled={true}
                       index={index}
+                      width="2"
                     />
-                    <TextForm
-                      colFormat="a-3"
+                    <TextInputCol
                       value={values.members[index].roles}
                       label="Roles"
                       field={`members[${index}].roles`}
                       handleChange={handleChange}
                       disabled={isDisabled}
                       index={index}
+                      width="3"
                     />
-                    <TextForm
-                      colFormat="a-2"
+                    <TextInputCol
                       value={values.members[index].state}
                       label="State"
                       field={`members[${index}].state`}
                       handleChange={handleChange}
                       disabled={isDisabled}
                       index={index}
+                      width="2"
                     />
                     <ArrayButtonRemove
                       title="Remove Member"

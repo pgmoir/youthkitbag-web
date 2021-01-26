@@ -61,7 +61,11 @@ const App = ({ auth }) => {
         <User />
         <div id="wrapper">
           <Header />
-          <main className="container is-fluid">
+          <section
+            id="main"
+            aria-label="main body of content plus related links and features"
+            className="section"
+          >
             <noscript>
               You need to enable JavaScript to run this application.
             </noscript>
@@ -220,7 +224,7 @@ const App = ({ auth }) => {
                 component={SettingsPage}
               />
             </Switch>
-          </main>
+          </section>
         </div>
         <Footer />
       </Router>

@@ -70,42 +70,37 @@ const KitbagPage = ({ current, kitbags, fetchKitbag, clearKitbag, match }) => {
   }, [clearKitbag]);
 
   return (
-    <div>
+    <div className="container">
       <Title title={getTitle()} />
-      <section
-        id="main"
-        className="container-fluid"
-        aria-label="main body of content plus related links and features"
-      >
-        <div className="container">
-          {renderNoKitbagIntro()}
-          <Alert />
-          <div className="row">
-            <div className="col-12 mb-3 d-flex justify-content-end">
-              {kitbagId && kitbag.kitbagAdmin && kitbag.state !== 'blocked' && (
+
+      {renderNoKitbagIntro()}
+      <Alert />
+      <div className="columns">
+        <div className="column is-fullwidth">
+          <div className="buttons is-justify-content-flex-end">
+            {kitbagId && kitbag.kitbagAdmin && kitbag.state !== 'blocked' && (
+              <Link
+                to={`/kitbags/${kitbagId}/invite`}
+                className="button is-info"
+              >
+                Invite
+              </Link>
+            )}
+            {kitbagId &&
+              !kitbag.kitbagAdmin &&
+              kitbag.state !== 'blocked' &&
+              kitbag.kitbagMember && (
                 <Link
-                  to={`/kitbags/${kitbagId}/invite`}
-                  className="btn btn-primary"
+                  to={`/kitbags/${kitbagId}/leave`}
+                  className="button is-warning"
                 >
-                  Invite
+                  Leave
                 </Link>
               )}
-              {kitbagId &&
-                !kitbag.kitbagAdmin &&
-                kitbag.state !== 'blocked' &&
-                kitbag.kitbagMember && (
-                  <Link
-                    to={`/kitbags/${kitbagId}/leave`}
-                    className="btn btn-primary ml-3"
-                  >
-                    Leave
-                  </Link>
-                )}
-            </div>
           </div>
-          <KitbagForm kitbag={kitbag} />
         </div>
-      </section>
+      </div>
+      <KitbagForm kitbag={kitbag} />
     </div>
   );
 };

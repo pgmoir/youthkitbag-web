@@ -85,18 +85,10 @@ const MarketKitPage = ({
   }
 
   return (
-    <div>
+    <div className="container">
       {getTitle()}
-      <section
-        id="main"
-        className="container-fluid"
-        aria-label="main body of content plus related links and features"
-      >
-        <div className="container">
-          <Alert />
-          <MarketKitForm kitbagId={kitbagId} market={market} />
-        </div>
-      </section>
+      <Alert />
+      <MarketKitForm kitbagId={kitbagId} market={market} />
     </div>
   );
 };

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useMarketType from '../hooks/useMarketType';
+import classNames from 'classnames';
+import { MarketTypes } from '../../enums/marketTypes.enum';
 
 const MarketItemCard = ({ market }) => {
   const {
@@ -47,10 +49,23 @@ const MarketItemCard = ({ market }) => {
 
   if (!_id) return renderBlank();
 
+  const cardClasses = classNames('card', {
+    'has-background-primary': marketType === MarketTypes.TRADE,
+    'has-background-success': marketType === MarketTypes.RECYCLE,
+    'has-background-info': marketType === MarketTypes.WANTED,
+    'has-background-warning': marketType === MarketTypes.LOST,
+    'has-background-danger': marketType === MarketTypes.STOLEN,
+    'has-text-primary-light': marketType === MarketTypes.TRADE,
+    'has-text-success-light': marketType === MarketTypes.RECYCLE,
+    'has-text-info-light': marketType === MarketTypes.WANTED,
+    'has-text-warning-light': marketType === MarketTypes.LOST,
+    'has-text-danger-light': marketType === MarketTypes.STOLEN,
+  });
+
   return (
-    <div className="col-6 col-md-4 col-lg-3 mb-3">
-      <article className="card card-link card-b1">
-        {isOwned && (
+    <div className="column is-6-mobile is-4-tablet is-3-desktop is-2-fullhd">
+      <article className={cardClasses}>
+        {/* {isOwned && (
           <span className="icons-top-left pt-1">
             <Link to={`/kitbag/market/${kitbag}/delete/${_id}`}>
               <span
@@ -66,7 +81,7 @@ const MarketItemCard = ({ market }) => {
           } badge-fullsize badge-top-right`}
         >
           {pill}
-        </span>
+        </span> */}
         <Link
           to={
             isOwned
@@ -74,20 +89,17 @@ const MarketItemCard = ({ market }) => {
               : `/market/view/${_id}`
           }
         >
-          <img
-            className="card-img-top"
-            src={topImage()}
-            alt={title}
-            role="presentation"
-          />
-          <div className="card-body">
-            <h3 className={`card-title h6 ellipsis text-${color}`}>
-              <span className={`${icon} pr-2`} title={iconTitle}></span>
-              {title}
-            </h3>
-            {subtitle && <p className="card-text ellipsis">{subtitle}</p>}
+          <div className="card-image">
+            {' '}
+            <figure className="image is-4by3">
+              <img src={topImage()} alt={title} role="presentation" />
+            </figure>
           </div>
         </Link>
+        <div className="card-content">
+          <p>{title}</p>
+          {subtitle && <p>{subtitle}</p>}
+        </div>
       </article>
     </div>
   );

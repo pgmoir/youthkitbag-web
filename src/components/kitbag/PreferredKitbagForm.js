@@ -42,70 +42,67 @@ const PreferredKitbagForm = ({
   }
 
   return (
-    <div className="row">
-      <div className="col-12">
-        <h5>Kitbag Membership</h5>
-        <form className="mb-3" onSubmit={handleSubmit}>
-          <table className="table bg-light">
-            <thead>
-              <tr>
-                <th scope="col"></th>
-                <th scope="col">Kitbag</th>
-                <th scope="col">State</th>
-                <th scope="col">Roles</th>
-                <th scope="col" className="text-center">
-                  Preferred
-                </th>
+    <div>
+      <h5>Kitbag Membership</h5>
+      <form className="mb-3" onSubmit={handleSubmit}>
+        <table className="table bg-light is-fullwidth">
+          <thead>
+            <tr>
+              <th className="is-4"></th>
+              <th>Kitbag</th>
+              <th className="is-hidden-mobile">State</th>
+              <th className="is-hidden-mobile">Roles</th>
+              <th>Preferred</th>
+            </tr>
+          </thead>
+          <tbody>
+            {kitbags.map((item, index) => (
+              <tr key={index}>
+                <td>
+                  <Link to={`/kitbags/${item._id}`}>
+                    <figure className="image is-1by1">
+                      <img
+                        src={
+                          item.images && item.images.length > 0
+                            ? item.images[0].imageUrl
+                            : '/images/defaultthumb.png'
+                        }
+                        className="is-rounded"
+                        alt=""
+                      />
+                    </figure>
+                  </Link>
+                </td>
+                <td>
+                  <Link to={`/kitbags/${item._id}`}>{item.name}</Link>
+                </td>
+                <td className="is-hidden-mobile">{item.member.state}</td>
+                <td className="is-hidden-mobile">
+                  {item.member.roles.join(', ')}
+                </td>
+                <td>
+                  <input
+                    type="radio"
+                    name="KitbagPreference"
+                    id={item._id}
+                    value={values[index].preferred}
+                    onChange={setPreferred}
+                    checked={values[index].preferred === true}
+                  />
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {kitbags.map((item, index) => (
-                <tr key={index}>
-                  <td className="valign-m mw-3rem">
-                    <Link to={`/kitbags/${item._id}`}>
-                      <figure className="image is-48x48 is-square">
-                        <img
-                          src={
-                            item.images && item.images.length > 0
-                              ? item.images[0].imageUrl
-                              : '/images/defaultthumb.png'
-                          }
-                          className="is-rounded"
-                          alt=""
-                        />
-                      </figure>
-                    </Link>
-                  </td>
-                  <td className="valign-m">
-                    <Link to={`/kitbags/${item._id}`}>{item.name}</Link>
-                  </td>
-                  <td className="valign-m">{item.member.state}</td>
-                  <td className="valign-m">{item.member.roles.join(', ')}</td>
-                  <td className="valign-m text-center">
-                    <input
-                      className=""
-                      type="radio"
-                      name="KitbagPreference"
-                      id={item._id}
-                      value={values[index].preferred}
-                      onChange={setPreferred}
-                      checked={values[index].preferred === true}
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="buttons">
-            <button className="button is-primary" type="submit">
-              Save
-            </button>
-            <button className="button is-link" onClick={() => cancelPage()}>
-              Cancel
-            </button>
-          </div>
-        </form>
-      </div>
+            ))}
+          </tbody>
+        </table>
+        <div className="buttons">
+          <button className="button is-primary" type="submit">
+            Save
+          </button>
+          <button className="button is-warning" onClick={() => cancelPage()}>
+            Cancel
+          </button>
+        </div>
+      </form>
     </div>
   );
 };

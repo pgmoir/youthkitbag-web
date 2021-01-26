@@ -1,8 +1,8 @@
 @charset "utf-8";
 
-$card-content-padding: 1rem;
-
+@import './_sandstonev.scss';
 @import '../../node_modules/bulma/bulma.sass';
+@import './_sandstoneo.scss';
 
 body,
 #root {
@@ -15,26 +15,56 @@ body,
   flex: 1;
 }
 
-@include touch {
-  .flex-row-touch {
-    flex-direction: row;
-  }
+// @include touch {
+//   .flex-row-touch {
+//     flex-direction: row;
+//   }
 
-  .flex-col-touch {
-    flex-direction: column;
-  }
-}
+//   .flex-col-touch {
+//     flex-direction: column;
+//   }
+// }
 
-@include desktop {
-  .flex-row-desktop {
-    flex-direction: row;
-  }
+// @include desktop {
+//   .flex-row-desktop {
+//     flex-direction: row;
+//   }
 
-  .flex-row-desktop-reverse {
-    flex-direction: row-reverse;
-  }
+//   .flex-row-desktop-reverse {
+//     flex-direction: row-reverse;
+//   }
 
-  .flex-col-desktop {
-    flex-direction: column;
+//   .flex-col-desktop {
+//     flex-direction: column;
+//   }
+// }
+
+/*
+  Author: Aseem Lalfakawma <alalfakawma.github.io>
+  This SCSS mixin will allow sizing of table columns in Bulma CSS Framework.
+  The Bulma framework does not support this yet, this small code snippet fixes this.
+  USAGE:
+  * Should be applied on TH element, it controls all the columns under it *
+  The class should be "is-#",
+  is-1 will give the first widthamount, is-2 will give the second.
+  Eg. The code below shows the widthAmounts as (1, 2.5, 3, 4 , 5, 6, 7)
+  When typing <th class="is-2">, the width will be 2.5em, as the second value in widthAmounts array is 2.5
+*/
+
+$widthAmounts: (
+  1,
+  2.5,
+  3,
+  4,
+  5,
+  6,
+  7
+); // Just add the numbers here, you can use points too.
+$widthUnit: 'em'; // Add the unit here (rem|em|px|%)
+
+@each $width in $widthAmounts {
+  $i: index($widthAmounts, $width);
+  .table thead th.is-#{$i} {
+    width: #{$width}#{$widthUnit} !important;
   }
 }

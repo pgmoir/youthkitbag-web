@@ -57,8 +57,8 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
   }
 
   return (
-    <div className="is-flex flex-col-touch flex-row-desktop-reverse">
-      <div className="is-flex-grow-1">
+    <div className="columns mb-3">
+      <div className="column">
         <ImagesForm
           values={values}
           setChange={setChange}
@@ -66,7 +66,7 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
           error={errors.images}
         />
       </div>
-      <div className="is-flex-grow-1 mr-3" role="main">
+      <div className="column">
         <form onSubmit={handleSubmit}>
           <TextInputStd
             label="First Name"
@@ -150,10 +150,7 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
             <button className="button is-primary" type="submit">
               Save
             </button>
-            <button
-              className="button is-primary is-outlined"
-              onClick={() => cancelPage()}
-            >
+            <button className="button is-warning" onClick={() => cancelPage()}>
               Cancel
             </button>
           </div>

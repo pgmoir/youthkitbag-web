@@ -6,19 +6,17 @@ import {
   createMarketKit,
   editMarketKit,
 } from '../../../actions/KitbagMarketActions';
-import {
-  DateForm,
-  TextForm,
-  TextAreaForm,
-  ImagesForm,
-  SelectForm,
-} from '../../includes/forms';
+import { DateForm, ImagesForm } from '../../includes/forms';
 import Threads from '../../thread/threads/Threads';
 import validate from '../../includes/FormEmptyValidationRules';
 import { getImages } from '../../../utils/image';
 import { MarketTypes } from '../../../enums/marketTypes.enum';
 import ArrayButtonRemove from '../../includes/controls/ArrayButtonRemove';
 import CheckboxInput from '../../includes/controls/CheckboxInput';
+import TextInputStd from '../../includes/controls/TextInputStd';
+import TextInputCol from '../../includes/controls/TextInputCol';
+import TextAreaInputStd from '../../includes/controls/TextAreaInputStd';
+import SelectInputStd from '../../includes/controls/SelectInputStd';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -85,8 +83,7 @@ const MarketKitForm = ({
 
     if (isDisabled()) {
       return (
-        <TextForm
-          colFormat="3-9"
+        <TextInputStd
           label="Type"
           value={values.marketType}
           field="marketType"
@@ -98,7 +95,7 @@ const MarketKitForm = ({
     const typeItems = [MarketTypes.FOUND, MarketTypes.LOST, MarketTypes.STOLEN];
 
     return (
-      <SelectForm
+      <SelectInputStd
         colFormat="3-9"
         label="Type"
         value={values.marketType}
@@ -117,8 +114,7 @@ const MarketKitForm = ({
 
     if (isDisabled()) {
       return (
-        <TextForm
-          colFormat="3-9"
+        <TextInputStd
           label="Condition"
           value={values.condition}
           field="condition"
@@ -130,8 +126,7 @@ const MarketKitForm = ({
     const conditionItems = ['Used', 'New', 'Almost New', 'Other'];
 
     return (
-      <SelectForm
-        colFormat="3-9"
+      <SelectInputStd
         label="Condition"
         value={values.state}
         field="condition"
@@ -153,8 +148,7 @@ const MarketKitForm = ({
       market.marketType === MarketTypes.TRADE ? 'Asking Price' : 'Offer Price';
 
     return (
-      <TextForm
-        colFormat="3-9"
+      <TextInputStd
         type="number"
         label={label}
         value={values.marketPrice}
@@ -201,8 +195,7 @@ const MarketKitForm = ({
     }
 
     return (
-      <TextForm
-        colFormat="3-9"
+      <TextInputStd
         label="Security"
         value={values.security}
         field="security"
@@ -219,8 +212,7 @@ const MarketKitForm = ({
     }
 
     return (
-      <TextForm
-        colFormat="3-9"
+      <TextInputStd
         label="Incident Number"
         value={values.tracking}
         field="tracking"
@@ -291,18 +283,20 @@ const MarketKitForm = ({
 
   return (
     <>
-      <div className="row">
-        <ImagesForm
-          values={values}
-          setChange={setChange}
-          addArrayItem={addArrayItem}
-          disabled={isDisabled()}
-          error={errors.images}
-        />
-        <div className="col-12 col-lg-6 order-2 order-lg-1" role="main">
-          <form className="mb-3" onSubmit={handleSubmit}>
+      <div className="columns mb-3">
+        <div className="column">
+          <ImagesForm
+            values={values}
+            setChange={setChange}
+            addArrayItem={addArrayItem}
+            disabled={isDisabled()}
+            error={errors.images}
+          />
+        </div>
+        <div className="column">
+          <form onSubmit={handleSubmit}>
             {showMarketType()}
-            <TextForm
+            <TextInputStd
               colFormat="3-9"
               label="Title"
               value={values.title}
@@ -311,7 +305,7 @@ const MarketKitForm = ({
               error={errors.title}
               disabled={isDisabled()}
             />
-            <TextForm
+            <TextInputStd
               colFormat="3-9"
               label="Subtitle"
               value={values.subtitle}
@@ -320,7 +314,7 @@ const MarketKitForm = ({
               error={errors.subtitle}
               disabled={isDisabled()}
             />
-            <TextAreaForm
+            <TextAreaInputStd
               colFormat="3-9"
               label="Description"
               value={values.description}
@@ -334,7 +328,7 @@ const MarketKitForm = ({
             {showStolenOn()}
             {showSecurity()}
             {showTracking()}
-            <TextForm
+            <TextInputStd
               colFormat="3-9"
               label="Activities"
               value={values.activitys}
@@ -357,22 +351,22 @@ const MarketKitForm = ({
             <div>
               {values.groups &&
                 values.groups.map((item, index) => (
-                  <div className="form-row" key={index}>
-                    <TextForm
-                      colFormat="a-6"
+                  <div className="columns" key={index}>
+                    <TextInputCol
                       value={values.groups[index].name}
                       label="Name"
                       field={`groups[${index}].name`}
                       disabled={true}
                       index={index}
+                      width="7"
                     />
                     <DateForm
-                      colFormat="a-4"
                       value={values.groups[index].available}
                       label="Available"
                       field={`groups[${index}].available`}
                       setChange={setChange}
                       index={index}
+                      width="4"
                     />
                     <input
                       name={`groups[${index}].include`}
@@ -384,7 +378,7 @@ const MarketKitForm = ({
                       onClick={() => removeArrayItem('groups', index)}
                       index={index}
                       disabled={values.groups.length <= 1}
-                      width="2"
+                      width="1"
                     />
                   </div>
                 ))}
@@ -435,33 +429,35 @@ const MarketKitForm = ({
                   </div>
                 ))}
             </div>
-            <div>
-              <button className="btn btn-primary" type="submit">
+            <div className="buttons">
+              <button className="button is-primary" type="submit">
                 Save
               </button>
-              <Link className="btn btn-link" to="/market">
+              <Link className="button is-warning" to="/market">
                 Cancel
               </Link>
             </div>
           </form>
         </div>
       </div>
-      {market._id && market.threads.length > 0 && (
-        <>
-          <hr />
-          <div className="row">
-            <div className="col-12">
-              <h4>Offers and messages</h4>
+      <div>
+        {market._id && market.threads.length > 0 && (
+          <>
+            <hr />
+            <div className="row">
+              <div className="col-12">
+                <h4>Offers and messages</h4>
+              </div>
             </div>
-          </div>
-          <Threads
-            threads={market.threads}
-            kitbagId={market.kitbag}
-            source="kitbag"
-            marketType={market.marketType}
-          />
-        </>
-      )}
+            <Threads
+              threads={market.threads}
+              kitbagId={market.kitbag}
+              source="kitbag"
+              marketType={market.marketType}
+            />
+          </>
+        )}
+      </div>
     </>
   );
 };

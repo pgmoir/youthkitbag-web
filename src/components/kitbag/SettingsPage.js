@@ -30,11 +30,11 @@ const SettingsPage = ({ user }) => {
 
   const Kitbags = () => {
     return (
-      <div className="container">
+      <>
         <h2 className="subtitle">Kitbags</h2>
         <KitbagsHelp />
         <KitbagsPage />
-      </div>
+      </>
     );
   };
 
@@ -73,6 +73,7 @@ const SettingsPage = ({ user }) => {
       <div className="columns">
         <div className="column is-one-fifth">
           <SettingsNav />
+          <hr />
         </div>
         <div className="column">
           <Route path="/settings/user" component={User} />

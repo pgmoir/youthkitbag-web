@@ -95,10 +95,9 @@ const Groups = ({
   }
 
   return (
-    <>
+    <div className="container is-fluid">
       <Title title={getTitle()} />
       <Alert />
-      <GroupsHelp />
       <div className="columns">
         <div className="column is-three-quarters">
           <SearchForm
@@ -117,7 +116,7 @@ const Groups = ({
       <div className="mb-3">
         <Pagination search={search} callback={setSearch} />
       </div>
-    </>
+    </div>
   );
 };
 

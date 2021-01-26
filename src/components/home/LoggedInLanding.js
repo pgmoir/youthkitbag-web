@@ -46,10 +46,7 @@ const LoggedInLanding = ({ user }) => {
   }, [user]);
 
   return (
-    <section
-      id="main"
-      aria-label="main body of content plus related links and features"
-    >
+    <div className="container is-fluid px-0">
       <WelcomeAnnouncement />
       <Alert />
       <div className="tile is-ancestor">
@@ -99,7 +96,7 @@ const LoggedInLanding = ({ user }) => {
           />
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

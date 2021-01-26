@@ -13,6 +13,7 @@ const Title = ({ title, icon, iconTitle }) => {
           <title>{`${title} - YouthKitbag`}</title>
         </Helmet>
         <h1 className="title">{title}</h1>
+        <hr />
       </>
     );
   }

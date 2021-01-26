@@ -339,10 +339,7 @@ const KitForm = ({
             <button className="button is-primary" type="submit">
               Save
             </button>
-            <Link
-              className="button is-primary is-outlined"
-              to={`/kitbag/kit/${kitbagId}`}
-            >
+            <Link className="button is-warning" to={`/kitbag/kit/${kitbagId}`}>
               Cancel
             </Link>
           </div>

@@ -54,7 +54,6 @@ const KitCard = ({ kit, kitbagId }) => {
         <span className="badge badge-pill badge-dark badge-fullsize badge-top-right">
           {totalQuantity()}
         </span> */}
-
         <Link to={`/kitbag/kit/${kitbagId}/edit/${_id}`}>
           <div className="card-image">
             <figure className="image is-4by3">
@@ -62,7 +61,6 @@ const KitCard = ({ kit, kitbagId }) => {
             </figure>
           </div>
         </Link>
-
         <div className="card-content">
           <p>
             <strong>{title}</strong>

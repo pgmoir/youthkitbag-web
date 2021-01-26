@@ -93,7 +93,7 @@ const Kitbag = ({
   }
 
   return (
-    <>
+    <div className="container is-fluid">
       <Title title={getTitle()} />
       <Alert />
       <div className="columns">
@@ -121,7 +121,7 @@ const Kitbag = ({
       <div className="mb-3">
         <Pagination kitbagId={kitbagId} search={search} callback={setSearch} />
       </div>
-    </>
+    </div>
   );
 };
 
