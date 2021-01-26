@@ -31,7 +31,7 @@ export const fetchGroups = ({
       params: { by, searchfor, page, pagesize, order, direction },
     })
     .then((response) => {
-      dispatch({ type: FETCH_GROUPS, payload: response.data.data });
+      dispatch({ type: FETCH_GROUPS, payload: response.data });
       dispatch({
         type: SEARCH_GROUPS,
         payload: { searchfor, by, page, pagesize },
@@ -113,7 +113,7 @@ export const fetchGroupMembers = ({
       params: { by, searchfor, page, pagesize, order, direction },
     })
     .then((response) => {
-      dispatch({ type: FETCH_GROUP_MEMBERS, payload: response.data.data });
+      dispatch({ type: FETCH_GROUP_MEMBERS, payload: response.data });
       if (pushHistory) {
         dispatch({
           type: SEARCH_GROUP_MEMBERS,

@@ -90,8 +90,8 @@ const GroupForm = ({
   }
 
   return (
-    <div className="is-flex flex-col-touch flex-row-desktop-reverse">
-      <div className="is-flex-grow-1">
+    <div className="columns mb-3">
+      <div className="column">
         <ImagesForm
           values={values}
           setChange={setChange}
@@ -99,7 +99,7 @@ const GroupForm = ({
           error={errors.images}
         />
       </div>
-      <div className="is-flex-grow-1 mr-3" role="main">
+      <div className="column">
         <form onSubmit={handleSubmit}>
           <TextInputStd
             label="Name"
@@ -219,11 +219,11 @@ const GroupForm = ({
               ))}
           </div>
           {userBundle && values && (
-            <div className="buttons mb-3">
+            <div className="buttons">
               <button className="button is-primary" type="submit">
                 Save
               </button>
-              <Link className="button is-primary is-outlined" to="/groups">
+              <Link className="button is-warning" to="/groups">
                 Cancel
               </Link>
             </div>

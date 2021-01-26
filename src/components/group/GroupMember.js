@@ -69,9 +69,9 @@ const GroupMember = ({ groupId, member, groupMember, groupAdmin }) => {
   if (!member._id) return renderBlank();
 
   return (
-    <div className="col-6 col-sm-4 col-lg-3 col-xl-2 mb-3">
-      <article className="card card-b1">
-        {groupAdmin && (
+    <div className="column is-6-mobile is-4-tablet is-3-desktop is-2-fullhd">
+      <article className="card">
+        {/* {groupAdmin && (
           <span className="icons-top-left pt-1">
             <Link to={`/groups/${groupId}/members/${member._id}/delete`}>
               <span
@@ -80,27 +80,25 @@ const GroupMember = ({ groupId, member, groupMember, groupAdmin }) => {
               ></span>
             </Link>
           </span>
-        )}
-        <div className="p-2">
-          <img
-            className="card-img-top img-thumbnail rounded-circle p-0"
-            src={getThumbnail()}
-            alt=""
-            role="presentation"
-          />
+        )} */}
+        <div className="card-image">
+          <figure className="image is-4by3">
+            <img
+              className="card-img-top img-thumbnail rounded-circle p-0"
+              src={getThumbnail()}
+              alt=""
+              role="presentation"
+            />
+          </figure>
         </div>
-        <div className="card-body">
-          <h3 className="card-title h4 text-truncate">
+        <div className="card-content">
+          <p>
             {user.lastName
               ? `${user.lastName.toUpperCase()}, ${user.firstName}`
               : 'UNKNOWN'}
-          </h3>
-          <h4 className="card-title h5 ellipsis">
-            {user.userName ? user.userName : 'Username ?'}
-          </h4>
-          <p className="card-text">
-            {roles.length > 0 ? roles.join(', ') : '-'}
           </p>
+          <p>{user.userName ? user.userName : 'Username ?'}</p>
+          <p>{roles.length > 0 ? roles.join(', ') : '-'}</p>
           <span className="icons-bottom-left">
             <span
               className={`fas fa-meh w-25 text-center ${isRequested()}`}

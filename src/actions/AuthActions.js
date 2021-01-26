@@ -60,7 +60,7 @@ export const authenticateToken = (token) => (dispatch) => {
     })
     .catch((err) => {
       const { response } = err;
-      dispatch({ type: LOGIN_FAILURE, payload: response.data.data });
+      dispatch({ type: LOGIN_FAILURE, payload: response.data });
       history.push('/');
     });
 };
@@ -125,7 +125,7 @@ export const checkNewPassword = (token) => (dispatch) => {
   axios
     .get(`/auth/reset/${token}`)
     .then((response) => {
-      dispatch({ type: PASSWORD_RESET_CHECK, payload: response.data.data });
+      dispatch({ type: PASSWORD_RESET_CHECK, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
@@ -150,7 +150,7 @@ export const setNewPassword = (
     )
     .then((response) => {
       history.push('/auth/login');
-      dispatch({ type: PASSWORD_RESET, payload: response.data.data });
+      dispatch({ type: PASSWORD_RESET, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;

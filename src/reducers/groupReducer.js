@@ -29,7 +29,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         current: {},
-        list: action.payload.groups,
+        list: action.payload.data.groups,
         memberList: {},
       };
     case FETCH_GROUP:
@@ -41,7 +41,7 @@ export default (state = initialState, action) => {
         memberList: {},
       };
     case FETCH_GROUP_MEMBERS:
-      return { ...state, memberList: action.payload.members };
+      return { ...state, memberList: action.payload.data.members };
     case FETCH_GROUPS_MEMBER_REQUESTS:
       return { ...state, memberRequests: action.payload.data };
     case LOGOUT:

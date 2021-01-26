@@ -13,7 +13,7 @@ export default (state = initialState, action) => {
     case FETCH_KITBAG_KITS:
     case FETCH_MARKET_ITEMS:
     case FETCH_GROUPS:
-      return { ...state, ...action.payload.pagination };
+      return { ...state, ...action.payload.data.pagination };
     case RESET:
     case LOGOUT:
       return initialState;

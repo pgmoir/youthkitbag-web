@@ -35,7 +35,7 @@ export const fetchMarketItems = ({
       },
     })
     .then((response) => {
-      dispatch({ type: FETCH_MARKET_ITEMS, payload: response.data.data });
+      dispatch({ type: FETCH_MARKET_ITEMS, payload: response.data });
       if (pushHistory) {
         dispatch({
           type: SEARCH_MARKET_ITEMS,
@@ -56,7 +56,7 @@ export const fetchMarketItem = (marketId) => (dispatch) => {
   axios
     .get(`/market/${marketId}`, {})
     .then((response) => {
-      dispatch({ type: FETCH_MARKET_ITEM, payload: response.data.data });
+      dispatch({ type: FETCH_MARKET_ITEM, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;

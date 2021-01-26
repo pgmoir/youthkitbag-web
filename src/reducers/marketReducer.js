@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
     case SEARCH_MARKET_ITEMS:
       return { ...state, search: action.payload };
     case FETCH_MARKET_ITEMS:
-      return { ...state, current: {}, list: action.payload.markets };
+      return { ...state, current: {}, list: action.payload.data.markets };
     case FETCH_MARKET_ITEM:
       return { ...state, current: action.payload };
     case FETCH_MARKET_LISTS:

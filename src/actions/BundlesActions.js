@@ -6,7 +6,7 @@ export const fetchBundles = ({ user }) => (dispatch) => {
   axios
     .get(`/bundle${defaultBundles}`, {})
     .then((response) => {
-      dispatch({ type: FETCH_BUNDLES, payload: response.data.data });
+      dispatch({ type: FETCH_BUNDLES, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
@@ -18,7 +18,7 @@ export const fetchSubscriptionBundle = (bundleId) => (dispatch) => {
   axios
     .get(`/bundle/${bundleId}`, {})
     .then((response) => {
-      dispatch({ type: FETCH_BUNDLE, payload: response.data.data });
+      dispatch({ type: FETCH_BUNDLE, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;

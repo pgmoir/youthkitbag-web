@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
     case FETCH_MARKET_ITEMS:
     case FETCH_GROUPS:
     case FETCH_GROUP_MEMBERS:
-      return { ...state, ...action.payload.filter };
+      return { ...state, ...action.payload.data.filter };
     case RESET:
     case LOGOUT:
       return initialState;

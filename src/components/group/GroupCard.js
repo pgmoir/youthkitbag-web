@@ -81,9 +81,7 @@ const GroupCard = ({ group }) => {
         </Link>
 
         <div className="card-content">
-          <p>
-            <strong>{name}</strong>
-          </p>
+          <p>{name}</p>
           {activitys && <p>{activitys.join(', ')}</p>}
         </div>
       </article>

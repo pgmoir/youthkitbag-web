@@ -98,28 +98,23 @@ const GroupMembers = ({ stateSearch, items, fetchGroupMembers, match }) => {
     if (!group._id) return renderBlank();
 
     return (
-      <div>
+      <div className="container is-fluid px-0">
         <Title title={getTitle()} />
-        <section
-          id="main"
-          className="container-fluid"
-          aria-label="main body of content plus related links and features"
-        >
-          <div className="container">
-            <Alert />
-            <div className="row">
-              <div className="col-12 col-sm-9">
-                <SearchForm
-                  searchId={groupId}
-                  search={search}
-                  callback={setSearch}
-                  incPagination={false}
-                />
-              </div>
-            </div>
-            <div className="row">{renderList()}</div>
+        <Alert />
+        <div className="columns">
+          <div className="column is-three-quarters">
+            <SearchForm
+              searchId={groupId}
+              search={search}
+              callback={setSearch}
+              incPagination={false}
+              placeholderText="Search members"
+            />
           </div>
-        </section>
+        </div>
+        <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
+          {renderList()}
+        </div>
       </div>
     );
   }

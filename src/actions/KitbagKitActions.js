@@ -26,7 +26,7 @@ export const fetchKitbagKits = ({
       params: { by, searchfor, page, pagesize, order, direction },
     })
     .then((response) => {
-      dispatch({ type: FETCH_KITBAG_KITS, payload: response.data.data });
+      dispatch({ type: FETCH_KITBAG_KITS, payload: response.data });
       if (pushHistory) {
         dispatch({
           type: SEARCH_KITBAG_KITS,

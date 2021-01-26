@@ -34,43 +34,43 @@ export const fetchKitbagMarketItems = ({
         case MarketTypes.TRADE:
           dispatch({
             type: FETCH_KITBAG_MARKET_TRADES,
-            payload: response.data.data,
+            payload: response.data,
           });
           break;
         case MarketTypes.RECYCLE:
           dispatch({
             type: FETCH_KITBAG_MARKET_RECYCLES,
-            payload: response.data.data,
+            payload: response.data,
           });
           break;
         case MarketTypes.FOUND:
           dispatch({
             type: FETCH_KITBAG_MARKET_FOUNDS,
-            payload: response.data.data,
+            payload: response.data,
           });
           break;
         case MarketTypes.LOST:
           dispatch({
             type: FETCH_KITBAG_MARKET_LOSTS,
-            payload: response.data.data,
+            payload: response.data,
           });
           break;
         case MarketTypes.STOLEN:
           dispatch({
             type: FETCH_KITBAG_MARKET_STOLENS,
-            payload: response.data.data,
+            payload: response.data,
           });
           break;
         case MarketTypes.WANTED:
           dispatch({
             type: FETCH_KITBAG_MARKET_WANTEDS,
-            payload: response.data.data,
+            payload: response.data,
           });
           break;
         default:
           dispatch({
             type: FETCH_KITBAG_MARKET_ITEMS,
-            payload: response.data.data,
+            payload: response.data,
           });
           break;
       }
@@ -85,7 +85,7 @@ export const fetchMarketKit = (kitbagId, marketId) => (dispatch) => {
   axios
     .get(`/kitbag/market/${kitbagId}/${marketId}`, {})
     .then((response) => {
-      dispatch({ type: FETCH_MARKET_KIT, payload: response.data.data });
+      dispatch({ type: FETCH_MARKET_KIT, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
@@ -99,7 +99,7 @@ export const fetchMarketKitFromKit = (kitbagId, kitId, marketType) => (
   axios
     .get(`/kitbag/market/${kitbagId}/add/${kitId}/${marketType}`, {})
     .then((response) => {
-      dispatch({ type: FETCH_MARKET_KIT, payload: response.data.data });
+      dispatch({ type: FETCH_MARKET_KIT, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;

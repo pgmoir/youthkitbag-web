@@ -130,62 +130,48 @@ const GroupPage = ({ current, fetchGroup, match }) => {
       <Alert />
       <GroupsHelp />
       <div className="columns">
-        <div className="column">
-          {(group.groupAdmin || createGroup) && <GroupForm group={group} />}
-          {!group.groupAdmin && !createGroup && <GroupDisplay group={group} />}
+        <div className="column is-half-width">
+          {group.groupMemberState && (
+            <h2>Your member state {getGroupMemberStateIcon()}</h2>
+          )}
+          {!group.groupMemberState && (
+            <h2>You are not a member of this group</h2>
+          )}
         </div>
-      </div>
-      {/* <section
-        id="main"
-        className="container-fluid"
-        aria-label="main body of content plus related links and features"
-      >
-        <div className="container">
-          <div className="row pb-3">
-            <div className="col-12 col-sm-8">
-              {group.groupMemberState && (
-                <h2>Your member state {getGroupMemberStateIcon()}</h2>
+        <div className="column is-fullwidth">
+          <div className="buttons is-justify-content-flex-end">
+            {group._id &&
+              group.state === 'approved' &&
+              (group.groupAdmin || group.groupMember) && (
+                <Link
+                  to={`/groups/${groupId}/members`}
+                  className="button is-primary"
+                >
+                  Members
+                </Link>
               )}
-              {!group.groupMemberState && (
-                <h2>You are not a member of this group</h2>
-              )}
-            </div>
-            <div className="col-12 col-sm-4 mb-3 d-flex justify-content-end">
-              <div>
-                {group._id &&
-                  group.state === 'approved' &&
-                  (group.groupAdmin || group.groupMember) && (
-                    <Link
-                      to={`/groups/${groupId}/members`}
-                      className="btn btn-primary"
-                    >
-                      Members
-                    </Link>
-                  )}
-                {group._id && group.state === 'approved' && !group.groupMember && (
-                  <Link
-                    to={`/groups/${groupId}/join`}
-                    className={`btn btn-primary ${
-                      group.groupMemberState ? 'disabled' : ''
-                    } ml-3`}
-                    disabled={group.groupMemberState}
-                  >
-                    Join
-                  </Link>
-                )}
-                {group._id && group.state === 'approved' && group.groupMember && (
-                  <Link
-                    to={`/groups/${groupId}/leave`}
-                    className="btn btn-primary ml-3"
-                  >
-                    Leave
-                  </Link>
-                )}
-              </div>
-            </div>
+            {group._id && group.state === 'approved' && !group.groupMember && (
+              <Link
+                to={`/groups/${groupId}/join`}
+                className={`button is-success ${
+                  group.groupMemberState ? 'disabled' : ''
+                }`}
+                disabled={group.groupMemberState}
+              >
+                Join
+              </Link>
+            )}
+            {group._id && group.state === 'approved' && group.groupMember && (
+              <Link to={`/groups/${groupId}/leave`} className="button is-info">
+                Leave
+              </Link>
+            )}
           </div>
         </div>
-      </section> */}
+      </div>
+
+      {(group.groupAdmin || createGroup) && <GroupForm group={group} />}
+      {!group.groupAdmin && !createGroup && <GroupDisplay group={group} />}
     </div>
   );
 };
