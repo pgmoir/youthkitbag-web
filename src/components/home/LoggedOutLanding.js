@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 
 const LoggedOutLanding = () => {
   return (
-    <div className="">
-      <div className="columns is-mobile is-centered">
+    <div className="container is-fluid px-0">
+      <div className="columns is-centered">
         <div className="column is-half">
           <SignUpForm />
         </div>

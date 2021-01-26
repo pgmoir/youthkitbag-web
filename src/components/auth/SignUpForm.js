@@ -4,6 +4,7 @@ import { signup } from '../../actions/AuthActions';
 import { connect } from 'react-redux';
 import validate from '../includes/FormEmptyValidationRules';
 import TextInputStd from '../includes/controls/TextInputStd';
+import Alert from '../includes/Alert';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -43,6 +44,7 @@ const SignUpForm = ({ newErrors, signup }) => {
 
   return (
     <div className="notification has-background-primary-light box">
+      <Alert />
       <form onSubmit={handleSubmit}>
         <TextInputStd
           value={values.firstName}
@@ -59,15 +61,6 @@ const SignUpForm = ({ newErrors, signup }) => {
           error={errors.lastName}
           placeHolder="Enter your Last Name"
           iconLeft="fas fa-user-plus"
-        />
-        <TextInputStd
-          value={values.userName}
-          field="userName"
-          handleChange={handleChange}
-          error={errors.userName}
-          autoComplete="userName"
-          placeHolder="User NameSpecify a unique User Name"
-          iconLeft="fas fa-user-circle"
         />
         <TextInputStd
           type="email"
