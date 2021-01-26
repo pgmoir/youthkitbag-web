@@ -104,7 +104,7 @@ const SignUpForm = ({ newErrors, signup }) => {
         >
           Sign Up for YouthKitbag
         </button>
-        {/* <p className="h6 pt-3 text-center">
+        {/* <p className="h6 pt-3 has-text-centered">
         Alternatively use <a href={`${baseUrl}/auth/google`}>Google</a>,{' '}
         <a href={`${baseUrl}/auth/facebook`}>Facebook</a>
         {' or '}

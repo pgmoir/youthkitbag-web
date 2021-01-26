@@ -19,7 +19,7 @@ const Why = () => {
                 alt=""
               ></img>
             </div>
-            <div className="col-lg-6 p-3 order-2 text-center">
+            <div className="col-lg-6 p-3 order-2 has-text-centered">
               <h2 className="h1 pb-2">Why did I create this app?</h2>
               <p className="f-lg">
                 From a very early age my kids were very active, and with all
@@ -46,7 +46,7 @@ const Why = () => {
                 alt=""
               ></img>
             </div>
-            <div className="col-lg-6 p-3 order-2 order-lg-1 text-center">
+            <div className="col-lg-6 p-3 order-2 order-lg-1 has-text-centered">
               <h2 className="h1 pb-2">And then came cycling</h2>
               <p className="f-lg">
                 It started with road cycling for one, then the second child
@@ -71,7 +71,7 @@ const Why = () => {
                 alt=""
               ></img>
             </div>
-            <div className="col-lg-6 p-3 order-2 text-center">
+            <div className="col-lg-6 p-3 order-2 has-text-centered">
               <h2 className="h1 pb-2">Kit end of life?</h2>
               <p className="f-lg">
                 I also wanted to easily sell or recycle items of kit to other

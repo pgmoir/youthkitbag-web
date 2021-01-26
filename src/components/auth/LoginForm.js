@@ -66,7 +66,7 @@ const LoginForm = ({ referrer, newErrors, login }) => {
           </a>
         </div>
       </div>
-      <p className="mb-3 text-center">
+      <p className="mb-3 has-text-centered">
         <span className="centre-line"></span>
         or
         <span className="centre-line"></span>

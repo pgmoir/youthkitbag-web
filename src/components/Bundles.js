@@ -51,76 +51,69 @@ const Bundles = ({ auth, user, bundles, fetchBundles }) => {
       : level <= themes.indexOf(user.bundle.theme);
 
     return (
-      <div className="col-12 col-sm-4" key={_id}>
-        <article className="card">
-          <div className={`card-header h4 text-center bg-${themes[level]}`}>
+      <div className="column">
+        <article key={_id} className="panel is-primary">
+          <div className={`panel-heading bg-${themes[level]}`}>
             {name} <span className={icon} title={`${name} tier`}></span>
           </div>
-          <img className="card-img" src="" alt="" role="presentation" />
-          <div className="card-body">
-            {cost < defaultCost && (
-              <p className="card-text text-center offer-highlight">
-                <strong>
-                  Best Offer
-                  <br />
-                  {title}
-                </strong>
-              </p>
-            )}
-            <p className="card-text text-center">up to {kit} kitbag items</p>
-            <p className="card-text text-center">up to {market} market items</p>
-            <p className="card-text text-center">up to {photos} photos</p>
-            <p className="card-text text-center">
-              admin {kitbagAdmins} kitbags
+          {cost < defaultCost && (
+            <p className="panel-block has-text-centered offer-highlight">
+              <strong>
+                Best Offer
+                <br />
+                {title}
+              </strong>
             </p>
-            <p className="card-text text-center">join {kitbags} kitbags</p>
-            <p className="card-text text-center">admin {groupAdmins} groups</p>
-            <p className="card-text text-center">join {groups} groups</p>
-            <hr />
-            <h5 className="text-center mb-3">Cost</h5>
-            <p
-              className={`card-text text-center ${
-                cost < defaultCost ? 'text-linethru' : ''
+          )}
+          <p className="panel-block has-text-centered">
+            up to {kit} kitbag items
+          </p>
+          <p className="panel-block has-text-centered">
+            up to {market} market items
+          </p>
+          <p className="panel-block has-text-centered">up to {photos} photos</p>
+          <p className="panel-block has-text-centered">
+            admin {kitbagAdmins} kitbags
+          </p>
+          <p className="panel-block has-text-centered">
+            join {kitbags} kitbags
+          </p>
+          <p className="panel-block has-text-centered">
+            admin {groupAdmins} groups
+          </p>
+          <p className="panel-block has-text-centered">join {groups} groups</p>
+          <p className="panel-block has-text-centered mb-3">Cost</p>
+          <p
+            className={`panel-block has-text-centered ${
+              cost < defaultCost ? 'text-linethru' : ''
+            }`}
+          >
+            {cost === 0 ? 'FREE' : `£${Number(defaultCost).toFixed(2)} / year`}
+          </p>
+          {cost < defaultCost && (
+            <p className="panel-block has-text-centered">
+              Reduced to £{Number(cost).toFixed(2)} / year
+            </p>
+          )}
+          <p className="panel-block">
+            <Link
+              to={!loggedIn ? '/auth/signup' : `/bundles/purchase/${_id}`}
+              className={`button is-success ${
+                disabledButton ? 'disabled' : ''
               }`}
             >
-              {cost === 0
-                ? 'FREE'
-                : `£${Number(defaultCost).toFixed(2)} / year`}
-            </p>
-            {cost < defaultCost && (
-              <p className="card-text text-center">
-                Reduced to £{Number(cost).toFixed(2)} / year
-              </p>
-            )}
-            <hr />
-            <div className="d-flex">
-              <Link
-                to={!loggedIn ? '/auth/signup' : `/bundles/purchase/${_id}`}
-                className={`btn btn-primary mx-auto ${
-                  disabledButton ? 'disabled' : ''
-                }`}
-              >
-                {level === 0 ? 'Sign Up' : 'Upgrade'}
-              </Link>
-            </div>
-          </div>
+              {level === 0 ? 'Sign Up' : 'Upgrade'}
+            </Link>
+          </p>
         </article>
       </div>
     );
   }
 
   return (
-    <div>
+    <div className="container">
       <Title title="Bundles & Benefits" />
-      <section
-        id="main"
-        className="container-fluid"
-        aria-label="main body of content plus related links and features"
-      >
-        <div className="container">
-          <div className="row">{bundles.map((p) => renderBundle(p))}</div>
-        </div>
-      </section>
+      <div className="columns">{bundles.map((p) => renderBundle(p))}</div>
     </div>
   );
 };

@@ -45,7 +45,7 @@ const Security = () => {
                 Track down kit being sold by others. Keep track of everything in
                 your &quot;YouthKitbag&quot;!
               </p>
-              <div className="text-center">
+              <div className="has-text-centered">
                 <Link
                   className="btn btn-primary btn-lg text-white py-3 px-5 bg-dark"
                   to="/auth/signup"

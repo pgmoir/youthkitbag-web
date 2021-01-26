@@ -30,7 +30,10 @@ const MarketTitle = ({ market, isOwned }) => {
         >
           <div className="container d-flex border-bottom-1">
             <div className={`p-3 align-self-center text-${color} h1`}>
-              <span className={`${icon} text-center`} title={iconTitle}></span>
+              <span
+                className={`${icon} has-text-centered`}
+                title={iconTitle}
+              ></span>
             </div>
             <div className="w-100">
               <div className="py-3">

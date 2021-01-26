@@ -1,41 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { fetchSubscriptionBundle } from '../actions/BundlesActions';
+import { connect, useSelector } from 'react-redux';
+import { fetchBundle } from '../actions/BundlesActions';
 import Title from './includes/title/Title';
 import Alert from './includes/Alert';
 
 const mapStateToProps = (state) => ({
-  selected: state.subscription.selected,
+  selected: state.bundles.selected,
 });
 
 const mapDispatchToProps = {
-  fetchSubscriptionBundle,
+  fetchBundle,
 };
 
-const BundlePurchasePage = ({ selected, fetchSubscriptionBundle, match }) => {
-  const subscriptionId = match.params.subscriptionId;
+const BundlePurchasePage = ({ selected, fetchBundle, match }) => {
+  const bundleId = match.params.bundleId;
 
-  const [subscription, setSubscription] = useState({
-    title: 'Loading subscription details ...',
+  const [bundle, setBundle] = useState({
+    title: 'Loading bundle details ...',
     description: '',
     details: [],
     price: 0.0,
   });
 
   useEffect(() => {
-    fetchSubscriptionBundle(subscriptionId);
-  }, [fetchSubscriptionBundle, subscriptionId]);
+    console.log('FETCH', bundleId);
+    fetchBundle(bundleId);
+  }, [fetchBundle, bundleId]);
 
   useEffect(() => {
     if (selected && selected._id) {
-      setSubscription(selected);
+      setBundle(selected);
     }
   }, [selected]);
 
   return (
     <div>
-      <Title title="Purchase subscription" />
+      <Title title="Purchase bundle" />
       <section
         id="main"
         className="container-fluid"
@@ -45,10 +46,10 @@ const BundlePurchasePage = ({ selected, fetchSubscriptionBundle, match }) => {
           <Alert />
           <div className="row">
             <div className="col-12">
-              <h4>Purchase {subscription.title} subscription</h4>
+              <h4>Purchase {bundle.title} bundle</h4>
             </div>
           </div>
-          <h3>Total Price: £{Number(subscription.price).toFixed(2)}</h3>
+          <h3>Total Price: £{Number(bundle.price).toFixed(2)}</h3>
           <hr />
           <div className="row pb-3">
             <div className="col-12 d-flex justify-content-end">
@@ -62,7 +63,7 @@ const BundlePurchasePage = ({ selected, fetchSubscriptionBundle, match }) => {
                   data-key="pk_test_GrVrOqLyxwRIBFfaYw3oGQA4006DOxfIft"
                   data-amount={this.props.totalPrice * 100}
                   data-name="Moir Consultancy Limited"
-                  data-description="Your subscription purchase from YouthKitbag"
+                  data-description="Your bundle purchase from YouthKitbag"
                   data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
                   data-locale="auto"
                   data-currency="gbp"

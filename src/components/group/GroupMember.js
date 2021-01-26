@@ -44,19 +44,19 @@ const GroupMember = ({ groupId, member, groupMember, groupAdmin }) => {
             <p className="card-text bg-light hgt-1">&nbsp;</p>
             <span className="icons-bottom-left">
               <span
-                className="fas fa-meh w-25 text-center text-light"
+                className="fas fa-meh w-25 has-text-centered text-light"
                 title="Membership has been requested"
               ></span>
               <span
-                className="fas fa-laugh w-25 text-center text-light"
+                className="fas fa-laugh w-25 has-text-centered text-light"
                 title="Membership has been approved"
               ></span>
               <span
-                className="fas fa-sad-tear w-25 text-center text-light"
+                className="fas fa-sad-tear w-25 has-text-centered text-light"
                 title="Membership has been rejected"
               ></span>
               <span
-                className="fas fa-meh-blank w-25 text-center text-light"
+                className="fas fa-meh-blank w-25 has-text-centered text-light"
                 title="Membership has been suspended"
               ></span>
             </span>
@@ -101,7 +101,7 @@ const GroupMember = ({ groupId, member, groupMember, groupAdmin }) => {
           <p>{roles.length > 0 ? roles.join(', ') : '-'}</p>
           <span className="icons-bottom-left">
             <span
-              className={`fas fa-meh w-25 text-center ${isRequested()}`}
+              className={`fas fa-meh w-25 has-text-centered ${isRequested()}`}
               title="Membership has been requested if highlighted"
             ></span>
             {groupAdmin && state !== 'left' && (
@@ -109,21 +109,21 @@ const GroupMember = ({ groupId, member, groupMember, groupAdmin }) => {
                 <Link to={`/groups/${groupId}/members/${member._id}/approved`}>
                   <span className="sr-only">Approve membership</span>
                   <span
-                    className={`fas fa-laugh w-25 text-center ${isApproved()}`}
+                    className={`fas fa-laugh w-25 has-text-centered ${isApproved()}`}
                     title="Approve membership"
                   ></span>
                 </Link>
                 <Link to={`/groups/${groupId}/members/${member._id}/rejected`}>
                   <span className="sr-only">Reject membership</span>
                   <span
-                    className={`fas fa-sad-tear w-25 text-center ${isRejected()}`}
+                    className={`fas fa-sad-tear w-25 has-text-centered ${isRejected()}`}
                     title="Reject membership"
                   ></span>
                 </Link>
                 <Link to={`/groups/${groupId}/members/${member._id}/suspended`}>
                   <span className="sr-only">Suspend membership</span>
                   <span
-                    className={`fas fa-meh-blank w-25 text-center ${isSuspended()}`}
+                    className={`fas fa-meh-blank w-25 has-text-centered ${isSuspended()}`}
                     title="Suspend membership"
                   ></span>
                 </Link>
@@ -132,15 +132,15 @@ const GroupMember = ({ groupId, member, groupMember, groupAdmin }) => {
             {!groupAdmin && groupMember && state !== 'left' && (
               <>
                 <span
-                  className={`fas fa-laugh w-25 text-center ${isApproved()}`}
+                  className={`fas fa-laugh w-25 has-text-centered ${isApproved()}`}
                   title="Member has been approved if highlighted"
                 ></span>
                 <span
-                  className={`fas fa-sad-tear w-25 text-center ${isRejected()}`}
+                  className={`fas fa-sad-tear w-25 has-text-centered ${isRejected()}`}
                   title="Member has been rejected if highlighted"
                 ></span>
                 <span
-                  className={`fas fa-meh-blank w-25 text-center ${isSuspended()}`}
+                  className={`fas fa-meh-blank w-25 has-text-centered ${isSuspended()}`}
                   title="Member has been suspended if highlighted"
                 ></span>
               </>
@@ -148,7 +148,7 @@ const GroupMember = ({ groupId, member, groupMember, groupAdmin }) => {
             {state === 'left' && (
               <>
                 <span
-                  className={`fas fa-dizzy w-25 text-center text-danger`}
+                  className={`fas fa-dizzy w-25 has-text-centered text-danger`}
                   title="Member has left group"
                 ></span>
               </>

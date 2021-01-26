@@ -20,7 +20,7 @@ const LoggedOutLanding = () => {
   //     aria-label="main body of content plus related links and features"
   //   >
   //     <div className="jumbotron">
-  //       <div className="container text-center">
+  //       <div className="container has-text-centered">
   //         <div className="row">
   //           <div className="col-12 col-lg-6">
   //             <h1>YouthKitbag</h1>

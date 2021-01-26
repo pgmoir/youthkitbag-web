@@ -78,7 +78,7 @@ const GroupIntroMarkets = ({ type, markets }) => {
   return (
     <div className="pb-3">
       <h2 className={`h4 text-${color}`}>
-        <span className={`${icon} text-center pr-2`} title={title}></span>
+        <span className={`${icon} has-text-centered pr-2`} title={title}></span>
         {title}
       </h2>
       {markets && markets.totalItems > 0 && (

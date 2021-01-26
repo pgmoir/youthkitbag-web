@@ -94,10 +94,10 @@ const GroupIntro = ({
           })}
         </ul>
         <div className="bg-dark text-white p-5 mr-3 my-3 rounded-lg">
-          <h3 className="pb-3 text-center">
+          <h3 className="pb-3 has-text-centered">
             What are you waiting for? Come and join!
           </h3>
-          <p className="pb-3 text-center">
+          <p className="pb-3 has-text-centered">
             After you sign up and log in, make sure you request to join{' '}
             {group.name}
           </p>

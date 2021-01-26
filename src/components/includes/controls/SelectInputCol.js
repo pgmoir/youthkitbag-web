@@ -45,8 +45,8 @@ const SelectInputCol = ({
           </select>
         </div>
         {iconLeft && (
-          <div class="icon is-small is-left">
-            <i class={iconLeft}></i>
+          <div className="icon is-small is-left">
+            <i className={iconLeft}></i>
           </div>
         )}
       </div>

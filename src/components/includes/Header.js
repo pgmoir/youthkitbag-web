@@ -34,7 +34,10 @@ const Header = ({ auth, user }) => {
             <Link className="navbar-item" to="/">
               <strong>YouthKitbag</strong>
             </Link>
-            <label class="navbar-burger burger" for="navbar-toggle-state">
+            <label
+              className="navbar-burger burger"
+              htmlFor="navbar-toggle-state"
+            >
               <span></span>
               <span></span>
               <span></span>
@@ -52,7 +55,7 @@ const Header = ({ auth, user }) => {
                           aria-label="Market place"
                         >
                           <span className="icon">
-                            <i class="fas fa-boxes"></i>
+                            <i className="fas fa-boxes"></i>
                           </span>
                           <span>Market</span>
                         </Link>
@@ -66,7 +69,7 @@ const Header = ({ auth, user }) => {
                           aria-label={`${kitbag.name}`}
                         >
                           <span className="icon">
-                            <i class="fas fa-briefcase"></i>
+                            <i className="fas fa-briefcase"></i>
                           </span>
                           <span>Kitbag</span>
                         </Link>
@@ -75,7 +78,7 @@ const Header = ({ auth, user }) => {
                     <div className="navbar-item">
                       <Link className="button is-light" to="/settings/user">
                         <span className="icon">
-                          <i class="fas fa-user-cog"></i>
+                          <i className="fas fa-user-cog"></i>
                         </span>
                         <span>Settings</span>
                       </Link>
@@ -86,7 +89,7 @@ const Header = ({ auth, user }) => {
                         to="/auth/logout"
                       >
                         <span className="icon">
-                          <i class="fas fa-sign-out-alt"></i>
+                          <i className="fas fa-sign-out-alt"></i>
                         </span>
                         <span>Log out</span>
                       </Link>
@@ -98,7 +101,7 @@ const Header = ({ auth, user }) => {
                     <div className="navbar-item">
                       <Link className="button is-primary" to="/auth/signup">
                         <span className="icon">
-                          <i class="fas fa-sign-in-alt"></i>
+                          <i className="fas fa-sign-in-alt"></i>
                         </span>
                         <span>Sign up</span>
                       </Link>
@@ -106,7 +109,7 @@ const Header = ({ auth, user }) => {
                     <div className="navbar-item">
                       <Link className="button is-light" to="/auth/login">
                         <span className="icon">
-                          <i class="fas fa-user-circle"></i>
+                          <i className="fas fa-user-circle"></i>
                         </span>
                         <span>Log in</span>
                       </Link>

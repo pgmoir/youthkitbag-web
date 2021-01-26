@@ -36,29 +36,19 @@ const Content = ({ contentId, content, fetchContent }) => {
   }
 
   return (
-    <div>
+    <div className="container">
       <Title title={content.fields.title} />
-      <section
-        id="main"
-        className="container-fluid"
-        aria-label="main body of content plus related links and features"
-      >
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <p>
-                <em>
-                  Last updated:{' '}
-                  {new Date(content.sys.updatedAt).toLocaleString('en-GB', {
-                    timeZone: 'UTC',
-                  })}
-                </em>
-              </p>
-              {renderAllConent(content)}
-            </div>
-          </div>
-        </div>
-      </section>
+      <div className="mb-3">
+        <p>
+          <em>
+            Last updated:{' '}
+            {new Date(content.sys.updatedAt).toLocaleString('en-GB', {
+              timeZone: 'UTC',
+            })}
+          </em>
+        </p>
+      </div>
+      <div>{renderAllConent(content)}</div>
     </div>
   );
 };

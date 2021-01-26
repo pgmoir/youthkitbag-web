@@ -48,7 +48,7 @@ export default (state = initialState, action) => {
     case CREATE_MARKET_KIT:
     case EDIT_MARKET_KIT:
     case RESPOND_MARKET_KIT:
-      return { ...state, current: action.payload };
+      return { ...state, current: action.payload.data };
     case DELETE_MARKET_KIT:
       return { ...state };
     case RESET:

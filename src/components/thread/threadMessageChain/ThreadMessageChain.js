@@ -78,7 +78,7 @@ const ThreadMessageChain = ({
     if (!sentOn) return <div className="bg-white pb-1"></div>;
     const sentOnDate = new Date(sentOn);
     return (
-      <div className="bg-white p-2 text-center pb-3">
+      <div className="bg-white p-2 has-text-centered pb-3">
         {sentOnDate.toDateString()}
       </div>
     );
