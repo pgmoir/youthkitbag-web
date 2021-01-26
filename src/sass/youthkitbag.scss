@@ -4,6 +4,11 @@
 @import '../../node_modules/bulma/bulma.sass';
 @import './_sandstoneo.scss';
 
+/* 
+  sticky footer
+  makes sure at least the whole viewport is used 
+  wrapper includes header and main (but not footer) and fills available space
+  */
 body,
 #root {
   display: flex;
@@ -15,31 +20,8 @@ body,
   flex: 1;
 }
 
-// @include touch {
-//   .flex-row-touch {
-//     flex-direction: row;
-//   }
-
-//   .flex-col-touch {
-//     flex-direction: column;
-//   }
-// }
-
-// @include desktop {
-//   .flex-row-desktop {
-//     flex-direction: row;
-//   }
-
-//   .flex-row-desktop-reverse {
-//     flex-direction: row-reverse;
-//   }
-
-//   .flex-col-desktop {
-//     flex-direction: column;
-//   }
-// }
-
 /*
+
   Author: Aseem Lalfakawma <alalfakawma.github.io>
   This SCSS mixin will allow sizing of table columns in Bulma CSS Framework.
   The Bulma framework does not support this yet, this small code snippet fixes this.
@@ -49,22 +31,29 @@ body,
   is-1 will give the first widthamount, is-2 will give the second.
   Eg. The code below shows the widthAmounts as (1, 2.5, 3, 4 , 5, 6, 7)
   When typing <th class="is-2">, the width will be 2.5em, as the second value in widthAmounts array is 2.5
-*/
+  */
 
-$widthAmounts: (
-  1,
-  2.5,
-  3,
-  4,
-  5,
-  6,
-  7
-); // Just add the numbers here, you can use points too.
-$widthUnit: 'em'; // Add the unit here (rem|em|px|%)
+// Just add the numbers here, you can use points too.
+$widthAmounts: (1, 2.5, 3, 4, 5, 6, 7);
+// Add the unit here (rem|em|px|%)
+$widthUnit: 'em';
 
 @each $width in $widthAmounts {
   $i: index($widthAmounts, $width);
   .table thead th.is-#{$i} {
     width: #{$width}#{$widthUnit} !important;
   }
+}
+
+/*
+  burger bun css solution (no javascript)
+  adapation from here https://jsfiddle.net/jfm2jyk5/
+  not quite working yet
+  */
+#navbar-toggle-state {
+  display: none;
+}
+
+#navbar-toggle-state:checked ~ .navbar-menu {
+  display: block !important;
 }

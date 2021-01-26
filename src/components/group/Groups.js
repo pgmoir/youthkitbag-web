@@ -95,7 +95,7 @@ const Groups = ({
   }
 
   return (
-    <div className="container is-fluid">
+    <div className="container is-fluid px-0">
       <Title title={getTitle()} />
       <Alert />
       <div className="columns">

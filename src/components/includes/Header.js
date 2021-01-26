@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CookieConsent from 'react-cookie-consent';
+import classNames from 'classnames';
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
@@ -33,19 +34,18 @@ const Header = ({ auth, user }) => {
             <Link className="navbar-item" to="/">
               <strong>YouthKitbag</strong>
             </Link>
-            <div class="navbar-burger burger" data-target="navbarBasic">
+            <label class="navbar-burger burger" for="navbar-toggle-state">
               <span></span>
               <span></span>
               <span></span>
-            </div>
-          </div>
-          <div id="navbarBasic" className="navbar-menu">
-            <div className="navbar-end">
-              <div className="navbar-item">
-                <div className="buttons">
-                  {loggedIn && (
-                    <>
-                      {group && (
+            </label>
+            <input type="checkbox" id="navbar-toggle-state" />
+            <div className="navbar-menu">
+              <div className="navbar-end">
+                {loggedIn && (
+                  <>
+                    {group && (
+                      <div className="navbar-item">
                         <Link
                           className="button is-light"
                           to="/market?searchfor=&by=&page=1&pagesize=24"
@@ -56,8 +56,10 @@ const Header = ({ auth, user }) => {
                           </span>
                           <span>Market</span>
                         </Link>
-                      )}
-                      {kitbag && (
+                      </div>
+                    )}
+                    {kitbag && (
+                      <div className="navbar-item">
                         <Link
                           className="button is-light"
                           to={`/kitbag/kit/${kitbag._id}`}
@@ -68,13 +70,17 @@ const Header = ({ auth, user }) => {
                           </span>
                           <span>Kitbag</span>
                         </Link>
-                      )}
+                      </div>
+                    )}
+                    <div className="navbar-item">
                       <Link className="button is-light" to="/settings/user">
                         <span className="icon">
                           <i class="fas fa-user-cog"></i>
                         </span>
                         <span>Settings</span>
                       </Link>
+                    </div>
+                    <div className="navbar-item">
                       <Link
                         className="button is-primary is-outlined is-inverted"
                         to="/auth/logout"
@@ -84,25 +90,29 @@ const Header = ({ auth, user }) => {
                         </span>
                         <span>Log out</span>
                       </Link>
-                    </>
-                  )}
-                  {!loggedIn && (
-                    <>
+                    </div>
+                  </>
+                )}
+                {!loggedIn && (
+                  <>
+                    <div className="navbar-item">
                       <Link className="button is-primary" to="/auth/signup">
                         <span className="icon">
                           <i class="fas fa-sign-in-alt"></i>
                         </span>
                         <span>Sign up</span>
                       </Link>
+                    </div>
+                    <div className="navbar-item">
                       <Link className="button is-light" to="/auth/login">
                         <span className="icon">
                           <i class="fas fa-user-circle"></i>
                         </span>
                         <span>Log in</span>
                       </Link>
-                    </>
-                  )}
-                </div>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
