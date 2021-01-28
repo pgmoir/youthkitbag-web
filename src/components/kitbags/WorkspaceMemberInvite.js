@@ -7,9 +7,10 @@ import {
   fetchWorkspace,
   inviteToWorkspace,
 } from '../../actions/WorkspaceActions';
-import { TextForm, SelectForm } from '../includes/forms';
 import ModalWithForm from '../includes/ModalWithForm';
 import validate from '../includes/FormEmptyValidationRules';
+import TextInputStd from '../includes/controls/TextInputStd';
+import SelectInputStd from '../includes/controls/SelectInputStd';
 
 const mapStateToProps = (state) => ({
   workspace: state.workspace.current,
@@ -82,16 +83,14 @@ const WorkspaceMemberInvite = ({
           Enter an email and specify roles for a person you want to give access
           to this workspace
         </p>
-        <TextForm
-          colFormat="3-9"
+        <TextInputStd
           label="Email"
           value={values.email}
           field="email"
           handleChange={handleChange}
           error={errors.email}
         />
-        <SelectForm
-          colFormat="3-9"
+        <SelectInputStd
           label="Roles"
           value={values.roles}
           field="roles"
@@ -106,18 +105,18 @@ const WorkspaceMemberInvite = ({
 
   function renderActions() {
     return (
-      <>
+      <div className="buttons">
         <Link
           to={`/workspace/${workspaceId}/members`}
-          className="btn btn-outline-secondary"
+          className="button is-warning"
           data-dismiss="modal"
         >
           Cancel
         </Link>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="button is-primary">
           Invite to Join
         </button>
-      </>
+      </div>
     );
   }
 

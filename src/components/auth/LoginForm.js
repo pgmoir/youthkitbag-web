@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { login } from '../../actions/AuthActions';
-import { TextForm } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
 import TextInputStd from '../includes/controls/TextInputStd';
 

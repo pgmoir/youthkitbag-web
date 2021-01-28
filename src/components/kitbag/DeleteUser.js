@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { Link } from 'react-router-dom';
 import { deleteUser } from '../../actions/UserActions';
-import { TextForm } from '../includes/forms';
 import ModalWithForm from '../includes/ModalWithForm';
 import history from '../../utils/history';
 import validate from '../includes/FormEmptyValidationRules';
 import Alert from '../includes/Alert';
+import TextInputStd from '../includes/controls/TextInputStd';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -49,8 +49,7 @@ const DeleteUser = ({ newErrors, deleteUser, match }) => {
           deletion of your user kitbag, and all associated data. Please be fully
           aware that there is no reversal of this action.
         </p>
-        <TextForm
-          colFormat="3-9"
+        <TextInputStd
           type="email"
           label="Email"
           value={values.email}
@@ -65,18 +64,18 @@ const DeleteUser = ({ newErrors, deleteUser, match }) => {
 
   function renderActions() {
     return (
-      <>
+      <div className="buttons">
         <Link
           to={`/settings/configuration`}
-          className="btn btn-outline-secondary"
+          className="button is-warning"
           data-dismiss="modal"
         >
           Cancel
         </Link>
-        <button type="submit" className="btn btn-danger">
+        <button type="submit" className="button is-danger">
           Delete User
         </button>
-      </>
+      </div>
     );
   }
 

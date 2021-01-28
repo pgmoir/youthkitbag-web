@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { reset } from '../../actions/AuthActions';
-import { TextForm } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
+import Alert from '../includes/Alert';
+import TextInputStd from '../includes/controls/TextInputStd';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -35,24 +36,23 @@ const ResetForm = ({ newErrors, reset }) => {
   }
 
   return (
-    <form className="w-100 d-block" onSubmit={handleSubmit}>
-      <TextForm
-        colFormat="3-9"
-        type="email"
-        label="Email"
-        value={values.email}
-        field="email"
-        handleChange={handleChange}
-        error={errors.email}
-        autoComplete="userName email"
-      />
-      <button
-        className="d-block btn btn-success btn-lg py-3 px-5 mt-3 mx-auto"
-        type="submit"
-      >
-        Reset Password
-      </button>
-    </form>
+    <div className="notification has-background-primary-light box">
+      <Alert />
+      <form onSubmit={handleSubmit}>
+        <TextInputStd
+          type="email"
+          label="Email"
+          value={values.email}
+          field="email"
+          handleChange={handleChange}
+          error={errors.email}
+          autoComplete="userName email"
+        />
+        <button className="button is-large is-primary" type="submit">
+          Reset Password
+        </button>
+      </form>
+    </div>
   );
 };
 

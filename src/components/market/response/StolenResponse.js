@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TextAreaForm } from '../../includes/forms';
+import TextAreaInputStd from '../../includes/controls/TextAreaInputStd';
 
 export const StolenResponse = ({
   values,
@@ -22,8 +22,7 @@ export const StolenResponse = ({
           </p>
           <form className="mb-3" onSubmit={handleSubmit}>
             <div>
-              <TextAreaForm
-                colFormat="sro-12"
+              <TextAreaInputStd
                 label="Details"
                 value={values.details}
                 field="details"
@@ -32,11 +31,11 @@ export const StolenResponse = ({
               />
             </div>
             <hr />
-            <div>
-              <button className="btn btn-primary" type="submit">
+            <div className="buttons">
+              <button className="button is-primary" type="submit">
                 Report
               </button>
-              <Link className="btn btn-link" to="/market/market">
+              <Link className="button is-warning" to="/market/market">
                 Cancel
               </Link>
             </div>

@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { Link } from 'react-router-dom';
 import { requestToJoinKitbag } from '../../actions/KitbagActions';
-import { TextForm } from '../includes/forms';
 import ModalWithForm from '../includes/ModalWithForm';
 import history from '../../utils/history';
 import validate from '../includes/FormEmptyValidationRules';
+import TextInputStd from '../includes/controls/TextInputStd';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -47,8 +47,7 @@ const KitbagMemberJoin = ({ newErrors, requestToJoinKitbag }) => {
           Enter the email of the person who has the kitbag to which you&apos;d
           like to join.
         </p>
-        <TextForm
-          colFormat="3-9"
+        <TextInputStd
           label="Email"
           value={values.email}
           field="email"
@@ -61,18 +60,14 @@ const KitbagMemberJoin = ({ newErrors, requestToJoinKitbag }) => {
 
   function renderActions() {
     return (
-      <>
-        <Link
-          to={`/`}
-          className="btn btn-outline-secondary"
-          data-dismiss="modal"
-        >
+      <div className="buttons">
+        <Link to={`/`} className="button is-warning" data-dismiss="modal">
           Cancel
         </Link>
-        <button type="submit" className="btn btn-success">
+        <button type="submit" className="button is-success">
           Request to Join
         </button>
-      </>
+      </div>
     );
   }
 

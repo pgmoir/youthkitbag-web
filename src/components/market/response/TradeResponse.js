@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TextAreaForm, TextForm } from '../../includes/forms';
+import TextAreaInputStd from '../../includes/controls/TextAreaInputStd';
+import TextInputStd from '../../includes/controls/TextInputStd';
 
 export const TradeResponse = ({
   values,
@@ -21,8 +22,7 @@ export const TradeResponse = ({
           </p>
           <form className="mb-3" onSubmit={handleSubmit}>
             <div>
-              <TextForm
-                colFormat="3-9"
+              <TextInputStd
                 type="number"
                 label="Offer Price"
                 value={values.responsePrice}
@@ -33,8 +33,7 @@ export const TradeResponse = ({
                 handleChange={handleChange}
                 error={errors.responsePrice}
               />
-              <TextAreaForm
-                colFormat="0-12"
+              <TextAreaInputStd
                 label="Details"
                 value={values.details}
                 field="details"
@@ -43,11 +42,11 @@ export const TradeResponse = ({
               />
             </div>
             <hr />
-            <div>
-              <button className="btn btn-primary" type="submit">
+            <div className="buttons">
+              <button className="button is-primary" type="submit">
                 Offer
               </button>
-              <Link className="btn btn-link" to="/market">
+              <Link className="button is-warning" to="/market">
                 Cancel
               </Link>
             </div>

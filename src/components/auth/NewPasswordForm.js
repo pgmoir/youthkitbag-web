@@ -2,17 +2,18 @@ import React, { useEffect } from 'react';
 import useForm from '../hooks/useForm';
 import { checkNewPassword, setNewPassword } from '../../actions/AuthActions';
 import { connect } from 'react-redux';
-import { TextForm } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
+import TextInputStd from '../includes/controls/TextInputStd';
+import Alert from '../includes/Alert';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   userId: state.auth.userId,
-  newErrors: state.toast.errors
+  newErrors: state.toast.errors,
 });
 
 const mapDispatchToProps = {
   checkNewPassword,
-  setNewPassword
+  setNewPassword,
 };
 
 const NewPasswordForm = ({
@@ -20,10 +21,10 @@ const NewPasswordForm = ({
   newErrors,
   checkNewPassword,
   setNewPassword,
-  token
+  token,
 }) => {
   const initialValues = {
-    password: ''
+    password: '',
   };
 
   const { values, handleChange, handleSubmit, errors, setErrors } = useForm(
@@ -49,24 +50,23 @@ const NewPasswordForm = ({
   }
 
   return (
-    <form className="w-100 d-block" onSubmit={handleSubmit}>
-      <TextForm
-        colFormat="3-9"
-        type="password"
-        label="Password"
-        value={values.password}
-        field="password"
-        handleChange={handleChange}
-        error={errors.password}
-        autoComplete="current-password"
-      />
-      <button
-        className="d-block btn btn-success btn-lg py-3 px-5 mt-3 mx-auto"
-        type="submit"
-      >
-        Update Password
-      </button>
-    </form>
+    <div className="notification has-background-primary-light box">
+      <Alert />
+      <form onSubmit={handleSubmit}>
+        <TextInputStd
+          type="password"
+          label="Password"
+          value={values.password}
+          field="password"
+          handleChange={handleChange}
+          error={errors.password}
+          autoComplete="current-password"
+        />
+        <button className="button is-large is-primary" type="submit">
+          Update Password
+        </button>
+      </form>
+    </div>
   );
 };
 

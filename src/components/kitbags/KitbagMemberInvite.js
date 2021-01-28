@@ -4,9 +4,10 @@ import history from '../../utils/history';
 import useForm from '../hooks/useForm';
 import { Link } from 'react-router-dom';
 import { fetchKitbag, inviteToKitbag } from '../../actions/KitbagActions';
-import { TextForm, SelectForm } from '../includes/forms';
 import ModalWithForm from '../includes/ModalWithForm';
 import validate from '../includes/FormEmptyValidationRules';
+import TextInputStd from '../includes/controls/TextInputStd';
+import SelectInputStd from '../includes/controls/SelectInputStd';
 
 const mapStateToProps = (state) => ({
   kitbag: state.kitbag.kitbags.current,
@@ -74,16 +75,14 @@ const KitbagMemberInvite = ({
           Enter an email and specify roles for a person you want to give access
           to this kitbag
         </p>
-        <TextForm
-          colFormat="3-9"
+        <TextInputStd
           label="Email"
           value={values.email}
           field="email"
           handleChange={handleChange}
           error={errors.email}
         />
-        <SelectForm
-          colFormat="3-9"
+        <SelectInputStd
           label="Roles"
           value={values.roles}
           field="roles"
@@ -98,18 +97,18 @@ const KitbagMemberInvite = ({
 
   function renderActions() {
     return (
-      <>
+      <div className="buttons">
         <Link
           to={`/kitbags/${kitbagId}`}
-          className="btn btn-outline-secondary"
+          className="button is-warning"
           data-dismiss="modal"
         >
           Cancel
         </Link>
-        <button type="submit" className="btn btn-success">
+        <button type="submit" className="button is-success">
           Invite to Join
         </button>
-      </>
+      </div>
     );
   }
 
