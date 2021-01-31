@@ -56,58 +56,58 @@ const Pagination = ({ kitbagId, search, callback, pagination }) => {
         >
           <ul className="pagination-list">
             <li>
-              <a
+              <button
                 className="pagination-link"
                 aria-label="Goto page 1"
                 disabled={isFirstPageDisabled()}
                 onClick={() => changePage(1)}
               >
                 First
-              </a>
+              </button>
             </li>
             <li>
               <span className="pagination-ellipsis">&hellip;</span>
             </li>
             <li>
-              <a
+              <button
                 className="pagination-previous"
                 disabled={isPreviousPageDisabled()}
                 onClick={() => changePage(pagination.previousPage)}
               >
                 Previous
-              </a>
+              </button>
             </li>
             <li>
-              <a
+              <button
                 className="pagination-link is-current"
                 aria-label={`Page ${pagination.currentPage}`}
                 aria-current="page"
                 onClick={() => changePage(pagination.currentPage)}
               >
                 {pagination.currentPage}
-              </a>
+              </button>
             </li>
             <li>
-              <a
+              <button
                 className="pagination-next"
                 disabled={isNextPageDisabled()}
                 onClick={() => changePage(pagination.nextPage)}
               >
                 Next page
-              </a>
+              </button>
             </li>
             <li>
               <span className="pagination-ellipsis">&hellip;</span>
             </li>
             <li>
-              <a
+              <button
                 className="pagination-link"
                 aria-label={`Goto page ${pagination.lastPage}`}
                 disabled={isLastPageDisabled()}
                 onClick={() => changePage(pagination.lastPage)}
               >
                 Last
-              </a>
+              </button>
             </li>
           </ul>
         </nav>
