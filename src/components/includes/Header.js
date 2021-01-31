@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CookieConsent from 'react-cookie-consent';
-import classNames from 'classnames';
 
 const mapStateToProps = (state) => ({
   auth: state.auth,

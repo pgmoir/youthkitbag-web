@@ -40,7 +40,6 @@ const Kitbag = ({
   }, [items]);
 
   useEffect(() => {
-    console.log(JSON.stringify(search, null, 2));
     fetchKitbagKits({
       ...search,
       kitbagId,

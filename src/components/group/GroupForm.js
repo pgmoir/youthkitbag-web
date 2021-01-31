@@ -74,21 +74,6 @@ const GroupForm = ({
     }
   }
 
-  function showSaveCancelButtons() {
-    if (!userBundle || !values) return null;
-
-    return (
-      <div className="buttons mb-3">
-        <button className="button is-primary" type="submit">
-          Save
-        </button>
-        <Link className="button is-primary is-outlined" to="/groups">
-          Cancel
-        </Link>
-      </div>
-    );
-  }
-
   return (
     <div className="columns mb-3">
       <div className="column">

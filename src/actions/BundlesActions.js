@@ -15,7 +15,6 @@ export const fetchBundles = ({ user }) => (dispatch) => {
 };
 
 export const fetchBundle = (bundleId) => (dispatch) => {
-  console.log('BUN', bundleId);
   axios
     .get(`/bundle/${bundleId}`, {})
     .then((response) => {

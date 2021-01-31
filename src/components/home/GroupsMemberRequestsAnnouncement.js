@@ -106,7 +106,7 @@ const GroupsMemberRequestsAnnouncement = ({
           you administer.
         </p>
       </div>
-      {/* <div className="mb-3">{renderList()}</div> */}
+      <div>{renderList()}</div>
       <div className="buttons">
         <Link className="button is-info is-inverted" to="/groups">
           View all your groups

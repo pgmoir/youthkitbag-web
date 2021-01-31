@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="content has-text-centered">
         <p>
           <strong>YouthKitbag</strong> by{' '}
-          <a href="" className="a11y-highlight">
+          <a href="https://pgmoir.wordpress.com/" className="a11y-highlight">
             Moir Consultancy Limited @ 2021
           </a>
         </p>

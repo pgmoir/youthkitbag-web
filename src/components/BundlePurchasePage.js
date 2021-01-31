@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { fetchBundle } from '../actions/BundlesActions';
 import Title from './includes/title/Title';
 import Alert from './includes/Alert';
@@ -24,7 +24,6 @@ const BundlePurchasePage = ({ selected, fetchBundle, match }) => {
   });
 
   useEffect(() => {
-    console.log('FETCH', bundleId);
     fetchBundle(bundleId);
   }, [fetchBundle, bundleId]);
 
