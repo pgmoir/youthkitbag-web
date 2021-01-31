@@ -15,21 +15,21 @@ const GroupCard = ({ group }) => {
       case 'approved':
         return (
           <span
-            className="icon-tray-item fas fa-check-circle text-success"
+            className="fas fa-check-circle has-text-success"
             title="Group has been approved"
           ></span>
         );
       case 'blocked':
         return (
           <span
-            className="icon-tray-item fas fa-times-circle text-danger"
+            className="fas fa-times-circle has-text-danger"
             title="Group has been blocked"
           ></span>
         );
       default:
         return (
           <span
-            className="icon-tray-item fas fa-question-circle text-warning"
+            className="fas fa-question-circle has-text-warning"
             title="Group has requested approval"
           ></span>
         );
@@ -38,14 +38,17 @@ const GroupCard = ({ group }) => {
 
   function renderBlank() {
     return (
-      <div className="col-6 col-md-4 col-lg-3 mb-3">
-        <article className="card card-link card-b1">
-          <div className="d-flex">
-            <div className="blank-square bg-light" />
+      <div className="column is-4-tablet is-3-desktop is-2-fullhd">
+        <article className="card">
+          <div className="card-image">
+            <figure className="image is-4by3">
+              <img src="/images/default.png" alt="" role="presentation" />
+            </figure>
           </div>
-          <div className="card-body">
-            <h3 className="card-title h6 ellipsis bg-light hgt-2">&nbsp;</h3>
-            <p className="card-text ellipsis bg-light hgt-3">&nbsp;</p>
+          <div className="card-content">
+            <p className="title is-size-5">Loading ...</p>
+            <p className="subtitle is-size-6"></p>
+            <p className="is-size-6">Members: counting...</p>
           </div>
         </article>
       </div>
@@ -57,21 +60,8 @@ const GroupCard = ({ group }) => {
   if (!_id) return renderBlank();
 
   return (
-    <div className="column is-6-mobile is-4-tablet is-3-desktop is-2-fullhd">
+    <div className="column is-4-tablet is-3-desktop is-2-fullhd">
       <article className="card">
-        {/* <span className="icons-top-left pt-1">
-          {appAdmin ? (
-            <Link to={`/groups/state/${_id}`}>{renderState(state)}</Link>
-          ) : (
-            renderState(state)
-          )}
-        </span>
-        <span
-          className={`badge badge-pill badge-dark badge-fullsize badge-top-right`}
-        >
-          {memberCount}
-        </span> */}
-
         <Link to={`/groups/${_id}`}>
           <div className="card-image">
             <figure className="image is-4by3">
@@ -79,10 +69,21 @@ const GroupCard = ({ group }) => {
             </figure>
           </div>
         </Link>
-
         <div className="card-content">
-          <p>{name}</p>
-          {activitys && <p>{activitys.join(', ')}</p>}
+          <p className="title is-size-5">
+            {name}{' '}
+            <span className="">
+              {appAdmin ? (
+                <Link to={`/groups/state/${_id}`}>{renderState(state)}</Link>
+              ) : (
+                renderState(state)
+              )}
+            </span>
+          </p>
+          {activitys && (
+            <p className="subtitle is-size-6">{activitys.join(', ')}</p>
+          )}
+          <p className="is-size-6">Members: {memberCount}</p>
         </div>
       </article>
     </div>

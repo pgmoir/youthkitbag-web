@@ -47,36 +47,24 @@ const Groups = ({
   function renderBlankList() {
     const blankList = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
     return blankList.map((item, index) => {
-      return <GroupCard key={`${item._id}-${index}`} group={item} />;
+      return <GroupCard key={`${index}`} group={item} />;
     });
   }
 
   if (!groups) {
     return (
-      <div>
+      <div className="container is-fluid px-0">
         <Title title="Loading ...." />
-        <section
-          id="main"
-          className="container-fluid"
-          aria-label="main body of content plus related links and features"
-        >
-          <div className="container">
-            <GroupsHelp />
-            <div className="row">
-              <div className="col-12 col-sm-9">
-                <div className="bg-light hgt-3 mb-3">&nbsp;</div>
-              </div>
-            </div>
-            <div className="row">{renderBlankList()}</div>
-          </div>
-        </section>
+        <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
+          {renderBlankList()}
+        </div>
       </div>
     );
   }
 
   function renderList() {
     return groups.map((item, index) => {
-      return <GroupCard key={`${item._id}-${index}`} group={item} />;
+      return <GroupCard key={`${index}`} group={item} />;
     });
   }
 

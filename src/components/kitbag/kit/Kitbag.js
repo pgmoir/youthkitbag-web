@@ -40,6 +40,7 @@ const Kitbag = ({
   }, [items]);
 
   useEffect(() => {
+    console.log(JSON.stringify(search, null, 2));
     fetchKitbagKits({
       ...search,
       kitbagId,
@@ -64,22 +65,11 @@ const Kitbag = ({
 
   if (!kits) {
     return (
-      <div>
+      <div className="container is-fluid px-0">
         <Title title="Loading ...." />
-        <section
-          id="main"
-          className="container-fluid"
-          aria-label="main body of content plus related links and features"
-        >
-          <div className="container">
-            <div className="row">
-              <div className="col-12 col-sm-9">
-                <div className="bg-light hgt-3 mb-3">&nbsp;</div>
-              </div>
-            </div>
-            <div className="row">{renderBlankList()}</div>
-          </div>
-        </section>
+        <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
+          {renderBlankList()}
+        </div>
       </div>
     );
   }
