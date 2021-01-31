@@ -57,7 +57,7 @@ const Kitbag = ({
   }
 
   function renderBlankList() {
-    const blankList = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+    const blankList = [{}, {}, {}, {}, {}, {}];
     return blankList.map((item, index) => {
       return <KitCard key={`${item._id}-${index}`} kit={item} />;
     });

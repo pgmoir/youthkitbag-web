@@ -68,19 +68,14 @@ const GroupMember = ({ groupId, member, groupMember, groupAdmin }) => {
 
   if (!member._id) return renderBlank();
 
+  function deleteItem(e) {
+    console.log('DELETE');
+    // <Link to={`/groups/${groupId}/members/${member._id}/delete`}>
+  }
+
   return (
-    <div className="column is-6-mobile is-4-tablet is-3-desktop is-2-fullhd">
+    <div className="column is-4-tablet is-3-desktop is-2-fullhd">
       <article className="card">
-        {/* {groupAdmin && (
-          <span className="icons-top-left pt-1">
-            <Link to={`/groups/${groupId}/members/${member._id}/delete`}>
-              <span
-                className="icon-tray-item fas fa-trash-alt"
-                title="Delete member"
-              ></span>
-            </Link>
-          </span>
-        )} */}
         <div className="card-image">
           <figure className="image is-4by3">
             <img
@@ -90,15 +85,35 @@ const GroupMember = ({ groupId, member, groupMember, groupAdmin }) => {
               role="presentation"
             />
           </figure>
+          {groupAdmin && (
+            <div className="has-text-left p-2 is-overlay">
+              <span
+                className="tag is-danger is-medium is-clickable"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  deleteItem(e);
+                }}
+              >
+                <span
+                  className="fas fa-trash-alt"
+                  title="Delete kit item"
+                ></span>
+              </span>
+            </div>
+          )}
         </div>
         <div className="card-content">
-          <p>
+          <p className="title is-size-5">
             {user.lastName
               ? `${user.lastName.toUpperCase()}, ${user.firstName}`
               : 'UNKNOWN'}
           </p>
-          <p>{user.userName ? user.userName : 'Username ?'}</p>
-          <p>{roles.length > 0 ? roles.join(', ') : '-'}</p>
+          <p className="subtitle is-size-6">
+            {user.userName ? user.userName : 'Username ?'}
+          </p>
+          <p className="subtitle is-size-6">
+            {roles.length > 0 ? roles.join(', ') : '-'}
+          </p>
           <span className="icons-bottom-left">
             <span
               className={`fas fa-meh w-25 has-text-centered ${isRequested()}`}

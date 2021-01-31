@@ -45,7 +45,7 @@ const Groups = ({
   }
 
   function renderBlankList() {
-    const blankList = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+    const blankList = [{}, {}, {}, {}, {}, {}];
     return blankList.map((item, index) => {
       return <GroupCard key={`${index}`} group={item} />;
     });

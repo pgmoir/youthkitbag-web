@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import history from '../../utils/history';
 
 const GroupCard = ({ group }) => {
   function topImage() {
@@ -9,6 +9,31 @@ const GroupCard = ({ group }) => {
     }
     return images[0].imageUrl;
   }
+
+  function renderBlank() {
+    return (
+      <div className="column is-4-tablet is-3-desktop is-2-fullhd">
+        <article className="card">
+          <div className="card-image">
+            <figure className="image is-4by3">
+              <img src="/images/default.png" alt="" role="presentation" />
+            </figure>
+            <div className="has-text-right p-2 is-overlay">
+              <span className="tag is-dark is-rounded">0</span>
+            </div>
+          </div>
+          <div className="card-content">
+            <p className="title is-size-5">Loading ...</p>
+            <p className="subtitle is-size-6"></p>
+          </div>
+        </article>
+      </div>
+    );
+  }
+
+  const { _id, name, activitys, state, memberCount, appAdmin } = group;
+
+  if (!_id) return renderBlank();
 
   function renderState(state) {
     switch (state) {
@@ -36,54 +61,42 @@ const GroupCard = ({ group }) => {
     }
   }
 
-  function renderBlank() {
-    return (
-      <div className="column is-4-tablet is-3-desktop is-2-fullhd">
-        <article className="card">
-          <div className="card-image">
-            <figure className="image is-4by3">
-              <img src="/images/default.png" alt="" role="presentation" />
-            </figure>
-          </div>
-          <div className="card-content">
-            <p className="title is-size-5">Loading ...</p>
-            <p className="subtitle is-size-6"></p>
-            <p className="is-size-6">Members: counting...</p>
-          </div>
-        </article>
-      </div>
-    );
+  function viewItem(e) {
+    history.push(`/groups/${_id}`);
   }
 
-  const { _id, name, activitys, state, memberCount, appAdmin } = group;
-
-  if (!_id) return renderBlank();
+  function changeState(e) {
+    console.log('CHANGE ST');
+    /* <Link to={`/kitbag/kit/${kitbagId}/delete/${_id}`}> */
+  }
 
   return (
     <div className="column is-4-tablet is-3-desktop is-2-fullhd">
-      <article className="card">
-        <Link to={`/groups/${_id}`}>
-          <div className="card-image">
-            <figure className="image is-4by3">
-              <img src={topImage()} alt={name} role="presentation" />
-            </figure>
+      <article className="card is-clickable" onClick={(e) => viewItem(e)}>
+        <div className="card-image">
+          <figure className="image is-4by3">
+            <img src={topImage()} alt={name} role="presentation" />
+          </figure>
+          <div className="has-text-right p-2 is-overlay">
+            <span className="tag is-dark is-rounded">{memberCount}</span>
           </div>
-        </Link>
-        <div className="card-content">
-          <p className="title is-size-5">
-            {name}{' '}
-            <span className="">
-              {appAdmin ? (
-                <Link to={`/groups/state/${_id}`}>{renderState(state)}</Link>
-              ) : (
-                renderState(state)
-              )}
+          <div className="has-text-left p-2 is-overlay">
+            <span
+              className="tag is-dark is-medium is-clickable"
+              onClick={(e) => {
+                e.stopPropagation();
+                changeState(e);
+              }}
+            >
+              {renderState(state)}
             </span>
-          </p>
+          </div>
+        </div>
+        <div className="card-content">
+          <p className="title is-size-5">{name}</p>
           {activitys && (
             <p className="subtitle is-size-6">{activitys.join(', ')}</p>
           )}
-          <p className="is-size-6">Members: {memberCount}</p>
         </div>
       </article>
     </div>

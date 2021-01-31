@@ -1,10 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import history from '../../utils/history';
 import useMarketType from '../hooks/useMarketType';
 import classNames from 'classnames';
 import { MarketTypes } from '../../enums/marketTypes.enum';
 
 const MarketItemCard = ({ market }) => {
+  function topImage() {
+    const { images } = market;
+    if (!images || images.length === 0) {
+      return '/images/default.png';
+    }
+    return images[0].imageUrl;
+  }
+
   const {
     _id,
     title,
@@ -23,33 +31,45 @@ const MarketItemCard = ({ market }) => {
     isOwned
   );
 
-  function topImage() {
-    const { images } = market;
-    if (!images || images.length === 0) {
-      return '/images/default.png';
-    }
-    return images[0].imageUrl;
-  }
-
   function renderBlank() {
     return (
-      <div className="col-6 col-md-4 col-lg-3 mb-3">
-        <article className="card card-link card-b1">
-          <div className="d-flex">
-            <div className="blank-square bg-light" />
+      <div className="column is-4-tablet is-3-desktop is-2-fullhd">
+        <article className="card">
+          <div className="card-image">
+            <figure className="image is-4by3">
+              <img src="/images/default.png" alt="" role="presentation" />
+            </figure>
+            <div className="has-text-right p-2 is-overlay">
+              <span className="tag is-dark is-rounded">0</span>
+            </div>
           </div>
-          <div className="card-body">
-            <h3 className="card-title h6 ellipsis bg-light hgt-2">&nbsp;</h3>
-            <p className="card-text ellipsis bg-light hgt-3">&nbsp;</p>
+          <div className="card-content">
+            <p className="title is-size-5">Loading ...</p>
+            <p className="subtitle is-size-6"></p>
           </div>
         </article>
       </div>
     );
   }
+  // function renderBlank() {
+  //   return (
+  //     <div className="col-6 col-md-4 col-lg-3 mb-3">
+  //       <article className="card card-link card-b1">
+  //         <div className="d-flex">
+  //           <div className="blank-square bg-light" />
+  //         </div>
+  //         <div className="card-body">
+  //           <h3 className="card-title h6 ellipsis bg-light hgt-2">&nbsp;</h3>
+  //           <p className="card-text ellipsis bg-light hgt-3">&nbsp;</p>
+  //         </div>
+  //       </article>
+  //     </div>
+  //   );
+  // }
 
   if (!_id) return renderBlank();
 
-  const cardClasses = classNames('card', {
+  const cardClasses = classNames('card is-clickable', {
     'has-background-primary': marketType === MarketTypes.TRADE,
     'has-background-success': marketType === MarketTypes.RECYCLE,
     'has-background-info': marketType === MarketTypes.WANTED,
@@ -62,19 +82,23 @@ const MarketItemCard = ({ market }) => {
     'has-text-danger-light': marketType === MarketTypes.STOLEN,
   });
 
+  function viewItem(e) {
+    if (isOwned) {
+      history.push(`/kitbag/market/${kitbag}/edit/${_id}`);
+    } else {
+      history.push(`/market/view/${_id}`);
+    }
+  }
+
+  function deleteItem(e) {
+    console.log('DELETE');
+    /* <Link to={`/kitbag/kit/${kitbagId}/delete/${_id}`}> */
+  }
+
   return (
-    <div className="column is-6-mobile is-4-tablet is-3-desktop is-2-fullhd">
-      <article className={cardClasses}>
-        {/* {isOwned && (
-          <span className="icons-top-left pt-1">
-            <Link to={`/kitbag/market/${kitbag}/delete/${_id}`}>
-              <span
-                className="icon-tray-item fas fa-trash-alt"
-                title="Delete item"
-              ></span>
-            </Link>
-          </span>
-        )}
+    <div className="column is-4-tablet is-3-desktop is-2-fullhd">
+      <article className={cardClasses} onClick={(e) => viewItem(e)}>
+        {/* 
         <span
           className={`badge badge-pill ${
             isOwned ? `badge-light text-${color}` : `badge-${color}`
@@ -82,23 +106,33 @@ const MarketItemCard = ({ market }) => {
         >
           {pill}
         </span> */}
-        <Link
-          to={
-            isOwned
-              ? `/kitbag/market/${kitbag}/edit/${_id}`
-              : `/market/view/${_id}`
-          }
-        >
-          <div className="card-image">
-            {' '}
-            <figure className="image is-4by3">
-              <img src={topImage()} alt={title} role="presentation" />
-            </figure>
+        <div className="card-image">
+          <figure className="image is-4by3">
+            <img src={topImage()} alt={title} role="presentation" />
+          </figure>
+          <div className="has-text-right p-2 is-overlay">
+            <span className="tag is-dark is-rounded">{pill}</span>
           </div>
-        </Link>
+          {isOwned && (
+            <div className="has-text-left p-2 is-overlay">
+              <span
+                className="tag is-danger is-medium is-clickable"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  deleteItem(e);
+                }}
+              >
+                <span
+                  className="fas fa-trash-alt"
+                  title="Delete kit item"
+                ></span>
+              </span>
+            </div>
+          )}
+        </div>
         <div className="card-content">
-          <p>{title}</p>
-          {subtitle && <p>{subtitle}</p>}
+          <p className="title is-size-5">{title}</p>
+          {subtitle && <p className="subtitle is-size-6">{subtitle}</p>}
         </div>
       </article>
     </div>

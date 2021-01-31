@@ -45,9 +45,9 @@ const MarketItems = ({
   }
 
   function renderBlankList() {
-    const blankList = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+    const blankList = [{}, {}, {}, {}, {}, {}];
     return blankList.map((item, index) => {
-      return <MarketItemCard key={`${item._id}-${index}`} market={item} />;
+      return <MarketItemCard key={`${index}`} market={item} />;
     });
   }
 
@@ -76,11 +76,7 @@ const MarketItems = ({
   function renderList() {
     return marketItems.map((item, index) => {
       return (
-        <MarketItemCard
-          key={`${item._id}-${index}`}
-          market={item}
-          kitbagId={kitbagId}
-        />
+        <MarketItemCard key={`${index}`} market={item} kitbagId={kitbagId} />
       );
     });
   }
@@ -99,7 +95,6 @@ const MarketItems = ({
             placeholderText="Search the market"
           />
         </div>
-        <div className="column is-one-quarter has-text-right"></div>
       </div>
       <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
         {renderList()}

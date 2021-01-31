@@ -2,16 +2,6 @@ import React from 'react';
 import history from '../../../utils/history';
 
 const KitCard = ({ kit, kitbagId }) => {
-  function totalQuantity() {
-    const { inbag } = kit;
-    if (!inbag) {
-      return 0;
-    }
-    return inbag.reduce(function (x, y) {
-      return x + y.quantity;
-    }, 0);
-  }
-
   function topImage() {
     const { images } = kit;
     if (!images || images.length === 0) {
@@ -43,16 +33,26 @@ const KitCard = ({ kit, kitbagId }) => {
 
   const { _id, title, subtitle } = kit;
 
-  function deleteItem(e) {
-    console.log('DELETE', kitbagId, _id, title);
-    /* <Link to={`/kitbag/kit/${kitbagId}/delete/${_id}`}> */
+  if (!_id) return renderBlank();
+
+  function totalQuantity() {
+    const { inbag } = kit;
+    if (!inbag) {
+      return 0;
+    }
+    return inbag.reduce(function (x, y) {
+      return x + y.quantity;
+    }, 0);
   }
 
   function viewItem(e) {
     history.push(`/kitbag/kit/${kitbagId}/edit/${_id}`);
   }
 
-  if (!_id) return renderBlank();
+  function deleteItem(e) {
+    console.log('DELETE', kitbagId, _id, title);
+    /* <Link to={`/kitbag/kit/${kitbagId}/delete/${_id}`}> */
+  }
 
   return (
     <div className="column is-4-tablet is-3-desktop is-2-fullhd">
@@ -69,7 +69,7 @@ const KitCard = ({ kit, kitbagId }) => {
               className="tag is-danger is-medium is-clickable"
               onClick={(e) => {
                 e.stopPropagation();
-                deleteItem(e, _id);
+                deleteItem(e);
               }}
             >
               <span className="fas fa-trash-alt" title="Delete kit item"></span>
