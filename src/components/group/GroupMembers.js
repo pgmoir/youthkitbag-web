@@ -108,7 +108,7 @@ const GroupMembers = ({ stateSearch, items, fetchGroupMembers, match }) => {
               search={search}
               callback={setSearch}
               incPagination={false}
-              placeholderText="Search members"
+              placeholderText="Search group members"
             />
           </div>
         </div>

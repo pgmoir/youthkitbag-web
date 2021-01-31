@@ -19,7 +19,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case SEARCH_KITBAG_KITS:
-      return { ...state, search: action.payload.data };
+      return { ...state, search: action.payload };
     case FETCH_KITBAG_KITS:
       return { ...state, current: {}, list: action.payload.data.kits };
     case FETCH_KITBAG_KIT:

@@ -74,7 +74,7 @@ const KitbagMarketAnnouncement = ({
       </div>
       <div className="buttons">
         <Link
-          to="/market?searchfor=&by=trade&page=1&pagesize=24&excgroups=true"
+          to={`/market?searchfor=&by=${marketType}&page=1&pagesize=24&excgroups=true`}
           className="button is-success is-inverted"
         >
           View all your {description}

@@ -96,6 +96,7 @@ const MarketItems = ({
             search={search}
             callback={setSearch}
             collections={lists}
+            placeholderText="Search the market"
           />
         </div>
         <div className="column is-one-quarter has-text-right"></div>
