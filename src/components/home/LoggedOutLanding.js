@@ -1,7 +1,5 @@
 import React from 'react';
-import Alert from '../includes/Alert';
 import SignUpForm from '../auth/SignUpForm';
-import { Link } from 'react-router-dom';
 
 const LoggedOutLanding = () => {
   return (

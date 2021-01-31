@@ -66,6 +66,7 @@ const GroupCard = ({ group }) => {
   }
 
   function changeState(e) {
+    if (!appAdmin) return;
     console.log('CHANGE ST');
     /* <Link to={`/kitbag/kit/${kitbagId}/delete/${_id}`}> */
   }

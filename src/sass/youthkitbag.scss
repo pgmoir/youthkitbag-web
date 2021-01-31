@@ -59,5 +59,10 @@ $widthUnit: 'em';
 }
 
 /*
-  tags
+  accessibility
   */
+.a11y-highlight {
+  &:hover {
+    text-decoration: underline;
+  }
+}

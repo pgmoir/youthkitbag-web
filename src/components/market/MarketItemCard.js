@@ -24,12 +24,7 @@ const MarketItemCard = ({ market }) => {
     threads,
   } = market;
 
-  const { icon, iconTitle, color, pill } = useMarketType(
-    marketType,
-    marketPrice,
-    threads,
-    isOwned
-  );
+  const { pill } = useMarketType(marketType, marketPrice, threads, isOwned);
 
   function renderBlank() {
     return (
@@ -51,21 +46,6 @@ const MarketItemCard = ({ market }) => {
       </div>
     );
   }
-  // function renderBlank() {
-  //   return (
-  //     <div className="col-6 col-md-4 col-lg-3 mb-3">
-  //       <article className="card card-link card-b1">
-  //         <div className="d-flex">
-  //           <div className="blank-square bg-light" />
-  //         </div>
-  //         <div className="card-body">
-  //           <h3 className="card-title h6 ellipsis bg-light hgt-2">&nbsp;</h3>
-  //           <p className="card-text ellipsis bg-light hgt-3">&nbsp;</p>
-  //         </div>
-  //       </article>
-  //     </div>
-  //   );
-  // }
 
   if (!_id) return renderBlank();
 

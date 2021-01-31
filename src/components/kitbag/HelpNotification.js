@@ -15,7 +15,7 @@ const HelpNotification = ({ nameOf, hideFlag, title, children }) => {
 
     var found = flags.find((e) => e.name === nameOf);
     setHelpDismissed(!found ? false : found.hide);
-  }, [flags, setHelpDismissed]);
+  }, [flags, setHelpDismissed, nameOf]);
 
   function hideHelp() {
     hideFlag(nameOf, true);

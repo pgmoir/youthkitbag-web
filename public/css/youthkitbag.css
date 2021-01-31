@@ -7936,10 +7936,17 @@ body,
 
 /*
   burger bun css solution (no javascript)
-  https://jsfiddle.net/jfm2jyk5/
+  adapation from here https://jsfiddle.net/jfm2jyk5/
+  not quite working yet
   */
 #navbar-toggle-state {
   display: none; }
 
 #navbar-toggle-state:checked ~ .navbar-menu {
   display: block !important; }
+
+/*
+  accessibility
+  */
+.a11y-highlight:hover {
+  text-decoration: underline; }

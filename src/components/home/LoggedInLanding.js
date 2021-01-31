@@ -3,7 +3,6 @@ import Alert from '../includes/Alert';
 import { connect } from 'react-redux';
 import {
   userHasGroupMembership,
-  userHasGroupAdministration,
   userPreferredKitbagId,
 } from '../../utils/user';
 import UserAnnouncement from './UserAnnouncement';
@@ -24,10 +23,9 @@ const mapStateToProps = (state) => ({
 });
 
 const LoggedInLanding = ({ user }) => {
-  const [loading, setLoading] = useState(true);
   const [preferredKitbagId, setPreferredKitbagId] = useState(null);
   const [hasGroupMembership, setHasGroupMembership] = useState(false);
-  const [hasGroupAdministration, setHasGroupAdministration] = useState(false);
+  // const [hasGroupAdministration, setHasGroupAdministration] = useState(false);
 
   const group =
     user.groups && user.groups.length > 0
@@ -40,8 +38,7 @@ const LoggedInLanding = ({ user }) => {
     if (user) {
       setPreferredKitbagId(userPreferredKitbagId(user));
       setHasGroupMembership(userHasGroupMembership(user));
-      setHasGroupAdministration(userHasGroupAdministration(user));
-      setLoading(false);
+      // setHasGroupAdministration(userHasGroupAdministration(user));
     }
   }, [user]);
 
