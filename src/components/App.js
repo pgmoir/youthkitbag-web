@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import PrivateRoute from '../utils/privateRoute';
 import history from '../utils/history';
