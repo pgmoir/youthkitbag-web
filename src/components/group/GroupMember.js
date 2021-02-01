@@ -74,7 +74,7 @@ const GroupMember = ({ groupId, member, groupMember, groupAdmin }) => {
   }
 
   return (
-    <div className="column is-4-tablet is-3-desktop is-2-fullhd">
+    <div className="column is-12-mobile is-4-tablet is-3-desktop is-2-fullhd">
       <article className="card">
         <div className="card-image">
           <figure className="image is-4by3">
