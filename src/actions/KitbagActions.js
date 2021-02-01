@@ -7,26 +7,9 @@ import {
   API_ERROR,
   CREATE_KITBAG_INVITE,
   EDIT_KITBAG_LEAVE,
-  FETCH_PREFERRED_KITBAG,
   CREATE_KITBAG,
 } from './types';
 import history from '../utils/history';
-
-export const fetchPreferredKitbag = () => (dispatch) => {
-  axios
-    .get('/kitbag/preferred', {})
-    .then((response) => {
-      dispatch({
-        type: FETCH_PREFERRED_KITBAG,
-        payload: response.data,
-      });
-    })
-    .catch((err) => {
-      const { response } = err;
-      dispatch({ type: API_ERROR, payload: response.data });
-      history.push('/');
-    });
-};
 
 export const fetchKitbag = (kitbagId) => (dispatch) => {
   axios

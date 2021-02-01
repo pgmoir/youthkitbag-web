@@ -34,7 +34,7 @@ const PreferredKitbagForm = ({
   function updatePreferredKitbag() {
     kitbags = undefined;
     const kitbagId = values.find((a) => a.preferred)._id;
-    editPreferredKitbag(userId, kitbagId);
+    editPreferredKitbag({ kitbagId });
   }
 
   function cancelPage() {

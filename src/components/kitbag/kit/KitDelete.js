@@ -1,81 +1,57 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import {
-  fetchKitbagKit,
-  deleteKitbagKit,
-} from '../../../actions/KitbagKitActions';
-import Modal from '../../includes/Modal';
-import history from '../../../utils/history';
-
-const mapStateToProps = (state) => ({
-  item: state.kitbag.kit.current,
-});
+import { deleteKitbagKit } from '../../../actions/KitbagKitActions';
 
 const mapDispatchToProps = {
-  fetchKitbagKit,
   deleteKitbagKit,
 };
 
-const KitDelete = ({ item, fetchKitbagKit, deleteKitbagKit, match }) => {
-  const { kitbagId, kitId } = match.params;
-  const [kit, setKit] = useState({});
-
-  useEffect(() => {
-    if (item) {
-      setKit(item);
-    }
-  }, [item, setKit]);
-
-  useEffect(() => {
-    if (kitbagId && kitId) {
-      fetchKitbagKit(kitbagId, kitId);
-    }
-  }, [kitbagId, kitId, fetchKitbagKit]);
-
-  function renderTitle() {
-    if (!kit._id) {
-      return 'Delete item of kit';
-    }
-    return `Delete "${kit.title}"`;
-  }
-
-  function renderContent() {
-    if (!kit._id) {
-      return 'Are you sure you want to delete this item of kit? You do have the option to just change the active state and retain the history of this item.';
-    }
-    return `Are you sure you want to delete "${kit.title}"? You do have the option to just change the active state and retain the history of this item.`;
-  }
-
-  function renderActions() {
-    return (
-      <>
-        <Link
-          to={`/kitbag/kit/${kitbagId}`}
-          className="btn btn-outline-secondary"
-          data-dismiss="modal"
-        >
-          Cancel
-        </Link>
-        <button
-          type="button"
-          className="btn btn-danger"
-          onClick={() => deleteKitbagKit(kitbagId, kitId)}
-        >
-          Delete
-        </button>
-      </>
-    );
+const KitDelete = ({
+  kitId,
+  kitbagId,
+  title,
+  modalIsActive,
+  setModalIsActive,
+  deleteKitbagKit,
+}) => {
+  function closeModal() {
+    setModalIsActive(false);
   }
 
   return (
-    <Modal
-      title={renderTitle()}
-      content={renderContent()}
-      actions={renderActions()}
-      onDismiss={() => history.push(`/kitbag/kit/${kitbagId}`)}
-    />
+    <div className={`modal ${modalIsActive ? 'is-active' : ''}`}>
+      <div className="modal-background" onClick={closeModal}></div>
+      <div className="modal-card">
+        <header className="modal-card-head">
+          <p className="modal-card-title">Please confirm</p>
+          <button
+            className="delete"
+            aria-label="close"
+            onClick={closeModal}
+          ></button>
+        </header>
+        <section className="modal-card-body">
+          <p className="is-size-6">
+            Are you sure you want to delete the item of kit, "{title}"?
+          </p>
+        </section>
+        <footer className="modal-card-foot">
+          <button
+            className="button is-success"
+            onClick={async () => {
+              deleteKitbagKit({ kitbagId, kitId });
+              setModalIsActive(false);
+            }}
+          >
+            Delete
+          </button>
+          <button className="button is-warning" onClick={closeModal}>
+            Cancel
+          </button>
+        </footer>
+      </div>
+    </div>
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(KitDelete);
+export default connect(null, mapDispatchToProps)(KitDelete);

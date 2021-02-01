@@ -10,7 +10,7 @@ import Pagination from '../../includes/Pagination';
 
 const mapStateToProps = (state) => ({
   stateSearch: state.kitbag.kit.search,
-  items: state.kitbag.kit.list,
+  entities: state.kitbag.kit.entities,
   pagination: state.pagination,
   kitbags: state.user.kitbags,
   lists: state.kitbag.kit.lists,
@@ -22,7 +22,7 @@ const mapDispatchToProps = {
 
 const Kitbag = ({
   stateSearch,
-  items,
+  entities,
   pagination,
   kitbags,
   lists,
@@ -31,13 +31,6 @@ const Kitbag = ({
 }) => {
   const [search, setSearch] = useState(stateSearch);
   const [kitbagId] = useState(match.params.kitbagId);
-  const [kits, setKits] = useState(items);
-
-  useEffect(() => {
-    if (items) {
-      setKits(items);
-    }
-  }, [items]);
 
   useEffect(() => {
     fetchKitbagKits({
@@ -58,11 +51,11 @@ const Kitbag = ({
   function renderBlankList() {
     const blankList = [{}, {}, {}, {}, {}, {}];
     return blankList.map((item, index) => {
-      return <KitCard key={`${item._id}-${index}`} kit={item} />;
+      return <KitCard key={`${index}`} kit={item} />;
     });
   }
 
-  if (!kits) {
+  if (!Object.keys(entities)) {
     return (
       <div className="container is-fluid px-0">
         <Title title="Loading ...." />
@@ -74,43 +67,54 @@ const Kitbag = ({
   }
 
   function renderList() {
-    return kits.map((item, index) => {
+    return Object.keys(entities).map((key, index) => {
       return (
-        <KitCard key={`${item._id}-${index}`} kit={item} kitbagId={kitbagId} />
+        <KitCard
+          key={`${index}`}
+          kit={entities[key]}
+          kitbagId={kitbagId}
+          search={search}
+        />
       );
     });
   }
 
   return (
-    <div className="container is-fluid px-0">
-      <Title title={getTitle()} />
-      <Alert />
-      <div className="columns">
-        <div className="column is-three-quarters">
-          <SearchForm
-            searchId={kitbagId}
+    <>
+      <div className="container is-fluid px-0">
+        <Title title={getTitle()} />
+        <Alert />
+        <div className="columns">
+          <div className="column is-three-quarters">
+            <SearchForm
+              searchId={kitbagId}
+              search={search}
+              callback={setSearch}
+              collections={lists}
+              placeholderText="Search your kit"
+            />
+          </div>
+          <div className="column is-one-quarter has-text-right">
+            <Link
+              to={`/kitbag/kit/${kitbagId}/new`}
+              className="button is-primary"
+            >
+              Add new kit
+            </Link>
+          </div>
+        </div>
+        <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
+          {renderList()}
+        </div>
+        <div className="mb-3">
+          <Pagination
+            kitbagId={kitbagId}
             search={search}
             callback={setSearch}
-            collections={lists}
-            placeholderText="Search your kit"
           />
         </div>
-        <div className="column is-one-quarter has-text-right">
-          <Link
-            to={`/kitbag/kit/${kitbagId}/new`}
-            className="button is-primary"
-          >
-            Add new kit
-          </Link>
-        </div>
       </div>
-      <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
-        {renderList()}
-      </div>
-      <div className="mb-3">
-        <Pagination kitbagId={kitbagId} search={search} callback={setSearch} />
-      </div>
-    </div>
+    </>
   );
 };
 

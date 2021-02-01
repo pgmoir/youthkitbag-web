@@ -4,12 +4,15 @@ import {
   FETCH_GROUPS,
   RESET,
   LOGOUT,
+  DELETE_KITBAG_KIT,
 } from '../actions/types';
 
 const initialState = { totalItems: 0, itemsPerPage: 24, currentPage: 1 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case DELETE_KITBAG_KIT:
+      return { ...state, totalItems: state.totalItems - 1 };
     case FETCH_KITBAG_KITS:
     case FETCH_MARKET_ITEMS:
     case FETCH_GROUPS:

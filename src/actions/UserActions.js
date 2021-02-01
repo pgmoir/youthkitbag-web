@@ -9,7 +9,7 @@ import {
 } from './types';
 import axios from '../utils/axios';
 import history from '../utils/history';
-import { fetchPreferredKitbag } from './';
+// import { fetchPreferredKitbag } from './';
 
 export const getUser = () => (dispatch) => {
   axios
@@ -17,7 +17,7 @@ export const getUser = () => (dispatch) => {
     .then((response) => {
       dispatch({ type: GETALL_SUCCESS });
       dispatch({ type: GET_USER, payload: response.data });
-      dispatch(fetchPreferredKitbag());
+      // dispatch(fetchPreferredKitbag());
     })
     .catch(() => {});
 };
@@ -49,12 +49,11 @@ export const deleteUser = (formValues) => (dispatch) => {
     });
 };
 
-export const editPreferredKitbag = ({ kitbagId }, { url }) => (dispatch) => {
+export const editPreferredKitbag = ({ kitbagId }) => (dispatch) => {
   axios
     .put(`/user/kitbag/${kitbagId}`, {}, {})
     .then((response) => {
       dispatch({ type: EDIT_USER, payload: response.data });
-      if (url) history.push(url);
     })
     .catch((err) => {
       const { response } = err;

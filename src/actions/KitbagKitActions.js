@@ -81,12 +81,11 @@ export const editKitbagKit = (kitbagId, kitId, formValues) => (dispatch) => {
     });
 };
 
-export const deleteKitbagKit = (kitbagId, kitId) => (dispatch) => {
+export const deleteKitbagKit = ({ kitbagId, kitId }) => (dispatch) => {
   axios
     .delete(`/kitbag/kit/${kitbagId}/${kitId}`, {})
     .then((response) => {
-      history.push(`/kitbag/kit/${kitbagId}`);
-      dispatch({ type: DELETE_KITBAG_KIT, payload: response.data });
+      dispatch({ type: DELETE_KITBAG_KIT, payload: kitId });
     })
     .catch((err) => {
       const { response } = err;

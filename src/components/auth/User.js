@@ -1,18 +1,17 @@
-import { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { getUser } from '../../actions/UserActions';
 import { fetchKitbagLists } from '../../actions/KitbagKitActions';
-
-const mapStateToProps = (state) => ({
-  kitbags: state.user.kitbags,
-});
 
 const mapDispatchToProps = {
   getUser,
   fetchKitbagLists,
 };
 
-const User = ({ kitbags, getUser, fetchKitbagLists }) => {
+const User = ({ getUser, fetchKitbagLists }) => {
+  console.log('Render USER component');
+  const userId = useSelector((state) => state.user._id);
+  const kitbags = useSelector((state) => state.user.kitbags);
+
   const kitbagId =
     kitbags &&
     kitbags.length > 0 &&
@@ -20,14 +19,15 @@ const User = ({ kitbags, getUser, fetchKitbagLists }) => {
       ? kitbags.find((a) => a.preferred)._id
       : undefined;
 
-  useEffect(() => {
+  if (!userId) {
     getUser();
-    if (kitbagId) {
-      fetchKitbagLists(kitbagId);
-    }
-  }, [getUser, fetchKitbagLists, kitbagId]);
+  }
+
+  if (kitbagId) {
+    fetchKitbagLists(kitbagId);
+  }
 
   return null;
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(User);
+export default connect(null, mapDispatchToProps)(User);

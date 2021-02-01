@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import history from '../../../utils/history';
+import KitDelete from './KitDelete';
 
 const KitCard = ({ kit, kitbagId }) => {
   const [modalIsActive, setModalIsActive] = useState(false);
+
   function topImage() {
     const { images } = kit;
     if (!images || images.length === 0) {
@@ -51,13 +53,7 @@ const KitCard = ({ kit, kitbagId }) => {
   }
 
   function deleteItem(e) {
-    console.log('DELETE', kitbagId, _id, title);
     setModalIsActive(true);
-    /* <Link to={`/kitbag/kit/${kitbagId}/delete/${_id}`}> */
-  }
-
-  function closeModal() {
-    setModalIsActive(false);
   }
 
   return (
@@ -92,30 +88,13 @@ const KitCard = ({ kit, kitbagId }) => {
           </div>
         </article>
       </div>
-      <div className={`modal ${modalIsActive ? 'is-active' : ''}`}>
-        <div className="modal-background" onClick={closeModal}></div>
-        <div className="modal-card">
-          <header className="modal-card-head">
-            <p className="modal-card-title">Please confirm</p>
-            <button
-              className="delete"
-              aria-label="close"
-              onClick={closeModal}
-            ></button>
-          </header>
-          <section className="modal-card-body">
-            <p className="is-size-6">
-              Are you sure you want to delete the item of kit, "{title}"?
-            </p>
-          </section>
-          <footer className="modal-card-foot">
-            <button className="button is-success">Delete</button>
-            <button className="button is-warning" onClick={closeModal}>
-              Cancel
-            </button>
-          </footer>
-        </div>
-      </div>
+      <KitDelete
+        kitId={_id}
+        kitbagId={kitbagId}
+        title={title}
+        modalIsActive={modalIsActive}
+        setModalIsActive={setModalIsActive}
+      />
     </>
   );
 };
