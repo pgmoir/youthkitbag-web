@@ -21,45 +21,19 @@ const MarketTitle = ({ market, isOwned }) => {
       <Helmet>
         <title>{`${title} - YouthKitbag`}</title>
       </Helmet>
-      <h1 className="title is-size-4">{title}</h1>
-      <h2 className="subtitle is-size-5">{subtitle}</h2>
-      <hr />
-      {/* <section
-        id="title"
-        className="container-fluid px-0"
-        role="banner"
-        aria-label="breadcrumb navigation and page title"
-      >
-        <div className="container d-flex border-bottom-1">
-          <div className={`p-3 align-self-center text-${color} h1`}>
-            <span
-              className={`${icon} has-text-centered`}
-              title={iconTitle}
-            ></span>
-          </div>
-          <div className="w-100">
-            <div className="py-3">
-              <h1 className={`m-0 text-${color}`}>{title}</h1>
-            </div>
-            {subtitle && (
-              <div className="pb-3">
-                <h2 className="m-0">{subtitle}</h2>
-              </div>
-            )}
-          </div>
-          <div className="d-flex flex-column">
-            <div className="p-3 h1">
-              <span
-                className={`badge badge-pill ${
-                  isOwned ? `badge-light text-${color}` : `badge-${color}`
-                }`}
-              >
-                {pill}
-              </span>
-            </div>
-          </div>
+      <div className="columns">
+        <div className="column is-two-thirds">
+          <h1 className="title is-size-4">{title}</h1>
+          <h2 className="subtitle is-size-5">{subtitle}</h2>
         </div>
-      </section> */}
+        <div className="column is-one-third has-text-left-mobile has-text-right">
+          <span className={`tag is-rounded is-large is-size-4 is-${color}`}>
+            <span className={`${icon} pr-2`} title={iconTitle}></span>
+            {pill}
+          </span>
+        </div>
+      </div>
+      <hr />
     </>
   );
 };

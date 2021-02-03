@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { fetchMarketItem } from '../../actions/MarketActions';
 import MarketItemForm from './MarketItemForm';
 import MarketTitle from '../includes/title/MarketTitle';
 import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
+import Breadcrumb from '../includes/Breadcrumb';
 
 const mapDispatchToProps = {
   fetchMarketItem,
@@ -16,6 +17,12 @@ const MarketItemViewPage = ({ fetchMarketItem, match }) => {
   const market = useSelector((state) => {
     return !marketId ? null : state.market.entities[marketId];
   });
+
+  const crumbs = [
+    { title: 'Home', to: '/' },
+    { title: 'Market', to: '/market' },
+    { title: `${market?.title}` },
+  ];
 
   useEffect(() => {
     fetchMarketItem(marketId);
@@ -31,6 +38,7 @@ const MarketItemViewPage = ({ fetchMarketItem, match }) => {
 
   return (
     <div className="container">
+      <Breadcrumb crumbs={crumbs} />
       {getTitle()}
       <Alert />
       {market && market._id && <MarketItemForm market={market} />}

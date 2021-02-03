@@ -23,7 +23,7 @@ const useMarketType = (marketType, marketPrice, threads, isOwned) => {
     isFound || isLost || isStolen
       ? 'danger'
       : isWanted || isWantRecycle
-      ? 'secondary'
+      ? 'info'
       : isRecycle
       ? 'success'
       : 'primary';
@@ -40,7 +40,7 @@ const useMarketType = (marketType, marketPrice, threads, isOwned) => {
       <>{pillText}</>
     ) : (
       <>
-        {pillText} / <span className="fas fa-comments"></span>{' '}
+        {pillText} / <span className="fas fa-comments ml-1"></span>{' '}
         {isOwned
           ? `${threads.filter((t) => t.responseState === 'open').length}`
           : ''}

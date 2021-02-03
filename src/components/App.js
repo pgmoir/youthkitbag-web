@@ -64,7 +64,7 @@ const App = ({ auth }) => {
           <section
             id="main"
             aria-label="main body of content plus related links and features"
-            className="section"
+            className="section pt-5"
           >
             <noscript>
               You need to enable JavaScript to run this application.

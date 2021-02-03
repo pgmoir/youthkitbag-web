@@ -6,6 +6,7 @@ import MarketItemCard from './MarketItemCard';
 import SearchForm from '../includes/SearchForm';
 import Pagination from '../includes/Pagination';
 import Alert from '../includes/Alert';
+import Breadcrumb from '../includes/Breadcrumb';
 
 const mapStateToProps = (state) => ({
   stateSearch: state.market.search,
@@ -33,6 +34,8 @@ const MarketItems = ({
     fetchMarketItems({ ...search });
   }, [search, fetchMarketItems]);
 
+  const crumbs = [{ title: 'Home', to: '/' }, { title: 'Market' }];
+
   function getTitle() {
     return `Market (${pagination.totalItems})`;
   }
@@ -46,22 +49,12 @@ const MarketItems = ({
 
   if (!Object.keys(entities)) {
     return (
-      <div>
+      <div className="container is-fluid px-0">
+        <Breadcrumb crumbs={crumbs} />
         <Title title="Loading ...." />
-        <section
-          id="main"
-          className="container-fluid"
-          aria-label="main body of content plus related links and features"
-        >
-          <div className="container">
-            <div className="row">
-              <div className="col-12 col-sm-9">
-                <div className="bg-light hgt-3 mb-3">&nbsp;</div>
-              </div>
-            </div>
-            <div className="row">{renderBlankList()}</div>
-          </div>
-        </section>
+        <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
+          {renderBlankList()}
+        </div>
       </div>
     );
   }
@@ -80,6 +73,7 @@ const MarketItems = ({
 
   return (
     <div className="container is-fluid px-0">
+      <Breadcrumb crumbs={crumbs} />
       <Title title={getTitle()} />
       <Alert />
       <div className="columns">

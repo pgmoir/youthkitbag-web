@@ -190,7 +190,7 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
           {showTracking()}
           <TextInputStd
             label="Activities"
-            value={market.activitys.join(', ')}
+            value={market.activitys?.join(', ')}
             readOnly={true}
             addClassName="is-static"
           />
@@ -205,7 +205,7 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
           )}
         </div>
       </div>
-      {market.threads.length > 0 && (
+      {/* {market.threads.length > 0 && (
         <>
           <div className="row">
             <div className="col-12">
@@ -219,7 +219,7 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
             marketType={market.marketType}
           />
         </>
-      )}
+      )} */}
     </>
   );
 };
