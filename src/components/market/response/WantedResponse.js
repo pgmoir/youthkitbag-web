@@ -12,35 +12,35 @@ export const WantedResponse = ({
   return (
     <>
       {values && (
-        <>
-          <h3>Are you able to supply this item</h3>
-          <p>
+        <div className="content">
+          <p className="is-size-6 has-text-weight-medium">
+            Are you able to supply this item?
+          </p>
+          <p className="is-size-6">
             If you can help fulfill this wanted request, then please submit an
             asking price, or optionally, leave as 0 (zero) if you&apos;re
-            willing to donate for free, and any other relevant details. The
-            purchaser will get back to you as quickly as possible.
+            willing to donate for free, and include any other relevant details.
+            The purchaser will get back to you as quickly as possible.
           </p>
-          <form className="mb-3" onSubmit={handleSubmit}>
-            <div>
-              <TextInputStd
-                type="number"
-                label="Asking Price"
-                value={values.responsePrice}
-                field="responsePrice"
-                step=".01"
-                min="0"
-                max="29999.99"
-                handleChange={handleChange}
-                error={errors.responsePrice}
-              />
-              <TextAreaInputStd
-                label="Details"
-                value={values.details}
-                field="details"
-                handleChange={handleChange}
-                error={errors.details}
-              />
-            </div>
+          <form onSubmit={handleSubmit}>
+            <TextInputStd
+              type="number"
+              label="Asking Price"
+              value={values.responsePrice}
+              field="responsePrice"
+              step=".01"
+              min="0"
+              max="29999.99"
+              handleChange={handleChange}
+              error={errors.responsePrice}
+            />
+            <TextAreaInputStd
+              label="Details"
+              value={values.details}
+              field="details"
+              handleChange={handleChange}
+              error={errors.details}
+            />
             <hr />
             <div className="buttons">
               <button className="button is-primary" type="submit">
@@ -51,7 +51,7 @@ export const WantedResponse = ({
               </Link>
             </div>
           </form>
-        </>
+        </div>
       )}
     </>
   );

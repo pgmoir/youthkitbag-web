@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { fetchKitbagKit } from '../../../actions/KitbagKitActions';
 import KitForm from './KitForm';
 import Title from '../../includes/title/Title';
 import Alert from '../../includes/Alert';
 
-const mapStateToProps = (state) => ({
-  current: state.kitbag.kit.current,
-});
-
 const mapDispatchToProps = {
   fetchKitbagKit,
 };
 
-const KitPage = ({ current, fetchKitbagKit, match }) => {
+const KitPage = ({ fetchKitbagKit, match }) => {
   const { kitId, kitbagId } = match.params;
+
+  const current = useSelector((state) => {
+    return !kitId ? null : state.kitbag.kit.entities[kitId];
+  });
+
   const [kit, setKit] = useState({
     title: '',
     subtitle: '',
@@ -49,12 +50,12 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
     }
   }, [current]);
 
-  function itemIsLoding() {
+  function itemIsLoading() {
     return kitId && !kit._id;
   }
 
   function getTitle() {
-    if (itemIsLoding()) {
+    if (itemIsLoading()) {
       return 'Loading ...';
     }
 
@@ -96,4 +97,4 @@ const KitPage = ({ current, fetchKitbagKit, match }) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(KitPage);
+export default connect(null, mapDispatchToProps)(KitPage);

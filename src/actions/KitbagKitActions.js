@@ -19,7 +19,6 @@ export const fetchKitbagKits = ({
   order,
   direction,
   kitbagId,
-  pushHistory,
 }) => (dispatch) => {
   axios
     .get(`/kitbag/kit/${kitbagId}`, {
@@ -27,15 +26,14 @@ export const fetchKitbagKits = ({
     })
     .then((response) => {
       dispatch({ type: FETCH_KITBAG_KITS, payload: response.data });
-      if (pushHistory) {
-        dispatch({
-          type: SEARCH_KITBAG_KITS,
-          payload: { searchfor, by, page, pagesize, order, direction },
-        });
-        history.push(
-          `/kitbag/kit/${kitbagId}?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}&order=${order}&direction=${direction}`
-        );
-      }
+
+      dispatch({
+        type: SEARCH_KITBAG_KITS,
+        payload: { searchfor, by, page, pagesize, order, direction },
+      });
+      history.push(
+        `/kitbag/kit/${kitbagId}?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}&order=${order}&direction=${direction}`
+      );
     })
     .catch((err) => {
       const { response } = err;

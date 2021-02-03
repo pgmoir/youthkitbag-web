@@ -9,7 +9,7 @@ import Alert from '../includes/Alert';
 
 const mapStateToProps = (state) => ({
   stateSearch: state.market.search,
-  items: Object.values(state.market.list),
+  entities: state.market.entities,
   pagination: state.pagination,
   lists: state.kitbag.kit.lists,
 });
@@ -20,7 +20,7 @@ const mapDispatchToProps = {
 
 const MarketItems = ({
   stateSearch,
-  items,
+  entities,
   pagination,
   lists,
   fetchMarketItems,
@@ -28,16 +28,9 @@ const MarketItems = ({
 }) => {
   const [search, setSearch] = useState(stateSearch);
   const kitbagId = match.params.kitbagId;
-  const [marketItems, setMarketItems] = useState([]);
 
   useEffect(() => {
-    if (items) {
-      setMarketItems(items);
-    }
-  }, [items]);
-
-  useEffect(() => {
-    fetchMarketItems({ ...search, pushHistory: true });
+    fetchMarketItems({ ...search });
   }, [search, fetchMarketItems]);
 
   function getTitle() {
@@ -51,7 +44,7 @@ const MarketItems = ({
     });
   }
 
-  if (!marketItems) {
+  if (!Object.keys(entities)) {
     return (
       <div>
         <Title title="Loading ...." />
@@ -74,9 +67,13 @@ const MarketItems = ({
   }
 
   function renderList() {
-    return marketItems.map((item, index) => {
+    return Object.keys(entities).map((key, index) => {
       return (
-        <MarketItemCard key={`${index}`} market={item} kitbagId={kitbagId} />
+        <MarketItemCard
+          key={`${index}`}
+          market={entities[key]}
+          kitbagId={kitbagId}
+        />
       );
     });
   }

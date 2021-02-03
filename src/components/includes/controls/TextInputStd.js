@@ -19,16 +19,12 @@ const TextInputStd = ({
   autoList,
   iconLeft,
 }) => {
-  const controlClasses = classNames({
-    control: true,
+  const controlClasses = classNames('control', 'has-icons-right', {
     'has-icons-left': iconLeft,
-    'has-icons-right': true,
   });
 
-  const inputClasses = classNames({
-    input: true,
+  const inputClasses = classNames('input', addClassName, {
     'is-danger': error,
-    addClassName: addClassName,
   });
 
   return (

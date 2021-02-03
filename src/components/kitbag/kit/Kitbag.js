@@ -36,7 +36,6 @@ const Kitbag = ({
     fetchKitbagKits({
       ...search,
       kitbagId,
-      pushHistory: true,
     });
   }, [search, fetchKitbagKits, kitbagId]);
 
@@ -69,12 +68,7 @@ const Kitbag = ({
   function renderList() {
     return Object.keys(entities).map((key, index) => {
       return (
-        <KitCard
-          key={`${index}`}
-          kit={entities[key]}
-          kitbagId={kitbagId}
-          search={search}
-        />
+        <KitCard key={`${index}`} kit={entities[key]} kitbagId={kitbagId} />
       );
     });
   }

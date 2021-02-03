@@ -12,6 +12,7 @@ import Threads from '../thread/threads/Threads';
 import validate from '../includes/FormEmptyValidationRules';
 import { ImagesDisplay } from '../includes/forms/ImagesDisplay';
 import { MarketTypes } from '../../enums/marketTypes.enum';
+import TextInputStd from '../includes/controls/TextInputStd';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -21,7 +22,7 @@ const mapDispatchToProps = {
   respondMarketItem,
 };
 
-const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
+const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
   const initialValues = {
     _id: '',
     responseOn: '',
@@ -93,11 +94,12 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
       market.marketPrice === 0 ? 'free' : `£${market.marketPrice.toFixed(2)}`;
 
     return (
-      <p>
-        <strong>{label}: </strong>
-        <br />
-        {price}
-      </p>
+      <TextInputStd
+        label={label}
+        value={price}
+        readOnly={true}
+        addClassName="is-static"
+      />
     );
   };
 
@@ -129,11 +131,12 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
     if (!market.security || market.security.length === 0) return null;
 
     return (
-      <p>
-        <strong>Security reference: </strong>
-        <br />
-        {market.security}
-      </p>
+      <TextInputStd
+        label="Security reference"
+        value={market.security}
+        readOnly={true}
+        addClassName="is-static"
+      />
     );
   };
 
@@ -147,11 +150,12 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
       : market.tracking;
 
     return (
-      <p>
-        <strong>Incident Number: </strong>
-        <br />
-        {tracking}
-      </p>
+      <TextInputStd
+        label="Incident Number"
+        value={tracking}
+        readOnly={true}
+        addClassName="is-static"
+      />
     );
   };
 
@@ -168,27 +172,28 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
 
   return (
     <>
-      <div className="row">
-        <ImagesDisplay images={market.images} />
-        <div className="col-12 col-lg-6 order-2 order-lg-1 pr-3" role="main">
+      <div className="columns mb-3">
+        <div className="column">
+          <ImagesDisplay images={market.images} />
+        </div>
+        <div className="column">
           {showStolenOn()}
-          <p>
-            <strong>Description: </strong>
-            <br />
-            {market.description}
-          </p>
+          <TextInputStd
+            label="Description"
+            value={market.description}
+            readOnly={true}
+            addClassName="is-static"
+          />
           {showCondition()}
           {showPrice()}
           {showSecurity()}
           {showTracking()}
-          <p className="mb-0">
-            <strong>Activities: </strong>
-          </p>
-          <ul>
-            {market.activitys.map((m, i) => {
-              return <li key={i}>{m}</li>;
-            })}
-          </ul>
+          <TextInputStd
+            label="Activities"
+            value={market.activitys.join(', ')}
+            readOnly={true}
+            addClassName="is-static"
+          />
           <hr />
           {market.threads.length === 0 && (
             <Response
@@ -200,7 +205,7 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
           )}
         </div>
       </div>
-      {market._id && market.threads.length > 0 && (
+      {market.threads.length > 0 && (
         <>
           <div className="row">
             <div className="col-12">
@@ -219,4 +224,4 @@ const MarketItemDetails = ({ market, newErrors, respondMarketItem }) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MarketItemDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(MarketItemForm);
