@@ -31,18 +31,20 @@ const ThreadLink = ({ thread, source, changeThreadDisplayed }) => {
 
   return (
     <div
-      className="thread-link mb-2"
+      className=""
       role="button"
       onClick={(e) => changeThreadDisplayed(thread._id)}
       tabIndex="0"
     >
       <div className="d-block float-left">
         <div className="p-2">
-          <img
-            src={_id ? threadWith.image : '/images/defaultthumb.png'}
-            className="img-avatar img-thumbnail img-link rounded-circle p-0 m-1"
-            alt=""
-          />
+          <figure className="image is-1by1">
+            <img
+              src={_id ? threadWith.image : '/images/defaultthumb.png'}
+              className="is-rounded"
+              alt=""
+            />
+          </figure>
         </div>
       </div>
       <div className={getBgStyle(responseState)}>

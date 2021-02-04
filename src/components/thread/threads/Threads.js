@@ -12,6 +12,8 @@ const Threads = ({ threads, kitbagId, source, marketType }) => {
     }
   }, [threads, setThreadDisplayed]);
 
+  if (!threads) return null;
+
   function parseThread(thread) {
     let newThread = { ...thread };
     newThread.messages = [];
@@ -71,9 +73,9 @@ const Threads = ({ threads, kitbagId, source, marketType }) => {
 
   return (
     <>
-      <div className="row pb-3">
-        <div className="col-4">{renderThreadLinks()}</div>
-        <div className="col-8">{renderThreadMessages()}</div>
+      <div className="columns">
+        <div className="column is-4">{renderThreadLinks()}</div>
+        <div className="column is-8">{renderThreadMessages()}</div>
       </div>
     </>
   );

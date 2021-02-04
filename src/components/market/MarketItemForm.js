@@ -13,6 +13,7 @@ import validate from '../includes/FormEmptyValidationRules';
 import { ImagesDisplay } from '../includes/forms/ImagesDisplay';
 import { MarketTypes } from '../../enums/marketTypes.enum';
 import TextInputStd from '../includes/controls/TextInputStd';
+import { getDateSpan } from '../../utils/date';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -75,11 +76,12 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
     }
 
     return (
-      <p>
-        <strong>Condition: </strong>
-        <br />
-        {market.condition}
-      </p>
+      <TextInputStd
+        label="Condition"
+        value={market.condition}
+        readOnly={true}
+        addClassName="is-static"
+      />
     );
   };
 
@@ -112,14 +114,13 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
       return null;
     }
 
-    const occurredOn = new Date(market.occurredOn).toDateString();
-
     return (
-      <p>
-        <strong>{capitalize(market.marketType)} on: </strong>
-        <br />
-        {occurredOn}
-      </p>
+      <TextInputStd
+        label={`${capitalize(market.marketType)} on`}
+        value={getDateSpan(market.occurredOn)}
+        readOnly={true}
+        addClassName="is-static"
+      />
     );
   };
 
@@ -194,32 +195,33 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
             readOnly={true}
             addClassName="is-static"
           />
-          <hr />
           {market.threads.length === 0 && (
-            <Response
-              values={values}
-              handleChange={handleChange}
-              errors={errors}
-              handleSubmit={handleSubmit}
-            />
+            <>
+              <hr />
+              <Response
+                values={values}
+                handleChange={handleChange}
+                errors={errors}
+                handleSubmit={handleSubmit}
+              />
+            </>
           )}
         </div>
       </div>
-      {/* {market.threads.length > 0 && (
+      {market?.threads?.length > 0 && (
         <>
-          <div className="row">
-            <div className="col-12">
-              <h4>{`Thread for "${market.title}"`}</h4>
-            </div>
+          <hr />
+          <div className="content">
+            <p className="subtitle is-size-5">{`Chat for "${market.title}"`}</p>
+            <Threads
+              threads={market.threads}
+              kitbagId={market.kitbag}
+              source="market"
+              marketType={market.marketType}
+            />
           </div>
-          <Threads
-            threads={market.threads}
-            kitbagId={market.kitbag}
-            source="market"
-            marketType={market.marketType}
-          />
         </>
-      )} */}
+      )}
     </>
   );
 };
