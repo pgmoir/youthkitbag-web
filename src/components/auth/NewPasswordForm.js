@@ -25,6 +25,7 @@ const NewPasswordForm = ({
 }) => {
   const initialValues = {
     password: '',
+    userId,
   };
 
   const { values, handleChange, handleSubmit, errors, setErrors } = useForm(
@@ -69,6 +70,7 @@ const NewPasswordForm = ({
           placeHolder="Enter your new password"
           iconLeft="fas fa-lock"
         />
+        <input name="userId" type="hidden" value={values.userId} />
         <button
           className="button is-large is-fullwidth is-success"
           type="submit"

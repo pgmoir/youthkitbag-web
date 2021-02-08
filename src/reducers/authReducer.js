@@ -52,7 +52,7 @@ export default function authentication(state = initialState, action) {
       };
     case PASSWORD_RESET_CHECK:
       return {
-        userId: action.payload.userId,
+        userId: action.payload.data.userId,
         loggedIn: false,
       };
     default:

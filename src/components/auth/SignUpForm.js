@@ -75,7 +75,7 @@ const SignUpForm = ({ newErrors, signup }) => {
           field="email"
           handleChange={handleChange}
           error={errors.email}
-          placeHolder="Enter your email address"
+          placeHolder="Enter your email"
           iconLeft="fas fa-envelope"
         />
         <TextInputStd
@@ -102,7 +102,7 @@ const SignUpForm = ({ newErrors, signup }) => {
           className="button is-large is-fullwidth is-success"
           type="submit"
         >
-          Sign Up for YouthKitbag
+          Sign Up
         </button>
       </form>
       <p className="h6 pt-3 has-text-centered">

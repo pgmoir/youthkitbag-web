@@ -54,19 +54,19 @@ const LoginForm = ({ referrer, newErrors, login }) => {
           className="button is-large is-fullwidth btn-google"
           href={`${baseUrl}/auth/google?referrer=${referrer}`}
         >
-          Login with Google
+          with Google
         </a>
         <a
           className="button is-large is-fullwidth btn-facebook"
           href={`${baseUrl}/auth/facebook?referrer=${referrer}`}
         >
-          Login with Facebook
+          with Facebook
         </a>
         <a
           className="button is-large is-fullwidth btn-github"
           href={`${baseUrl}/auth/github?referrer=${referrer}`}
         >
-          Login with GitHub
+          with GitHub
         </a>
       </div>
       <p className="mb-3 has-text-centered">
@@ -82,7 +82,7 @@ const LoginForm = ({ referrer, newErrors, login }) => {
           handleChange={handleChange}
           error={errors.email}
           autoComplete="email"
-          placeHolder="Enter your email address"
+          placeHolder="Enter your email"
           iconLeft="fas fa-envelope"
         />
         <TextInputStd
@@ -99,7 +99,7 @@ const LoginForm = ({ referrer, newErrors, login }) => {
           className="button is-large is-fullwidth is-success"
           type="submit"
         >
-          Login to YouthKitbag
+          Login
         </button>
       </form>
     </div>

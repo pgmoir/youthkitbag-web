@@ -22,6 +22,7 @@ import {
   CREATE_KITBAG,
   EDIT_KITBAG,
   RESET_REQUESTED,
+  PASSWORD_RESET,
 } from '../actions/types';
 
 const initialState = {
@@ -46,6 +47,7 @@ export default (state = initialState, action) => {
     case EDIT_MARKET_KIT:
     case SIGNUP_SUCCESS:
     case RESET_REQUESTED:
+    case PASSWORD_RESET:
       return {
         currentMessage: action.payload.message,
         currentStyle: 'success',

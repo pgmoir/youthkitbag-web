@@ -56,9 +56,10 @@ const ResetForm = ({ newErrors, reset }) => {
           handleChange={handleChange}
           error={errors.email}
           autoComplete="email"
-          placeHolder="Enter your email address"
+          placeHolder="Enter your email"
           iconLeft="fas fa-envelope"
         />
+
         <button
           className="button is-large is-fullwidth is-success"
           type="submit"

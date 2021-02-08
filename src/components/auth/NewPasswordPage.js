@@ -3,7 +3,6 @@ import Title from '../includes/title/Title';
 import NewPasswordForm from './NewPasswordForm';
 
 const NewPasswordPage = ({ match }) => {
-  console.log('MATCH', match);
   const { token } = match.params;
 
   return (
