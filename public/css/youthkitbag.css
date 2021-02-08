@@ -265,7 +265,7 @@ th {
 
 html {
   background-color: white;
-  font-size: 16px;
+  font-size: 20px;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   min-width: 300px;
@@ -7950,3 +7950,21 @@ body,
   */
 .a11y-highlight:hover {
   text-decoration: underline; }
+
+/*
+  button third party auth
+  */
+.btn-facebook {
+  border: 1px solid #95989a;
+  background: #fff url("/images/facebook.svg") no-repeat 16px 0px;
+  background-size: 47px; }
+
+.btn-google {
+  border: 1px solid #95989a;
+  background: #fff url("/images/google.svg") no-repeat 25px;
+  background-size: 25px; }
+
+.btn-github {
+  border: 1px solid #95989a;
+  background: #fff url("/images/github.svg") no-repeat 25px;
+  background-size: 25px; }

@@ -52,17 +52,27 @@ const NewPasswordForm = ({
   return (
     <div className="notification has-background-primary-light box">
       <Alert />
+      <div className="content">
+        <p>
+          You have requested a password reset. The token supplied is currently
+          valid, and you should enter a new password here.
+        </p>
+      </div>
       <form onSubmit={handleSubmit}>
         <TextInputStd
           type="password"
-          label="Password"
           value={values.password}
           field="password"
           handleChange={handleChange}
           error={errors.password}
           autoComplete="current-password"
+          placeHolder="Enter your new password"
+          iconLeft="fas fa-lock"
         />
-        <button className="button is-large is-primary" type="submit">
+        <button
+          className="button is-large is-fullwidth is-success"
+          type="submit"
+        >
           Update Password
         </button>
       </form>

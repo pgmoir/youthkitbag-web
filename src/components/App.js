@@ -107,9 +107,17 @@ const App = ({ auth }) => {
                 {auth.loggedIn ? <Redirect to="/" /> : <Reset />}
               </Route>
               <Route path="/auth/token/:token" exact component={Token} />
-              <Route path="/auth/newpassword/:token" exact>
-                {auth.loggedIn ? <Redirect to="/" /> : <NewPassword />}
-              </Route>
+              <Route
+                path="/auth/newpassword/:token"
+                exact
+                render={(props) => {
+                  if (auth.loggedIn) {
+                    return <Redirect to="/" />;
+                  } else {
+                    return <NewPassword {...props} />;
+                  }
+                }}
+              />
               <Route path="/auth/logout" exact component={Logout} />
 
               <PrivateRoute

@@ -21,6 +21,7 @@ import {
   API_USER_ERROR,
   CREATE_KITBAG,
   EDIT_KITBAG,
+  RESET_REQUESTED,
 } from '../actions/types';
 
 const initialState = {
@@ -44,6 +45,7 @@ export default (state = initialState, action) => {
     case EDIT_KITBAG_KIT:
     case EDIT_MARKET_KIT:
     case SIGNUP_SUCCESS:
+    case RESET_REQUESTED:
       return {
         currentMessage: action.payload.message,
         currentStyle: 'success',

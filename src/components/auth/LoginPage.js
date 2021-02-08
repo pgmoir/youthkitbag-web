@@ -1,7 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Title from '../includes/title/Title';
-import Alert from '../includes/Alert';
 import LoginForm from './LoginForm';
 
 const Login = ({ location }) => {
@@ -15,28 +13,13 @@ const Login = ({ location }) => {
     referrer = location.state.from.pathname;
   }
   return (
-    <div>
+    <div className="container">
       <Title title="Login" />
-      <section
-        id="main"
-        className="container-fluid"
-        aria-label="main body of content plus related links and features"
-      >
-        <div className="container">
-          <p className="lead">
-            If you don&apos;t have an kitbag already,{' '}
-            <Link to="/auth/signup">then sign up for an kitbag</Link>. Or for
-            the forgetful,{' '}
-            <Link to="/auth/reset">then reset your password</Link>.
-          </p>
-          <div className="row">
-            <div className="col-12 col-md-6 mb-3 mx-auto">
-              <Alert />
-              <LoginForm referrer={referrer} />
-            </div>
-          </div>
+      <div className="columns is-centered">
+        <div className="column is-two-thirds-tablet is-half-desktop">
+          <LoginForm referrer={referrer} />
         </div>
-      </section>
+      </div>
     </div>
   );
 };

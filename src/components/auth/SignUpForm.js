@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import useForm from '../hooks/useForm';
 import { signup } from '../../actions/AuthActions';
 import { connect } from 'react-redux';
@@ -45,13 +46,19 @@ const SignUpForm = ({ newErrors, signup }) => {
   return (
     <div className="notification has-background-primary-light box">
       <Alert />
+      <div className="content">
+        <p>
+          If you already have an kitbag,{' '}
+          <Link to="/auth/login">then login to access your kitbag</Link>.
+        </p>
+      </div>
       <form onSubmit={handleSubmit}>
         <TextInputStd
           value={values.firstName}
           field="firstName"
           handleChange={handleChange}
           error={errors.firstName}
-          placeHolder="Enter your First Name"
+          placeHolder="Enter your first name"
           iconLeft="fas fa-user"
         />
         <TextInputStd
@@ -59,7 +66,7 @@ const SignUpForm = ({ newErrors, signup }) => {
           field="lastName"
           handleChange={handleChange}
           error={errors.lastName}
-          placeHolder="Enter your Last Name"
+          placeHolder="Enter your last name"
           iconLeft="fas fa-user-plus"
         />
         <TextInputStd
@@ -68,7 +75,7 @@ const SignUpForm = ({ newErrors, signup }) => {
           field="email"
           handleChange={handleChange}
           error={errors.email}
-          placeHolder="Enter your Email Address"
+          placeHolder="Enter your email address"
           iconLeft="fas fa-envelope"
         />
         <TextInputStd
@@ -92,18 +99,18 @@ const SignUpForm = ({ newErrors, signup }) => {
           iconLeft="fas fa-passport"
         />
         <button
-          className="button is-large is-fullwidth is-primary"
+          className="button is-large is-fullwidth is-success"
           type="submit"
         >
           Sign Up for YouthKitbag
         </button>
-        <p className="h6 pt-3 has-text-centered">
-          Alternatively use <a href={`${baseUrl}/auth/google`}>Google</a>,{' '}
-          <a href={`${baseUrl}/auth/facebook`}>Facebook</a>
-          {' or '}
-          <a href={`${baseUrl}/auth/github`}>GitHub</a>
-        </p>
       </form>
+      <p className="h6 pt-3 has-text-centered">
+        Alternatively use <a href={`${baseUrl}/auth/google`}>Google</a>,{' '}
+        <a href={`${baseUrl}/auth/facebook`}>Facebook</a>
+        {' or '}
+        <a href={`${baseUrl}/auth/github`}>GitHub</a>
+      </p>
     </div>
   );
 };

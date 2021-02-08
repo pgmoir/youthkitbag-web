@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import useForm from '../hooks/useForm';
 import { login } from '../../actions/AuthActions';
 import validate from '../includes/FormEmptyValidationRules';
 import TextInputStd from '../includes/controls/TextInputStd';
+import Alert from '../includes/Alert';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -38,47 +40,49 @@ const LoginForm = ({ referrer, newErrors, login }) => {
   }
 
   return (
-    <>
-      <div className="mb-3">
-        <div className="row mb-3 mx-0">
-          <a
-            className="btn btn-lg p-3 btn-block btn-google"
-            href={`${baseUrl}/auth/google?referrer=${referrer}`}
-          >
-            Login with Google
-          </a>
-        </div>
-        <div className="row mb-3 mx-0">
-          <a
-            className="btn btn-lg p-3 btn-block btn-facebook"
-            href={`${baseUrl}/auth/facebook?referrer=${referrer}`}
-          >
-            Login with Facebook
-          </a>
-        </div>
-        <div className="row mb-3 mx-0">
-          <a
-            className="btn btn-lg p-3 btn-block btn-github"
-            href={`${baseUrl}/auth/github?referrer=${referrer}`}
-          >
-            Login with GitHub
-          </a>
-        </div>
+    <div className="notification has-background-primary-light box">
+      <Alert />
+      <div className="content">
+        <p>
+          If you don&apos;t have an kitbag already,{' '}
+          <Link to="/auth/signup">then sign up for an kitbag</Link>. Or for the
+          forgetful, <Link to="/auth/reset">then reset your password</Link>.
+        </p>
+      </div>
+      <div className="buttons">
+        <a
+          className="button is-large is-fullwidth btn-google"
+          href={`${baseUrl}/auth/google?referrer=${referrer}`}
+        >
+          Login with Google
+        </a>
+        <a
+          className="button is-large is-fullwidth btn-facebook"
+          href={`${baseUrl}/auth/facebook?referrer=${referrer}`}
+        >
+          Login with Facebook
+        </a>
+        <a
+          className="button is-large is-fullwidth btn-github"
+          href={`${baseUrl}/auth/github?referrer=${referrer}`}
+        >
+          Login with GitHub
+        </a>
       </div>
       <p className="mb-3 has-text-centered">
         <span className="centre-line"></span>
         or
         <span className="centre-line"></span>
       </p>
-      <form className="w-100 d-block" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <TextInputStd
           type="email"
           value={values.email}
           field="email"
           handleChange={handleChange}
           error={errors.email}
-          autoComplete="userName email"
-          placeHolder="Email"
+          autoComplete="email"
+          placeHolder="Enter your email address"
           iconLeft="fas fa-envelope"
         />
         <TextInputStd
@@ -88,14 +92,17 @@ const LoginForm = ({ referrer, newErrors, login }) => {
           handleChange={handleChange}
           error={errors.password}
           autoComplete="current-password"
-          placeHolder="Password"
+          placeHolder="Enter your password"
           iconLeft="fas fa-lock"
         />
-        <button className="button is-success" type="submit">
+        <button
+          className="button is-large is-fullwidth is-success"
+          type="submit"
+        >
           Login to YouthKitbag
         </button>
       </form>
-    </>
+    </div>
   );
 };
 

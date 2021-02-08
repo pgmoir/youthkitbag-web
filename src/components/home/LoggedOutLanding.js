@@ -1,11 +1,13 @@
 import React from 'react';
+import Title from '../includes/title/Title';
 import SignUpForm from '../auth/SignUpForm';
 
 const LoggedOutLanding = () => {
   return (
-    <div className="container is-fluid px-0">
+    <div className="container">
+      <Title title="Sign Up" />
       <div className="columns is-centered">
-        <div className="column is-half">
+        <div className="column is-two-thirds-tablet is-half-desktop">
           <SignUpForm />
         </div>
       </div>

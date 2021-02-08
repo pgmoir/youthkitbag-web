@@ -1,32 +1,19 @@
 import React from 'react';
-
 import Title from '../includes/title/Title';
-import Alert from '../includes/Alert';
 import NewPasswordForm from './NewPasswordForm';
 
 const NewPasswordPage = ({ match }) => {
-  const token = match.params.token;
+  console.log('MATCH', match);
+  const { token } = match.params;
+
   return (
-    <div>
+    <div className="container">
       <Title title="Set a new password" />
-      <section
-        id="main"
-        className="container-fluid"
-        aria-label="main body of content plus related links and features"
-      >
-        <div className="container">
-          <p className="lead">
-            You have requested a password reset. The token supplied is currently
-            valid, and you should enter a new password here.
-          </p>
-          <div className="row">
-            <div className="col-12 col-md-6 mb-3 mx-auto">
-              <Alert />
-              <NewPasswordForm token={token} />
-            </div>
-          </div>
+      <div className="columns is-centered">
+        <div className="column is-two-thirds-tablet is-half-desktop">
+          <NewPasswordForm token={token} />
         </div>
-      </section>
+      </div>
     </div>
   );
 };

@@ -14,7 +14,7 @@ const mapDispatchToProps = {
 };
 
 const BundlePurchasePage = ({ selected, fetchBundle, match }) => {
-  const bundleId = match.params.bundleId;
+  const { bundleId } = match.params;
 
   const [bundle, setBundle] = useState({
     title: 'Loading bundle details ...',

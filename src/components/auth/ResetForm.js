@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { reset } from '../../actions/AuthActions';
@@ -38,17 +39,30 @@ const ResetForm = ({ newErrors, reset }) => {
   return (
     <div className="notification has-background-primary-light box">
       <Alert />
+      <div className="content">
+        <p>
+          If you have forgotten your password, then enter your email here and
+          you will be sent a link to create a new password. Please be aware that
+          this link is time limited, and will expire in an hour after sending.
+          If actually you know you&apos;re password,{' '}
+          <Link to="/auth/login">login direct to your kitbag</Link>.
+        </p>
+      </div>
       <form onSubmit={handleSubmit}>
         <TextInputStd
           type="email"
-          label="Email"
           value={values.email}
           field="email"
           handleChange={handleChange}
           error={errors.email}
-          autoComplete="userName email"
+          autoComplete="email"
+          placeHolder="Enter your email address"
+          iconLeft="fas fa-envelope"
         />
-        <button className="button is-large is-primary" type="submit">
+        <button
+          className="button is-large is-fullwidth is-success"
+          type="submit"
+        >
           Reset Password
         </button>
       </form>
