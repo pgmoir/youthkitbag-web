@@ -8,7 +8,6 @@ const mapDispatchToProps = {
 };
 
 const User = ({ getUser, fetchKitbagLists }) => {
-  console.log('Render USER component');
   const userId = useSelector((state) => state.user._id);
   const kitbags = useSelector((state) => state.user.kitbags);
 

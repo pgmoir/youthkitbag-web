@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { fetchMarketItem } from '../../actions/MarketActions';
 import MarketItemForm from './MarketItemForm';
