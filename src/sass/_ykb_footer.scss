@@ -1,0 +1,15 @@
+/* 
+  sticky footer
+  makes sure at least the whole viewport is used 
+  wrapper includes header and main (but not footer) and fills available space
+  */
+body,
+#root {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+#wrapper {
+  flex: 1;
+}

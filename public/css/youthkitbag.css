@@ -7888,21 +7888,18 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   background-color: #e6e1d7; }
 
 /*
+  accessibility
+  */
+.a11y-highlight:hover {
+  text-decoration: underline; }
+
+/*
   button for third party auth
   */
 .button-oauth {
   background-position-y: center;
   background-size: 25px;
   background-repeat: no-repeat; }
-
-.facebook {
-  background-image: url("/images/facebook.svg"); }
-
-.google {
-  background-image: url("/images/google.svg"); }
-
-.github {
-  background-image: url("/images/github.svg"); }
 
 /* 
   sticky footer
@@ -7917,6 +7914,26 @@ body,
 
 #wrapper {
   flex: 1; }
+
+/*
+  burger bun css solution (no javascript)
+  adapation from here https://jsfiddle.net/jfm2jyk5/
+  not quite working yet
+  */
+#navbar-toggle-state {
+  display: none; }
+
+#navbar-toggle-state:checked ~ .navbar-menu {
+  display: block !important; }
+
+.facebook {
+  background-image: url("/images/facebook.svg"); }
+
+.google {
+  background-image: url("/images/google.svg"); }
+
+.github {
+  background-image: url("/images/github.svg"); }
 
 /*
 
@@ -7950,20 +7967,3 @@ body,
 
 .table thead th.is-7 {
   width: 7em !important; }
-
-/*
-  burger bun css solution (no javascript)
-  adapation from here https://jsfiddle.net/jfm2jyk5/
-  not quite working yet
-  */
-#navbar-toggle-state {
-  display: none; }
-
-#navbar-toggle-state:checked ~ .navbar-menu {
-  display: block !important; }
-
-/*
-  accessibility
-  */
-.a11y-highlight:hover {
-  text-decoration: underline; }

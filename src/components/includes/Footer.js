@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <footer className="footer">
-      <div className="content has-text-centered">
+      <div className="content has-text-centered pb-5">
         <p>
           <strong>YouthKitbag</strong> by{' '}
           <a href="https://pgmoir.wordpress.com/" className="a11y-highlight">
