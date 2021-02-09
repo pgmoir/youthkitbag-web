@@ -17,20 +17,8 @@ const Content = ({ contentId, content, fetchContent }) => {
 
   if (!content) {
     return (
-      <div>
-        <section
-          id="main"
-          className="container-fluid"
-          aria-label="main body of content plus related links and features"
-        >
-          <div className="container">
-            <div className="row m-5 p-5 bg-light">
-              <div className="col-12">
-                <h1>Loading ...</h1>
-              </div>
-            </div>
-          </div>
-        </section>
+      <div className="container">
+        <Title title="Loading ..." />
       </div>
     );
   }
@@ -38,7 +26,7 @@ const Content = ({ contentId, content, fetchContent }) => {
   return (
     <div className="container">
       <Title title={content.fields.title} />
-      <div className="mb-3">
+      <div className="content">
         <p>
           <em>
             Last updated:{' '}
@@ -48,7 +36,7 @@ const Content = ({ contentId, content, fetchContent }) => {
           </em>
         </p>
       </div>
-      <div>{renderAllConent(content)}</div>
+      <div className="content">{renderAllConent(content)}</div>
     </div>
   );
 };
