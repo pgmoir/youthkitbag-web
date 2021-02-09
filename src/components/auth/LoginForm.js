@@ -46,22 +46,25 @@ const LoginForm = ({ referrer, newErrors, login }) => {
       <Alert />
       <div className="buttons">
         <a
-          className="button is-large is-fullwidth btn-google"
+          className="button is-large is-fullwidth"
           href={`${baseUrl}/auth/google?referrer=${referrer}`}
         >
-          Google
+          <span className="icon button-oauth google"></span>
+          <span>Google</span>
         </a>
         <a
-          className="button is-large is-fullwidth btn-facebook"
+          className="button is-large is-fullwidth"
           href={`${baseUrl}/auth/facebook?referrer=${referrer}`}
         >
-          Facebook
+          <span className="icon is-medium button-oauth facebook"></span>
+          <span>Facebook</span>
         </a>
         <a
-          className="button is-large is-fullwidth btn-github"
+          className="button is-large is-fullwidth"
           href={`${baseUrl}/auth/github?referrer=${referrer}`}
         >
-          GitHub
+          <span className="icon is-medium button-oauth github"></span>
+          <span>GitHub</span>
         </a>
       </div>
       <p className="mb-3 has-text-centered">
@@ -99,9 +102,9 @@ const LoginForm = ({ referrer, newErrors, login }) => {
       </form>
       <div className="content mt-5">
         <p className="has-text-centered">
-          If you don&apos;t have an kitbag already,{' '}
-          <Link to="/auth/signup">then sign up for an kitbag</Link>. Or for the
-          forgetful, <Link to="/auth/reset">then reset your password</Link>.
+          If you don&apos;t have an account,{' '}
+          <Link to="/auth/signup">then sign up for a new account</Link>. Or for
+          the forgetful, <Link to="/auth/reset">then reset your password</Link>.
         </p>
       </div>
     </div>

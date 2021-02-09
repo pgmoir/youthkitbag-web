@@ -7887,6 +7887,23 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   color: #325d88;
   background-color: #e6e1d7; }
 
+/*
+  button for third party auth
+  */
+.button-oauth {
+  background-position-y: center;
+  background-size: 25px;
+  background-repeat: no-repeat; }
+
+.facebook {
+  background-image: url("/images/facebook.svg"); }
+
+.google {
+  background-image: url("/images/google.svg"); }
+
+.github {
+  background-image: url("/images/github.svg"); }
+
 /* 
   sticky footer
   makes sure at least the whole viewport is used 
@@ -7950,21 +7967,3 @@ body,
   */
 .a11y-highlight:hover {
   text-decoration: underline; }
-
-/*
-  button third party auth
-  */
-.btn-facebook {
-  border: 1px solid #95989a;
-  background: #fff url("/images/facebook.svg") no-repeat 25px;
-  background-size: 25px; }
-
-.btn-google {
-  border: 1px solid #95989a;
-  background: #fff url("/images/google.svg") no-repeat 25px;
-  background-size: 25px; }
-
-.btn-github {
-  border: 1px solid #95989a;
-  background: #fff url("/images/github.svg") no-repeat 25px;
-  background-size: 25px; }

@@ -3,6 +3,8 @@
 @import './_sandstonev.scss';
 @import '../../node_modules/bulma/bulma.sass';
 @import './_sandstoneo.scss';
+@import './_ykb_button.scss';
+@import './_ykb_svg.scss';
 
 /* 
   sticky footer
@@ -65,25 +67,4 @@ $widthUnit: 'em';
   &:hover {
     text-decoration: underline;
   }
-}
-
-/*
-  button third party auth
-  */
-.btn-facebook {
-  border: 1px solid #95989a;
-  background: #fff url('/images/facebook.svg') no-repeat 25px;
-  background-size: 25px;
-}
-
-.btn-google {
-  border: 1px solid #95989a;
-  background: #fff url('/images/google.svg') no-repeat 25px;
-  background-size: 25px;
-}
-
-.btn-github {
-  border: 1px solid #95989a;
-  background: #fff url('/images/github.svg') no-repeat 25px;
-  background-size: 25px;
 }
