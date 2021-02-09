@@ -42,26 +42,26 @@ const LoginForm = ({ referrer, newErrors, login }) => {
 
   return (
     <div className="notification has-background-primary-light box">
-      <Title title="Login" hasHr={false} />
+      <Title title="Login with" hasHr={false} />
       <Alert />
       <div className="buttons">
         <a
           className="button is-large is-fullwidth btn-google"
           href={`${baseUrl}/auth/google?referrer=${referrer}`}
         >
-          with Google
+          Google
         </a>
         <a
           className="button is-large is-fullwidth btn-facebook"
           href={`${baseUrl}/auth/facebook?referrer=${referrer}`}
         >
-          with Facebook
+          Facebook
         </a>
         <a
           className="button is-large is-fullwidth btn-github"
           href={`${baseUrl}/auth/github?referrer=${referrer}`}
         >
-          with GitHub
+          GitHub
         </a>
       </div>
       <p className="mb-3 has-text-centered">

@@ -7956,8 +7956,8 @@ body,
   */
 .btn-facebook {
   border: 1px solid #95989a;
-  background: #fff url("/images/facebook.svg") no-repeat 16px 0px;
-  background-size: 47px; }
+  background: #fff url("/images/facebook.svg") no-repeat 25px;
+  background-size: 25px; }
 
 .btn-google {
   border: 1px solid #95989a;
