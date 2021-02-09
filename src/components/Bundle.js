@@ -34,15 +34,6 @@ const Bundle = ({ loggedIn, user, bundle }) => {
         <div className={`panel-heading bg-${themes[level]}`}>
           {name} <span className={icon} title={`${name} tier`}></span>
         </div>
-        {cost < defaultCost && (
-          <p className="panel-block py-3 is-block offer-highlight">
-            <strong>
-              Best Offer
-              <br />
-              {title}
-            </strong>
-          </p>
-        )}
         <p className="panel-block py-3 is-block">{`up to ${kit} kitbag items`}</p>
         <p className="panel-block py-3 is-block">{`up to ${market} market items`}</p>
         <p className="panel-block py-3 is-block">{`up to ${photos} photos`}</p>
@@ -54,14 +45,18 @@ const Bundle = ({ loggedIn, user, bundle }) => {
         <p className="panel-block py-3 is-block">{`join ${groups} groups`}</p>
         <p
           className={`panel-block py-3 is-block ${
-            cost < defaultCost ? 'text-linethru' : 'has-text-weight-bold'
+            cost < defaultCost
+              ? 'has-text-line-through'
+              : 'has-text-weight-bold'
           }`}
         >
-          {cost === 0 ? 'FREE' : `£${Number(defaultCost).toFixed(2)} / year`}
+          {defaultCost === 0
+            ? 'FREE'
+            : `£${Number(defaultCost).toFixed(2)} / year`}
         </p>
         {cost < defaultCost && (
           <p className="panel-block py-3 is-block has-text-weight-bold">
-            {`Reduced to £{Number(cost).toFixed(2)} / year`}
+            {`Reduced to £${Number(cost).toFixed(2)} / year`}
           </p>
         )}
         <p className="panel-block py-5 is-block">
@@ -73,6 +68,17 @@ const Bundle = ({ loggedIn, user, bundle }) => {
           </Link>
         </p>
       </article>
+      {cost < defaultCost && (
+        <article className="panel is-primary">
+          <p className="panel-block py-3 is-block offer-highlight">
+            <strong>
+              Best Offer
+              <br />
+              {title}
+            </strong>
+          </p>
+        </article>
+      )}
     </div>
   );
 };

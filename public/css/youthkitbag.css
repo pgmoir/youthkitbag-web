@@ -7967,3 +7967,9 @@ body,
 
 .table thead th.is-7 {
   width: 7em !important; }
+
+/*
+  strike through text
+  */
+.has-text-line-through {
+  text-decoration: line-through; }
