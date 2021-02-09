@@ -1,5 +1,4 @@
 import React from 'react';
-import Title from '../includes/title/Title';
 import LoginForm from './LoginForm';
 
 const Login = ({ location }) => {
@@ -14,7 +13,6 @@ const Login = ({ location }) => {
   }
   return (
     <div className="container">
-      <Title title="Login" />
       <div className="columns is-centered">
         <div className="column is-two-thirds-tablet is-half-desktop">
           <LoginForm referrer={referrer} />

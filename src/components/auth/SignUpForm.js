@@ -5,6 +5,7 @@ import { signup } from '../../actions/AuthActions';
 import { connect } from 'react-redux';
 import validate from '../includes/FormEmptyValidationRules';
 import TextInputStd from '../includes/controls/TextInputStd';
+import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 
 const mapStateToProps = (state) => ({
@@ -45,13 +46,8 @@ const SignUpForm = ({ newErrors, signup }) => {
 
   return (
     <div className="notification has-background-primary-light box">
+      <Title title="Sign Up" hasHr={false} />
       <Alert />
-      <div className="content">
-        <p>
-          If you already have an kitbag,{' '}
-          <Link to="/auth/login">then login to access your kitbag</Link>.
-        </p>
-      </div>
       <form onSubmit={handleSubmit}>
         <TextInputStd
           value={values.firstName}
@@ -105,12 +101,18 @@ const SignUpForm = ({ newErrors, signup }) => {
           Sign Up
         </button>
       </form>
-      <p className="h6 pt-3 has-text-centered">
-        Alternatively use <a href={`${baseUrl}/auth/google`}>Google</a>,{' '}
-        <a href={`${baseUrl}/auth/facebook`}>Facebook</a>
-        {' or '}
-        <a href={`${baseUrl}/auth/github`}>GitHub</a>
-      </p>
+      <div className="content pt-5">
+        <p className="has-text-centered">
+          Alternatively use <a href={`${baseUrl}/auth/google`}>Google</a>,{' '}
+          <a href={`${baseUrl}/auth/facebook`}>Facebook</a>
+          {' or '}
+          <a href={`${baseUrl}/auth/github`}>GitHub</a>
+        </p>
+        <p className="has-text-centered">
+          If you already have an kitbag,{' '}
+          <Link to="/auth/login">then login to access your kitbag</Link>.
+        </p>
+      </div>
     </div>
   );
 };

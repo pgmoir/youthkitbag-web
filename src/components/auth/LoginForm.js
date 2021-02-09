@@ -5,6 +5,7 @@ import useForm from '../hooks/useForm';
 import { login } from '../../actions/AuthActions';
 import validate from '../includes/FormEmptyValidationRules';
 import TextInputStd from '../includes/controls/TextInputStd';
+import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 
 const mapStateToProps = (state) => ({
@@ -41,14 +42,8 @@ const LoginForm = ({ referrer, newErrors, login }) => {
 
   return (
     <div className="notification has-background-primary-light box">
+      <Title title="Login" hasHr={false} />
       <Alert />
-      <div className="content">
-        <p>
-          If you don&apos;t have an kitbag already,{' '}
-          <Link to="/auth/signup">then sign up for an kitbag</Link>. Or for the
-          forgetful, <Link to="/auth/reset">then reset your password</Link>.
-        </p>
-      </div>
       <div className="buttons">
         <a
           className="button is-large is-fullwidth btn-google"
@@ -102,6 +97,13 @@ const LoginForm = ({ referrer, newErrors, login }) => {
           Login
         </button>
       </form>
+      <div className="content mt-5">
+        <p className="has-text-centered">
+          If you don&apos;t have an kitbag already,{' '}
+          <Link to="/auth/signup">then sign up for an kitbag</Link>. Or for the
+          forgetful, <Link to="/auth/reset">then reset your password</Link>.
+        </p>
+      </div>
     </div>
   );
 };

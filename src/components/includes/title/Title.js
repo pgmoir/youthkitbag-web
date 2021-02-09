@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
-const Title = ({ title }) => {
+const Title = ({ title, hasHr = true }) => {
   if (title === '') {
     return null;
   }
@@ -12,7 +12,7 @@ const Title = ({ title }) => {
         <title>{`${title} - YouthKitbag`}</title>
       </Helmet>
       <h1 className="title is-size-4">{title}</h1>
-      <hr />
+      {hasHr && <hr />}
     </>
   );
 };
