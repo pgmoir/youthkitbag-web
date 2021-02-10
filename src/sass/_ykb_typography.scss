@@ -4,3 +4,18 @@
 .has-text-line-through {
   text-decoration: line-through;
 }
+
+/*
+  https://www.bennadel.com/blog/3881-css-flexbox-overflow-text-overflow-ellipses-and-a-separation-of-concerns.htm
+  original idea from ben nadel, but simplified 
+  keeps text on one line and truncated
+  */
+.has-truncated {
+  overflow: hidden;
+
+  .is-truncated-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

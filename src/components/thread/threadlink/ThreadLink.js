@@ -31,13 +31,13 @@ const ThreadLink = ({ thread, source, changeThreadDisplayed }) => {
 
   return (
     <div
-      className="is-clickable is-flex"
+      className="is-clickable is-flex box"
       role="button"
       onClick={() => changeThreadDisplayed(thread._id)}
       onKeyPress={() => changeThreadDisplayed(thread._id)}
       tabIndex="0"
     >
-      <div className="is-flex-shrink-0 is-flex-grow-0 has-background-primary is-align-self-center px-3">
+      <div className="is-flex-shrink-0 is-flex-grow-0 is-align-self-center pr-4">
         <div className="image">
           <img
             src={_id ? threadWith.image : '/images/defaultthumb.png'}
@@ -47,23 +47,16 @@ const ThreadLink = ({ thread, source, changeThreadDisplayed }) => {
         </div>
       </div>
 
-      <div className="is-flex-grow-1 has-background-success">
-        <div className="d-flex">
-          <div className="mr-auto py-2 flex-truncated">
-            {_id && threadWith.name}
-            {!_id && <div className="bg-light hgt-1 mr-3 mt-1">&nbsp;</div>}
+      <div className="is-flex-grow-1 has-truncated">
+        <div className="is-flex">
+          <div className="is-flex-shrink-1 is-flex-grow-1 has-truncated">
+            <div className="is-truncated-text">{_id && threadWith.name}</div>
           </div>
-          <div className="py-2 flex-truncated text-right pr-2">
-            {_id && displaySentOn(lastMessage.sentOn)}
-            {!_id && <div className="bg-light hgt-1 mt-1">&nbsp;</div>}
+          <div className="is-flex-shrink-0 is-flex-wrap-nowrap">
+            <em>{_id && displaySentOn(lastMessage.sentOn)}</em>
           </div>
         </div>
-        <div className="d-flex">
-          <div className="pb-2 d-block flex-truncated">
-            {_id && lastMessage.content}
-            {!_id && <div className="bg-light hgt-1 w-100 mt-1">&nbsp;</div>}
-          </div>
-        </div>
+        <div className="is-truncated-text">{_id && lastMessage.content}</div>
       </div>
     </div>
   );

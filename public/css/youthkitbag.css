@@ -7975,9 +7975,22 @@ body,
   text-decoration: line-through; }
 
 /*
+  https://www.bennadel.com/blog/3881-css-flexbox-overflow-text-overflow-ellipses-and-a-separation-of-concerns.htm
+  original idea from ben nadel, but simplified 
+  keeps text on one line and truncated
+  */
+.has-truncated {
+  overflow: hidden; }
+  .has-truncated .is-truncated-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
+
+/*
   https://stackoverflow.com/questions/26681059/create-a-circle-avatar-from-a-rectangle-image-keeping-proportions-and-just-using
   this is an extension of the simplest option using object-fit, but generating different default sizes along Bulma standard sizes
   this creates default square version, but to get circle - just apply the standard bulma is-rounded (radius: 50%)
+  nb. the img item should be wrapped in figure/div with class of image
   */
 .is-avatar {
   object-fit: cover; }
