@@ -1,6 +1,8 @@
 import React from 'react';
 
 const ThreadLink = ({ thread, source, changeThreadDisplayed }) => {
+  if (!thread.messages) return null;
+
   function getLastMessage() {
     const { messages } = thread;
     if (messages.length === 0) return { content: '' };
@@ -37,7 +39,7 @@ const ThreadLink = ({ thread, source, changeThreadDisplayed }) => {
 
       <div className="is-flex-grow-1 has-truncated">
         <div className="is-flex">
-          <div className="is-flex-shrink-1 is-flex-grow-1 has-truncated">
+          <div className="is-flex-shrink-1 is-flex-grow-1 has-truncated pr-2">
             <div className="is-truncated-text">{_id && threadWith.name}</div>
           </div>
           <div className="is-flex-shrink-0 is-flex-wrap-nowrap">
