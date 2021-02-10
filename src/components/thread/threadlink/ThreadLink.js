@@ -31,24 +31,23 @@ const ThreadLink = ({ thread, source, changeThreadDisplayed }) => {
 
   return (
     <div
-      className="is-clickable"
+      className="is-clickable is-flex"
       role="button"
       onClick={() => changeThreadDisplayed(thread._id)}
       onKeyPress={() => changeThreadDisplayed(thread._id)}
       tabIndex="0"
     >
-      <div className="d-block float-left">
-        <div className="p-2">
-          <figure className="image">
-            <img
-              src={_id ? threadWith.image : '/images/defaultthumb.png'}
-              className="is-avatar is-rounded is-64x64"
-              alt=""
-            />
-          </figure>
+      <div className="is-flex-shrink-0 is-flex-grow-0 has-background-primary is-align-self-center px-3">
+        <div className="image">
+          <img
+            src={_id ? threadWith.image : '/images/defaultthumb.png'}
+            className="is-avatar is-rounded is-64x64"
+            alt=""
+          />
         </div>
       </div>
-      <div className={getBgStyle(responseState)}>
+
+      <div className="is-flex-grow-1 has-background-success">
         <div className="d-flex">
           <div className="mr-auto py-2 flex-truncated">
             {_id && threadWith.name}
