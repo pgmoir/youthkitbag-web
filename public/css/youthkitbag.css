@@ -7973,3 +7973,32 @@ body,
   */
 .has-text-line-through {
   text-decoration: line-through; }
+
+/*
+  https://stackoverflow.com/questions/26681059/create-a-circle-avatar-from-a-rectangle-image-keeping-proportions-and-just-using
+  this is an extension of the simplest option using object-fit, but generating different default sizes along Bulma standard sizes
+  this creates default square version, but to get circle - just apply the standard bulma is-rounded (radius: 50%)
+  */
+.is-avatar {
+  object-fit: cover; }
+  .is-avatar.is-16x16 {
+    width: 16px;
+    height: 16px; }
+  .is-avatar.is-24x24 {
+    width: 24px;
+    height: 24px; }
+  .is-avatar.is-32x32 {
+    width: 32px;
+    height: 32px; }
+  .is-avatar.is-48x48 {
+    width: 48px;
+    height: 48px; }
+  .is-avatar.is-64x64 {
+    width: 64px;
+    height: 64px; }
+  .is-avatar.is-96x96 {
+    width: 96px;
+    height: 96px; }
+  .is-avatar.is-128x128 {
+    width: 128px;
+    height: 128px; }

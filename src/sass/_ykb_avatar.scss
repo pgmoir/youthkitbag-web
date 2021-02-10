@@ -1,0 +1,19 @@
+/*
+  https://stackoverflow.com/questions/26681059/create-a-circle-avatar-from-a-rectangle-image-keeping-proportions-and-just-using
+  this is an extension of the simplest option using object-fit, but generating different default sizes along Bulma standard sizes
+  this creates default square version, but to get circle - just apply the standard bulma is-rounded (radius: 50%)
+  */
+.is-avatar {
+  object-fit: cover;
+
+  $avatarSizes: (16, 24, 32, 48, 64, 96, 128);
+  $sizeUnit: 'px';
+
+  @each $size in $avatarSizes {
+    $i: index($avatarSizes, $size);
+    &.is-#{$size}x#{$size} {
+      width: #{$size}#{$sizeUnit};
+      height: #{$size}#{$sizeUnit};
+    }
+  }
+}

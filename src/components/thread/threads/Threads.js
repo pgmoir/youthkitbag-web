@@ -19,7 +19,7 @@ const Threads = ({ threads, kitbagId, source, marketType }) => {
     newThread.messages = [];
     const { messages } = thread;
     let previousDate;
-    for (var i = 0; i < messages.length; i++) {
+    for (var i = 0; i < messages?.length; i++) {
       const { fromKitbag, author, content, sentOn } = messages[i];
       const { sourceDate, newPreviousDate } = compareForSameDate(
         sentOn,
@@ -52,6 +52,7 @@ const Threads = ({ threads, kitbagId, source, marketType }) => {
   }
 
   function changeThreadDisplayed(id) {
+    console.log('CHANGE', id);
     setThreadDisplayed(id);
   }
 

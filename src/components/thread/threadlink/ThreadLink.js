@@ -31,17 +31,18 @@ const ThreadLink = ({ thread, source, changeThreadDisplayed }) => {
 
   return (
     <div
-      className=""
+      className="is-clickable"
       role="button"
-      onClick={(e) => changeThreadDisplayed(thread._id)}
+      onClick={() => changeThreadDisplayed(thread._id)}
+      onKeyPress={() => changeThreadDisplayed(thread._id)}
       tabIndex="0"
     >
       <div className="d-block float-left">
         <div className="p-2">
-          <figure className="image is-1by1">
+          <figure className="image">
             <img
               src={_id ? threadWith.image : '/images/defaultthumb.png'}
-              className="is-rounded"
+              className="is-avatar is-rounded is-64x64"
               alt=""
             />
           </figure>
@@ -59,9 +60,6 @@ const ThreadLink = ({ thread, source, changeThreadDisplayed }) => {
           </div>
         </div>
         <div className="d-flex">
-          {/* <div className="pb-2 mr-2">
-            <i className="fas fa-comment text-light"></i>
-          </div> */}
           <div className="pb-2 d-block flex-truncated">
             {_id && lastMessage.content}
             {!_id && <div className="bg-light hgt-1 w-100 mt-1">&nbsp;</div>}
