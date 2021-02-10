@@ -90,35 +90,23 @@ const ThreadMessageChain = ({
     return messages
       .filter((m) => m.content.length > 0)
       .map((message, index) => {
-        const { fromKitbag, author, content } = message;
+        const { author, content } = message;
         return (
-          <div className="bg-white" key={`${index}`}>
+          <div className="has-background-white" key={`${index}`}>
             {displaySentOn(message.sentOn)}
-            <div className="pb-3">
-              <div
-                className={`d-block ${
-                  fromKitbag ? 'float-left' : 'float-right'
-                } px-2 pb-3`}
-              >
-                <img
-                  src={author.image}
-                  className="img-avatar img-thumbnail img-link rounded-circle p-0 m-1"
-                  alt="ALTER"
-                />
+            <div className="is-flex">
+              <div className="is-flex-shrink-0 is-flex-grow-0 is-align-self-center pr-4">
+                <div className="image">
+                  <img
+                    src={author.image}
+                    className="is-avatar is-rounded is-48x48"
+                    alt=""
+                  />
+                </div>
               </div>
               <div>
-                <div
-                  className={`d-flex ${
-                    fromKitbag ? 'justify-content-start' : 'justify-content-end'
-                  }`}
-                >
-                  <div
-                    className={`p-2 w-75 bg-affair-30 rounded-lg position-relative display-linebreak  ${
-                      fromKitbag ? 'speech-left' : 'speech-right'
-                    }`}
-                  >
-                    {content}
-                  </div>
+                <div className="">
+                  <div className="">{content}</div>
                 </div>
               </div>
             </div>
@@ -153,29 +141,23 @@ const ThreadMessageChain = ({
     <>
       {thread._id === displayed && (
         <>
-          <div className="thread-message-chain mb-2 bg-light border rounded-sm">
-            {renderMessages()}
-          </div>
+          <div className="has-background-success box">{renderMessages()}</div>
           <Alert />
-          <form className="mb-3" onSubmit={handleSubmit}>
-            <div className="form-row">
-              <div className="col">
-                <TextAreaInput
-                  handleChange={handleChange}
-                  field="content"
-                  value={values.content}
-                  error={errors.content}
-                  addClassName="mb-2"
-                  rows="2"
-                  placeholder="Reply with message"
-                />
-              </div>
-            </div>
+          <form onSubmit={handleSubmit}>
+            <TextAreaInput
+              handleChange={handleChange}
+              field="content"
+              value={values.content}
+              error={errors.content}
+              addClassName="mb-2"
+              rows="2"
+              placeholder="Reply with message"
+            />
             <div className="form-row">
               <div className="col"></div>
               {renderResponseStateOptions()}
               <div className="col-auto">
-                <button className="btn btn-primary" type="submit">
+                <button className="button is-primary" type="submit">
                   Send
                 </button>
               </div>

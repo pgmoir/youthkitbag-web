@@ -12,19 +12,7 @@ const ThreadLink = ({ thread, source, changeThreadDisplayed }) => {
     return new Date(sentOn).toDateString();
   }
 
-  function getBgStyle(responseState) {
-    switch (responseState) {
-      case 'accept':
-        return 'bg-success text-light';
-      case 'reject':
-        return 'bg-danger text-light';
-      case 'withdraw':
-        return 'bg-warning text-gray-500';
-      default:
-        return 'bg-light';
-    }
-  }
-  const { _id, sourceKitbag, responseUser, responseState } = thread;
+  const { _id, sourceKitbag, responseUser } = thread;
   const lastMessage = _id ? getLastMessage() : {};
   const isMarket = source === 'market';
   const threadWith = isMarket ? sourceKitbag : responseUser;
@@ -41,7 +29,7 @@ const ThreadLink = ({ thread, source, changeThreadDisplayed }) => {
         <div className="image">
           <img
             src={_id ? threadWith.image : '/images/defaultthumb.png'}
-            className="is-avatar is-rounded is-64x64"
+            className="is-avatar is-rounded is-48x48"
             alt=""
           />
         </div>

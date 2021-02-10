@@ -75,8 +75,8 @@ const Threads = ({ threads, kitbagId, source, marketType }) => {
   return (
     <>
       <div className="columns">
-        <div className="column is-4">{renderThreadLinks()}</div>
-        <div className="column is-8">{renderThreadMessages()}</div>
+        <div className="column is-6">{renderThreadLinks()}</div>
+        <div className="column is-6">{renderThreadMessages()}</div>
       </div>
     </>
   );
