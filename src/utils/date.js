@@ -1,3 +1,6 @@
+import dayjs from 'dayjs';
+import * as relativeTime from 'dayjs/plugin/relativeTime';
+
 export const compareForSameDate = (sourceDateTime, previousDate) => {
   if (!previousDate) {
     previousDate = { day: 0, month: 0, year: 0 };
@@ -55,4 +58,11 @@ export const getTimeSpan = (thisDate) => {
 export const getDateSpan = (thisDate) => {
   if (!thisDate) return;
   return formatDate(thisDate);
+};
+
+export const relativeTimeFromNow = (thisDate) => {
+  if (!thisDate) return null;
+
+  dayjs.extend(relativeTime);
+  return dayjs(thisDate).fromNow(false);
 };

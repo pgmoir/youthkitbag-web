@@ -7,7 +7,7 @@ import {
   editMarketKit,
 } from '../../../actions/KitbagMarketActions';
 import { DateForm, ImagesForm } from '../../includes/forms';
-import Threads from '../../thread/threads/Threads';
+import Threads from '../../thread/Threads';
 import validate from '../../includes/FormEmptyValidationRules';
 import { getImages } from '../../../utils/image';
 import { MarketTypes } from '../../../enums/marketTypes.enum';
@@ -440,24 +440,20 @@ const MarketKitForm = ({
           </form>
         </div>
       </div>
-      <div>
-        {market._id && market.threads.length > 0 && (
-          <>
-            <hr />
-            <div className="row">
-              <div className="col-12">
-                <h4>Offers and messages</h4>
-              </div>
-            </div>
+      {market._id && market.threads.length > 0 && (
+        <>
+          <hr />
+          <div className="content">
+            <p className="subtitle is-size-5">Offers and messages</p>
             <Threads
               threads={market.threads}
               kitbagId={market.kitbag}
               source="kitbag"
               marketType={market.marketType}
             />
-          </>
-        )}
-      </div>
+          </div>
+        </>
+      )}
     </>
   );
 };

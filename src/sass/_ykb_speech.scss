@@ -1,0 +1,44 @@
+/*
+  https://projects.verou.me/bubbly/
+  */
+
+.is-speech {
+  position: relative;
+  background: #ffffff;
+  border-radius: 0.5rem;
+  padding: 1rem;
+
+  &.is-speech-right {
+    &:after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      width: 0;
+      height: 0;
+      border: 20px solid transparent;
+      border-left-color: #ffffff;
+      border-right: 0;
+      border-top: 0;
+      margin-top: -10px;
+      margin-right: -20px;
+    }
+  }
+
+  &.is-speech-left {
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 0;
+      height: 0;
+      border: 20px solid transparent;
+      border-right-color: #ffffff;
+      border-left: 0;
+      border-top: 0;
+      margin-top: -10px;
+      margin-left: -20px;
+    }
+  }
+}

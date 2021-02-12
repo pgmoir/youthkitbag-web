@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
-import useForm from '../../hooks/useForm';
-import { respondToMarketKitThread } from '../../../actions/KitbagMarketActions';
-import { respondToMarketThread } from '../../../actions/MarketActions';
-import TextAreaInput from '../../includes/controls/TextAreaInput';
-import RadioGroupInput from '../../includes/controls/RadioGroupInput';
-import Alert from '../../includes/Alert';
+import classNames from 'classnames';
+import useForm from '../hooks/useForm';
+import { respondToMarketKitThread } from '../../actions/KitbagMarketActions';
+import { respondToMarketThread } from '../../actions/MarketActions';
+import TextAreaInput from '../includes/controls/TextAreaInput';
+import RadioGroupInput from '../includes/controls/RadioGroupInput';
+import Alert from '../includes/Alert';
 import { connect } from 'react-redux';
-import validate from '../../includes/FormEmptyValidationRules';
+import validate from '../includes/FormEmptyValidationRules';
+import { relativeTimeFromNow } from '../../utils/date';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -74,28 +76,31 @@ const ThreadMessageChain = ({
     }
   }, [newErrors, setErrors]);
 
-  const displaySentOn = (sentOn) => {
-    if (!sentOn) return <div className="bg-white pb-1"></div>;
-    const sentOnDate = new Date(sentOn);
-    return (
-      <div className="bg-white p-2 has-text-centered pb-3">
-        {sentOnDate.toDateString()}
-      </div>
-    );
-  };
-
   const renderMessages = () => {
     const { messages } = thread;
 
     return messages
       .filter((m) => m.content.length > 0)
       .map((message, index) => {
-        const { author, content } = message;
+        const { fromKitbag, author, content, sentOn } = message;
+
+        const messageClasses = classNames('is-flex', {
+          'is-flex-direction-row-reverse': fromKitbag,
+          'is-flex-direction-row': !fromKitbag,
+        });
+
+        const contentClasses = classNames('is-speech', {
+          'is-speech-right mx-3 mr-5': fromKitbag,
+          'is-speech-left ml-5 mr-3': !fromKitbag,
+        });
+
         return (
-          <div className="has-background-white" key={`${index}`}>
-            {displaySentOn(message.sentOn)}
-            <div className="is-flex">
-              <div className="is-flex-shrink-0 is-flex-grow-0 is-align-self-center pr-4">
+          <div className="" key={`${index}`}>
+            <div className="has-text-light has-text-centered is-italic p-2">
+              {relativeTimeFromNow(sentOn)}
+            </div>
+            <div className={messageClasses}>
+              <div className="is-flex-shrink-0 is-flex-grow-0 is-align-self-center">
                 <div className="image">
                   <img
                     src={author.image}
@@ -104,10 +109,8 @@ const ThreadMessageChain = ({
                   />
                 </div>
               </div>
-              <div>
-                <div className="">
-                  <div className="">{content}</div>
-                </div>
+              <div className="is-flex-grow-1">
+                <div className={contentClasses}>{content}</div>
               </div>
             </div>
           </div>
@@ -133,36 +136,48 @@ const ThreadMessageChain = ({
         field="responseState"
         value={values.responseState}
         handleChange={handleChange}
+        isRow={true}
       />
     );
   };
+
+  const showReply =
+    source === 'kitbag' ||
+    (source === 'market' && thread.responseState !== 'close');
 
   return (
     <>
       {thread._id === displayed && (
         <>
-          <div className="has-background-success box">{renderMessages()}</div>
-          <Alert />
-          <form onSubmit={handleSubmit}>
-            <TextAreaInput
-              handleChange={handleChange}
-              field="content"
-              value={values.content}
-              error={errors.content}
-              addClassName="mb-2"
-              rows="2"
-              placeholder="Reply with message"
-            />
-            <div className="form-row">
-              <div className="col"></div>
-              {renderResponseStateOptions()}
-              <div className="col-auto">
-                <button className="button is-primary" type="submit">
-                  Send
-                </button>
-              </div>
-            </div>
-          </form>
+          <div className="has-background-success box">
+            <div className="mb-5">{renderMessages()}</div>
+            {showReply && (
+              <>
+                <Alert />
+                <form onSubmit={handleSubmit}>
+                  <TextAreaInput
+                    handleChange={handleChange}
+                    field="content"
+                    value={values.content}
+                    error={errors.content}
+                    addClassName="mb-2"
+                    rows="2"
+                    placeholder="Reply with message"
+                  />
+                  <div className="is-flex is-align-items-center mt-3">
+                    <div className="is-flex-grow-1">
+                      {renderResponseStateOptions()}
+                    </div>
+                    <div className="is-flex-grow-0">
+                      <button className="button is-primary" type="submit">
+                        Send
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </>
+            )}
+          </div>
         </>
       )}
     </>

@@ -21,6 +21,8 @@ const Header = ({ auth, user }) => {
         .find((a) => a.member.state === 'approved')
     : undefined;
 
+  const { topImage } = user;
+
   return (
     <>
       <header>
@@ -75,11 +77,14 @@ const Header = ({ auth, user }) => {
                       </div>
                     )}
                     <div className="navbar-item">
-                      <Link className="button is-light" to="/settings/user">
-                        <span className="icon">
-                          <i className="fas fa-user-cog"></i>
-                        </span>
-                        <span>Settings</span>
+                      <Link className="" to="/settings/user">
+                        <div className="image">
+                          <img
+                            src={topImage || '/images/defaultthumb.png'}
+                            className="is-avatar is-rounded is-48x48"
+                            alt=""
+                          />
+                        </div>
                       </Link>
                     </div>
                     <div className="navbar-item">

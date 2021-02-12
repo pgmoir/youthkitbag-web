@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import ThreadLink from '../threadlink/ThreadLink';
-import ThreadMessageChain from '../threadMessageChain/ThreadMessageChain';
-import { compareForSameDate } from '../../../utils/date';
+import ThreadLink from './ThreadLink';
+import ThreadMessageChain from './ThreadMessageChain';
+import { compareForSameDate } from '../../utils/date';
 
 const Threads = ({ threads, kitbagId, source, marketType }) => {
   const [threadDisplayed, setThreadDisplayed] = useState();
