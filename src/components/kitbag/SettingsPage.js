@@ -1,23 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
+
+import Alert from '../includes/Alert';
+import Breadcrumb from '../includes/Breadcrumb';
+import BundlePage from './BundlePage';
+import ConfigurationPage from './ConfigurationPage';
+import GroupsHelp from './GroupsHelp';
+import GroupsPage from './GroupsPage';
+import KitbagsHelp from './KitbagsHelp';
+import KitbagsPage from './KitbagsPage';
+import SettingsNav from './SettingsNav';
 import Title from '../includes/title/Title';
 import UserForm from './UserForm';
-import KitbagsPage from './KitbagsPage';
-import GroupsPage from './GroupsPage';
-import BundlePage from './BundlePage';
-import Alert from '../includes/Alert';
-import GroupsHelp from './GroupsHelp';
-import ConfigurationPage from './ConfigurationPage';
-import SettingsNav from './SettingsNav';
-import KitbagsHelp from './KitbagsHelp';
 import UserHelp from './UserHelp';
+import { capitalize } from '../../utils/strings';
 
 const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-const SettingsPage = ({ user }) => {
+const SettingsPage = ({ user, match }) => {
+  const { setting } = match.params;
+
   const User = () => {
     return (
       <>
@@ -66,8 +71,20 @@ const SettingsPage = ({ user }) => {
     );
   };
 
+  function getCrumbs(pageSetting) {
+    if (!pageSetting) {
+      return [{ title: 'Home', to: '/' }, { title: 'Personal Settings' }];
+    }
+    return [
+      { title: 'Home', to: '/' },
+      { title: 'Personal Settings', to: '/settings' },
+      { title: capitalize(setting) },
+    ];
+  }
+
   return (
     <div className="container">
+      <Breadcrumb crumbs={getCrumbs(setting)} />
       <Title title="Personal Settings" />
       <Alert />
       <div className="columns">

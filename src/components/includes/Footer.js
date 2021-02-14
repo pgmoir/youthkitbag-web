@@ -16,17 +16,17 @@ const Footer = () => {
         <div className="column has-text-centered">
           <p>About YouthKitbag</p>
           <p>
-            <Link to="/help-and-contact/index" className="a11y-highlight">
-              Help &amp; Contacts
-            </Link>
-          </p>
-          <p>
             <Link to="/bundles" className="a11y-highlight">
-              Bundles
+              Buy a Bundle
             </Link>
           </p>
           <p>
-            <Link to="/info-for/media/index" className="a11y-highlight">
+            <Link to="/help" className="a11y-highlight">
+              Help
+            </Link>
+          </p>
+          <p>
+            <Link to="/media" className="a11y-highlight">
               Media
             </Link>
           </p>
@@ -44,7 +44,7 @@ const Footer = () => {
             </Link>
           </p>
           <p>
-            <Link to="/site/cookiesy" className="a11y-highlight">
+            <Link to="/site/cookies" className="a11y-highlight">
               Cookies
             </Link>
           </p>

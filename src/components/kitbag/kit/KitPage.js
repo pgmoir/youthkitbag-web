@@ -5,6 +5,7 @@ import { fetchKitbagKit } from '../../../actions/KitbagKitActions';
 import KitForm from './KitForm';
 import Title from '../../includes/title/Title';
 import Alert from '../../includes/Alert';
+import Breadcrumb from '../../includes/Breadcrumb';
 
 const mapDispatchToProps = {
   fetchKitbagKit,
@@ -14,7 +15,11 @@ const KitPage = ({ fetchKitbagKit, match }) => {
   const { kitId, kitbagId } = match.params;
 
   const current = useSelector((state) => {
-    return !kitId ? null : state.kitbag.kit.entities[kitId];
+    return state.kitbag.kit?.entities[kitId];
+  });
+
+  const kitbag = useSelector((state) => {
+    return state.user.kitbags?.find((kitbag) => kitbag._id === kitbagId);
   });
 
   const [kit, setKit] = useState({
@@ -58,12 +63,18 @@ const KitPage = ({ fetchKitbagKit, match }) => {
     if (itemIsLoading()) {
       return 'Loading ...';
     }
-
     return kit._id ? `${kit.title}` : 'Create new kit';
   }
 
+  const crumbs = [
+    { title: 'Home', to: '/' },
+    { title: `${kitbag?.name}`, to: `/kitbag/kit/${kitbagId}` },
+    { title: `${kit?.title}` },
+  ];
+
   return (
     <div className="container">
+      <Breadcrumb crumbs={crumbs} />
       <Title title={getTitle()} />
       <Alert />
       {kitId && (

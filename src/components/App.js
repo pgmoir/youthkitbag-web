@@ -1,49 +1,51 @@
 import React from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import PrivateRoute from '../utils/privateRoute';
-import history from '../utils/history';
-import User from './auth/User';
-import Header from './includes/Header';
-import Footer from './includes/Footer';
-import Home from './Home';
-import Why from './Why';
-import Bundles from './Bundles';
-import Content from './site/Content';
-import Security from './site/Security';
+import { connect } from 'react-redux';
+import { ContentTypes } from '../enums/contentTypes.enum';
 import Accessibility from './site/Accessibility';
-import SignUp from './auth/SignUpPage';
-import Login from './auth/LoginPage';
-import Reset from './auth/ResetPage';
-import NewPassword from './auth/NewPasswordPage';
-import Logout from './auth/Logout';
-import Token from './auth/Token';
-import BundlePurchasePage from './BundlePurchasePage';
-import Groups from './group/Groups';
-import GroupPage from './group/GroupPage';
-import ShowGroupPage from './show/ShowGroupPage';
-import GroupState from './group/GroupState';
-import GroupMembers from './group/GroupMembers';
-import GroupMemberState from './group/GroupMemberState';
+import BundlePurchasePage from './bundles/BundlePurchasePage';
+import BundlesPage from './bundles/BundlesPage';
+import Content from './site/Content';
+import DeleteUser from './kitbag/DeleteUser';
+import Footer from './includes/Footer';
+import GroupMemberDelete from './group/GroupMemberDelete';
 import GroupMemberJoin from './group/GroupMemberJoin';
 import GroupMemberLeave from './group/GroupMemberLeave';
+import GroupMembers from './group/GroupMembers';
+import GroupMemberState from './group/GroupMemberState';
+import GroupPage from './group/GroupPage';
+import Groups from './group/Groups';
+import GroupState from './group/GroupState';
+import Header from './includes/Header';
+import HelpPage from './site/HelpPage';
+import history from '../utils/history';
+import Home from './Home';
 import Kitbag from './kitbag/kit/Kitbag';
-import KitPage from './kitbag/kit/KitPage';
-import KitDelete from './kitbag/kit/KitDelete';
-import MarketKitPage from './kitbag/market/MarketKitPage';
-import MarketItems from './market/MarketItems';
-import MarketItemViewPage from './market/MarketItemViewPage';
-import MarketKitDelete from './kitbag/market/MarketKitDelete';
-import SettingsPage from './kitbag/SettingsPage';
-import KitbagPage from './kitbags/KitbagPage';
-import KitbagMemberInvite from './kitbags/KitbagMemberInvite';
 import KitbagMemberAccept from './kitbags/KitbagMemberAccept';
+import KitbagMemberInvite from './kitbags/KitbagMemberInvite';
 import KitbagMemberJoin from './kitbags/KitbagMemberJoin';
-import LearnMore from './learn/LearnMore';
-import GroupMemberDelete from './group/GroupMemberDelete';
-import DeleteUser from './kitbag/DeleteUser';
-import { connect } from 'react-redux';
-import { TERMSCONDITIONS, PRIVACYPOLICY } from './site/content-types';
+import KitbagPage from './kitbags/KitbagPage';
+import KitDelete from './kitbag/kit/KitDelete';
+import KitPage from './kitbag/kit/KitPage';
+import LearnMore from './site/LearnMore';
+import Login from './auth/LoginPage';
+import Logout from './auth/Logout';
+import MarketItemViewPage from './market/MarketItemViewPage';
+import MarketKitDelete from './kitbag/market/MarketItemDelete';
+import MarketKitPage from './kitbag/market/MarketKitPage';
+import MarketPage from './market/MarketPage';
+import MediaPage from './site/MediaPage';
+import NewPassword from './auth/NewPasswordPage';
+import PrivateRoute from '../utils/privateRoute';
+import Reset from './auth/ResetPage';
+import Security from './site/Security';
+import SettingsPage from './kitbag/SettingsPage';
+import ShowGroupPage from './show/ShowGroupPage';
+import SignUp from './auth/SignUpPage';
+import Token from './auth/Token';
+import User from './auth/User';
+import Why from './Why';
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
@@ -71,8 +73,10 @@ const App = ({ auth }) => {
             </noscript>
             <Switch>
               <Route path="/" exact component={Home} />
+              <Route path="/help" exact component={HelpPage} />
+              <Route path="/media" exact component={MediaPage} />
               <Route path="/why" exact component={Why} />
-              <Route path="/bundles" exact component={Bundles} />
+              <Route path="/bundles" exact component={BundlesPage} />
 
               <Route path="/learn/:activity" component={LearnMore} />
 
@@ -80,14 +84,17 @@ const App = ({ auth }) => {
                 path="/site/terms"
                 exact
                 render={(props) => (
-                  <Content {...props} contentId={TERMSCONDITIONS} />
+                  <Content
+                    {...props}
+                    contentId={ContentTypes.TERMSCONDITIONS}
+                  />
                 )}
               />
               <Route
                 path="/site/privacy"
                 exact
                 render={(props) => (
-                  <Content {...props} contentId={PRIVACYPOLICY} />
+                  <Content {...props} contentId={ContentTypes.PRIVACYPOLICY} />
                 )}
               />
               <Route path="/site/security" exact component={Security} />
@@ -131,7 +138,7 @@ const App = ({ auth }) => {
                 exact
                 component={MarketItemViewPage}
               />
-              <Route path="/market" component={MarketItems} />
+              <Route path="/market" component={MarketPage} />
 
               <PrivateRoute
                 path="/kitbag/kit/:kitbagId/new"
@@ -228,7 +235,7 @@ const App = ({ auth }) => {
                 component={DeleteUser}
               />
               <PrivateRoute
-                path="/settings/:setting"
+                path="/settings/:setting?"
                 component={SettingsPage}
               />
             </Switch>

@@ -158,9 +158,8 @@ export const respondToMarketKitThread = (
 export const deleteMarketKit = (kitbagId, marketId) => (dispatch) => {
   axios
     .delete(`/kitbag/market/${kitbagId}/${marketId}`, {})
-    .then((response) => {
-      history.push(`/market/${kitbagId}`);
-      dispatch({ type: DELETE_MARKET_KIT, payload: response.data });
+    .then(() => {
+      dispatch({ type: DELETE_MARKET_KIT, payload: marketId });
     })
     .catch((err) => {
       const { response } = err;

@@ -13,7 +13,6 @@ const mapDispatchToProps = {
 };
 
 const PreferredKitbagForm = ({
-  userId,
   kitbags,
   editPreferredKitbag,
   loadSettingsPage,
@@ -73,14 +72,16 @@ const PreferredKitbagForm = ({
                     </figure>
                   </Link>
                 </td>
-                <td>
+                <td className="is-vcentered">
                   <Link to={`/kitbags/${item._id}`}>{item.name}</Link>
                 </td>
-                <td className="is-hidden-mobile">{item.member.state}</td>
-                <td className="is-hidden-mobile">
+                <td className="is-hidden-mobile is-vcentered">
+                  {item.member.state}
+                </td>
+                <td className="is-hidden-mobile is-vcentered">
                   {item.member.roles.join(', ')}
                 </td>
-                <td>
+                <td className="is-vcentered">
                   <input
                     type="radio"
                     name="KitbagPreference"

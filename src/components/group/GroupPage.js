@@ -7,6 +7,7 @@ import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 import GroupsHelp from '../kitbag/GroupsHelp';
 import GroupDisplay from './GroupDisplay';
+import Breadcrumb from '../includes/Breadcrumb';
 
 const mapStateToProps = (state) => ({
   current: state.group.current,
@@ -124,8 +125,15 @@ const GroupPage = ({ current, fetchGroup, match }) => {
     }
   }
 
+  const crumbs = [
+    { title: 'Home', to: '/' },
+    { title: 'Groups', to: '/groups' },
+    { title: getTitle() },
+  ];
+
   return (
     <div className="container">
+      <Breadcrumb crumbs={crumbs} />
       <Title title={getTitle()} icon={getIcon()} iconTitle={getIconTitle()} />
       <Alert />
       <GroupsHelp />

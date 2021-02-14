@@ -9,7 +9,7 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  entities: [],
+  entities: {},
   lists: [],
   search: { searchfor: '', by: '', page: 1, pagesize: 24, loading: true },
 };

@@ -19,7 +19,7 @@ const mapDispatchToProps = {
   fetchMarketItems,
 };
 
-const MarketItems = ({
+const MarketPage = ({
   stateSearch,
   entities,
   pagination,
@@ -97,4 +97,4 @@ const MarketItems = ({
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MarketItems);
+export default connect(mapStateToProps, mapDispatchToProps)(MarketPage);

@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import history from '../../../utils/history';
+import BlankCard from '../BlankCard';
 import KitDelete from './KitDelete';
 
 const KitCard = ({ kit, kitbagId }) => {
   const [modalIsActive, setModalIsActive] = useState(false);
+
+  const { _id, title, subtitle, active } = kit;
+
+  if (!kit?._id) return <BlankCard />;
 
   function topImage() {
     const { images } = kit;
@@ -12,31 +17,6 @@ const KitCard = ({ kit, kitbagId }) => {
     }
     return images[0].imageUrl;
   }
-
-  function renderBlank() {
-    return (
-      <div className="column is-12-mobile is-4-tablet is-3-desktop is-2-fullhd">
-        <article className="card">
-          <div className="card-image">
-            <figure className="image is-4by3">
-              <img src="/images/default.png" alt="" role="presentation" />
-            </figure>
-            <div className="has-text-right p-2 is-overlay">
-              <span className="tag is-dark is-rounded">0</span>
-            </div>
-          </div>
-          <div className="card-content">
-            <p className="title is-size-5">Loading ...</p>
-            <p className="subtitle is-size-6"></p>
-          </div>
-        </article>
-      </div>
-    );
-  }
-
-  const { _id, title, subtitle } = kit;
-
-  if (!_id) return renderBlank();
 
   function totalQuantity() {
     const { inbag } = kit;
@@ -48,18 +28,25 @@ const KitCard = ({ kit, kitbagId }) => {
     }, 0);
   }
 
-  function viewItem(e) {
+  function viewItem() {
     history.push(`/kitbag/kit/${kitbagId}/edit/${_id}`);
   }
 
   function deleteItem(e) {
+    e.stopPropagation();
     setModalIsActive(true);
   }
 
   return (
     <>
       <div className="column is-12-mobile is-4-tablet is-3-desktop is-2-fullhd">
-        <article className="card is-clickable" onClick={(e) => viewItem(e)}>
+        <div
+          className="card is-clickable"
+          onClick={() => viewItem()}
+          onKeyPress={() => viewItem()}
+          role="button"
+          tabIndex="0"
+        >
           <div className="card-image">
             <figure className="image is-4by3">
               <img src={topImage()} alt={title} role="presentation" />
@@ -67,26 +54,32 @@ const KitCard = ({ kit, kitbagId }) => {
             <div className="has-text-right p-2 is-overlay">
               <span className="tag is-dark is-rounded">{totalQuantity()}</span>
             </div>
-            <div className="has-text-left p-2 is-overlay">
-              <span
-                className="tag is-danger is-medium is-clickable"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  deleteItem(e);
-                }}
-              >
+            {active && (
+              <div className="has-text-left p-2 is-overlay">
                 <span
-                  className="fas fa-trash-alt"
-                  title="Delete kit item"
-                ></span>
-              </span>
-            </div>
+                  className="tag is-danger is-medium is-clickable"
+                  onClick={(e) => {
+                    deleteItem(e);
+                  }}
+                  onKeyPress={(e) => {
+                    deleteItem(e);
+                  }}
+                  role="button"
+                  tabIndex="0"
+                >
+                  <span
+                    className="fas fa-trash-alt"
+                    title="Delete kit item"
+                  ></span>
+                </span>
+              </div>
+            )}
           </div>
           <div className="card-content">
             <p className="title is-size-5">{title}</p>
             {subtitle && <p className="subtitle is-size-6">{subtitle}</p>}
           </div>
-        </article>
+        </div>
       </div>
       <KitDelete
         kitId={_id}

@@ -50,11 +50,13 @@ const GroupsPage = ({ user }) => {
                       </figure>
                     </Link>
                   </td>
-                  <td>
+                  <td className="is-vcentered">
                     <Link to={`/groups/${item._id}`}>{item.name}</Link>
                   </td>
-                  <td className="is-hidden-mobile">{item.member.state}</td>
-                  <td className="is-hidden-mobile">
+                  <td className="is-hidden-mobile is-vcentered">
+                    {item.member.state}
+                  </td>
+                  <td className="is-hidden-mobile is-vcentered">
                     {item.member.roles.join(', ')}
                   </td>
                 </tr>

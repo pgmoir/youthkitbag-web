@@ -2986,7 +2986,7 @@ a.tag:hover {
 .card {
   background-color: white;
   border-radius: 0.25rem;
-  box-shadow: 0 2px 3px rgba(62, 63, 58, 0.1), 0 0 0 1px rgba(62, 63, 58, 0.1);
+  box-shadow: 0 2px 3px rgba(62, 63, 58, 0.3), 0 0 0 1px rgba(62, 63, 58, 0.1);
   color: #3e3f3a;
   max-width: 100%;
   overflow: hidden;

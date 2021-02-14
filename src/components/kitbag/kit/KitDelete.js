@@ -20,7 +20,13 @@ const KitDelete = ({
 
   return (
     <div className={`modal ${modalIsActive ? 'is-active' : ''}`}>
-      <div className="modal-background" onClick={closeModal}></div>
+      <div
+        className="modal-background"
+        onClick={closeModal}
+        onKeyPress={closeModal}
+        role="button"
+        tabIndex="0"
+      ></div>
       <div className="modal-card">
         <header className="modal-card-head">
           <p className="modal-card-title">Please confirm</p>
@@ -28,11 +34,12 @@ const KitDelete = ({
             className="delete"
             aria-label="close"
             onClick={closeModal}
+            tabIndex="0"
           ></button>
         </header>
         <section className="modal-card-body">
           <p className="is-size-6">
-            Are you sure you want to delete the item of kit, "{title}"?
+            {`Are you sure you want to delete this kitbag item, "${title}"?`}
           </p>
         </section>
         <footer className="modal-card-foot">

@@ -40,7 +40,7 @@ const useMarketType = (marketType, marketPrice, threads, isOwned) => {
       <>{pillText}</>
     ) : (
       <>
-        {pillText} / <span className="fas fa-comments ml-1"></span>{' '}
+        {pillText} / <span className="fas fa-comments mx-1"></span>
         {isOwned
           ? `${threads.filter((t) => t.responseState === 'open').length}`
           : ''}

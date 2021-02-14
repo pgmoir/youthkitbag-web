@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
-import Title from './includes/title/Title';
 import { connect } from 'react-redux';
-import { fetchBundles } from '../actions/BundlesActions';
+
+import { fetchBundles } from '../../actions/BundlesActions';
+import Alert from '../includes/Alert';
 import Bundle from './Bundle';
+import Breadcrumb from '../includes/Breadcrumb';
+import Title from '../includes/title/Title';
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
@@ -14,18 +17,24 @@ const mapDispatchToProps = {
   fetchBundles,
 };
 
-const Bundles = ({ auth, user, bundles, fetchBundles }) => {
+const BundlesPage = ({ auth, user, bundles, fetchBundles }) => {
+  const pageTitle = 'Bundles & Benefits';
+
   useEffect(() => {
     fetchBundles({ user });
   }, [user, fetchBundles]);
 
   const { loggedIn } = auth;
 
-  if (!bundles || bundles.length === 0) return null;
+  if (bundles?.length === 0) return null;
+
+  const crumbs = [{ title: 'Home', to: '/' }, { title: pageTitle }];
 
   return (
     <div className="container">
-      <Title title="Bundles & Benefits" />
+      <Breadcrumb crumbs={crumbs} />
+      <Title title={pageTitle} />
+      <Alert />
       <div className="columns">
         {bundles.map((p, index) => (
           <Bundle key={index} loggedIn={loggedIn} user={user} bundle={p} />
@@ -35,4 +44,4 @@ const Bundles = ({ auth, user, bundles, fetchBundles }) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Bundles);
+export default connect(mapStateToProps, mapDispatchToProps)(BundlesPage);

@@ -7,7 +7,7 @@ import {
   editMarketKit,
 } from '../../../actions/KitbagMarketActions';
 import { DateForm, ImagesForm } from '../../includes/forms';
-import Threads from '../../thread/Threads';
+import Threads from '../../threads/Threads';
 import validate from '../../includes/FormEmptyValidationRules';
 import { getImages } from '../../../utils/image';
 import { MarketTypes } from '../../../enums/marketTypes.enum';

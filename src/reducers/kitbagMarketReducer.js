@@ -2,11 +2,9 @@ import {
   FETCH_MARKET_KIT,
   CREATE_MARKET_KIT,
   EDIT_MARKET_KIT,
-  DELETE_MARKET_KIT,
   RESET,
   LOGOUT,
   RESPOND_MARKET_KIT,
-  FETCH_MARKET_ITEMS,
   FETCH_KITBAG_MARKET_ITEMS,
   FETCH_KITBAG_MARKET_TRADES,
   FETCH_KITBAG_MARKET_RECYCLES,
@@ -29,31 +27,37 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_MARKET_ITEMS:
     case FETCH_KITBAG_MARKET_ITEMS:
       return { ...state, list: action.payload };
+
     case FETCH_KITBAG_MARKET_TRADES:
       return { ...state, trades: action.payload };
+
     case FETCH_KITBAG_MARKET_RECYCLES:
       return { ...state, recycles: action.payload };
+
     case FETCH_KITBAG_MARKET_FOUNDS:
       return { ...state, founds: action.payload };
+
     case FETCH_KITBAG_MARKET_LOSTS:
       return { ...state, losts: action.payload };
+
     case FETCH_KITBAG_MARKET_STOLENS:
       return { ...state, stolens: action.payload };
+
     case FETCH_KITBAG_MARKET_WANTEDS:
       return { ...state, wanteds: action.payload };
+
     case FETCH_MARKET_KIT:
     case CREATE_MARKET_KIT:
     case EDIT_MARKET_KIT:
     case RESPOND_MARKET_KIT:
       return { ...state, current: action.payload.data };
-    case DELETE_MARKET_KIT:
-      return { ...state };
+
     case RESET:
     case LOGOUT:
       return initialState;
+
     default:
       return state;
   }

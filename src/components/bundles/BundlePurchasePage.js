@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchBundle } from '../actions/BundlesActions';
-import Title from './includes/title/Title';
-import Alert from './includes/Alert';
+import { fetchBundle } from '../../actions/BundlesActions';
+import Title from '../includes/title/Title';
+import Alert from '../includes/Alert';
 
 const mapStateToProps = (state) => ({
   selected: state.bundles.selected,

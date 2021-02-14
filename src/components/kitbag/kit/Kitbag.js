@@ -7,6 +7,7 @@ import Title from '../../includes/title/Title';
 import KitCard from './KitCard';
 import SearchForm from '../../includes/SearchForm';
 import Pagination from '../../includes/Pagination';
+import Breadcrumb from '../../includes/Breadcrumb';
 
 const mapStateToProps = (state) => ({
   stateSearch: state.kitbag.kit.search,
@@ -39,13 +40,20 @@ const Kitbag = ({
     });
   }, [search, fetchKitbagKits, kitbagId]);
 
-  function getTitle() {
+  function getTitle(includeCount = true) {
     if (!kitbags) {
       return 'Loading ...';
     }
     const kitbag = kitbags.find((a) => a.preferred);
-    return `${kitbag.name} (${pagination.totalItems})`;
+
+    if (includeCount) {
+      return `${kitbag.name} (${pagination.totalItems})`;
+    }
+
+    return `${kitbag.name}`;
   }
+
+  const crumbs = [{ title: 'Home', to: '/' }, { title: getTitle(false) }];
 
   function renderBlankList() {
     const blankList = [{}, {}, {}, {}, {}, {}];
@@ -76,6 +84,7 @@ const Kitbag = ({
   return (
     <>
       <div className="container is-fluid px-0">
+        <Breadcrumb crumbs={crumbs} />
         <Title title={getTitle()} />
         <Alert />
         <div className="columns">

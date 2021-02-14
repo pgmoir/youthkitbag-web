@@ -8,7 +8,7 @@ import { LostResponse } from './response/LostResponse';
 import { StolenResponse } from './response/StolenResponse';
 import { TradeResponse } from './response/TradeResponse';
 import { WantedResponse } from './response/WantedResponse';
-import Threads from '../thread/Threads';
+import Threads from '../threads/Threads';
 import validate from '../includes/FormEmptyValidationRules';
 import { ImagesDisplay } from '../includes/forms/ImagesDisplay';
 import { MarketTypes } from '../../enums/marketTypes.enum';

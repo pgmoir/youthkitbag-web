@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import { fetchKitbag, clearKitbag } from '../../actions/KitbagActions';
-import KitbagForm from './KitbagForm';
-import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
+import Breadcrumb from '../includes/Breadcrumb';
+import KitbagForm from './KitbagForm';
 import KitbagsHelp from '../kitbag/KitbagsHelp';
+import Title from '../includes/title/Title';
+import KitbagMemberInvite from './KitbagMemberInvite';
 
 const mapStateToProps = (state) => ({
   current: state.kitbag.kitbags.current,
@@ -19,6 +22,7 @@ const mapDispatchToProps = {
 
 const KitbagPage = ({ current, kitbags, fetchKitbag, clearKitbag, match }) => {
   const { kitbagId } = match.params;
+  const [modalIsActive, setModalIsActive] = useState(false);
   const [kitbag, setKitbag] = useState({
     name: '',
     description: '',
@@ -69,22 +73,41 @@ const KitbagPage = ({ current, kitbags, fetchKitbag, clearKitbag, match }) => {
     };
   }, [clearKitbag]);
 
+  function inviteMember(e) {
+    e.stopPropagation();
+    setModalIsActive(true);
+  }
+
+  const crumbs = [
+    { title: 'Home', to: '/' },
+    { title: 'Personal Settings', to: '/settings' },
+    { title: 'Kitbags', to: '/settings/kitbags' },
+    { title: getTitle() },
+  ];
+
   return (
     <div className="container">
+      <Breadcrumb crumbs={crumbs} />
       <Title title={getTitle()} />
-
       {renderNoKitbagIntro()}
       <Alert />
       <div className="columns">
         <div className="column is-fullwidth">
           <div className="buttons is-justify-content-flex-end">
             {kitbagId && kitbag.kitbagAdmin && kitbag.state !== 'blocked' && (
-              <Link
-                to={`/kitbags/${kitbagId}/invite`}
+              <div
                 className="button is-info"
+                onClick={(e) => {
+                  inviteMember(e);
+                }}
+                onKeyPress={(e) => {
+                  inviteMember(e);
+                }}
+                role="button"
+                tabIndex="0"
               >
                 Invite
-              </Link>
+              </div>
             )}
             {kitbagId &&
               !kitbag.kitbagAdmin &&
@@ -101,6 +124,11 @@ const KitbagPage = ({ current, kitbags, fetchKitbag, clearKitbag, match }) => {
         </div>
       </div>
       <KitbagForm kitbag={kitbag} />
+      <KitbagMemberInvite
+        kitbag={kitbag}
+        modalIsActive={modalIsActive}
+        setModalIsActive={setModalIsActive}
+      />
     </div>
   );
 };

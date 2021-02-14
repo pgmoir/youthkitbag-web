@@ -1,17 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import history from '../../utils/history';
 import useMarketType from '../hooks/useMarketType';
 import classNames from 'classnames';
 import { MarketTypes } from '../../enums/marketTypes.enum';
+import BlankCard from '../kitbag/BlankCard';
+import MarketItemDelete from '../kitbag/market/MarketItemDelete';
 
 const MarketItemCard = ({ market }) => {
-  function topImage() {
-    const { images } = market;
-    if (!images || images.length === 0) {
-      return '/images/default.png';
-    }
-    return images[0].imageUrl;
-  }
+  const [modalIsActive, setModalIsActive] = useState(false);
 
   const {
     _id,
@@ -22,32 +18,20 @@ const MarketItemCard = ({ market }) => {
     kitbag,
     marketPrice,
     threads,
+    deleted,
   } = market;
 
   const { pill } = useMarketType(marketType, marketPrice, threads, isOwned);
 
-  function renderBlank() {
-    return (
-      <div className="column is-12-mobile is-4-tablet is-3-desktop is-2-fullhd">
-        <article className="card">
-          <div className="card-image">
-            <figure className="image is-4by3">
-              <img src="/images/default.png" alt="" role="presentation" />
-            </figure>
-            <div className="has-text-right p-2 is-overlay">
-              <span className="tag is-dark is-rounded">0</span>
-            </div>
-          </div>
-          <div className="card-content">
-            <p className="title is-size-5">Loading ...</p>
-            <p className="subtitle is-size-6"></p>
-          </div>
-        </article>
-      </div>
-    );
-  }
+  if (!market?._id) return <BlankCard />;
 
-  if (!_id) return renderBlank();
+  function topImage() {
+    const { images } = market;
+    if (!images || images.length === 0) {
+      return '/images/default.png';
+    }
+    return images[0].imageUrl;
+  }
 
   const cardClasses = classNames('card is-clickable', {
     'has-background-primary': marketType === MarketTypes.TRADE,
@@ -62,7 +46,7 @@ const MarketItemCard = ({ market }) => {
     'has-text-danger-light': marketType === MarketTypes.STOLEN,
   });
 
-  function viewItem(e) {
+  function viewItem() {
     if (isOwned) {
       history.push(`/kitbag/market/${kitbag}/edit/${_id}`);
     } else {
@@ -71,51 +55,62 @@ const MarketItemCard = ({ market }) => {
   }
 
   function deleteItem(e) {
-    console.log('DELETE');
-    /* <Link to={`/kitbag/kit/${kitbagId}/delete/${_id}`}> */
+    e.stopPropagation();
+    setModalIsActive(true);
   }
 
   return (
-    <div className="column is-12-mobile is-4-tablet is-3-desktop is-2-fullhd">
-      <article className={cardClasses} onClick={(e) => viewItem(e)}>
-        {/* 
-        <span
-          className={`badge badge-pill ${
-            isOwned ? `badge-light text-${color}` : `badge-${color}`
-          } badge-fullsize badge-top-right`}
+    <>
+      <div className="column is-12-mobile is-4-tablet is-3-desktop is-2-fullhd">
+        <div
+          className={cardClasses}
+          onClick={() => viewItem()}
+          onKeyPress={() => viewItem()}
+          role="button"
+          tabIndex="0"
         >
-          {pill}
-        </span> */}
-        <div className="card-image">
-          <figure className="image is-4by3">
-            <img src={topImage()} alt={title} role="presentation" />
-          </figure>
-          <div className="has-text-right p-2 is-overlay">
-            <span className="tag is-dark is-rounded">{pill}</span>
-          </div>
-          {isOwned && (
-            <div className="has-text-left p-2 is-overlay">
-              <span
-                className="tag is-danger is-medium is-clickable"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  deleteItem(e);
-                }}
-              >
-                <span
-                  className="fas fa-trash-alt"
-                  title="Delete kit item"
-                ></span>
-              </span>
+          <div className="card-image">
+            <figure className="image is-4by3">
+              <img src={topImage()} alt={title} role="presentation" />
+            </figure>
+            <div className="has-text-right p-2 is-overlay">
+              <span className="tag is-dark is-rounded">{pill}</span>
             </div>
-          )}
+            {isOwned && !deleted && (
+              <div className="has-text-left p-2 is-overlay">
+                <span
+                  className="tag is-danger is-medium is-clickable"
+                  onClick={(e) => {
+                    deleteItem(e);
+                  }}
+                  onKeyPress={(e) => {
+                    deleteItem(e);
+                  }}
+                  role="button"
+                  tabIndex="0"
+                >
+                  <span
+                    className="fas fa-trash-alt"
+                    title="Delete market item"
+                  ></span>
+                </span>
+              </div>
+            )}
+          </div>
+          <div className="card-content">
+            <p className="title is-size-5">{title}</p>
+            {subtitle && <p className="subtitle is-size-6">{subtitle}</p>}
+          </div>
         </div>
-        <div className="card-content">
-          <p className="title is-size-5">{title}</p>
-          {subtitle && <p className="subtitle is-size-6">{subtitle}</p>}
-        </div>
-      </article>
-    </div>
+      </div>
+      <MarketItemDelete
+        marketId={_id}
+        kitbagId={kitbag}
+        title={title}
+        modalIsActive={modalIsActive}
+        setModalIsActive={setModalIsActive}
+      />
+    </>
   );
 };
 

@@ -16,7 +16,6 @@ const TextInputStd = ({
   autoComplete,
   addClassName,
   placeHolder,
-  autoList,
   iconLeft,
 }) => {
   const controlClasses = classNames('control', 'has-icons-right', {

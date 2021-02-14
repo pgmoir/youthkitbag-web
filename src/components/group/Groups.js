@@ -7,6 +7,7 @@ import GroupCard from './GroupCard';
 import SearchForm from '../includes/SearchForm';
 import Pagination from '../includes/Pagination';
 import Alert from '../includes/Alert';
+import Breadcrumb from '../includes/Breadcrumb';
 
 const mapStateToProps = (state) => ({
   stateSearch: state.group.search,
@@ -81,8 +82,11 @@ const Groups = ({
     );
   }
 
+  const crumbs = [{ title: 'Home', to: '/' }, { title: 'Groups' }];
+
   return (
     <div className="container is-fluid px-0">
+      <Breadcrumb crumbs={crumbs} />
       <Title title={getTitle()} />
       <Alert />
       <div className="columns">
