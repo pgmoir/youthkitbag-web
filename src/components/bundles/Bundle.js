@@ -30,7 +30,7 @@ const Bundle = ({ loggedIn, user, bundle }) => {
 
   return (
     <div className="column has-text-centered">
-      <article className="panel is-primary">
+      <article className="panel is-primary has-background-white">
         <div className={`panel-heading bg-${themes[level]}`}>
           {name} <span className={icon} title={`${name} tier`}></span>
         </div>
@@ -69,13 +69,11 @@ const Bundle = ({ loggedIn, user, bundle }) => {
         </p>
       </article>
       {cost < defaultCost && (
-        <article className="panel is-primary">
-          <p className="panel-block py-3 is-block offer-highlight">
-            <strong>
-              Best Offer
-              <br />
-              {title}
-            </strong>
+        <article className="panel is-primary has-background-white">
+          <p className="panel-block py-3 is-block offer-highlight has-text-weight-bold">
+            Best Offer
+            <br />
+            {title}
           </p>
         </article>
       )}
