@@ -265,7 +265,7 @@ th {
 
 html {
   background-color: white;
-  font-size: 18px;
+  font-size: 16px;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   min-width: 300px;
@@ -7887,6 +7887,11 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   color: #325d88;
   background-color: #e6e1d7; }
 
+.select {
+  width: 100%; }
+  .select select {
+    width: 100%; }
+
 /*
   accessibility
   */
@@ -7922,6 +7927,10 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   .is-avatar.is-128x128 {
     width: 128px;
     height: 128px; }
+
+.image.has-avatar-overlap {
+  display: inline-block;
+  margin-right: -1.5rem; }
 
 /*
   button for third party auth

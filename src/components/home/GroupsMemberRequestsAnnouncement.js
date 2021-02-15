@@ -47,24 +47,31 @@ const GroupsMemberRequestsAnnouncement = ({
   function renderMemberList(members) {
     return (
       <>
-        <div className="img-avatars">
-          {members.map((m, index) => {
-            if (index < 5) {
-              return (
-                <span key={index} className="img-overlap-avatar">
-                  <img
-                    className="img-avatar-lg img-thumbnail img-link rounded-circle p-0 m-1"
-                    src={m.user.image}
-                    alt={m.user.userName}
-                  />
-                </span>
-              );
-            } else {
-              return null;
-            }
-          })}
-        </div>
-        {members.length > 5 && <span>+ {members.length - 5}</span>}
+        {members.map((m, index) => {
+          if (index < 5) {
+            return (
+              <div key={index} className="image has-avatar-overlap">
+                <img
+                  src={m.user?.image || '/images/defaultthumb.png'}
+                  className="is-avatar is-rounded is-48x48"
+                  alt={`${m.user?.firstName} ${m.user?.lastName}`}
+                />
+              </div>
+            );
+          } else {
+            return null;
+          }
+        })}
+        {members.length > 5 && (
+          <div
+            key={members.length}
+            className="image has-avatar-overlap is-align-self-center"
+          >
+            <span className="tag is-large is-rounded is-primary">{`+${
+              members.length - 5
+            }`}</span>
+          </div>
+        )}
       </>
     );
   }
@@ -72,25 +79,27 @@ const GroupsMemberRequestsAnnouncement = ({
   function renderList() {
     return groupsWithMemberRequests.map((g, index) => {
       return (
-        <Link
-          className="a-inherit a11y-highlight"
-          key={index}
-          to={`/groups/${g._id}/members?searchfor=&by=requested`}
-        >
-          <div className="bg-white d-flex flex-row align-items-center mb-2">
-            <div className="pl-1 py-1 pr-2">
+        <div key={index} className="is-flex">
+          <div className="is-flex-shrink-0 is-flex-grow-0 pr-4">
+            <div className="image">
               <img
-                src={topImage(g.images)}
+                src={topImage(g.images) || '/images/defaultthumb.png'}
+                className="is-avatar is-rounded is-48x48"
                 alt=""
-                className="img-fluid img-thumbnail img-small"
               />
             </div>
-            <div className="">
-              <h3 className="h6 ellipsis mb-0 mr-3">{g.name}</h3>
+          </div>
+          <div className="is-flex-grow-1 is-flex">
+            <div className="is-flex-grow-0 has-truncated is-align-self-center mr-3">
+              <div className="has-text-weight-medium is-truncated-text">
+                {g.name}
+              </div>
+            </div>
+            <div className="is-flex-grow-1 is-flex is-flex-wrap-nowrap">
               {renderMemberList(g.members)}
             </div>
           </div>
-        </Link>
+        </div>
       );
     });
   }
@@ -105,8 +114,8 @@ const GroupsMemberRequestsAnnouncement = ({
           <span className="tag is-rounded">{groupsCount}</span> of the groups
           you administer.
         </p>
+        <div>{renderList()}</div>
       </div>
-      <div>{renderList()}</div>
       <div className="buttons">
         <Link className="button is-info is-inverted" to="/groups">
           View all your groups

@@ -32,7 +32,7 @@ const TextInputCol = ({
   return (
     <div className={columnClasses}>
       {index === 0 && label && (
-        <label htmlFor="{field}" className="label">
+        <label htmlFor={field} className="label">
           {label}
         </label>
       )}

@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import useForm from '../hooks/useForm';
 import { respondToMarketKitThread } from '../../actions/KitbagMarketActions';
 import { respondToMarketThread } from '../../actions/MarketActions';
-import TextAreaInput from '../includes/controls/TextAreaInput';
+import TextAreaInputStd from '../includes/controls/TextAreaInputStd';
 import RadioGroupInput from '../includes/controls/RadioGroupInput';
 import Alert from '../includes/Alert';
 import { connect } from 'react-redux';
@@ -155,7 +155,7 @@ const ThreadMessageChain = ({
               <>
                 <Alert />
                 <form onSubmit={handleSubmit}>
-                  <TextAreaInput
+                  <TextAreaInputStd
                     handleChange={handleChange}
                     field="content"
                     value={values.content}

@@ -50,7 +50,7 @@ const PreferredKitbagForm = ({
               <th className="is-4"></th>
               <th>Kitbag</th>
               <th className="is-hidden-mobile">State</th>
-              <th className="is-hidden-mobile">Roles</th>
+              <th className="is-hidden-mobile">Role</th>
               <th>Preferred</th>
             </tr>
           </thead>
@@ -79,7 +79,7 @@ const PreferredKitbagForm = ({
                   {item.member.state}
                 </td>
                 <td className="is-hidden-mobile is-vcentered">
-                  {item.member.roles.join(', ')}
+                  {item.member.role}
                 </td>
                 <td className="is-vcentered">
                   <input

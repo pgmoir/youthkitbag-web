@@ -18,3 +18,10 @@
     }
   }
 }
+
+.image {
+  &.has-avatar-overlap {
+    display: inline-block;
+    margin-right: -1.5rem;
+  }
+}

@@ -29,7 +29,7 @@ const GroupsPage = ({ user }) => {
                 <th className="is-4"></th>
                 <th>Group</th>
                 <th className="is-hidden-mobile">State</th>
-                <th className="is-hidden-mobile">Roles</th>
+                <th className="is-hidden-mobile">Role</th>
               </tr>
             </thead>
             <tbody>
@@ -57,7 +57,7 @@ const GroupsPage = ({ user }) => {
                     {item.member.state}
                   </td>
                   <td className="is-hidden-mobile is-vcentered">
-                    {item.member.roles.join(', ')}
+                    {item.member.role}
                   </td>
                 </tr>
               ))}

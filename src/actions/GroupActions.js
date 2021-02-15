@@ -147,32 +147,28 @@ export const editGroupMember = ({ groupId, memberId, formValues }) => (
     });
 };
 
-export const deleteGroupMember = (groupId, memberId) => (dispatch) => {
+export const deleteGroupMember = ({ groupId, memberId }) => (dispatch) => {
   axios
     .delete(`/group/${groupId}/members/${memberId}/delete`, {})
     .then((response) => {
-      history.push(`/groups/${groupId}/members`);
       dispatch({ type: DELETE_GROUP_MEMBER, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
       dispatch({ type: API_ERROR, payload: response.data });
-      history.push(`/groups/${groupId}/members`);
     });
 };
 
-export const requestGroupJoin = (groupId) => (dispatch) => {
+export const requestGroupJoin = ({ groupId }) => (dispatch) => {
   axios
     .post(`/group/${groupId}/members/join`, {}, {})
     .then((response) => {
-      history.push(`/groups/${groupId}`);
       dispatch({ type: CREATE_GROUP_JOIN, payload: response.data });
       dispatch(getUser());
     })
     .catch((err) => {
       const { response } = err;
       dispatch({ type: API_ERROR, payload: response.data });
-      history.push(`/groups/${groupId}`);
     });
 };
 

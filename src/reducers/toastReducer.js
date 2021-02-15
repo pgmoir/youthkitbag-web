@@ -23,6 +23,7 @@ import {
   EDIT_KITBAG,
   RESET_REQUESTED,
   PASSWORD_RESET,
+  CREATE_GROUP_JOIN,
 } from '../actions/types';
 
 const initialState = {
@@ -48,6 +49,7 @@ export default (state = initialState, action) => {
     case SIGNUP_SUCCESS:
     case RESET_REQUESTED:
     case PASSWORD_RESET:
+    case CREATE_GROUP_JOIN:
       return {
         currentMessage: action.payload.message,
         currentStyle: 'success',

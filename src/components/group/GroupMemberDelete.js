@@ -1,54 +1,67 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { deleteGroupMember } from '../../actions/GroupActions';
-import Modal from '../includes/Modal';
-import history from '../../utils/history';
 
 const mapDispatchToProps = {
   deleteGroupMember,
 };
 
-const GroupMemberDelete = ({ deleteGroupMember, match }) => {
-  const { groupId } = match.params;
-
-  function renderTitle() {
-    return 'Delete member';
+const GroupMemberDelete = ({
+  groupId,
+  memberId,
+  user,
+  deleteGroupMember,
+  modalIsActive,
+  setModalIsActive,
+}) => {
+  function closeModal() {
+    setModalIsActive(false);
   }
 
-  function renderContent() {
-    return 'Are you sure you want to delete this member?';
-  }
-
-  function renderActions() {
-    const { groupId, memberId } = match.params;
-    return (
-      <>
-        <Link
-          to={`/groups/${groupId}/members`}
-          className="btn btn-outline-secondary"
-          data-dismiss="modal"
-        >
-          Cancel
-        </Link>
-        <button
-          type="button"
-          className="btn btn-danger"
-          onClick={() => deleteGroupMember(groupId, memberId)}
-        >
-          Delete
-        </button>
-      </>
-    );
+  function memberName() {
+    return `${user.firstName} ${user.lastName}`;
   }
 
   return (
-    <Modal
-      title={renderTitle()}
-      content={renderContent()}
-      actions={renderActions()}
-      onDismiss={() => history.push(`/groups/${groupId}/members`)}
-    />
+    <div className={`modal ${modalIsActive ? 'is-active' : ''}`}>
+      <div
+        className="modal-background"
+        onClick={closeModal}
+        onKeyPress={closeModal}
+        role="button"
+        tabIndex="0"
+      ></div>
+      <div className="modal-card">
+        <header className="modal-card-head">
+          <p className="modal-card-title">Please confirm</p>
+          <button
+            className="delete"
+            aria-label="close"
+            onClick={closeModal}
+            tabIndex="0"
+          ></button>
+        </header>
+        <section className="modal-card-body">
+          <p className="is-size-6">
+            {`Are you sure you want to delete this member, "${memberName()}"?`}
+          </p>
+        </section>
+        <footer className="modal-card-foot">
+          <button
+            className="button is-success"
+            onClick={async () => {
+              deleteGroupMember({ groupId, memberId });
+              setModalIsActive(false);
+            }}
+          >
+            Delete
+          </button>
+          <button className="button is-warning" onClick={closeModal}>
+            Cancel
+          </button>
+        </footer>
+      </div>
+    </div>
   );
 };
 

@@ -86,7 +86,8 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
             label="Email"
             value={values.email}
             field="email"
-            readOnly={true}
+            handleChange={handleChange}
+            addClassName={'is-static'}
           />
           <TextInputStd
             label="Username"

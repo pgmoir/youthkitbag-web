@@ -10,6 +10,9 @@ import TextInputStd from '../includes/controls/TextInputStd';
 import TextAreaInputStd from '../includes/controls/TextAreaInputStd';
 import TextInputCol from '../includes/controls/TextInputCol';
 import ArrayButtonRemove from '../includes/controls/ArrayButtonRemove';
+import SelectInputCol from '../includes/controls/SelectInputCol';
+import { MemberRoles } from '../../enums/memberRoles.enum';
+import { MemberStates } from '../../enums/memberStates.enum';
 
 const mapStateToProps = (state) => ({
   userBundle: state.user.bundle,
@@ -108,6 +111,14 @@ const KitbagForm = ({
     );
   }
 
+  const roleItems = ['', MemberRoles.ADMIN, MemberRoles.MEMBER];
+  const stateItems = [
+    '',
+    MemberStates.INVITED,
+    MemberStates.APPROVED,
+    MemberStates.BLOCKED,
+  ];
+
   return (
     <div className="columns mb-3">
       <div className="column">
@@ -142,7 +153,10 @@ const KitbagForm = ({
             <>
               <div>
                 {values.members.map((item, index) => (
-                  <div className="columns" key={index}>
+                  <div
+                    className="columns is-variable is-gapless mx-0 mb-1"
+                    key={index}
+                  >
                     <TextInputCol
                       value={
                         values.members[index].user
@@ -153,37 +167,29 @@ const KitbagForm = ({
                       field={`members[${index}].user.email`}
                       disabled={true}
                       index={index}
-                      width="4"
+                      width="5"
                     />
-                    <TextInputCol
-                      value={
-                        values.members[index].user
-                          ? values.members[index].user.userName
-                          : ''
-                      }
-                      label="Username"
-                      field={`members[${index}].user.userName`}
-                      disabled={true}
-                      index={index}
-                      width="2"
-                    />
-                    <TextInputCol
-                      value={values.members[index].roles}
-                      label="Roles"
-                      field={`members[${index}].roles`}
+                    <SelectInputCol
+                      label="Role"
+                      value={values.members[index].role}
+                      field={`members[${index}].role`}
                       handleChange={handleChange}
+                      error={errors.role}
+                      items={roleItems}
                       disabled={isDisabled}
                       index={index}
                       width="3"
                     />
-                    <TextInputCol
-                      value={values.members[index].state}
+                    <SelectInputCol
                       label="State"
+                      value={values.members[index].state}
                       field={`members[${index}].state`}
                       handleChange={handleChange}
+                      error={errors.state}
+                      items={stateItems}
                       disabled={isDisabled}
                       index={index}
-                      width="2"
+                      width="3"
                     />
                     <ArrayButtonRemove
                       title="Remove Member"

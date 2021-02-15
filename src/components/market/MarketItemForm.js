@@ -80,7 +80,6 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
         label="Condition"
         value={market.condition}
         readOnly={true}
-        addClassName="is-static"
       />
     );
   };
@@ -95,14 +94,7 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
     const price =
       market.marketPrice === 0 ? 'free' : `£${market.marketPrice.toFixed(2)}`;
 
-    return (
-      <TextInputStd
-        label={label}
-        value={price}
-        readOnly={true}
-        addClassName="is-static"
-      />
-    );
+    return <TextInputStd label={label} value={price} readOnly={true} />;
   };
 
   const showStolenOn = () => {
@@ -119,7 +111,6 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
         label={`${capitalize(market.marketType)} on`}
         value={getDateSpan(market.occurredOn)}
         readOnly={true}
-        addClassName="is-static"
       />
     );
   };
@@ -136,7 +127,6 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
         label="Security reference"
         value={market.security}
         readOnly={true}
-        addClassName="is-static"
       />
     );
   };
@@ -151,12 +141,7 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
       : market.tracking;
 
     return (
-      <TextInputStd
-        label="Incident Number"
-        value={tracking}
-        readOnly={true}
-        addClassName="is-static"
-      />
+      <TextInputStd label="Incident Number" value={tracking} readOnly={true} />
     );
   };
 
@@ -183,7 +168,6 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
             label="Description"
             value={market.description}
             readOnly={true}
-            addClassName="is-static"
           />
           {showCondition()}
           {showPrice()}
@@ -193,7 +177,6 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
             label="Activities"
             value={market.activitys?.join(', ')}
             readOnly={true}
-            addClassName="is-static"
           />
           {market.threads.length === 0 && (
             <>

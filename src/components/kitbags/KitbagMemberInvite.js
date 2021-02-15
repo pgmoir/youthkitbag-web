@@ -25,7 +25,7 @@ const KitbagMemberInvite = ({ kitbag, modalIsActive, setModalIsActive }) => {
 
   const { name } = kitbag;
   // const kitbagId = match.params.kitbagId;
-  const initialValues = { email: '', roles: '' };
+  const initialValues = { email: '', role: '' };
 
   const rolesItems = ['', 'admin', 'member'];
 
@@ -49,7 +49,7 @@ const KitbagMemberInvite = ({ kitbag, modalIsActive, setModalIsActive }) => {
 
   function sendInvite() {
     if (values.email) {
-      const formValues = { ...values, roles: values.roles.split(',') };
+      const formValues = { ...values };
       inviteToKitbag(kitbag._id, formValues);
       //      history.push(`/kitbag/${kitbagId}/members`);
     }
@@ -69,7 +69,7 @@ const KitbagMemberInvite = ({ kitbag, modalIsActive, setModalIsActive }) => {
   //   return (
   //     <>
   //       <p>
-  //         Enter an email and specify roles for a person you want to give access
+  //         Enter an email and specify role for a person you want to give access
   //         to this kitbag
   //       </p>
   //       <TextInputStd

@@ -18,7 +18,7 @@ const SelectInputStd = ({
   return (
     <div className="field">
       {label && (
-        <label htmlFor="{field}" className="label">
+        <label htmlFor={field} className="label">
           {label}
         </label>
       )}

@@ -100,3 +100,10 @@
   color: $primary;
   background-color: $pagination-background-color;
 }
+
+.select {
+  width: 100%;
+  select {
+    width: 100%;
+  }
+}

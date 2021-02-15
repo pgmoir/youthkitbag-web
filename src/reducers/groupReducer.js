@@ -8,6 +8,7 @@ import {
   SEARCH_GROUPS,
   FETCH_GROUPS_MEMBER_REQUESTS,
   SEARCH_GROUP_MEMBERS,
+  CREATE_GROUP_JOIN,
 } from '../actions/types';
 
 const initialState = {
@@ -34,6 +35,7 @@ export default (state = initialState, action) => {
       };
     case FETCH_GROUP:
     case CREATE_GROUP:
+    case CREATE_GROUP_JOIN:
     case EDIT_GROUP:
       return {
         ...state,

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
+
 import { fetchGroup } from '../../actions/GroupActions';
 import GroupForm from './GroupForm';
 import Title from '../includes/title/Title';
@@ -8,6 +10,8 @@ import Alert from '../includes/Alert';
 import GroupsHelp from '../kitbag/GroupsHelp';
 import GroupDisplay from './GroupDisplay';
 import Breadcrumb from '../includes/Breadcrumb';
+import GroupMemberJoin from './GroupMemberJoin';
+import { MemberStates } from '../../enums/memberStates.enum';
 
 const mapStateToProps = (state) => ({
   current: state.group.current,
@@ -20,6 +24,7 @@ const mapDispatchToProps = {
 const GroupPage = ({ current, fetchGroup, match }) => {
   const { groupId } = match.params;
   const [createGroup, setCreateGroup] = useState(false);
+  const [joinModalIsActive, setJoinModalIsActive] = useState(false);
   const [group, setGroup] = useState({
     name: '',
     description: '',
@@ -83,47 +88,21 @@ const GroupPage = ({ current, fetchGroup, match }) => {
     return 'Certified group';
   }
 
-  function getGroupMemberStateIcon() {
-    switch (group.groupMemberState) {
-      case 'requested':
-        return (
-          <span
-            className="fas fa-meh pl-3 text-info"
-            title="Membership has been requested"
-          ></span>
-        );
-      case 'approved':
-        return (
-          <span
-            className="fas fa-laugh pl-3 text-success"
-            title="Membership has been approved"
-          ></span>
-        );
-      case 'rejected':
-        return (
-          <span
-            className="fas fa-sad-tear pl-3 text-warning"
-            title="Membership has been rejected"
-          ></span>
-        );
-      case 'blocked':
-        return (
-          <span
-            className="fas fa-meh-blank pl-3 text-danger"
-            title="Membership has been blocked"
-          ></span>
-        );
-      case 'left':
-        return (
-          <span
-            className="fas fa-dizzy pl-3 text-danger"
-            title="Left membership"
-          ></span>
-        );
-      default:
-        break;
-    }
+  function joinGroup(e) {
+    e.stopPropagation();
+    setJoinModalIsActive(true);
   }
+
+  const stateClasses = classNames('tag is-large is-rounded', {
+    'is-success': group.groupMemberState === MemberStates.APPROVED,
+    'is-info':
+      group.groupMemberState === MemberStates.REQUESTED ||
+      group.groupMemberState === MemberStates.INVITED,
+    'is-warning': group.groupMemberState === MemberStates.REJECTED,
+    'is-danger':
+      group.groupMemberState === MemberStates.BLOCKED ||
+      group.groupMemberState === MemberStates.LEFT,
+  });
 
   const crumbs = [
     { title: 'Home', to: '/' },
@@ -132,55 +111,78 @@ const GroupPage = ({ current, fetchGroup, match }) => {
   ];
 
   return (
-    <div className="container">
-      <Breadcrumb crumbs={crumbs} />
-      <Title title={getTitle()} icon={getIcon()} iconTitle={getIconTitle()} />
-      <Alert />
-      <GroupsHelp />
-      <div className="columns">
-        <div className="column is-half-width">
-          {group.groupMemberState && (
-            <h2>Your member state {getGroupMemberStateIcon()}</h2>
-          )}
-          {!group.groupMemberState && (
-            <h2>You are not a member of this group</h2>
-          )}
-        </div>
-        <div className="column is-fullwidth">
-          <div className="buttons is-justify-content-flex-end">
-            {group._id &&
-              group.state === 'approved' &&
-              (group.groupAdmin || group.groupMember) && (
-                <Link
-                  to={`/groups/${groupId}/members`}
-                  className="button is-primary"
-                >
-                  Members
-                </Link>
-              )}
-            {group._id && group.state === 'approved' && !group.groupMember && (
-              <Link
-                to={`/groups/${groupId}/join`}
-                className={`button is-success ${
-                  group.groupMemberState ? 'disabled' : ''
-                }`}
-                disabled={group.groupMemberState}
-              >
-                Join
-              </Link>
+    <>
+      <div className="container">
+        <Breadcrumb crumbs={crumbs} />
+        <Title title={getTitle()} icon={getIcon()} iconTitle={getIconTitle()} />
+        <Alert />
+        <GroupsHelp />
+        <div className="columns">
+          <div className="column is-half-width">
+            {group.groupMemberState && (
+              <span
+                className={stateClasses}
+              >{`Your current membership status is "${group.groupMemberState}"`}</span>
             )}
-            {group._id && group.state === 'approved' && group.groupMember && (
-              <Link to={`/groups/${groupId}/leave`} className="button is-info">
-                Leave
-              </Link>
+            {!group.groupMemberState && (
+              <h2>You are not a member of this group</h2>
             )}
           </div>
+          <div className="column is-fullwidth">
+            <div className="buttons is-justify-content-flex-end">
+              {group._id &&
+                group.state === 'approved' &&
+                (group.groupAdmin || group.groupMember) && (
+                  <Link
+                    to={`/groups/${groupId}/members`}
+                    className="button is-primary"
+                  >
+                    Members
+                  </Link>
+                )}
+              {group._id && group.state === 'approved' && !group.groupMember && (
+                <span
+                  className={`button is-success is-clickable ${
+                    group.groupMemberState ? 'disabled' : ''
+                  }`}
+                  disabled={group.groupMemberState}
+                  onClick={(e) => {
+                    joinGroup(e);
+                  }}
+                  onKeyPress={(e) => {
+                    joinGroup(e);
+                  }}
+                  role="button"
+                  tabIndex="0"
+                >
+                  Join
+                </span>
+              )}
+              {group._id && group.state === 'approved' && group.groupMember && (
+                <Link
+                  to={`/groups/${groupId}/leave`}
+                  className="button is-info"
+                >
+                  Leave
+                </Link>
+              )}
+            </div>
+          </div>
         </div>
-      </div>
 
-      {(group.groupAdmin || createGroup) && <GroupForm group={group} />}
-      {!group.groupAdmin && !createGroup && <GroupDisplay group={group} />}
-    </div>
+        {group.groupAdmin || createGroup ? (
+          <GroupForm group={group} />
+        ) : (
+          <GroupDisplay group={group} />
+        )}
+      </div>
+      <GroupMemberJoin
+        groupId={groupId}
+        name={group.name}
+        modalIsActive={joinModalIsActive}
+        setModalIsActive={setJoinModalIsActive}
+      />
+    </>
   );
 };
 

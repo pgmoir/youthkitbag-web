@@ -21,19 +21,12 @@ const GroupDisplay = ({ group }) => {
             label="Description"
             value={group.description}
             readOnly={true}
-            addClassName="is-static"
           />
-          <TextInputStd
-            label="Website"
-            value={group.website}
-            readOnly={true}
-            addClassName="is-static"
-          />
+          <TextInputStd label="Website" value={group.website} readOnly={true} />
           <TextInputStd
             label="Activities"
             value={group.activitys?.join(', ')}
             readOnly={true}
-            addClassName="is-static"
           />
           {/* <h2 className="h5">
             Copy and share the link below to promote this group
