@@ -7932,6 +7932,10 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   display: inline-block;
   margin-right: -1.5rem; }
 
+body {
+  background-image: url("/images/sport-wallpaper.jpg");
+  background-repeat: repeat; }
+
 /*
   button for third party auth
   */
