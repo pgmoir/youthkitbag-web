@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import validate from '../includes/FormEmptyValidationRules';
 import TextInputStd from '../includes/controls/TextInputStd';
 import Alert from '../includes/Alert';
+import Title from '../includes/title/Title';
 
 const mapStateToProps = (state) => ({
   userId: state.auth.userId,
@@ -52,6 +53,7 @@ const NewPasswordForm = ({
 
   return (
     <div className="notification has-background-primary-light box">
+      <Title title="Set a new password" hasHr={false} />
       <Alert />
       <div className="content">
         <p>

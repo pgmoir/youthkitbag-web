@@ -2722,7 +2722,7 @@ a.tag:hover {
 
 .help {
   display: block;
-  font-size: 0.75rem;
+  font-size: 16px;
   margin-top: 0.25rem; }
   .help.is-white {
     color: white; }
@@ -7968,6 +7968,26 @@ body,
 
 #navbar-toggle-state:checked ~ .navbar-menu {
   display: block !important; }
+
+.is-overlay-topleft {
+  top: 0;
+  left: 0;
+  position: absolute; }
+
+.is-overlay-topright {
+  top: 0;
+  right: 0;
+  position: absolute; }
+
+.is-overlay-bottomleft {
+  bottom: 0;
+  left: 0;
+  position: absolute; }
+
+.is-overlay-bottomright {
+  bottom: 0;
+  right: 0;
+  position: absolute; }
 
 .is-radio-small {
   width: 1rem;

@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+
 import { fetchMarketItems } from '../../actions/MarketActions';
-import Title from '../includes/title/Title';
-import MarketItemCard from './MarketItemCard';
-import SearchForm from '../includes/SearchForm';
-import Pagination from '../includes/Pagination';
 import Alert from '../includes/Alert';
 import Breadcrumb from '../includes/Breadcrumb';
+import MarketItemCard from './MarketItemCard';
+import Pagination from '../includes/Pagination';
+import SearchForm from '../includes/SearchForm';
+import Title from '../includes/title/Title';
 
 const mapStateToProps = (state) => ({
   stateSearch: state.market.search,

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
+import Title from '../includes/title/Title';
 import { reset } from '../../actions/AuthActions';
 import validate from '../includes/FormEmptyValidationRules';
 import Alert from '../includes/Alert';
@@ -38,6 +39,7 @@ const ResetForm = ({ newErrors, reset }) => {
 
   return (
     <div className="notification has-background-primary-light box">
+      <Title title="Reset your password" hasHr={false} />
       <Alert />
       <div className="content">
         <p>

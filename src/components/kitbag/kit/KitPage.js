@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+
 import { fetchKitbagKit } from '../../../actions/KitbagKitActions';
-import KitForm from './KitForm';
-import Title from '../../includes/title/Title';
 import Alert from '../../includes/Alert';
 import Breadcrumb from '../../includes/Breadcrumb';
+import KitForm from './KitForm';
+import Title from '../../includes/title/Title';
 
 const mapDispatchToProps = {
   fetchKitbagKit,
@@ -69,7 +70,7 @@ const KitPage = ({ fetchKitbagKit, match }) => {
   const crumbs = [
     { title: 'Home', to: '/' },
     { title: `${kitbag?.name}`, to: `/kitbag/kit/${kitbagId}` },
-    { title: `${kit?.title}` },
+    { title: getTitle() },
   ];
 
   return (

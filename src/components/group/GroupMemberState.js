@@ -9,52 +9,62 @@ const mapDispatchToProps = {
   editGroupMember,
 };
 
-const GroupMemberState = ({ editGroupMember, match }) => {
-  const { groupId } = match.params;
-
-  function renderTitle() {
-    return 'Change state of member';
+const GroupMemberState = ({
+  groupId,
+  memberId,
+  user,
+  editGroupMember,
+  modalIsActive,
+  setModalIsActive,
+}) => {
+  function closeModal() {
+    setModalIsActive(false);
   }
 
-  function renderContent() {
-    return 'Are you sure you want to change the state of this member?';
-  }
-
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
-  function renderActions() {
-    const { groupId, memberId, state } = match.params;
-    return (
-      <>
-        <Link
-          to={`/groups/${groupId}/members`}
-          className="btn btn-outline-secondary"
-          data-dismiss="modal"
-        >
-          Cancel
-        </Link>
-        <button
-          type="button"
-          className="btn btn-danger"
-          onClick={() =>
-            editGroupMember({ groupId, memberId, formValues: { state } })
-          }
-        >
-          {capitalizeFirstLetter(state)}
-        </button>
-      </>
-    );
+  function memberName() {
+    return `${user.firstName} ${user.lastName}`;
   }
 
   return (
-    <Modal
-      title={renderTitle()}
-      content={renderContent()}
-      actions={renderActions()}
-      onDismiss={() => history.push(`/groups/${groupId}/members`)}
-    />
+    <div className={`modal ${modalIsActive ? 'is-active' : ''}`}>
+      <div
+        className="modal-background"
+        onClick={closeModal}
+        onKeyPress={closeModal}
+        role="button"
+        tabIndex="0"
+      ></div>
+      <div className="modal-card">
+        <header className="modal-card-head">
+          <p className="modal-card-title">Select member state</p>
+          <button
+            className="delete"
+            aria-label="close"
+            onClick={closeModal}
+            tabIndex="0"
+          ></button>
+        </header>
+        <section className="modal-card-body">
+          <p className="is-size-6">
+            {`Are you sure you want to change the membership status for, "${memberName()}"?`}
+          </p>
+        </section>
+        <footer className="modal-card-foot">
+          <button
+            className="button is-success"
+            onClick={async () => {
+              editGroupMember({ groupId, memberId });
+              setModalIsActive(false);
+            }}
+          >
+            Save
+          </button>
+          <button className="button is-warning" onClick={closeModal}>
+            Cancel
+          </button>
+        </footer>
+      </div>
+    </div>
   );
 };
 

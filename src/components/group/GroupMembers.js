@@ -78,7 +78,7 @@ const GroupMembers = ({ stateSearch, items, fetchGroupMembers, match }) => {
 
   function renderList() {
     if (group.members.length === 0) {
-      return <h2 className="subtitle">There are no members identified</h2>;
+      return null;
     }
 
     return group.members.map((member, index) => {

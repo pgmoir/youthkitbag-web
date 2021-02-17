@@ -117,7 +117,7 @@ const GroupsMemberRequestsAnnouncement = ({
         <div>{renderList()}</div>
       </div>
       <div className="buttons">
-        <Link className="button is-info is-inverted" to="/groups">
+        <Link className="button is-info is-inverted" to="/groups?">
           View all your groups
         </Link>
       </div>

@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
+import React, { useState, useEffect } from 'react';
 
 import { fetchGroup } from '../../actions/GroupActions';
-import GroupForm from './GroupForm';
-import Title from '../includes/title/Title';
-import Alert from '../includes/Alert';
-import GroupsHelp from '../kitbag/GroupsHelp';
-import GroupDisplay from './GroupDisplay';
-import Breadcrumb from '../includes/Breadcrumb';
-import GroupMemberJoin from './GroupMemberJoin';
 import { MemberStates } from '../../enums/memberStates.enum';
+import Alert from '../includes/Alert';
+import Breadcrumb from '../includes/Breadcrumb';
+import GroupDisplay from './GroupDisplay';
+import GroupForm from './GroupForm';
+import GroupMemberJoin from './GroupMemberJoin';
+import GroupsHelp from '../kitbag/GroupsHelp';
+import Title from '../includes/title/Title';
 
 const mapStateToProps = (state) => ({
   current: state.group.current,

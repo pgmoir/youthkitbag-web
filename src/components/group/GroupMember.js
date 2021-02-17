@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 
 import BlankCard from '../kitbag/BlankCard';
 import GroupMemberDelete from './GroupMemberDelete';
+import GroupMemberState from './GroupMemberState';
 import { MemberStates } from '../../enums/memberStates.enum';
 
 const GroupMember = ({ groupId, member, groupAdmin }) => {
-  const [modalIsActive, setModalIsActive] = useState(false);
+  const [deleteModalIsActive, setDeleteModalIsActive] = useState(false);
+  const [stateModalIsActive, setStateModalIsActive] = useState(false);
 
   const { user, role, state } = member;
 
@@ -16,13 +18,18 @@ const GroupMember = ({ groupId, member, groupAdmin }) => {
     return member.user.image;
   }
 
-  function deleteItem(e) {
+  function deleteMember(e) {
     e.stopPropagation();
-    setModalIsActive(true);
-    // <Link to={`/groups/${groupId}/members/${member._id}/delete`}>
+    setDeleteModalIsActive(true);
+  }
+
+  function editMember(e) {
+    e.stopPropagation();
+    setStateModalIsActive(true);
   }
 
   const stateClasses = classNames('tag is-rounded', {
+    'is-clickable': groupAdmin,
     'is-success': state === MemberStates.APPROVED,
     'is-info': state === MemberStates.REQUESTED,
     'is-warning': state === MemberStates.REJECTED,
@@ -37,27 +44,45 @@ const GroupMember = ({ groupId, member, groupAdmin }) => {
             <figure className="image is-4by3">
               <img src={getThumbnail()} alt="" role="presentation" />
             </figure>
-            <div className="has-text-right p-2 is-overlay">
-              <span className={stateClasses}>{state}</span>
-            </div>
-            {groupAdmin && (
-              <div className="has-text-left p-2 is-overlay">
-                <span
-                  className="tag is-danger is-medium is-clickable"
-                  onClick={(e) => {
-                    deleteItem(e);
-                  }}
-                  onKeyPress={(e) => {
-                    deleteItem(e);
-                  }}
-                  role="button"
-                  tabIndex="0"
-                >
+            {groupAdmin ? (
+              <>
+                <div className="has-text-left p-2 is-overlay-topleft">
                   <span
-                    className="fas fa-trash-alt"
-                    title="Delete member"
-                  ></span>
-                </span>
+                    className="tag is-danger is-medium is-clickable"
+                    onClick={(e) => {
+                      deleteMember(e);
+                    }}
+                    onKeyPress={(e) => {
+                      deleteMember(e);
+                    }}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    <span
+                      className="fas fa-trash-alt"
+                      title="Delete member"
+                    ></span>
+                  </span>
+                </div>
+                <div className="has-text-right p-2 is-overlay-topright">
+                  <span
+                    className={stateClasses}
+                    onClick={(e) => {
+                      editMember(e);
+                    }}
+                    onKeyPress={(e) => {
+                      editMember(e);
+                    }}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    {state}
+                  </span>
+                </div>
+              </>
+            ) : (
+              <div className="has-text-right p-2 is-overlay-topright">
+                <span className={stateClasses}>{state}</span>
               </div>
             )}
           </div>
@@ -76,8 +101,15 @@ const GroupMember = ({ groupId, member, groupAdmin }) => {
         groupId={groupId}
         memberId={member._id}
         user={user}
-        modalIsActive={modalIsActive}
-        setModalIsActive={setModalIsActive}
+        modalIsActive={deleteModalIsActive}
+        setModalIsActive={setDeleteModalIsActive}
+      />
+      <GroupMemberState
+        groupId={groupId}
+        memberId={member._id}
+        user={user}
+        modalIsActive={stateModalIsActive}
+        setModalIsActive={setStateModalIsActive}
       />
     </>
   );

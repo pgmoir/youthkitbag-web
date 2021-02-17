@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+
 import {
   fetchMarketKit,
   fetchMarketKitFromKit,
@@ -8,6 +9,7 @@ import MarketKitForm from './MarketKitForm';
 import Title from '../../includes/title/Title';
 import Alert from '../../includes/Alert';
 import MarketTitle from '../../includes/title/MarketTitle';
+import Breadcrumb from '../../includes/Breadcrumb';
 
 const mapStateToProps = (state) => ({
   current: state.kitbag.market.current,
@@ -72,21 +74,32 @@ const MarketKitPage = ({
     }
   }, [current]);
 
+  const crumbs = [
+    { title: 'Home', to: '/' },
+    { title: 'Market', to: `/market` },
+    { title: getTitle() },
+  ];
+
   function itemIsLoading() {
     return marketId && !market._id;
   }
 
   function getTitle() {
     if (itemIsLoading()) {
-      return <Title title="Loading ..." />;
+      return 'Loading ...';
     }
 
-    return <MarketTitle market={market} isOwned={true} />;
+    return market.title;
   }
 
   return (
     <div className="container">
-      {getTitle()}
+      <Breadcrumb crumbs={crumbs} />{' '}
+      {itemIsLoading() ? (
+        <Title title={getTitle()} />
+      ) : (
+        <MarketTitle market={market} isOwned={true} />
+      )}
       <Alert />
       <MarketKitForm kitbagId={kitbagId} market={market} />
     </div>
