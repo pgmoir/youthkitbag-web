@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { editGroupMember } from '../../actions/GroupActions';
-import Modal from '../includes/Modal';
-import history from '../../utils/history';
+import { MemberStates } from '../../enums/memberStates.enum';
+import SelectInputStd from '../includes/controls/SelectInputStd';
+import useForm from '../hooks/useForm';
+import validate from '../includes/FormEmptyValidationRules';
 
 const mapDispatchToProps = {
   editGroupMember,
@@ -12,6 +13,7 @@ const mapDispatchToProps = {
 const GroupMemberState = ({
   groupId,
   memberId,
+  memberState,
   user,
   editGroupMember,
   modalIsActive,
@@ -21,8 +23,31 @@ const GroupMemberState = ({
     setModalIsActive(false);
   }
 
+  const initialValues = { state: memberState };
+  const stateItems = [
+    '',
+    MemberStates.APPROVED,
+    MemberStates.INVITED,
+    MemberStates.REQUESTED,
+    MemberStates.REJECTED,
+    MemberStates.SUSPENDED,
+    MemberStates.LEFT,
+  ];
+
+  const { handleChange, handleSubmit, values, errors } = useForm(
+    initialValues,
+    updateMember,
+    validate
+  );
+
   function memberName() {
     return `${user.firstName} ${user.lastName}`;
+  }
+
+  function updateMember() {
+    const formValues = { ...values };
+    editGroupMember({ groupId, memberId, formValues });
+    setModalIsActive(false);
   }
 
   return (
@@ -45,18 +70,19 @@ const GroupMemberState = ({
           ></button>
         </header>
         <section className="modal-card-body">
-          <p className="is-size-6">
-            {`Are you sure you want to change the membership status for, "${memberName()}"?`}
+          <p className="is-size-6 mb-3">
+            {`Select the new membership status for, "${memberName()}"`}
           </p>
+          <SelectInputStd
+            value={values.state}
+            field="state"
+            handleChange={handleChange}
+            error={errors.state}
+            items={stateItems}
+          />
         </section>
         <footer className="modal-card-foot">
-          <button
-            className="button is-success"
-            onClick={async () => {
-              editGroupMember({ groupId, memberId });
-              setModalIsActive(false);
-            }}
-          >
+          <button className="button is-success" onClick={handleSubmit}>
             Save
           </button>
           <button className="button is-warning" onClick={closeModal}>

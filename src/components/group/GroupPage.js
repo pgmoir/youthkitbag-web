@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import React, { useState, useEffect } from 'react';
@@ -13,16 +13,17 @@ import GroupMemberJoin from './GroupMemberJoin';
 import GroupsHelp from '../kitbag/GroupsHelp';
 import Title from '../includes/title/Title';
 
-const mapStateToProps = (state) => ({
-  current: state.group.current,
-});
-
 const mapDispatchToProps = {
   fetchGroup,
 };
 
-const GroupPage = ({ current, fetchGroup, match }) => {
+const GroupPage = ({ fetchGroup, match }) => {
   const { groupId } = match.params;
+
+  const current = useSelector((state) => {
+    return state.group.entities[groupId];
+  });
+
   const [createGroup, setCreateGroup] = useState(false);
   const [joinModalIsActive, setJoinModalIsActive] = useState(false);
   const [group, setGroup] = useState({
@@ -100,7 +101,7 @@ const GroupPage = ({ current, fetchGroup, match }) => {
       group.groupMemberState === MemberStates.INVITED,
     'is-warning': group.groupMemberState === MemberStates.REJECTED,
     'is-danger':
-      group.groupMemberState === MemberStates.BLOCKED ||
+      group.groupMemberState === MemberStates.SUSPENDED ||
       group.groupMemberState === MemberStates.LEFT,
   });
 
@@ -186,4 +187,4 @@ const GroupPage = ({ current, fetchGroup, match }) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupPage);
+export default connect(null, mapDispatchToProps)(GroupPage);

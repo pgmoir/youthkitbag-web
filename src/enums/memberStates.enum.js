@@ -3,6 +3,6 @@ export const MemberStates = {
   REQUESTED: 'requested',
   APPROVED: 'approved',
   REJECTED: 'rejected',
-  BLOCKED: 'blocked',
+  SUSPENDED: 'suspended',
   LEFT: 'left',
 };

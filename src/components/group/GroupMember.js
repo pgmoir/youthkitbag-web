@@ -33,7 +33,7 @@ const GroupMember = ({ groupId, member, groupAdmin }) => {
     'is-success': state === MemberStates.APPROVED,
     'is-info': state === MemberStates.REQUESTED,
     'is-warning': state === MemberStates.REJECTED,
-    'is-danger': state === MemberStates.BLOCKED,
+    'is-danger': state === MemberStates.SUSPENDED,
   });
 
   return (
@@ -107,6 +107,7 @@ const GroupMember = ({ groupId, member, groupAdmin }) => {
       <GroupMemberState
         groupId={groupId}
         memberId={member._id}
+        memberState={state}
         user={user}
         modalIsActive={stateModalIsActive}
         setModalIsActive={setStateModalIsActive}

@@ -116,7 +116,7 @@ const KitbagForm = ({
     '',
     MemberStates.INVITED,
     MemberStates.APPROVED,
-    MemberStates.BLOCKED,
+    MemberStates.SUSPENDED,
   ];
 
   return (

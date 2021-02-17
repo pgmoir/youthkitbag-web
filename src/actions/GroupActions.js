@@ -125,6 +125,7 @@ export const fetchGroupMembers = ({
       }
     })
     .catch((err) => {
+      console.log(err);
       const { response } = err;
       dispatch({ type: API_ERROR, payload: response.data });
       history.push(`/groups/${groupId}/members`);
@@ -137,21 +138,19 @@ export const editGroupMember = ({ groupId, memberId, formValues }) => (
   axios
     .put(`/group/${groupId}/members/${memberId}`, { ...formValues }, {})
     .then((response) => {
-      history.push(`/groups/${groupId}/members`);
       dispatch({ type: EDIT_GROUP_MEMBER_STATE, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
       dispatch({ type: API_ERROR, payload: response.data });
-      history.push(`/groups/${groupId}/members`);
     });
 };
 
 export const deleteGroupMember = ({ groupId, memberId }) => (dispatch) => {
   axios
     .delete(`/group/${groupId}/members/${memberId}/delete`, {})
-    .then((response) => {
-      dispatch({ type: DELETE_GROUP_MEMBER, payload: response.data });
+    .then(() => {
+      dispatch({ type: DELETE_GROUP_MEMBER, payload: memberId });
     })
     .catch((err) => {
       const { response } = err;

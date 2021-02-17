@@ -11,7 +11,7 @@ import Breadcrumb from '../includes/Breadcrumb';
 
 const mapStateToProps = (state) => ({
   stateSearch: state.group.search,
-  items: Object.values(state.group.list),
+  items: Object.values(state.group.entities),
   pagination: state.pagination,
   userBundle: state.user.bundle,
 });

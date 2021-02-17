@@ -33,6 +33,7 @@ export default (state = initialState, action) => {
 
     case DELETE_KITBAG_KIT: {
       const kitId = action.payload;
+      // eslint-disable-next-line no-unused-vars
       const { [kitId]: value, ...otherEntities } = state.entities;
       return { ...state, entities: otherEntities };
     }
