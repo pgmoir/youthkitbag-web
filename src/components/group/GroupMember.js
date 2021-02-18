@@ -6,7 +6,7 @@ import GroupMemberDelete from './GroupMemberDelete';
 import GroupMemberState from './GroupMemberState';
 import { MemberStates } from '../../enums/memberStates.enum';
 
-const GroupMember = ({ groupId, member, groupAdmin }) => {
+const GroupMember = ({ groupId, member, isGroupAdmin }) => {
   const [deleteModalIsActive, setDeleteModalIsActive] = useState(false);
   const [stateModalIsActive, setStateModalIsActive] = useState(false);
 
@@ -29,7 +29,7 @@ const GroupMember = ({ groupId, member, groupAdmin }) => {
   }
 
   const stateClasses = classNames('tag is-rounded', {
-    'is-clickable': groupAdmin,
+    'is-clickable': isGroupAdmin,
     'is-success': state === MemberStates.APPROVED,
     'is-info': state === MemberStates.REQUESTED,
     'is-warning': state === MemberStates.REJECTED,
@@ -44,7 +44,7 @@ const GroupMember = ({ groupId, member, groupAdmin }) => {
             <figure className="image is-4by3">
               <img src={getThumbnail()} alt="" role="presentation" />
             </figure>
-            {groupAdmin ? (
+            {isGroupAdmin ? (
               <>
                 <div className="has-text-left p-2 is-overlay-topleft">
                   <span
@@ -93,7 +93,7 @@ const GroupMember = ({ groupId, member, groupAdmin }) => {
                 : 'UNKNOWN'}
             </p>
             <p className="subtitle is-size-6">{role}</p>
-            {groupAdmin && <p className="subtitle is-size-6">{user.email}</p>}
+            {isGroupAdmin && <p className="subtitle is-size-6">{user.email}</p>}
           </div>
         </article>
       </div>

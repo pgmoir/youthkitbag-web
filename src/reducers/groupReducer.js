@@ -7,11 +7,11 @@ import {
   EDIT_GROUP,
   SEARCH_GROUPS,
   FETCH_GROUPS_MEMBER_REQUESTS,
-  SEARCH_GROUP_MEMBERS,
-  CREATE_GROUP_JOIN,
+  GROUP_MEMBER_JOIN,
   RESET,
-  DELETE_GROUP_MEMBER,
+  GROUP_MEMBER_DELETE,
   EDIT_GROUP_MEMBER_STATE,
+  GROUP_MEMBER_LEAVE,
 } from '../actions/types';
 
 const initialState = {
@@ -48,7 +48,8 @@ export default (state = initialState, action) => {
 
     case FETCH_GROUP:
     case CREATE_GROUP:
-    case CREATE_GROUP_JOIN:
+    case GROUP_MEMBER_JOIN:
+    case GROUP_MEMBER_LEAVE:
     case EDIT_GROUP: {
       const group = action.payload.data;
       const groupId = group._id;
@@ -63,7 +64,7 @@ export default (state = initialState, action) => {
       return { ...state, memberEntities };
     }
 
-    case DELETE_GROUP_MEMBER: {
+    case GROUP_MEMBER_DELETE: {
       const memberId = action.payload;
       // eslint-disable-next-line no-unused-vars
       const { [memberId]: value, ...otherEntities } = state.memberEntities;

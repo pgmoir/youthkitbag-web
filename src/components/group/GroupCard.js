@@ -1,4 +1,5 @@
 import React from 'react';
+import { GroupStates } from '../../enums/groupStates.enum';
 import history from '../../utils/history';
 
 const GroupCard = ({ group }) => {
@@ -37,24 +38,31 @@ const GroupCard = ({ group }) => {
 
   function renderState(state) {
     switch (state) {
-      case 'approved':
+      case GroupStates.ACTIVE:
         return (
           <span
             className="fas fa-check-circle has-text-success"
             title="Group has been approved"
           ></span>
         );
-      case 'blocked':
+      case GroupStates.BLOCKED:
+        return (
+          <span
+            className="fas fa-times-circle has-text-warning"
+            title="Group has been blocked"
+          ></span>
+        );
+      case GroupStates.DELETED:
         return (
           <span
             className="fas fa-times-circle has-text-danger"
-            title="Group has been blocked"
+            title="Group has been deleted"
           ></span>
         );
       default:
         return (
           <span
-            className="fas fa-question-circle has-text-warning"
+            className="fas fa-question-circle has-text-info"
             title="Group has requested approval"
           ></span>
         );
@@ -67,7 +75,6 @@ const GroupCard = ({ group }) => {
 
   function changeState(e) {
     if (!appAdmin) return;
-    console.log('CHANGE ST');
     /* <Link to={`/kitbag/kit/${kitbagId}/delete/${_id}`}> */
   }
 

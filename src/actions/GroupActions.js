@@ -5,12 +5,12 @@ import {
   FETCH_GROUP,
   EDIT_GROUP,
   EDIT_GROUP_STATE,
-  DELETE_GROUP_MEMBER,
+  GROUP_MEMBER_DELETE,
   FETCH_GROUP_MEMBERS,
   EDIT_GROUP_MEMBER_STATE,
   API_ERROR,
-  CREATE_GROUP_JOIN,
-  EDIT_GROUP_LEAVE,
+  GROUP_MEMBER_JOIN,
+  GROUP_MEMBER_LEAVE,
   SEARCH_GROUPS,
   FETCH_GROUPS_MEMBER_REQUESTS,
 } from './types';
@@ -138,7 +138,7 @@ export const deleteGroupMember = ({ groupId, memberId }) => (dispatch) => {
   axios
     .delete(`/group/${groupId}/members/${memberId}/delete`, {})
     .then(() => {
-      dispatch({ type: DELETE_GROUP_MEMBER, payload: memberId });
+      dispatch({ type: GROUP_MEMBER_DELETE, payload: memberId });
     })
     .catch((err) => {
       const { response } = err;
@@ -150,7 +150,7 @@ export const requestGroupJoin = ({ groupId }) => (dispatch) => {
   axios
     .post(`/group/${groupId}/members/join`, {}, {})
     .then((response) => {
-      dispatch({ type: CREATE_GROUP_JOIN, payload: response.data });
+      dispatch({ type: GROUP_MEMBER_JOIN, payload: response.data });
       dispatch(getUser());
     })
     .catch((err) => {
@@ -159,12 +159,11 @@ export const requestGroupJoin = ({ groupId }) => (dispatch) => {
     });
 };
 
-export const requestGroupLeave = (groupId) => (dispatch) => {
+export const requestGroupLeave = ({ groupId }) => (dispatch) => {
   axios
     .put(`/group/${groupId}/members/leave`, {}, {})
     .then((response) => {
-      history.push(`/groups/${groupId}`);
-      dispatch({ type: EDIT_GROUP_LEAVE, payload: response.data });
+      dispatch({ type: GROUP_MEMBER_LEAVE, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;

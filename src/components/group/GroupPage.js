@@ -10,8 +10,11 @@ import Breadcrumb from '../includes/Breadcrumb';
 import GroupDisplay from './GroupDisplay';
 import GroupForm from './GroupForm';
 import GroupMemberJoin from './GroupMemberJoin';
+import GroupMemberLeave from './GroupMemberLeave';
 import GroupsHelp from '../kitbag/GroupsHelp';
 import Title from '../includes/title/Title';
+import { GroupStates } from '../../enums/groupStates.enum';
+import { MemberRoles } from '../../enums/memberRoles.enum';
 
 const mapDispatchToProps = {
   fetchGroup,
@@ -26,6 +29,7 @@ const GroupPage = ({ fetchGroup, match }) => {
 
   const [createGroup, setCreateGroup] = useState(false);
   const [joinModalIsActive, setJoinModalIsActive] = useState(false);
+  const [leaveModalIsActive, setLeaveModalIsActive] = useState(false);
   const [group, setGroup] = useState({
     name: '',
     description: '',
@@ -39,6 +43,12 @@ const GroupPage = ({ fetchGroup, match }) => {
     topImage: '/images/default.png',
     imagesToUpload: 0,
   });
+
+  const canLeaveStates = [
+    MemberStates.APPROVED,
+    MemberStates.INVITED,
+    MemberStates.REQUESTED,
+  ];
 
   useEffect(() => {
     if (groupId) {
@@ -60,6 +70,12 @@ const GroupPage = ({ fetchGroup, match }) => {
     }
   }, [current]);
 
+  const isGroupAdmin =
+    group.state !== GroupStates.BLOCKED &&
+    group.state !== GroupStates.DELETED &&
+    group.groupMemberRole === MemberRoles.ADMIN &&
+    group.groupMemberState === MemberStates.APPROVED;
+
   function groupIsLoading() {
     return groupId && !group._id && !createGroup;
   }
@@ -76,17 +92,59 @@ const GroupPage = ({ fetchGroup, match }) => {
   }
 
   function getIcon() {
-    if (groupIsLoading() || !group._id || group.state !== 'approved')
-      return null;
+    if (!isGroupAdmin) return null;
 
-    return 'fas fa-certificate text-gold';
+    return 'fas fa-crown text-gold';
   }
 
-  function getIconTitle() {
-    if (groupIsLoading() || !group._id || group.state !== 'approved')
-      return null;
+  function getCurrentState() {
+    if (!group._id) return null;
 
-    return 'Certified group';
+    if (group.state === GroupStates.REQUESTED) {
+      return (
+        <span className="tag is-large is-rounded is-warning">
+          This group is currently awaiting approval and members cannot join
+        </span>
+      );
+    }
+
+    if (
+      group.state === GroupStates.BLOCKED ||
+      group.state === GroupStates.DELETED
+    ) {
+      return (
+        <span className="tag is-large is-rounded is-danger">
+          {`This group has been ${
+            group.state === GroupStates.BLOCKED ? 'blocked' : 'deleted'
+          } and members cannot join`}
+        </span>
+      );
+    }
+
+    const stateClasses = classNames('tag is-large is-rounded', {
+      'is-success': group.groupMemberState === MemberStates.APPROVED,
+      'is-info':
+        group.groupMemberState === MemberStates.REQUESTED ||
+        group.groupMemberState === MemberStates.INVITED,
+      'is-warning': group.groupMemberState === MemberStates.REJECTED,
+      'is-danger':
+        group.groupMemberState === MemberStates.SUSPENDED ||
+        group.groupMemberState === MemberStates.LEFT,
+    });
+
+    if (group.groupMemberState) {
+      return (
+        <span
+          className={stateClasses}
+        >{`Your current membership status is "${group.groupMemberState}"`}</span>
+      );
+    }
+
+    return (
+      <span className="tag is-large is-rounded is-link">
+        You are currently not a member of this group
+      </span>
+    );
   }
 
   function joinGroup(e) {
@@ -94,16 +152,20 @@ const GroupPage = ({ fetchGroup, match }) => {
     setJoinModalIsActive(true);
   }
 
-  const stateClasses = classNames('tag is-large is-rounded', {
-    'is-success': group.groupMemberState === MemberStates.APPROVED,
-    'is-info':
-      group.groupMemberState === MemberStates.REQUESTED ||
-      group.groupMemberState === MemberStates.INVITED,
-    'is-warning': group.groupMemberState === MemberStates.REJECTED,
-    'is-danger':
-      group.groupMemberState === MemberStates.SUSPENDED ||
-      group.groupMemberState === MemberStates.LEFT,
-  });
+  function leaveGroup(e) {
+    e.stopPropagation();
+    setLeaveModalIsActive(true);
+  }
+
+  function canJoin() {
+    return (
+      !group.groupMemberState || group.groupMemberState === MemberStates.LEFT
+    );
+  }
+
+  function canLeave() {
+    return canLeaveStates.includes(group.groupMemberState);
+  }
 
   const crumbs = [
     { title: 'Home', to: '/' },
@@ -115,25 +177,15 @@ const GroupPage = ({ fetchGroup, match }) => {
     <>
       <div className="container">
         <Breadcrumb crumbs={crumbs} />
-        <Title title={getTitle()} icon={getIcon()} iconTitle={getIconTitle()} />
+        <Title title={getTitle()} icon={getIcon()} />
         <Alert />
         <GroupsHelp />
         <div className="columns">
-          <div className="column is-half-width">
-            {group.groupMemberState && (
-              <span
-                className={stateClasses}
-              >{`Your current membership status is "${group.groupMemberState}"`}</span>
-            )}
-            {!group.groupMemberState && (
-              <h2>You are not a member of this group</h2>
-            )}
-          </div>
-          <div className="column is-fullwidth">
-            <div className="buttons is-justify-content-flex-end">
-              {group._id &&
-                group.state === 'approved' &&
-                (group.groupAdmin || group.groupMember) && (
+          <div className="column is-half-width">{getCurrentState()}</div>
+          {group._id && group.state === GroupStates.ACTIVE && (
+            <div className="column is-fullwidth">
+              <div className="buttons is-justify-content-flex-end">
+                {isGroupAdmin && (
                   <Link
                     to={`/groups/${groupId}/members`}
                     className="button is-primary"
@@ -141,37 +193,42 @@ const GroupPage = ({ fetchGroup, match }) => {
                     Members
                   </Link>
                 )}
-              {group._id && group.state === 'approved' && !group.groupMember && (
-                <span
-                  className={`button is-success is-clickable ${
-                    group.groupMemberState ? 'disabled' : ''
-                  }`}
-                  disabled={group.groupMemberState}
-                  onClick={(e) => {
-                    joinGroup(e);
-                  }}
-                  onKeyPress={(e) => {
-                    joinGroup(e);
-                  }}
-                  role="button"
-                  tabIndex="0"
-                >
-                  Join
-                </span>
-              )}
-              {group._id && group.state === 'approved' && group.groupMember && (
-                <Link
-                  to={`/groups/${groupId}/leave`}
-                  className="button is-info"
-                >
-                  Leave
-                </Link>
-              )}
+                {canJoin() && (
+                  <span
+                    className="button is-success is-clickable"
+                    onClick={(e) => {
+                      joinGroup(e);
+                    }}
+                    onKeyPress={(e) => {
+                      joinGroup(e);
+                    }}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    Join
+                  </span>
+                )}
+                {canLeave() && (
+                  <span
+                    className="button is-info is-clickable"
+                    onClick={(e) => {
+                      leaveGroup(e);
+                    }}
+                    onKeyPress={(e) => {
+                      leaveGroup(e);
+                    }}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    Leave
+                  </span>
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
-        {group.groupAdmin || createGroup ? (
+        {isGroupAdmin || createGroup ? (
           <GroupForm group={group} />
         ) : (
           <GroupDisplay group={group} />
@@ -182,6 +239,12 @@ const GroupPage = ({ fetchGroup, match }) => {
         name={group.name}
         modalIsActive={joinModalIsActive}
         setModalIsActive={setJoinModalIsActive}
+      />
+      <GroupMemberLeave
+        groupId={groupId}
+        name={group.name}
+        modalIsActive={leaveModalIsActive}
+        setModalIsActive={setLeaveModalIsActive}
       />
     </>
   );

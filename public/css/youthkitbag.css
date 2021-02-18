@@ -7944,6 +7944,12 @@ body {
   background-size: 25px;
   background-repeat: no-repeat; }
 
+/*
+ custom colors
+  */
+.text-gold {
+  color: #d4af37; }
+
 /* 
   sticky footer
   makes sure at least the whole viewport is used 

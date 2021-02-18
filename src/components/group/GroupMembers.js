@@ -43,7 +43,14 @@ const GroupMembers = ({ fetchGroupMembers, match }) => {
   function renderBlankList() {
     const blankList = [{}, {}, {}, {}, {}, {}];
     return blankList.map((member, index) => {
-      return <GroupMember key={`${index}`} groupId={groupId} member={member} />;
+      return (
+        <GroupMember
+          key={`${index}`}
+          groupId={groupId}
+          member={member}
+          isGroupAdmin={false}
+        />
+      );
     });
   }
 
@@ -76,7 +83,9 @@ const GroupMembers = ({ fetchGroupMembers, match }) => {
           key={`${index}`}
           member={memberEntities[key]}
           groupId={groupId}
-          groupAdmin={isGroupAdmin}
+          isGroupAdmin={
+            isGroupAdmin && memberEntities[key]._id !== userGroup.member._id
+          }
         />
       );
     });

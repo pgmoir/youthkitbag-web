@@ -9,7 +9,7 @@ import {
   LOGIN_FAILURE,
   EDIT_GROUP_STATE,
   EDIT_GROUP_MEMBER_STATE,
-  DELETE_GROUP_MEMBER,
+  GROUP_MEMBER_DELETE,
   EDIT_USER,
   RESET_USER_FLAGS,
   API_ERROR,
@@ -23,7 +23,7 @@ import {
   EDIT_KITBAG,
   RESET_REQUESTED,
   PASSWORD_RESET,
-  CREATE_GROUP_JOIN,
+  GROUP_MEMBER_JOIN,
 } from '../actions/types';
 
 const initialState = {
@@ -49,14 +49,14 @@ export default (state = initialState, action) => {
     case SIGNUP_SUCCESS:
     case RESET_REQUESTED:
     case PASSWORD_RESET:
-    case CREATE_GROUP_JOIN:
+    case GROUP_MEMBER_JOIN:
       return {
         currentMessage: action.payload.message,
         currentStyle: 'success',
       };
     case DELETE_KITBAG_KIT:
     case DELETE_MARKET_KIT:
-    case DELETE_GROUP_MEMBER:
+    case GROUP_MEMBER_DELETE:
       return {
         currentMessage: action.payload.message,
         currentStyle: 'warning',

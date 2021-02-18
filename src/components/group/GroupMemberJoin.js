@@ -1,9 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchGroup, requestGroupJoin } from '../../actions/GroupActions';
-import Modal from '../includes/Modal';
-import history from '../../utils/history';
+import { requestGroupJoin } from '../../actions/GroupActions';
 
 const mapDispatchToProps = {
   requestGroupJoin,
@@ -41,7 +38,7 @@ const GroupMemberJoin = ({
         </header>
         <section className="modal-card-body">
           <p className="is-size-6">
-            {`Would you like submit a request to join "${name}"?`}
+            {`Would you like to submit a request to join "${name}"?`}
           </p>
         </section>
         <footer className="modal-card-foot">
