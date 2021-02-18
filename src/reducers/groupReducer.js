@@ -7,7 +7,6 @@ import {
   EDIT_GROUP,
   SEARCH_GROUPS,
   FETCH_GROUPS_MEMBER_REQUESTS,
-  SEARCH_GROUP_MEMBERS,
   CREATE_GROUP_JOIN,
   RESET,
   DELETE_GROUP_MEMBER,
@@ -18,7 +17,6 @@ const initialState = {
   entities: {},
   memberEntities: {},
   search: { searchfor: '', by: '', page: 1, pagesize: 24, loading: true },
-  searchMembers: { searchfor: '', by: '', loading: true },
   memberRequests: [],
 };
 
@@ -26,10 +24,6 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case SEARCH_GROUPS: {
       return { ...state, search: action.payload };
-    }
-
-    case SEARCH_GROUP_MEMBERS: {
-      return { ...state, searchMembers: action.payload };
     }
 
     case FETCH_GROUPS: {

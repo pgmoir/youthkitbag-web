@@ -29,7 +29,7 @@ const GroupMembers = ({ fetchGroupMembers, match }) => {
 
   useEffect(() => {
     if (groupId) {
-      fetchGroupMembers({ groupId, pushHistory: true });
+      fetchGroupMembers({ groupId });
     }
   }, [fetchGroupMembers, groupId]);
 

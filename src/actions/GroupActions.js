@@ -12,7 +12,6 @@ import {
   CREATE_GROUP_JOIN,
   EDIT_GROUP_LEAVE,
   SEARCH_GROUPS,
-  SEARCH_GROUP_MEMBERS,
   FETCH_GROUPS_MEMBER_REQUESTS,
 } from './types';
 import history from '../utils/history';
@@ -106,7 +105,6 @@ export const fetchGroupMembers = ({
   order,
   direction,
   groupId,
-  pushHistory,
 }) => (dispatch) => {
   axios
     .get(`/group/${groupId}/members`, {
@@ -114,15 +112,6 @@ export const fetchGroupMembers = ({
     })
     .then((response) => {
       dispatch({ type: FETCH_GROUP_MEMBERS, payload: response.data });
-      if (pushHistory) {
-        dispatch({
-          type: SEARCH_GROUP_MEMBERS,
-          payload: { searchfor, by },
-        });
-        history.push(
-          `/groups/${groupId}/members?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}&order=${order}&direction=${direction}`
-        );
-      }
     })
     .catch((err) => {
       const { response } = err;
