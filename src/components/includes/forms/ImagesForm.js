@@ -45,7 +45,7 @@ const ImagesForm = ({
         <div key={index} className="is-flex is-flex-direction-row m-3">
           {image.state !== 'D' ? (
             <div className="card">
-              <div className="card-image">
+              <div className="card-image is-clickable">
                 <figure className="image is-square is-128x128">
                   <img
                     src={image.imageUrl}
@@ -55,30 +55,34 @@ const ImagesForm = ({
                   />
                 </figure>
                 {!disabled && (
-                  <div className="is-overlay">
-                    <button
-                      className="button is-danger is-outlined"
-                      href="#"
-                      onClick={deleteImage.bind(null, image._id)}
-                    >
-                      <i
-                        aria-hidden="true"
-                        className="fas fa-trash"
-                        title="Delete this image?"
-                      ></i>
-                    </button>
-                    <button
-                      className="button is-success is-outlined"
-                      href="#"
-                      onClick={setPrimaryImage.bind(null, image._id)}
-                    >
-                      <i
-                        aria-hidden="true"
-                        className="fas fa-star"
-                        title="Set as primary image"
-                      ></i>
-                    </button>
-                  </div>
+                  <>
+                    <div className="is-overlay-topleft">
+                      <button
+                        className="button is-danger is-outlined"
+                        href="#"
+                        onClick={deleteImage.bind(null, image._id)}
+                      >
+                        <i
+                          aria-hidden="true"
+                          className="fas fa-trash"
+                          title="Delete this image?"
+                        ></i>
+                      </button>
+                    </div>
+                    <div className="is-overlay-topright">
+                      <button
+                        className="button is-success is-outlined"
+                        href="#"
+                        onClick={setPrimaryImage.bind(null, image._id)}
+                      >
+                        <i
+                          aria-hidden="true"
+                          className="fas fa-star"
+                          title="Set as primary image"
+                        ></i>
+                      </button>
+                    </div>
+                  </>
                 )}
               </div>
             </div>
