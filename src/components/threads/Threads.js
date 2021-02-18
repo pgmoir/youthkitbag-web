@@ -52,7 +52,6 @@ const Threads = ({ threads, kitbagId, source, marketType }) => {
   }
 
   function changeThreadDisplayed(id) {
-    console.log('CHANGE', id);
     setThreadDisplayed(id);
   }
 

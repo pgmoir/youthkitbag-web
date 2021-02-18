@@ -3,7 +3,13 @@ import { useSelector } from 'react-redux';
 import useForm from '../hooks/useForm';
 import validate from './FormEmptyValidationRules';
 
-const SearchForm = ({ search, callback, placeholderText, collections }) => {
+const SearchForm = ({
+  search,
+  callback,
+  placeholderText,
+  collections,
+  useInstant = false,
+}) => {
   const filter = useSelector((state) => state.filter);
   const pagination = useSelector((state) => state.pagination);
   const [isClearing, setIsClearing] = useState(false);
@@ -128,6 +134,18 @@ const SearchForm = ({ search, callback, placeholderText, collections }) => {
                 })}
               </select>
             </span>
+          ) : useInstant ? (
+            <input
+              name="searchfor"
+              className="input"
+              type="text"
+              onChange={(e) => instantSearchFor(e)}
+              onBlur={(e) => instantSearchFor(e)}
+              value={values.searchfor}
+              id="searchfor"
+              arialabel="Search by text"
+              placeholder={placeholderText}
+            />
           ) : (
             <input
               name="searchfor"

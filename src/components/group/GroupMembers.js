@@ -23,7 +23,6 @@ const GroupMembers = ({ fetchGroupMembers, match }) => {
   );
 
   const [search, setSearch] = useState(stateSearch);
-
   const isGroupAdmin =
     userGroup?.member?.role === MemberRoles.ADMIN &&
     userGroup?.member?.state === MemberStates.APPROVED;
@@ -59,9 +58,18 @@ const GroupMembers = ({ fetchGroupMembers, match }) => {
     );
 
   function renderList() {
+    const searchfor = search.searchfor.toLowerCase();
     return Object.keys(memberEntities).map((key, index) => {
       if (search.by !== 'all' && search.by !== '') {
         if (memberEntities[key].state !== search.by) return null;
+      }
+      if (searchfor !== '') {
+        const { firstName, lastName } = memberEntities[key].user;
+        if (
+          !firstName.toLowerCase().includes(searchfor) &&
+          !lastName.toLowerCase().includes(searchfor)
+        )
+          return null;
       }
       return (
         <GroupMember
@@ -94,6 +102,7 @@ const GroupMembers = ({ fetchGroupMembers, match }) => {
             callback={setSearch}
             incPagination={false}
             placeholderText="Search group members"
+            useInstant={true}
           />
         </div>
       </div>

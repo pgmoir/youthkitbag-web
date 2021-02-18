@@ -125,7 +125,6 @@ export const fetchGroupMembers = ({
       }
     })
     .catch((err) => {
-      console.log(err);
       const { response } = err;
       dispatch({ type: API_ERROR, payload: response.data });
       history.push(`/groups/${groupId}/members`);
