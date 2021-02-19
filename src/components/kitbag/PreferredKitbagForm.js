@@ -83,6 +83,7 @@ const PreferredKitbagForm = ({
                 </td>
                 <td className="is-vcentered">
                   <input
+                    className="is-radio-large"
                     type="radio"
                     name="KitbagPreference"
                     id={item._id}

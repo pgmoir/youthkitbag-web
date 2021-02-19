@@ -17,7 +17,7 @@ import SelectInputCol from '../../includes/controls/SelectInputCol';
 import TextInputCol from '../../includes/controls/TextInputCol';
 import ArrayButtonAdd from '../../includes/controls/ArrayButtonAdd';
 import ArrayButtonRemove from '../../includes/controls/ArrayButtonRemove';
-import CheckboxInput from '../../includes/controls/CheckboxInput';
+import CheckboxInputStd from '../../includes/controls/CheckboxInputStd';
 import DateInputCol from '../../includes/controls/DateInputCol';
 
 const mapStateToProps = (state) => ({
@@ -292,7 +292,7 @@ const KitForm = ({
             handleChange={handleChange}
             error={errors.security}
           />
-          <CheckboxInput
+          <CheckboxInputStd
             label="Active"
             value={values.active}
             field="active"

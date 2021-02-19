@@ -7944,6 +7944,32 @@ body {
   background-size: 25px;
   background-repeat: no-repeat; }
 
+.is-checkbox-medium {
+  -ms-transform: scale(1.5);
+  /* IE */
+  -moz-transform: scale(1.5);
+  /* FF */
+  -webkit-transform: scale(1.5);
+  /* Safari and Chrome */
+  -o-transform: scale(1.5);
+  /* Opera */
+  transform: scale(1.5);
+  position: relative;
+  left: 0.25em; }
+
+.is-checkbox-large {
+  -ms-transform: scale(2);
+  /* IE */
+  -moz-transform: scale(2);
+  /* FF */
+  -webkit-transform: scale(2);
+  /* Safari and Chrome */
+  -o-transform: scale(2);
+  /* Opera */
+  transform: scale(2);
+  position: relative;
+  left: 0.5em; }
+
 /*
  custom colors
   */

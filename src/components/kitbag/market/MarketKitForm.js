@@ -13,7 +13,7 @@ import validate from '../../includes/FormEmptyValidationRules';
 import { getImages } from '../../../utils/image';
 import { MarketTypes } from '../../../enums/marketTypes.enum';
 import ArrayButtonRemove from '../../includes/controls/ArrayButtonRemove';
-import CheckboxInput from '../../includes/controls/CheckboxInput';
+import CheckboxInputStd from '../../includes/controls/CheckboxInputStd';
 import TextInputStd from '../../includes/controls/TextInputStd';
 import TextInputCol from '../../includes/controls/TextInputCol';
 import TextAreaInputStd from '../../includes/controls/TextAreaInputStd';
@@ -335,7 +335,7 @@ const MarketKitForm = ({
               disabled={isDisabled()}
             />
             {values._id && (
-              <CheckboxInput
+              <CheckboxInputStd
                 label={completedLabel()}
                 value={values.completed}
                 field="completed"
