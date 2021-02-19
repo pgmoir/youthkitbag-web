@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import useForm from '../../hooks/useForm';
 import {
   createMarketKit,
   editMarketKit,
 } from '../../../actions/KitbagMarketActions';
-import { DateForm, ImagesForm } from '../../includes/forms';
+import { ImagesForm } from '../../includes/forms';
 import Threads from '../../threads/Threads';
 import validate from '../../includes/FormEmptyValidationRules';
 import { getImages } from '../../../utils/image';
@@ -17,6 +18,8 @@ import TextInputStd from '../../includes/controls/TextInputStd';
 import TextInputCol from '../../includes/controls/TextInputCol';
 import TextAreaInputStd from '../../includes/controls/TextAreaInputStd';
 import SelectInputStd from '../../includes/controls/SelectInputStd';
+import DateInputCol from '../../includes/controls/DateInputCol';
+import DateInputStd from '../../includes/controls/DateInputStd';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -96,7 +99,6 @@ const MarketKitForm = ({
 
     return (
       <SelectInputStd
-        colFormat="3-9"
         label="Type"
         value={values.marketType}
         field="marketType"
@@ -173,10 +175,9 @@ const MarketKitForm = ({
     }
 
     return (
-      <DateForm
-        colFormat="3-9"
-        value={values.occurredOn}
+      <DateInputStd
         label="Occurred On"
+        value={values.occurredOn}
         field="occurredOn"
         setChange={setChange}
         error={errors.occurredOn}
@@ -297,7 +298,6 @@ const MarketKitForm = ({
           <form onSubmit={handleSubmit}>
             {showMarketType()}
             <TextInputStd
-              colFormat="3-9"
               label="Title"
               value={values.title}
               field="title"
@@ -306,7 +306,6 @@ const MarketKitForm = ({
               disabled={isDisabled()}
             />
             <TextInputStd
-              colFormat="3-9"
               label="Subtitle"
               value={values.subtitle}
               field="subtitle"
@@ -315,7 +314,6 @@ const MarketKitForm = ({
               disabled={isDisabled()}
             />
             <TextAreaInputStd
-              colFormat="3-9"
               label="Description"
               value={values.description}
               field="description"
@@ -329,7 +327,6 @@ const MarketKitForm = ({
             {showSecurity()}
             {showTracking()}
             <TextInputStd
-              colFormat="3-9"
               label="Activities"
               value={values.activitys}
               field="activitys"
@@ -358,15 +355,16 @@ const MarketKitForm = ({
                       field={`groups[${index}].name`}
                       disabled={true}
                       index={index}
-                      width="7"
+                      width="8"
                     />
-                    <DateForm
+                    <DateInputCol
                       value={values.groups[index].available}
                       label="Available"
                       field={`groups[${index}].available`}
                       setChange={setChange}
+                      placeHolder="17-Jan-2021"
                       index={index}
-                      width="4"
+                      width="3"
                     />
                     <input
                       name={`groups[${index}].include`}

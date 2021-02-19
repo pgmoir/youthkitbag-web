@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import useForm from '../../hooks/useForm';
 import {
   createKitbagKit,
   editKitbagKit,
 } from '../../../actions/KitbagKitActions';
-import { DateForm, ImagesForm } from '../../includes/forms';
+import { ImagesForm } from '../../includes/forms';
 import validate from '../../includes/FormEmptyValidationRules';
 import { getImages } from '../../../utils/image';
 import TextInputStd from '../../includes/controls/TextInputStd';
@@ -17,6 +18,7 @@ import TextInputCol from '../../includes/controls/TextInputCol';
 import ArrayButtonAdd from '../../includes/controls/ArrayButtonAdd';
 import ArrayButtonRemove from '../../includes/controls/ArrayButtonRemove';
 import CheckboxInput from '../../includes/controls/CheckboxInput';
+import DateInputCol from '../../includes/controls/DateInputCol';
 
 const mapStateToProps = (state) => ({
   kitbagLists: state.kitbag.kit.lists,
@@ -37,7 +39,12 @@ const KitForm = ({
   editKitbagKit,
 }) => {
   const initialValues = { ...kit, images: getImages(kit.images) };
-  const initialPurchase = { from: '', quantity: 0, ondate: '', price: 0.0 };
+  const initialPurchase = {
+    from: '',
+    quantity: 0,
+    ondate: new Date(),
+    price: 0.0,
+  };
   const initialInbag = { location: '', condition: 'used', quantity: 0 };
 
   const statusItems = [
@@ -162,13 +169,14 @@ const KitForm = ({
                     index={index}
                     width="2"
                   />
-                  <DateForm
-                    colFormat="a-4"
+                  <DateInputCol
                     value={values.purchases[index].ondate}
                     label="On"
                     field={`purchases[${index}].ondate`}
                     setChange={setChange}
+                    placeHolder="17-Jan-2021"
                     index={index}
+                    width="3"
                   />
                   <TextInputCol
                     type="number"
