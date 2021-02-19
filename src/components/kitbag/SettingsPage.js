@@ -83,21 +83,23 @@ const SettingsPage = ({ user, match }) => {
   }
 
   return (
-    <div className="container">
+    <div>
       <Breadcrumb crumbs={getCrumbs(setting)} />
       <Title title="Personal Settings" />
-      <Alert />
-      <div className="columns">
-        <div className="column is-one-fifth">
-          <SettingsNav />
-          <hr />
-        </div>
-        <div className="column">
-          <Route path="/settings/user" component={User} />
-          <Route path="/settings/kitbags" component={Kitbags} />
-          <Route path="/settings/groups" component={Groups} />
-          <Route path="/settings/bundle" component={Bundle} />
-          <Route path="/settings/configuration" component={Configuration} />
+      <div className="container">
+        <Alert />
+        <div className="columns">
+          <div className="column is-one-fifth">
+            <SettingsNav />
+            <hr />
+          </div>
+          <div className="column">
+            <Route path="/settings/user" component={User} />
+            <Route path="/settings/kitbags" component={Kitbags} />
+            <Route path="/settings/groups" component={Groups} />
+            <Route path="/settings/bundle" component={Bundle} />
+            <Route path="/settings/configuration" component={Configuration} />
+          </div>
         </div>
       </div>
     </div>

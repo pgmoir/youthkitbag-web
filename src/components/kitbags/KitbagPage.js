@@ -89,46 +89,48 @@ const KitbagPage = ({ current, kitbags, fetchKitbag, clearKitbag, match }) => {
   ];
 
   return (
-    <div className="container">
+    <div>
       <Breadcrumb crumbs={crumbs} />
       <Title title={getTitle()} />
-      {renderNoKitbagIntro()}
-      <Alert />
-      <div className="columns">
-        <div className="column is-fullwidth">
-          <div className="buttons is-justify-content-flex-end">
-            {kitbagId &&
-              kitbag.kitbagAdmin &&
-              kitbag.state !== KitbagStates.BLOCKED && (
-                <div
-                  className="button is-info"
-                  onClick={(e) => {
-                    inviteMember(e);
-                  }}
-                  onKeyPress={(e) => {
-                    inviteMember(e);
-                  }}
-                  role="button"
-                  tabIndex="0"
-                >
-                  Invite
-                </div>
-              )}
-            {kitbagId &&
-              !kitbag.kitbagAdmin &&
-              kitbag.state !== KitbagStates.BLOCKED &&
-              kitbag.kitbagMember && (
-                <Link
-                  to={`/kitbags/${kitbagId}/leave`}
-                  className="button is-warning"
-                >
-                  Leave
-                </Link>
-              )}
+      <div className="container">
+        {renderNoKitbagIntro()}
+        <Alert />
+        <div className="columns">
+          <div className="column is-fullwidth">
+            <div className="buttons is-justify-content-flex-end">
+              {kitbagId &&
+                kitbag.kitbagAdmin &&
+                kitbag.state !== KitbagStates.BLOCKED && (
+                  <div
+                    className="button is-info"
+                    onClick={(e) => {
+                      inviteMember(e);
+                    }}
+                    onKeyPress={(e) => {
+                      inviteMember(e);
+                    }}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    Invite
+                  </div>
+                )}
+              {kitbagId &&
+                !kitbag.kitbagAdmin &&
+                kitbag.state !== KitbagStates.BLOCKED &&
+                kitbag.kitbagMember && (
+                  <Link
+                    to={`/kitbags/${kitbagId}/leave`}
+                    className="button is-warning"
+                  >
+                    Leave
+                  </Link>
+                )}
+            </div>
           </div>
         </div>
+        <KitbagForm kitbag={kitbag} />
       </div>
-      <KitbagForm kitbag={kitbag} />
       <KitbagMemberInvite
         kitbag={kitbag}
         modalIsActive={modalIsActive}

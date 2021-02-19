@@ -5,7 +5,7 @@ import { editUser, loadSettingsPage } from '../../actions/UserActions';
 import { ImagesForm } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
 import { getImages } from '../../utils/image';
-import TextInputStd from '../includes/controls/TextInputStd';
+import TextInput from '../includes/controls/TextInput';
 
 const mapDispatchToProps = { editUser, loadSettingsPage };
 
@@ -68,21 +68,21 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
       </div>
       <div className="column">
         <form onSubmit={handleSubmit}>
-          <TextInputStd
+          <TextInput
             label="First Name"
             value={values.firstName}
             field="firstName"
             handleChange={handleChange}
             error={errors.firstName}
           />
-          <TextInputStd
+          <TextInput
             label="Last Name"
             value={values.lastName}
             field="lastName"
             handleChange={handleChange}
             error={errors.lastName}
           />
-          <TextInputStd
+          <TextInput
             label="Email"
             value={values.email}
             field="email"
@@ -90,7 +90,7 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
             addClassName={'is-static'}
           />
           <hr />
-          <TextInputStd
+          <TextInput
             label="Activities"
             value={values.activitys}
             field="activitys"

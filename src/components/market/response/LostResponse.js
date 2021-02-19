@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import TextAreaInputStd from '../../includes/controls/TextAreaInputStd';
+import TextAreaInput from '../../includes/controls/TextAreaInput';
 
 export const LostResponse = ({
   values,
@@ -21,7 +21,7 @@ export const LostResponse = ({
           </p>
           <form className="mb-3" onSubmit={handleSubmit}>
             <div>
-              <TextAreaInputStd
+              <TextAreaInput
                 label="Details"
                 value={values.details}
                 field="details"

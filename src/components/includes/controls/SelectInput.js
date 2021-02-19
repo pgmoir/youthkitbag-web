@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-const SelectInputStd = ({
+const SelectInput = ({
   label,
   value,
   field,
@@ -51,4 +51,4 @@ const SelectInputStd = ({
   );
 };
 
-export default SelectInputStd;
+export default SelectInput;

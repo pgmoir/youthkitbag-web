@@ -13,13 +13,11 @@ import validate from '../../includes/FormEmptyValidationRules';
 import { getImages } from '../../../utils/image';
 import { MarketTypes } from '../../../enums/marketTypes.enum';
 import ArrayButtonRemove from '../../includes/controls/ArrayButtonRemove';
-import CheckboxInputStd from '../../includes/controls/CheckboxInputStd';
-import TextInputStd from '../../includes/controls/TextInputStd';
-import TextInputCol from '../../includes/controls/TextInputCol';
-import TextAreaInputStd from '../../includes/controls/TextAreaInputStd';
-import SelectInputStd from '../../includes/controls/SelectInputStd';
-import DateInputCol from '../../includes/controls/DateInputCol';
-import DateInputStd from '../../includes/controls/DateInputStd';
+import CheckBoxInput from '../../includes/controls/CheckBoxInput';
+import TextInput from '../../includes/controls/TextInput';
+import TextAreaInput from '../../includes/controls/TextAreaInput';
+import SelectInput from '../../includes/controls/SelectInput';
+import DateInput from '../../includes/controls/DateInput';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -86,7 +84,7 @@ const MarketKitForm = ({
 
     if (isDisabled()) {
       return (
-        <TextInputStd
+        <TextInput
           label="Type"
           value={values.marketType}
           field="marketType"
@@ -98,7 +96,7 @@ const MarketKitForm = ({
     const typeItems = [MarketTypes.FOUND, MarketTypes.LOST, MarketTypes.STOLEN];
 
     return (
-      <SelectInputStd
+      <SelectInput
         label="Type"
         value={values.marketType}
         field="marketType"
@@ -116,7 +114,7 @@ const MarketKitForm = ({
 
     if (isDisabled()) {
       return (
-        <TextInputStd
+        <TextInput
           label="Condition"
           value={values.condition}
           field="condition"
@@ -128,7 +126,7 @@ const MarketKitForm = ({
     const conditionItems = ['Used', 'New', 'Almost New', 'Other'];
 
     return (
-      <SelectInputStd
+      <SelectInput
         label="Condition"
         value={values.state}
         field="condition"
@@ -150,7 +148,7 @@ const MarketKitForm = ({
       market.marketType === MarketTypes.TRADE ? 'Asking Price' : 'Offer Price';
 
     return (
-      <TextInputStd
+      <TextInput
         type="number"
         label={label}
         value={values.marketPrice}
@@ -175,7 +173,7 @@ const MarketKitForm = ({
     }
 
     return (
-      <DateInputStd
+      <DateInput
         label="Occurred On"
         value={values.occurredOn}
         field="occurredOn"
@@ -196,7 +194,7 @@ const MarketKitForm = ({
     }
 
     return (
-      <TextInputStd
+      <TextInput
         label="Security"
         value={values.security}
         field="security"
@@ -213,7 +211,7 @@ const MarketKitForm = ({
     }
 
     return (
-      <TextInputStd
+      <TextInput
         label="Incident Number"
         value={values.tracking}
         field="tracking"
@@ -297,7 +295,7 @@ const MarketKitForm = ({
         <div className="column">
           <form onSubmit={handleSubmit}>
             {showMarketType()}
-            <TextInputStd
+            <TextInput
               label="Title"
               value={values.title}
               field="title"
@@ -305,7 +303,7 @@ const MarketKitForm = ({
               error={errors.title}
               disabled={isDisabled()}
             />
-            <TextInputStd
+            <TextInput
               label="Subtitle"
               value={values.subtitle}
               field="subtitle"
@@ -313,7 +311,7 @@ const MarketKitForm = ({
               error={errors.subtitle}
               disabled={isDisabled()}
             />
-            <TextAreaInputStd
+            <TextAreaInput
               label="Description"
               value={values.description}
               field="description"
@@ -326,7 +324,7 @@ const MarketKitForm = ({
             {showStolenOn()}
             {showSecurity()}
             {showTracking()}
-            <TextInputStd
+            <TextInput
               label="Activities"
               value={values.activitys}
               field="activitys"
@@ -335,7 +333,7 @@ const MarketKitForm = ({
               disabled={isDisabled()}
             />
             {values._id && (
-              <CheckboxInputStd
+              <CheckBoxInput
                 label={completedLabel()}
                 value={values.completed}
                 field="completed"
@@ -346,45 +344,51 @@ const MarketKitForm = ({
             )}
             <hr />
             <div>
+              <p className="has-text-weight-bold mb-3">
+                Group Shares (With, Available On)
+              </p>
               {values.groups &&
                 values.groups.map((item, index) => (
-                  <div className="columns" key={index}>
-                    <TextInputCol
-                      value={values.groups[index].name}
-                      label="Name"
-                      field={`groups[${index}].name`}
-                      disabled={true}
-                      index={index}
-                      width="8"
-                    />
-                    <DateInputCol
-                      value={values.groups[index].available}
-                      label="Available"
-                      field={`groups[${index}].available`}
-                      setChange={setChange}
-                      placeHolder="17-Jan-2021"
-                      index={index}
-                      width="3"
-                    />
-                    <input
-                      name={`groups[${index}].include`}
-                      type="hidden"
-                      value={values.groups[index].include}
-                    />
-                    <ArrayButtonRemove
-                      title="Remove Purchase"
-                      onClick={() => removeArrayItem('groups', index)}
-                      index={index}
-                      disabled={values.groups.length <= 1}
-                      width="1"
-                    />
+                  <div
+                    className="is-flex is-flex-wrap-wrap is-flex-groupshare"
+                    key={index}
+                  >
+                    <div className="mr-3 mb-3 name">
+                      <TextInput
+                        value={values.groups[index].name}
+                        field={`groups[${index}].name`}
+                        disabled={true}
+                        iconRight={false}
+                      />
+                    </div>
+                    <div className="mr-3 mb-3 ondate">
+                      <DateInput
+                        value={values.groups[index].available}
+                        field={`groups[${index}].available`}
+                        setChange={setChange}
+                        placeHolder="17-Jan-2021"
+                      />
+                    </div>
+                    <div className="mx-1 mb-5">
+                      <input
+                        name={`groups[${index}].include`}
+                        type="hidden"
+                        value={values.groups[index].include}
+                      />
+                      <ArrayButtonRemove
+                        title="Remove Purchase"
+                        onClick={() => removeArrayItem('groups', index)}
+                        index={index}
+                        disabled={values.groups.length <= 1}
+                      />
+                    </div>
                   </div>
                 ))}
               {errors.groups && (
                 <label className="text-danger">{errors.groups}</label>
               )}
             </div>
-            <hr />
+            <hr className="mt-0" />
             <div>
               {values.images &&
                 values.images.map((item, index) => (

@@ -50,7 +50,7 @@ const MarketPage = ({
 
   if (!Object.keys(entities)) {
     return (
-      <div className="container is-fluid px-0">
+      <div>
         <Breadcrumb crumbs={crumbs} />
         <Title title="Loading ...." />
         <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
@@ -73,7 +73,7 @@ const MarketPage = ({
   }
 
   return (
-    <div className="container is-fluid px-0">
+    <div>
       <Breadcrumb crumbs={crumbs} />
       <Title title={getTitle()} />
       <Alert />

@@ -37,11 +37,13 @@ const MarketItemViewPage = ({ fetchMarketItem, match }) => {
   }
 
   return (
-    <div className="container">
+    <div>
       <Breadcrumb crumbs={crumbs} />
       {getTitle()}
-      <Alert />
-      {market && market._id && <MarketItemForm market={market} />}
+      <div className="container">
+        <Alert />
+        {market && market._id && <MarketItemForm market={market} />}
+      </div>
     </div>
   );
 };

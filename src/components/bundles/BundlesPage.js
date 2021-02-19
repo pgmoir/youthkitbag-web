@@ -31,14 +31,16 @@ const BundlesPage = ({ auth, user, bundles, fetchBundles }) => {
   const crumbs = [{ title: 'Home', to: '/' }, { title: pageTitle }];
 
   return (
-    <div className="container">
+    <div>
       <Breadcrumb crumbs={crumbs} />
       <Title title={pageTitle} />
-      <Alert />
-      <div className="columns">
-        {bundles.map((p, index) => (
-          <Bundle key={index} loggedIn={loggedIn} user={user} bundle={p} />
-        ))}
+      <div className="container">
+        <Alert />
+        <div className="columns">
+          {bundles.map((p, index) => (
+            <Bundle key={index} loggedIn={loggedIn} user={user} bundle={p} />
+          ))}
+        </div>
       </div>
     </div>
   );

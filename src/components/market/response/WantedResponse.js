@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import TextAreaInputStd from '../../includes/controls/TextAreaInputStd';
-import TextInputStd from '../../includes/controls/TextInputStd';
+import TextAreaInput from '../../includes/controls/TextAreaInput';
+import TextInput from '../../includes/controls/TextInput';
 
 export const WantedResponse = ({
   values,
@@ -23,7 +23,7 @@ export const WantedResponse = ({
             The purchaser will get back to you as quickly as possible.
           </p>
           <form onSubmit={handleSubmit}>
-            <TextInputStd
+            <TextInput
               type="number"
               label="Asking Price"
               value={values.responsePrice}
@@ -34,7 +34,7 @@ export const WantedResponse = ({
               handleChange={handleChange}
               error={errors.responsePrice}
             />
-            <TextAreaInputStd
+            <TextAreaInput
               label="Details"
               value={values.details}
               field="details"

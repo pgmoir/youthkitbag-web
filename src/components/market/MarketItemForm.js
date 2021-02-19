@@ -12,7 +12,7 @@ import Threads from '../threads/Threads';
 import validate from '../includes/FormEmptyValidationRules';
 import { ImagesDisplay } from '../includes/forms/ImagesDisplay';
 import { MarketTypes } from '../../enums/marketTypes.enum';
-import TextInputStd from '../includes/controls/TextInputStd';
+import TextInput from '../includes/controls/TextInput';
 import { getDateSpan } from '../../utils/date';
 
 const mapStateToProps = (state) => ({
@@ -76,11 +76,7 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
     }
 
     return (
-      <TextInputStd
-        label="Condition"
-        value={market.condition}
-        readOnly={true}
-      />
+      <TextInput label="Condition" value={market.condition} readOnly={true} />
     );
   };
 
@@ -94,7 +90,7 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
     const price =
       market.marketPrice === 0 ? 'free' : `£${market.marketPrice.toFixed(2)}`;
 
-    return <TextInputStd label={label} value={price} readOnly={true} />;
+    return <TextInput label={label} value={price} readOnly={true} />;
   };
 
   const showStolenOn = () => {
@@ -107,7 +103,7 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
     }
 
     return (
-      <TextInputStd
+      <TextInput
         label={`${capitalize(market.marketType)} on`}
         value={getDateSpan(market.occurredOn)}
         readOnly={true}
@@ -123,7 +119,7 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
     if (!market.security || market.security.length === 0) return null;
 
     return (
-      <TextInputStd
+      <TextInput
         label="Security reference"
         value={market.security}
         readOnly={true}
@@ -141,7 +137,7 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
       : market.tracking;
 
     return (
-      <TextInputStd label="Incident Number" value={tracking} readOnly={true} />
+      <TextInput label="Incident Number" value={tracking} readOnly={true} />
     );
   };
 
@@ -164,7 +160,7 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
         </div>
         <div className="column">
           {showStolenOn()}
-          <TextInputStd
+          <TextInput
             label="Description"
             value={market.description}
             readOnly={true}
@@ -173,7 +169,7 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
           {showPrice()}
           {showSecurity()}
           {showTracking()}
-          <TextInputStd
+          <TextInput
             label="Activities"
             value={market.activitys?.join(', ')}
             readOnly={true}

@@ -83,7 +83,7 @@ const Kitbag = ({
 
   return (
     <>
-      <div className="container is-fluid px-0">
+      <div>
         <Breadcrumb crumbs={crumbs} />
         <Title title={getTitle()} />
         <Alert />

@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 import { fetchKitbag, inviteToKitbag } from '../../actions/KitbagActions';
 import ModalWithForm from '../includes/ModalWithForm';
 import validate from '../includes/FormEmptyValidationRules';
-import TextInputStd from '../includes/controls/TextInputStd';
-import SelectInputStd from '../includes/controls/SelectInputStd';
+import TextInput from '../includes/controls/TextInput';
+import SelectInput from '../includes/controls/SelectInput';
 
 // const mapStateToProps = (state) => ({
 //   kitbag: state.kitbag.kitbags.current,
@@ -72,14 +72,14 @@ const KitbagMemberInvite = ({ kitbag, modalIsActive, setModalIsActive }) => {
   //         Enter an email and specify role for a person you want to give access
   //         to this kitbag
   //       </p>
-  //       <TextInputStd
+  //       <TextInput
   //         label="Email"
   //         value={values.email}
   //         field="email"
   //         handleChange={handleChange}
   //         error={errors.email}
   //       />
-  //       <SelectInputStd
+  //       <SelectInput
   //         label="Roles"
   //         value={values.roles}
   //         field="roles"
@@ -142,7 +142,7 @@ const KitbagMemberInvite = ({ kitbag, modalIsActive, setModalIsActive }) => {
             Enter an email and select the role for the person you want to invite
             to this kitbag
           </p>
-          <TextInputStd
+          <TextInput
             label="Email"
             value={values.email}
             field="email"

@@ -6,7 +6,7 @@ import Title from '../includes/title/Title';
 import { reset } from '../../actions/AuthActions';
 import validate from '../includes/FormEmptyValidationRules';
 import Alert from '../includes/Alert';
-import TextInputStd from '../includes/controls/TextInputStd';
+import TextInput from '../includes/controls/TextInput';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -51,7 +51,7 @@ const ResetForm = ({ newErrors, reset }) => {
         </p>
       </div>
       <form onSubmit={handleSubmit}>
-        <TextInputStd
+        <TextInput
           type="email"
           value={values.email}
           field="email"

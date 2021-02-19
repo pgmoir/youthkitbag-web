@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { editGroupState } from '../../actions/GroupActions';
-import SelectInputStd from '../includes/controls/SelectInputStd';
+import SelectInput from '../includes/controls/SelectInput';
 import useForm from '../hooks/useForm';
 import validate from '../includes/FormEmptyValidationRules';
 import { GroupStates } from '../../enums/groupStates.enum';
@@ -66,7 +66,7 @@ const GroupState = ({
           <p className="is-size-6 mb-3">
             {`Select the new group status for, "${groupName}"`}
           </p>
-          <SelectInputStd
+          <SelectInput
             value={values.state}
             field="state"
             handleChange={handleChange}

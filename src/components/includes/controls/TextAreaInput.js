@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-const TextAreaInputStd = ({
+const TextAreaInput = ({
   label,
   value,
   field,
@@ -57,4 +57,4 @@ const TextAreaInputStd = ({
   );
 };
 
-export default TextAreaInputStd;
+export default TextAreaInput;

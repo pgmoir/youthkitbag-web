@@ -6,14 +6,13 @@ import { createKitbag, editKitbag } from '../../actions/KitbagActions';
 import { ImagesForm } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
 import { getImages } from '../../utils/image';
-import TextInputStd from '../includes/controls/TextInputStd';
-import TextAreaInputStd from '../includes/controls/TextAreaInputStd';
-import TextInputCol from '../includes/controls/TextInputCol';
+import TextInput from '../includes/controls/TextInput';
+import TextAreaInput from '../includes/controls/TextAreaInput';
 import ArrayButtonRemove from '../includes/controls/ArrayButtonRemove';
-import SelectInputCol from '../includes/controls/SelectInputCol';
 import { MemberRoles } from '../../enums/memberRoles.enum';
 import { MemberStates } from '../../enums/memberStates.enum';
 import { KitbagStates } from '../../enums/kitbagStates.enum';
+import SelectInput from '../includes/controls/SelectInput';
 
 const mapStateToProps = (state) => ({
   userBundle: state.user.bundle,
@@ -134,7 +133,7 @@ const KitbagForm = ({
       </div>
       <div className="column">
         <form onSubmit={handleSubmit}>
-          <TextInputStd
+          <TextInput
             label="Name"
             value={values.name}
             field="name"
@@ -142,7 +141,7 @@ const KitbagForm = ({
             handleChange={handleChange}
             error={errors.name}
           />
-          <TextAreaInputStd
+          <TextAreaInput
             label="Description"
             value={values.description}
             field="description"
@@ -151,48 +150,48 @@ const KitbagForm = ({
             error={errors.description}
           />
           <hr />
-          {values.members && values.members.length > 0 && (
-            <>
-              <div>
-                {values.members.map((item, index) => (
-                  <div
-                    className="columns is-variable is-gapless mx-0 mb-1"
-                    key={index}
-                  >
-                    <TextInputCol
+          <div>
+            <p className="has-text-weight-bold mb-3">
+              Members (Email, Role, State)
+            </p>
+            {values.members &&
+              values.members.map((item, index) => (
+                <div
+                  className="is-flex is-flex-wrap-wrap is-flex-members"
+                  key={index}
+                >
+                  <div className="mr-3 mb-3 email">
+                    <TextInput
                       value={
                         values.members[index].user
                           ? values.members[index].user.email
                           : values.members[index].email
                       }
-                      label="Email"
                       field={`members[${index}].user.email`}
                       disabled={true}
-                      index={index}
-                      width="5"
                     />
-                    <SelectInputCol
-                      label="Role"
+                  </div>
+                  <div className="mr-3 mb-3 role">
+                    <SelectInput
                       value={values.members[index].role}
                       field={`members[${index}].role`}
                       handleChange={handleChange}
                       error={errors.role}
                       items={roleItems}
                       disabled={isDisabled}
-                      index={index}
-                      width="3"
                     />
-                    <SelectInputCol
-                      label="State"
+                  </div>
+                  <div className="mr-3 mb-3 state">
+                    <SelectInput
                       value={values.members[index].state}
                       field={`members[${index}].state`}
                       handleChange={handleChange}
                       error={errors.state}
                       items={stateItems}
                       disabled={isDisabled}
-                      index={index}
-                      width="3"
                     />
+                  </div>
+                  <div className="mr-3 mb-5">
                     <ArrayButtonRemove
                       title="Remove Member"
                       onClick={() => removeArrayItem('members', index)}
@@ -200,11 +199,10 @@ const KitbagForm = ({
                       width="1"
                     />
                   </div>
-                ))}
-              </div>
-              <hr />
-            </>
-          )}
+                </div>
+              ))}
+            <hr className="mt-0" />
+          </div>
           {showSaveCancelButtons()}
         </form>
       </div>

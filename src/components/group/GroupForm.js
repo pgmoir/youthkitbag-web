@@ -6,8 +6,8 @@ import { ImagesForm } from '../includes/forms';
 import { connect } from 'react-redux';
 import validate from '../includes/FormEmptyValidationRules';
 import { getImages } from '../../utils/image';
-import TextInputStd from '../includes/controls/TextInputStd';
-import TextAreaInputStd from '../includes/controls/TextAreaInputStd';
+import TextInput from '../includes/controls/TextInput';
+import TextAreaInput from '../includes/controls/TextAreaInput';
 
 const mapStateToProps = (state) => ({
   userBundle: state.user.bundle,
@@ -86,21 +86,21 @@ const GroupForm = ({
       </div>
       <div className="column">
         <form onSubmit={handleSubmit}>
-          <TextInputStd
+          <TextInput
             label="Name"
             value={values.name}
             field="name"
             handleChange={handleChange}
             error={errors.name}
           />
-          <TextAreaInputStd
+          <TextAreaInput
             label="Description"
             value={values.description}
             field="description"
             handleChange={handleChange}
             error={errors.description}
           />
-          <TextInputStd
+          <TextInput
             type="email"
             label="Email"
             value={values.email}
@@ -108,7 +108,7 @@ const GroupForm = ({
             handleChange={handleChange}
             error={errors.email}
           />
-          <TextInputStd
+          <TextInput
             label="Website"
             value={values.website}
             field="website"
@@ -116,7 +116,7 @@ const GroupForm = ({
             error={errors.website}
           />
           <hr />
-          <TextInputStd
+          <TextInput
             label="Activities"
             value={values.activitys}
             field="activitys"
@@ -124,7 +124,7 @@ const GroupForm = ({
             error={errors.activitys}
           />
           <hr />
-          <TextAreaInputStd
+          <TextAreaInput
             label="Recommendation"
             value={values.recommendation}
             field="recommendation"
@@ -132,7 +132,7 @@ const GroupForm = ({
             handleChange={handleChange}
             error={errors.recommendation}
           />
-          <TextInputStd
+          <TextInput
             label="Recommendation by"
             value={values.recommendationBy}
             field="recommendationBy"

@@ -1,14 +1,11 @@
 import React from 'react';
-import classNames from 'classnames';
 
-const RemoveArrayButton = ({ title, onClick, index, disabled, width }) => {
-  const columnClasses = classNames('column', `is-${width}`);
-
+const RemoveArrayButton = ({ label, title, onClick, index, disabled }) => {
   return (
-    <div className={columnClasses}>
-      {index === 0 && (
+    <div>
+      {index === 0 && label && (
         <label className="label" htmlFor={`remove-btn-${title}-${index}`}>
-          Rem
+          {label}
         </label>
       )}
       <button

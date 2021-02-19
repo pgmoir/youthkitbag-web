@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import TextAreaInputStd from '../../includes/controls/TextAreaInputStd';
+import TextAreaInput from '../../includes/controls/TextAreaInput';
 
 export const FoundResponse = ({
   values,
@@ -20,7 +20,7 @@ export const FoundResponse = ({
           </p>
           <form className="mb-3" onSubmit={handleSubmit}>
             <div>
-              <TextAreaInputStd
+              <TextAreaInput
                 label="Details"
                 value={values.details}
                 field="details"

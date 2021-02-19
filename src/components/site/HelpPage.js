@@ -9,11 +9,13 @@ const HelpPage = () => {
   const crumbs = [{ title: 'Home', to: '/' }, { title: pageTitle }];
 
   return (
-    <div className="container">
+    <div>
       <Breadcrumb crumbs={crumbs} />
       <Title title={pageTitle} />
-      <div className="content">
-        <p>This page will display links to the help docuemntation</p>
+      <div className="container">
+        <div className="content">
+          <p>This page will display links to the help docuemntation</p>
+        </div>
       </div>
     </div>
   );

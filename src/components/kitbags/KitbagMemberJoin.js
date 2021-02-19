@@ -6,7 +6,7 @@ import { requestToJoinKitbag } from '../../actions/KitbagActions';
 import ModalWithForm from '../includes/ModalWithForm';
 import history from '../../utils/history';
 import validate from '../includes/FormEmptyValidationRules';
-import TextInputStd from '../includes/controls/TextInputStd';
+import TextInput from '../includes/controls/TextInput';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -47,7 +47,7 @@ const KitbagMemberJoin = ({ newErrors, requestToJoinKitbag }) => {
           Enter the email of the person who has the kitbag to which you&apos;d
           like to join.
         </p>
-        <TextInputStd
+        <TextInput
           label="Email"
           value={values.email}
           field="email"

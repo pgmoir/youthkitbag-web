@@ -99,7 +99,7 @@ const GroupMembers = ({ fetchGroupMembers, match }) => {
   ];
 
   return (
-    <div className="container is-fluid px-0">
+    <div>
       <Breadcrumb crumbs={crumbs} />
       <Title title={getTitle()} />
       <Alert />

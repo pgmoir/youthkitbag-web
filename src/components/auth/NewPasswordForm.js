@@ -3,7 +3,7 @@ import useForm from '../hooks/useForm';
 import { checkNewPassword, setNewPassword } from '../../actions/AuthActions';
 import { connect } from 'react-redux';
 import validate from '../includes/FormEmptyValidationRules';
-import TextInputStd from '../includes/controls/TextInputStd';
+import TextInput from '../includes/controls/TextInput';
 import Alert from '../includes/Alert';
 import Title from '../includes/title/Title';
 
@@ -62,7 +62,7 @@ const NewPasswordForm = ({
         </p>
       </div>
       <form onSubmit={handleSubmit}>
-        <TextInputStd
+        <TextInput
           type="password"
           value={values.password}
           field="password"

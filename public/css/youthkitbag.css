@@ -8000,6 +8000,21 @@ body {
 .is-flex-stored .quantity {
   width: 100px; }
 
+.is-flex-groupshare .name {
+  width: 400px; }
+
+.is-flex-groupshare .ondate {
+  width: 120px; }
+
+.is-flex-members .email {
+  width: 250px; }
+
+.is-flex-members .role {
+  width: 150px; }
+
+.is-flex-members .state {
+  width: 150px; }
+
 /* 
   sticky footer
   makes sure at least the whole viewport is used 

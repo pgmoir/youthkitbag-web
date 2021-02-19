@@ -4,7 +4,7 @@ import useForm from '../hooks/useForm';
 import { signup } from '../../actions/AuthActions';
 import { connect } from 'react-redux';
 import validate from '../includes/FormEmptyValidationRules';
-import TextInputStd from '../includes/controls/TextInputStd';
+import TextInput from '../includes/controls/TextInput';
 import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 
@@ -48,7 +48,7 @@ const SignUpForm = ({ newErrors, signup }) => {
       <Title title="Sign Up" hasHr={false} />
       <Alert />
       <form onSubmit={handleSubmit}>
-        <TextInputStd
+        <TextInput
           value={values.firstName}
           field="firstName"
           handleChange={handleChange}
@@ -56,7 +56,7 @@ const SignUpForm = ({ newErrors, signup }) => {
           placeHolder="Enter your first name"
           iconLeft="fas fa-user"
         />
-        <TextInputStd
+        <TextInput
           value={values.lastName}
           field="lastName"
           handleChange={handleChange}
@@ -64,7 +64,7 @@ const SignUpForm = ({ newErrors, signup }) => {
           placeHolder="Enter your last name"
           iconLeft="fas fa-user-plus"
         />
-        <TextInputStd
+        <TextInput
           type="email"
           value={values.email}
           field="email"
@@ -73,7 +73,7 @@ const SignUpForm = ({ newErrors, signup }) => {
           placeHolder="Enter your email"
           iconLeft="fas fa-envelope"
         />
-        <TextInputStd
+        <TextInput
           type="password"
           value={values.password}
           field="password"
@@ -83,7 +83,7 @@ const SignUpForm = ({ newErrors, signup }) => {
           placeHolder="Create your password"
           iconLeft="fas fa-lock"
         />
-        <TextInputStd
+        <TextInput
           type="password"
           value={values.confirmPassword}
           field="confirmPassword"

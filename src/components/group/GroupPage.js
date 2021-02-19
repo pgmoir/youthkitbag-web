@@ -170,64 +170,65 @@ const GroupPage = ({ fetchGroup, match }) => {
 
   return (
     <>
-      <div className="container">
+      <div>
         <Breadcrumb crumbs={crumbs} />
         <Title title={getTitle()} icon={getIcon()} />
-        <Alert />
-        <GroupsHelp />
-        <div className="columns">
-          <div className="column is-half-width">{getCurrentState()}</div>
-          {group._id && group.state === GroupStates.ACTIVE && (
-            <div className="column is-fullwidth">
-              <div className="buttons is-justify-content-flex-end">
-                {isGroupAdmin && (
-                  <Link
-                    to={`/groups/${groupId}/members`}
-                    className="button is-primary"
-                  >
-                    Members
-                  </Link>
-                )}
-                {canJoin() && (
-                  <span
-                    className="button is-success is-clickable"
-                    onClick={(e) => {
-                      joinGroup(e);
-                    }}
-                    onKeyPress={(e) => {
-                      joinGroup(e);
-                    }}
-                    role="button"
-                    tabIndex="0"
-                  >
-                    Join
-                  </span>
-                )}
-                {canLeave() && (
-                  <span
-                    className="button is-info is-clickable"
-                    onClick={(e) => {
-                      leaveGroup(e);
-                    }}
-                    onKeyPress={(e) => {
-                      leaveGroup(e);
-                    }}
-                    role="button"
-                    tabIndex="0"
-                  >
-                    Leave
-                  </span>
-                )}
+        <div className="container">
+          <GroupsHelp />
+          <Alert />
+          <div className="columns">
+            <div className="column is-half-width">{getCurrentState()}</div>
+            {group._id && group.state === GroupStates.ACTIVE && (
+              <div className="column is-fullwidth">
+                <div className="buttons is-justify-content-flex-end">
+                  {isGroupAdmin && (
+                    <Link
+                      to={`/groups/${groupId}/members`}
+                      className="button is-primary"
+                    >
+                      Members
+                    </Link>
+                  )}
+                  {canJoin() && (
+                    <span
+                      className="button is-success is-clickable"
+                      onClick={(e) => {
+                        joinGroup(e);
+                      }}
+                      onKeyPress={(e) => {
+                        joinGroup(e);
+                      }}
+                      role="button"
+                      tabIndex="0"
+                    >
+                      Join
+                    </span>
+                  )}
+                  {canLeave() && (
+                    <span
+                      className="button is-info is-clickable"
+                      onClick={(e) => {
+                        leaveGroup(e);
+                      }}
+                      onKeyPress={(e) => {
+                        leaveGroup(e);
+                      }}
+                      role="button"
+                      tabIndex="0"
+                    >
+                      Leave
+                    </span>
+                  )}
+                </div>
               </div>
-            </div>
+            )}
+          </div>
+          {isGroupAdmin || createGroup ? (
+            <GroupForm group={group} />
+          ) : (
+            <GroupDisplay group={group} />
           )}
         </div>
-
-        {isGroupAdmin || createGroup ? (
-          <GroupForm group={group} />
-        ) : (
-          <GroupDisplay group={group} />
-        )}
       </div>
       <GroupMemberJoin
         groupId={groupId}

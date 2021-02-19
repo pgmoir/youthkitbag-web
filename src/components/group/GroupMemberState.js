@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { editGroupMember } from '../../actions/GroupActions';
 import { MemberStates } from '../../enums/memberStates.enum';
-import SelectInputStd from '../includes/controls/SelectInputStd';
+import SelectInput from '../includes/controls/SelectInput';
 import useForm from '../hooks/useForm';
 import validate from '../includes/FormEmptyValidationRules';
 
@@ -73,7 +73,7 @@ const GroupMemberState = ({
           <p className="is-size-6 mb-3">
             {`Select the new membership status for, "${memberName()}"`}
           </p>
-          <SelectInputStd
+          <SelectInput
             value={values.state}
             field="state"
             handleChange={handleChange}

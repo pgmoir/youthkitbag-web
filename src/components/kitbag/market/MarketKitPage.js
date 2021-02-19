@@ -93,15 +93,17 @@ const MarketKitPage = ({
   }
 
   return (
-    <div className="container">
-      <Breadcrumb crumbs={crumbs} />{' '}
+    <div>
+      <Breadcrumb crumbs={crumbs} />
       {itemIsLoading() ? (
         <Title title={getTitle()} />
       ) : (
         <MarketTitle market={market} isOwned={true} />
       )}
-      <Alert />
-      <MarketKitForm kitbagId={kitbagId} market={market} />
+      <div className="container">
+        <Alert />
+        <MarketKitForm kitbagId={kitbagId} market={market} />
+      </div>
     </div>
   );
 };

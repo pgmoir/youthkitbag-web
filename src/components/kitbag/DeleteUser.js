@@ -7,7 +7,7 @@ import ModalWithForm from '../includes/ModalWithForm';
 import history from '../../utils/history';
 import validate from '../includes/FormEmptyValidationRules';
 import Alert from '../includes/Alert';
-import TextInputStd from '../includes/controls/TextInputStd';
+import TextInput from '../includes/controls/TextInput';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -49,7 +49,7 @@ const DeleteUser = ({ newErrors, deleteUser, match }) => {
           deletion of your user kitbag, and all associated data. Please be fully
           aware that there is no reversal of this action.
         </p>
-        <TextInputStd
+        <TextInput
           type="email"
           label="Email"
           value={values.email}

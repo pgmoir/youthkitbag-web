@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import useForm from '../hooks/useForm';
 import { login } from '../../actions/AuthActions';
 import validate from '../includes/FormEmptyValidationRules';
-import TextInputStd from '../includes/controls/TextInputStd';
+import TextInput from '../includes/controls/TextInput';
 import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 
@@ -73,7 +73,7 @@ const LoginForm = ({ referrer, newErrors, login }) => {
         <span className="centre-line"></span>
       </p>
       <form onSubmit={handleSubmit}>
-        <TextInputStd
+        <TextInput
           type="email"
           value={values.email}
           field="email"
@@ -83,7 +83,7 @@ const LoginForm = ({ referrer, newErrors, login }) => {
           placeHolder="Enter your email"
           iconLeft="fas fa-envelope"
         />
-        <TextInputStd
+        <TextInput
           type="password"
           value={values.password}
           field="password"

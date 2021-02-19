@@ -85,7 +85,7 @@ const Groups = ({
   const crumbs = [{ title: 'Home', to: '/' }, { title: 'Groups' }];
 
   return (
-    <div className="container is-fluid px-0">
+    <div>
       <Breadcrumb crumbs={crumbs} />
       <Title title={getTitle()} />
       <Alert />

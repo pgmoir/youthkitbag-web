@@ -74,37 +74,39 @@ const KitPage = ({ fetchKitbagKit, match }) => {
   ];
 
   return (
-    <div className="container">
+    <div>
       <Breadcrumb crumbs={crumbs} />
       <Title title={getTitle()} />
-      <Alert />
-      {kitId && (
-        <div className="columns">
-          <div className="column is-fullwidth">
-            <div className="buttons is-justify-content-flex-end">
-              <Link
-                to={`/kitbag/market/${kitbagId}/add/${kitId}/trade`}
-                className="button is-info"
-              >
-                Trade Recycle
-              </Link>
-              <Link
-                to={`/kitbag/market/${kitbagId}/add/${kitId}/wanted`}
-                className="button is-success"
-              >
-                Wanted
-              </Link>
-              <Link
-                to={`/kitbag/market/${kitbagId}/add/${kitId}/stolen`}
-                className="button is-warning"
-              >
-                Found Lost Stolen
-              </Link>
+      <div className="container">
+        <Alert />
+        {kitId && (
+          <div className="columns">
+            <div className="column is-fullwidth">
+              <div className="buttons is-justify-content-flex-end">
+                <Link
+                  to={`/kitbag/market/${kitbagId}/add/${kitId}/trade`}
+                  className="button is-info"
+                >
+                  Trade Recycle
+                </Link>
+                <Link
+                  to={`/kitbag/market/${kitbagId}/add/${kitId}/wanted`}
+                  className="button is-success"
+                >
+                  Wanted
+                </Link>
+                <Link
+                  to={`/kitbag/market/${kitbagId}/add/${kitId}/stolen`}
+                  className="button is-warning"
+                >
+                  Found Lost Stolen
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-      <KitForm kitbagId={kitbagId} kit={kit} />
+        )}
+        <KitForm kitbagId={kitbagId} kit={kit} />
+      </div>
     </div>
   );
 };

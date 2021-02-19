@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CheckboxInputStd = ({ label, value, field, onChange, help }) => {
+const CheckBoxInput = ({ label, value, field, onChange, help }) => {
   return (
     <div className="columns is-vcentered">
       <div className="column is-">
@@ -29,4 +29,4 @@ const CheckboxInputStd = ({ label, value, field, onChange, help }) => {
   );
 };
 
-export default CheckboxInputStd;
+export default CheckBoxInput;

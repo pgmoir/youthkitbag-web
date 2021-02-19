@@ -1,49 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import classNames from 'classnames';
-import dayjs from 'dayjs';
 
-const DateInputStd = ({
+const TextInput = ({
+  type,
   label,
   value,
   field,
+  step,
+  min,
+  max,
   disabled,
   readOnly,
-  setChange,
+  handleChange,
   error,
+  autoComplete,
   addClassName,
   placeHolder,
-  iconRight,
+  iconRight = true,
   iconLeft,
 }) => {
-  const [currentValue, setCurrentValue] = useState(
-    value && dayjs(value).isValid() ? dayjs(value).format('DD-MMM-YYYY') : ''
-  );
-
-  const handleDateChange = (event) => {
-    if (disabled) return;
-
-    if (!dayjs(event.target.value).isValid()) {
-      setCurrentValue('');
-      setChange(field, undefined);
-      return;
-    }
-
-    if (dayjs(event.target.value).isBefore('1970-01-01', 'year')) {
-      setCurrentValue('');
-      setChange(field, undefined);
-      return;
-    }
-
-    setCurrentValue(dayjs(event.target.value).format('DD-MMM-YYYY'));
-    setChange(field, dayjs(event.target.value).toISOString());
-    return;
-  };
-
-  const handleTypeChange = (event) => {
-    if (disabled) return;
-    setCurrentValue(event.target.value);
-  };
-
   const controlClasses = classNames('control', {
     'has-icons-right': iconRight,
     'has-icons-left': iconLeft,
@@ -68,13 +43,17 @@ const DateInputStd = ({
             <input
               className={inputClasses}
               name={field}
-              type="text"
+              type={type ? type : 'text'}
+              step={step}
+              min={min}
+              max={max}
               disabled={disabled}
               readOnly={readOnly}
-              onChange={handleTypeChange}
-              onBlur={handleDateChange}
-              value={currentValue}
+              onChange={handleChange}
+              onBlur={handleChange}
+              value={value}
               aria-describedby={field}
+              autoComplete={autoComplete}
               tabIndex={disabled || readOnly ? -1 : 0}
               placeholder={placeHolder}
             />
@@ -96,4 +75,4 @@ const DateInputStd = ({
   );
 };
 
-export default DateInputStd;
+export default TextInput;
