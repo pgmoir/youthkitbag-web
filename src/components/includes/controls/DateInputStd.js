@@ -12,6 +12,7 @@ const DateInputStd = ({
   error,
   addClassName,
   placeHolder,
+  iconRight,
   iconLeft,
 }) => {
   const [currentValue, setCurrentValue] = useState(
@@ -43,7 +44,8 @@ const DateInputStd = ({
     setCurrentValue(event.target.value);
   };
 
-  const controlClasses = classNames('control', 'has-icons-right', {
+  const controlClasses = classNames('control', {
+    'has-icons-right': iconRight,
     'has-icons-left': iconLeft,
   });
 
@@ -81,7 +83,7 @@ const DateInputStd = ({
                 <i className={iconLeft}></i>
               </span>
             )}
-            {error && (
+            {error && iconRight && (
               <span className="icon is-small is-right">
                 <i className="fas fa-exclamation-triangle"></i>
               </span>

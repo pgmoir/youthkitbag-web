@@ -16,9 +16,11 @@ const TextInputStd = ({
   autoComplete,
   addClassName,
   placeHolder,
+  iconRight = true,
   iconLeft,
 }) => {
-  const controlClasses = classNames('control', 'has-icons-right', {
+  const controlClasses = classNames('control', {
+    'has-icons-right': iconRight,
     'has-icons-left': iconLeft,
   });
 
@@ -60,7 +62,7 @@ const TextInputStd = ({
                 <i className={iconLeft}></i>
               </span>
             )}
-            {error && (
+            {error && iconRight && (
               <span className="icon is-small is-right">
                 <i className="fas fa-exclamation-triangle"></i>
               </span>

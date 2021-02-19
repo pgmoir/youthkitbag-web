@@ -1,0 +1,29 @@
+/*
+ custom flexboxes
+  */
+.is-flex-purchases {
+  .purchased-from {
+    width: 200px;
+  }
+  .quantity {
+    width: 100px;
+  }
+  .ondate {
+    width: 120px;
+  }
+  .price {
+    width: 100px;
+  }
+}
+
+.is-flex-stored {
+  .location {
+    width: 200px;
+  }
+  .condition {
+    width: 160px;
+  }
+  .quantity {
+    width: 100px;
+  }
+}

@@ -13,12 +13,13 @@ import { getImages } from '../../../utils/image';
 import TextInputStd from '../../includes/controls/TextInputStd';
 import TextAreaInputStd from '../../includes/controls/TextAreaInputStd';
 import SelectInputStd from '../../includes/controls/SelectInputStd';
-import SelectInputCol from '../../includes/controls/SelectInputCol';
 import TextInputCol from '../../includes/controls/TextInputCol';
 import ArrayButtonAdd from '../../includes/controls/ArrayButtonAdd';
 import ArrayButtonRemove from '../../includes/controls/ArrayButtonRemove';
+import ArrayButtonRemoveStd from '../../includes/controls/ArrayButtonRemoveStd';
 import CheckboxInputStd from '../../includes/controls/CheckboxInputStd';
 import DateInputCol from '../../includes/controls/DateInputCol';
+import DateInputStd from '../../includes/controls/DateInputStd';
 
 const mapStateToProps = (state) => ({
   kitbagLists: state.kitbag.kit.lists,
@@ -145,57 +146,64 @@ const KitForm = ({
           />
           <hr />
           <div>
+            <p className="has-text-weight-bold mb-3">
+              Purchased (From, Quantity, On, Cost)
+            </p>
             {values.purchases &&
               values.purchases.map((item, index) => (
-                <div className="columns" key={index}>
-                  <TextInputCol
-                    value={values.purchases[index].from}
-                    label="Purchased from"
-                    field={`purchases[${index}].from`}
-                    handleChange={handleChange}
-                    index={index}
-                    autoList={kitbagLists.purchasesFroms}
-                    width="3"
-                  />
-                  <TextInputCol
-                    type="number"
-                    value={values.purchases[index].quantity}
-                    label="Quantity"
-                    field={`purchases[${index}].quantity`}
-                    step="1"
-                    min="0"
-                    max="9999"
-                    handleChange={handleChange}
-                    index={index}
-                    width="2"
-                  />
-                  <DateInputCol
-                    value={values.purchases[index].ondate}
-                    label="On"
-                    field={`purchases[${index}].ondate`}
-                    setChange={setChange}
-                    placeHolder="17-Jan-2021"
-                    index={index}
-                    width="3"
-                  />
-                  <TextInputCol
-                    type="number"
-                    value={values.purchases[index].price}
-                    label="Price"
-                    field={`purchases[${index}].price`}
-                    step=".01"
-                    min="0.00"
-                    max="29999.99"
-                    handleChange={handleChange}
-                    index={index}
-                    width="2"
-                  />
-                  <ArrayButtonRemove
-                    title="Remove Purchase"
-                    onClick={() => removeArrayItem('purchases', index)}
-                    index={index}
-                    width="1"
-                  />
+                <div
+                  className="is-flex is-flex-wrap-wrap is-flex-purchases"
+                  key={index}
+                >
+                  <div className="mr-3 mb-3 purchased-from">
+                    <TextInputStd
+                      value={values.purchases[index].from}
+                      field={`purchases[${index}].from`}
+                      handleChange={handleChange}
+                      autoList={kitbagLists.purchasesFroms}
+                      placeHolder="From"
+                      iconRight={false}
+                    />
+                  </div>
+                  <div className="mr-3 mb-3 quantity">
+                    <TextInputStd
+                      type="number"
+                      value={values.purchases[index].quantity}
+                      field={`purchases[${index}].quantity`}
+                      step="1"
+                      min="0"
+                      max="9999"
+                      handleChange={handleChange}
+                      iconRight={false}
+                    />
+                  </div>
+                  <div className="mr-3 mb-3 ondate">
+                    <DateInputStd
+                      value={values.purchases[index].ondate}
+                      field={`purchases[${index}].ondate`}
+                      setChange={setChange}
+                      placeHolder="17-Jan-2021"
+                    />
+                  </div>
+                  <div className="mr-3 mb-3 price">
+                    <TextInputStd
+                      type="number"
+                      value={values.purchases[index].price}
+                      field={`purchases[${index}].price`}
+                      step=".01"
+                      min="0.00"
+                      max="29999.99"
+                      handleChange={handleChange}
+                      iconRight={false}
+                    />
+                  </div>
+                  <div className="mx-1 mb-5">
+                    <ArrayButtonRemoveStd
+                      title="Remove Purchase"
+                      onClick={() => removeArrayItem('purchases', index)}
+                      index={index}
+                    />
+                  </div>
                 </div>
               ))}
             <ArrayButtonAdd
@@ -205,44 +213,50 @@ const KitForm = ({
           </div>
           <hr />
           <div>
+            <p className="has-text-weight-bold mb-3">
+              Stored (Location, Condition, Quantity)
+            </p>
             {values.inbag &&
               values.inbag.map((item, index) => (
-                <div className="columns" key={index}>
-                  <TextInputCol
-                    value={values.inbag[index].location}
-                    label="Storage location"
-                    field={`inbag[${index}].location`}
-                    handleChange={handleChange}
-                    index={index}
-                    width="4"
-                  />
-                  <SelectInputCol
-                    label="Condition"
-                    value={values.inbag[index].condition}
-                    field={`inbag[${index}].condition`}
-                    handleChange={handleChange}
-                    items={conditionItems}
-                    index={index}
-                    width="4"
-                  />
-                  <TextInputCol
-                    type="number"
-                    value={values.inbag[index].quantity}
-                    label="Quantity"
-                    field={`inbag[${index}].quantity`}
-                    step="1"
-                    min="0"
-                    max="9999"
-                    handleChange={handleChange}
-                    index={index}
-                    width="3"
-                  />
-                  <ArrayButtonRemove
-                    title="Remove Inbag"
-                    onClick={() => removeArrayItem('inbag', index)}
-                    index={index}
-                    width="1"
-                  />
+                <div
+                  className="is-flex is-flex-wrap-wrap is-flex-stored"
+                  key={index}
+                >
+                  <div className="mr-3 mb-3 location">
+                    <TextInputStd
+                      value={values.inbag[index].location}
+                      field={`inbag[${index}].location`}
+                      handleChange={handleChange}
+                      placeHolder="Location"
+                    />
+                  </div>
+                  <div className="mr-3 mb-3 condition">
+                    <SelectInputStd
+                      value={values.inbag[index].condition}
+                      field={`inbag[${index}].condition`}
+                      handleChange={handleChange}
+                      items={conditionItems}
+                    />
+                  </div>
+                  <div className="mr-3 mb-3 quantity">
+                    <TextInputStd
+                      type="number"
+                      value={values.inbag[index].quantity}
+                      field={`inbag[${index}].quantity`}
+                      step="1"
+                      min="0"
+                      max="9999"
+                      handleChange={handleChange}
+                      placeHolder="Qty"
+                    />
+                  </div>
+                  <div className="mx-1 mb-5">
+                    <ArrayButtonRemoveStd
+                      title="Remove Inbag"
+                      onClick={() => removeArrayItem('inbag', index)}
+                      index={index}
+                    />
+                  </div>
                 </div>
               ))}
             <ArrayButtonAdd

@@ -7976,6 +7976,30 @@ body {
 .text-gold {
   color: #d4af37; }
 
+/*
+ custom flexboxes
+  */
+.is-flex-purchases .purchased-from {
+  width: 200px; }
+
+.is-flex-purchases .quantity {
+  width: 100px; }
+
+.is-flex-purchases .ondate {
+  width: 120px; }
+
+.is-flex-purchases .price {
+  width: 100px; }
+
+.is-flex-stored .location {
+  width: 200px; }
+
+.is-flex-stored .condition {
+  width: 160px; }
+
+.is-flex-stored .quantity {
+  width: 100px; }
+
 /* 
   sticky footer
   makes sure at least the whole viewport is used 

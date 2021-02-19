@@ -8,7 +8,7 @@ const BlankCard = () => {
           <figure className="image is-4by3">
             <img src="/images/default.png" alt="" role="presentation" />
           </figure>
-          <div className="has-text-right p-2 is-overlay">
+          <div className="has-text-right p-2 is-overlay-topright">
             <span className="tag is-dark is-rounded">0</span>
           </div>
         </div>

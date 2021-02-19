@@ -42,7 +42,7 @@ const ImagesForm = ({
 
     const thumbnails = images.map((image, index) => {
       return (
-        <div key={index} className="is-flex is-flex-direction-row m-3">
+        <div key={index} className="is-flex is-flex-direction-row mb-3 ml-3">
           {image.state !== 'D' ? (
             <div className="card">
               <div className="card-image is-clickable">
@@ -112,7 +112,7 @@ const ImagesForm = ({
       );
     });
 
-    return <div className="columns is-multiline mb-0">{thumbnails}</div>;
+    return <div className="columns is-multiline mt-3 mb-0">{thumbnails}</div>;
   }
 
   function renderTopImage(src) {

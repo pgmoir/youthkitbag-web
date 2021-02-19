@@ -51,11 +51,8 @@ const KitCard = ({ kit, kitbagId }) => {
             <figure className="image is-4by3">
               <img src={topImage()} alt={title} role="presentation" />
             </figure>
-            <div className="has-text-right p-2 is-overlay">
-              <span className="tag is-dark is-rounded">{totalQuantity()}</span>
-            </div>
             {active && (
-              <div className="has-text-left p-2 is-overlay">
+              <div className="has-text-left p-2 is-overlay-topleft">
                 <span
                   className="tag is-danger is-medium is-clickable"
                   onClick={(e) => {
@@ -74,6 +71,9 @@ const KitCard = ({ kit, kitbagId }) => {
                 </span>
               </div>
             )}
+            <div className="has-text-right p-2 is-overlay-topright">
+              <span className="tag is-dark is-rounded">{totalQuantity()}</span>
+            </div>
           </div>
           <div className="card-content">
             <p className="title is-size-5">{title}</p>
