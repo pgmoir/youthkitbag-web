@@ -108,28 +108,23 @@ const GroupPage = ({ fetchGroup, match }) => {
       );
     }
 
-    if (
-      group.state === GroupStates.BLOCKED ||
-      group.state === GroupStates.DELETED
-    ) {
+    if ([GroupStates.BLOCKED, GroupStates.DELETED].includes(group.state)) {
       return (
         <span className="tag is-large is-rounded is-danger">
-          {`This group has been ${
-            group.state === GroupStates.BLOCKED ? 'blocked' : 'deleted'
-          } and members cannot join`}
+          {`This group has been ${group.state} and members cannot join`}
         </span>
       );
     }
 
     const stateClasses = classNames('tag is-large is-rounded', {
       'is-success': group.groupMemberState === MemberStates.APPROVED,
-      'is-info':
-        group.groupMemberState === MemberStates.REQUESTED ||
-        group.groupMemberState === MemberStates.INVITED,
+      'is-info': [MemberStates.REQUESTED, MemberStates.INVITED].includes(
+        group.groupMemberState
+      ),
       'is-warning': group.groupMemberState === MemberStates.REJECTED,
-      'is-danger':
-        group.groupMemberState === MemberStates.SUSPENDED ||
-        group.groupMemberState === MemberStates.LEFT,
+      'is-danger': [MemberStates.SUSPENDED, MemberStates.LEFT].includes(
+        group.groupMemberState
+      ),
     });
 
     if (group.groupMemberState) {

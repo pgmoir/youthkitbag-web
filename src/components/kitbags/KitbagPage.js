@@ -9,6 +9,8 @@ import KitbagForm from './KitbagForm';
 import KitbagsHelp from '../kitbag/KitbagsHelp';
 import Title from '../includes/title/Title';
 import KitbagMemberInvite from './KitbagMemberInvite';
+import { MemberStates } from '../../enums/memberStates.enum';
+import { KitbagStates } from '../../enums/kitbagStates.enum';
 
 const mapStateToProps = (state) => ({
   current: state.kitbag.kitbags.current,
@@ -56,7 +58,8 @@ const KitbagPage = ({ current, kitbags, fetchKitbag, clearKitbag, match }) => {
     if (kitbagIsLoading()) {
       return 'Loading ...';
     }
-    const leftState = kitbag.kitbagMemberState === 'left' ? ' (left)' : '';
+    const leftState =
+      kitbag.kitbagMemberState === MemberStates.LEFT ? ' (left)' : '';
     return kitbag._id ? `${kitbag.name}${leftState}` : 'Create new kitbag';
   }
 
@@ -94,24 +97,26 @@ const KitbagPage = ({ current, kitbags, fetchKitbag, clearKitbag, match }) => {
       <div className="columns">
         <div className="column is-fullwidth">
           <div className="buttons is-justify-content-flex-end">
-            {kitbagId && kitbag.kitbagAdmin && kitbag.state !== 'blocked' && (
-              <div
-                className="button is-info"
-                onClick={(e) => {
-                  inviteMember(e);
-                }}
-                onKeyPress={(e) => {
-                  inviteMember(e);
-                }}
-                role="button"
-                tabIndex="0"
-              >
-                Invite
-              </div>
-            )}
+            {kitbagId &&
+              kitbag.kitbagAdmin &&
+              kitbag.state !== KitbagStates.BLOCKED && (
+                <div
+                  className="button is-info"
+                  onClick={(e) => {
+                    inviteMember(e);
+                  }}
+                  onKeyPress={(e) => {
+                    inviteMember(e);
+                  }}
+                  role="button"
+                  tabIndex="0"
+                >
+                  Invite
+                </div>
+              )}
             {kitbagId &&
               !kitbag.kitbagAdmin &&
-              kitbag.state !== 'blocked' &&
+              kitbag.state !== KitbagStates.BLOCKED &&
               kitbag.kitbagMember && (
                 <Link
                   to={`/kitbags/${kitbagId}/leave`}

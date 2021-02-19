@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CookieConsent from 'react-cookie-consent';
+import { GroupStates } from '../../enums/groupStates.enum';
+import { MemberStates } from '../../enums/memberStates.enum';
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
@@ -17,8 +19,8 @@ const Header = ({ auth, user }) => {
 
   const group = user.groups
     ? user.groups
-        .filter((g) => g.state === 'approved')
-        .find((a) => a.member.state === 'approved')
+        .filter((g) => g.state === GroupStates.ACTIVE)
+        .find((a) => a.member.state === MemberStates.APPROVED)
     : undefined;
 
   const { topImage } = user;

@@ -13,6 +13,7 @@ import ArrayButtonRemove from '../includes/controls/ArrayButtonRemove';
 import SelectInputCol from '../includes/controls/SelectInputCol';
 import { MemberRoles } from '../../enums/memberRoles.enum';
 import { MemberStates } from '../../enums/memberStates.enum';
+import { KitbagStates } from '../../enums/kitbagStates.enum';
 
 const mapStateToProps = (state) => ({
   userBundle: state.user.bundle,
@@ -81,7 +82,8 @@ const KitbagForm = ({
     if (values) {
       const newKitbag = !values._id;
       const admin =
-        (values.kitbagAdmin && values.state !== 'blocked') || values.appAdmin;
+        (values.kitbagAdmin && values.state !== KitbagStates.BLOCKED) ||
+        values.appAdmin;
       setIsDisabled(!newKitbag && !admin);
     }
   }, [values, setIsDisabled]);

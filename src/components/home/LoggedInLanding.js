@@ -17,6 +17,8 @@ import { MarketTypes } from '../../enums/marketTypes.enum';
 import KitbagMarketAnnouncement from './KitbagMarketAnnouncement';
 import KitbagKitLevelWarnings from './KitbagKitLevelWarnings';
 import LoadingAnnouncement from './LoadingAnnouncement';
+import { GroupStates } from '../../enums/groupStates.enum';
+import { MemberStates } from '../../enums/memberStates.enum';
 
 const mapStateToProps = (state) => ({
   user: state.user,
@@ -30,8 +32,8 @@ const LoggedInLanding = ({ user }) => {
   const group =
     user.groups && user.groups.length > 0
       ? user.groups
-          .filter((g) => g.state === 'approved')
-          .find((a) => a.member.state === 'approved')
+          .filter((g) => g.state === GroupStates.ACTIVE)
+          .find((a) => a.member.state === MemberStates.APPROVED)
       : undefined;
 
   useEffect(() => {

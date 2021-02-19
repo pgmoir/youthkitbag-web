@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchGroup, editGroupState } from '../../actions/GroupActions';
 import Modal from '../includes/Modal';
 import history from '../../utils/history';
+import { GroupStates } from '../../enums/groupStates.enum';
 
 const mapStateToProps = (state, ownProps) => ({
   group: state.group[ownProps.match.params.groupId],
@@ -43,14 +44,14 @@ const GroupState = ({ group, fetchGroup, editGroupState, match }) => {
         <button
           type="button"
           className="btn btn-danger"
-          onClick={() => editGroupState(groupId, 'blocked')}
+          onClick={() => editGroupState(groupId, GroupStates.BLOCKED)}
         >
           Block
         </button>
         <button
           type="button"
           className="btn btn-success"
-          onClick={() => editGroupState(groupId, 'approved')}
+          onClick={() => editGroupState(groupId, GroupStates.ACTIVE)}
         >
           Approve
         </button>
