@@ -23,7 +23,6 @@ import history from '../utils/history';
 import Home from './Home';
 import Kitbag from './kitbag/kit/Kitbag';
 import KitbagMemberAccept from './kitbags/KitbagMemberAccept';
-import KitbagMemberInvite from './kitbags/KitbagMemberInvite';
 import KitbagMemberJoin from './kitbags/KitbagMemberJoin';
 import KitbagPage from './kitbags/KitbagPage';
 import KitDelete from './kitbag/kit/KitDelete';
@@ -220,10 +219,6 @@ const App = ({ auth }) => {
 
               <PrivateRoute path="/kitbags/new" component={KitbagPage} />
               <PrivateRoute path="/kitbags/join" component={KitbagMemberJoin} />
-              <PrivateRoute
-                path="/kitbags/:kitbagId/invite"
-                component={KitbagMemberInvite}
-              />
               <PrivateRoute
                 path="/kitbags/:kitbagId/member/accept/:email/:token"
                 component={KitbagMemberAccept}

@@ -132,7 +132,8 @@ const KitbagPage = ({ current, kitbags, fetchKitbag, clearKitbag, match }) => {
         <KitbagForm kitbag={kitbag} />
       </div>
       <KitbagMemberInvite
-        kitbag={kitbag}
+        kitbagId={kitbag._id}
+        kitbagName={kitbag.name}
         modalIsActive={modalIsActive}
         setModalIsActive={setModalIsActive}
       />

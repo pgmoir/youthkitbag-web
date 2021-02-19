@@ -24,6 +24,7 @@ import {
   RESET_REQUESTED,
   PASSWORD_RESET,
   GROUP_MEMBER_JOIN,
+  CREATE_KITBAG_INVITE,
 } from '../actions/types';
 
 const initialState = {
@@ -50,6 +51,7 @@ export default (state = initialState, action) => {
     case RESET_REQUESTED:
     case PASSWORD_RESET:
     case GROUP_MEMBER_JOIN:
+    case CREATE_KITBAG_INVITE:
       return {
         currentMessage: action.payload.message,
         currentStyle: 'success',

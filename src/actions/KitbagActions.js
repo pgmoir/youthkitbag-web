@@ -72,17 +72,15 @@ export const editKitbagState = (kitbagId, state) => (dispatch) => {
     });
 };
 
-export const inviteToKitbag = (kitbagId, formValues) => (dispatch) => {
+export const inviteToKitbag = ({ kitbagId, formValues }) => (dispatch) => {
   axios
     .post(`/kitbag/${kitbagId}/member/invite`, { ...formValues }, {})
     .then((response) => {
-      history.push(`/kitbags/${kitbagId}`);
       dispatch({ type: CREATE_KITBAG_INVITE, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;
       dispatch({ type: API_ERROR, payload: response.data });
-      history.push(`/settings/kitbags`);
     });
 };
 

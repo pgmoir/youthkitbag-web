@@ -1,123 +1,44 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import history from '../../utils/history';
+
 import useForm from '../hooks/useForm';
-import { Link } from 'react-router-dom';
-import { fetchKitbag, inviteToKitbag } from '../../actions/KitbagActions';
-import ModalWithForm from '../includes/ModalWithForm';
+import { inviteToKitbag } from '../../actions/KitbagActions';
 import validate from '../includes/FormEmptyValidationRules';
 import TextInput from '../includes/controls/TextInput';
 import SelectInput from '../includes/controls/SelectInput';
-
-// const mapStateToProps = (state) => ({
-//   kitbag: state.kitbag.kitbags.current,
-//   newErrors: state.toast.errors,
-// });
+import { MemberRoles } from '../../enums/memberRoles.enum';
 
 const mapDispatchToProps = {
   inviteToKitbag,
 };
 
-const KitbagMemberInvite = ({ kitbag, modalIsActive, setModalIsActive }) => {
+const KitbagMemberInvite = ({
+  kitbagId,
+  kitbagName,
+  inviteToKitbag,
+  modalIsActive,
+  setModalIsActive,
+}) => {
   function closeModal() {
     setModalIsActive(false);
   }
 
-  const { name } = kitbag;
-  // const kitbagId = match.params.kitbagId;
   const initialValues = { email: '', role: '' };
 
-  const rolesItems = ['', 'admin', 'member'];
+  const roleItems = ['', MemberRoles.ADMIN, MemberRoles.MEMBER];
 
-  const { handleChange, handleSubmit, values, errors, setErrors } = useForm(
+  const { handleChange, handleSubmit, values, errors } = useForm(
     initialValues,
     sendInvite,
     validate
   );
 
-  // useEffect(() => {
-  //   if (kitbagId) {
-  //     fetchKitbag(kitbagId);
-  //   }
-  // }, [fetchKitbag, kitbagId]);
-
-  // useEffect(() => {
-  //   if (newErrors) {
-  //     setErrors(newErrors);
-  //   }
-  // }, [newErrors, setErrors]);
-
   function sendInvite() {
-    if (values.email) {
-      const formValues = { ...values };
-      inviteToKitbag(kitbag._id, formValues);
-      //      history.push(`/kitbag/${kitbagId}/members`);
-    }
+    const formValues = { ...values };
+    inviteToKitbag({ kitbagId, formValues });
+    setModalIsActive(false);
   }
 
-  // function renderTitle() {
-  //   if (!kitbag) {
-  //     return 'Invite to kitbag';
-  //   }
-  //   return `Invite to "${kitbag.name}"`;
-  // }
-
-  // function renderContent() {
-  //   if (!kitbag) {
-  //     return 'Invite option not available.';
-  //   }
-  //   return (
-  //     <>
-  //       <p>
-  //         Enter an email and specify role for a person you want to give access
-  //         to this kitbag
-  //       </p>
-  //       <TextInput
-  //         label="Email"
-  //         value={values.email}
-  //         field="email"
-  //         handleChange={handleChange}
-  //         error={errors.email}
-  //       />
-  //       <SelectInput
-  //         label="Roles"
-  //         value={values.roles}
-  //         field="roles"
-  //         handleChange={handleChange}
-  //         error={errors.roles}
-  //         items={rolesItems}
-  //         useItem={false}
-  //       />
-  //     </>
-  //   );
-  // }
-
-  // function renderActions() {
-  //   return (
-  //     <div className="buttons">
-  //       <Link
-  //         to={`/kitbags/${kitbagId}`}
-  //         className="button is-warning"
-  //         data-dismiss="modal"
-  //       >
-  //         Cancel
-  //       </Link>
-  //       <button type="submit" className="button is-success">
-  //         Invite to Join
-  //       </button>
-  //     </div>
-  //   );
-  // }
-
-  // return (
-  //   <ModalWithForm
-  //     title={renderTitle()}
-  //     content={renderContent()}
-  //     actions={renderActions()}
-  //     handleSubmit={handleSubmit}
-  //     onDismiss={() => history.push(`/kitbags/${kitbagId}`)}
-  //   />
-  // );
   return (
     <div className={`modal ${modalIsActive ? 'is-active' : ''}`}>
       <div
@@ -129,7 +50,7 @@ const KitbagMemberInvite = ({ kitbag, modalIsActive, setModalIsActive }) => {
       ></div>
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title">{`Invite to ${name}`}</p>
+          <p className="modal-card-title">{`Invite to ${kitbagName}`}</p>
           <button
             className="delete"
             aria-label="close"
@@ -139,8 +60,8 @@ const KitbagMemberInvite = ({ kitbag, modalIsActive, setModalIsActive }) => {
         </header>
         <section className="modal-card-body">
           <p className="is-size-6 mb-3">
-            Enter an email and select the role for the person you want to invite
-            to this kitbag
+            Enter the email and role for the person you want to invite to this
+            kitbag
           </p>
           <TextInput
             label="Email"
@@ -149,14 +70,17 @@ const KitbagMemberInvite = ({ kitbag, modalIsActive, setModalIsActive }) => {
             handleChange={handleChange}
             error={errors.email}
           />
+          <SelectInput
+            label="Role"
+            value={values.role}
+            field="role"
+            handleChange={handleChange}
+            error={errors.role}
+            items={roleItems}
+          />
         </section>
         <footer className="modal-card-foot">
-          <button
-            className="button is-success"
-            onClick={async () => {
-              setModalIsActive(false);
-            }}
-          >
+          <button className="button is-success" onClick={handleSubmit}>
             Invite
           </button>
           <button className="button is-warning" onClick={closeModal}>
