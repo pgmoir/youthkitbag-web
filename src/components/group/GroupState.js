@@ -1,72 +1,90 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { fetchGroup, editGroupState } from '../../actions/GroupActions';
-import Modal from '../includes/Modal';
-import history from '../../utils/history';
+import { editGroupState } from '../../actions/GroupActions';
+import SelectInputStd from '../includes/controls/SelectInputStd';
+import useForm from '../hooks/useForm';
+import validate from '../includes/FormEmptyValidationRules';
 import { GroupStates } from '../../enums/groupStates.enum';
 
-const mapStateToProps = (state, ownProps) => ({
-  group: state.group[ownProps.match.params.groupId],
-});
-
 const mapDispatchToProps = {
-  fetchGroup,
   editGroupState,
 };
 
-const GroupState = ({ group, fetchGroup, editGroupState, match }) => {
-  const groupId = match.params.groupId;
-
-  useEffect(() => {
-    if (groupId) {
-      fetchGroup(groupId);
-    }
-  }, [fetchGroup, groupId]);
-
-  function renderTitle() {
-    if (!group) {
-      return 'Update state of group';
-    }
-    return `Update state of "${group.name}"`;
+const GroupState = ({
+  groupId,
+  groupState,
+  groupName,
+  editGroupState,
+  modalIsActive,
+  setModalIsActive,
+}) => {
+  function closeModal() {
+    setModalIsActive(false);
   }
 
-  function renderContent() {
-    if (!group) {
-      return 'Are you sure you want to change the state of this group. Any change may impact existing members or market items.';
-    }
-    return `How do you want to change the state of "${group.name}"? You can either approve or block this group. Any change may impact existing members or market items.`;
-  }
+  const initialValues = { state: groupState };
+  const stateItems = [
+    '',
+    GroupStates.ACTIVE,
+    GroupStates.REQUESTED,
+    GroupStates.BLOCKED,
+    GroupStates.DELETED,
+  ];
 
-  function renderActions() {
-    const { groupId } = match.params;
-    return (
-      <>
-        <button
-          type="button"
-          className="btn btn-danger"
-          onClick={() => editGroupState(groupId, GroupStates.BLOCKED)}
-        >
-          Block
-        </button>
-        <button
-          type="button"
-          className="btn btn-success"
-          onClick={() => editGroupState(groupId, GroupStates.ACTIVE)}
-        >
-          Approve
-        </button>
-      </>
-    );
+  const { handleChange, handleSubmit, values, errors } = useForm(
+    initialValues,
+    updateGroup,
+    validate
+  );
+
+  function updateGroup() {
+    const formValues = { ...values };
+    editGroupState({ groupId, formValues });
+    setModalIsActive(false);
   }
 
   return (
-    <Modal
-      title={renderTitle()}
-      content={renderContent()}
-      actions={renderActions()}
-      onDismiss={() => history.push('/groups')}
-    />
+    <div className={`modal ${modalIsActive ? 'is-active' : ''}`}>
+      <div
+        className="modal-background"
+        onClick={closeModal}
+        onKeyPress={closeModal}
+        role="button"
+        tabIndex="0"
+      ></div>
+      <div className="modal-card">
+        <header className="modal-card-head">
+          <p className="modal-card-title">Select group state</p>
+          <button
+            className="delete"
+            aria-label="close"
+            onClick={closeModal}
+            tabIndex="0"
+          ></button>
+        </header>
+        <section className="modal-card-body">
+          <p className="is-size-6 mb-3">
+            {`Select the new group status for, "${groupName}"`}
+          </p>
+          <SelectInputStd
+            value={values.state}
+            field="state"
+            handleChange={handleChange}
+            error={errors.state}
+            items={stateItems}
+          />
+        </section>
+        <footer className="modal-card-foot">
+          <button className="button is-success" onClick={handleSubmit}>
+            Save
+          </button>
+          <button className="button is-warning" onClick={closeModal}>
+            Cancel
+          </button>
+        </footer>
+      </div>
+    </div>
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupState);
+export default connect(null, mapDispatchToProps)(GroupState);
