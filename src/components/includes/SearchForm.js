@@ -87,6 +87,10 @@ const SearchForm = ({
     });
   }
 
+  function noAction(event) {
+    event.stopPropagation();
+  }
+
   function clearSearch() {
     setValues({ by: '', searchfor: '', order: 'updatedAt', direction: -1 });
     setIsClearing(true);
@@ -100,7 +104,7 @@ const SearchForm = ({
             <select
               name="by"
               onChange={(e) => instantSearchBy(e)}
-              onBlur={(e) => instantSearchBy(e)}
+              onBlur={(e) => noAction(e)}
               value={values.by}
             >
               {filter.options.map((o) => (
