@@ -89,13 +89,6 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
             handleChange={handleChange}
             addClassName={'is-static'}
           />
-          <TextInputStd
-            label="Username"
-            value={values.userName}
-            field="userName"
-            handleChange={handleChange}
-            error={errors.userName}
-          />
           <hr />
           <TextInputStd
             label="Activities"

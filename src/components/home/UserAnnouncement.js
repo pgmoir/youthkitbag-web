@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 const UserAnnouncement = ({ user }) => {
   // function userComplete() {
-  //   const { firstName, lastName, userName, activitys } = user;
-  //   return firstName && lastName && userName && activitys.length > 0;
+  //   const { firstName, lastName, activitys } = user;
+  //   return firstName && lastName && activitys.length > 0;
   // }
 
   // if (userComplete()) return null;

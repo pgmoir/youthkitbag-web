@@ -22,7 +22,6 @@ const SignUpForm = ({ newErrors, signup }) => {
   const initialValues = {
     firstName: '',
     lastName: '',
-    userName: '',
     email: '',
     password: '',
     confirmPassword: '',
