@@ -2722,7 +2722,7 @@ a.tag:hover {
 
 .help {
   display: block;
-  font-size: 16px;
+  font-size: 0.75rem;
   margin-top: 0.25rem; }
   .help.is-white {
     color: white; }
@@ -7892,6 +7892,15 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   .select select {
     width: 100%; }
 
+html {
+  font-size: 12px; }
+  @media screen and (min-width: 769px), print {
+    html {
+      font-size: 14px; } }
+  @media screen and (min-width: 1024px) {
+    html {
+      font-size: 16px; } }
+
 /*
   accessibility
   */
@@ -8007,13 +8016,13 @@ body {
   width: 120px; }
 
 .is-flex-members .email {
-  width: 250px; }
+  width: 18rem; }
 
 .is-flex-members .role {
-  width: 150px; }
+  width: 8rem; }
 
 .is-flex-members .state {
-  width: 150px; }
+  width: 8rem; }
 
 /* 
   sticky footer

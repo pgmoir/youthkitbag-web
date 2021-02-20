@@ -95,41 +95,7 @@ const KitbagPage = ({ current, kitbags, fetchKitbag, clearKitbag, match }) => {
       <div className="container">
         {renderNoKitbagIntro()}
         <Alert />
-        <div className="columns">
-          <div className="column is-fullwidth">
-            <div className="buttons is-justify-content-flex-end">
-              {kitbagId &&
-                kitbag.kitbagAdmin &&
-                kitbag.state !== KitbagStates.BLOCKED && (
-                  <div
-                    className="button is-info"
-                    onClick={(e) => {
-                      inviteMember(e);
-                    }}
-                    onKeyPress={(e) => {
-                      inviteMember(e);
-                    }}
-                    role="button"
-                    tabIndex="0"
-                  >
-                    Invite
-                  </div>
-                )}
-              {kitbagId &&
-                !kitbag.kitbagAdmin &&
-                kitbag.state !== KitbagStates.BLOCKED &&
-                kitbag.kitbagMember && (
-                  <Link
-                    to={`/kitbags/${kitbagId}/leave`}
-                    className="button is-warning"
-                  >
-                    Leave
-                  </Link>
-                )}
-            </div>
-          </div>
-        </div>
-        <KitbagForm kitbag={kitbag} />
+        <KitbagForm kitbag={kitbag} inviteMember={inviteMember} />
       </div>
       <KitbagMemberInvite
         kitbagId={kitbag._id}

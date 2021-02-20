@@ -30,6 +30,7 @@ const KitbagForm = ({
   newErrors,
   createKitbag,
   editKitbag,
+  inviteMember,
 }) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [hasKitbagAdmin, setHasKitbagAdmin] = useState(false);
@@ -169,6 +170,7 @@ const KitbagForm = ({
                       }
                       field={`members[${index}].user.email`}
                       disabled={true}
+                      iconRight={false}
                     />
                   </div>
                   <div className="mr-3 mb-3 role">
@@ -201,6 +203,22 @@ const KitbagForm = ({
                   </div>
                 </div>
               ))}
+            {kitbag.kitbagAdmin && kitbag.state !== KitbagStates.BLOCKED && (
+              <div className="buttons">
+                <button
+                  className="button is-info"
+                  type="button"
+                  onClick={(e) => {
+                    inviteMember(e);
+                  }}
+                  onKeyPress={(e) => {
+                    inviteMember(e);
+                  }}
+                >
+                  Invite
+                </button>
+              </div>
+            )}
             <hr className="mt-0" />
           </div>
           {showSaveCancelButtons()}

@@ -7,7 +7,6 @@ import Accessibility from './site/Accessibility';
 import BundlePurchasePage from './bundles/BundlePurchasePage';
 import BundlesPage from './bundles/BundlesPage';
 import Content from './site/Content';
-import DeleteUser from './kitbag/DeleteUser';
 import Footer from './includes/Footer';
 import GroupMemberDelete from './group/GroupMemberDelete';
 import GroupMemberJoin from './group/GroupMemberJoin';
@@ -23,7 +22,6 @@ import history from '../utils/history';
 import Home from './Home';
 import Kitbag from './kitbag/kit/Kitbag';
 import KitbagMemberAccept from './kitbags/KitbagMemberAccept';
-import KitbagMemberJoin from './kitbags/KitbagMemberJoin';
 import KitbagPage from './kitbags/KitbagPage';
 import KitDelete from './kitbag/kit/KitDelete';
 import KitPage from './kitbag/kit/KitPage';
@@ -218,17 +216,12 @@ const App = ({ auth }) => {
               <PrivateRoute path="/groups" component={Groups} />
 
               <PrivateRoute path="/kitbags/new" component={KitbagPage} />
-              <PrivateRoute path="/kitbags/join" component={KitbagMemberJoin} />
               <PrivateRoute
                 path="/kitbags/:kitbagId/member/accept/:email/:token"
                 component={KitbagMemberAccept}
               />
               <PrivateRoute path="/kitbags/:kitbagId" component={KitbagPage} />
 
-              <PrivateRoute
-                path="/settings/user/:userId/delete"
-                component={DeleteUser}
-              />
               <PrivateRoute
                 path="/settings/:setting?"
                 component={SettingsPage}
