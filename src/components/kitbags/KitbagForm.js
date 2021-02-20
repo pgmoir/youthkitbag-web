@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { createKitbag, editKitbag } from '../../actions/KitbagActions';
 import { ImagesForm } from '../includes/forms';
@@ -34,6 +34,8 @@ const KitbagForm = ({
 }) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [hasKitbagAdmin, setHasKitbagAdmin] = useState(false);
+
+  const userId = useSelector((state) => state.user?._id);
 
   const initialValues = {
     ...kitbag,
@@ -173,34 +175,59 @@ const KitbagForm = ({
                       iconRight={false}
                     />
                   </div>
-                  <div className="mr-3 mb-3 role">
-                    <SelectInput
-                      value={values.members[index].role}
-                      field={`members[${index}].role`}
-                      handleChange={handleChange}
-                      error={errors.role}
-                      items={roleItems}
-                      disabled={isDisabled}
-                    />
-                  </div>
-                  <div className="mr-3 mb-3 state">
-                    <SelectInput
-                      value={values.members[index].state}
-                      field={`members[${index}].state`}
-                      handleChange={handleChange}
-                      error={errors.state}
-                      items={stateItems}
-                      disabled={isDisabled}
-                    />
-                  </div>
-                  <div className="mr-3 mb-5">
-                    <ArrayButtonRemove
-                      title="Remove Member"
-                      onClick={() => removeArrayItem('members', index)}
-                      index={index}
-                      width="1"
-                    />
-                  </div>
+                  {values.members[index].user?._id !== userId ? (
+                    <>
+                      <div className="mr-3 mb-3 role">
+                        <SelectInput
+                          value={values.members[index].role}
+                          field={`members[${index}].role`}
+                          handleChange={handleChange}
+                          error={errors.role}
+                          items={roleItems}
+                          disabled={isDisabled}
+                        />
+                      </div>
+                      <div className="mr-3 mb-3 state">
+                        <SelectInput
+                          value={values.members[index].state}
+                          field={`members[${index}].state`}
+                          handleChange={handleChange}
+                          error={errors.state}
+                          items={stateItems}
+                          disabled={isDisabled}
+                        />
+                      </div>
+                      <div className="mr-3 mb-5">
+                        <ArrayButtonRemove
+                          title="Remove Member"
+                          onClick={() => removeArrayItem('members', index)}
+                          index={index}
+                          width="1"
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="mr-3 mb-3 role">
+                        <TextInput
+                          value={values.members[index].role}
+                          field={`members[${index}].role`}
+                          handleChange={handleChange}
+                          error={errors.role}
+                          disabled={true}
+                        />
+                      </div>
+                      <div className="mr-3 mb-3 state">
+                        <TextInput
+                          value={values.members[index].state}
+                          field={`members[${index}].state`}
+                          handleChange={handleChange}
+                          error={errors.state}
+                          disabled={true}
+                        />
+                      </div>
+                    </>
+                  )}
                 </div>
               ))}
             {kitbag.kitbagAdmin && kitbag.state !== KitbagStates.BLOCKED && (
@@ -215,7 +242,7 @@ const KitbagForm = ({
                     inviteMember(e);
                   }}
                 >
-                  Invite
+                  Invite Member
                 </button>
               </div>
             )}
