@@ -11,7 +11,6 @@ import TextAreaInput from '../includes/controls/TextAreaInput';
 import ArrayButtonRemove from '../includes/controls/ArrayButtonRemove';
 import { MemberRoles } from '../../enums/memberRoles.enum';
 import { MemberStates } from '../../enums/memberStates.enum';
-import { KitbagStates } from '../../enums/kitbagStates.enum';
 import SelectInput from '../includes/controls/SelectInput';
 
 const mapStateToProps = (state) => ({
@@ -59,7 +58,7 @@ const KitbagForm = ({
   }, [newErrors, setErrors]);
 
   useEffect(() => {
-    if (kitbag) {
+    if (kitbag._id) {
       kitbag.images = getImages(kitbag.images);
       kitbag.topImage =
         kitbag.images && kitbag.images.filter((i) => i.state !== 'D').length > 0
@@ -82,7 +81,7 @@ const KitbagForm = ({
 
     return (
       <div className="buttons">
-        {kitbag.kitbagAdmin && (
+        {values.kitbagAdmin && (
           <button className="button is-primary" type="submit">
             Save
           </button>
@@ -107,7 +106,7 @@ const KitbagForm = ({
       <div className="column">
         <ImagesForm
           values={values}
-          disabled={!kitbag.kitbagAdmin}
+          disabled={!values.kitbagAdmin}
           setChange={setChange}
           addArrayItem={addArrayItem}
           error={errors.images}
@@ -119,7 +118,7 @@ const KitbagForm = ({
             label="Name"
             value={values.name}
             field="name"
-            disabled={!kitbag.kitbagAdmin}
+            disabled={!values.kitbagAdmin}
             handleChange={handleChange}
             error={errors.name}
           />
@@ -127,12 +126,12 @@ const KitbagForm = ({
             label="Description"
             value={values.description}
             field="description"
-            disabled={!kitbag.kitbagAdmin}
+            disabled={!values.kitbagAdmin}
             handleChange={handleChange}
             error={errors.description}
           />
           <hr />
-          {kitbag.kitbagAdmin && (
+          {values.kitbagAdmin && kitbag?._id && (
             <div>
               <p className="has-text-weight-bold mb-3">
                 Members (Email, Role, State)
@@ -186,22 +185,20 @@ const KitbagForm = ({
                     </div>
                   </div>
                 ))}
-              {kitbag.kitbagAdmin && kitbag.state !== KitbagStates.BLOCKED && (
-                <div className="buttons">
-                  <button
-                    className="button is-info"
-                    type="button"
-                    onClick={(e) => {
-                      inviteMember(e);
-                    }}
-                    onKeyPress={(e) => {
-                      inviteMember(e);
-                    }}
-                  >
-                    Invite Member
-                  </button>
-                </div>
-              )}
+              <div className="buttons">
+                <button
+                  className="button is-info"
+                  type="button"
+                  onClick={(e) => {
+                    inviteMember(e);
+                  }}
+                  onKeyPress={(e) => {
+                    inviteMember(e);
+                  }}
+                >
+                  Invite Member
+                </button>
+              </div>
               <hr className="mt-0" />
             </div>
           )}

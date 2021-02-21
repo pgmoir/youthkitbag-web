@@ -7989,31 +7989,31 @@ body {
  custom flexboxes
   */
 .is-flex-purchases .purchased-from {
-  width: 200px; }
+  width: 14rem; }
 
 .is-flex-purchases .quantity {
-  width: 100px; }
+  width: 6rem; }
 
 .is-flex-purchases .ondate {
-  width: 120px; }
+  width: 8rem; }
 
 .is-flex-purchases .price {
-  width: 100px; }
+  width: 6rem; }
 
 .is-flex-stored .location {
-  width: 200px; }
+  width: 18rem; }
 
 .is-flex-stored .condition {
-  width: 160px; }
+  width: 10rem; }
 
 .is-flex-stored .quantity {
-  width: 100px; }
+  width: 6rem; }
 
 .is-flex-groupshare .name {
-  width: 400px; }
+  width: 26rem; }
 
 .is-flex-groupshare .ondate {
-  width: 120px; }
+  width: 8rem; }
 
 .is-flex-members .email {
   width: 16rem; }

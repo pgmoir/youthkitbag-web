@@ -208,7 +208,7 @@ const KitForm = ({
               onClick={() => addArrayItem('purchases', [initialPurchase])}
             />
           </div>
-          <hr className="mt-0" />
+          <hr />
           <div>
             <p className="has-text-weight-bold mb-3">
               Stored (Location, Condition, Quantity)
@@ -225,6 +225,7 @@ const KitForm = ({
                       field={`inbag[${index}].location`}
                       handleChange={handleChange}
                       placeHolder="Location"
+                      iconRight={false}
                     />
                   </div>
                   <div className="mr-3 mb-3 condition">
@@ -245,6 +246,7 @@ const KitForm = ({
                       max="9999"
                       handleChange={handleChange}
                       placeHolder="Qty"
+                      iconRight={false}
                     />
                   </div>
                   <div className="mx-1 mb-5">
@@ -261,7 +263,7 @@ const KitForm = ({
               onClick={() => addArrayItem('inbag', [initialInbag])}
             />
           </div>
-          <hr className="mt-0" />
+          <hr />
           <TextInput
             type="number"
             value={values.warning}

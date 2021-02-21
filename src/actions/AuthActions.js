@@ -68,7 +68,7 @@ export const authenticateToken = (token) => (dispatch) => {
 export const signup = (formValues) => (dispatch) => {
   window.localStorage.clear();
   const { kitbagId } = formValues;
-  const signupUrl = kitbagId ? `/auth/signup/${kitbagId}` : 'auth/signup';
+  const signupUrl = kitbagId ? `/auth/signup/kitbag` : 'auth/signup';
   axios
     .post(signupUrl, { ...formValues }, {})
     .then((response) => {
