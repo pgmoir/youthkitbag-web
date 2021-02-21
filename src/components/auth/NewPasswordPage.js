@@ -1,4 +1,5 @@
 import React from 'react';
+
 import NewPasswordForm from './NewPasswordForm';
 
 const NewPasswordPage = ({ match }) => {

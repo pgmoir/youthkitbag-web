@@ -7,6 +7,7 @@ const SelectInput = ({
   field,
   handleChange,
   items,
+  disabled,
   error,
   iconLeft,
 }) => {
@@ -29,6 +30,7 @@ const SelectInput = ({
             onChange={handleChange}
             onBlur={handleChange}
             value={value}
+            disabled={disabled}
             aria-describedby={field}
           >
             {items.map((item, index) => {

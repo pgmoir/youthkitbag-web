@@ -16,15 +16,18 @@ const mapDispatchToProps = {
   signup,
 };
 
-const SignUpForm = ({ newErrors, signup }) => {
+const SignUpForm = ({ newErrors, signup, kitbagId, groupId, email }) => {
   const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
+  const emailDisabled = !!email;
 
   const initialValues = {
     firstName: '',
     lastName: '',
-    email: '',
+    email: email || '',
     password: '',
     confirmPassword: '',
+    kitbagId,
+    groupId,
   };
 
   const { values, handleChange, handleSubmit, errors, setErrors } = useForm(
@@ -70,6 +73,7 @@ const SignUpForm = ({ newErrors, signup }) => {
           field="email"
           handleChange={handleChange}
           error={errors.email}
+          disabled={emailDisabled}
           placeHolder="Enter your email"
           iconLeft="fas fa-envelope"
         />

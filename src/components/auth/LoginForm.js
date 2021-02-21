@@ -16,11 +16,11 @@ const mapDispatchToProps = {
   login,
 };
 
-const LoginForm = ({ referrer, newErrors, login }) => {
+const LoginForm = ({ referrer, newErrors, login, email }) => {
   const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
   const initialValues = {
-    email: '',
+    email: email || '',
     password: '',
   };
 

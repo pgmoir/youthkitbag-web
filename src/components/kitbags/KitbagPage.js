@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { fetchKitbag, clearKitbag } from '../../actions/KitbagActions';
@@ -10,7 +9,6 @@ import KitbagsHelp from '../kitbag/KitbagsHelp';
 import Title from '../includes/title/Title';
 import KitbagMemberInvite from './KitbagMemberInvite';
 import { MemberStates } from '../../enums/memberStates.enum';
-import { KitbagStates } from '../../enums/kitbagStates.enum';
 
 const mapStateToProps = (state) => ({
   current: state.kitbag.kitbags.current,
