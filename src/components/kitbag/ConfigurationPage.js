@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { resetFlags } from '../../actions/UserActions';
 import { Link } from 'react-router-dom';
+import DeleteUser from './DeleteUser';
 
 const mapStateToProps = (state) => ({
   flags: state.user.flags,
@@ -12,6 +13,13 @@ const mapDispatchToProps = {
 };
 
 const ConfigurationPage = ({ userId, flags, resetFlags }) => {
+  const [modalIsActive, setModalIsActive] = useState(false);
+
+  function deleteUser(e) {
+    e.stopPropagation();
+    setModalIsActive(true);
+  }
+
   return (
     <>
       <div className="content">
@@ -58,14 +66,26 @@ const ConfigurationPage = ({ userId, flags, resetFlags }) => {
           user and all associated data.
         </p>
         <div className="buttons">
-          <Link
-            to={`/settings/user/${userId}/delete`}
-            className="button is-danger"
+          <span
+            className="button is-danger is-clickable"
+            onClick={(e) => {
+              deleteUser(e);
+            }}
+            onKeyPress={(e) => {
+              deleteUser(e);
+            }}
+            role="button"
+            tabIndex="0"
           >
             Delete User
-          </Link>
+          </span>
         </div>
       </div>
+      <DeleteUser
+        userId={userId}
+        modalIsActive={modalIsActive}
+        setModalIsActive={setModalIsActive}
+      />
     </>
   );
 };

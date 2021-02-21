@@ -35,13 +35,13 @@ export const editUser = (formValues) => (dispatch) => {
     });
 };
 
-export const deleteUser = (formValues) => (dispatch) => {
+export const deleteUser = ({ userId, formValues }) => (dispatch) => {
   axios
-    .put('/user/delete', { ...formValues }, {})
+    .put('/user/delete', { ...formValues, userId }, {})
     .then(() => {
       window.localStorage.clear();
       dispatch({ type: RESET });
-      history.push('/auth/login?return=/settings/user');
+      history.push('/');
     })
     .catch((err) => {
       const { response } = err;
