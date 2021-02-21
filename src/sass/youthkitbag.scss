@@ -1,5 +1,6 @@
 @charset "utf-8";
 
+@import './_ykb_variables.scss';
 @import './_sandstonev.scss';
 @import '../../node_modules/bulma/bulma.sass';
 @import './_sandstoneo.scss';
@@ -7,10 +8,10 @@
 html {
   font-size: 12px;
   @include tablet {
-    font-size: 14px;
+    font-size: 16px;
   }
   @include desktop {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 

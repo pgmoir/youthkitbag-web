@@ -20,7 +20,6 @@ $warning-invert: #fff;
 
 $family-sans-serif: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $body-size: 16px;
-//$help-size: 16px;
 
 $link: #8e8c84;
 
@@ -43,3 +42,9 @@ $control-height: 2.572em;
 // darken the box shadow from 0.1 to 0.3
 $box-shadow: 0 0.5em 1em -0.125em rgba(hsl(0, 0%, 4%), 0.3),
   0 0px 0 1px rgba(hsl(0, 0%, 4%), 0.02);
+
+// accessibility focus
+$button-focus-box-shadow-size: 0 0 0 0.3rem;
+
+$input-focus-box-shadow-size: 0 0 0 0.3rem;
+$input-focus-box-shadow-color: rgba($gold, 0.75);
