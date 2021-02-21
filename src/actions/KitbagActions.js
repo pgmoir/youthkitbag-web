@@ -9,6 +9,7 @@ import {
   EDIT_KITBAG_LEAVE,
   CREATE_KITBAG,
   DELETE_KITBAG_MEMBER,
+  REQUEST_TO_JOIN_KITBAG,
 } from './types';
 import history from '../utils/history';
 
@@ -98,11 +99,11 @@ export const deleteFromKitbag = ({ kitbagId, memberId }) => (dispatch) => {
     });
 };
 
-export const requestToJoinKitbag = (email) => (dispatch) => {
+export const requestToJoinKitbag = ({ formValues }) => (dispatch) => {
   axios
-    .post(`/kitbag/requesttojoin/${email}`, {}, {})
-    .then(() => {
-      history.push(`/`);
+    .post(`/kitbag/requesttojoin`, { ...formValues }, {})
+    .then((response) => {
+      dispatch({ type: REQUEST_TO_JOIN_KITBAG, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;

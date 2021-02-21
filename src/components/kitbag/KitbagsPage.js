@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import PreferredKitbagForm from './PreferredKitbagForm';
+import KitbagMemberJoin from '../kitbags/KitbagMemberJoin';
 
-const mapStateToProps = (state) => ({
-  user: state.user,
-});
+const KitbagsPage = () => {
+  const user = useSelector((state) => state.user);
+  const [modalIsActive, setModalIsActive] = useState(false);
 
-const KitbagsPage = ({ user }) => {
+  function requestToJoinKitbag(e) {
+    e.stopPropagation();
+    setModalIsActive(true);
+  }
   return (
     <>
       <div className="content">
@@ -16,11 +20,24 @@ const KitbagsPage = ({ user }) => {
           within your chosen bundle limits. The default Star kitbag (free)
           allows you to create 3 kitbags.
         </p>
-        <p>
+        <div className="buttons">
           <Link to="/kitbags/new" className="button is-primary">
             Create Kitbag
           </Link>
-        </p>
+          <span
+            className="button is-info is-clickable"
+            onClick={(e) => {
+              requestToJoinKitbag(e);
+            }}
+            onKeyPress={(e) => {
+              requestToJoinKitbag(e);
+            }}
+            role="button"
+            tabIndex="0"
+          >
+            Join Kitbag
+          </span>
+        </div>
         <p>
           You can then invite others to join your kitbags via email. Those
           invited, will need to create an kitbag, and then accept your invite.
@@ -36,8 +53,13 @@ const KitbagsPage = ({ user }) => {
       {user && user.kitbags && user.kitbags.length > 0 && (
         <PreferredKitbagForm userId={user._id} kitbags={user.kitbags} />
       )}
+      <KitbagMemberJoin
+        // userId={userId}
+        modalIsActive={modalIsActive}
+        setModalIsActive={setModalIsActive}
+      />
     </>
   );
 };
 
-export default connect(mapStateToProps)(KitbagsPage);
+export default KitbagsPage;

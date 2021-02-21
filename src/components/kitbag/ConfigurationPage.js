@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { resetFlags } from '../../actions/UserActions';
-import { Link } from 'react-router-dom';
 import DeleteUser from './DeleteUser';
 
 const mapStateToProps = (state) => ({
