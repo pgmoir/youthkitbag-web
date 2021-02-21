@@ -3,12 +3,10 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { ContentTypes } from '../enums/contentTypes.enum';
-import Accessibility from './site/Accessibility';
 import BundlePurchasePage from './bundles/BundlePurchasePage';
 import BundlesPage from './bundles/BundlesPage';
 import Content from './site/Content';
 import Footer from './includes/Footer';
-import GroupMemberDelete from './group/GroupMemberDelete';
 import GroupMemberJoin from './group/GroupMemberJoin';
 import GroupMemberLeave from './group/GroupMemberLeave';
 import GroupMembers from './group/GroupMembers';
@@ -98,7 +96,9 @@ const App = ({ auth }) => {
               <Route
                 path="/site/accessibility"
                 exact
-                component={Accessibility}
+                render={(props) => (
+                  <Content {...props} contentId={ContentTypes.ACCESSIBILITY} />
+                )}
               />
 
               <Route path="/auth/signup" exact>
@@ -182,11 +182,6 @@ const App = ({ auth }) => {
                 path="/groups/state/:groupId"
                 exact
                 component={GroupState}
-              />
-              <PrivateRoute
-                path="/groups/:groupId/members/:memberId/delete"
-                exact
-                component={GroupMemberDelete}
               />
               <PrivateRoute
                 path="/groups/:groupId/members/:memberId/:state"

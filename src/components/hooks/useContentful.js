@@ -27,6 +27,13 @@ const useContentful = (contentId, fetchContent) => {
         <li key={index}>{item.content.map((c, i) => renderContent(c, i))}</li>
       );
     }
+    if (item.nodeType === 'hyperlink') {
+      return (
+        <a key={index} href={item.data.uri} className="a11y-highlight">
+          {item.content.map((c, i) => renderContent(c, i))}
+        </a>
+      );
+    }
     if (item.nodeType === 'text') {
       return item.value;
     }

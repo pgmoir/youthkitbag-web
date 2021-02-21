@@ -7907,6 +7907,12 @@ html {
 /*
   accessibility
   */
+a {
+  color: #325d88; }
+  a:focus {
+    outline: rgba(212, 175, 55, 0.75) solid 0.3rem;
+    border-radius: 0.25rem; }
+
 .a11y-highlight:hover {
   text-decoration: underline; }
 
