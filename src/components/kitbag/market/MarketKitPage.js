@@ -78,7 +78,7 @@ const MarketKitPage = ({
   const crumbs = [
     { title: 'Home', to: '/' },
     { title: 'Market', to: `/market` },
-    { title: getTitle() },
+    { title: `${market?.title}` },
   ];
 
   function getTitle() {
