@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchGroupsMemberRequests } from '../../actions/GroupActions';
+import { getImage } from '../../utils/image';
 
 const mapStateToProps = (state) => ({
   groupsMemberRequests: state.group.memberRequests,
@@ -37,22 +38,20 @@ const GroupsMemberRequestsAnnouncement = ({
     return total + g.members.length;
   }, 0);
 
-  function topImage(images) {
-    if (!images || images.length === 0) {
-      return '/images/default.png';
-    }
-    return images[0].imageUrl;
-  }
-
   function renderMemberList(members) {
     return (
       <>
         {members.map((m, index) => {
+          const userProfileImageUrl = getImage({
+            images: [m.user?.image],
+            index: 0,
+            email: m.user?.email,
+          });
           if (index < 5) {
             return (
               <div key={index} className="image has-avatar-overlap">
                 <img
-                  src={m.user?.image || '/images/defaultthumb.png'}
+                  src={userProfileImageUrl}
                   className="is-avatar is-rounded is-48x48"
                   alt={`${m.user?.firstName} ${m.user?.lastName}`}
                 />
@@ -83,7 +82,7 @@ const GroupsMemberRequestsAnnouncement = ({
           <div className="is-flex-shrink-0 is-flex-grow-0 pr-4">
             <div className="image">
               <img
-                src={topImage(g.images) || '/images/defaultthumb.png'}
+                src={getImage({ images: g.images, index: 0 })}
                 className="is-avatar is-rounded is-48x48"
                 alt=""
               />

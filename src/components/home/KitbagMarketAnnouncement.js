@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
 import { fetchKitbagMarketItems } from '../../actions/KitbagMarketActions';
+import { getFirstImageExcludeDeleted } from '../../utils/image';
 
 const mapDispatchToProps = {
   fetchKitbagMarketItems,
@@ -26,10 +27,7 @@ const KitbagMarketAnnouncement = ({
   // if (!marketItems) return null;
 
   function topImage(images) {
-    if (!images || images.length === 0) {
-      return '/images/default.png';
-    }
-    return images[0].imageUrl;
+    return getFirstImageExcludeDeleted({ images });
   }
 
   function renderList() {

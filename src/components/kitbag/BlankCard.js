@@ -1,4 +1,5 @@
 import React from 'react';
+import { ImageUrls } from '../../enums/imageUrls.enum';
 
 const BlankCard = () => {
   return (
@@ -6,7 +7,7 @@ const BlankCard = () => {
       <article className="card">
         <div className="card-image">
           <figure className="image is-4by3">
-            <img src="/images/default.png" alt="" role="presentation" />
+            <img src={ImageUrls.DEFAULT} alt="" role="presentation" />
           </figure>
           <div className="has-text-right p-2 is-overlay-topright">
             <span className="tag is-dark is-rounded">0</span>

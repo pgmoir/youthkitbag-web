@@ -15,6 +15,7 @@ import GroupsHelp from '../kitbag/GroupsHelp';
 import Title from '../includes/title/Title';
 import { GroupStates } from '../../enums/groupStates.enum';
 import { MemberRoles } from '../../enums/memberRoles.enum';
+import { ImageUrls } from '../../enums/imageUrls.enum';
 
 const mapDispatchToProps = {
   fetchGroup,
@@ -40,7 +41,7 @@ const GroupPage = ({ fetchGroup, match }) => {
     location: '',
     activitys: [],
     images: [],
-    topImage: '/images/default.png',
+    topImage: ImageUrls.DEFAULT,
     imagesToUpload: 0,
   });
 

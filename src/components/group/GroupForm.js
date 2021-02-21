@@ -5,7 +5,7 @@ import { createGroup, editGroup } from '../../actions/GroupActions';
 import { ImagesForm } from '../includes/forms';
 import { connect } from 'react-redux';
 import validate from '../includes/FormEmptyValidationRules';
-import { getImages } from '../../utils/image';
+import { getFirstImageExcludeDeleted, getImages } from '../../utils/image';
 import TextInput from '../includes/controls/TextInput';
 import TextAreaInput from '../includes/controls/TextAreaInput';
 
@@ -52,10 +52,7 @@ const GroupForm = ({
   useEffect(() => {
     if (group) {
       group.images = getImages(group.images);
-      group.topImage =
-        group.images && group.images.filter((i) => i.state !== 'D').length > 0
-          ? group.images.filter((i) => i.state !== 'D')[0].imageUrl
-          : '/images/default.png';
+      group.topImage = getFirstImageExcludeDeleted({ images: group.images });
       setValues(group);
     }
   }, [group, setValues]);

@@ -10,6 +10,7 @@ import Title from '../../includes/title/Title';
 import Alert from '../../includes/Alert';
 import MarketTitle from '../../includes/title/MarketTitle';
 import Breadcrumb from '../../includes/Breadcrumb';
+import { ImageUrls } from '../../../enums/imageUrls.enum';
 
 const mapStateToProps = (state) => ({
   current: state.kitbag.market.current,
@@ -48,7 +49,7 @@ const MarketKitPage = ({
     tracking: '',
     groups: [],
     marketDetails: [],
-    topImage: '/images/default.png',
+    topImage: ImageUrls.DEFAULT,
     imagesToUpload: 0,
   });
 
@@ -80,26 +81,18 @@ const MarketKitPage = ({
     { title: getTitle() },
   ];
 
-  function itemIsLoading() {
-    return marketId && !market._id;
-  }
-
   function getTitle() {
-    if (itemIsLoading()) {
-      return 'Loading ...';
+    if (!market) {
+      return <Title title="Loading ..." />;
     }
 
-    return market.title;
+    return <MarketTitle market={market} isOwned={true} />;
   }
 
   return (
     <div>
       <Breadcrumb crumbs={crumbs} />
-      {itemIsLoading() ? (
-        <Title title={getTitle()} />
-      ) : (
-        <MarketTitle market={market} isOwned={true} />
-      )}
+      {getTitle()}
       <div className="container">
         <Alert />
         <MarketKitForm kitbagId={kitbagId} market={market} />

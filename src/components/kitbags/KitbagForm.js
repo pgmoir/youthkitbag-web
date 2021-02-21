@@ -5,13 +5,10 @@ import useForm from '../hooks/useForm';
 import { createKitbag, editKitbag } from '../../actions/KitbagActions';
 import { ImagesForm } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
-import { getImages } from '../../utils/image';
+import { getFirstImageExcludeDeleted, getImages } from '../../utils/image';
 import TextInput from '../includes/controls/TextInput';
 import TextAreaInput from '../includes/controls/TextAreaInput';
-import ArrayButtonRemove from '../includes/controls/ArrayButtonRemove';
-import { MemberRoles } from '../../enums/memberRoles.enum';
-import { MemberStates } from '../../enums/memberStates.enum';
-import SelectInput from '../includes/controls/SelectInput';
+import KitbagMember from './KitbagMember';
 
 const mapStateToProps = (state) => ({
   userBundle: state.user.bundle,
@@ -44,7 +41,6 @@ const KitbagForm = ({
     handleChange,
     handleSubmit,
     addArrayItem,
-    removeArrayItem,
     values,
     setValues,
     errors,
@@ -60,10 +56,7 @@ const KitbagForm = ({
   useEffect(() => {
     if (kitbag._id) {
       kitbag.images = getImages(kitbag.images);
-      kitbag.topImage =
-        kitbag.images && kitbag.images.filter((i) => i.state !== 'D').length > 0
-          ? kitbag.images.filter((i) => i.state !== 'D')[0].imageUrl
-          : '/images/default.png';
+      kitbag.topImage = getFirstImageExcludeDeleted({ images: kitbag.images });
       setValues(kitbag);
     }
   }, [kitbag, setValues]);
@@ -92,14 +85,6 @@ const KitbagForm = ({
       </div>
     );
   }
-
-  const roleItems = ['', MemberRoles.ADMIN, MemberRoles.MEMBER];
-  const stateItems = [
-    '',
-    MemberStates.INVITED,
-    MemberStates.APPROVED,
-    MemberStates.SUSPENDED,
-  ];
 
   return (
     <div className="columns mb-3">
@@ -138,51 +123,15 @@ const KitbagForm = ({
               </p>
               {values.members &&
                 values.members.map((item, index) => (
-                  <div
-                    className="is-flex is-flex-wrap-wrap is-flex-members"
-                    key={index}
-                  >
-                    <div className="mr-3 mb-3 email">
-                      <TextInput
-                        value={
-                          values.members[index].user
-                            ? values.members[index].user.email
-                            : values.members[index].email
-                        }
-                        field={`members[${index}].user.email`}
-                        disabled={true}
-                        iconRight={false}
-                      />
-                    </div>
-                    <div className="mr-3 mb-3 role">
-                      <SelectInput
-                        value={values.members[index].role}
-                        field={`members[${index}].role`}
-                        handleChange={handleChange}
-                        error={errors.role}
-                        items={roleItems}
-                        disabled={userId === values.members[index].user?._id}
-                      />
-                    </div>
-                    <div className="mr-3 mb-3 state">
-                      <SelectInput
-                        value={values.members[index].state}
-                        field={`members[${index}].state`}
-                        handleChange={handleChange}
-                        error={errors.state}
-                        items={stateItems}
-                        disabled={userId === values.members[index].user?._id}
-                      />
-                    </div>
-                    <div className="mr-3 mb-5">
-                      <ArrayButtonRemove
-                        title="Remove Member"
-                        onClick={() => removeArrayItem('members', index)}
-                        index={index}
-                        width="1"
-                        disabled={userId === values.members[index].user?._id}
-                      />
-                    </div>
+                  <div key={index}>
+                    <KitbagMember
+                      kitbag={kitbag}
+                      values={values}
+                      index={index}
+                      handleChange={handleChange}
+                      errors={errors}
+                      userId={userId}
+                    />
                   </div>
                 ))}
               <div className="buttons">

@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { MarketTypes } from '../../enums/marketTypes.enum';
 import BlankCard from '../kitbag/BlankCard';
 import MarketItemDelete from '../kitbag/market/MarketItemDelete';
+import { getImage } from '../../utils/image';
 
 const MarketItemCard = ({ market }) => {
   const [modalIsActive, setModalIsActive] = useState(false);
@@ -26,11 +27,7 @@ const MarketItemCard = ({ market }) => {
   if (!market?._id) return <BlankCard />;
 
   function topImage() {
-    const { images } = market;
-    if (!images || images.length === 0) {
-      return '/images/default.png';
-    }
-    return images[0].imageUrl;
+    return getImage({ images: market.images, index: 0 });
   }
 
   const cardClasses = classNames('card is-clickable', {

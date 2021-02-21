@@ -9,6 +9,7 @@ import KitbagsHelp from '../kitbag/KitbagsHelp';
 import Title from '../includes/title/Title';
 import KitbagMemberInvite from './KitbagMemberInvite';
 import { MemberStates } from '../../enums/memberStates.enum';
+import { ImageUrls } from '../../enums/imageUrls.enum';
 
 const mapStateToProps = (state) => ({
   current: state.kitbag.kitbags.current,
@@ -28,7 +29,7 @@ const KitbagPage = ({ current, kitbags, fetchKitbag, clearKitbag, match }) => {
     description: '',
     images: [],
     members: [],
-    topImage: '/images/default.png',
+    topImage: ImageUrls.DEFAULT,
     imagesToUpload: 0,
   });
 

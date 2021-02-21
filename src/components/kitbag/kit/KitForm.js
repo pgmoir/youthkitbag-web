@@ -9,7 +9,7 @@ import {
 } from '../../../actions/KitbagKitActions';
 import { ImagesForm } from '../../includes/forms';
 import validate from '../../includes/FormEmptyValidationRules';
-import { getImages } from '../../../utils/image';
+import { getFirstImageExcludeDeleted, getImages } from '../../../utils/image';
 import TextInput from '../../includes/controls/TextInput';
 import TextAreaInput from '../../includes/controls/TextAreaInput';
 import SelectInput from '../../includes/controls/SelectInput';
@@ -83,10 +83,7 @@ const KitForm = ({
   useEffect(() => {
     if (kit) {
       kit.images = getImages(kit.images);
-      kit.topImage =
-        kit.images && kit.images.filter((i) => i.state !== 'D').length > 0
-          ? kit.images.filter((i) => i.state !== 'D')[0].imageUrl
-          : '/images/default.png';
+      kit.topImage = getFirstImageExcludeDeleted({ images: kit.images });
       setValues(kit);
     }
   }, [kit, setValues]);

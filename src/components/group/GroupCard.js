@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { GroupStates } from '../../enums/groupStates.enum';
 import history from '../../utils/history';
+import { getImage } from '../../utils/image';
 import BlankCard from '../kitbag/BlankCard';
 import GroupState from './GroupState';
 
@@ -10,14 +11,7 @@ const GroupCard = ({ group }) => {
   if (!group?._id) return <BlankCard />;
 
   const { _id, name, activitys, state, memberCount, appAdmin } = group;
-
-  function topImage() {
-    const { images } = group;
-    if (!images || images.length === 0) {
-      return '/images/default.png';
-    }
-    return images[0].imageUrl;
-  }
+  const topImage = getImage({ images: group?.images, index: 0 });
 
   function renderState(state) {
     switch (state) {
@@ -67,7 +61,7 @@ const GroupCard = ({ group }) => {
         <article className="card is-clickable" onClick={(e) => viewItem(e)}>
           <div className="card-image">
             <figure className="image is-4by3">
-              <img src={topImage()} alt={name} role="presentation" />
+              <img src={topImage} alt={name} role="presentation" />
             </figure>
             {appAdmin && (
               <div className="has-text-left p-2 is-overlay-topleft">

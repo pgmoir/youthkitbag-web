@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import CookieConsent from 'react-cookie-consent';
 import { GroupStates } from '../../enums/groupStates.enum';
 import { MemberStates } from '../../enums/memberStates.enum';
+import { getImage } from '../../utils/image';
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
@@ -23,7 +24,10 @@ const Header = ({ auth, user }) => {
         .find((a) => a.member.state === MemberStates.APPROVED)
     : undefined;
 
-  const { topImage } = user;
+  const profileImage = getImage({
+    images: user?.images,
+    email: user?.email,
+  });
 
   return (
     <>
@@ -82,7 +86,7 @@ const Header = ({ auth, user }) => {
                       <Link className="" to="/settings/user">
                         <div className="image">
                           <img
-                            src={topImage || '/images/defaultthumb.png'}
+                            src={profileImage}
                             className="is-avatar is-rounded is-48x48"
                             alt=""
                           />

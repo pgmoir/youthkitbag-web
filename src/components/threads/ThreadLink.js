@@ -1,5 +1,6 @@
 import React from 'react';
 import { relativeTimeFromNow } from '../../utils/date';
+import { getImage } from '../../utils/image';
 
 const ThreadLink = ({ thread, source, changeThreadDisplayed }) => {
   if (!thread.messages) return null;
@@ -19,7 +20,10 @@ const ThreadLink = ({ thread, source, changeThreadDisplayed }) => {
       <div className="is-flex-shrink-0 is-flex-grow-0 is-align-self-center pr-4">
         <div className="image">
           <img
-            src={sourceUser?.image || '/images/defaultthumb.png'}
+            src={getImage({
+              images: [sourceUser.image],
+              email: sourceUser.email,
+            })}
             className="is-avatar is-rounded is-48x48"
             alt=""
           />

@@ -4,7 +4,7 @@ import useForm from '../hooks/useForm';
 import { editUser, loadSettingsPage } from '../../actions/UserActions';
 import { ImagesForm } from '../includes/forms';
 import validate from '../includes/FormEmptyValidationRules';
-import { getImages } from '../../utils/image';
+import { getFirstImageExcludeDeleted, getImages } from '../../utils/image';
 import TextInput from '../includes/controls/TextInput';
 
 const mapDispatchToProps = { editUser, loadSettingsPage };
@@ -34,10 +34,7 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
   useEffect(() => {
     if (user) {
       user.images = getImages(user.images);
-      user.topImage =
-        user.images && user.images.filter((i) => i.state !== 'D').length > 0
-          ? user.images.filter((i) => i.state !== 'D')[0].imageUrl
-          : '/images/default.png';
+      user.topImage = getFirstImageExcludeDeleted({ images: user.images });
       setValues(user);
     }
   }, [user, setValues]);

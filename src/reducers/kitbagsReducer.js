@@ -6,7 +6,8 @@ import {
   FETCH_PREFERRED_KITBAG,
   CREATE_KITBAG,
   EDIT_KITBAG,
-  CREATE_KITBAG_INVITE,
+  INVITE_KITBAG_MEMBER,
+  DELETE_KITBAG_MEMBER,
 } from '../actions/types';
 
 const initialState = { preferred: {}, current: {}, memberList: {} };
@@ -23,7 +24,8 @@ export default (state = initialState, action) => {
     case CREATE_KITBAG:
     case EDIT_KITBAG:
     case FETCH_KITBAG:
-    case CREATE_KITBAG_INVITE: {
+    case INVITE_KITBAG_MEMBER:
+    case DELETE_KITBAG_MEMBER: {
       return {
         ...state,
         current: action.payload.data,

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
+import { getFirstImageExcludeDeleted } from '../../../utils/image';
 import { resize, dataURItoBlob } from '../../../utils/imageResize';
 
 const ImagesForm = ({
@@ -128,12 +129,7 @@ const ImagesForm = ({
         return i;
       });
       setChange('images', images);
-      setChange(
-        'topImage',
-        images && images.filter((i) => i.state !== 'D').length > 0
-          ? images.filter((i) => i.state !== 'D')[0].imageUrl
-          : '/images/default.png'
-      );
+      setChange('topImage', getFirstImageExcludeDeleted({ images }));
     }
   }
 
@@ -155,12 +151,7 @@ const ImagesForm = ({
       const otherImages = values.images.filter((i) => i._id !== id);
       const images = primaryImage.concat(otherImages);
       setChange('images', images);
-      setChange(
-        'topImage',
-        images && images.filter((i) => i.state !== 'D').length > 0
-          ? images.filter((i) => i.state !== 'D')[0].imageUrl
-          : '/images/default.png'
-      );
+      setChange('topImage', getFirstImageExcludeDeleted({ images }));
     }
   }
 

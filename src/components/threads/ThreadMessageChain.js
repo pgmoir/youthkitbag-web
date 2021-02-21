@@ -9,6 +9,7 @@ import Alert from '../includes/Alert';
 import { connect } from 'react-redux';
 import validate from '../includes/FormEmptyValidationRules';
 import { relativeTimeFromNow } from '../../utils/date';
+import { getImage } from '../../utils/image';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -103,7 +104,10 @@ const ThreadMessageChain = ({
               <div className="is-flex-shrink-0 is-flex-grow-0 is-align-self-center">
                 <div className="image">
                   <img
-                    src={author.image}
+                    src={getImage({
+                      images: [author.image],
+                      email: author.email,
+                    })}
                     className="is-avatar is-rounded is-48x48"
                     alt=""
                   />

@@ -14,25 +14,26 @@ const ImagesDisplay = ({ images }) => {
       return null;
     }
 
-    const items = [];
-
-    for (let i = 0; i < images.length; i++) {
-      items.push(
-        <div key={`image${i}`} className="carousel-thumbnail d-inline-flex">
-          <>
-            <img
-              className="img-fluid mb-3 img-link mini-img mr-1"
-              src={images[i].imageUrl}
-              alt=""
-              role="presentation"
-              onClick={renderTopImage.bind(null, images[i].imageUrl)}
-            />
-          </>
+    const thumbnails = images.map((image, index) => {
+      return (
+        <div key={index} className="is-flex is-flex-direction-row mb-3 ml-3">
+          <div className="card">
+            <div className="card-image is-clickable">
+              <figure className="image is-square is-128x128">
+                <img
+                  src={image.imageUrl}
+                  alt=""
+                  role="presentation"
+                  onClick={renderTopImage.bind(null, image.imageUrl)}
+                />
+              </figure>
+            </div>
+          </div>
         </div>
       );
-    }
+    });
 
-    return <div>{items}</div>;
+    return <div className="columns is-multiline mt-3 mb-0">{thumbnails}</div>;
   }
 
   function renderTopImage(src) {
@@ -41,19 +42,16 @@ const ImagesDisplay = ({ images }) => {
 
   return (
     <>
-      <div className="col-12 col-md-6 order-1 order-md-2" role="main">
-        <div>
-          <img
-            id="preview"
-            name="preview"
-            className="img-fluid mb-3"
-            src={topImageUrl}
-            alt=""
-            role="presentation"
-          />
-        </div>
-        <div>{renderSecondaryImages()}</div>
-      </div>
+      <figure className="image mb-3">
+        <img
+          id="preview"
+          name="preview"
+          src={topImageUrl}
+          alt=""
+          role="presentation"
+        />
+      </figure>
+      {renderSecondaryImages()}
     </>
   );
 };

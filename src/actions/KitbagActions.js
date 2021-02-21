@@ -5,9 +5,10 @@ import {
   EDIT_KITBAG,
   EDIT_KITBAG_STATE,
   API_ERROR,
-  CREATE_KITBAG_INVITE,
+  INVITE_KITBAG_MEMBER,
   EDIT_KITBAG_LEAVE,
   CREATE_KITBAG,
+  DELETE_KITBAG_MEMBER,
 } from './types';
 import history from '../utils/history';
 
@@ -39,6 +40,7 @@ export const createKitbag = (formValues) => (dispatch) => {
   axios
     .post(`/kitbag`, { ...formValues }, {})
     .then((response) => {
+      history.push('/settings/kitbags');
       dispatch({ type: CREATE_KITBAG, payload: response.data });
     })
     .catch((err) => {
@@ -76,7 +78,19 @@ export const inviteToKitbag = ({ kitbagId, formValues }) => (dispatch) => {
   axios
     .post(`/kitbag/${kitbagId}/member/invite`, { ...formValues }, {})
     .then((response) => {
-      dispatch({ type: CREATE_KITBAG_INVITE, payload: response.data });
+      dispatch({ type: INVITE_KITBAG_MEMBER, payload: response.data });
+    })
+    .catch((err) => {
+      const { response } = err;
+      dispatch({ type: API_ERROR, payload: response.data });
+    });
+};
+
+export const deleteFromKitbag = ({ kitbagId, memberId }) => (dispatch) => {
+  axios
+    .delete(`/kitbag/${kitbagId}/member/${memberId}`, {})
+    .then((response) => {
+      dispatch({ type: DELETE_KITBAG_MEMBER, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;

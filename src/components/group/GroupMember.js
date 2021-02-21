@@ -5,6 +5,7 @@ import BlankCard from '../kitbag/BlankCard';
 import GroupMemberDelete from './GroupMemberDelete';
 import GroupMemberState from './GroupMemberState';
 import { MemberStates } from '../../enums/memberStates.enum';
+import { getImage } from '../../utils/image';
 
 const GroupMember = ({ groupId, member, isGroupAdmin }) => {
   const [deleteModalIsActive, setDeleteModalIsActive] = useState(false);
@@ -14,8 +15,12 @@ const GroupMember = ({ groupId, member, isGroupAdmin }) => {
 
   if (!member._id) return <BlankCard />;
 
-  function getThumbnail() {
-    return member.user.image;
+  function userProfileImageUrl() {
+    return getImage({
+      images: [member.user?.image],
+      index: 0,
+      email: member.user?.email,
+    });
   }
 
   function deleteMember(e) {
@@ -42,7 +47,7 @@ const GroupMember = ({ groupId, member, isGroupAdmin }) => {
         <article className="card">
           <div className="card-image">
             <figure className="image is-4by3">
-              <img src={getThumbnail()} alt="" role="presentation" />
+              <img src={userProfileImageUrl()} alt="" role="presentation" />
             </figure>
             {isGroupAdmin ? (
               <>

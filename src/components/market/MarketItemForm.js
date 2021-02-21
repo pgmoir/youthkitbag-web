@@ -14,6 +14,7 @@ import { ImagesDisplay } from '../includes/forms/ImagesDisplay';
 import { MarketTypes } from '../../enums/marketTypes.enum';
 import TextInput from '../includes/controls/TextInput';
 import { getDateSpan } from '../../utils/date';
+import { getFirstImageExcludeDeleted } from '../../utils/image';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -48,10 +49,7 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
 
   useEffect(() => {
     if (market) {
-      market.topImage =
-        market.images && market.images.filter((i) => i.state !== 'D').length > 0
-          ? market.images.filter((i) => i.state !== 'D')[0].imageUrl
-          : '/images/default.png';
+      market.topImage = getFirstImageExcludeDeleted({ images: market.images });
     }
   }, [market]);
 

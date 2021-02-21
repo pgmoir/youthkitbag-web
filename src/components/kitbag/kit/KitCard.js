@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import history from '../../../utils/history';
+import { getFirstImageExcludeDeleted } from '../../../utils/image';
 import BlankCard from '../BlankCard';
 import KitDelete from './KitDelete';
 
@@ -11,11 +12,7 @@ const KitCard = ({ kit, kitbagId }) => {
   if (!kit?._id) return <BlankCard />;
 
   function topImage() {
-    const { images } = kit;
-    if (!images || images.length === 0) {
-      return '/images/default.png';
-    }
-    return images[0].imageUrl;
+    return getFirstImageExcludeDeleted({ images: kit.images });
   }
 
   function totalQuantity() {

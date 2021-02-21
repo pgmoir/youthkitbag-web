@@ -9,7 +9,7 @@ const KitbagMemebrAccept = ({ match }) => {
   //   description: '',
   //   images: [],
   //   members: [],
-  //   topImage: '/images/default.png',
+  //   topImage: ImageUrls.DEFAULT,
   //   imagesToUpload: 0
   // });
 

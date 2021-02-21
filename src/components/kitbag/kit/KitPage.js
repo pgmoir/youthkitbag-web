@@ -7,6 +7,7 @@ import Alert from '../../includes/Alert';
 import Breadcrumb from '../../includes/Breadcrumb';
 import KitForm from './KitForm';
 import Title from '../../includes/title/Title';
+import { ImageUrls } from '../../../enums/imageUrls.enum';
 
 const mapDispatchToProps = {
   fetchKitbagKit,
@@ -36,7 +37,7 @@ const KitPage = ({ fetchKitbagKit, match }) => {
     tags: '',
     active: true,
     images: [],
-    topImage: '/images/default.png',
+    topImage: ImageUrls.DEFAULT,
     imagesToUpload: 0,
   });
 

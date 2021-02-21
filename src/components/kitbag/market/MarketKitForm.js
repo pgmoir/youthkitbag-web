@@ -10,7 +10,7 @@ import {
 import { ImagesForm } from '../../includes/forms';
 import Threads from '../../threads/Threads';
 import validate from '../../includes/FormEmptyValidationRules';
-import { getImages } from '../../../utils/image';
+import { getFirstImageExcludeDeleted, getImages } from '../../../utils/image';
 import { MarketTypes } from '../../../enums/marketTypes.enum';
 import ArrayButtonRemove from '../../includes/controls/ArrayButtonRemove';
 import CheckBoxInput from '../../includes/controls/CheckBoxInput';
@@ -58,10 +58,7 @@ const MarketKitForm = ({
   useEffect(() => {
     if (market) {
       market.images = getImages(market.images);
-      market.topImage =
-        market.images && market.images.filter((i) => i.state !== 'D').length > 0
-          ? market.images.filter((i) => i.state !== 'D')[0].imageUrl
-          : '/images/default.png';
+      market.topImage = getFirstImageExcludeDeleted({ images: market.images });
       setValues(market);
     }
   }, [market, setValues]);
