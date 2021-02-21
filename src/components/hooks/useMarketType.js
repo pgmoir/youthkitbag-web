@@ -1,9 +1,17 @@
 import React from 'react';
 import { MarketTypes } from '../../enums/marketTypes.enum';
 
-const useMarketType = (marketType, marketPrice, threads, isOwned) => {
-  const isTrade = marketType === MarketTypes.TRADE && marketPrice > 0;
-  const isRecycle = marketType === MarketTypes.TRADE && marketPrice === 0;
+const useMarketType = ({
+  marketId,
+  marketType,
+  marketPrice,
+  threads,
+  isOwned,
+}) => {
+  const isTrade =
+    marketType === MarketTypes.TRADE && (marketPrice > 0 || !marketId);
+  const isRecycle =
+    marketType === MarketTypes.TRADE && marketPrice === 0 && marketId;
   const isWanted = marketType === MarketTypes.WANTED && marketPrice > 0;
   const isWantRecycle = marketType === MarketTypes.WANTED && marketPrice === 0;
   const isFound = marketType === MarketTypes.FOUND;
@@ -20,8 +28,10 @@ const useMarketType = (marketType, marketPrice, threads, isOwned) => {
   const iconTitle = `${marketType} item`;
 
   const color =
-    isFound || isLost || isStolen
+    isFound || isStolen
       ? 'danger'
+      : isLost
+      ? 'warning'
       : isWanted || isWantRecycle
       ? 'info'
       : isRecycle
@@ -32,7 +42,7 @@ const useMarketType = (marketType, marketPrice, threads, isOwned) => {
     isTrade || isWanted
       ? `£${marketPrice.toFixed(2)}`
       : isRecycle || isWantRecycle
-      ? 'free'
+      ? 'Recycle'
       : marketType;
 
   const pill =
@@ -46,6 +56,7 @@ const useMarketType = (marketType, marketPrice, threads, isOwned) => {
           : ''}
       </>
     );
+
   return {
     icon,
     iconTitle,

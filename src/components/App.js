@@ -24,7 +24,7 @@ import Login from './auth/LoginPage';
 import Logout from './auth/Logout';
 import MarketItemViewPage from './market/MarketItemViewPage';
 import MarketKitDelete from './kitbag/market/MarketItemDelete';
-import MarketKitPage from './kitbag/market/MarketKitPage';
+import MarketKitEditPage from './kitbag/market/MarketKitEditPage';
 import MarketPage from './market/MarketPage';
 import NewPassword from './auth/NewPasswordPage';
 import PrivateRoute from '../utils/privateRoute';
@@ -117,17 +117,17 @@ const App = ({ auth }) => {
               <PrivateRoute
                 path="/kitbag/market/:kitbagId/new"
                 exact
-                component={MarketKitPage}
+                component={MarketKitEditPage}
               />
               <PrivateRoute
                 path="/kitbag/market/:kitbagId/add/:kitId/:marketType"
                 exact
-                component={MarketKitPage}
+                component={MarketKitEditPage}
               />
               <PrivateRoute
                 path="/kitbag/market/:kitbagId/edit/:marketId"
                 exact
-                component={MarketKitPage}
+                component={MarketKitEditPage}
               />
               <PrivateRoute
                 path="/kitbag/market/:kitbagId/delete/:marketId"

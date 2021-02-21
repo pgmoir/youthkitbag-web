@@ -28,7 +28,7 @@ const mapDispatchToProps = {
   editMarketKit,
 };
 
-const MarketKitForm = ({
+const MarketKitEditForm = ({
   kitbagId,
   market,
   newErrors,
@@ -457,4 +457,4 @@ const MarketKitForm = ({
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MarketKitForm);
+export default connect(mapStateToProps, mapDispatchToProps)(MarketKitEditForm);

@@ -5,12 +5,13 @@ import useMarketType from '../../hooks/useMarketType';
 const MarketTitle = ({ market, isOwned }) => {
   const { title, subtitle, marketType, marketPrice, threads } = market;
 
-  const { icon, iconTitle, color, pill } = useMarketType(
+  const { icon, iconTitle, color, pill } = useMarketType({
+    marketId: market._id,
     marketType,
     marketPrice,
     threads,
-    isOwned
-  );
+    isOwned,
+  });
 
   if (title === '') {
     return null;
@@ -27,10 +28,12 @@ const MarketTitle = ({ market, isOwned }) => {
           <h2 className="subtitle is-size-5">{subtitle}</h2>
         </div>
         <div className="column is-one-third has-text-left-mobile has-text-right">
-          <span className={`tag is-rounded is-large is-size-4 is-${color}`}>
-            <span className={`${icon} pr-2`} title={iconTitle}></span>
-            {pill}
-          </span>
+          {market?._id && (
+            <span className={`tag is-rounded is-large is-size-4 is-${color}`}>
+              <span className={`${icon} pr-2`} title={iconTitle}></span>
+              {pill}
+            </span>
+          )}
         </div>
       </div>
       <hr />

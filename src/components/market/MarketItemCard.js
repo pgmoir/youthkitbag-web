@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import history from '../../utils/history';
 import useMarketType from '../hooks/useMarketType';
 import classNames from 'classnames';
-import { MarketTypes } from '../../enums/marketTypes.enum';
 import BlankCard from '../kitbag/BlankCard';
 import MarketItemDelete from '../kitbag/market/MarketItemDelete';
 import { getImage } from '../../utils/image';
@@ -22,7 +21,13 @@ const MarketItemCard = ({ market }) => {
     deleted,
   } = market;
 
-  const { pill } = useMarketType(marketType, marketPrice, threads, isOwned);
+  const { pill, color } = useMarketType({
+    marketId: _id,
+    marketType,
+    marketPrice,
+    threads,
+    isOwned,
+  });
 
   if (!market?._id) return <BlankCard />;
 
@@ -30,18 +35,7 @@ const MarketItemCard = ({ market }) => {
     return getImage({ images: market.images, index: 0 });
   }
 
-  const cardClasses = classNames('card is-clickable', {
-    'has-background-primary': marketType === MarketTypes.TRADE,
-    'has-background-success': marketType === MarketTypes.RECYCLE,
-    'has-background-info': marketType === MarketTypes.WANTED,
-    'has-background-warning': marketType === MarketTypes.LOST,
-    'has-background-danger': marketType === MarketTypes.STOLEN,
-    'has-text-primary-light': marketType === MarketTypes.TRADE,
-    'has-text-success-light': marketType === MarketTypes.RECYCLE,
-    'has-text-info-light': marketType === MarketTypes.WANTED,
-    'has-text-warning-light': marketType === MarketTypes.LOST,
-    'has-text-danger-light': marketType === MarketTypes.STOLEN,
-  });
+  const cardClasses = classNames(`card is-clickable`);
 
   function viewItem() {
     if (isOwned) {
@@ -91,7 +85,9 @@ const MarketItemCard = ({ market }) => {
               </div>
             )}
             <div className="has-text-right p-2 is-overlay-topright">
-              <span className="tag is-dark is-rounded">{pill}</span>
+              <span className={`tag is-${color} is-rounded is-size-6`}>
+                {pill}
+              </span>
             </div>
           </div>
           <div className="card-content">

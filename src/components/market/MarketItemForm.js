@@ -86,7 +86,9 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
     const label =
       market.marketType === MarketTypes.TRADE ? 'Asking Price' : 'Offering';
     const price =
-      market.marketPrice === 0 ? 'free' : `£${market.marketPrice.toFixed(2)}`;
+      market.marketPrice === 0
+        ? 'Recycle'
+        : `£${market.marketPrice.toFixed(2)}`;
 
     return <TextInput label={label} value={price} readOnly={true} />;
   };

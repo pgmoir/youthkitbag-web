@@ -5,7 +5,7 @@ import {
   fetchMarketKit,
   fetchMarketKitFromKit,
 } from '../../../actions/KitbagMarketActions';
-import MarketKitForm from './MarketKitForm';
+import MarketKitEditForm from './MarketKitEditForm';
 import Title from '../../includes/title/Title';
 import Alert from '../../includes/Alert';
 import MarketTitle from '../../includes/title/MarketTitle';
@@ -21,7 +21,7 @@ const mapDispatchToProps = {
   fetchMarketKitFromKit,
 };
 
-const MarketKitPage = ({
+const MarketKitEditPage = ({
   current,
   fetchMarketKit,
   fetchMarketKitFromKit,
@@ -95,10 +95,10 @@ const MarketKitPage = ({
       {getTitle()}
       <div className="container">
         <Alert />
-        <MarketKitForm kitbagId={kitbagId} market={market} />
+        <MarketKitEditForm kitbagId={kitbagId} market={market} />
       </div>
     </div>
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MarketKitPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MarketKitEditPage);

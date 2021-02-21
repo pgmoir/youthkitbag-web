@@ -7896,13 +7896,10 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
     width: 100%; }
 
 html {
-  font-size: 12px; }
-  @media screen and (min-width: 769px), print {
-    html {
-      font-size: 16px; } }
+  font-size: 14px; }
   @media screen and (min-width: 1024px) {
     html {
-      font-size: 18px; } }
+      font-size: 16px; } }
 
 /*
   accessibility
@@ -8019,7 +8016,7 @@ body {
   width: 6rem; }
 
 .is-flex-groupshare .name {
-  width: 26rem; }
+  width: 22rem; }
 
 .is-flex-groupshare .ondate {
   width: 8rem; }
