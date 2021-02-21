@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
 import useForm from '../hooks/useForm';
@@ -32,8 +32,6 @@ const KitbagForm = ({
   editKitbag,
   inviteMember,
 }) => {
-  const [hasKitbagAdmin, setHasKitbagAdmin] = useState(false);
-
   const userId = useSelector((state) => state.user?._id);
 
   const initialValues = {
@@ -78,14 +76,6 @@ const KitbagForm = ({
       createKitbag(values);
     }
   }
-
-  useEffect(() => {
-    if (userBundle && userBundle.max && userBundle.size) {
-      setHasKitbagAdmin(
-        userBundle.max.kitbagAdmins > userBundle.size.kitbagAdmins
-      );
-    }
-  }, [userBundle, setHasKitbagAdmin]);
 
   function showSaveCancelButtons() {
     if (!userBundle || !values) return null;
