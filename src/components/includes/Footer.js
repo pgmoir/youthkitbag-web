@@ -21,12 +21,12 @@ const Footer = () => {
             </Link>
           </p>
           <p>
-            <Link to="/help" className="a11y-highlight">
+            <Link to="/site/helpandsupport" className="a11y-highlight">
               Help
             </Link>
           </p>
           <p>
-            <Link to="/media" className="a11y-highlight">
+            <Link to="/site/mediaenquiries" className="a11y-highlight">
               Media
             </Link>
           </p>
@@ -34,12 +34,12 @@ const Footer = () => {
         <div className="column has-text-centered">
           <p>Information for</p>
           <p>
-            <Link to="/site/terms" className="a11y-highlight">
+            <Link to="/site/termsandconditions" className="a11y-highlight">
               Terms &amp; Conditions
             </Link>
           </p>
           <p>
-            <Link to="/site/privacy" className="a11y-highlight">
+            <Link to="/site/privacypolicy" className="a11y-highlight">
               Privacy Policy
             </Link>
           </p>

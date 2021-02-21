@@ -2,20 +2,16 @@ import React from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
-import { ContentTypes } from '../enums/contentTypes.enum';
 import BundlePurchasePage from './bundles/BundlePurchasePage';
 import BundlesPage from './bundles/BundlesPage';
 import Content from './site/Content';
 import Footer from './includes/Footer';
-import GroupMemberJoin from './group/GroupMemberJoin';
 import GroupMemberLeave from './group/GroupMemberLeave';
 import GroupMembers from './group/GroupMembers';
-import GroupMemberState from './group/GroupMemberState';
 import GroupPage from './group/GroupPage';
 import Groups from './group/Groups';
 import GroupState from './group/GroupState';
 import Header from './includes/Header';
-import HelpPage from './site/HelpPage';
 import history from '../utils/history';
 import Home from './Home';
 import Kitbag from './kitbag/kit/Kitbag';
@@ -30,11 +26,9 @@ import MarketItemViewPage from './market/MarketItemViewPage';
 import MarketKitDelete from './kitbag/market/MarketItemDelete';
 import MarketKitPage from './kitbag/market/MarketKitPage';
 import MarketPage from './market/MarketPage';
-import MediaPage from './site/MediaPage';
 import NewPassword from './auth/NewPasswordPage';
 import PrivateRoute from '../utils/privateRoute';
 import Reset from './auth/ResetPage';
-import Security from './site/Security';
 import SettingsPage from './kitbag/SettingsPage';
 import ShowGroupPage from './show/ShowGroupPage';
 import SignUp from './auth/SignUpPage';
@@ -68,39 +62,10 @@ const App = ({ auth }) => {
             </noscript>
             <Switch>
               <Route path="/" exact component={Home} />
-              <Route path="/help" exact component={HelpPage} />
-              <Route path="/media" exact component={MediaPage} />
               <Route path="/why" exact component={Why} />
               <Route path="/bundles" exact component={BundlesPage} />
-
               <Route path="/learn/:activity" component={LearnMore} />
-
-              <Route
-                path="/site/terms"
-                exact
-                render={(props) => (
-                  <Content
-                    {...props}
-                    contentId={ContentTypes.TERMSCONDITIONS}
-                  />
-                )}
-              />
-              <Route
-                path="/site/privacy"
-                exact
-                render={(props) => (
-                  <Content {...props} contentId={ContentTypes.PRIVACYPOLICY} />
-                )}
-              />
-              <Route path="/site/security" exact component={Security} />
-              <Route
-                path="/site/accessibility"
-                exact
-                render={(props) => (
-                  <Content {...props} contentId={ContentTypes.ACCESSIBILITY} />
-                )}
-              />
-
+              <Route path="/site/:contentId" component={Content} />
               <Route path="/auth/signup" exact>
                 {auth.loggedIn ? <Redirect to="/" /> : <SignUp />}
               </Route>
@@ -123,20 +88,17 @@ const App = ({ auth }) => {
                 }}
               />
               <Route path="/auth/logout" exact component={Logout} />
-
               <PrivateRoute
                 path="/bundles/purchase/:bundleId"
                 exact
                 component={BundlePurchasePage}
               />
-
               <PrivateRoute
                 path="/market/view/:marketId"
                 exact
                 component={MarketItemViewPage}
               />
               <Route path="/market" component={MarketPage} />
-
               <PrivateRoute
                 path="/kitbag/kit/:kitbagId/new"
                 component={KitPage}
@@ -152,7 +114,6 @@ const App = ({ auth }) => {
                 component={KitDelete}
               />
               <PrivateRoute path="/kitbag/kit/:kitbagId" component={Kitbag} />
-
               <PrivateRoute
                 path="/kitbag/market/:kitbagId/new"
                 exact
@@ -184,19 +145,9 @@ const App = ({ auth }) => {
                 component={GroupState}
               />
               <PrivateRoute
-                path="/groups/:groupId/members/:memberId/:state"
-                exact
-                component={GroupMemberState}
-              />
-              <PrivateRoute
                 path="/groups/:groupId/members"
                 exact
                 component={GroupMembers}
-              />
-              <PrivateRoute
-                path="/groups/:groupId/join"
-                exact
-                component={GroupMemberJoin}
               />
               <PrivateRoute
                 path="/groups/:groupId/leave"
@@ -209,14 +160,12 @@ const App = ({ auth }) => {
                 component={GroupPage}
               />
               <PrivateRoute path="/groups" component={Groups} />
-
               <PrivateRoute path="/kitbags/new" component={KitbagPage} />
               <PrivateRoute
                 path="/kitbags/:kitbagId/member/accept/:email/:token"
                 component={KitbagMemberAccept}
               />
               <PrivateRoute path="/kitbags/:kitbagId" component={KitbagPage} />
-
               <PrivateRoute
                 path="/settings/:setting?"
                 component={SettingsPage}
