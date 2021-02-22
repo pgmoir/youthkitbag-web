@@ -18,6 +18,7 @@ const TextInput = ({
   placeHolder,
   iconRight = true,
   iconLeft,
+  isLink,
 }) => {
   const controlClasses = classNames('control', {
     'has-icons-right': iconRight,
@@ -28,6 +29,21 @@ const TextInput = ({
     'is-danger': error,
   });
 
+  function displayReadOnly() {
+    if (isLink) {
+      return (
+        <p>
+          <span className="mr-3">
+            <a href={value}>{value}</a>
+          </span>
+          <i className="fas fa-external-link-alt has-text-primary"></i>
+        </p>
+      );
+    }
+
+    return <p>{value}</p>;
+  }
+
   return (
     <div className="field">
       {label && (
@@ -36,7 +52,7 @@ const TextInput = ({
         </label>
       )}
       {readOnly ? (
-        <p>{value}</p>
+        displayReadOnly()
       ) : (
         <>
           <div className={controlClasses}>

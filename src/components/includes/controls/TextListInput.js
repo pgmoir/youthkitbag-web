@@ -39,54 +39,64 @@ const TextListInput = ({
           {label}
         </label>
       )}
-      {readOnly ? (
-        <p>{value}</p>
-      ) : (
-        <>
-          <div className="field is-grouped is-grouped-multiline">
+      <>
+        {readOnly ? (
+          <div className="tags are-medium">
             {items.map((item, index) => {
               return (
-                <div key={index} className="control">
-                  <div className="tags has-addons">
-                    <div className="tag is-primary is-medium">{item}</div>
-                    <div className="tag is-delete is-medium is-clickable"></div>
-                  </div>
-                </div>
+                <span key={index} className="tag is-success">
+                  {item}
+                </span>
               );
             })}
           </div>
-          <div className={controlClasses}>
-            <input
-              className={inputClasses}
-              name={field}
-              type={type ? type : 'text'}
-              step={step}
-              min={min}
-              max={max}
-              disabled={disabled}
-              readOnly={readOnly}
-              onChange={handleChange}
-              onBlur={handleChange}
-              value={value}
-              aria-describedby={field}
-              autoComplete={autoComplete}
-              tabIndex={disabled || readOnly ? -1 : 0}
-              placeholder={placeHolder}
-            />
-            {iconLeft && (
-              <span className="icon is-small is-left">
-                <i className={iconLeft}></i>
-              </span>
-            )}
-            {error && iconRight && (
-              <span className="icon is-small is-right">
-                <i className="fas fa-exclamation-triangle"></i>
-              </span>
-            )}
-          </div>
-          {error && <p className="help is-danger">{error}</p>}
-        </>
-      )}
+        ) : (
+          <>
+            <div className="field is-grouped is-grouped-multiline">
+              {items.map((item, index) => {
+                return (
+                  <div key={index} className="control">
+                    <div className="tags are-medium has-addons">
+                      <div className="tag is-success">{item}</div>
+                      <div className="tag is-delete is-clickable"></div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div className={controlClasses}>
+              <input
+                className={inputClasses}
+                name={field}
+                type={type ? type : 'text'}
+                step={step}
+                min={min}
+                max={max}
+                disabled={disabled}
+                readOnly={readOnly}
+                onChange={handleChange}
+                onBlur={handleChange}
+                value={value}
+                aria-describedby={field}
+                autoComplete={autoComplete}
+                tabIndex={disabled || readOnly ? -1 : 0}
+                placeholder={placeHolder}
+              />
+              {iconLeft && (
+                <span className="icon is-small is-left">
+                  <i className={iconLeft}></i>
+                </span>
+              )}
+              {error && iconRight && (
+                <span className="icon is-small is-right">
+                  <i className="fas fa-exclamation-triangle"></i>
+                </span>
+              )}
+            </div>
+            {error && <p className="help is-danger">{error}</p>}
+          </>
+        )}
+      </>
     </div>
   );
 };

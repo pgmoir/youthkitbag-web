@@ -12,6 +12,7 @@ import {
   GROUP_MEMBER_DELETE,
   EDIT_GROUP_MEMBER_STATE,
   GROUP_MEMBER_LEAVE,
+  EDIT_GROUP_STATE,
 } from '../actions/types';
 
 const initialState = {
@@ -50,6 +51,7 @@ export default (state = initialState, action) => {
     case CREATE_GROUP:
     case GROUP_MEMBER_JOIN:
     case GROUP_MEMBER_LEAVE:
+    case EDIT_GROUP_STATE:
     case EDIT_GROUP: {
       const group = action.payload.data;
       const groupId = group._id;

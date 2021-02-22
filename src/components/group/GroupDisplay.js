@@ -1,6 +1,7 @@
 import React from 'react';
 import TextAreaInput from '../includes/controls/TextAreaInput';
 import TextInput from '../includes/controls/TextInput';
+import TextListInput from '../includes/controls/TextListInput';
 import { ImagesDisplay } from '../includes/forms/ImagesDisplay';
 
 const GroupDisplay = ({ group }) => {
@@ -16,16 +17,21 @@ const GroupDisplay = ({ group }) => {
         <div className="column">
           <ImagesDisplay images={group.images} />
         </div>
-        <div className="column">
+        <div className="column box p-5 m-3">
           <TextAreaInput
             label="Description"
             value={group.description}
             readOnly={true}
           />
-          <TextInput label="Website" value={group.website} readOnly={true} />
           <TextInput
+            label="Website"
+            value={group.website}
+            readOnly={true}
+            isLink={true}
+          />
+          <TextListInput
             label="Activities"
-            value={group.activitys?.join(', ')}
+            value={group.activitys}
             readOnly={true}
           />
           {/* <h2 className="h5">

@@ -76,13 +76,13 @@ const GroupsMemberRequestsAnnouncement = ({
   }
 
   function renderList() {
-    return groupsWithMemberRequests.map((g, index) => {
+    return groupsWithMemberRequests.map((group, index) => {
       return (
-        <div key={index} className="is-flex">
+        <div key={index} className="box is-flex p-3">
           <div className="is-flex-shrink-0 is-flex-grow-0 pr-4">
             <div className="image">
               <img
-                src={getImage({ images: g.images, index: 0 })}
+                src={getImage({ images: group.images, index: 0 })}
                 className="is-avatar is-rounded is-48x48"
                 alt=""
               />
@@ -91,11 +91,12 @@ const GroupsMemberRequestsAnnouncement = ({
           <div className="is-flex-grow-1 is-flex">
             <div className="is-flex-grow-0 has-truncated is-align-self-center mr-3">
               <div className="has-text-weight-medium is-truncated-text">
-                {g.name}
+                {group.name}
               </div>
+              <div className="is-truncated-text">{`You have ${group.members.length} member request`}</div>
             </div>
             <div className="is-flex-grow-1 is-flex is-flex-wrap-nowrap">
-              {renderMemberList(g.members)}
+              {renderMemberList(group.members)}
             </div>
           </div>
         </div>
