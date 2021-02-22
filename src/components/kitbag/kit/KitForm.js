@@ -17,6 +17,7 @@ import ArrayButtonAdd from '../../includes/controls/ArrayButtonAdd';
 import ArrayButtonRemove from '../../includes/controls/ArrayButtonRemove';
 import CheckBoxInput from '../../includes/controls/CheckBoxInput';
 import DateInput from '../../includes/controls/DateInput';
+import TextListInput from '../../includes/controls/TextListInput';
 
 const mapStateToProps = (state) => ({
   kitbagLists: state.kitbag.kit.lists,
@@ -273,22 +274,26 @@ const KitForm = ({
             error={errors.warning}
           />
           <hr />
-          <h3 className="h6">Categorise/Security (all optional)</h3>
-          <small
-            id="categoryhelp"
-            className="form-text text-muted form-control-help mb-3"
-          >
-            You can add activity names, personal tags and security numbers to
-            your kit. Enter names separate by commas. (e.g. football, cycling)
-          </small>
-          <TextInput
+          <div className="content">
+            <p className="is-size-6 has-text-weight-bold">
+              Categorise/Security (all optional)
+            </p>
+            <p
+              id="categoryhelp"
+              className="form-text text-muted form-control-help mb-3"
+            >
+              You can add activity names, personal tags and security numbers to
+              your kit. Enter names separate by commas. (e.g. football, cycling)
+            </p>
+          </div>
+          <TextListInput
             label="Activities"
             value={values.activitys}
             field="activitys"
             handleChange={handleChange}
             error={errors.activitys}
           />
-          <TextInput
+          <TextListInput
             label="Tags"
             value={values.tags}
             field="tags"
