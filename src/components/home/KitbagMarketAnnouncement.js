@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
 import { fetchKitbagMarketItems } from '../../actions/KitbagMarketActions';
 import { getFirstImageExcludeDeleted } from '../../utils/image';
@@ -13,49 +13,55 @@ const KitbagMarketAnnouncement = ({
   marketType,
   fetchKitbagMarketItems,
 }) => {
-  const marketItems = useSelector(
-    (state) => state.kitbag.market[marketType]?.items
+  const history = useHistory();
+  const marketTypeKey = `${marketType.toLowerCase()}s`;
+  const { items, totalItems } = useSelector(
+    (state) => state.kitbag.market[marketTypeKey]
   );
-  // const totalItems = useSelector(
-  //   (state) => state.kitbag.market[marketType]?.totalItems
-  // );
 
   useEffect(() => {
     fetchKitbagMarketItems({ by: marketType, pagesize: 5 });
   }, [marketType, fetchKitbagMarketItems]);
 
-  // if (!marketItems) return null;
+  if (!totalItems || totalItems === 0) return null;
 
   function topImage(images) {
     return getFirstImageExcludeDeleted({ images });
   }
 
-  function renderList() {
-    if (!marketItems || !marketItems.length) return;
+  function viewMarketItem(item) {
+    history.push(`/kitbag/market/${item.kitbag}/edit/${item._id}`);
+  }
 
-    return marketItems.map((m, index) => {
+  //TODO: This still does funny things at certain widths - but not at all small widths
+  // only when in multi column mode.
+  function renderList() {
+    return items?.map((item, index) => {
       return (
-        <Link
-          className="a-inherit"
+        <div
           key={index}
-          to={`/kitbag/market/${m.kitbag}/edit/${m._id}`}
+          className="box is-flex is-clickable p-3"
+          role="button"
+          onClick={() => viewMarketItem(item)}
+          onKeyPress={() => viewMarketItem(item)}
+          tabIndex="0"
         >
-          <div className="bg-white d-flex flex-row align-items-center mb-2">
-            <div className="pl-1 py-1 pr-2">
+          <div className="is-flex-shrink-0 is-flex-grow-0 pr-4">
+            <div className="image">
               <img
-                src={topImage(m.images)}
+                src={topImage(item.images)}
+                className="is-avatar is-48x48"
                 alt=""
-                className="img-fluid img-thumbnail img-small"
               />
             </div>
-            <div className="">
-              <h3 className="h6 ellipsis mb-0 mr-3">{m.title}</h3>
-              <p className="mb-0">
-                You have <strong>{m.threads.length}</strong> active threads
-              </p>
-            </div>
           </div>
-        </Link>
+          <div className="is-flex-shrink-1 is-flex-grow-1 is-flex is-flex-direction-column has-text-black has-truncated">
+            <div className="is-truncated-text has-text-weight-medium">
+              {item.title}
+            </div>
+            <div className="is-truncated-text">{`You have ${item.threads.length} active threads`}</div>
+          </div>
+        </div>
       );
     });
   }
@@ -65,10 +71,11 @@ const KitbagMarketAnnouncement = ({
       <p className="title">Your {description}</p>
       <div className="content">
         <p>
-          You currently have <span className="tag is-rounded">{0}</span> active{' '}
+          You currently have{' '}
+          <span className="tag is-rounded">{totalItems || 0}</span> active{' '}
           {description}.
         </p>
-        <div>{renderList()}</div>
+        {renderList()}
         <p>These are your most recently active {description}.</p>
       </div>
       <div className="buttons">

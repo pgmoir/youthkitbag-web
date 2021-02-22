@@ -35,6 +35,7 @@ import SignUp from './auth/SignUpPage';
 import Token from './auth/Token';
 import User from './auth/User';
 import Why from './Why';
+import ScrollToTop from './ScrollToTop';
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
@@ -49,6 +50,7 @@ const App = ({ auth }) => {
         </title>
       </Helmet>
       <Router history={history}>
+        <ScrollToTop />
         <User />
         <div id="wrapper">
           <Header />
