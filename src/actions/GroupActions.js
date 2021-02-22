@@ -84,9 +84,9 @@ export const editGroup = (groupId, formValues) => (dispatch) => {
     });
 };
 
-export const editGroupState = (groupId, state) => (dispatch) => {
+export const editGroupState = ({ groupId, formValues }) => (dispatch) => {
   axios
-    .put(`/group/${groupId}/state`, { state: state }, {})
+    .put(`/group/${groupId}/state`, { ...formValues }, {})
     .then((response) => {
       history.push('/groups?searchfor=&by=&page=1&pagesize=24');
       dispatch({ type: EDIT_GROUP_STATE, payload: response.data });
