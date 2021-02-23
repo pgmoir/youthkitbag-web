@@ -43,7 +43,7 @@ const GroupsMemberRequestsAnnouncement = ({
       <>
         {members.map((m, index) => {
           const userProfileImageUrl = getImage({
-            images: [m.user?.image],
+            images: m.user?.images,
             index: 0,
             email: m.user?.email,
           });

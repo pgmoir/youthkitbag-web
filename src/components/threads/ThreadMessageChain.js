@@ -105,7 +105,7 @@ const ThreadMessageChain = ({
                 <div className="image">
                   <img
                     src={getImage({
-                      images: [author.image],
+                      images: author.images,
                       email: author.email,
                     })}
                     className="is-avatar is-rounded is-48x48"

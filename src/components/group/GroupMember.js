@@ -17,7 +17,7 @@ const GroupMember = ({ groupId, member, isGroupAdmin }) => {
 
   function userProfileImageUrl() {
     return getImage({
-      images: [member.user?.image],
+      images: member.user?.images,
       index: 0,
       email: member.user?.email,
     });

@@ -21,7 +21,7 @@ const ThreadLink = ({ thread, source, changeThreadDisplayed }) => {
         <div className="image">
           <img
             src={getImage({
-              images: [sourceUser.image],
+              images: sourceUser.images,
               email: sourceUser.email,
             })}
             className="is-avatar is-rounded is-48x48"
