@@ -29,6 +29,7 @@ const GroupDisplay = ({ group }) => {
             readOnly={true}
             isLink={true}
           />
+          <TextInput label="Address" value={group.address} readOnly={true} />
           <TextListInput
             label="Activities"
             value={group.activitys}

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import TextAreaInput from '../../includes/controls/TextAreaInput';
+import { MarketResponse } from './MarketResponse';
 
 export const LostResponse = ({
   values,
@@ -11,35 +11,23 @@ export const LostResponse = ({
   return (
     <>
       {values && (
-        <>
-          <h3>Have any information about this item</h3>
-          <p>
-            If you can help with any information that could help recover this
+        <MarketResponse
+          question="Have any information about this item?"
+          explanation="If you can help with any information that could help recover this
             item, then please leave details below. The owner will be extremely
             grateful, and will get back in touch with you as quickly as
-            possible.
-          </p>
-          <form className="mb-3" onSubmit={handleSubmit}>
-            <div>
-              <TextAreaInput
-                label="Details"
-                value={values.details}
-                field="details"
-                handleChange={handleChange}
-                error={errors.details}
-              />
-            </div>
-            <hr />
-            <div className="buttons">
-              <button className="button is-primary" type="submit">
-                Offer
-              </button>
-              <Link className="button is-warning" to="/market/market">
-                Cancel
-              </Link>
-            </div>
-          </form>
-        </>
+            possible."
+          buttonText="Offer"
+          handleSubmit={handleSubmit}
+        >
+          <TextAreaInput
+            label="Details"
+            value={values.details}
+            field="details"
+            handleChange={handleChange}
+            error={errors.details}
+          />
+        </MarketResponse>
       )}
     </>
   );

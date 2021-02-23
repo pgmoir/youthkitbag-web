@@ -119,11 +119,6 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
                     type="hidden"
                     value={values.images[index].state}
                   />
-                  <input
-                    name={`images[${index}].photoId`}
-                    type="hidden"
-                    value={values.images[index].photoId}
-                  />
                 </div>
               ))}
             {values.deletedImages &&

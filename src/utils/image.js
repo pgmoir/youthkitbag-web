@@ -7,7 +7,6 @@ export const getImages = (images) => {
   return images.map((i) => {
     var ni = { ...i };
     ni.state = '';
-    ni.photoId = '';
     return ni;
   });
 };

@@ -10,7 +10,7 @@ const GroupCard = ({ group }) => {
 
   if (!group?._id) return <BlankCard />;
 
-  const { _id, name, activitys, state, memberCount, appAdmin } = group;
+  const { _id, name, address, activitys, state, memberCount, appAdmin } = group;
   const topImage = getImage({ images: group?.images, index: 0 });
 
   function renderState(state) {
@@ -58,12 +58,18 @@ const GroupCard = ({ group }) => {
   return (
     <>
       <div className="column is-12-mobile is-4-tablet is-3-desktop is-2-fullhd">
-        <article className="card is-clickable" onClick={(e) => viewItem(e)}>
+        <div
+          className="card is-clickable"
+          onClick={(e) => viewItem(e)}
+          onKeyPress={(e) => viewItem(e)}
+          tabIndex="0"
+          role="button"
+        >
           <div className="card-image">
             <figure className="image is-4by3">
               <img src={topImage} alt={name} role="presentation" />
             </figure>
-            {appAdmin && (
+            {appAdmin ? (
               <div className="has-text-left p-2 is-overlay-topleft">
                 <span
                   className="tag is-dark is-medium is-clickable"
@@ -79,6 +85,12 @@ const GroupCard = ({ group }) => {
                   {renderState(state)}
                 </span>
               </div>
+            ) : (
+              <div className="has-text-left p-2 is-overlay-topleft">
+                <span className="tag is-dark is-medium">
+                  {renderState(state)}
+                </span>
+              </div>
             )}
             <div className="has-text-right p-2 is-overlay-topright">
               <span className="tag is-dark is-rounded">{memberCount}</span>
@@ -86,11 +98,20 @@ const GroupCard = ({ group }) => {
           </div>
           <div className="card-content">
             <p className="title is-size-5">{name}</p>
+            {address && <p className="subtitle is-size-6">{address}</p>}
             {activitys && (
-              <p className="subtitle is-size-6">{activitys.join(', ')}</p>
+              <div className="tags">
+                {activitys.map((activity, index) => {
+                  return (
+                    <span key={index} className="tag is-success">
+                      {activity}
+                    </span>
+                  );
+                })}
+              </div>
             )}
           </div>
-        </article>
+        </div>
       </div>
       <GroupState
         groupId={group._id}

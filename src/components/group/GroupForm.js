@@ -98,6 +98,14 @@ const GroupForm = ({
             error={errors.description}
           />
           <TextInput
+            label="Address"
+            value={values.address}
+            field="address"
+            handleChange={handleChange}
+            error={errors.address}
+            placeHolder="e.g. Woodford Green IG8 7DQ"
+          />
+          <TextInput
             type="email"
             label="Email"
             value={values.email}
@@ -112,7 +120,6 @@ const GroupForm = ({
             handleChange={handleChange}
             error={errors.website}
           />
-          <hr />
           <TextInput
             label="Activities"
             value={values.activitys}
@@ -120,7 +127,6 @@ const GroupForm = ({
             handleChange={handleChange}
             error={errors.activitys}
           />
-          <hr />
           <TextAreaInput
             label="Recommendation"
             value={values.recommendation}
@@ -136,7 +142,6 @@ const GroupForm = ({
             handleChange={handleChange}
             error={errors.recommendationBy}
           />
-          <hr />
           {group._id && (
             <>
               <h2 className="h5">
@@ -181,11 +186,6 @@ const GroupForm = ({
                     name={`images[${index}].state`}
                     type="hidden"
                     value={values.images[index].state}
-                  />
-                  <input
-                    name={`images[${index}].photoId`}
-                    type="hidden"
-                    value={values.images[index].photoId}
                   />
                 </div>
               ))}
