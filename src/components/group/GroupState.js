@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import { editGroupState } from '../../actions/GroupActions';
 import SelectInput from '../includes/controls/SelectInput';
 import useForm from '../hooks/useForm';
 import validate from '../includes/FormEmptyValidationRules';
 import { GroupStates } from '../../enums/groupStates.enum';
+import { Modal } from '../includes/modals/Modal';
 
 const mapDispatchToProps = {
   editGroupState,
@@ -18,11 +20,8 @@ const GroupState = ({
   modalIsActive,
   setModalIsActive,
 }) => {
-  function closeModal() {
-    setModalIsActive(false);
-  }
-
   const initialValues = { state: groupState };
+
   const stateItems = [
     '',
     GroupStates.ACTIVE,
@@ -43,47 +42,32 @@ const GroupState = ({
     setModalIsActive(false);
   }
 
+  function getPrimaryButton() {
+    return (
+      <button className="button is-success" onClick={handleSubmit}>
+        Save
+      </button>
+    );
+  }
+
   return (
-    <div className={`modal ${modalIsActive ? 'is-active' : ''}`}>
-      <div
-        className="modal-background"
-        onClick={closeModal}
-        onKeyPress={closeModal}
-        role="button"
-        tabIndex="0"
-      ></div>
-      <div className="modal-card">
-        <header className="modal-card-head">
-          <p className="modal-card-title">Select group state</p>
-          <button
-            className="delete"
-            aria-label="close"
-            onClick={closeModal}
-            tabIndex="0"
-          ></button>
-        </header>
-        <section className="modal-card-body">
-          <p className="is-size-6 mb-3">
-            {`Select the new group status for, "${groupName}"`}
-          </p>
-          <SelectInput
-            value={values.state}
-            field="state"
-            handleChange={handleChange}
-            error={errors.state}
-            items={stateItems}
-          />
-        </section>
-        <footer className="modal-card-foot">
-          <button className="button is-success" onClick={handleSubmit}>
-            Save
-          </button>
-          <button className="button is-warning" onClick={closeModal}>
-            Cancel
-          </button>
-        </footer>
-      </div>
-    </div>
+    <Modal
+      title="Select group state"
+      modalIsActive={modalIsActive}
+      setModalIsActive={setModalIsActive}
+      primaryButton={getPrimaryButton()}
+    >
+      <p className="is-size-6 mb-3">
+        {`Select the new group status for, "${groupName}"`}
+      </p>
+      <SelectInput
+        value={values.state}
+        field="state"
+        handleChange={handleChange}
+        error={errors.state}
+        items={stateItems}
+      />
+    </Modal>
   );
 };
 
