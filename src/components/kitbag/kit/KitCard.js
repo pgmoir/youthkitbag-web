@@ -13,9 +13,7 @@ const KitCard = ({ kit, kitbagId }) => {
 
   if (!kit?._id) return <BlankCard />;
 
-  function topImage() {
-    return getImage({ images: images, index: imageKey });
-  }
+  const showImage = getImage({ images, index: imageKey });
 
   function totalQuantity() {
     const { inbag } = kit;
@@ -48,7 +46,7 @@ const KitCard = ({ kit, kitbagId }) => {
         >
           <div className="card-image">
             <figure className="image is-4by3">
-              <img src={topImage()} alt={title} role="presentation" />
+              <img src={showImage} alt={title} role="presentation" />
             </figure>
             {active && (
               <div className="has-text-left p-2 is-overlay-topleft">

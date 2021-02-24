@@ -6,22 +6,22 @@ import GroupMemberDelete from './GroupMemberDelete';
 import GroupMemberState from './GroupMemberState';
 import { MemberStates } from '../../enums/memberStates.enum';
 import { getImage } from '../../utils/image';
+import ImageNav from '../includes/helpers/ImageNav';
 
 const GroupMember = ({ groupId, member, isGroupAdmin }) => {
   const [deleteModalIsActive, setDeleteModalIsActive] = useState(false);
   const [stateModalIsActive, setStateModalIsActive] = useState(false);
+  const [imageKey, setImageKey] = useState(0);
 
   const { user, role, state } = member;
 
   if (!member._id) return <BlankCard />;
 
-  function userProfileImageUrl() {
-    return getImage({
-      images: member.user?.images,
-      index: 0,
-      email: member.user?.email,
-    });
-  }
+  const showImage = getImage({
+    images: user?.images,
+    index: imageKey,
+    email: user?.email,
+  });
 
   function deleteMember(e) {
     e.stopPropagation();
@@ -47,7 +47,7 @@ const GroupMember = ({ groupId, member, isGroupAdmin }) => {
         <article className="card">
           <div className="card-image">
             <figure className="image is-4by3">
-              <img src={userProfileImageUrl()} alt="" role="presentation" />
+              <img src={showImage} alt="" role="presentation" />
             </figure>
             {isGroupAdmin ? (
               <>
@@ -90,6 +90,11 @@ const GroupMember = ({ groupId, member, isGroupAdmin }) => {
                 <span className={stateClasses}>{state}</span>
               </div>
             )}
+            <ImageNav
+              images={user?.images}
+              imageKey={imageKey}
+              setImageKey={setImageKey}
+            />
           </div>
           <div className="card-content">
             <p className="title is-size-5">

@@ -2,16 +2,28 @@ import React, { useState } from 'react';
 import { GroupStates } from '../../enums/groupStates.enum';
 import history from '../../utils/history';
 import { getImage } from '../../utils/image';
+import ImageNav from '../includes/helpers/ImageNav';
 import BlankCard from '../kitbag/BlankCard';
 import GroupState from './GroupState';
 
 const GroupCard = ({ group }) => {
   const [stateModalIsActive, setStateModalIsActive] = useState(false);
+  const [imageKey, setImageKey] = useState(0);
 
   if (!group?._id) return <BlankCard />;
 
-  const { _id, name, address, activitys, state, memberCount, appAdmin } = group;
-  const topImage = getImage({ images: group?.images, index: 0 });
+  const {
+    _id,
+    name,
+    images,
+    address,
+    activitys,
+    state,
+    memberCount,
+    appAdmin,
+  } = group;
+
+  const showImage = getImage({ images, index: imageKey });
 
   function renderState(state) {
     switch (state) {
@@ -46,6 +58,7 @@ const GroupCard = ({ group }) => {
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
   function viewItem(e) {
     history.push(`/groups/${_id}`);
   }
@@ -67,7 +80,7 @@ const GroupCard = ({ group }) => {
         >
           <div className="card-image">
             <figure className="image is-4by3">
-              <img src={topImage} alt={name} role="presentation" />
+              <img src={showImage} alt={name} role="presentation" />
             </figure>
             {appAdmin ? (
               <div className="has-text-left p-2 is-overlay-topleft">
@@ -95,6 +108,11 @@ const GroupCard = ({ group }) => {
             <div className="has-text-right p-2 is-overlay-topright">
               <span className="tag is-dark is-rounded">{memberCount}</span>
             </div>
+            <ImageNav
+              images={images}
+              imageKey={imageKey}
+              setImageKey={setImageKey}
+            />
           </div>
           <div className="card-content">
             <p className="title is-size-5">{name}</p>

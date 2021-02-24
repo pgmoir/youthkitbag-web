@@ -34,9 +34,7 @@ const MarketItemCard = ({ market }) => {
 
   if (!market?._id) return <BlankCard />;
 
-  function showImage() {
-    return getImage({ images: images, index: imageKey });
-  }
+  const showImage = getImage({ images, index: imageKey });
 
   const cardClasses = classNames(`card is-clickable`);
 
@@ -65,7 +63,7 @@ const MarketItemCard = ({ market }) => {
         >
           <div className="card-image">
             <figure className="image is-4by3">
-              <img src={showImage()} alt={title} role="presentation" />
+              <img src={showImage} alt={title} role="presentation" />
             </figure>
             {isOwned && !deleted && (
               <div className="has-text-left p-2 is-overlay-topleft">
