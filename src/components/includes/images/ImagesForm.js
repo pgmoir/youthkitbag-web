@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
-import { getFirstImageExcludeDeleted, getImage } from '../../../utils/image';
+import { getImage } from '../../../utils/image';
 import { resize, dataURItoBlob } from '../../../utils/imageResize';
 import { ImagesNav } from './ImagesNav';
 import { ImageUpload } from './ImageUpload';
@@ -28,6 +28,7 @@ const ImagesForm = ({
     if (!files.length) {
       return;
     }
+
     setChange('imagesToUpload', files.length);
     for (let i = 0; i < files.length; i++) {
       resize(files[i], MAXWIDTH, MAXHEIGHT, function (resizedDataUrl) {
@@ -36,6 +37,7 @@ const ImagesForm = ({
         dispatch(addImage(kitbagId, formData));
       });
     }
+
     return;
   }
 
@@ -134,7 +136,7 @@ const ImagesForm = ({
         return i;
       });
       setChange('images', images);
-      setChange('topImage', getFirstImageExcludeDeleted({ images }));
+      setImageKey(0);
     }
   }
 
@@ -156,7 +158,7 @@ const ImagesForm = ({
       const otherImages = values.images.filter((i) => i._id !== id);
       const images = primaryImage.concat(otherImages);
       setChange('images', images);
-      setChange('topImage', getFirstImageExcludeDeleted({ images }));
+      setImageKey(0);
     }
   }
 
