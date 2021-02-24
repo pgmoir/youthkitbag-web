@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import BlankCard from '../kitbag/BlankCard';
 import MarketItemDelete from '../kitbag/market/MarketItemDelete';
 import { getImage } from '../../utils/image';
-import ImageNav from '../includes/helpers/ImageNav';
+import { ImagesNav } from '../includes/images';
 
 const MarketItemCard = ({ market }) => {
   const [modalIsActive, setModalIsActive] = useState(false);
@@ -90,7 +90,7 @@ const MarketItemCard = ({ market }) => {
                 {pill}
               </span>
             </div>
-            <ImageNav
+            <ImagesNav
               images={images}
               imageKey={imageKey}
               setImageKey={setImageKey}

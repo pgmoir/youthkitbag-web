@@ -7,7 +7,7 @@ import {
   createMarketKit,
   editMarketKit,
 } from '../../../actions/KitbagMarketActions';
-import { ImagesForm } from '../../includes/forms';
+import { ImagesForm } from '../../includes/images';
 import Threads from '../../threads/Threads';
 import validate from '../../includes/FormEmptyValidationRules';
 import { getFirstImageExcludeDeleted, getImages } from '../../../utils/image';

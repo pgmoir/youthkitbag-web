@@ -2,7 +2,7 @@ import React from 'react';
 import TextAreaInput from '../includes/controls/TextAreaInput';
 import TextInput from '../includes/controls/TextInput';
 import TextListInput from '../includes/controls/TextListInput';
-import { ImagesDisplay } from '../includes/forms/ImagesDisplay';
+import { ImagesDisplay } from '../includes/images';
 
 const GroupDisplay = ({ group }) => {
   if (!group._id) return null;

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useForm from '../hooks/useForm';
 import { createGroup, editGroup } from '../../actions/GroupActions';
-import { ImagesForm } from '../includes/forms';
+import { ImagesForm } from '../includes/images';
 import { connect } from 'react-redux';
 import validate from '../includes/FormEmptyValidationRules';
 import { getFirstImageExcludeDeleted, getImages } from '../../utils/image';

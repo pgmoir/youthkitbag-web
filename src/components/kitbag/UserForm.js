@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { editUser, loadSettingsPage } from '../../actions/UserActions';
-import { ImagesForm } from '../includes/forms';
+import { ImagesForm } from '../includes/images';
 import validate from '../includes/FormEmptyValidationRules';
 import { getFirstImageExcludeDeleted, getImages } from '../../utils/image';
 import TextInput from '../includes/controls/TextInput';

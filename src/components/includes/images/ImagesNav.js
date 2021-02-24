@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ImageNav = ({ images, imageKey, setImageKey }) => {
+const ImagesNav = ({ images, imageKey, setImageKey }) => {
   if (!images || images.length <= 1) return null;
 
   const lastImageKey = images.length - 1;
@@ -60,4 +60,4 @@ const ImageNav = ({ images, imageKey, setImageKey }) => {
   );
 };
 
-export default ImageNav;
+export { ImagesNav };

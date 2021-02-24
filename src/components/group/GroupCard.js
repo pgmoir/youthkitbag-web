@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { GroupStates } from '../../enums/groupStates.enum';
 import history from '../../utils/history';
 import { getImage } from '../../utils/image';
-import ImageNav from '../includes/helpers/ImageNav';
+import { ImagesNav } from '../includes/images';
 import BlankCard from '../kitbag/BlankCard';
 import GroupState from './GroupState';
 
@@ -108,7 +108,7 @@ const GroupCard = ({ group }) => {
             <div className="has-text-right p-2 is-overlay-topright">
               <span className="tag is-dark is-rounded">{memberCount}</span>
             </div>
-            <ImageNav
+            <ImagesNav
               images={images}
               imageKey={imageKey}
               setImageKey={setImageKey}

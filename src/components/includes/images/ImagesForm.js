@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
-import { getFirstImageExcludeDeleted } from '../../../utils/image';
+import { getFirstImageExcludeDeleted, getImage } from '../../../utils/image';
 import { resize, dataURItoBlob } from '../../../utils/imageResize';
+import { ImagesNav } from './ImagesNav';
+import { ImageUpload } from './ImageUpload';
 
 const ImagesForm = ({
   kitbagId,
@@ -12,6 +14,12 @@ const ImagesForm = ({
   addArrayItem,
   error,
 }) => {
+  const [imageKey, setImageKey] = useState(0);
+  const dispatch = useDispatch();
+  const newImages = useSelector((state) => state.images.newImages);
+
+  const { images } = values;
+
   const MAXWIDTH = 720;
   const MAXHEIGHT = 720;
 
@@ -31,13 +39,8 @@ const ImagesForm = ({
     return;
   }
 
-  const dispatch = useDispatch();
-  const newImages = useSelector((state) => state.images.newImages);
-
   function renderThumbnails() {
-    if (!values) return null;
-
-    const { images } = values;
+    if (!images) return null;
 
     if (!images?.length) return null;
 
@@ -52,7 +55,7 @@ const ImagesForm = ({
                     src={image.imageUrl}
                     alt=""
                     role="presentation"
-                    onClick={renderTopImage.bind(null, image.imageUrl)}
+                    onClick={() => setImageKey(index)}
                   />
                 </figure>
                 {!disabled && (
@@ -113,12 +116,14 @@ const ImagesForm = ({
       );
     });
 
-    return <div className="columns is-multiline mt-3 mb-0">{thumbnails}</div>;
+    return (
+      <div className="columns is-mobile is-multiline mt-3 mb-0">
+        {thumbnails}
+      </div>
+    );
   }
 
-  function renderTopImage(src) {
-    setChange('topImage', src);
-  }
+  const showImage = getImage({ images, index: imageKey });
 
   function deleteImage(id) {
     if (id && values.images) {
@@ -180,41 +185,22 @@ const ImagesForm = ({
 
   return (
     <>
-      <figure className="image mb-3">
+      <figure className="image mb-3 carousel">
         <img
           id="preview"
           name="preview"
-          src={values.topImage}
+          src={showImage}
           alt=""
           role="presentation"
         />
+        <ImagesNav
+          images={images}
+          imageKey={imageKey}
+          setImageKey={setImageKey}
+        />
       </figure>
       {renderThumbnails()}
-      {!disabled && (
-        <div className="field mb-3">
-          <div className="control">
-            <div className="file">
-              <label className="file-label" htmlFor="photos">
-                <input
-                  type="file"
-                  multiple
-                  className={`file-input${error ? ' is-danger' : ''}`}
-                  id="photos"
-                  aria-describedby="photos"
-                  onChange={(e) => onFileChanged(e)}
-                />
-                <span className="file-cta">
-                  <span className="file-icon">
-                    <i className="fas fa-upload"></i>
-                  </span>
-                  <span className="file-label">Choose image(s)</span>
-                </span>
-              </label>
-            </div>
-          </div>
-          {error && <p className="help is-danger">{error}</p>}
-        </div>
-      )}
+      {!disabled && <ImageUpload error={error} onFileChanged={onFileChanged} />}
     </>
   );
 };

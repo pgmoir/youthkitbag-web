@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { getImage } from '../../../utils/image';
+import { ImagesNav } from './ImagesNav';
 
 const ImagesDisplay = ({ images }) => {
-  const [topImageUrl, setTopImageUrl] = useState(null);
-
-  useEffect(() => {
-    if (images && images.length > 0) {
-      setTopImageUrl(images[0].imageUrl);
-    }
-  }, [images, setTopImageUrl]);
+  const [imageKey, setImageKey] = useState(0);
 
   function renderSecondaryImages() {
     if (!images || images.length <= 1) {
@@ -24,7 +20,7 @@ const ImagesDisplay = ({ images }) => {
                   src={image.imageUrl}
                   alt=""
                   role="presentation"
-                  onClick={renderTopImage.bind(null, image.imageUrl)}
+                  onClick={() => setImageKey(index)}
                 />
               </figure>
             </div>
@@ -33,24 +29,31 @@ const ImagesDisplay = ({ images }) => {
       );
     });
 
-    return <div className="columns is-multiline mt-3 mb-0">{thumbnails}</div>;
+    return (
+      <div className="columns is-mobile is-multiline mt-3 mb-0">
+        {thumbnails}
+      </div>
+    );
   }
 
-  function renderTopImage(src) {
-    setTopImageUrl(src);
-  }
+  const showImage = getImage({ images, index: imageKey });
 
   return (
     <>
-      <figure className="image mb-3">
+      <div className="image mb-3 carousel">
         <img
           id="preview"
           name="preview"
-          src={topImageUrl}
+          src={showImage}
           alt=""
           role="presentation"
         />
-      </figure>
+        <ImagesNav
+          images={images}
+          imageKey={imageKey}
+          setImageKey={setImageKey}
+        />
+      </div>
       {renderSecondaryImages()}
     </>
   );

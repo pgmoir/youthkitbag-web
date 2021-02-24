@@ -10,7 +10,7 @@ import { TradeResponse } from './response/TradeResponse';
 import { WantedResponse } from './response/WantedResponse';
 import Threads from '../threads/Threads';
 import validate from '../includes/FormEmptyValidationRules';
-import { ImagesDisplay } from '../includes/forms/ImagesDisplay';
+import { ImagesDisplay } from '../includes/images';
 import { MarketTypes } from '../../enums/marketTypes.enum';
 import TextInput from '../includes/controls/TextInput';
 import { getDateSpan } from '../../utils/date';

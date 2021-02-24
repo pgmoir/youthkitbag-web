@@ -6,7 +6,7 @@ import GroupMemberDelete from './GroupMemberDelete';
 import GroupMemberState from './GroupMemberState';
 import { MemberStates } from '../../enums/memberStates.enum';
 import { getImage } from '../../utils/image';
-import ImageNav from '../includes/helpers/ImageNav';
+import { ImagesNav } from '../includes/images';
 
 const GroupMember = ({ groupId, member, isGroupAdmin }) => {
   const [deleteModalIsActive, setDeleteModalIsActive] = useState(false);
@@ -90,7 +90,7 @@ const GroupMember = ({ groupId, member, isGroupAdmin }) => {
                 <span className={stateClasses}>{state}</span>
               </div>
             )}
-            <ImageNav
+            <ImagesNav
               images={user?.images}
               imageKey={imageKey}
               setImageKey={setImageKey}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import history from '../../../utils/history';
 import { getImage } from '../../../utils/image';
-import ImageNav from '../../includes/helpers/ImageNav';
+import { ImagesNav } from '../../includes/images';
 import BlankCard from '../BlankCard';
 import KitDelete from './KitDelete';
 
@@ -71,7 +71,7 @@ const KitCard = ({ kit, kitbagId }) => {
             <div className="has-text-right p-2 is-overlay-topright">
               <span className="tag is-dark is-rounded">{totalQuantity()}</span>
             </div>
-            <ImageNav
+            <ImagesNav
               images={images}
               imageKey={imageKey}
               setImageKey={setImageKey}

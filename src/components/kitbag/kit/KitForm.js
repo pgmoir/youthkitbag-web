@@ -7,7 +7,7 @@ import {
   createKitbagKit,
   editKitbagKit,
 } from '../../../actions/KitbagKitActions';
-import { ImagesForm } from '../../includes/forms';
+import { ImagesForm } from '../../includes/images';
 import validate from '../../includes/FormEmptyValidationRules';
 import { getFirstImageExcludeDeleted, getImages } from '../../../utils/image';
 import TextInput from '../../includes/controls/TextInput';
