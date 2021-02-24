@@ -5,9 +5,11 @@ import classNames from 'classnames';
 import BlankCard from '../kitbag/BlankCard';
 import MarketItemDelete from '../kitbag/market/MarketItemDelete';
 import { getImage } from '../../utils/image';
+import ImageNav from '../includes/helpers/ImageNav';
 
 const MarketItemCard = ({ market }) => {
   const [modalIsActive, setModalIsActive] = useState(false);
+  const [imageKey, setImageKey] = useState(0);
 
   const {
     _id,
@@ -17,6 +19,7 @@ const MarketItemCard = ({ market }) => {
     marketType,
     kitbag,
     marketPrice,
+    images,
     threads,
     deleted,
   } = market;
@@ -31,8 +34,8 @@ const MarketItemCard = ({ market }) => {
 
   if (!market?._id) return <BlankCard />;
 
-  function topImage() {
-    return getImage({ images: market.images, index: 0 });
+  function showImage() {
+    return getImage({ images: images, index: imageKey });
   }
 
   const cardClasses = classNames(`card is-clickable`);
@@ -62,7 +65,7 @@ const MarketItemCard = ({ market }) => {
         >
           <div className="card-image">
             <figure className="image is-4by3">
-              <img src={topImage()} alt={title} role="presentation" />
+              <img src={showImage()} alt={title} role="presentation" />
             </figure>
             {isOwned && !deleted && (
               <div className="has-text-left p-2 is-overlay-topleft">
@@ -89,6 +92,11 @@ const MarketItemCard = ({ market }) => {
                 {pill}
               </span>
             </div>
+            <ImageNav
+              images={images}
+              imageKey={imageKey}
+              setImageKey={setImageKey}
+            />
           </div>
           <div className="card-content">
             <p className="title is-size-5">{title}</p>

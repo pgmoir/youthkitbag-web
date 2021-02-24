@@ -7991,6 +7991,11 @@ body {
 .text-gold {
   color: #d4af37; }
 
+.tag.is-seethru {
+  background-color: rgba(255, 255, 255, 0.25); }
+  .tag.is-seethru:hover {
+    background-color: rgba(255, 255, 255, 0.75); }
+
 /*
  custom flexboxes
   */
@@ -8074,6 +8079,19 @@ body,
   bottom: 0;
   right: 0;
   position: absolute; }
+
+.is-overlay-leftcenter {
+  top: 50%;
+  left: 0;
+  position: absolute; }
+
+.is-overlay-rightcenter {
+  top: 50%;
+  right: 0;
+  position: absolute; }
+
+.icon-top-adjust {
+  margin-top: -24px; }
 
 .is-radio-small {
   width: 1rem;

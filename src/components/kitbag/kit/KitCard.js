@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import history from '../../../utils/history';
-import { getFirstImageExcludeDeleted } from '../../../utils/image';
+import { getImage } from '../../../utils/image';
+import ImageNav from '../../includes/helpers/ImageNav';
 import BlankCard from '../BlankCard';
 import KitDelete from './KitDelete';
 
 const KitCard = ({ kit, kitbagId }) => {
   const [modalIsActive, setModalIsActive] = useState(false);
+  const [imageKey, setImageKey] = useState(0);
 
-  const { _id, title, subtitle, active } = kit;
+  const { _id, title, subtitle, images, active } = kit;
 
   if (!kit?._id) return <BlankCard />;
 
   function topImage() {
-    return getFirstImageExcludeDeleted({ images: kit.images });
+    return getImage({ images: images, index: imageKey });
   }
 
   function totalQuantity() {
@@ -71,6 +73,11 @@ const KitCard = ({ kit, kitbagId }) => {
             <div className="has-text-right p-2 is-overlay-topright">
               <span className="tag is-dark is-rounded">{totalQuantity()}</span>
             </div>
+            <ImageNav
+              images={images}
+              imageKey={imageKey}
+              setImageKey={setImageKey}
+            />
           </div>
           <div className="card-content">
             <p className="title is-size-5">{title}</p>
