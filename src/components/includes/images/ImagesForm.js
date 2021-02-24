@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
 import { getImage } from '../../../utils/image';
 import { resize, dataURItoBlob } from '../../../utils/imageResize';
+import { ImageModal } from '../modals/ImageModal';
 import { ImagesNav } from './ImagesNav';
 import { ImageUpload } from './ImageUpload';
 
@@ -17,6 +18,7 @@ const ImagesForm = ({
   const [imageKey, setImageKey] = useState(0);
   const dispatch = useDispatch();
   const newImages = useSelector((state) => state.images.newImages);
+  const [modalIsActive, setModalIsActive] = useState(false);
 
   const { images } = values;
 
@@ -194,6 +196,8 @@ const ImagesForm = ({
           src={showImage}
           alt=""
           role="presentation"
+          className="is-clickable"
+          onClick={() => setModalIsActive(true)}
         />
         <ImagesNav
           images={images}
@@ -203,6 +207,12 @@ const ImagesForm = ({
       </figure>
       {renderThumbnails()}
       {!disabled && <ImageUpload error={error} onFileChanged={onFileChanged} />}
+      <ImageModal
+        images={images}
+        currentKey={imageKey}
+        modalIsActive={modalIsActive}
+        setModalIsActive={setModalIsActive}
+      />
     </>
   );
 };

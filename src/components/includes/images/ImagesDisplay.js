@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+
 import { getImage } from '../../../utils/image';
 import { ImagesNav } from './ImagesNav';
+import { ImageModal } from '../modals/ImageModal';
 
 const ImagesDisplay = ({ images }) => {
   const [imageKey, setImageKey] = useState(0);
+  const [modalIsActive, setModalIsActive] = useState(false);
 
   function renderSecondaryImages() {
     if (!images || images.length <= 1) {
@@ -47,6 +50,8 @@ const ImagesDisplay = ({ images }) => {
           src={showImage}
           alt=""
           role="presentation"
+          className="is-clickable"
+          onClick={() => setModalIsActive(true)}
         />
         <ImagesNav
           images={images}
@@ -55,6 +60,12 @@ const ImagesDisplay = ({ images }) => {
         />
       </div>
       {renderSecondaryImages()}
+      <ImageModal
+        images={images}
+        currentKey={imageKey}
+        modalIsActive={modalIsActive}
+        setModalIsActive={setModalIsActive}
+      />
     </>
   );
 };
