@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { getImage } from '../../utils/image';
 
 const mapStateToProps = (state) => ({
   user: state.user,
@@ -39,11 +40,7 @@ const GroupsPage = ({ user }) => {
                     <Link to={`/groups/${item._id}`}>
                       <figure className="image is-1by1">
                         <img
-                          src={
-                            item.images && item.images.length > 0
-                              ? item.images[0].imageUrl
-                              : '/images/defaultthumb.png'
-                          }
+                          src={getImage({ images: item.images, index: 0 })}
                           className="is-rounded"
                           alt=""
                         />

@@ -133,8 +133,8 @@ const Header = ({ auth, user }) => {
       </header>
       <CookieConsent
         cookieName="youthkitbagCookieConstent-1"
-        // buttonClasses="btn btn-warning mx-auto mx-sm-3 mb-3 my-sm-auto"
-        // disableButtonStyles={true}
+        buttonClasses="button is-warning m-5"
+        disableButtonStyles={true}
       >
         <div className="py-4">
           This website requires cookies to handle key features such as logging

@@ -7,10 +7,7 @@ export default function authentication(state = initialState, action) {
     case GET_USER:
     case EDIT_USER: {
       const user = action.payload.data;
-      const topImage = user.images.length
-        ? user.images[0].imageUrl
-        : '/images/defaultthumb.png';
-      return { topImage, ...user };
+      return { ...user };
     }
     case LOGOUT:
       return initialState;

@@ -8,7 +8,7 @@ const ImagesDisplay = ({ images }) => {
   const [imageKey, setImageKey] = useState(0);
   const [modalIsActive, setModalIsActive] = useState(false);
 
-  function renderSecondaryImages() {
+  function renderThumbnails() {
     if (!images || images.length <= 1) {
       return null;
     }
@@ -59,7 +59,7 @@ const ImagesDisplay = ({ images }) => {
           setImageKey={setImageKey}
         />
       </div>
-      {renderSecondaryImages()}
+      {renderThumbnails()}
       <ImageModal
         images={images}
         currentKey={imageKey}

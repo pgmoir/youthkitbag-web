@@ -6,6 +6,7 @@ import {
   loadSettingsPage,
 } from '../../actions/UserActions';
 import { connect } from 'react-redux';
+import { getImage } from '../../utils/image';
 
 const mapDispatchToProps = {
   editPreferredKitbag,
@@ -61,11 +62,7 @@ const PreferredKitbagForm = ({
                   <Link to={`/kitbags/${item._id}`}>
                     <figure className="image is-1by1">
                       <img
-                        src={
-                          item.images && item.images.length > 0
-                            ? item.images[0].imageUrl
-                            : '/images/defaultthumb.png'
-                        }
+                        src={getImage({ images: item.images, index: 0 })}
                         className="is-rounded"
                         alt=""
                       />

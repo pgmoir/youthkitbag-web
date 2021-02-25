@@ -44,9 +44,7 @@ const ImagesForm = ({
   }
 
   function renderThumbnails() {
-    if (!images) return null;
-
-    if (!images?.length) return null;
+    if (!images || !images?.length) return null;
 
     const thumbnails = images.map((image, index) => {
       return (
