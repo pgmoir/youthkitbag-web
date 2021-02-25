@@ -132,7 +132,7 @@ const GroupPage = ({ fetchGroup, match }) => {
       return (
         <span
           className={stateClasses}
-        >{`Your current membership status is "${group.groupMemberState}"`}</span>
+        >{`Your membership status is "${group.groupMemberState}"`}</span>
       );
     }
 
