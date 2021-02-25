@@ -164,13 +164,18 @@ const SearchForm = ({
           )}
         </p>
         <p className="control">
-          <button className="button is-primary" type="submit">
-            Search
+          <button className="button is-primary" type="submit" title="Search">
+            <i className="fas fa-search"></i>
           </button>
         </p>
         <p className="control">
-          <button className="button" type="button" onClick={clearSearch}>
-            Clear
+          <button
+            className="button"
+            type="button"
+            onClick={clearSearch}
+            title="Reset search"
+          >
+            <i className="fas fa-undo-alt"></i>
           </button>
         </p>
       </div>
