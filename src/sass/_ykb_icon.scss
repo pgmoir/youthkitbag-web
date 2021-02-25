@@ -1,0 +1,13 @@
+.icon {
+  &.is-extralarge {
+    height: 6rem;
+    width: 6rem;
+    font-size: 3rem;
+  }
+  &.is-rounded {
+    border-radius: 50%;
+  }
+  &.is-extralarge.has-background-success:hover {
+    border: $success solid 3.1rem;
+  }
+}

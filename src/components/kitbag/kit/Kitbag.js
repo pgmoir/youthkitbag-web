@@ -88,7 +88,7 @@ const Kitbag = ({
         <Title title={getTitle()} />
         <Alert />
         <div className="columns">
-          <div className="column is-three-quarters">
+          <div className="column is-full">
             <SearchForm
               searchId={kitbagId}
               search={search}
@@ -96,14 +96,6 @@ const Kitbag = ({
               collections={lists}
               placeholderText="Search your kit"
             />
-          </div>
-          <div className="column is-one-quarter has-text-right">
-            <Link
-              to={`/kitbag/kit/${kitbagId}/new`}
-              className="button is-primary"
-            >
-              Add new kit
-            </Link>
           </div>
         </div>
         <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
@@ -118,9 +110,13 @@ const Kitbag = ({
         </div>
       </div>
       <div className="is-sticky-bottomright icon-text">
-        <div className="icon is-xlarge has-background-success has-text-light is-clickable is-rounded m-5">
-          <i className="fas fa-plus is-large"></i>
-        </div>
+        <Link
+          to={`/kitbag/kit/${kitbagId}/new`}
+          className="icon is-extralarge has-background-success has-text-light is-rounded m-5"
+          title="Add new item to your kitbag"
+        >
+          <i className="fas fa-plus"></i>
+        </Link>
       </div>
     </>
   );

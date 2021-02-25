@@ -42,16 +42,4 @@
   position: fixed;
   bottom: 0px;
   right: 0px;
-  .is-rounded {
-    border-radius: 50%;
-  }
-  .icon {
-    &.is-xlarge {
-      height: 6rem;
-      width: 6rem;
-    }
-    .is-large {
-      font-size: 3rem;
-    }
-  }
 }
