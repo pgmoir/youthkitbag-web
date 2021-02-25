@@ -8122,6 +8122,11 @@ body,
 .icon-top-adjust {
   margin-top: -24px; }
 
+.is-sticky-bottomright {
+  position: fixed;
+  bottom: 0px;
+  right: 0px; }
+
 .is-radio-small {
   width: 1rem;
   height: 1rem; }

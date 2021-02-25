@@ -117,6 +117,11 @@ const Kitbag = ({
           />
         </div>
       </div>
+      <div className="is-sticky-bottomright">
+        <div className="tag is-large is-rounded is-success m-5">
+          <i className="fas fa-plus"></i>
+        </div>
+      </div>
     </>
   );
 };
