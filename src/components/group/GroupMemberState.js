@@ -39,9 +39,7 @@ const GroupMemberState = ({
     validate
   );
 
-  function memberName() {
-    return `${user.firstName} ${user.lastName}`;
-  }
+  const memberName = `${user.firstName} ${user.lastName}`;
 
   function updateMember() {
     const formValues = { ...values };
@@ -49,23 +47,15 @@ const GroupMemberState = ({
     setModalIsActive(false);
   }
 
-  function getPrimaryButton() {
-    return (
-      <button className="button is-success" onClick={handleSubmit}>
-        Save
-      </button>
-    );
-  }
-
   return (
     <Modal
       title="Select member state"
+      handleSubmit={handleSubmit}
       modalIsActive={modalIsActive}
       setModalIsActive={setModalIsActive}
-      primaryButton={getPrimaryButton()}
     >
       <p className="is-size-6 mb-3">
-        {`Select the new membership status for, "${memberName()}"`}
+        {`Select the new membership status for, "${memberName}"`}
       </p>
       <SelectInput
         value={values.state}

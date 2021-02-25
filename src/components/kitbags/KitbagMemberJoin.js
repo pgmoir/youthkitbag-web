@@ -29,20 +29,13 @@ const KitbagMemberJoin = ({
     setModalIsActive(false);
   }
 
-  function getPrimaryButton() {
-    return (
-      <button className="button is-primary" onClick={handleSubmit}>
-        Send Request
-      </button>
-    );
-  }
-
   return (
     <Modal
       title="Request to join a kitbag?"
+      buttonText="Send Request"
+      handleSubmit={handleSubmit}
       modalIsActive={modalIsActive}
       setModalIsActive={setModalIsActive}
-      primaryButton={getPrimaryButton()}
     >
       <p className="is-size-6">
         Enter the email of the person who has the kitbag to which you&apos;d

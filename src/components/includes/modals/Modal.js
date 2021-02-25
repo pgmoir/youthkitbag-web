@@ -1,18 +1,27 @@
 import React from 'react';
+import classNames from 'classnames';
 
 const Modal = ({
   title,
   children,
-  primaryButton,
+  buttonClassName = 'is-success',
+  buttonText = 'Save',
+  handleSubmit,
   modalIsActive,
   setModalIsActive,
 }) => {
+  const modalClasses = classNames('modal', {
+    'is-active': modalIsActive,
+  });
+
+  const primaryButtonClasses = classNames('button', buttonClassName);
+
   function closeModal() {
     setModalIsActive(false);
   }
 
   return (
-    <div className={`modal ${modalIsActive ? 'is-active' : ''}`}>
+    <div className={modalClasses}>
       <div
         className="modal-background"
         onClick={closeModal}
@@ -32,7 +41,9 @@ const Modal = ({
         </header>
         <section className="modal-card-body">{children}</section>
         <footer className="modal-card-foot">
-          {primaryButton}
+          <button className={primaryButtonClasses} onClick={handleSubmit}>
+            {buttonText}
+          </button>
           <button className="button is-warning" onClick={closeModal}>
             Cancel
           </button>

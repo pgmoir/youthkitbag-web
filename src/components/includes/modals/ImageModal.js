@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import classNames from 'classnames';
+
 import { getImage } from '../../../utils/image';
 import { ImagesNav } from '../images';
 
@@ -12,12 +14,16 @@ const ImageModal = ({
 
   const showImage = getImage({ images, index: imageKey });
 
+  const modalClasses = classNames('modal', {
+    'is-active': modalIsActive,
+  });
+
   function closeModal() {
     setModalIsActive(false);
   }
 
   return (
-    <div className={`modal ${modalIsActive ? 'is-active' : ''}`}>
+    <div className={modalClasses}>
       <div
         className="modal-background is-clickable"
         role="button"

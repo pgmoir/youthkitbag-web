@@ -15,26 +15,18 @@ const GroupMemberLeave = ({
   modalIsActive,
   setModalIsActive,
 }) => {
-  function getPrimaryButton() {
-    return (
-      <button
-        className="button is-success"
-        onClick={async () => {
-          requestGroupLeave({ groupId });
-          setModalIsActive(false);
-        }}
-      >
-        Leave
-      </button>
-    );
+  function handleSubmit() {
+    requestGroupLeave({ groupId });
+    setModalIsActive(false);
   }
 
   return (
     <Modal
       title="Please confirm"
+      buttonText="Leave"
+      handleSubmit={handleSubmit}
       modalIsActive={modalIsActive}
       setModalIsActive={setModalIsActive}
-      primaryButton={getPrimaryButton()}
     >
       <p className="is-size-6">{`Would you like to leave "${name}"?`}</p>
     </Modal>

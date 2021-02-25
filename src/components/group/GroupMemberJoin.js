@@ -15,26 +15,18 @@ const GroupMemberJoin = ({
   modalIsActive,
   setModalIsActive,
 }) => {
-  function getPrimaryButton() {
-    return (
-      <button
-        className="button is-success"
-        onClick={async () => {
-          requestGroupJoin({ groupId });
-          setModalIsActive(false);
-        }}
-      >
-        Submit Request
-      </button>
-    );
+  function handleSubmit() {
+    requestGroupJoin({ groupId });
+    setModalIsActive(false);
   }
 
   return (
     <Modal
       title="Please confirm"
+      buttonText="Submit Request"
+      handleSubmit={handleSubmit}
       modalIsActive={modalIsActive}
       setModalIsActive={setModalIsActive}
-      primaryButton={getPrimaryButton()}
     >
       <p className="is-size-6">
         {`Would you like to submit a request to join "${name}"?`}

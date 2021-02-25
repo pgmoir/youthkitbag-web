@@ -16,26 +16,19 @@ const MarketItemDelete = ({
   setModalIsActive,
   deleteMarketKit,
 }) => {
-  function getPrimaryButton() {
-    return (
-      <button
-        className="button is-success"
-        onClick={async () => {
-          deleteMarketKit(kitbagId, marketId);
-          setModalIsActive(false);
-        }}
-      >
-        Delete
-      </button>
-    );
+  function handleSubmit() {
+    deleteMarketKit(kitbagId, marketId);
+    setModalIsActive(false);
   }
 
   return (
     <Modal
       title="Please confirm"
+      buttonClassName="is-danger"
+      buttonText="Delete"
+      handleSubmit={handleSubmit}
       modalIsActive={modalIsActive}
       setModalIsActive={setModalIsActive}
-      primaryButton={getPrimaryButton()}
     >
       <p className="is-size-6">
         {`Are you sure you want to delete this market item, "${title}"?`}

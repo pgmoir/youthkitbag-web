@@ -16,33 +16,24 @@ const GroupMemberDelete = ({
   modalIsActive,
   setModalIsActive,
 }) => {
-  function memberName() {
-    return `${user.firstName} ${user.lastName}`;
-  }
+  const memberName = `${user.firstName} ${user.lastName}`;
 
-  function getPrimaryButton() {
-    return (
-      <button
-        className="button is-success"
-        onClick={async () => {
-          deleteGroupMember({ groupId, memberId });
-          setModalIsActive(false);
-        }}
-      >
-        Delete
-      </button>
-    );
+  function handleSubmit() {
+    deleteGroupMember({ groupId, memberId });
+    setModalIsActive(false);
   }
 
   return (
     <Modal
       title="Please confirm"
+      buttonClassName="is-danger"
+      buttonText="Delete"
+      handleSubmit={handleSubmit}
       modalIsActive={modalIsActive}
       setModalIsActive={setModalIsActive}
-      primaryButton={getPrimaryButton()}
     >
       <p className="is-size-6">
-        {`Are you sure you want to delete this member, "${memberName()}"?`}
+        {`Are you sure you want to delete this member, "${memberName}"?`}
       </p>
     </Modal>
   );

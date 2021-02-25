@@ -42,20 +42,12 @@ const GroupState = ({
     setModalIsActive(false);
   }
 
-  function getPrimaryButton() {
-    return (
-      <button className="button is-success" onClick={handleSubmit}>
-        Save
-      </button>
-    );
-  }
-
   return (
     <Modal
       title="Select group state"
+      handleSubmit={handleSubmit}
       modalIsActive={modalIsActive}
       setModalIsActive={setModalIsActive}
-      primaryButton={getPrimaryButton()}
     >
       <p className="is-size-6 mb-3">
         {`Select the new group status for, "${groupName}"`}

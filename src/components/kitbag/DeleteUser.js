@@ -31,20 +31,14 @@ const DeleteUser = ({
     setModalIsActive(false);
   }
 
-  function getPrimaryButton() {
-    return (
-      <button className="button is-danger" onClick={handleSubmit}>
-        Delete
-      </button>
-    );
-  }
-
   return (
     <Modal
       title="Are you really sure?"
+      buttonClassName="is-danger"
+      buttonText="Delete"
+      handleSubmit={handleSubmit}
       modalIsActive={modalIsActive}
       setModalIsActive={setModalIsActive}
-      primaryButton={getPrimaryButton()}
     >
       <p className="is-size-6">
         You must enter your current email and password to complete the deletion

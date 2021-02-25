@@ -15,26 +15,19 @@ const KitDelete = ({
   setModalIsActive,
   deleteKitbagKit,
 }) => {
-  function getPrimaryButton() {
-    return (
-      <button
-        className="button is-success"
-        onClick={async () => {
-          deleteKitbagKit({ kitbagId, kitId });
-          setModalIsActive(false);
-        }}
-      >
-        Delete
-      </button>
-    );
+  function handleSubmit() {
+    deleteKitbagKit({ kitbagId, kitId });
+    setModalIsActive(false);
   }
 
   return (
     <Modal
       title="Please confirm"
+      buttonClassName="is-danger"
+      buttonText="Delete"
+      handleSubmit={handleSubmit}
       modalIsActive={modalIsActive}
       setModalIsActive={setModalIsActive}
-      primaryButton={getPrimaryButton()}
     >
       <p className="is-size-6">
         {`Are you sure you want to delete this kitbag item, "${title}"?`}

@@ -36,20 +36,13 @@ const KitbagMemberInvite = ({
     setModalIsActive(false);
   }
 
-  function getPrimaryButton() {
-    return (
-      <button className="button is-success" onClick={handleSubmit}>
-        Invite
-      </button>
-    );
-  }
-
   return (
     <Modal
       title={`Invite to ${kitbagName}`}
+      buttonText="Invite"
+      handleSubmit={handleSubmit}
       modalIsActive={modalIsActive}
       setModalIsActive={setModalIsActive}
-      primaryButton={getPrimaryButton()}
     >
       <p className="is-size-6 mb-3">
         Enter the email and role for the person you want to invite to this
