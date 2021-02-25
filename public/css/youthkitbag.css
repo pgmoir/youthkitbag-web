@@ -8089,17 +8089,6 @@ body,
 .icon.is-extralarge.has-background-success:hover {
   border: #93c54b solid 3.1rem; }
 
-/*
-  burger bun css solution (no javascript)
-  adapation from here https://jsfiddle.net/jfm2jyk5/
-  not quite working yet
-  */
-#navbar-toggle-state {
-  display: none; }
-
-#navbar-toggle-state:checked ~ .navbar-menu {
-  display: block !important; }
-
 .is-overlay-topleft {
   top: 0;
   left: 0;

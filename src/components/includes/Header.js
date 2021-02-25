@@ -38,95 +38,79 @@ const Header = ({ auth, user }) => {
           aria-label="main navigation"
         >
           <div className="navbar-brand">
-            <Link className="navbar-item" to="/">
-              <strong>YouthKitbag</strong>
+            <Link className="navbar-item is-size-4" to="/">
+              YouthKitbag
             </Link>
-            <label
-              className="navbar-burger burger"
-              htmlFor="navbar-toggle-state"
-            >
-              <span></span>
-              <span></span>
-              <span></span>
-            </label>
-            <input type="checkbox" id="navbar-toggle-state" />
-            <div className="navbar-menu">
-              <div className="navbar-end">
-                {loggedIn && (
-                  <>
-                    {group && (
-                      <div className="navbar-item">
-                        <Link
-                          className="button is-light"
-                          to="/market?searchfor=&by=&page=1&pagesize=24"
-                          aria-label="Market place"
-                        >
-                          <span className="icon">
-                            <i className="fas fa-boxes"></i>
-                          </span>
-                          <span>Market</span>
-                        </Link>
-                      </div>
-                    )}
-                    {kitbag && (
-                      <div className="navbar-item">
-                        <Link
-                          className="button is-light"
-                          to={`/kitbag/kit/${kitbag._id}`}
-                          aria-label={`${kitbag.name}`}
-                        >
-                          <span className="icon">
-                            <i className="fas fa-briefcase"></i>
-                          </span>
-                          <span>Kitbag</span>
-                        </Link>
-                      </div>
-                    )}
-                    <div className="navbar-item">
-                      <Link className="" to="/settings/user">
-                        <div className="image">
-                          <img
-                            src={profileImage}
-                            className="is-avatar is-rounded is-48x48"
-                            alt=""
-                          />
-                        </div>
-                      </Link>
-                    </div>
-                    <div className="navbar-item">
+
+            <div className="is-flex is-flex-grow-1 is-justify-content-flex-end is-align-items-center">
+              {loggedIn && (
+                <>
+                  {group && (
+                    <div>
                       <Link
-                        className="button is-primary is-outlined is-inverted"
-                        to="/auth/logout"
+                        className="button is-light px-3 mr-3"
+                        to="/market"
+                        aria-label="Market place"
                       >
-                        <span className="icon">
-                          <i className="fas fa-sign-out-alt"></i>
-                        </span>
-                        <span>Log out</span>
+                        <i className="fas fa-boxes"></i>
+                        <span className="is-hidden-touch">Market</span>
                       </Link>
                     </div>
-                  </>
-                )}
-                {!loggedIn && (
-                  <>
-                    <div className="navbar-item">
-                      <Link className="button is-primary" to="/auth/signup">
-                        <span className="icon">
-                          <i className="fas fa-sign-in-alt"></i>
-                        </span>
-                        <span>Sign up</span>
+                  )}
+                  {kitbag && (
+                    <div>
+                      <Link
+                        className="button is-light px-3 mr-3"
+                        to={`/kitbag/kit/${kitbag._id}`}
+                        aria-label={`${kitbag.name}`}
+                      >
+                        <i className="fas fa-briefcase"></i>
+                        <span className="is-hidden-touch">Kitbag</span>
                       </Link>
                     </div>
-                    <div className="navbar-item">
-                      <Link className="button is-light" to="/auth/login">
-                        <span className="icon">
-                          <i className="fas fa-user-circle"></i>
-                        </span>
-                        <span>Log in</span>
-                      </Link>
-                    </div>
-                  </>
-                )}
-              </div>
+                  )}
+                  <div>
+                    <Link className="" to="/settings/user">
+                      <div className="image mr-3">
+                        <img
+                          src={profileImage}
+                          className="is-avatar is-rounded is-32x32"
+                          alt=""
+                        />
+                      </div>
+                    </Link>
+                  </div>
+                  <div>
+                    <Link
+                      className="button is-primary is-outlined is-inverted px-3 mr-3"
+                      to="/auth/logout"
+                    >
+                      <i className="fas fa-sign-out-alt"></i>
+                      <span className="is-hidden-touch">Log out</span>
+                    </Link>
+                  </div>
+                </>
+              )}
+              {!loggedIn && (
+                <>
+                  <div className="navbar-item">
+                    <Link className="button is-primary" to="/auth/signup">
+                      <span className="icon">
+                        <i className="fas fa-sign-in-alt"></i>
+                      </span>
+                      <span>Sign up</span>
+                    </Link>
+                  </div>
+                  <div className="navbar-item">
+                    <Link className="button is-light" to="/auth/login">
+                      <span className="icon">
+                        <i className="fas fa-user-circle"></i>
+                      </span>
+                      <span>Log in</span>
+                    </Link>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </nav>
