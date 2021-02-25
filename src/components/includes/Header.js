@@ -37,13 +37,13 @@ const Header = ({ auth, user }) => {
           role="navigation"
           aria-label="main navigation"
         >
-          <div className="navbar-brand">
+          <div className="navbar-brand is-flex-grow-1">
             <Link className="navbar-item is-size-4" to="/">
               YouthKitbag
             </Link>
 
             <div className="is-flex is-flex-grow-1 is-justify-content-flex-end is-align-items-center">
-              {loggedIn && (
+              {loggedIn ? (
                 <>
                   {group && (
                     <div>
@@ -53,7 +53,9 @@ const Header = ({ auth, user }) => {
                         aria-label="Market place"
                       >
                         <i className="fas fa-boxes"></i>
-                        <span className="is-hidden-touch">Market</span>
+                        <span className="is-hidden-touch ml-3 has-text-weight-bold">
+                          Market
+                        </span>
                       </Link>
                     </div>
                   )}
@@ -65,7 +67,9 @@ const Header = ({ auth, user }) => {
                         aria-label={`${kitbag.name}`}
                       >
                         <i className="fas fa-briefcase"></i>
-                        <span className="is-hidden-touch">Kitbag</span>
+                        <span className="is-hidden-touch ml-3 has-text-weight-bold">
+                          Kitbag
+                        </span>
                       </Link>
                     </div>
                   )}
@@ -86,27 +90,36 @@ const Header = ({ auth, user }) => {
                       to="/auth/logout"
                     >
                       <i className="fas fa-sign-out-alt"></i>
-                      <span className="is-hidden-touch">Log out</span>
+                      <span className="is-hidden-touch ml-3 has-text-weight-bold">
+                        Log out
+                      </span>
                     </Link>
                   </div>
                 </>
-              )}
-              {!loggedIn && (
+              ) : (
                 <>
-                  <div className="navbar-item">
-                    <Link className="button is-primary" to="/auth/signup">
-                      <span className="icon">
-                        <i className="fas fa-sign-in-alt"></i>
+                  <div>
+                    <Link
+                      className="button is-primary px-3 mr-3"
+                      to="/auth/signup"
+                      aria-label="Sign up"
+                    >
+                      <i className="fas fa-sign-in-alt"></i>
+                      <span className="is-hidden-touch ml-3 has-text-weight-bold">
+                        Sign up
                       </span>
-                      <span>Sign up</span>
                     </Link>
                   </div>
-                  <div className="navbar-item">
-                    <Link className="button is-light" to="/auth/login">
-                      <span className="icon">
-                        <i className="fas fa-user-circle"></i>
+                  <div>
+                    <Link
+                      className="button is-light px-3 mr-3"
+                      to="/auth/login"
+                      aria-label="Log in"
+                    >
+                      <i className="fas fa-user-circle"></i>
+                      <span className="is-hidden-touch ml-3 has-text-weight-bold">
+                        Log in
                       </span>
-                      <span>Log in</span>
                     </Link>
                   </div>
                 </>
