@@ -76,38 +76,47 @@ const Groups = ({
       return null;
 
     return (
-      <Link to="/groups/new" className="button is-primary">
-        Add new group
-      </Link>
+      <div className="is-sticky-bottomright icon-text">
+        <Link
+          to="/groups/new"
+          className="icon is-extralarge has-background-success has-text-light is-rounded m-5"
+          title="Add new group"
+        >
+          <i className="fas fa-plus"></i>
+        </Link>
+      </div>
     );
   }
 
   const crumbs = [{ title: 'Home', to: '/' }, { title: 'Groups' }];
 
   return (
-    <div>
-      <Breadcrumb crumbs={crumbs} />
-      <Title title={getTitle()} />
-      <Alert />
-      <div className="columns">
-        <div className="column is-three-quarters">
-          <SearchForm
-            search={search}
-            callback={setSearch}
-            placeholderText="Search groups"
-          />
+    <>
+      <div>
+        <Breadcrumb crumbs={crumbs} />
+        <Title title={getTitle()} />
+        <Alert />
+        <div className="columns">
+          <div className="column is-three-quarters">
+            <SearchForm
+              search={search}
+              callback={setSearch}
+              placeholderText="Search groups"
+            />
+          </div>
+          <div className="column is-one-quarter has-text-right">
+            {renderAddNewButton()}
+          </div>
         </div>
-        <div className="column is-one-quarter has-text-right">
-          {renderAddNewButton()}
+        <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
+          {renderList()}
+        </div>
+        <div className="mb-3">
+          <Pagination search={search} callback={setSearch} />
         </div>
       </div>
-      <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
-        {renderList()}
-      </div>
-      <div className="mb-3">
-        <Pagination search={search} callback={setSearch} />
-      </div>
-    </div>
+      {renderAddNewButton()}
+    </>
   );
 };
 
