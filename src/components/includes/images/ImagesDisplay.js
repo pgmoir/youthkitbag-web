@@ -18,7 +18,7 @@ const ImagesDisplay = ({ images }) => {
         <div key={index} className="is-flex is-flex-direction-row mb-3 ml-3">
           <div className="card">
             <div className="card-image is-clickable">
-              <figure className="image is-square is-128x128">
+              <figure className="image is-square is-96x96">
                 <img
                   src={image.imageUrl}
                   alt=""

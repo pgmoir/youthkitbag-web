@@ -52,7 +52,7 @@ const ImagesForm = ({
           {image.state !== 'D' ? (
             <div className="card">
               <div className="card-image is-clickable">
-                <figure className="image is-square is-128x128">
+                <figure className="image is-square is-96x96">
                   <img
                     src={image.imageUrl}
                     alt=""
@@ -95,7 +95,7 @@ const ImagesForm = ({
           ) : (
             <div className="card">
               <div className="card-image">
-                <figure className="image is-square is-128x128">
+                <figure className="image is-square is-96x96">
                   <img src={image.imageUrl} alt="" role="presentation" />
                 </figure>
                 <div className="is-overlay">
