@@ -160,55 +160,20 @@ const GroupForm = ({
                   title="Link will open a new tab"
                 ></span>
               </p>
-              <hr />
             </>
           )}
-          <div>
-            {values.images &&
-              values.images.map((item, index) => (
-                <div key={`${item._id}-${index}`}>
-                  <input
-                    name={`images[${index}]._id`}
-                    type="hidden"
-                    value={values.images[index]._id}
-                  />
-                  <input
-                    name={`images[${index}].image`}
-                    type="hidden"
-                    value={values.images[index].image}
-                  />
-                  <input
-                    name={`images[${index}].imageUrl`}
-                    type="hidden"
-                    value={values.images[index].imageUrl}
-                  />
-                  <input
-                    name={`images[${index}].state`}
-                    type="hidden"
-                    value={values.images[index].state}
-                  />
-                </div>
-              ))}
-            {values.deletedImages &&
-              values.deletedImages.map((item, index) => (
-                <div key={`${item._id}-${index}`}>
-                  <input
-                    name={`deletedImages[${index}]._id`}
-                    type="hidden"
-                    value={values.deletedImages[index]._id}
-                  />
-                </div>
-              ))}
-          </div>
           {userBundle && values && (
-            <div className="buttons">
-              <button className="button is-primary" type="submit">
-                Save
-              </button>
-              <Link className="button is-warning" to="/groups">
-                Cancel
-              </Link>
-            </div>
+            <>
+              <hr />
+              <div className="buttons">
+                <button className="button is-primary" type="submit">
+                  Save
+                </button>
+                <Link className="button is-warning" to="/groups">
+                  Cancel
+                </Link>
+              </div>
+            </>
           )}
         </form>
       </div>

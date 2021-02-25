@@ -315,43 +315,6 @@ const KitForm = ({
             help="This item is automatically switched off when state is changed to Sold, Stolen, Recycled, Trashed or Donated, but can be changed so that it remains included in standard search."
           />
           <hr />
-          <div>
-            {values.images &&
-              values.images.map((item, index) => (
-                <div key={`${item._id}-${index}`}>
-                  <input
-                    name={`images[${index}]._id`}
-                    type="hidden"
-                    value={values.images[index]._id}
-                  />
-                  <input
-                    name={`images[${index}].image`}
-                    type="hidden"
-                    value={values.images[index].image}
-                  />
-                  <input
-                    name={`images[${index}].imageUrl`}
-                    type="hidden"
-                    value={values.images[index].imageUrl}
-                  />
-                  <input
-                    name={`images[${index}].state`}
-                    type="hidden"
-                    value={values.images[index].state}
-                  />
-                </div>
-              ))}
-            {values.deletedImages &&
-              values.deletedImages.map((item, index) => (
-                <div key={`${item._id}-${index}`}>
-                  <input
-                    name={`deletedImages[${index}]._id`}
-                    type="hidden"
-                    value={values.deletedImages[index]._id}
-                  />
-                </div>
-              ))}
-          </div>
           <div className="buttons">
             <button className="button is-primary" type="submit">
               Save
