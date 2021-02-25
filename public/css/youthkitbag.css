@@ -8025,11 +8025,6 @@ fullhd: from 1408px
 .text-gold {
   color: #d4af37; }
 
-.tag.is-seethru {
-  background-color: rgba(255, 255, 255, 0.25); }
-  .tag.is-seethru:hover {
-    background-color: rgba(255, 255, 255, 0.75); }
-
 /*
  custom flexboxes
   */
@@ -8138,6 +8133,20 @@ body,
 .is-radio-large {
   width: 1.5rem;
   height: 1.5rem; }
+
+/*
+  used for navigation arrows
+  */
+.tag.is-seethru {
+  background-color: rgba(255, 255, 255, 0.25); }
+  .tag.is-seethru:hover {
+    background-color: rgba(255, 255, 255, 0.75); }
+
+.button.is-seethru {
+  border: none;
+  background-color: rgba(255, 255, 255, 0.05); }
+  .button.is-seethru:hover {
+    background-color: rgba(255, 255, 255, 0.75); }
 
 /*
   https://projects.verou.me/bubbly/

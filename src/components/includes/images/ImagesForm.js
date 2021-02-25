@@ -64,26 +64,26 @@ const ImagesForm = ({
                   <>
                     <div className="is-overlay-topleft">
                       <button
-                        className="button is-danger is-outlined"
+                        className="button is-seethru"
                         href="#"
                         onClick={deleteImage.bind(null, image._id)}
                       >
                         <i
                           aria-hidden="true"
-                          className="fas fa-trash"
+                          className="fas fa-trash has-text-danger"
                           title="Delete this image?"
                         ></i>
                       </button>
                     </div>
                     <div className="is-overlay-topright">
                       <button
-                        className="button is-success is-outlined"
+                        className="button is-seethru"
                         href="#"
                         onClick={setPrimaryImage.bind(null, image._id)}
                       >
                         <i
                           aria-hidden="true"
-                          className="fas fa-star"
+                          className="fas fa-star has-text-success"
                           title="Set as primary image"
                         ></i>
                       </button>
@@ -100,13 +100,13 @@ const ImagesForm = ({
                 </figure>
                 <div className="is-overlay">
                   <button
-                    className="button is-warning is-outlined"
+                    className="button is-seethru"
                     href="#"
                     onClick={reinstateImage.bind(null, image._id)}
                   >
                     <i
                       aria-hidden="true"
-                      className="fas fa-undo"
+                      className="fas fa-undo has-text-warning"
                       title="Undo image deletion"
                     ></i>
                   </button>
