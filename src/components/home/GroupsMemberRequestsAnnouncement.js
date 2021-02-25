@@ -106,7 +106,7 @@ const GroupsMemberRequestsAnnouncement = ({
 
   return (
     <article className="tile is-child notification is-info">
-      <p className="title">Member requests</p>
+      <h2 className="title">Member requests</h2>
       <div className="content">
         <p>
           You have <span className="tag is-rounded">{requestsCount}</span>{' '}

@@ -6,7 +6,7 @@ const MarketAnnouncement = ({ group, doNotShow }) => {
 
   return (
     <article className="tile is-child notification is-danger">
-      <p className="title">Market watches</p>
+      <h2 className="title">Market watches</h2>
       <div className="content">
         <p>You have received responses to your trade offers.</p>
       </div>

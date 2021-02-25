@@ -6,7 +6,7 @@ const KitbagKitAddMoreAdvice = ({ kitbagId }) => {
 
   return (
     <article className="tile is-child notification is-danger">
-      <p className="title">Add more kit</p>
+      <h2 className="title">Add more kit</h2>
       <div className="content">
         <p>
           You only have <span className="tag is-rounded">0</span> items stored

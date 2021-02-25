@@ -6,7 +6,7 @@ const KitbagKitLevelWarnings = ({ kitbagId, doNotShow }) => {
 
   return (
     <article className="tile is-child notification is-danger">
-      <p className="title">Kit level warnings</p>
+      <h2 className="title">Kit level warnings</h2>
       <div className="content">
         <p>
           You have the following items at warning level. Please order new stock

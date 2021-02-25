@@ -6,7 +6,7 @@ const GroupAnnouncement = ({ hasGroupMembership }) => {
 
   return (
     <article className="tile is-child notification is-info">
-      <p className="title">Join a group</p>
+      <h2 className="title">Join a group</h2>
       <div className="content">
         <p>
           YouthKitbag currently only allows trading through accredited clubs and

@@ -6,7 +6,7 @@ const KitbagKitAnnouncement = ({ kitbagId }) => {
 
   return (
     <article className="tile is-child notification is-danger">
-      <p className="title">Kitbag activity</p>
+      <h2 className="title">Kitbag activity</h2>
       <div className="content">
         <p>
           The following items have recently been added, edited or traded in your

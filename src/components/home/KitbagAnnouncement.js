@@ -10,7 +10,7 @@ const KitbagAnnouncement = ({ kitbagId }) => {
 
   return (
     <article className="tile is-child notification is-primary">
-      <p className="title">Get started</p>
+      <h2 className="title">Get started</h2>
       <p className="subtitle">Make the most of YouthKitbag</p>
       <div className="content">
         <p>

@@ -11,7 +11,7 @@ const UserAnnouncement = ({ user }) => {
 
   return (
     <article className="tile is-child notification is-warning box">
-      <p className="title">Complete your user profile</p>
+      <h2 className="title">Complete your user profile</h2>
       <div className="content">
         <p>
           It appears that you haven&apos;t completed your YouthKitbag user
