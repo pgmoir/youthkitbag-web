@@ -2,15 +2,12 @@ import React, { useState } from 'react';
 import {
   ArrowForward,
   ArrowRight,
-  HeroBg,
   HeroBtnWrapper,
   HeroContainer,
   HeroContent,
   HeroH1,
   HeroP,
-  VideoBg,
 } from './HeroElements';
-import Video from '../../../videos/data.mp4';
 import { Button } from '../ButtonElements';
 
 const HeroSection = () => {
@@ -20,15 +17,16 @@ const HeroSection = () => {
   };
   return (
     <HeroContainer>
-      <HeroBg>
-        <VideoBg autoPlay loop muted src={Video} type="video/mp4" />
-      </HeroBg>
       <HeroContent>
-        <HeroH1>Organise in Private, Trade with Safety</HeroH1>
+        <HeroH1>
+          Organise with Security
+          <br />
+          Trade with Safety
+        </HeroH1>
         <HeroP>
-          Keep track of all the kit your kids need for school, sports, music and
-          all their other interests. Then trade or share with the people you
-          know and trust when it is no longer needed, lost or stolen.
+          Track your childs school, sports, music and other interest kit. Then
+          trade or share with the people you know and trust when it is no longer
+          needed, lost or stolen.
         </HeroP>
         <HeroBtnWrapper>
           <Button

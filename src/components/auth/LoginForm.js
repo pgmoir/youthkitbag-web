@@ -59,13 +59,13 @@ const LoginForm = ({ referrer, newErrors, login, email }) => {
           <span className="icon is-medium button-oauth facebook"></span>
           <span>Facebook</span>
         </a>
-        <a
+        {/* <a
           className="button is-large is-fullwidth"
           href={`${baseUrl}/auth/github?referrer=${referrer}`}
         >
           <span className="icon is-medium button-oauth github"></span>
           <span>GitHub</span>
-        </a>
+        </a> */}
       </div>
       <p className="mb-3 has-text-centered">
         <span className="centre-line"></span>
