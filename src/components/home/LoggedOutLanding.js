@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Login from '../auth/LoginPage';
+import HeroSection from '../loggedout/HeroSection';
 import Navbar from '../loggedout/Navbar';
 import Sidebar from '../loggedout/Sidebar';
 
@@ -13,6 +15,10 @@ const LoggedOutLanding = () => {
     <>
       <Sidebar isOpen={isOpen} toggle={toggle} />
       <Navbar toggle={toggle} />
+      <HeroSection />
+      <div className="m-5">
+        <Login />
+      </div>
     </>
   );
 };

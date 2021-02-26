@@ -41,9 +41,6 @@ const Navbar = ({ toggle }) => {
           </NavBtn>
         </NavbarContainer>
       </Nav>
-      <div className="m-5">
-        <Login />
-      </div>
     </>
   );
 };
