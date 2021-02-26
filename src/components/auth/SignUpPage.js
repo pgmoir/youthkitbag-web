@@ -4,7 +4,7 @@ import queryString from 'query-string';
 
 import SignUpForm from './SignUpForm';
 
-const SignUpPage = () => {
+const SignUp = () => {
   const location = useLocation();
   const { kitbagId, groupId, email } = queryString.parse(location.search);
 
@@ -19,4 +19,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignUp;

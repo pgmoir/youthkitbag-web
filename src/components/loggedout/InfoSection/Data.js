@@ -36,8 +36,8 @@ export const loggedOutObjTwo = {
 
 export const loggedOutObjThree = {
   id: 'market',
-  lightBg: false,
-  lightText: true,
+  lightBg: true,
+  lightText: false,
   lightTextDesc: true,
   topline: 'Trade Recycle Find',
   headline: 'Free trade and recycle with people you know and trust',
@@ -47,7 +47,7 @@ export const loggedOutObjThree = {
   imgStart: true,
   img: require('../../../images/trade.svg'),
   alt: 'Trade and recycle with friends',
-  dark: true,
-  primary: true,
-  darkText: false,
+  dark: false,
+  primary: false,
+  darkText: true,
 };

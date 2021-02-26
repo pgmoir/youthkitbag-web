@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Login from '../auth/LoginPage';
+import SignUp from '../auth/SignUpPage';
+import Groups from '../loggedout/Groups';
 import HeroSection from '../loggedout/HeroSection';
 import InfoSection from '../loggedout/InfoSection';
 import {
@@ -24,9 +26,13 @@ const LoggedOutLanding = () => {
       <HeroSection />
       <InfoSection {...loggedOutObjOne} />
       <InfoSection {...loggedOutObjTwo} />
+      <Groups />
       <InfoSection {...loggedOutObjThree} />
-      <div className="m-5">
+      <div className="m-5" id="login">
         <Login />
+      </div>
+      <div className="m-5" id="signup">
+        <SignUp />
       </div>
     </>
   );
