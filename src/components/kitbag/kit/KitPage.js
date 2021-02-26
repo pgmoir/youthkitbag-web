@@ -75,7 +75,7 @@ const KitPage = ({ fetchKitbagKit, match }) => {
   ];
 
   return (
-    <div>
+    <div className="main container is-fluid">
       <Breadcrumb crumbs={crumbs} />
       <Title title={getTitle()} />
       <div className="container">

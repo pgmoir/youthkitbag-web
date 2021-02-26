@@ -45,7 +45,7 @@ const LoggedInLanding = ({ user }) => {
   }, [user]);
 
   return (
-    <div className="container is-fluid px-0">
+    <div className="main container is-fluid">
       <WelcomeAnnouncement />
       <Alert />
       <div className="tile is-ancestor">

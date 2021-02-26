@@ -83,7 +83,7 @@ const SettingsPage = ({ user, match }) => {
   }
 
   return (
-    <div>
+    <div className="main container is-fluid">
       <Breadcrumb crumbs={getCrumbs(setting)} />
       <Title title="Personal Settings" />
       <div className="container">

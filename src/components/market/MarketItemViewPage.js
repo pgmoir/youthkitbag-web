@@ -37,7 +37,7 @@ const MarketItemViewPage = ({ fetchMarketItem, match }) => {
   }
 
   return (
-    <div>
+    <div className="main container is-fluid">
       <Breadcrumb crumbs={crumbs} />
       {getTitle()}
       <div className="container">

@@ -1,13 +1,12 @@
 /*
   accessibility
   */
-a {
-  color: $primary;
-  &:focus {
-    outline: rgba($gold, 0.75) solid 0.3rem;
-    border-radius: 0.25rem;
-  }
-}
+// a {
+//   color: $primary;
+//   &:focus {
+//     outline: rgba($gold, 0.75) solid 0.3rem;
+//   }
+// }
 
 .a11y-highlight {
   &:hover {

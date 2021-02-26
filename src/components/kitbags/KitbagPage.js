@@ -88,7 +88,7 @@ const KitbagPage = ({ current, kitbags, fetchKitbag, clearKitbag, match }) => {
   ];
 
   return (
-    <div>
+    <div className="main container is-fluid">
       <Breadcrumb crumbs={crumbs} />
       <Title title={getTitle()} />
       <div className="container">

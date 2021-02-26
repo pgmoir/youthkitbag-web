@@ -7904,12 +7904,6 @@ html {
 /*
   accessibility
   */
-a {
-  color: #325d88; }
-  a:focus {
-    outline: rgba(212, 175, 55, 0.75) solid 0.3rem;
-    border-radius: 0.25rem; }
-
 .a11y-highlight:hover {
   text-decoration: underline; }
 
@@ -8088,6 +8082,12 @@ body,
 
 .icon.is-extralarge.has-background-success:hover {
   border: #5b7f29 solid 3.1rem; }
+
+/*
+ main body
+  */
+.main {
+  margin-top: 110px; }
 
 .is-overlay-topleft {
   top: 0;

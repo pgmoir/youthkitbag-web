@@ -31,7 +31,7 @@ const BundlesPage = ({ auth, user, bundles, fetchBundles }) => {
   const crumbs = [{ title: 'Home', to: '/' }, { title: pageTitle }];
 
   return (
-    <div>
+    <div className="main container is-fluid">
       <Breadcrumb crumbs={crumbs} />
       <Title title={pageTitle} />
       <div className="container">

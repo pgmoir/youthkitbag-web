@@ -171,7 +171,7 @@ const GroupPage = ({ fetchGroup, match }) => {
 
   return (
     <>
-      <div>
+      <div className="main container is-fluid">
         <Breadcrumb crumbs={crumbs} />
         <Title title={getTitle()} icon={getIcon()} />
         <div className="container">

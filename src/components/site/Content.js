@@ -32,7 +32,7 @@ const Content = ({ content, fetchContent, match }) => {
   const crumbs = [{ title: 'Home', to: '/' }, { title: content.fields.title }];
 
   return (
-    <div>
+    <div className="main container is-fluid">
       <Breadcrumb crumbs={crumbs} />
       <Title title={content.fields.title} />
       <div className="container">

@@ -9,10 +9,12 @@ const SignUp = () => {
   const { kitbagId, groupId, email } = queryString.parse(location.search);
 
   return (
-    <div className="container">
-      <div className="columns is-centered">
-        <div className="column is-two-thirds-tablet is-half-desktop">
-          <SignUpForm kitbagId={kitbagId} groupId={groupId} email={email} />
+    <div className="main container is-fluid">
+      <div className="container">
+        <div className="columns is-centered">
+          <div className="column is-two-thirds-tablet is-half-desktop">
+            <SignUpForm kitbagId={kitbagId} groupId={groupId} email={email} />
+          </div>
         </div>
       </div>
     </div>

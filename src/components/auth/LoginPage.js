@@ -18,10 +18,12 @@ const Login = () => {
     referrer = location.state.from.pathname;
   }
   return (
-    <div className="container">
-      <div className="columns is-centered">
-        <div className="column is-two-thirds-tablet is-half-desktop">
-          <LoginForm referrer={referrer} email={email} />
+    <div className="main container is-fluid">
+      <div className="container">
+        <div className="columns is-centered">
+          <div className="column is-two-thirds-tablet is-half-desktop">
+            <LoginForm referrer={referrer} email={email} />
+          </div>
         </div>
       </div>
     </div>
