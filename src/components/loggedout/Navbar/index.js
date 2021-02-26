@@ -1,6 +1,5 @@
 import React from 'react';
 import { FaBars } from 'react-icons/fa';
-import Login from '../../auth/LoginPage';
 import {
   MobileIcon,
   Nav,

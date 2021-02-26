@@ -11,7 +11,7 @@ import {
   VideoBg,
 } from './HeroElements';
 import Video from '../../../videos/data.mp4';
-import { Button } from '../ButtonElement';
+import { Button } from '../ButtonElements';
 
 const HeroSection = () => {
   const [hover, setHover] = useState(false);
@@ -24,13 +24,20 @@ const HeroSection = () => {
         <VideoBg autoPlay loop muted src={Video} type="video/mp4" />
       </HeroBg>
       <HeroContent>
-        <HeroH1>Virtual Bank Made Easy</HeroH1>
+        <HeroH1>Organise in Private, Trade with Safety</HeroH1>
         <HeroP>
-          Sign up for a new account today and receive $250 in credits towards
-          your next payment
+          Keep track of all the kit your kids need for school, sports, music and
+          all their other interests. Then trade or share with the people you
+          know and trust when it is no longer needed, lost or stolen.
         </HeroP>
         <HeroBtnWrapper>
-          <Button to="signup" onMouseEnter={onHover} onMouseLeave={onHover}>
+          <Button
+            to="signup"
+            onMouseEnter={onHover}
+            onMouseLeave={onHover}
+            primary={true}
+            dark={true}
+          >
             Get Started {hover ? <ArrowForward /> : <ArrowRight />}
           </Button>
         </HeroBtnWrapper>
