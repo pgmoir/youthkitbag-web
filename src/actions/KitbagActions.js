@@ -10,6 +10,7 @@ import {
   CREATE_KITBAG,
   DELETE_KITBAG_MEMBER,
   REQUEST_TO_JOIN_KITBAG,
+  EDIT_KITBAG_MEMBER_STATE,
 } from './types';
 import history from '../utils/history';
 
@@ -92,6 +93,20 @@ export const deleteFromKitbag = ({ kitbagId, memberId }) => (dispatch) => {
     .delete(`/kitbag/${kitbagId}/member/${memberId}`, {})
     .then((response) => {
       dispatch({ type: DELETE_KITBAG_MEMBER, payload: response.data });
+    })
+    .catch((err) => {
+      const { response } = err;
+      dispatch({ type: API_ERROR, payload: response.data });
+    });
+};
+
+export const updateMemberInKitbag = ({ kitbagId, memberId, formValues }) => (
+  dispatch
+) => {
+  axios
+    .put(`/kitbag/${kitbagId}/member/${memberId}`, { ...formValues })
+    .then((response) => {
+      dispatch({ type: EDIT_KITBAG_MEMBER_STATE, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;

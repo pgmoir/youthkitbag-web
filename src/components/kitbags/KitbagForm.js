@@ -116,6 +116,8 @@ const KitbagForm = ({
             error={errors.description}
           />
           <hr />
+          {showSaveCancelButtons()}
+          <hr className="mt-0" />
           {values.kitbagAdmin && kitbag?._id && (
             <div>
               <p className="has-text-weight-bold mb-3">
@@ -148,10 +150,8 @@ const KitbagForm = ({
                   Invite Member
                 </button>
               </div>
-              <hr className="mt-0" />
             </div>
           )}
-          {showSaveCancelButtons()}
         </form>
       </div>
     </div>

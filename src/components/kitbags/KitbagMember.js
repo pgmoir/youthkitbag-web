@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import TextInput from '../includes/controls/TextInput';
 import ArrayButtonRemove from '../includes/controls/ArrayButtonRemove';
 import { MemberRoles } from '../../enums/memberRoles.enum';
 import { MemberStates } from '../../enums/memberStates.enum';
 import SelectInput from '../includes/controls/SelectInput';
 import KitbagMemberDelete from './KitbagMemberDelete';
+import { updateMemberInKitbag } from '../../actions/KitbagActions';
+
+const mapDispatchToProps = {
+  updateMemberInKitbag,
+};
 
 const KitbagMember = ({
   kitbag,
@@ -13,6 +19,7 @@ const KitbagMember = ({
   handleChange,
   errors,
   userId,
+  updateMemberInKitbag,
 }) => {
   const [modalIsActive, setModalIsActive] = useState(false);
 
@@ -27,6 +34,18 @@ const KitbagMember = ({
   function deleteMember(e) {
     e.stopPropagation();
     setModalIsActive(true);
+  }
+
+  function updateMember(index) {
+    const formValues = { ...values.members[index] };
+    //   role: .role,
+    //   state: values.members[index].state,
+    // };
+    updateMemberInKitbag({
+      kitbagId: kitbag._id,
+      memberId: values.members[index]._id,
+      formValues,
+    });
   }
 
   return (
@@ -65,6 +84,19 @@ const KitbagMember = ({
           />
         </div>
         <div className="mr-3 mb-5">
+          <button
+            className="button is-success"
+            type="button"
+            onClick={() => updateMember(index)}
+            disabled={userId === values.members[index].user?._id}
+          >
+            <span
+              className="icon-tray-item fas fa-save"
+              title="Update this item"
+            ></span>
+          </button>
+        </div>
+        <div className="mr-3 mb-5">
           <ArrayButtonRemove
             title="Remove Member"
             onClick={(e) => deleteMember(e)}
@@ -90,4 +122,4 @@ const KitbagMember = ({
   );
 };
 
-export default KitbagMember;
+export default connect(null, mapDispatchToProps)(KitbagMember);

@@ -1,13 +1,8 @@
 import React from 'react';
 
-const RemoveArrayButton = ({ label, title, onClick, index, disabled }) => {
+const RemoveArrayButton = ({ title, onClick, index, disabled }) => {
   return (
     <div>
-      {index === 0 && label && (
-        <label className="label" htmlFor={`remove-btn-${title}-${index}`}>
-          {label}
-        </label>
-      )}
       <button
         className="button is-danger"
         id={`remove-btn-${title}-${index}`}

@@ -26,6 +26,7 @@ import {
   GROUP_MEMBER_JOIN,
   INVITE_KITBAG_MEMBER,
   DELETE_KITBAG_MEMBER,
+  EDIT_KITBAG_MEMBER_STATE,
 } from '../actions/types';
 
 const initialState = {
@@ -54,6 +55,7 @@ export default (state = initialState, action) => {
     case GROUP_MEMBER_JOIN:
     case INVITE_KITBAG_MEMBER:
     case DELETE_KITBAG_MEMBER:
+    case EDIT_KITBAG_MEMBER_STATE:
       return {
         currentMessage: action.payload.message,
         currentStyle: 'success',
