@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import {
@@ -14,30 +13,8 @@ import {
   NavLogo,
   NavMenu,
 } from './NavbarElements';
-import { GroupStates } from '../../../enums/groupStates.enum';
-import { MemberStates } from '../../../enums/memberStates.enum';
-import { getImage } from '../../../utils/image';
 
-const Navbar = ({ toggle, auth }) => {
-  const user = useSelector((state) => state.user);
-
-  const { loggedIn } = auth;
-
-  const kitbag = user.kitbags
-    ? user.kitbags.find((a) => a.preferred)
-    : undefined;
-
-  const group = user.groups
-    ? user.groups
-        .filter((g) => g.state === GroupStates.ACTIVE)
-        .find((a) => a.member.state === MemberStates.APPROVED)
-    : undefined;
-
-  const profileImage = getImage({
-    images: user?.images,
-    email: user?.email,
-  });
-
+const Navbar = ({ toggle, loggedIn, kitbag, group, profileImage }) => {
   return (
     <>
       <Nav>
@@ -51,7 +28,7 @@ const Navbar = ({ toggle, auth }) => {
               <>
                 {kitbag && (
                   <NavItem>
-                    <NavLink to={`/kitbag/kit/${kitbag._id}`}>Kitbags</NavLink>
+                    <NavLink to={`/kitbag/kit/${kitbag._id}`}>Kitbag</NavLink>
                   </NavItem>
                 )}
                 <NavItem>
@@ -95,7 +72,7 @@ const Navbar = ({ toggle, auth }) => {
             )}
           </NavMenu>
           <NavBtn>
-            {auth.loggedIn ? (
+            {loggedIn ? (
               <NavBtnLink to="/auth/logout">Log Out</NavBtnLink>
             ) : (
               <NavBtnLink to="/auth/login">Log In</NavBtnLink>
