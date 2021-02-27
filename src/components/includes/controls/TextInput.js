@@ -34,7 +34,9 @@ const TextInput = ({
       return (
         <p>
           <span className="mr-3">
-            <a href={value}>{value}</a>
+            <a className="has-text-primary" href={value}>
+              {value}
+            </a>
           </span>
           <i className="fas fa-external-link-alt has-text-primary"></i>
         </p>

@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PreferredKitbagForm from './PreferredKitbagForm';
-import KitbagMemberJoin from '../kitbags/KitbagMemberJoin';
+// import KitbagMemberJoin from '../kitbags/KitbagMemberJoin';
 
 const KitbagsPage = () => {
   const user = useSelector((state) => state.user);
-  const [modalIsActive, setModalIsActive] = useState(false);
+  // const [modalIsActive, setModalIsActive] = useState(false);
 
-  function requestToJoinKitbag(e) {
-    e.stopPropagation();
-    setModalIsActive(true);
-  }
+  // function requestToJoinKitbag(e) {
+  //   e.stopPropagation();
+  //   setModalIsActive(true);
+  // }
+
   return (
     <>
       <div className="content">
@@ -24,7 +25,7 @@ const KitbagsPage = () => {
           <Link to="/kitbags/new" className="button is-primary">
             Create Kitbag
           </Link>
-          <span
+          {/* <span
             className="button is-info is-clickable"
             onClick={(e) => {
               requestToJoinKitbag(e);
@@ -36,7 +37,7 @@ const KitbagsPage = () => {
             tabIndex="0"
           >
             Join Kitbag
-          </span>
+          </span> */}
         </div>
         <p>
           You can then invite others to join your kitbags via email. Those
@@ -50,14 +51,16 @@ const KitbagsPage = () => {
           below and click on save to apply the change.
         </p>
       </div>
-      {user && user.kitbags && user.kitbags.length > 0 && (
-        <PreferredKitbagForm userId={user._id} kitbags={user.kitbags} />
-      )}
-      <KitbagMemberJoin
+      <div className="mb-5">
+        {user && user.kitbags && user.kitbags.length > 0 && (
+          <PreferredKitbagForm userId={user._id} kitbags={user.kitbags} />
+        )}
+      </div>
+      {/* <KitbagMemberJoin
         // userId={userId}
         modalIsActive={modalIsActive}
         setModalIsActive={setModalIsActive}
-      />
+      /> */}
     </>
   );
 };

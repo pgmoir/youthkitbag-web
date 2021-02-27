@@ -70,7 +70,12 @@ const PreferredKitbagForm = ({
                   </Link>
                 </td>
                 <td className="is-vcentered">
-                  <Link to={`/kitbags/${item._id}`}>{item.name}</Link>
+                  <Link
+                    className="has-text-primary a11y-highlight"
+                    to={`/kitbags/${item._id}`}
+                  >
+                    {item.name}
+                  </Link>
                 </td>
                 <td className="is-hidden-mobile is-vcentered">
                   {item.member.state}

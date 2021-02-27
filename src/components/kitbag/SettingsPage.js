@@ -26,7 +26,7 @@ const SettingsPage = ({ user, match }) => {
   const User = () => {
     return (
       <>
-        <h2 className="subtitle">User</h2>
+        <h2 className="subtitle has-text-weight-bold">User</h2>
         <UserHelp />
         <UserForm user={user} />
       </>
@@ -36,7 +36,7 @@ const SettingsPage = ({ user, match }) => {
   const Kitbags = () => {
     return (
       <>
-        <h2 className="subtitle">Kitbags</h2>
+        <h2 className="subtitle has-text-weight-bold">Kitbags</h2>
         <KitbagsHelp />
         <KitbagsPage />
       </>
@@ -46,7 +46,7 @@ const SettingsPage = ({ user, match }) => {
   const Groups = () => {
     return (
       <div className="container">
-        <h2 className="subtitle">Groups</h2>
+        <h2 className="subtitle has-text-weight-bold">Groups</h2>
         <GroupsHelp />
         <GroupsPage />
       </div>
@@ -56,7 +56,7 @@ const SettingsPage = ({ user, match }) => {
   const Bundle = () => {
     return (
       <div className="container">
-        <h2 className="subtitle">Bundle</h2>
+        <h2 className="subtitle has-text-weight-bold">Bundle</h2>
         <BundlePage />
       </div>
     );
@@ -65,7 +65,7 @@ const SettingsPage = ({ user, match }) => {
   const Configuration = () => {
     return (
       <div className="container">
-        <h2 className="subtitle">Configuration</h2>
+        <h2 className="subtitle has-text-weight-bold">Configuration</h2>
         <ConfigurationPage userId={user._id} />
       </div>
     );

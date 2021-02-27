@@ -23,7 +23,7 @@ const GroupsPage = ({ user }) => {
       </div>
       {user && user.groups && user.groups.length > 0 && (
         <>
-          <h5>Group Membership</h5>{' '}
+          <p className="has-text-weight-medium mb-3">Group Membership</p>
           <table className="table bg-light is-fullwidth">
             <thead>
               <tr>
@@ -48,7 +48,12 @@ const GroupsPage = ({ user }) => {
                     </Link>
                   </td>
                   <td className="is-vcentered">
-                    <Link to={`/groups/${item._id}`}>{item.name}</Link>
+                    <Link
+                      className="has-text-primary a11y-highlight"
+                      to={`/groups/${item._id}`}
+                    >
+                      {item.name}
+                    </Link>
                   </td>
                   <td className="is-hidden-mobile is-vcentered">
                     {item.member.state}
@@ -62,7 +67,7 @@ const GroupsPage = ({ user }) => {
           </table>
         </>
       )}
-      <div className="buttons">
+      <div className="buttons mb-5">
         <Link to="/groups" className="button is-primary">
           Join Group
         </Link>
