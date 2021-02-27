@@ -40,7 +40,7 @@ export const loggedOutObjThree = {
   lightText: false,
   lightTextDesc: true,
   topline: 'Trade Recycle Find',
-  headline: 'Free trade and recycle with people you know and trust',
+  headline: 'Free trade and recycle with people you know',
   description:
     'When your kids grow up or move on, sell or recycle kit with the people you know or trust. If its lost or stolen, or you need new or used kit, share the info quickly with the people most likely to help,',
   buttonLabel: 'Join YouthKitbag',

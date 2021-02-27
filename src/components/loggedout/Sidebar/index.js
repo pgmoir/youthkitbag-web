@@ -34,18 +34,30 @@ const Sidebar = ({ isOpen, toggle, loggedIn, kitbag, group }) => {
             </>
           ) : (
             <>
-              <SidebarLink to="kitbags">Kitbags</SidebarLink>
-              <SidebarLink to="groups">Groups</SidebarLink>
-              <SidebarLink to="market">Market</SidebarLink>
-              <SidebarLink to="signup">Sign Up</SidebarLink>
+              <SidebarLink to="kitbags" onClick={toggle}>
+                Kitbags
+              </SidebarLink>
+              <SidebarLink to="groups" onClick={toggle}>
+                Groups
+              </SidebarLink>
+              <SidebarLink to="market" onClick={toggle}>
+                Market
+              </SidebarLink>
+              <SidebarLink to="signup" onClick={toggle}>
+                Sign Up
+              </SidebarLink>
             </>
           )}
         </SidebarMenu>
         <SideBtnWrap>
           {loggedIn ? (
-            <SidebarRoute to="/auth/logout">Log Out</SidebarRoute>
+            <SidebarRoute to="/auth/logout" onClick={toggle}>
+              Log Out
+            </SidebarRoute>
           ) : (
-            <SidebarRoute to="/auth/login">Log In</SidebarRoute>
+            <SidebarRoute to="/auth/login" onClick={toggle}>
+              Log In
+            </SidebarRoute>
           )}
         </SideBtnWrap>
       </SidebarWrapper>

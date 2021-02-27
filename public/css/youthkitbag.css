@@ -8075,6 +8075,9 @@ body,
 #wrapper {
   flex: 1; }
 
+.footer {
+  min-height: 600px; }
+
 .icon.is-extralarge {
   height: 6rem;
   width: 6rem;

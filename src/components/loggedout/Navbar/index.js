@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
+import { animateScroll as scroll } from 'react-scroll';
 import {
   MobileIcon,
   Nav,
@@ -15,14 +16,25 @@ import {
 } from './NavbarElements';
 
 const Navbar = ({ toggle, loggedIn, kitbag, group, profileImage }) => {
+  let location = useLocation();
+  const showIcon = !location.pathname.startsWith('/auth/');
+
+  const toggleHome = () => {
+    scroll.scrollToTop();
+  };
+
   return (
     <>
       <Nav>
         <NavbarContainer>
-          <NavLogo to="/">YouthKitbag</NavLogo>
-          <MobileIcon onClick={toggle}>
-            <FaBars />
-          </MobileIcon>
+          <NavLogo to="/" onClick={toggleHome}>
+            YouthKitbag
+          </NavLogo>
+          {showIcon && (
+            <MobileIcon onClick={toggle}>
+              <FaBars />
+            </MobileIcon>
+          )}
           <NavMenu>
             {loggedIn ? (
               <>
@@ -54,19 +66,64 @@ const Navbar = ({ toggle, loggedIn, kitbag, group, profileImage }) => {
             ) : (
               <>
                 <NavItem>
-                  <NavLinks to="kitbags">Kitbags</NavLinks>
+                  <NavLinks
+                    to="kitbags"
+                    smooth={true}
+                    duration={500}
+                    spy={true}
+                    exact="true"
+                    offset={-80}
+                  >
+                    Kitbags
+                  </NavLinks>
                 </NavItem>
                 <NavItem>
-                  <NavLinks to="groups">Groups</NavLinks>
+                  <NavLinks
+                    to="groups"
+                    smooth={true}
+                    duration={500}
+                    spy={true}
+                    exact="true"
+                    offset={-80}
+                  >
+                    Groups
+                  </NavLinks>
                 </NavItem>
                 <NavItem>
-                  <NavLinks to="trust">Trust</NavLinks>
+                  <NavLinks
+                    to="trust"
+                    smooth={true}
+                    duration={500}
+                    spy={true}
+                    exact="true"
+                    offset={-80}
+                  >
+                    Trust
+                  </NavLinks>
                 </NavItem>
                 <NavItem>
-                  <NavLinks to="market">Market</NavLinks>
+                  <NavLinks
+                    to="market"
+                    smooth={true}
+                    duration={500}
+                    spy={true}
+                    exact="true"
+                    offset={-80}
+                  >
+                    Market
+                  </NavLinks>
                 </NavItem>
                 <NavItem>
-                  <NavLinks to="signup">Sign Up</NavLinks>
+                  <NavLinks
+                    to="signup"
+                    smooth={true}
+                    duration={500}
+                    spy={true}
+                    exact="true"
+                    offset={-80}
+                  >
+                    Sign Up
+                  </NavLinks>
                 </NavItem>
               </>
             )}
