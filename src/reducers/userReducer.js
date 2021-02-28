@@ -1,4 +1,9 @@
-import { EDIT_USER, GET_USER, LOGOUT } from '../actions/types';
+import {
+  EDIT_USER,
+  GET_USER,
+  LOGOUT,
+  REQUEST_TO_JOIN_KITBAG,
+} from '../actions/types';
 
 const initialState = {};
 
@@ -9,6 +14,12 @@ export default function authentication(state = initialState, action) {
       const user = action.payload.data;
       return { ...user };
     }
+
+    case REQUEST_TO_JOIN_KITBAG: {
+      const { user } = action.payload.data;
+      return { ...user };
+    }
+
     case LOGOUT:
       return initialState;
     default:

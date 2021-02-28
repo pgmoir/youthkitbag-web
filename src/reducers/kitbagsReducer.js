@@ -9,6 +9,7 @@ import {
   INVITE_KITBAG_MEMBER,
   DELETE_KITBAG_MEMBER,
   EDIT_KITBAG_MEMBER_STATE,
+  REQUEST_TO_JOIN_KITBAG,
 } from '../actions/types';
 
 const initialState = { preferred: {}, current: {}, memberList: {} };
@@ -20,6 +21,10 @@ export default (state = initialState, action) => {
         ...state,
         preferred: action.payload.data,
       };
+    }
+
+    case REQUEST_TO_JOIN_KITBAG: {
+      return { ...state, preferred: action.payload.data.kitbag };
     }
 
     case CREATE_KITBAG:

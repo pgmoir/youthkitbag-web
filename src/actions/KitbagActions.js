@@ -114,9 +114,9 @@ export const updateMemberInKitbag = ({ kitbagId, memberId, formValues }) => (
     });
 };
 
-export const requestToJoinKitbag = ({ formValues }) => (dispatch) => {
+export const requestToJoinKitbag = ({ kitbagId }) => (dispatch) => {
   axios
-    .post(`/kitbag/requesttojoin`, { ...formValues }, {})
+    .put(`/kitbag/${kitbagId}/member/join`, {}, {})
     .then((response) => {
       dispatch({ type: REQUEST_TO_JOIN_KITBAG, payload: response.data });
     })
