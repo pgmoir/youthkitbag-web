@@ -10,4 +10,7 @@
   &.is-extralarge.has-background-success:hover {
     border: $success solid 3.1rem;
   }
+  &.is-extralarge.has-background-primary:hover {
+    border: $primary solid 3.1rem;
+  }
 }

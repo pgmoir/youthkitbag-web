@@ -8089,6 +8089,9 @@ body,
 .icon.is-extralarge.has-background-success:hover {
   border: #5b7f29 solid 3.1rem; }
 
+.icon.is-extralarge.has-background-primary:hover {
+  border: #325d88 solid 3.1rem; }
+
 /*
  main body
   */

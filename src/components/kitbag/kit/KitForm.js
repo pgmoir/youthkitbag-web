@@ -323,6 +323,18 @@ const KitForm = ({
               Cancel
             </Link>
           </div>
+          <div className="is-sticky-bottomright icon-text">
+            <div
+              onClick={handleSubmit}
+              onKeyPress={handleSubmit}
+              className="icon is-extralarge has-background-primary is-clickable has-text-light is-rounded m-5"
+              title="Add new item to your kitbag"
+              role="button"
+              tabIndex="0"
+            >
+              <i className="fas fa-save"></i>
+            </div>
+          </div>
         </form>
       </div>
     </div>
