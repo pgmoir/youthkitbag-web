@@ -29,19 +29,19 @@ const WelcomeAnnouncement = ({ flags, hideFlag }) => {
   if (welcomeAnnouncement) return <Title title="Your Kitbag essentials" />;
 
   return (
-    <div className="box is-primary">
+    <div className="box">
       <h1 className="title is-1">Welcome to YouthKitbag!</h1>
       <div className="content">
         <p>
           Thank you for signing up to YouthKitbag, the simple and easy way to
-          log, find and trade or recycle your child&apos;s sports, musical,
-          activity or school gear after they grow out of it.
+          track and trade or recycle your child&apos;s sports, musical, activity
+          or school gear.
         </p>
-        <hr></hr>
+        <hr />
         <p>
-          We will do our best to guide you on this page to the things you need
-          to do to get the most out of YouthKitbag, but you may find it useful
-          to watch this short video guide.
+          We will do our best on this dashboard to guide you through the key
+          features to get the most out of YouthKitbag, but you may find it
+          useful to watch this short video guide.
         </p>
       </div>
       <div className="buttons">
