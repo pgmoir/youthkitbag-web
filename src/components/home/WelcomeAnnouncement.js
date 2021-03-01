@@ -26,10 +26,15 @@ const WelcomeAnnouncement = ({ flags, hideFlag }) => {
     hideFlag('welcomeAnnouncement', true);
   }
 
-  if (welcomeAnnouncement) return <Title title="Your Kitbag essentials" />;
+  if (welcomeAnnouncement)
+    return (
+      <article className="notification box">
+        <h1 className="title is-3">Your YouthKitbag essentials!</h1>
+      </article>
+    );
 
   return (
-    <div className="box">
+    <article className="box">
       <h1 className="title is-1">Welcome to YouthKitbag!</h1>
       <div className="content">
         <p>
@@ -55,7 +60,7 @@ const WelcomeAnnouncement = ({ flags, hideFlag }) => {
           Hide this message
         </button>
       </div>
-    </div>
+    </article>
   );
 };
 

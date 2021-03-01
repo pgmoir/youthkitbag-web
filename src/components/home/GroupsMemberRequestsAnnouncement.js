@@ -30,8 +30,8 @@ const GroupsMemberRequestsAnnouncement = ({
     }
   }, [groupsMemberRequests]);
 
-  // if (!groupsWithMemberRequests || groupsWithMemberRequests.length === 0)
-  //   return null;
+  if (!groupsWithMemberRequests || groupsWithMemberRequests.length === 0)
+    return null;
 
   const groupsCount = groupsWithMemberRequests.length;
   const requestsCount = groupsWithMemberRequests.reduce(function (total, g) {
@@ -105,7 +105,7 @@ const GroupsMemberRequestsAnnouncement = ({
   }
 
   return (
-    <article className="tile is-child notification is-info">
+    <article className="notification is-info box">
       <h2 className="title">Member requests</h2>
       <div className="content">
         <p>

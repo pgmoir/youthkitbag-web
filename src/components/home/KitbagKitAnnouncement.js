@@ -5,7 +5,7 @@ const KitbagKitAnnouncement = ({ kitbagId }) => {
   // if (!kitbagId) return null;
 
   return (
-    <article className="tile is-child notification is-danger">
+    <article className="notification is-success box">
       <h2 className="title">Kitbag activity</h2>
       <div className="content">
         <p>
@@ -15,7 +15,7 @@ const KitbagKitAnnouncement = ({ kitbagId }) => {
       </div>
       <div className="buttons">
         <Link
-          className="button is-danger is-inverted"
+          className="button is-success is-inverted"
           to={`/kitbag/kit/${kitbagId}`}
         >
           View kitbag

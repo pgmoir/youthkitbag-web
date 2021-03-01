@@ -2,15 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const UserAnnouncement = ({ user }) => {
-  // function userComplete() {
-  //   const { firstName, lastName, activitys } = user;
-  //   return firstName && lastName && activitys.length > 0;
-  // }
+  function userComplete() {
+    const { firstName, lastName, activitys } = user;
+    return firstName && lastName && activitys.length > 0;
+  }
 
-  // if (userComplete()) return null;
+  if (userComplete()) return null;
 
   return (
-    <article className="tile is-child notification is-warning box">
+    <article className="notification is-warning box">
       <h2 className="title">Complete your user profile</h2>
       <div className="content">
         <p>

@@ -5,7 +5,7 @@ const KitbagKitAddMoreAdvice = ({ kitbagId }) => {
   // if (!kitbagId) return null;
 
   return (
-    <article className="tile is-child notification is-danger">
+    <article className="notification is-warning box">
       <h2 className="title">Add more kit</h2>
       <div className="content">
         <p>
@@ -17,13 +17,13 @@ const KitbagKitAddMoreAdvice = ({ kitbagId }) => {
       </div>
       <div className="buttons">
         <Link
-          className="button is-danger is-inverted"
+          className="button is-warning is-inverted"
           to={`/kitbag/kit/${kitbagId}/new`}
         >
           Add more kit
         </Link>
         <Link
-          className="button is-danger is-inverted is-outlined"
+          className="button is-warning is-inverted is-outlined"
           to={`/kitbag/kit/${kitbagId}`}
         >
           View kitbag

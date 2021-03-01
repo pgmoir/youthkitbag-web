@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const KitbagKitLevelWarnings = ({ kitbagId, doNotShow }) => {
-  // if (!kitbagId || !doNotShow) return null;
+const KitbagKitLevelWarnings = ({ kitbagId }) => {
+  if (!kitbagId) return null;
 
   return (
-    <article className="tile is-child notification is-danger">
+    <article className="notification is-danger box">
       <h2 className="title">Kit level warnings</h2>
       <div className="content">
         <p>

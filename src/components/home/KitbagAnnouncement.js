@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
   we recommend setting up or joining one.
 */
 const KitbagAnnouncement = ({ kitbagId }) => {
-  // if (kitbagId) return null;
+  if (kitbagId) return null;
 
   return (
-    <article className="tile is-child notification is-primary">
+    <article className="notification is-primary box">
       <h2 className="title">Get started</h2>
       <p className="subtitle">Make the most of YouthKitbag</p>
       <div className="content">

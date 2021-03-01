@@ -65,7 +65,7 @@ const KitbagMarketAnnouncement = ({
   }
 
   return (
-    <article className="tile is-child notification is-success">
+    <article className="notification is-success box">
       <h2 className="title">Your {description}</h2>
       <div className="content">
         <p>
