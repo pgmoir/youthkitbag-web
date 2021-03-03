@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useForm from '../hooks/useForm';
 import { createGroup, editGroup } from '../../actions/GroupActions';
@@ -8,6 +8,9 @@ import validate from '../includes/FormEmptyValidationRules';
 import { getFirstImageExcludeDeleted, getImages } from '../../utils/image';
 import TextInput from '../includes/controls/TextInput';
 import TextAreaInput from '../includes/controls/TextAreaInput';
+import TextInputButton from '../includes/controls/TextInputButton';
+import customAxios from '../../utils/axios';
+import YkbMap from '../includes/maps/YkbMap';
 
 const mapStateToProps = (state) => ({
   userBundle: state.user.bundle,
@@ -26,6 +29,7 @@ const GroupForm = ({
   createGroup,
   editGroup,
 }) => {
+  const [showMap, setShowMap] = useState(false);
   const initialValues = { ...group, images: getImages(group.images) };
 
   const {
@@ -71,6 +75,40 @@ const GroupForm = ({
     }
   }
 
+  function handleAddressSearch(e) {
+    e.preventDefault();
+
+    function updateLatLon(lat, lon) {
+      setChange('lat', lat);
+      setChange('lon', lon);
+    }
+
+    function updateAddressError() {
+      setErrors({
+        ...errors,
+        address: 'Address search was unable to find this location',
+      });
+    }
+
+    customAxios
+      .get(`/address/search/${values.address}`)
+      .then((response) => {
+        const { address, status } = response.data.data;
+        if (address && status === 'OK') {
+          const { lat, lng } = address.location;
+          setErrors({});
+          updateLatLon(lat, lng);
+          setShowMap(true);
+        } else {
+          updateAddressError();
+          setShowMap(false);
+        }
+      })
+      .catch((err) => {
+        updateAddressError(err);
+      });
+  }
+
   return (
     <div className="columns mb-3">
       <div className="column">
@@ -97,14 +135,29 @@ const GroupForm = ({
             handleChange={handleChange}
             error={errors.description}
           />
-          <TextInput
+          <TextInputButton
             label="Address"
             value={values.address}
             field="address"
             handleChange={handleChange}
             error={errors.address}
             placeHolder="e.g. Woodford Green IG8 7DQ"
+            buttonText="Search"
+            handleButtonClick={(e) => handleAddressSearch(e)}
+            description="Search address or postcode to set location on map"
           />
+          <button
+            type="button"
+            className="button is-info is-light mb-4"
+            onClick={() => setShowMap(!showMap)}
+          >
+            {showMap ? 'Hide Map' : 'Show Map'}
+          </button>
+          {showMap && (
+            <div className="leaflet-container mb-3">
+              <YkbMap id={values._id} position={[values.lat, values.lon]} />
+            </div>
+          )}
           <TextInput
             type="email"
             label="Email"

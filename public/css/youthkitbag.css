@@ -8092,6 +8092,10 @@ body,
 .icon.is-extralarge.has-background-primary:hover {
   border: #325d88 solid 3.1rem; }
 
+.leaflet-container {
+  width: 100%;
+  height: 300px; }
+
 /*
  main body
   */

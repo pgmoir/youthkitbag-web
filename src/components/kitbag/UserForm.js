@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect, useSelector } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { editUser, loadSettingsPage } from '../../actions/UserActions';
@@ -6,10 +6,14 @@ import { ImagesForm } from '../includes/images';
 import validate from '../includes/FormEmptyValidationRules';
 import { getFirstImageExcludeDeleted, getImages } from '../../utils/image';
 import TextInput from '../includes/controls/TextInput';
+import TextInputButton from '../includes/controls/TextInputButton';
+import customAxios from '../../utils/axios';
+import YkbMap from '../includes/maps/YkbMap';
 
 const mapDispatchToProps = { editUser, loadSettingsPage };
 
 const UserForm = ({ user, editUser, loadSettingsPage }) => {
+  const [showMap, setShowMap] = useState(false);
   const initialValues = { ...user, images: getImages(user.images) };
 
   const newErrors = useSelector((state) => state.toast.errors);
@@ -53,6 +57,40 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
     loadSettingsPage('/settings/user');
   }
 
+  function handleAddressSearch(e) {
+    e.preventDefault();
+
+    function updateLatLon(lat, lon) {
+      setChange('lat', lat);
+      setChange('lon', lon);
+    }
+
+    function updateAddressError() {
+      setErrors({
+        ...errors,
+        address: 'Address search was unable to find this location',
+      });
+    }
+
+    customAxios
+      .get(`/address/search/${values.postcode}`)
+      .then((response) => {
+        const { address, status } = response.data.data;
+        if (address && status === 'OK') {
+          const { lat, lng } = address.location;
+          setErrors({});
+          updateLatLon(lat, lng);
+          setShowMap(true);
+        } else {
+          updateAddressError();
+          setShowMap(false);
+        }
+      })
+      .catch((err) => {
+        updateAddressError(err);
+      });
+  }
+
   return (
     <div className="columns mb-3">
       <div className="column">
@@ -86,6 +124,29 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
             handleChange={handleChange}
             addClassName={'is-static'}
           />
+          <TextInputButton
+            label="Postcode"
+            value={values.postcode}
+            field="postcode"
+            handleChange={handleChange}
+            error={errors.postcode}
+            placeHolder="Only postcode required"
+            buttonText="Search"
+            handleButtonClick={(e) => handleAddressSearch(e)}
+            description="Search postcode to set location on map"
+          />
+          <button
+            type="button"
+            className="button is-info is-light mb-4"
+            onClick={() => setShowMap(!showMap)}
+          >
+            {showMap ? 'Hide Map' : 'Show Map'}
+          </button>
+          {showMap && (
+            <div className="leaflet-container mb-3">
+              <YkbMap id={values._id} position={[values.lat, values.lon]} />
+            </div>
+          )}{' '}
           <hr />
           <TextInput
             label="Activities"
