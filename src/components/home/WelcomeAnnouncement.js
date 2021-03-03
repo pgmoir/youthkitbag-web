@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { hideFlag } from '../../actions/UserActions';
-import Title from '../includes/title/Title';
 
 const mapStateToProps = (state) => ({
   flags: state.user.flags,

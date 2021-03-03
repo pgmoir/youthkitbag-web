@@ -125,7 +125,7 @@ const MarketKitEditForm = ({
     return (
       <SelectInput
         label="Condition"
-        value={values.state}
+        value={values.condition}
         field="condition"
         handleChange={handleChange}
         error={errors.condition}
