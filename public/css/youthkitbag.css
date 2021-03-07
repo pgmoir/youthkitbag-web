@@ -7937,9 +7937,17 @@ html {
     width: 128px;
     height: 128px; }
 
+.has-avatars {
+  line-height: 0px; }
+
 .image.has-avatar-overlap {
-  display: inline-block;
-  margin-right: -1.5rem; }
+  display: inline-block; }
+  .image.has-avatar-overlap:not(:first-child) {
+    margin-left: -1.5rem; }
+
+.image.is-overlap-counter {
+  vertical-align: top;
+  padding-top: 4px; }
 
 body {
   background-image: url("/images/sport-wallpaper.jpg");

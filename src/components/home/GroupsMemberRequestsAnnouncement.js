@@ -64,7 +64,7 @@ const GroupsMemberRequestsAnnouncement = ({
         {members.length > 5 && (
           <div
             key={members.length}
-            className="image has-avatar-overlap is-align-self-center"
+            className="image has-avatar-overlap is-overlap-counter"
           >
             <span className="tag is-large is-rounded is-primary">{`+${
               members.length - 5
@@ -78,7 +78,7 @@ const GroupsMemberRequestsAnnouncement = ({
   function renderList() {
     return groupsWithMemberRequests.map((group, index) => {
       return (
-        <div key={index} className="box is-flex p-3">
+        <div key={index} className="box is-flex is-align-items-center p-3">
           <div className="is-flex-shrink-0 is-flex-grow-0 pr-4">
             <div className="image">
               <img
@@ -88,16 +88,14 @@ const GroupsMemberRequestsAnnouncement = ({
               />
             </div>
           </div>
-          <div className="is-flex-grow-1 is-flex">
-            <div className="is-flex-grow-0 has-truncated is-align-self-center mr-3">
-              <div className="has-text-weight-medium is-truncated-text">
-                {group.name}
-              </div>
-              <div className="is-truncated-text">{`You have ${group.members.length} member request`}</div>
+          <div className="is-flex is-flex-direction-column is-flex-grow-1 has-truncated">
+            <div className="is-truncated-text has-text-weight-medium">
+              {group.name}
             </div>
-            <div className="is-flex-grow-1 is-flex is-flex-wrap-nowrap">
-              {renderMemberList(group.members)}
-            </div>
+            <div className="is-truncated-text">{`You have ${group.members.length} member request`}</div>
+          </div>
+          <div className="is-flex-shrink-0 is-flex-grow-0 pl-4 has-avatars  is-align-items-center ">
+            {renderMemberList(group.members)}
           </div>
         </div>
       );

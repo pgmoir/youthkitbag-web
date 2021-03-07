@@ -56,7 +56,9 @@ const KitbagMarketAnnouncement = ({
             </div>
           </div>
           <div className="is-flex-shrink-1 is-flex-grow-1 is-flex is-flex-direction-column has-text-black has-truncated">
-            <div className="has-text-weight-medium">{item.title}</div>
+            <div className="is-truncated-text has-text-weight-medium">
+              {item.title}
+            </div>
             <div className="is-truncated-text">{`You have ${item.threads.length} active threads`}</div>
           </div>
         </div>

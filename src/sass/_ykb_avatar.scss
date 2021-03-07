@@ -19,9 +19,19 @@
   }
 }
 
+.has-avatars {
+  line-height: 0px;
+}
+
 .image {
   &.has-avatar-overlap {
     display: inline-block;
-    margin-right: -1.5rem;
+    &:not(:first-child) {
+      margin-left: -1.5rem;
+    }
+  }
+  &.is-overlap-counter {
+    vertical-align: top;
+    padding-top: 4px;
   }
 }
