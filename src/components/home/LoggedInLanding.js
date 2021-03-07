@@ -62,7 +62,8 @@ const LoggedInLanding = () => {
         <GroupsMemberRequestsAnnouncement />
         <KitbagKitLevelWarnings kitbagId={preferredKitbagId} />
         <KitbagKitAddMoreAdvice />
-        <KitbagKitAnnouncement />
+        <KitbagKitAnnouncement kitbagId={preferredKitbagId} created={true} />
+        <KitbagKitAnnouncement kitbagId={preferredKitbagId} created={false} />
         <MarketAnnouncement group={group} />
         <KitbagMarketAnnouncement
           description={'trades'}

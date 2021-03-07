@@ -7,6 +7,7 @@ import {
   DELETE_KITBAG_KIT,
   API_ERROR,
   FETCH_KITBAG_LISTS,
+  FETCH_RECENT_KITS,
   SEARCH_KITBAG_KITS,
 } from './types';
 import history from '../utils/history';
@@ -49,6 +50,25 @@ export const fetchKitbagKit = (kitbagId, kitId) => (dispatch) => {
     .catch((err) => {
       const { response } = err;
       dispatch({ type: API_ERROR, payload: response.data });
+    });
+};
+
+export const fetchRecentKitbagKits = ({ created, days, kitbagId }) => (
+  dispatch
+) => {
+  axios
+    .get(`/kitbag/kit/${kitbagId}/recent`, {
+      params: { created, days },
+    })
+    .then((response) => {
+      dispatch({
+        type: FETCH_RECENT_KITS,
+        payload: { ...response.data, created, days },
+      });
+    })
+    .catch((err) => {
+      const { response } = err;
+      dispatch({ type: API_ERROR, payload: response });
     });
 };
 

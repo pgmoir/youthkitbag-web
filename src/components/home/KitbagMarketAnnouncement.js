@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
 import { fetchKitbagMarketItems } from '../../actions/KitbagMarketActions';
-import { getFirstImageExcludeDeleted } from '../../utils/image';
+import DisplayedItem from './DisplayedItem';
 
 const mapDispatchToProps = {
   fetchKitbagMarketItems,
@@ -25,10 +25,6 @@ const KitbagMarketAnnouncement = ({
 
   if (!totalItems || totalItems === 0) return null;
 
-  function topImage(images) {
-    return getFirstImageExcludeDeleted({ images });
-  }
-
   function viewMarketItem(item) {
     history.push(`/kitbag/market/${item.kitbag}/edit/${item._id}`);
   }
@@ -36,30 +32,14 @@ const KitbagMarketAnnouncement = ({
   function renderList() {
     return items?.map((item, index) => {
       return (
-        <div
+        <DisplayedItem
           key={index}
-          className="box is-flex is-clickable p-3"
-          role="button"
-          onClick={() => viewMarketItem(item)}
-          onKeyPress={() => viewMarketItem(item)}
-          tabIndex="0"
-        >
-          <div className="is-flex-shrink-0 is-flex-grow-0 pr-4">
-            <div className="image">
-              <img
-                src={topImage(item.images)}
-                className="is-avatar is-48x48"
-                alt=""
-              />
-            </div>
-          </div>
-          <div className="is-flex-shrink-1 is-flex-grow-1 is-flex is-flex-direction-column has-text-black has-truncated">
-            <div className="is-truncated-text has-text-weight-medium">
-              {item.title}
-            </div>
-            <div className="is-truncated-text">{`You have ${item.threads.length} active threads`}</div>
-          </div>
-        </div>
+          index={index}
+          clickAction={() => viewMarketItem(item)}
+          images={item.images}
+          title={item.title}
+          subtext={`You have ${item.threads.length} active threads`}
+        />
       );
     });
   }
