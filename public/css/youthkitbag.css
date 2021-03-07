@@ -7943,7 +7943,7 @@ html {
 .image.has-avatar-overlap {
   display: inline-block; }
   .image.has-avatar-overlap:not(:first-child) {
-    margin-left: -1.5rem; }
+    margin-left: -2.1rem; }
 
 .image.is-overlap-counter {
   vertical-align: top;
@@ -8128,6 +8128,14 @@ body,
 /* Style your items */
 .my-masonry-grid_column > article {
   margin-bottom: 30px; }
+
+/*
+  burger bun css solution (no javascript)
+  adapation from here https://jsfiddle.net/jfm2jyk5/
+  not quite working yet
+  */
+.notification.is-notification-even {
+  padding: 1.25rem 1.5rem; }
 
 .is-overlay-topleft {
   top: 0;

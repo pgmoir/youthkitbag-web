@@ -10,7 +10,7 @@ const UserAnnouncement = ({ user }) => {
   if (userComplete()) return null;
 
   return (
-    <article className="notification is-warning box">
+    <article className="notification is-notification-even is-warning box">
       <h2 className="title">Complete your user profile</h2>
       <div className="content">
         <p>

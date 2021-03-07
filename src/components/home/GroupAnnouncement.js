@@ -5,7 +5,7 @@ const GroupAnnouncement = ({ hasGroupMembership }) => {
   if (hasGroupMembership) return null;
 
   return (
-    <article className="notification is-info box">
+    <article className="notification is-notification-even is-info box">
       <h2 className="title">Join a group</h2>
       <div className="content">
         <p>

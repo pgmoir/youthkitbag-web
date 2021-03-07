@@ -103,7 +103,7 @@ const GroupsMemberRequestsAnnouncement = ({
   }
 
   return (
-    <article className="notification is-info box">
+    <article className="notification is-notification-even is-info box">
       <h2 className="title">Member requests</h2>
       <div className="content">
         <p>

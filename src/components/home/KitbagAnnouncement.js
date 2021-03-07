@@ -9,7 +9,7 @@ const KitbagAnnouncement = ({ kitbagId }) => {
   if (kitbagId) return null;
 
   return (
-    <article className="notification is-primary box">
+    <article className="notification is-notification-even is-primary box">
       <h2 className="title">Get started</h2>
       <p className="subtitle">Make the most of YouthKitbag</p>
       <div className="content">

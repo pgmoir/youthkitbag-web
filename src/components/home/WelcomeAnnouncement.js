@@ -27,7 +27,7 @@ const WelcomeAnnouncement = ({ flags, hideFlag }) => {
 
   if (welcomeAnnouncement)
     return (
-      <article className="notification box">
+      <article className="notification is-notification-even box">
         <h1 className="title is-3">Your YouthKitbag essentials!</h1>
       </article>
     );

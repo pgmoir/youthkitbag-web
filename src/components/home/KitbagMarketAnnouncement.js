@@ -33,8 +33,6 @@ const KitbagMarketAnnouncement = ({
     history.push(`/kitbag/market/${item.kitbag}/edit/${item._id}`);
   }
 
-  //TODO: This still does funny things at certain widths - but not at all small widths
-  // only when in multi column mode.
   function renderList() {
     return items?.map((item, index) => {
       return (
@@ -67,7 +65,7 @@ const KitbagMarketAnnouncement = ({
   }
 
   return (
-    <article className="notification is-success box">
+    <article className="notification is-notification-even is-success box">
       <h2 className="title">Your {description}</h2>
       <div className="content">
         <p>

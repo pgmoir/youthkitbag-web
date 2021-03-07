@@ -5,7 +5,7 @@ const MarketAnnouncement = ({ group, doNotShow }) => {
   if (!group || !doNotShow) return null;
 
   return (
-    <article className="notification is-info box">
+    <article className="notification is-notification-even is-info box">
       <h2 className="title">Market watches</h2>
       <div className="content">
         <p>You have received responses to your trade offers.</p>

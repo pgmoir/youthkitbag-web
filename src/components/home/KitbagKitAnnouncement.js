@@ -5,7 +5,7 @@ const KitbagKitAnnouncement = ({ kitbagId }) => {
   // if (!kitbagId) return null;
 
   return (
-    <article className="notification is-success box">
+    <article className="notification is-notification-even is-success box">
       <h2 className="title">Kitbag activity</h2>
       <div className="content">
         <p>

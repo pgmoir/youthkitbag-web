@@ -5,7 +5,7 @@ const KitbagKitAddMoreAdvice = ({ kitbagId }) => {
   // if (!kitbagId) return null;
 
   return (
-    <article className="notification is-warning box">
+    <article className="notification is-notification-even is-warning box">
       <h2 className="title">Add more kit</h2>
       <div className="content">
         <p>

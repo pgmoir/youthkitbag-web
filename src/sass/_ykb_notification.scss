@@ -1,0 +1,10 @@
+/*
+  burger bun css solution (no javascript)
+  adapation from here https://jsfiddle.net/jfm2jyk5/
+  not quite working yet
+  */
+.notification {
+  &.is-notification-even {
+    padding: 1.25rem 1.5rem;
+  }
+}

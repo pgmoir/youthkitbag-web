@@ -5,7 +5,7 @@ const KitbagKitLevelWarnings = ({ kitbagId }) => {
   if (!kitbagId) return null;
 
   return (
-    <article className="notification is-danger box">
+    <article className="notification is-notification-even is-danger box">
       <h2 className="title">Kit level warnings</h2>
       <div className="content">
         <p>
