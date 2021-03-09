@@ -1,34 +1,18 @@
-import React, { useEffect } from 'react';
-import { connect, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { fetchRecentKitbagKits } from '../../actions';
 import DisplayedItem from './DisplayedItem';
 
-const mapDispatchToProps = {
-  fetchRecentKitbagKits,
-};
-
-const KitbagKitAnnouncement = ({
-  kitbagId,
-  created,
-  fetchRecentKitbagKits,
-}) => {
+const KitbagKitAnnouncement = ({ kitbagId, created }) => {
   const history = useHistory();
   const { recent } = useSelector((state) => state.kitbag.kit);
-
-  useEffect(() => {
-    console.log('UEFF', kitbagId);
-    if (kitbagId) {
-      fetchRecentKitbagKits({ created, days: 7, kitbagId });
-    }
-  }, [fetchRecentKitbagKits, created, kitbagId]);
 
   if (!kitbagId) return null;
 
   if (recent.createdCount === 0 && recent.updatedCount === 0) return null;
 
   function viewKitItem(item) {
-    history.push(`/kitbag/${item.kitbag}/edit/${item._id}`);
+    history.push(`/kitbag/kit/${kitbagId}/edit/${item._id}`);
   }
 
   function renderList(items) {
@@ -85,4 +69,4 @@ const KitbagKitAnnouncement = ({
   );
 };
 
-export default connect(null, mapDispatchToProps)(KitbagKitAnnouncement);
+export default KitbagKitAnnouncement;

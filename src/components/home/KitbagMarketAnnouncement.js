@@ -1,27 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { connect, useSelector } from 'react-redux';
-import { fetchKitbagMarketItems } from '../../actions/KitbagMarketActions';
+import { useSelector } from 'react-redux';
 import DisplayedItem from './DisplayedItem';
 
-const mapDispatchToProps = {
-  fetchKitbagMarketItems,
-};
-
-const KitbagMarketAnnouncement = ({
-  description,
-  marketType,
-  fetchKitbagMarketItems,
-}) => {
+const KitbagMarketAnnouncement = ({ description, marketType }) => {
   const history = useHistory();
   const marketTypeKey = `${marketType.toLowerCase()}s`;
   const { items, totalItems } = useSelector(
     (state) => state.kitbag.market[marketTypeKey]
   );
-
-  useEffect(() => {
-    fetchKitbagMarketItems({ by: marketType, pagesize: 5 });
-  }, [marketType, fetchKitbagMarketItems]);
 
   if (!totalItems || totalItems === 0) return null;
 
@@ -33,7 +20,7 @@ const KitbagMarketAnnouncement = ({
     return items?.map((item, index) => {
       return (
         <DisplayedItem
-          key={index}
+          key={item._id}
           index={index}
           clickAction={() => viewMarketItem(item)}
           images={item.images}
@@ -68,4 +55,4 @@ const KitbagMarketAnnouncement = ({
   );
 };
 
-export default connect(null, mapDispatchToProps)(KitbagMarketAnnouncement);
+export default KitbagMarketAnnouncement;

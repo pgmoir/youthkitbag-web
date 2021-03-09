@@ -37,8 +37,13 @@ const BundlesPage = ({ auth, user, bundles, fetchBundles }) => {
       <div className="container">
         <Alert />
         <div className="columns">
-          {bundles.map((p, index) => (
-            <Bundle key={index} loggedIn={loggedIn} user={user} bundle={p} />
+          {bundles.map((bundle) => (
+            <Bundle
+              key={bundle._id}
+              loggedIn={loggedIn}
+              user={user}
+              bundle={bundle}
+            />
           ))}
         </div>
       </div>

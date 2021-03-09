@@ -9,7 +9,9 @@
 // }
 
 .a11y-highlight {
+  color: $primary;
   &:hover {
+    color: $primary;
     text-decoration: underline;
   }
 }

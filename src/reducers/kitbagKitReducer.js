@@ -9,6 +9,7 @@ import {
   RESET,
   LOGOUT,
   FETCH_KITBAG_LISTS,
+  FETCH_WARNING_KITS,
 } from '../actions/types';
 
 const initialState = {
@@ -23,6 +24,7 @@ const initialState = {
     updatedCount: 0,
     updatedDays: 7,
   },
+  warnings: [],
 };
 
 export default (state = initialState, action) => {
@@ -41,7 +43,6 @@ export default (state = initialState, action) => {
     }
 
     case FETCH_RECENT_KITS: {
-      console.log('PL', action.payload);
       const { created, days } = action.payload;
       const { kits, itemCount } = action.payload.data;
       const recent = created
@@ -58,6 +59,11 @@ export default (state = initialState, action) => {
             updatedDays: days,
           };
       return { ...state, recent };
+    }
+
+    case FETCH_WARNING_KITS: {
+      const { kits } = action.payload.data;
+      return { ...state, warnings: kits };
     }
 
     case DELETE_KITBAG_KIT: {

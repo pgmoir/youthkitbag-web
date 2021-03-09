@@ -1,26 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { fetchGroupsMemberRequests } from '../../actions/GroupActions';
+import { Link, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { getImage } from '../../utils/image';
 
-const mapStateToProps = (state) => ({
-  groupsMemberRequests: state.group.memberRequests,
-});
-
-const mapDispatchToProps = {
-  fetchGroupsMemberRequests,
-};
-
-const GroupsMemberRequestsAnnouncement = ({
-  groupsMemberRequests,
-  fetchGroupsMemberRequests,
-}) => {
+const GroupsMemberRequestsAnnouncement = () => {
+  const history = useHistory();
   const [groupsWithMemberRequests, setGroupsWithMemberRequests] = useState([]);
-
-  useEffect(() => {
-    fetchGroupsMemberRequests();
-  }, [fetchGroupsMemberRequests]);
+  const groupsMemberRequests = useSelector(
+    (state) => state.group.memberRequests
+  );
 
   useEffect(() => {
     if (groupsMemberRequests) {
@@ -38,22 +26,27 @@ const GroupsMemberRequestsAnnouncement = ({
     return total + g.members.length;
   }, 0);
 
+  // http://localhost:3000/groups/602ec91fb0ed8434fd5a217d/members
+  function viewMembersList(group) {
+    history.push(`/groups/${group._id}/members`);
+  }
+
   function renderMemberList(members) {
     return (
       <>
-        {members.map((m, index) => {
+        {members.map((member, index) => {
           const userProfileImageUrl = getImage({
-            images: m.user?.images,
+            images: member.user?.images,
             index: 0,
-            email: m.user?.email,
+            email: member.user?.email,
           });
           if (index < 5) {
             return (
-              <div key={index} className="image has-avatar-overlap">
+              <div key={member._id} className="image has-avatar-overlap">
                 <img
                   src={userProfileImageUrl}
                   className="is-avatar is-rounded is-48x48"
-                  alt={`${m.user?.firstName} ${m.user?.lastName}`}
+                  alt={`${member.user?.firstName} ${member.user?.lastName}`}
                 />
               </div>
             );
@@ -76,9 +69,16 @@ const GroupsMemberRequestsAnnouncement = ({
   }
 
   function renderList() {
-    return groupsWithMemberRequests.map((group, index) => {
+    return groupsWithMemberRequests.map((group) => {
       return (
-        <div key={index} className="box is-flex is-align-items-center p-3">
+        <div
+          key={group._id}
+          className="box is-flex is-align-items-center is-clickable p-3"
+          role="button"
+          onClick={() => viewMembersList(group)}
+          onKeyPress={() => viewMembersList(group)}
+          tabIndex="0"
+        >
           <div className="is-flex-shrink-0 is-flex-grow-0 pr-4">
             <div className="image">
               <img
@@ -123,7 +123,4 @@ const GroupsMemberRequestsAnnouncement = ({
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GroupsMemberRequestsAnnouncement);
+export default GroupsMemberRequestsAnnouncement;

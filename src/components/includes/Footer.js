@@ -14,7 +14,7 @@ const Footer = () => {
       </div>
       <div className="columns">
         <div className="column has-text-centered">
-          <p>About YouthKitbag</p>
+          <p className="has-text-weight-medium">About YouthKitbag</p>
           <p>
             <Link to="/bundles" className="a11y-highlight">
               Buy a Bundle
@@ -32,7 +32,7 @@ const Footer = () => {
           </p>
         </div>
         <div className="column has-text-centered">
-          <p>Information for</p>
+          <p className="has-text-weight-medium">Information for</p>
           <p>
             <Link to="/site/termsandconditions" className="a11y-highlight">
               Terms &amp; Conditions
@@ -60,7 +60,7 @@ const Footer = () => {
           </p>
         </div>
         <div className="column has-text-centered">
-          <p>Contact details</p>
+          <p className="has-text-weight-medium">Contact details</p>
           <p>
             <span className="sr-only">Our address is:</span>
             YouthKitbag c/o Moir Consultancy Ltd

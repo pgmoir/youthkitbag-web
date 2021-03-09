@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const KitbagKitAddMoreAdvice = ({ kitbagId }) => {
-  // if (!kitbagId) return null;
+  if (!kitbagId) return null;
 
   return (
     <article className="notification is-notification-even is-warning box">

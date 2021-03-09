@@ -9,6 +9,7 @@ import {
   FETCH_KITBAG_LISTS,
   FETCH_RECENT_KITS,
   SEARCH_KITBAG_KITS,
+  FETCH_WARNING_KITS,
 } from './types';
 import history from '../utils/history';
 
@@ -64,6 +65,21 @@ export const fetchRecentKitbagKits = ({ created, days, kitbagId }) => (
       dispatch({
         type: FETCH_RECENT_KITS,
         payload: { ...response.data, created, days },
+      });
+    })
+    .catch((err) => {
+      const { response } = err;
+      dispatch({ type: API_ERROR, payload: response });
+    });
+};
+
+export const fetchWarningsKitbagKits = ({ kitbagId }) => (dispatch) => {
+  axios
+    .get(`/kitbag/kit/${kitbagId}/warnings`)
+    .then((response) => {
+      dispatch({
+        type: FETCH_WARNING_KITS,
+        payload: { ...response.data },
       });
     })
     .catch((err) => {

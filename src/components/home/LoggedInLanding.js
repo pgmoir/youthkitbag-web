@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Alert from '../includes/Alert';
-import { useSelector } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import Masonry from 'react-masonry-css';
 import WelcomeAnnouncement from './WelcomeAnnouncement';
 import UserAnnouncement from './UserAnnouncement';
@@ -8,7 +8,6 @@ import KitbagAnnouncement from './KitbagAnnouncement';
 import GroupAnnouncement from './GroupAnnouncement';
 import GroupsMemberRequestsAnnouncement from './GroupsMemberRequestsAnnouncement';
 import KitbagKitLevelWarnings from './KitbagKitLevelWarnings';
-import KitbagKitAddMoreAdvice from './KitbagKitAddMoreAdvice';
 import KitbagKitAnnouncement from './KitbagKitAnnouncement';
 import MarketAnnouncement from './MarketAnnouncement';
 import KitbagMarketAnnouncement from './KitbagMarketAnnouncement';
@@ -16,11 +15,29 @@ import {
   userHasGroupMembership,
   userPreferredKitbagId,
 } from '../../utils/user';
+import {
+  fetchKitbagMarketItems,
+  fetchRecentKitbagKits,
+  fetchGroupsMemberRequests,
+  fetchWarningsKitbagKits,
+} from '../../actions';
 import { MarketTypes } from '../../enums/marketTypes.enum';
 import { GroupStates } from '../../enums/groupStates.enum';
 import { MemberStates } from '../../enums/memberStates.enum';
 
-const LoggedInLanding = () => {
+const mapDispatchToProps = {
+  fetchKitbagMarketItems,
+  fetchRecentKitbagKits,
+  fetchGroupsMemberRequests,
+  fetchWarningsKitbagKits,
+};
+
+const LoggedInLanding = ({
+  fetchKitbagMarketItems,
+  fetchRecentKitbagKits,
+  fetchGroupsMemberRequests,
+  fetchWarningsKitbagKits,
+}) => {
   const user = useSelector((state) => state.user);
 
   const [preferredKitbagId, setPreferredKitbagId] = useState(null);
@@ -35,10 +52,35 @@ const LoggedInLanding = () => {
 
   useEffect(() => {
     if (user._id) {
-      setPreferredKitbagId(userPreferredKitbagId(user));
-      setHasGroupMembership(userHasGroupMembership(user));
+      const kitbagId = userPreferredKitbagId(user);
+      setPreferredKitbagId(kitbagId);
+
+      if (kitbagId) {
+        fetchRecentKitbagKits({ created: true, days: 7, kitbagId });
+        fetchRecentKitbagKits({ created: false, days: 7, kitbagId });
+      }
+
+      const hasGroup = userHasGroupMembership(user);
+      setHasGroupMembership(hasGroup);
+
+      if (hasGroup) {
+        fetchKitbagMarketItems({ by: MarketTypes.TRADE, pagesize: 5 });
+        fetchKitbagMarketItems({ by: MarketTypes.RECYCLE, pagesize: 5 });
+        fetchKitbagMarketItems({ by: MarketTypes.FOUND, pagesize: 5 });
+        fetchKitbagMarketItems({ by: MarketTypes.LOST, pagesize: 5 });
+        fetchKitbagMarketItems({ by: MarketTypes.STOLEN, pagesize: 5 });
+        fetchKitbagMarketItems({ by: MarketTypes.WANTED, pagesize: 5 });
+        fetchGroupsMemberRequests();
+        fetchWarningsKitbagKits({ kitbagId });
+      }
     }
-  }, [user]);
+  }, [
+    user,
+    fetchKitbagMarketItems,
+    fetchRecentKitbagKits,
+    fetchGroupsMemberRequests,
+    fetchWarningsKitbagKits,
+  ]);
 
   const masonryBreakpoints = {
     default: 4,
@@ -61,7 +103,7 @@ const LoggedInLanding = () => {
         <GroupAnnouncement hasGroupMembership={hasGroupMembership} />
         <GroupsMemberRequestsAnnouncement />
         <KitbagKitLevelWarnings kitbagId={preferredKitbagId} />
-        <KitbagKitAddMoreAdvice />
+        {/* <KitbagKitAddMoreAdvice /> */}
         <KitbagKitAnnouncement kitbagId={preferredKitbagId} created={true} />
         <KitbagKitAnnouncement kitbagId={preferredKitbagId} created={false} />
         <MarketAnnouncement group={group} />
@@ -94,4 +136,4 @@ const LoggedInLanding = () => {
   );
 };
 
-export default LoggedInLanding;
+export default connect(null, mapDispatchToProps)(LoggedInLanding);

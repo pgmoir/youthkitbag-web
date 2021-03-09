@@ -7904,8 +7904,11 @@ html {
 /*
   accessibility
   */
-.a11y-highlight:hover {
-  text-decoration: underline; }
+.a11y-highlight {
+  color: #325d88; }
+  .a11y-highlight:hover {
+    color: #325d88;
+    text-decoration: underline; }
 
 /*
   https://stackoverflow.com/questions/26681059/create-a-circle-avatar-from-a-rectangle-image-keeping-proportions-and-just-using
