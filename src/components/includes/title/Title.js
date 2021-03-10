@@ -1,10 +1,15 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import classNames from 'classnames';
 
-const Title = ({ title, icon, hasHr = true }) => {
+const Title = ({ title, icon, iconAction, hasAction, hasHr = true }) => {
   if (title === '') {
     return null;
   }
+
+  const iconClasses = classNames(`ml-3 ${icon}`, {
+    'is-clickable': hasAction,
+  });
 
   return (
     <>
@@ -13,7 +18,16 @@ const Title = ({ title, icon, hasHr = true }) => {
       </Helmet>
       <h1 className="title is-size-4">
         {title}
-        {icon && <i className={`${icon} ml-3`}></i>}
+        {icon && iconAction && (
+          <i
+            className={iconClasses}
+            onClick={() => iconAction()}
+            onKeyPress={() => iconAction()}
+            role="button"
+            tabIndex="0"
+          ></i>
+        )}
+        {icon && !iconAction && <i className={iconClasses}></i>}
       </h1>
       {hasHr && <hr />}
     </>

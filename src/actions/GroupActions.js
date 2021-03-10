@@ -13,6 +13,7 @@ import {
   GROUP_MEMBER_LEAVE,
   SEARCH_GROUPS,
   FETCH_GROUPS_MEMBER_REQUESTS,
+  FETCH_GROUPS_LISTS,
 } from './types';
 import history from '../utils/history';
 import { getUser } from './UserActions';
@@ -22,8 +23,8 @@ export const fetchGroups = ({
   searchfor,
   page,
   pagesize,
-  order,
-  direction,
+  order = 'updatedAt',
+  direction = -1,
 }) => (dispatch) => {
   axios
     .get(`/group/search`, {
@@ -178,6 +179,18 @@ export const fetchGroupsMemberRequests = () => (dispatch) => {
         type: FETCH_GROUPS_MEMBER_REQUESTS,
         payload: response.data,
       });
+    })
+    .catch((err) => {
+      const { response } = err;
+      dispatch({ type: API_ERROR, payload: response.data });
+    });
+};
+
+export const fetchGroupsLists = () => (dispatch) => {
+  axios
+    .get(`/group/lists`, {})
+    .then((response) => {
+      dispatch({ type: FETCH_GROUPS_LISTS, payload: response.data });
     })
     .catch((err) => {
       const { response } = err;

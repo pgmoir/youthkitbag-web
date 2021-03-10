@@ -22,8 +22,8 @@ export const fetchKitbagMarketItems = ({
   searchfor,
   page,
   pagesize,
-  order,
-  direction,
+  order = 'updatedAt',
+  direction = -1,
 }) => (dispatch) => {
   axios
     .get(`/kitbag/market`, {

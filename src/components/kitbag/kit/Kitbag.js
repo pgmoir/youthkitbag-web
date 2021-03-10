@@ -8,6 +8,7 @@ import KitCard from './KitCard';
 import SearchForm from '../../includes/SearchForm';
 import Pagination from '../../includes/Pagination';
 import Breadcrumb from '../../includes/Breadcrumb';
+import KitRow from './KitRow';
 
 const mapStateToProps = (state) => ({
   stateSearch: state.kitbag.kit.search,
@@ -31,6 +32,7 @@ const Kitbag = ({
   match,
 }) => {
   const [search, setSearch] = useState(stateSearch);
+  const [displayRow, setDisplayRow] = useState(false);
   const [kitbagId] = useState(match.params.kitbagId);
 
   useEffect(() => {
@@ -73,19 +75,46 @@ const Kitbag = ({
     );
   }
 
-  function renderList() {
+  function renderCards() {
     return Object.keys(entities).map((key, index) => {
       return (
-        <KitCard key={`${index}`} kit={entities[key]} kitbagId={kitbagId} />
+        <KitCard
+          key={`${index}`}
+          kit={entities[key]}
+          kitbagId={kitbagId}
+          callback={setSearch}
+        />
       );
     });
+  }
+
+  function renderRows() {
+    return Object.keys(entities).map((key, index) => {
+      return (
+        <KitRow
+          key={`${index}`}
+          kit={entities[key]}
+          kitbagId={kitbagId}
+          callback={setSearch}
+        />
+      );
+    });
+  }
+
+  function updateDisplay() {
+    setDisplayRow(!displayRow);
   }
 
   return (
     <>
       <div className="main container is-fluid">
         <Breadcrumb crumbs={crumbs} />
-        <Title title={getTitle()} />
+        <Title
+          title={getTitle()}
+          icon={displayRow ? 'fas fa-address-card' : 'fas fa-align-justify'}
+          iconAction={updateDisplay}
+          hasAction={true}
+        />
         <Alert />
         <div className="columns">
           <div className="column is-full">
@@ -98,9 +127,13 @@ const Kitbag = ({
             />
           </div>
         </div>
-        <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
-          {renderList()}
-        </div>
+        {displayRow ? (
+          <div className="">{renderRows()}</div>
+        ) : (
+          <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
+            {renderCards()}
+          </div>
+        )}
         <div className="mb-3">
           <Pagination
             kitbagId={kitbagId}

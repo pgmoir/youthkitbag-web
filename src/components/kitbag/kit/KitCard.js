@@ -5,11 +5,21 @@ import { ImagesNav } from '../../includes/images';
 import BlankCard from '../BlankCard';
 import KitDelete from './KitDelete';
 
-const KitCard = ({ kit, kitbagId }) => {
+const KitCard = ({ kit, kitbagId, callback }) => {
   const [modalIsActive, setModalIsActive] = useState(false);
   const [imageKey, setImageKey] = useState(0);
 
-  const { _id, title, subtitle, images, active } = kit;
+  const {
+    _id,
+    title,
+    subtitle,
+    images,
+    active,
+    tags,
+    activitys,
+    inbag,
+    purchases,
+  } = kit;
 
   if (!kit?._id) return <BlankCard />;
 
@@ -32,6 +42,18 @@ const KitCard = ({ kit, kitbagId }) => {
   function deleteItem(e) {
     e.stopPropagation();
     setModalIsActive(true);
+  }
+
+  function searchBy(e, searchfor, by) {
+    e.stopPropagation();
+    callback({
+      searchfor,
+      by,
+      page: 1,
+      pagesize: 24,
+      order: 'updatedAt',
+      direction: -1,
+    });
   }
 
   return (
@@ -80,6 +102,66 @@ const KitCard = ({ kit, kitbagId }) => {
           <div className="card-content">
             <p className="title is-size-5">{title}</p>
             {subtitle && <p className="subtitle is-size-6">{subtitle}</p>}
+            {(tags || activitys || inbag || purchases) && (
+              <div className="tags m-0">
+                {tags?.map((tag, index) => {
+                  return (
+                    <span
+                      key={index}
+                      className="tag is-warning is-clickable mb-2"
+                      onClick={(e) => searchBy(e, tag, 'tag')}
+                      onKeyPress={(e) => searchBy(e, tag, 'tag')}
+                      role="button"
+                      tabIndex={0}
+                    >
+                      {tag}
+                    </span>
+                  );
+                })}
+                {activitys?.map((activity, index) => {
+                  return (
+                    <span
+                      key={index}
+                      className="tag is-success is-clickable mb-2"
+                      onClick={(e) => searchBy(e, activity, 'activity')}
+                      onKeyPress={(e) => searchBy(e, activity, 'activity')}
+                      role="button"
+                      tabIndex={0}
+                    >
+                      {activity}
+                    </span>
+                  );
+                })}
+                {inbag?.map((bag, index) => {
+                  return (
+                    <span
+                      key={index}
+                      className="tag is-info is-clickable mb-2"
+                      onClick={(e) => searchBy(e, bag.location, 'container')}
+                      onKeyPress={(e) => searchBy(e, bag.location, 'container')}
+                      role="button"
+                      tabIndex={0}
+                    >
+                      {bag.location}
+                    </span>
+                  );
+                })}
+                {purchases?.map((purchase, index) => {
+                  return (
+                    <span
+                      key={index}
+                      className="tag is-danger is-clickable mb-2"
+                      onClick={(e) => searchBy(e, purchase.from, 'source')}
+                      onKeyPress={(e) => searchBy(e, purchase.from, 'source')}
+                      role="button"
+                      tabIndex={0}
+                    >
+                      {purchase.from}
+                    </span>
+                  );
+                })}{' '}
+              </div>
+            )}
           </div>
         </div>
       </div>

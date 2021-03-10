@@ -13,10 +13,12 @@ import {
   EDIT_GROUP_MEMBER_STATE,
   GROUP_MEMBER_LEAVE,
   EDIT_GROUP_STATE,
+  FETCH_GROUPS_LISTS,
 } from '../actions/types';
 
 const initialState = {
   entities: {},
+  lists: [],
   memberEntities: {},
   search: { searchfor: '', by: '', page: 1, pagesize: 24, loading: true },
   searchMembers: { searchfor: '', by: '', loading: true },
@@ -75,6 +77,10 @@ export default (state = initialState, action) => {
 
     case FETCH_GROUPS_MEMBER_REQUESTS: {
       return { ...state, memberRequests: action.payload.data };
+    }
+
+    case FETCH_GROUPS_LISTS: {
+      return { ...state, lists: action.payload.data };
     }
 
     case RESET:

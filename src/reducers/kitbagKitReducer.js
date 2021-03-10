@@ -15,7 +15,15 @@ import {
 const initialState = {
   entities: {},
   lists: [],
-  search: { searchfor: '', by: '', page: 1, pagesize: 24, loading: true },
+  search: {
+    searchfor: '',
+    by: '',
+    page: 1,
+    pagesize: 24,
+    order: 'updatedAt',
+    direction: -1,
+    loading: true,
+  },
   recent: {
     createdItems: [],
     createdCount: 0,

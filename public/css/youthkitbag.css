@@ -8103,6 +8103,20 @@ body,
 .icon.is-extralarge.has-background-primary:hover {
   border: #325d88 solid 3.1rem; }
 
+.row-image {
+  display: block;
+  position: relative; }
+
+@media only screen and (max-width: 768px) {
+  .image.is-extralarge {
+    max-width: 160px;
+    max-height: 160px; } }
+
+@media only screen and (min-width: 769px) {
+  .image.is-extralarge {
+    max-width: 200px;
+    max-height: 200px; } }
+
 .leaflet-container {
   width: 100%;
   height: 300px; }

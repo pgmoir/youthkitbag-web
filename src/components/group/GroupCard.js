@@ -6,7 +6,7 @@ import { ImagesNav } from '../includes/images';
 import BlankCard from '../kitbag/BlankCard';
 import GroupState from './GroupState';
 
-const GroupCard = ({ group }) => {
+const GroupCard = ({ group, callback }) => {
   const [stateModalIsActive, setStateModalIsActive] = useState(false);
   const [imageKey, setImageKey] = useState(0);
 
@@ -68,6 +68,18 @@ const GroupCard = ({ group }) => {
     setStateModalIsActive(true);
   }
 
+  function searchBy(e, searchfor, by) {
+    e.stopPropagation();
+    callback({
+      searchfor,
+      by,
+      page: 1,
+      pagesize: 24,
+      order: 'updatedAt',
+      direction: -1,
+    });
+  }
+
   return (
     <>
       <div className="column is-12-mobile is-4-tablet is-3-desktop is-2-fullhd">
@@ -121,7 +133,14 @@ const GroupCard = ({ group }) => {
               <div className="tags">
                 {activitys.map((activity, index) => {
                   return (
-                    <span key={index} className="tag is-success">
+                    <span
+                      key={index}
+                      className="tag is-success is-clickable mb-2"
+                      onClick={(e) => searchBy(e, activity, 'activity')}
+                      onKeyPress={(e) => searchBy(e, activity, 'activity')}
+                      role="button"
+                      tabIndex={0}
+                    >
                       {activity}
                     </span>
                   );

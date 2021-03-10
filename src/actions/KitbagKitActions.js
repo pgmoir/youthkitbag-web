@@ -18,9 +18,9 @@ export const fetchKitbagKits = ({
   searchfor,
   page,
   pagesize,
-  order,
-  direction,
   kitbagId,
+  order = 'updatedAt',
+  direction = -1,
 }) => (dispatch) => {
   axios
     .get(`/kitbag/kit/${kitbagId}`, {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 import { connect } from 'react-redux';
 import { fetchGroups } from '../../actions';
 import Title from '../includes/title/Title';
@@ -14,6 +15,7 @@ const mapStateToProps = (state) => ({
   items: Object.values(state.group.entities),
   pagination: state.pagination,
   userBundle: state.user.bundle,
+  lists: state.group.lists,
 });
 
 const mapDispatchToProps = {
@@ -24,6 +26,7 @@ const Groups = ({
   stateSearch,
   items,
   pagination,
+  lists,
   userBundle,
   fetchGroups,
 }) => {
@@ -64,7 +67,7 @@ const Groups = ({
 
   function renderList() {
     return groups.map((item, index) => {
-      return <GroupCard key={`${index}`} group={item} />;
+      return <GroupCard key={`${index}`} group={item} callback={setSearch} />;
     });
   }
 
@@ -101,6 +104,7 @@ const Groups = ({
             <SearchForm
               search={search}
               callback={setSearch}
+              collections={lists}
               placeholderText="Search groups"
             />
           </div>
