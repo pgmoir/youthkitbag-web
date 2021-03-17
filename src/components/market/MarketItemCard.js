@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import history from '../../utils/history';
 import useMarketType from '../hooks/useMarketType';
-import classNames from 'classnames';
 import BlankCard from '../kitbag/BlankCard';
 import MarketItemDelete from '../kitbag/market/MarketItemDelete';
 import { getImage } from '../../utils/image';
 import { ImagesNav } from '../includes/images';
+import useCardRowClasses from '../hooks/useCardRowClasses';
 
-const MarketItemCard = ({ market, callback }) => {
+const MarketItemCard = ({ market, callback, isCard = true }) => {
   const [modalIsActive, setModalIsActive] = useState(false);
   const [imageKey, setImageKey] = useState(0);
 
@@ -34,11 +34,20 @@ const MarketItemCard = ({ market, callback }) => {
     isOwned,
   });
 
-  if (!market?._id) return <BlankCard />;
+  const {
+    wrapperClassNames,
+    clickAreaClassNames,
+    imageClassNames,
+    figureClassNames,
+    contentClassNames,
+    titleClassNames,
+    subtitleClassNames,
+    tagsClassNames,
+  } = useCardRowClasses({ isCard });
+
+  if (!market?._id) return <BlankCard isCard={isCard} />;
 
   const showImage = getImage({ images, index: imageKey });
-
-  const cardClasses = classNames(`card is-clickable`);
 
   function viewItem() {
     if (isOwned) {
@@ -67,16 +76,16 @@ const MarketItemCard = ({ market, callback }) => {
 
   return (
     <>
-      <div className="column is-12-mobile is-4-tablet is-3-desktop is-2-fullhd">
+      <div className={wrapperClassNames}>
         <div
-          className={cardClasses}
+          className={clickAreaClassNames}
           onClick={() => viewItem()}
           onKeyPress={() => viewItem()}
           role="button"
           tabIndex="0"
         >
-          <div className="card-image">
-            <figure className="image is-4by3">
+          <div className={imageClassNames}>
+            <figure className={figureClassNames}>
               <img src={showImage} alt={title} role="presentation" />
             </figure>
             {isOwned && !deleted && (
@@ -110,10 +119,10 @@ const MarketItemCard = ({ market, callback }) => {
               setImageKey={setImageKey}
             />
           </div>
-          <div className="card-content">
-            <p className="title is-size-5">{title}</p>
-            {subtitle && <p className="subtitle is-size-6">{subtitle}</p>}
-            <div className="tags m-0">
+          <div className={contentClassNames}>
+            <div className={titleClassNames}>{title}</div>
+            {subtitle && <div className={subtitleClassNames}>{subtitle}</div>}
+            <div className={tagsClassNames}>
               <span
                 className="tag is-info is-clickable mb-2"
                 onClick={(e) => searchBy(e, '', hasMarketType)}

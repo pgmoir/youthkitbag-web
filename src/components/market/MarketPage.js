@@ -8,7 +8,6 @@ import MarketItemCard from './MarketItemCard';
 import Pagination from '../includes/Pagination';
 import SearchForm from '../includes/SearchForm';
 import Title from '../includes/title/Title';
-import MarketItemRow from './MarketItemRow';
 
 const mapStateToProps = (state) => ({
   stateSearch: state.market.search,
@@ -62,18 +61,15 @@ const MarketPage = ({
     );
   }
 
-  function renderCards() {
+  function renderCards(isCard) {
     return Object.keys(entities).map((key) => {
       return (
-        <MarketItemCard key={key} market={entities[key]} callback={setSearch} />
-      );
-    });
-  }
-
-  function renderRows() {
-    return Object.keys(entities).map((key) => {
-      return (
-        <MarketItemRow key={key} market={entities[key]} callback={setSearch} />
+        <MarketItemCard
+          key={key}
+          market={entities[key]}
+          callback={setSearch}
+          isCard={isCard}
+        />
       );
     });
   }
@@ -104,10 +100,10 @@ const MarketPage = ({
         </div>
       </div>
       {displayRow ? (
-        <div className="">{renderRows()}</div>
+        <div className="">{renderCards(false)}</div>
       ) : (
         <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
-          {renderCards()}
+          {renderCards(true)}
         </div>
       )}
       <div className="mb-3">

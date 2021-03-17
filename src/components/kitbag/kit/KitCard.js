@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import className from 'classnames';
 import history from '../../../utils/history';
-import { getImage } from '../../../utils/image';
-import { ImagesNav } from '../../includes/images';
 import BlankCard from '../BlankCard';
 import KitDelete from './KitDelete';
+import { getImage } from '../../../utils/image';
+import { ImagesNav } from '../../includes/images';
+import useCardRowClasses from '../../hooks/useCardRowClasses';
 
 const KitCard = ({ kit, kitbagId, callback, isCard = true }) => {
   const [modalIsActive, setModalIsActive] = useState(false);
@@ -22,41 +22,18 @@ const KitCard = ({ kit, kitbagId, callback, isCard = true }) => {
     purchases,
   } = kit;
 
+  const {
+    wrapperClassNames,
+    clickAreaClassNames,
+    imageClassNames,
+    figureClassNames,
+    contentClassNames,
+    titleClassNames,
+    subtitleClassNames,
+    tagsClassNames,
+  } = useCardRowClasses({ isCard });
+
   if (!kit?._id) return <BlankCard isCard={isCard} />;
-
-  const wrapperClassNames = isCard
-    ? className('column is-12-mobile is-4-tablet is-3-desktop is-2-fullhd')
-    : className('');
-
-  const clickAreaClassNames = isCard
-    ? className('card is-clickable')
-    : className('is-flex is-clickable has-background-light mb-2');
-
-  const imageClassNames = isCard
-    ? className('card-image')
-    : className('is-flex-shrink-0 is-flex-grow-0 row-image');
-
-  const figureClassNames = isCard
-    ? className('image is-4by3')
-    : className('image is-extralarge');
-
-  const contentClassNames = isCard
-    ? className('card-content')
-    : className(
-        'is-flex-shrink-1 is-flex-grow-1 is-flex is-flex-direction-column has-text-black has-truncated'
-      );
-
-  const titleClassNames = isCard
-    ? className('title is-size-5')
-    : className('is-truncated-text has-text-weight-medium is-size-4 mx-3 mt-2');
-
-  const subtitleClassNames = isCard
-    ? className('subtitle is-size-6')
-    : className('is-truncated-text is-size-5 mx-3');
-
-  const tagsClassNames = isCard
-    ? className('tags m-0')
-    : className('tags mx-3 mt-2 mb-0');
 
   const showImage = getImage({ images, index: imageKey });
 
