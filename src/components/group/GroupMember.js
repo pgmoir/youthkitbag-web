@@ -7,21 +7,36 @@ import GroupMemberState from './GroupMemberState';
 import { MemberStates } from '../../enums/memberStates.enum';
 import { getImage } from '../../utils/image';
 import { ImagesNav } from '../includes/images';
+import useCardRowClasses from '../hooks/useCardRowClasses';
 
-const GroupMember = ({ groupId, member, isGroupAdmin }) => {
+const GroupMember = ({ groupId, member, isGroupAdmin, isCard = true }) => {
   const [deleteModalIsActive, setDeleteModalIsActive] = useState(false);
   const [stateModalIsActive, setStateModalIsActive] = useState(false);
   const [imageKey, setImageKey] = useState(0);
 
   const { user, role, state } = member;
 
-  if (!member._id) return <BlankCard />;
+  const {
+    wrapperClassNames,
+    clickAreaClassNames,
+    imageClassNames,
+    figureClassNames,
+    contentClassNames,
+    titleClassNames,
+    subtitleClassNames,
+  } = useCardRowClasses({ isCard });
+
+  if (!member._id) return <BlankCard isCard={isCard} />;
 
   const showImage = getImage({
     images: user?.images,
     index: imageKey,
     email: user?.email,
   });
+
+  function viewItem() {
+    // do nothing yet
+  }
 
   function deleteMember(e) {
     e.stopPropagation();
@@ -43,10 +58,16 @@ const GroupMember = ({ groupId, member, isGroupAdmin }) => {
 
   return (
     <>
-      <div className="column is-12-mobile is-4-tablet is-3-desktop is-2-fullhd">
-        <article className="card">
-          <div className="card-image">
-            <figure className="image is-4by3">
+      <div className={wrapperClassNames}>
+        <div
+          className={clickAreaClassNames}
+          onClick={() => viewItem()}
+          onKeyPress={() => viewItem()}
+          role="button"
+          tabIndex="0"
+        >
+          <div className={imageClassNames}>
+            <figure className={figureClassNames}>
               <img src={showImage} alt="" role="presentation" />
             </figure>
             {isGroupAdmin ? (
@@ -96,16 +117,16 @@ const GroupMember = ({ groupId, member, isGroupAdmin }) => {
               setImageKey={setImageKey}
             />
           </div>
-          <div className="card-content">
-            <p className="title is-size-5">
+          <div className={contentClassNames}>
+            <div className={titleClassNames}>
               {user.lastName
                 ? `${user.lastName.toUpperCase()}, ${user.firstName}`
                 : 'UNKNOWN'}
-            </p>
-            <p className="subtitle is-size-6">{role}</p>
-            {isGroupAdmin && <p className="subtitle is-size-6">{user.email}</p>}
+            </div>
+            {role && <div className={subtitleClassNames}>{role}</div>}
+            {isGroupAdmin && <p className={subtitleClassNames}>{user.email}</p>}
           </div>
-        </article>
+        </div>
       </div>
       <GroupMemberDelete
         groupId={groupId}

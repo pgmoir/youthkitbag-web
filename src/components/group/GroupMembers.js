@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { fetchGroupMembers } from '../../actions';
 import Title from '../includes/title/Title';
@@ -23,6 +23,8 @@ const GroupMembers = ({ fetchGroupMembers, match }) => {
   );
 
   const [search, setSearch] = useState(stateSearch);
+  const [displayRow, setDisplayRow] = useState(false);
+
   const isGroupAdmin =
     userGroup?.member?.role === MemberRoles.ADMIN &&
     userGroup?.member?.state === MemberStates.APPROVED;
@@ -64,7 +66,7 @@ const GroupMembers = ({ fetchGroupMembers, match }) => {
       </div>
     );
 
-  function renderList() {
+  function renderCards(isCard) {
     const searchfor = search.searchfor.toLowerCase();
     return Object.keys(memberEntities).map((key, index) => {
       if (search.by !== 'all' && search.by !== '') {
@@ -86,9 +88,14 @@ const GroupMembers = ({ fetchGroupMembers, match }) => {
           isGroupAdmin={
             isGroupAdmin && memberEntities[key]._id !== userGroup.member._id
           }
+          isCard={isCard}
         />
       );
     });
+  }
+
+  function updateDisplay() {
+    setDisplayRow(!displayRow);
   }
 
   const crumbs = [
@@ -101,7 +108,12 @@ const GroupMembers = ({ fetchGroupMembers, match }) => {
   return (
     <div className="main container is-fluid">
       <Breadcrumb crumbs={crumbs} />
-      <Title title={getTitle()} />
+      <Title
+        title={getTitle()}
+        icon={displayRow ? 'fas fa-address-card' : 'fas fa-align-justify'}
+        iconAction={updateDisplay}
+        hasAction={true}
+      />
       <Alert />
       <div className="columns">
         <div className="column is-three-quarters">
@@ -115,9 +127,13 @@ const GroupMembers = ({ fetchGroupMembers, match }) => {
           />
         </div>
       </div>
-      <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
-        {renderList()}
-      </div>
+      {displayRow ? (
+        <div className="">{renderCards(false)}</div>
+      ) : (
+        <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
+          {renderCards(true)}
+        </div>
+      )}
     </div>
   );
 };
