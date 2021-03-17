@@ -8,12 +8,13 @@ import MarketItemCard from './MarketItemCard';
 import Pagination from '../includes/Pagination';
 import SearchForm from '../includes/SearchForm';
 import Title from '../includes/title/Title';
+import MarketItemRow from './MarketItemRow';
 
 const mapStateToProps = (state) => ({
   stateSearch: state.market.search,
   entities: state.market.entities,
   pagination: state.pagination,
-  lists: state.kitbag.kit.lists,
+  lists: state.market.lists,
 });
 
 const mapDispatchToProps = {
@@ -29,17 +30,18 @@ const MarketPage = ({
   match,
 }) => {
   const [search, setSearch] = useState(stateSearch);
+  const [displayRow, setDisplayRow] = useState(false);
   const kitbagId = match.params.kitbagId;
 
   useEffect(() => {
     fetchMarketItems({ ...search });
   }, [search, fetchMarketItems]);
 
-  const crumbs = [{ title: 'Home', to: '/' }, { title: 'Market' }];
-
   function getTitle() {
     return `Market (${pagination.totalItems})`;
   }
+
+  const crumbs = [{ title: 'Home', to: '/' }, { title: 'Market' }];
 
   function renderBlankList() {
     const blankList = [{}, {}, {}, {}, {}, {}];
@@ -60,22 +62,35 @@ const MarketPage = ({
     );
   }
 
-  function renderList() {
-    return Object.keys(entities).map((key, index) => {
+  function renderCards() {
+    return Object.keys(entities).map((key) => {
       return (
-        <MarketItemCard
-          key={`${index}`}
-          market={entities[key]}
-          kitbagId={kitbagId}
-        />
+        <MarketItemCard key={key} market={entities[key]} callback={setSearch} />
       );
     });
+  }
+
+  function renderRows() {
+    return Object.keys(entities).map((key) => {
+      return (
+        <MarketItemRow key={key} market={entities[key]} callback={setSearch} />
+      );
+    });
+  }
+
+  function updateDisplay() {
+    setDisplayRow(!displayRow);
   }
 
   return (
     <div className="main container is-fluid">
       <Breadcrumb crumbs={crumbs} />
-      <Title title={getTitle()} />
+      <Title
+        title={getTitle()}
+        icon={displayRow ? 'fas fa-address-card' : 'fas fa-align-justify'}
+        iconAction={updateDisplay}
+        hasAction={true}
+      />
       <Alert />
       <div className="columns">
         <div className="column is-three-quarters">
@@ -88,9 +103,13 @@ const MarketPage = ({
           />
         </div>
       </div>
-      <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
-        {renderList()}
-      </div>
+      {displayRow ? (
+        <div className="">{renderRows()}</div>
+      ) : (
+        <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
+          {renderCards()}
+        </div>
+      )}
       <div className="mb-3">
         <Pagination kitbagId={kitbagId} search={search} callback={setSearch} />
       </div>

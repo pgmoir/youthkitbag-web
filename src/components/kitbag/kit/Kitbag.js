@@ -8,7 +8,6 @@ import KitCard from './KitCard';
 import SearchForm from '../../includes/SearchForm';
 import Pagination from '../../includes/Pagination';
 import Breadcrumb from '../../includes/Breadcrumb';
-import KitRow from './KitRow';
 
 const mapStateToProps = (state) => ({
   stateSearch: state.kitbag.kit.search,
@@ -75,27 +74,15 @@ const Kitbag = ({
     );
   }
 
-  function renderCards() {
-    return Object.keys(entities).map((key, index) => {
+  function renderCards(isCard) {
+    return Object.keys(entities).map((key) => {
       return (
         <KitCard
-          key={`${index}`}
+          key={key}
           kit={entities[key]}
           kitbagId={kitbagId}
           callback={setSearch}
-        />
-      );
-    });
-  }
-
-  function renderRows() {
-    return Object.keys(entities).map((key, index) => {
-      return (
-        <KitRow
-          key={`${index}`}
-          kit={entities[key]}
-          kitbagId={kitbagId}
-          callback={setSearch}
+          isCard={isCard}
         />
       );
     });
@@ -128,10 +115,10 @@ const Kitbag = ({
           </div>
         </div>
         {displayRow ? (
-          <div className="">{renderRows()}</div>
+          <div className="">{renderCards(false)}</div>
         ) : (
           <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
-            {renderCards()}
+            {renderCards(true)}
           </div>
         )}
         <div className="mb-3">

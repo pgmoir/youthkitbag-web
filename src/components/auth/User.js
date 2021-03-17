@@ -1,13 +1,24 @@
 import { connect, useSelector } from 'react-redux';
-import { getUser, fetchKitbagLists, fetchGroupsLists } from '../../actions';
+import {
+  getUser,
+  fetchKitbagLists,
+  fetchMarketLists,
+  fetchGroupsLists,
+} from '../../actions';
 
 const mapDispatchToProps = {
   getUser,
   fetchKitbagLists,
+  fetchMarketLists,
   fetchGroupsLists,
 };
 
-const User = ({ getUser, fetchKitbagLists, fetchGroupsLists }) => {
+const User = ({
+  getUser,
+  fetchKitbagLists,
+  fetchMarketLists,
+  fetchGroupsLists,
+}) => {
   const userId = useSelector((state) => state.user._id);
   const kitbags = useSelector((state) => state.user.kitbags);
 
@@ -21,6 +32,7 @@ const User = ({ getUser, fetchKitbagLists, fetchGroupsLists }) => {
   if (!userId) {
     getUser();
     fetchGroupsLists();
+    fetchMarketLists();
   }
 
   if (kitbagId) {

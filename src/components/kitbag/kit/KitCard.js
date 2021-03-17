@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import className from 'classnames';
 import history from '../../../utils/history';
 import { getImage } from '../../../utils/image';
 import { ImagesNav } from '../../includes/images';
 import BlankCard from '../BlankCard';
 import KitDelete from './KitDelete';
 
-const KitCard = ({ kit, kitbagId, callback }) => {
+const KitCard = ({ kit, kitbagId, callback, isCard = true }) => {
   const [modalIsActive, setModalIsActive] = useState(false);
   const [imageKey, setImageKey] = useState(0);
 
@@ -21,7 +22,41 @@ const KitCard = ({ kit, kitbagId, callback }) => {
     purchases,
   } = kit;
 
-  if (!kit?._id) return <BlankCard />;
+  if (!kit?._id) return <BlankCard isCard={isCard} />;
+
+  const wrapperClassNames = isCard
+    ? className('column is-12-mobile is-4-tablet is-3-desktop is-2-fullhd')
+    : className('');
+
+  const clickAreaClassNames = isCard
+    ? className('card is-clickable')
+    : className('is-flex is-clickable has-background-light mb-2');
+
+  const imageClassNames = isCard
+    ? className('card-image')
+    : className('is-flex-shrink-0 is-flex-grow-0 row-image');
+
+  const figureClassNames = isCard
+    ? className('image is-4by3')
+    : className('image is-extralarge');
+
+  const contentClassNames = isCard
+    ? className('card-content')
+    : className(
+        'is-flex-shrink-1 is-flex-grow-1 is-flex is-flex-direction-column has-text-black has-truncated'
+      );
+
+  const titleClassNames = isCard
+    ? className('title is-size-5')
+    : className('is-truncated-text has-text-weight-medium is-size-4 mx-3 mt-2');
+
+  const subtitleClassNames = isCard
+    ? className('subtitle is-size-6')
+    : className('is-truncated-text is-size-5 mx-3');
+
+  const tagsClassNames = isCard
+    ? className('tags m-0')
+    : className('tags mx-3 mt-2 mb-0');
 
   const showImage = getImage({ images, index: imageKey });
 
@@ -58,16 +93,16 @@ const KitCard = ({ kit, kitbagId, callback }) => {
 
   return (
     <>
-      <div className="column is-12-mobile is-4-tablet is-3-desktop is-2-fullhd">
+      <div className={wrapperClassNames}>
         <div
-          className="card is-clickable"
+          className={clickAreaClassNames}
           onClick={() => viewItem()}
           onKeyPress={() => viewItem()}
           role="button"
           tabIndex="0"
         >
-          <div className="card-image">
-            <figure className="image is-4by3">
+          <div className={imageClassNames}>
+            <figure className={figureClassNames}>
               <img src={showImage} alt={title} role="presentation" />
             </figure>
             {active && (
@@ -99,11 +134,11 @@ const KitCard = ({ kit, kitbagId, callback }) => {
               setImageKey={setImageKey}
             />
           </div>
-          <div className="card-content">
-            <p className="title is-size-5">{title}</p>
-            {subtitle && <p className="subtitle is-size-6">{subtitle}</p>}
+          <div className={contentClassNames}>
+            <div className={titleClassNames}>{title}</div>
+            {subtitle && <div className={subtitleClassNames}>{subtitle}</div>}
             {(tags || activitys || inbag || purchases) && (
-              <div className="tags m-0">
+              <div className={tagsClassNames}>
                 {tags?.map((tag, index) => {
                   return (
                     <span

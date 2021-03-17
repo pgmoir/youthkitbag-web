@@ -329,6 +329,14 @@ const MarketKitEditForm = ({
               error={errors.activitys}
               disabled={isDisabled()}
             />
+            <TextInput
+              label="Tags"
+              value={values.tags}
+              field="tags"
+              handleChange={handleChange}
+              error={errors.tags}
+              disabled={isDisabled()}
+            />
             {values._id && (
               <CheckBoxInput
                 label={completedLabel()}

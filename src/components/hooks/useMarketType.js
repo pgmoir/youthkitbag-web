@@ -57,11 +57,14 @@ const useMarketType = ({
       </>
     );
 
+  const hasMarketType = isRecycle ? MarketTypes.RECYCLE : marketType;
+
   return {
     icon,
     iconTitle,
     color,
     pill,
+    hasMarketType,
   };
 };
 

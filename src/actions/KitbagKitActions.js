@@ -24,7 +24,7 @@ export const fetchKitbagKits = ({
 }) => (dispatch) => {
   axios
     .get(`/kitbag/kit/${kitbagId}`, {
-      params: { by, searchfor, page, pagesize, order, direction },
+      params: { searchfor, by, page, pagesize, order, direction },
     })
     .then((response) => {
       dispatch({ type: FETCH_KITBAG_KITS, payload: response.data });

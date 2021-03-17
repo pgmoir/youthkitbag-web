@@ -174,6 +174,11 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
             value={market.activitys?.join(', ')}
             readOnly={true}
           />
+          <TextInput
+            label="tags"
+            value={market.tags?.join(', ')}
+            readOnly={true}
+          />
           {market.threads.length === 0 && (
             <>
               <hr />

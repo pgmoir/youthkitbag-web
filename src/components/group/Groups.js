@@ -40,7 +40,7 @@ const Groups = ({
   }, [items]);
 
   useEffect(() => {
-    fetchGroups({ ...search, pushHistory: true });
+    fetchGroups({ ...search });
   }, [search, fetchGroups]);
 
   function getTitle() {

@@ -7,7 +7,7 @@ import MarketItemDelete from '../kitbag/market/MarketItemDelete';
 import { getImage } from '../../utils/image';
 import { ImagesNav } from '../includes/images';
 
-const MarketItemCard = ({ market }) => {
+const MarketItemCard = ({ market, callback }) => {
   const [modalIsActive, setModalIsActive] = useState(false);
   const [imageKey, setImageKey] = useState(0);
 
@@ -20,11 +20,13 @@ const MarketItemCard = ({ market }) => {
     kitbag,
     marketPrice,
     images,
+    activitys,
+    tags,
     threads,
     deleted,
   } = market;
 
-  const { pill, color } = useMarketType({
+  const { pill, color, hasMarketType } = useMarketType({
     marketId: _id,
     marketType,
     marketPrice,
@@ -49,6 +51,18 @@ const MarketItemCard = ({ market }) => {
   function deleteItem(e) {
     e.stopPropagation();
     setModalIsActive(true);
+  }
+
+  function searchBy(e, searchfor, by) {
+    e.stopPropagation();
+    callback({
+      searchfor,
+      by,
+      page: 1,
+      pagesize: 24,
+      order: 'updatedAt',
+      direction: -1,
+    });
   }
 
   return (
@@ -99,6 +113,45 @@ const MarketItemCard = ({ market }) => {
           <div className="card-content">
             <p className="title is-size-5">{title}</p>
             {subtitle && <p className="subtitle is-size-6">{subtitle}</p>}
+            <div className="tags m-0">
+              <span
+                className="tag is-info is-clickable mb-2"
+                onClick={(e) => searchBy(e, '', hasMarketType)}
+                onKeyPress={(e) => searchBy(e, '', hasMarketType)}
+                role="button"
+                tabIndex={0}
+              >
+                {hasMarketType}
+              </span>
+              {tags?.map((tag, index) => {
+                return (
+                  <span
+                    key={index}
+                    className="tag is-warning is-clickable mb-2"
+                    onClick={(e) => searchBy(e, tag, 'tag')}
+                    onKeyPress={(e) => searchBy(e, tag, 'tag')}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    {tag}
+                  </span>
+                );
+              })}
+              {activitys?.map((activity, index) => {
+                return (
+                  <span
+                    key={index}
+                    className="tag is-success is-clickable mb-2"
+                    onClick={(e) => searchBy(e, activity, 'activity')}
+                    onKeyPress={(e) => searchBy(e, activity, 'activity')}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    {activity}
+                  </span>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

@@ -19,7 +19,6 @@ export const fetchMarketItems = ({
   direction = -1,
   excgroups = false,
   exckitbags = false,
-  pushHistory,
 }) => (dispatch) => {
   axios
     .get(`/market`, {
@@ -36,15 +35,13 @@ export const fetchMarketItems = ({
     })
     .then((response) => {
       dispatch({ type: FETCH_MARKET_ITEMS, payload: response.data });
-      if (pushHistory) {
-        dispatch({
-          type: SEARCH_MARKET_ITEMS,
-          payload: { searchfor, by, page, pagesize, excgroups, exckitbags },
-        });
-        history.push(
-          `/market?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}&excgroups=${excgroups}&exckitbags=${exckitbags}`
-        );
-      }
+      dispatch({
+        type: SEARCH_MARKET_ITEMS,
+        payload: { searchfor, by, page, pagesize, excgroups, exckitbags },
+      });
+      history.push(
+        `/market?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}&excgroups=${excgroups}&exckitbags=${exckitbags}`
+      );
     })
     .catch((err) => {
       const { response } = err;
