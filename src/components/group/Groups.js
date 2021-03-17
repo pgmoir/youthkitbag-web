@@ -31,6 +31,7 @@ const Groups = ({
   fetchGroups,
 }) => {
   const [search, setSearch] = useState(stateSearch);
+  const [displayRow, setDisplayRow] = useState(false);
   const [groups, setGroups] = useState([]);
 
   useEffect(() => {
@@ -65,10 +66,21 @@ const Groups = ({
     );
   }
 
-  function renderList() {
+  function renderCards(isCard) {
     return groups.map((item, index) => {
-      return <GroupCard key={`${index}`} group={item} callback={setSearch} />;
+      return (
+        <GroupCard
+          key={index}
+          group={item}
+          callback={setSearch}
+          isCard={isCard}
+        />
+      );
     });
+  }
+
+  function updateDisplay() {
+    setDisplayRow(!displayRow);
   }
 
   function renderAddNewButton() {
@@ -97,7 +109,12 @@ const Groups = ({
     <>
       <div className="main container is-fluid">
         <Breadcrumb crumbs={crumbs} />
-        <Title title={getTitle()} />
+        <Title
+          title={getTitle()}
+          icon={displayRow ? 'fas fa-address-card' : 'fas fa-align-justify'}
+          iconAction={updateDisplay}
+          hasAction={true}
+        />
         <Alert />
         <div className="columns">
           <div className="column is-three-quarters">
@@ -112,9 +129,13 @@ const Groups = ({
             {renderAddNewButton()}
           </div>
         </div>
-        <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
-          {renderList()}
-        </div>
+        {displayRow ? (
+          <div className="">{renderCards(false)}</div>
+        ) : (
+          <div className="columns is-multiline is-mobile is-tablet is-desktop is-fullhd">
+            {renderCards(true)}
+          </div>
+        )}
         <div className="mb-3">
           <Pagination search={search} callback={setSearch} />
         </div>

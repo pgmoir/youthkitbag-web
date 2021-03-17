@@ -5,12 +5,11 @@ import { getImage } from '../../utils/image';
 import { ImagesNav } from '../includes/images';
 import BlankCard from '../kitbag/BlankCard';
 import GroupState from './GroupState';
+import useCardRowClasses from '../hooks/useCardRowClasses';
 
-const GroupCard = ({ group, callback }) => {
+const GroupCard = ({ group, callback, isCard = true }) => {
   const [stateModalIsActive, setStateModalIsActive] = useState(false);
   const [imageKey, setImageKey] = useState(0);
-
-  if (!group?._id) return <BlankCard />;
 
   const {
     _id,
@@ -22,6 +21,19 @@ const GroupCard = ({ group, callback }) => {
     memberCount,
     appAdmin,
   } = group;
+
+  const {
+    wrapperClassNames,
+    clickAreaClassNames,
+    imageClassNames,
+    figureClassNames,
+    contentClassNames,
+    titleClassNames,
+    subtitleClassNames,
+    tagsClassNames,
+  } = useCardRowClasses({ isCard });
+
+  if (!group?._id) return <BlankCard isCard={isCard} />;
 
   const showImage = getImage({ images, index: imageKey });
 
@@ -58,8 +70,7 @@ const GroupCard = ({ group, callback }) => {
     }
   }
 
-  // eslint-disable-next-line no-unused-vars
-  function viewItem(e) {
+  function viewItem() {
     history.push(`/groups/${_id}`);
   }
 
@@ -82,16 +93,16 @@ const GroupCard = ({ group, callback }) => {
 
   return (
     <>
-      <div className="column is-12-mobile is-4-tablet is-3-desktop is-2-fullhd">
+      <div className={wrapperClassNames}>
         <div
-          className="card is-clickable"
-          onClick={(e) => viewItem(e)}
-          onKeyPress={(e) => viewItem(e)}
-          tabIndex="0"
+          className={clickAreaClassNames}
+          onClick={() => viewItem()}
+          onKeyPress={() => viewItem()}
           role="button"
+          tabIndex="0"
         >
-          <div className="card-image">
-            <figure className="image is-4by3">
+          <div className={imageClassNames}>
+            <figure className={figureClassNames}>
               <img src={showImage} alt={name} role="presentation" />
             </figure>
             {appAdmin ? (
@@ -126,11 +137,11 @@ const GroupCard = ({ group, callback }) => {
               setImageKey={setImageKey}
             />
           </div>
-          <div className="card-content">
-            <p className="title is-size-5">{name}</p>
-            {address && <p className="subtitle is-size-6">{address}</p>}
+          <div className={contentClassNames}>
+            <div className={titleClassNames}>{name}</div>
+            {address && <div className={subtitleClassNames}>{address}</div>}
             {activitys && (
-              <div className="tags">
+              <div className={tagsClassNames}>
                 {activitys.map((activity, index) => {
                   return (
                     <span
