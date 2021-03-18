@@ -18,6 +18,7 @@ const TextListInput = ({
 }) => {
   const [currentValue, setCurrentValue] = useState('');
   const [autoOptions, setAutoOptions] = useState([]);
+  const AUTOSUGGEST_LIMIT = 10;
 
   const controlClasses = classNames('control autocomplete', {
     'has-icons-right': iconRight,
@@ -34,13 +35,45 @@ const TextListInput = ({
 
   let items = Array.isArray(value) ? value : value.split(',');
 
+  const addItem = (value) => {
+    const elements = value.split(',');
+    elements.forEach((element) => {
+      const newItem = element.trim().toLowerCase().replace(' ', '-');
+      if (newItem.length && !items.includes(newItem)) {
+        items = [...items, newItem];
+      }
+    });
+    setChange(field, items);
+    setCurrentValue('');
+  };
+
+  function* suggestionsFilter(array, condition, maxSize) {
+    if (!maxSize || maxSize > array.length) {
+      maxSize = array.length;
+    }
+    let count = 0;
+    let i = 0;
+    while (count < maxSize && i < array.length) {
+      if (condition(array[i])) {
+        yield array[i];
+        count++;
+      }
+      i++;
+    }
+  }
+
   const onChange = (event) => {
     event.persist();
     const { value } = event.target;
     setCurrentValue(value);
     if (suggestions?.length > 0) {
-      const foundSuggestions = suggestions.filter((suggestion) =>
-        suggestion.includes(value)
+      const foundSuggestions = Array.from(
+        suggestionsFilter(
+          suggestions,
+          (suggestion) =>
+            suggestion.includes(value.trim().toLowerCase().replace(' ', '-')),
+          AUTOSUGGEST_LIMIT
+        )
       );
       setAutoOptions(foundSuggestions);
     }
@@ -51,15 +84,7 @@ const TextListInput = ({
 
     function handleKeyPress(key, value) {
       if (key === 'Enter') {
-        const elements = value.split(',');
-        elements.forEach((element) => {
-          const newItem = element.trim().toLowerCase().replace(' ', '-');
-          if (newItem.length && !items.includes(newItem)) {
-            items = [...items, newItem];
-          }
-        });
-        setChange(field, items);
-        setCurrentValue('');
+        addItem(value);
         return true;
       }
       return false;
@@ -82,6 +107,11 @@ const TextListInput = ({
     const removeItem = event.target.getAttribute('data-item');
     items = items.filter((item) => item !== removeItem);
     setChange(field, items);
+  };
+
+  const selectOption = (event) => {
+    const optionValue = event.target.getAttribute('data-item');
+    addItem(optionValue);
   };
 
   return (
@@ -153,7 +183,14 @@ const TextListInput = ({
                 <div className="autocomplete-items">
                   {autoOptions.map((autoOption) => {
                     return (
-                      <div key={autoOption} data-item={autoOption}>
+                      <div
+                        key={autoOption}
+                        data-item={autoOption}
+                        onClick={selectOption}
+                        onKeyDown={selectOption}
+                        role="button"
+                        tabIndex="0"
+                      >
                         {autoOption}
                       </div>
                     );
