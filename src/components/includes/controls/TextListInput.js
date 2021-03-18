@@ -1,24 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 
 const TextListInput = ({
-  type,
   label,
   value,
   field,
-  step,
-  min,
-  max,
   disabled,
   readOnly,
-  handleChange,
+  setChange,
   error,
   autoComplete,
   addClassName,
-  placeHolder,
   iconRight = true,
   iconLeft,
+  tagClass = 'is-success',
 }) => {
+  const [currentValue, setCurrentValue] = useState('');
+
   const controlClasses = classNames('control', {
     'has-icons-right': iconRight,
     'has-icons-left': iconLeft,
@@ -28,9 +26,55 @@ const TextListInput = ({
     'is-danger': error,
   });
 
+  const tagClasses = classNames(`tag ${tagClass}`);
+
   if (!value) return null;
 
-  const items = Array.isArray(value) ? value : value.split(',');
+  let items = Array.isArray(value) ? value : value.split(',');
+
+  const onChange = (event) => {
+    event.persist();
+    const { value } = event.target;
+    setCurrentValue(value);
+  };
+
+  const onKeyPress = (event) => {
+    if (event.defaultPrevented) return;
+
+    function handleKeyPress(key, value) {
+      if (key === 'Enter') {
+        const elements = value.split(',');
+        elements.forEach((element) => {
+          const newItem = element.trim().toLowerCase().replace(' ', '-');
+          if (newItem.length && !items.includes(newItem)) {
+            items = [...items, newItem];
+          }
+        });
+        setChange(field, items);
+        setCurrentValue('');
+        return true;
+      }
+      return false;
+    }
+
+    let handled = false;
+
+    if (event.key !== undefined) {
+      handled = handleKeyPress(event.key, event.target.value);
+    } else if (event.keyCode !== undefined) {
+      handled = handleKeyPress(event.keyCode, event.target.value);
+    }
+
+    if (handled) {
+      event.preventDefault();
+    }
+  };
+
+  const removeItem = (event) => {
+    const removeItem = event.target.getAttribute('data-item');
+    items = items.filter((item) => item !== removeItem);
+    setChange(field, items);
+  };
 
   return (
     <div className="field">
@@ -57,8 +101,15 @@ const TextListInput = ({
                 return (
                   <div key={index} className="control">
                     <div className="tags are-medium has-addons">
-                      <div className="tag is-success">{item}</div>
-                      <div className="tag is-delete is-clickable"></div>
+                      <div className={tagClasses}>{item}</div>
+                      <div
+                        className="tag is-delete is-clickable"
+                        onClick={removeItem}
+                        onKeyPress={removeItem}
+                        role="button"
+                        tabIndex="0"
+                        data-item={item}
+                      ></div>
                     </div>
                   </div>
                 );
@@ -68,19 +119,17 @@ const TextListInput = ({
               <input
                 className={inputClasses}
                 name={field}
-                type={type ? type : 'text'}
-                step={step}
-                min={min}
-                max={max}
+                type="text"
                 disabled={disabled}
                 readOnly={readOnly}
-                onChange={handleChange}
-                onBlur={handleChange}
-                value={value}
+                onChange={(event) => onChange(event)}
+                onBlur={(event) => onChange(event)}
+                onKeyPress={(event) => onKeyPress(event)}
+                value={currentValue}
                 aria-describedby={field}
                 autoComplete={autoComplete}
                 tabIndex={disabled || readOnly ? -1 : 0}
-                placeholder={placeHolder}
+                placeholder={`Enter new item and press enter`}
               />
               {iconLeft && (
                 <span className="icon is-small is-left">

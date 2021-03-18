@@ -1,0 +1,23 @@
+.modal-content-image {
+  object-fit: contain;
+  height: 90%;
+  width: 90%;
+}
+
+// @media only screen and (max-width: 768px) {
+//   .image {
+//     &.is-extralarge {
+//       max-width: 160px;
+//       max-height: 160px;
+//     }
+//   }
+// }
+
+// @media only screen and (min-width: 769px) {
+//   .image {
+//     &.is-extralarge {
+//       max-width: 200px;
+//       max-height: 200px;
+//     }
+//   }
+// }

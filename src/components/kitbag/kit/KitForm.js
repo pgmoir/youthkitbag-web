@@ -17,6 +17,7 @@ import ArrayButtonAdd from '../../includes/controls/ArrayButtonAdd';
 import ArrayButtonRemove from '../../includes/controls/ArrayButtonRemove';
 import CheckBoxInput from '../../includes/controls/CheckBoxInput';
 import DateInput from '../../includes/controls/DateInput';
+import TextListInput from '../../includes/controls/TextListInput';
 
 const mapStateToProps = (state) => ({
   kitbagLists: state.kitbag.kit.lists,
@@ -285,19 +286,21 @@ const KitForm = ({
               your kit. Enter names separate by commas. (e.g. football, cycling)
             </p>
           </div>
-          <TextInput
+          <TextListInput
             label="Activities"
             value={values.activitys}
             field="activitys"
-            handleChange={handleChange}
+            setChange={setChange}
             error={errors.activitys}
+            tagClass="is-success"
           />
-          <TextInput
+          <TextListInput
             label="Tags"
             value={values.tags}
             field="tags"
-            handleChange={handleChange}
+            setChange={setChange}
             error={errors.tags}
+            tagClass="is-warning"
           />
           <TextInput
             label="Security"

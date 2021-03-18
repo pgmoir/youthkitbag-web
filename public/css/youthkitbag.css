@@ -8146,6 +8146,11 @@ body,
 .my-masonry-grid_column > article {
   margin-bottom: 30px; }
 
+.modal-content-image {
+  object-fit: contain;
+  height: 90%;
+  width: 90%; }
+
 /*
   burger bun css solution (no javascript)
   adapation from here https://jsfiddle.net/jfm2jyk5/

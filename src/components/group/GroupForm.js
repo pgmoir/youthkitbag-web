@@ -11,6 +11,7 @@ import TextAreaInput from '../includes/controls/TextAreaInput';
 import TextInputButton from '../includes/controls/TextInputButton';
 import customAxios from '../../utils/axios';
 import YkbMap from '../includes/maps/YkbMap';
+import TextListInput from '../includes/controls/TextListInput';
 
 const mapStateToProps = (state) => ({
   userBundle: state.user.bundle,
@@ -173,12 +174,13 @@ const GroupForm = ({
             handleChange={handleChange}
             error={errors.website}
           />
-          <TextInput
+          <TextListInput
             label="Activities"
             value={values.activitys}
             field="activitys"
-            handleChange={handleChange}
+            setChange={setChange}
             error={errors.activitys}
+            tagClass="is-success"
           />
           <TextAreaInput
             label="Recommendation"

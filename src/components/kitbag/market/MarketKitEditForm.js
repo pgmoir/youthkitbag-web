@@ -18,6 +18,7 @@ import TextInput from '../../includes/controls/TextInput';
 import TextAreaInput from '../../includes/controls/TextAreaInput';
 import SelectInput from '../../includes/controls/SelectInput';
 import DateInput from '../../includes/controls/DateInput';
+import TextListInput from '../../includes/controls/TextListInput';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors,
@@ -321,20 +322,22 @@ const MarketKitEditForm = ({
             {showStolenOn()}
             {showSecurity()}
             {showTracking()}
-            <TextInput
+            <TextListInput
               label="Activities"
               value={values.activitys}
               field="activitys"
-              handleChange={handleChange}
+              setChange={setChange}
               error={errors.activitys}
+              tagClass="is-success"
               disabled={isDisabled()}
             />
-            <TextInput
+            <TextListInput
               label="Tags"
               value={values.tags}
               field="tags"
-              handleChange={handleChange}
+              setChange={setChange}
               error={errors.tags}
+              tagClass="is-warning"
               disabled={isDisabled()}
             />
             {values._id && (
