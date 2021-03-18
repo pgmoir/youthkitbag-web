@@ -41,8 +41,11 @@ const KitbagKitLevelWarnings = ({ kitbagId }) => {
         {renderList(warnings)}
       </div>
       <div className="buttons">
-        <Link className="button is-danger is-inverted" to="/kitbag">
-          Go to kitbag
+        <Link
+          className="button is-danger is-inverted"
+          to={`/kitbag/kit/${kitbagId}`}
+        >
+          View kitbag
         </Link>
       </div>
     </article>

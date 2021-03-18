@@ -147,7 +147,7 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
             <div className="leaflet-container mb-3">
               <YkbMap id={values._id} position={[values.lat, values.lon]} />
             </div>
-          )}{' '}
+          )}
           <hr />
           <TextListInput
             label="Activities"

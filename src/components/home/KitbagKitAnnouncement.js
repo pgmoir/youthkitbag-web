@@ -9,8 +9,6 @@ const KitbagKitAnnouncement = ({ kitbagId, created }) => {
 
   if (!kitbagId) return null;
 
-  if (recent.createdCount === 0 && recent.updatedCount === 0) return null;
-
   function viewKitItem(item) {
     history.push(`/kitbag/kit/${kitbagId}/edit/${item._id}`);
   }
@@ -46,6 +44,18 @@ const KitbagKitAnnouncement = ({ kitbagId, created }) => {
           {renderList(recent.createdItems)}
         </div>
       )}
+      {created && recent.createdCount === 0 && (
+        <div className="content">
+          <p>
+            There have been <span className="tag is-rounded">NO</span> items
+            added to your kitbag in the last{' '}
+            <span className="tag is-rounded">{recent.createdDays}</span> days.
+          </p>
+          <p>
+            Click on the link below to access your kitbag and add some more.
+          </p>
+        </div>
+      )}
       {!created && recent.updatedCount > 0 && (
         <div className="content">
           <p>
@@ -55,6 +65,18 @@ const KitbagKitAnnouncement = ({ kitbagId, created }) => {
             <span className="tag is-rounded">{recent.updatedDays}</span> days.
           </p>
           {renderList(recent.updatedItems)}
+        </div>
+      )}
+      {!created && recent.createdCount === 0 && (
+        <div className="content">
+          <p>
+            There have been <span className="tag is-rounded">NO</span> items
+            updated to your kitbag in the last{' '}
+            <span className="tag is-rounded">{recent.createdDays}</span> days.
+          </p>
+          <p>
+            Click on the link below to access your kitbag and update some items.
+          </p>
         </div>
       )}
       <div className="buttons">

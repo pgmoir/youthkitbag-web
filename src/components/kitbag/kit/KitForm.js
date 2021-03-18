@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 
 import useForm from '../../hooks/useForm';
 import {
@@ -37,6 +37,8 @@ const KitForm = ({
   createKitbagKit,
   editKitbagKit,
 }) => {
+  const lists = useSelector((state) => state.kitbag.kit.lists);
+
   const initialValues = { ...kit, images: getImages(kit.images) };
   const initialPurchase = {
     from: '',
@@ -293,6 +295,7 @@ const KitForm = ({
             setChange={setChange}
             error={errors.activitys}
             tagClass="is-success"
+            suggestions={lists.activity}
           />
           <TextListInput
             label="Tags"
@@ -301,6 +304,7 @@ const KitForm = ({
             setChange={setChange}
             error={errors.tags}
             tagClass="is-warning"
+            suggestions={lists.tag}
           />
           <TextInput
             label="Security"

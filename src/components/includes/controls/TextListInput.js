@@ -13,11 +13,13 @@ const TextListInput = ({
   addClassName,
   iconRight = true,
   iconLeft,
+  suggestions,
   tagClass = 'is-success',
 }) => {
   const [currentValue, setCurrentValue] = useState('');
+  const [autoOptions, setAutoOptions] = useState([]);
 
-  const controlClasses = classNames('control', {
+  const controlClasses = classNames('control autocomplete', {
     'has-icons-right': iconRight,
     'has-icons-left': iconLeft,
   });
@@ -36,6 +38,12 @@ const TextListInput = ({
     event.persist();
     const { value } = event.target;
     setCurrentValue(value);
+    if (suggestions?.length > 0) {
+      const foundSuggestions = suggestions.filter((suggestion) =>
+        suggestion.includes(value)
+      );
+      setAutoOptions(foundSuggestions);
+    }
   };
 
   const onKeyPress = (event) => {
@@ -140,6 +148,17 @@ const TextListInput = ({
                 <span className="icon is-small is-right">
                   <i className="fas fa-exclamation-triangle"></i>
                 </span>
+              )}
+              {currentValue.length > 0 && autoOptions.length > 0 && (
+                <div className="autocomplete-items">
+                  {autoOptions.map((autoOption) => {
+                    return (
+                      <div key={autoOption} data-item={autoOption}>
+                        {autoOption}
+                      </div>
+                    );
+                  })}
+                </div>
               )}
             </div>
             {error && <p className="help is-danger">{error}</p>}
