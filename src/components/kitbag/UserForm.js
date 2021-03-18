@@ -9,6 +9,7 @@ import TextInput from '../includes/controls/TextInput';
 import TextInputButton from '../includes/controls/TextInputButton';
 import customAxios from '../../utils/axios';
 import YkbMap from '../includes/maps/YkbMap';
+import TextListInput from '../includes/controls/TextListInput';
 
 const mapDispatchToProps = { editUser, loadSettingsPage };
 
@@ -148,12 +149,13 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
             </div>
           )}{' '}
           <hr />
-          <TextInput
+          <TextListInput
             label="Activities"
             value={values.activitys}
             field="activitys"
-            handleChange={handleChange}
+            setChange={setChange}
             error={errors.activitys}
+            tagClass="is-success"
           />
           <hr />
           <div className="buttons mb-3">
