@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { connect, useSelector } from 'react-redux';
+
 import useForm from '../hooks/useForm';
 import { createGroup, editGroup } from '../../actions/GroupActions';
 import { ImagesForm } from '../includes/images';
-import { connect } from 'react-redux';
 import validate from '../includes/FormEmptyValidationRules';
 import { getFirstImageExcludeDeleted, getImages } from '../../utils/image';
 import TextInput from '../includes/controls/TextInput';
@@ -30,6 +31,8 @@ const GroupForm = ({
   createGroup,
   editGroup,
 }) => {
+  const { activity } = useSelector((state) => state.group.lists);
+
   const [showMap, setShowMap] = useState(false);
   const initialValues = { ...group, images: getImages(group.images) };
 
@@ -181,6 +184,7 @@ const GroupForm = ({
             setChange={setChange}
             error={errors.activitys}
             tagClass="is-success"
+            suggestions={activity}
           />
           <TextAreaInput
             label="Recommendation"

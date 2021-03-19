@@ -84,7 +84,7 @@ const TextListInput = ({
     if (event.defaultPrevented) return;
 
     function handleKeyPress(key, value) {
-      if (key === 'Enter') {
+      if (key === 'Enter' && event.target.value.length > 0) {
         addItem(value);
         return true;
       }

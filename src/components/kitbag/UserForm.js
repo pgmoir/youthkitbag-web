@@ -14,10 +14,11 @@ import TextListInput from '../includes/controls/TextListInput';
 const mapDispatchToProps = { editUser, loadSettingsPage };
 
 const UserForm = ({ user, editUser, loadSettingsPage }) => {
+  const { activity } = useSelector((state) => state.kitbag.kit.lists);
+  const newErrors = useSelector((state) => state.toast.errors);
+
   const [showMap, setShowMap] = useState(false);
   const initialValues = { ...user, images: getImages(user.images) };
-
-  const newErrors = useSelector((state) => state.toast.errors);
 
   const {
     setChange,
@@ -156,6 +157,7 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
             setChange={setChange}
             error={errors.activitys}
             tagClass="is-success"
+            suggestions={activity}
           />
           <hr />
           <div className="buttons mb-3">

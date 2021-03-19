@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 
 import useForm from '../../hooks/useForm';
 import {
@@ -36,6 +36,8 @@ const MarketKitEditForm = ({
   createMarketKit,
   editMarketKit,
 }) => {
+  const { activity, tag } = useSelector((state) => state.market.lists);
+
   const initialValues = { ...market, images: getImages(market.images) };
 
   const {
@@ -330,6 +332,7 @@ const MarketKitEditForm = ({
               error={errors.activitys}
               tagClass="is-success"
               disabled={isDisabled()}
+              suggestions={activity}
             />
             <TextListInput
               label="Tags"
@@ -339,6 +342,7 @@ const MarketKitEditForm = ({
               error={errors.tags}
               tagClass="is-warning"
               disabled={isDisabled()}
+              suggestions={tag}
             />
             {values._id && (
               <CheckBoxInput
