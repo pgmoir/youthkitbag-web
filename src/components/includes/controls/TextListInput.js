@@ -18,6 +18,7 @@ const TextListInput = ({
 }) => {
   const [currentValue, setCurrentValue] = useState('');
   const [autoOptions, setAutoOptions] = useState([]);
+  const [selectedOption, setSelectedOption] = useState(0);
   const AUTOSUGGEST_LIMIT = 10;
 
   const controlClasses = classNames('control autocomplete', {
@@ -91,11 +92,43 @@ const TextListInput = ({
     }
 
     let handled = false;
-
     if (event.key !== undefined) {
       handled = handleKeyPress(event.key, event.target.value);
     } else if (event.keyCode !== undefined) {
       handled = handleKeyPress(event.keyCode, event.target.value);
+    }
+
+    if (handled) {
+      event.preventDefault();
+    }
+  };
+
+  const onKeyDown = (event) => {
+    if (event.defaultPrevented) return;
+
+    function handleKeyDown(key) {
+      if (key === 'ArrowDown') {
+        if (selectedOption < autoOptions.length - 1) {
+          setSelectedOption(selectedOption + 1);
+          setCurrentValue(autoOptions[selectedOption + 1]);
+        }
+        return true;
+      }
+      if (key === 'ArrowUp') {
+        if (selectedOption > 0) {
+          setSelectedOption(selectedOption - 1);
+          setCurrentValue(autoOptions[selectedOption - 1]);
+        }
+        return true;
+      }
+      return false;
+    }
+
+    let handled = false;
+    if (event.key !== undefined) {
+      handled = handleKeyDown(event.key);
+    } else if (event.keyCode !== undefined) {
+      handled = handleKeyDown(event.keyCode);
     }
 
     if (handled) {
@@ -160,9 +193,10 @@ const TextListInput = ({
                 type="text"
                 disabled={disabled}
                 readOnly={readOnly}
-                onChange={(event) => onChange(event)}
-                onBlur={(event) => onChange(event)}
-                onKeyPress={(event) => onKeyPress(event)}
+                onChange={onChange}
+                onBlur={onChange}
+                onKeyPress={onKeyPress}
+                onKeyDown={onKeyDown}
                 value={currentValue}
                 aria-describedby={field}
                 autoComplete={autoComplete}
@@ -181,15 +215,18 @@ const TextListInput = ({
               )}
               {currentValue.length > 0 && autoOptions.length > 0 && (
                 <div className="autocomplete-items">
-                  {autoOptions.map((autoOption) => {
+                  {autoOptions.map((autoOption, index) => {
                     return (
                       <div
-                        key={autoOption}
+                        key={index}
                         data-item={autoOption}
                         onClick={selectOption}
                         onKeyDown={selectOption}
                         role="button"
                         tabIndex="0"
+                        className={
+                          index === selectedOption ? 'autocomplete-active' : ''
+                        }
                       >
                         {autoOption}
                       </div>
