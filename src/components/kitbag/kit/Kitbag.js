@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchKitbagKits } from '../../../actions';
+import { fetchKitbagKits, getKitbagKits } from '../../../actions';
 import Alert from '../../includes/Alert';
 import Title from '../../includes/title/Title';
 import KitCard from './KitCard';
-import SearchForm from '../../includes/SearchForm';
+import SearchFilter from '../../includes/SearchFilter';
 import Pagination from '../../includes/Pagination';
 import Breadcrumb from '../../includes/Breadcrumb';
 
 const mapStateToProps = (state) => ({
   stateSearch: state.kitbag.kit.search,
+  stateFilter: state.kitbag.kit.filter,
   entities: state.kitbag.kit.entities,
   pagination: state.pagination,
   kitbags: state.user.kitbags,
@@ -18,28 +19,39 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
+  getKitbagKits,
   fetchKitbagKits,
 };
 
 const Kitbag = ({
   stateSearch,
+  stateFilter,
   entities,
   pagination,
   kitbags,
   lists,
+  getKitbagKits,
   fetchKitbagKits,
   match,
 }) => {
   const [search, setSearch] = useState(stateSearch);
+  const [filter, setFilter] = useState(stateFilter);
   const [displayRow, setDisplayRow] = useState(false);
   const [kitbagId] = useState(match.params.kitbagId);
 
   useEffect(() => {
-    fetchKitbagKits({
+    getKitbagKits({
       ...search,
       kitbagId,
     });
-  }, [search, fetchKitbagKits, kitbagId]);
+  }, [search, getKitbagKits, kitbagId]);
+
+  useEffect(() => {
+    fetchKitbagKits({
+      ...filter,
+      kitbagId,
+    });
+  }, [filter, fetchKitbagKits, kitbagId]);
 
   function getTitle(includeCount = true) {
     if (!kitbags) {
@@ -105,10 +117,11 @@ const Kitbag = ({
         <Alert />
         <div className="columns">
           <div className="column is-full">
-            <SearchForm
+            <SearchFilter
               searchId={kitbagId}
               search={search}
               callback={setSearch}
+              callbackFilter={setFilter}
               collections={lists}
               placeholderText="Search your kit"
             />

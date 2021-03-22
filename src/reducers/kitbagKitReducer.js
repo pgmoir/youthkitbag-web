@@ -10,6 +10,7 @@ import {
   LOGOUT,
   FETCH_KITBAG_LISTS,
   FETCH_WARNING_KITS,
+  FILTER_KITBAG_KITS,
 } from '../actions/types';
 
 const initialState = {
@@ -18,6 +19,25 @@ const initialState = {
   search: {
     searchfor: '',
     by: '',
+    page: 1,
+    pagesize: 24,
+    order: 'updatedAt',
+    direction: -1,
+    loading: true,
+  },
+  filter: {
+    active: true,
+    searchFor: '',
+    exactSearchFor: false,
+    onlyTitle: false,
+    activitys: [],
+    allActivitys: false,
+    tags: [],
+    allTags: false,
+    countainer: '',
+    exactContainer: true,
+    source: '',
+    exactSource: true,
     page: 1,
     pagesize: 24,
     order: 'updatedAt',
@@ -39,6 +59,10 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case SEARCH_KITBAG_KITS: {
       return { ...state, search: action.payload };
+    }
+
+    case FILTER_KITBAG_KITS: {
+      return { ...state, filter: action.payload };
     }
 
     case FETCH_KITBAG_KITS: {

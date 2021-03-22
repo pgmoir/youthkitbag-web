@@ -9,11 +9,12 @@ import {
   FETCH_KITBAG_LISTS,
   FETCH_RECENT_KITS,
   SEARCH_KITBAG_KITS,
+  FILTER_KITBAG_KITS,
   FETCH_WARNING_KITS,
 } from './types';
 import history from '../utils/history';
 
-export const fetchKitbagKits = ({
+export const getKitbagKits = ({
   by,
   searchfor,
   page,
@@ -35,6 +36,25 @@ export const fetchKitbagKits = ({
       history.push(
         `/kitbag/kit/${kitbagId}?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}&order=${order}&direction=${direction}`
       );
+    })
+    .catch((err) => {
+      const { response } = err;
+      dispatch({ type: API_ERROR, payload: response });
+    });
+};
+
+export const fetchKitbagKits = (filter) => (dispatch) => {
+  axios
+    .post(`/kitbag/kit/${filter.kitbagId}/filter`, {
+      ...filter,
+    })
+    .then((response) => {
+      dispatch({ type: FETCH_KITBAG_KITS, payload: response.data });
+      dispatch({
+        type: FILTER_KITBAG_KITS,
+        payload: { ...filter },
+      });
+      history.push(`/kitbag/kit/${filter.kitbagId}`);
     })
     .catch((err) => {
       const { response } = err;

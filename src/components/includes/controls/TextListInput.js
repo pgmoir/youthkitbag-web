@@ -18,7 +18,7 @@ const TextListInput = ({
 }) => {
   const [currentValue, setCurrentValue] = useState('');
   const [autoOptions, setAutoOptions] = useState([]);
-  const [selectedOption, setSelectedOption] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(-1);
   const AUTOSUGGEST_LIMIT = 10;
 
   const controlClasses = classNames('control autocomplete', {
@@ -67,6 +67,7 @@ const TextListInput = ({
     event.persist();
     const { value } = event.target;
     setCurrentValue(value);
+    setSelectedOption(-1);
     if (suggestions?.length > 0) {
       const foundSuggestions = Array.from(
         suggestionsFilter(
