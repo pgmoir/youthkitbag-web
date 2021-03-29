@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchKitbagKits, getKitbagKits } from '../../../actions';
+import { fetchKitbagKits } from '../../../actions';
 import Alert from '../../includes/Alert';
 import Title from '../../includes/title/Title';
 import KitCard from './KitCard';
@@ -10,7 +10,6 @@ import Pagination from '../../includes/Pagination';
 import Breadcrumb from '../../includes/Breadcrumb';
 
 const mapStateToProps = (state) => ({
-  stateSearch: state.kitbag.kit.search,
   stateFilter: state.kitbag.kit.filter,
   entities: state.kitbag.kit.entities,
   pagination: state.pagination,
@@ -19,32 +18,20 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  getKitbagKits,
   fetchKitbagKits,
 };
 
 const Kitbag = ({
-  stateSearch,
   stateFilter,
   entities,
   pagination,
   kitbags,
-  lists,
-  getKitbagKits,
   fetchKitbagKits,
   match,
 }) => {
-  const [search, setSearch] = useState(stateSearch);
   const [filter, setFilter] = useState(stateFilter);
   const [displayRow, setDisplayRow] = useState(false);
   const [kitbagId] = useState(match.params.kitbagId);
-
-  useEffect(() => {
-    getKitbagKits({
-      ...search,
-      kitbagId,
-    });
-  }, [search, getKitbagKits, kitbagId]);
 
   useEffect(() => {
     fetchKitbagKits({
@@ -93,7 +80,7 @@ const Kitbag = ({
           key={key}
           kit={entities[key]}
           kitbagId={kitbagId}
-          callback={setSearch}
+          callback={setFilter}
           isCard={isCard}
         />
       );
@@ -118,11 +105,8 @@ const Kitbag = ({
         <div className="columns">
           <div className="column is-full">
             <SearchFilter
-              searchId={kitbagId}
-              search={search}
-              callback={setSearch}
-              callbackFilter={setFilter}
-              collections={lists}
+              filter={filter}
+              callback={setFilter}
               placeholderText="Search your kit"
             />
           </div>
@@ -137,8 +121,8 @@ const Kitbag = ({
         <div className="mb-3">
           <Pagination
             kitbagId={kitbagId}
-            search={search}
-            callback={setSearch}
+            search={filter}
+            callback={setFilter}
           />
         </div>
       </div>

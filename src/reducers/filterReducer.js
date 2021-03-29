@@ -1,5 +1,4 @@
 import {
-  FETCH_KITBAG_KITS,
   FETCH_MARKET_ITEMS,
   FETCH_GROUPS,
   FETCH_GROUP_MEMBERS,
@@ -13,7 +12,6 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_KITBAG_KITS:
     case FETCH_MARKET_ITEMS:
     case FETCH_GROUPS:
     case FETCH_GROUP_MEMBERS:

@@ -7,9 +7,9 @@ import SelectInput from './controls/SelectInput';
 import TextInput from './controls/TextInput';
 import TextListInput from './controls/TextListInput';
 import validate from './FormEmptyValidationRules';
+import { DefaultFilter } from '../../utils/filter';
 
 const KitbagKitFilter = ({ toggleFilter, callback }) => {
-  const pagination = useSelector((state) => state.pagination);
   const lists = useSelector((state) => state.kitbag.kit.lists);
   const filter = useSelector((state) => state.kitbag.kit.filter);
 
@@ -20,13 +20,10 @@ const KitbagKitFilter = ({ toggleFilter, callback }) => {
   );
 
   function searchItems() {
-    const { order, direction } = values;
     callback({
+      ...DefaultFilter,
       ...values,
       page: 1,
-      pagesize: pagination.itemsPerPage,
-      order,
-      direction,
     });
     toggleFilter();
   }
@@ -39,31 +36,31 @@ const KitbagKitFilter = ({ toggleFilter, callback }) => {
       <div className="columns">
         <div className="column is-half">
           <TextInput
-            label="Text search"
+            label="Search title, subtitle, description"
             value={values.searchFor}
             field="searchFor"
             handleChange={handleChange}
             error={errors.searchFor}
           />
         </div>
-        <div className="column is-one-quarter">
+        <div className="column is-one-quarter is-flex">
           <CheckBoxInput
             label="Exact search"
             value={values.exactSearchFor}
             field="exactSearchFor"
             onChange={handleChange}
             error={errors.exactSearchFor}
-            help="Search for title, subtitle or description that exactly matches your search above"
+            help="Perform and exact match on any of title, subtitle or description"
           />
         </div>
-        <div className="column is-one-quarter ">
+        <div className="column is-one-quarter is-flex">
           <CheckBoxInput
             label="Search only title"
             value={values.onlyTitle}
             field="onlyTitle"
             onChange={handleChange}
             error={errors.onlyTitle}
-            help="Only perform the search against the title"
+            help="Limit search to only the title field"
           />
         </div>
       </div>
@@ -79,7 +76,7 @@ const KitbagKitFilter = ({ toggleFilter, callback }) => {
             suggestions={lists.activity}
           />
         </div>
-        <div className="column is-half">
+        <div className="column is-half is-flex">
           <CheckBoxInput
             label="Search all selected activitys"
             value={values.allActivitys}
@@ -102,7 +99,7 @@ const KitbagKitFilter = ({ toggleFilter, callback }) => {
             suggestions={lists.tag}
           />
         </div>
-        <div className="column is-half">
+        <div className="column is-half is-flex">
           <CheckBoxInput
             label="Search all selected tags"
             value={values.allTags}

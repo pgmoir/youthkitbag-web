@@ -6,20 +6,11 @@ const mapStateToProps = (state) => ({
 });
 
 const Pagination = ({ kitbagId, search, callback, pagination }) => {
-  const {
-    searchfor,
-    by,
-    pagesize,
-    order,
-    direction,
-    excgroups,
-    exckitbags,
-  } = search;
+  const { pagesize, order, direction, excgroups, exckitbags } = search;
 
   function changePage(moveToPage) {
     callback({
-      by,
-      searchfor,
+      ...search,
       page: moveToPage,
       pagesize,
       order,

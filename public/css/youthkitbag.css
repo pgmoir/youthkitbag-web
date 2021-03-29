@@ -8072,6 +8072,9 @@ fullhd: from 1408px
 .is-flex-members .state {
   width: 8rem; }
 
+.is-flex-checkbox .checkbox {
+  width: 3rem; }
+
 /* 
   sticky footer
   makes sure at least the whole viewport is used 

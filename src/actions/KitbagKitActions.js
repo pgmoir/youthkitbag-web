@@ -8,40 +8,9 @@ import {
   API_ERROR,
   FETCH_KITBAG_LISTS,
   FETCH_RECENT_KITS,
-  SEARCH_KITBAG_KITS,
-  FILTER_KITBAG_KITS,
   FETCH_WARNING_KITS,
 } from './types';
 import history from '../utils/history';
-
-export const getKitbagKits = ({
-  by,
-  searchfor,
-  page,
-  pagesize,
-  kitbagId,
-  order = 'updatedAt',
-  direction = -1,
-}) => (dispatch) => {
-  axios
-    .get(`/kitbag/kit/${kitbagId}`, {
-      params: { searchfor, by, page, pagesize, order, direction },
-    })
-    .then((response) => {
-      dispatch({ type: FETCH_KITBAG_KITS, payload: response.data });
-      dispatch({
-        type: SEARCH_KITBAG_KITS,
-        payload: { searchfor, by, page, pagesize, order, direction },
-      });
-      history.push(
-        `/kitbag/kit/${kitbagId}?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}&order=${order}&direction=${direction}`
-      );
-    })
-    .catch((err) => {
-      const { response } = err;
-      dispatch({ type: API_ERROR, payload: response });
-    });
-};
 
 export const fetchKitbagKits = (filter) => (dispatch) => {
   axios
@@ -50,10 +19,10 @@ export const fetchKitbagKits = (filter) => (dispatch) => {
     })
     .then((response) => {
       dispatch({ type: FETCH_KITBAG_KITS, payload: response.data });
-      dispatch({
-        type: FILTER_KITBAG_KITS,
-        payload: { ...filter },
-      });
+      // dispatch({
+      //   type: FILTER_KITBAG_KITS,
+      //   payload: { ...filter },
+      // });
       history.push(`/kitbag/kit/${filter.kitbagId}`);
     })
     .catch((err) => {

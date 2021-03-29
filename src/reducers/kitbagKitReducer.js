@@ -1,5 +1,4 @@
 import {
-  SEARCH_KITBAG_KITS,
   FETCH_KITBAG_KIT,
   CREATE_KITBAG_KIT,
   DELETE_KITBAG_KIT,
@@ -10,21 +9,11 @@ import {
   LOGOUT,
   FETCH_KITBAG_LISTS,
   FETCH_WARNING_KITS,
-  FILTER_KITBAG_KITS,
 } from '../actions/types';
 
 const initialState = {
   entities: {},
   lists: [],
-  search: {
-    searchfor: '',
-    by: '',
-    page: 1,
-    pagesize: 24,
-    order: 'updatedAt',
-    direction: -1,
-    loading: true,
-  },
   filter: {
     active: true,
     searchFor: '',
@@ -34,7 +23,7 @@ const initialState = {
     allActivitys: false,
     tags: [],
     allTags: false,
-    countainer: '',
+    container: '',
     exactContainer: true,
     source: '',
     exactSource: true,
@@ -57,21 +46,13 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case SEARCH_KITBAG_KITS: {
-      return { ...state, search: action.payload };
-    }
-
-    case FILTER_KITBAG_KITS: {
-      return { ...state, filter: action.payload };
-    }
-
     case FETCH_KITBAG_KITS: {
-      const { kits } = action.payload.data;
+      const { kits, filter } = action.payload.data;
       let entities = {};
       kits.forEach((kit) => {
         entities[kit._id] = { ...kit };
       });
-      return { ...state, entities };
+      return { ...state, filter, entities };
     }
 
     case FETCH_RECENT_KITS: {

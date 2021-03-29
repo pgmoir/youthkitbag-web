@@ -5,6 +5,7 @@ import KitDelete from './KitDelete';
 import { getImage } from '../../../utils/image';
 import { ImagesNav } from '../../includes/images';
 import useCardRowClasses from '../../hooks/useCardRowClasses';
+import { getFilterBy } from '../../../utils/filter';
 
 const KitCard = ({ kit, kitbagId, callback, isCard = true }) => {
   const [modalIsActive, setModalIsActive] = useState(false);
@@ -56,16 +57,9 @@ const KitCard = ({ kit, kitbagId, callback, isCard = true }) => {
     setModalIsActive(true);
   }
 
-  function searchBy(e, searchfor, by) {
+  function searchBy(e, searchFor, by) {
     e.stopPropagation();
-    callback({
-      searchfor,
-      by,
-      page: 1,
-      pagesize: 24,
-      order: 'updatedAt',
-      direction: -1,
-    });
+    callback(getFilterBy(searchFor, by));
   }
 
   return (

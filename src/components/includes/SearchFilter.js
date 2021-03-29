@@ -1,26 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import classNames from 'classnames';
 import useForm from '../hooks/useForm';
 import validate from './FormEmptyValidationRules';
 import KitbagKitFilter from './KitbagKitFilter';
+import { hasFilter, DefaultFilter } from '../../utils/filter';
 
-const SearchFilter = ({
-  search,
-  callback,
-  callbackFilter,
-  placeholderText,
-  collections,
-  useInstant = false,
-}) => {
-  const pagination = useSelector((state) => state.pagination);
-
+const SearchFilter = ({ filter, callback, placeholderText }) => {
   const [showFilter, setShowFilter] = useState(false);
   const [isClearing, setIsClearing] = useState(false);
-  const [useCollection, setUseCollection] = useState(false);
-  const [collection, setCollection] = useState([]);
 
   const { setValues, handleChange, handleSubmit, values } = useForm(
-    search,
+    filter,
     searchItems,
     validate
   );
@@ -34,45 +24,18 @@ const SearchFilter = ({
 
   useEffect(() => {
     setValues({
-      by: search.by,
-      searchfor: search.searchfor,
-      order: search.order,
-      direction: search.direction,
+      searchFor: filter.searchFor,
+      order: filter.order,
+      direction: filter.direction,
     });
-  }, [search, setValues]);
-
-  useEffect(() => {
-    if (collections) {
-      setUseCollection(collections[values.by] ? true : false);
-      if (collections[values.by]) {
-        setCollection(collections[values.by]);
-      }
-    }
-  }, [values, collections, setUseCollection, setCollection]);
+  }, [filter, setValues]);
 
   function searchItems() {
-    const { by, searchfor, order, direction } = values;
+    closeFilter();
+    const { searchFor } = values;
     callback({
-      by,
-      searchfor,
-      page: 1,
-      pagesize: pagination.itemsPerPage,
-      order,
-      direction,
-    });
-  }
-
-  function instantSearchFor(event) {
-    const { by, order, direction } = values;
-    handleChange(event);
-    const { value } = event.target;
-    callback({
-      by,
-      searchfor: value,
-      page: 1,
-      pagesize: pagination.itemsPerPage,
-      order,
-      direction,
+      ...DefaultFilter,
+      searchFor,
     });
   }
 
@@ -80,10 +43,21 @@ const SearchFilter = ({
     setShowFilter(!showFilter);
   }
 
-  function clearSearch() {
-    setValues({ by: '', searchfor: '', order: 'updatedAt', direction: -1 });
+  function closeFilter() {
+    setShowFilter(false);
+  }
+
+  function clearFilter() {
+    setValues({ ...DefaultFilter });
     setIsClearing(true);
   }
+
+  const hasExistingFilter = hasFilter(filter);
+
+  const filterClasses = classNames('button', {
+    'is-primary': !hasExistingFilter,
+    'is-warning': hasExistingFilter,
+  });
 
   return (
     <>
@@ -91,7 +65,7 @@ const SearchFilter = ({
         <div className="field has-addons mb-3">
           <p className="control">
             <button
-              className="button is-primary"
+              className={filterClasses}
               type="button"
               title="Search"
               onClick={toggleFilter}
@@ -100,48 +74,16 @@ const SearchFilter = ({
             </button>
           </p>
           <p className="control">
-            {useCollection ? (
-              <span className="select">
-                <select
-                  name="searchfor"
-                  onChange={(e) => instantSearchFor(e)}
-                  onBlur={(e) => instantSearchFor(e)}
-                  value={values.searchfor}
-                  arialabel={`Search by ${values.by}`}
-                >
-                  {collection.map((item, index) => {
-                    return (
-                      <option key={index} value={item}>
-                        {item}
-                      </option>
-                    );
-                  })}
-                </select>
-              </span>
-            ) : useInstant ? (
-              <input
-                name="searchfor"
-                className="input"
-                type="text"
-                onChange={(e) => instantSearchFor(e)}
-                onBlur={(e) => instantSearchFor(e)}
-                value={values.searchfor}
-                id="searchfor"
-                arialabel="Search by text"
-                placeholder={placeholderText}
-              />
-            ) : (
-              <input
-                name="searchfor"
-                className="input"
-                type="text"
-                onChange={handleChange}
-                value={values.searchfor}
-                id="searchfor"
-                arialabel="Search by text"
-                placeholder={placeholderText}
-              />
-            )}
+            <input
+              name="searchFor"
+              className="input"
+              type="text"
+              onChange={handleChange}
+              value={values.searchFor}
+              id="searchFor"
+              arialabel="Search by text"
+              placeholder={placeholderText}
+            />
           </p>
           <p className="control">
             <button className="button is-primary" type="submit" title="Search">
@@ -152,7 +94,10 @@ const SearchFilter = ({
             <button
               className="button"
               type="button"
-              onClick={clearSearch}
+              onClick={() => {
+                closeFilter();
+                clearFilter();
+              }}
               title="Reset search"
             >
               <i className="fas fa-undo-alt"></i>
@@ -162,10 +107,7 @@ const SearchFilter = ({
       </form>
       {showFilter && (
         <div className="box">
-          <KitbagKitFilter
-            toggleFilter={toggleFilter}
-            callback={callbackFilter}
-          />
+          <KitbagKitFilter toggleFilter={toggleFilter} callback={callback} />
         </div>
       )}
     </>
