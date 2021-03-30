@@ -149,6 +149,17 @@ const KitbagKitFilter = ({ toggleFilter, callback }) => {
         </div>
       </div>
       <div className="columns">
+        <div className="column">
+          <CheckBoxInput
+            label="Search for items that have no images added"
+            value={values.noImages}
+            field="noImages"
+            onChange={handleChange}
+            error={errors.noImages}
+          />
+        </div>
+      </div>
+      <div className="columns">
         <div className="column is-half">
           <DateInput
             label="Created after"

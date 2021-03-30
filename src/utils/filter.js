@@ -6,6 +6,7 @@ export const hasFilter = (filter) => {
   if (filter.tags.length > 0) return true;
   if (filter.container) return true;
   if (filter.source) return true;
+  if (filter.noImages) return true;
   return false;
 };
 
@@ -41,6 +42,7 @@ export const DefaultFilter = {
   exactContainer: true,
   source: '',
   exactSource: true,
+  noImages: false,
   page: 1,
   pagesize: 24,
   order: 'updatedAt',

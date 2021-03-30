@@ -27,6 +27,7 @@ const initialState = {
     exactContainer: true,
     source: '',
     exactSource: true,
+    noImages: false,
     page: 1,
     pagesize: 24,
     order: 'updatedAt',
