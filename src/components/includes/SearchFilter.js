@@ -17,17 +17,15 @@ const SearchFilter = ({ filter, callback, placeholderText }) => {
 
   useEffect(() => {
     if (isClearing) {
-      handleSubmit();
+      closeFilter();
+      setValues({ ...DefaultFilter });
+      callback({ ...DefaultFilter });
       setIsClearing(false);
     }
-  }, [isClearing, handleSubmit]);
+  }, [callback, setValues, isClearing, handleSubmit]);
 
   useEffect(() => {
-    setValues({
-      searchFor: filter.searchFor,
-      order: filter.order,
-      direction: filter.direction,
-    });
+    setValues({ ...filter });
   }, [filter, setValues]);
 
   function searchItems() {
@@ -48,7 +46,6 @@ const SearchFilter = ({ filter, callback, placeholderText }) => {
   }
 
   function clearFilter() {
-    setValues({ ...DefaultFilter });
     setIsClearing(true);
   }
 
@@ -95,7 +92,6 @@ const SearchFilter = ({ filter, callback, placeholderText }) => {
               className="button"
               type="button"
               onClick={() => {
-                closeFilter();
                 clearFilter();
               }}
               title="Reset search"
