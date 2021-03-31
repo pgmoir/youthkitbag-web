@@ -79,10 +79,10 @@ const GroupCard = ({ group, callback, isCard = true }) => {
     setStateModalIsActive(true);
   }
 
-  function searchBy(e, searchfor, by) {
+  function searchBy(e, searchFor, by) {
     e.stopPropagation();
     callback({
-      searchfor,
+      searchFor,
       by,
       page: 1,
       pagesize: 24,

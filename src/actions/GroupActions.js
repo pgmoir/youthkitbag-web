@@ -20,7 +20,7 @@ import { getUser } from './UserActions';
 
 export const fetchGroups = ({
   by,
-  searchfor,
+  searchFor,
   page,
   pagesize,
   order = 'updatedAt',
@@ -28,16 +28,16 @@ export const fetchGroups = ({
 }) => (dispatch) => {
   axios
     .get(`/group/search`, {
-      params: { by, searchfor, page, pagesize, order, direction },
+      params: { by, searchFor, page, pagesize, order, direction },
     })
     .then((response) => {
       dispatch({ type: FETCH_GROUPS, payload: response.data });
       dispatch({
         type: SEARCH_GROUPS,
-        payload: { searchfor, by, page, pagesize },
+        payload: { searchFor, by, page, pagesize },
       });
       history.push(
-        `/groups?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}&order=${order}&direction=${direction}`
+        `/groups?searchFor=${searchFor}&by=${by}&page=${page}&pagesize=${pagesize}&order=${order}&direction=${direction}`
       );
     })
     .catch((err) => {
@@ -99,7 +99,7 @@ export const editGroupState = ({ groupId, formValues }) => (dispatch) => {
 
 export const fetchGroupMembers = ({
   by,
-  searchfor,
+  searchFor,
   page,
   pagesize,
   order,
@@ -108,7 +108,7 @@ export const fetchGroupMembers = ({
 }) => (dispatch) => {
   axios
     .get(`/group/${groupId}/members`, {
-      params: { by, searchfor, page, pagesize, order, direction },
+      params: { by, searchFor, page, pagesize, order, direction },
     })
     .then((response) => {
       dispatch({ type: FETCH_GROUP_MEMBERS, payload: response.data });

@@ -32,7 +32,7 @@ const SearchForm = ({
   useEffect(() => {
     setValues({
       by: search.by,
-      searchfor: search.searchfor,
+      searchFor: search.searchFor,
       order: search.order,
       direction: search.direction,
     });
@@ -48,10 +48,10 @@ const SearchForm = ({
   }, [values, collections, setUseCollection, setCollection]);
 
   function searchItems() {
-    const { by, searchfor, order, direction } = values;
+    const { by, searchFor, order, direction } = values;
     callback({
       by,
-      searchfor,
+      searchFor,
       page: 1,
       pagesize: pagination.itemsPerPage,
       order,
@@ -60,12 +60,12 @@ const SearchForm = ({
   }
 
   function instantSearchBy(event) {
-    const { searchfor, order, direction } = values;
+    const { searchFor, order, direction } = values;
     handleChange(event);
     const { value } = event.target;
     callback({
       by: value,
-      searchfor,
+      searchFor,
       page: 1,
       pagesize: pagination.itemsPerPage,
       order,
@@ -79,7 +79,7 @@ const SearchForm = ({
     const { value } = event.target;
     callback({
       by,
-      searchfor: value,
+      searchFor: value,
       page: 1,
       pagesize: pagination.itemsPerPage,
       order,
@@ -92,7 +92,7 @@ const SearchForm = ({
   }
 
   function clearSearch() {
-    setValues({ by: '', searchfor: '', order: 'updatedAt', direction: -1 });
+    setValues({ by: '', searchFor: '', order: 'updatedAt', direction: -1 });
     setIsClearing(true);
   }
 
@@ -123,10 +123,10 @@ const SearchForm = ({
           {useCollection ? (
             <span className="select">
               <select
-                name="searchfor"
+                name="searchFor"
                 onChange={(e) => instantSearchFor(e)}
                 onBlur={(e) => instantSearchFor(e)}
-                value={values.searchfor}
+                value={values.searchFor}
                 arialabel={`Search by ${values.by}`}
               >
                 {collection.map((item, index) => {
@@ -140,24 +140,24 @@ const SearchForm = ({
             </span>
           ) : useInstant ? (
             <input
-              name="searchfor"
+              name="searchFor"
               className="input"
               type="text"
               onChange={(e) => instantSearchFor(e)}
               onBlur={(e) => instantSearchFor(e)}
-              value={values.searchfor}
-              id="searchfor"
+              value={values.searchFor}
+              id="searchFor"
               arialabel="Search by text"
               placeholder={placeholderText}
             />
           ) : (
             <input
-              name="searchfor"
+              name="searchFor"
               className="input"
               type="text"
               onChange={handleChange}
-              value={values.searchfor}
-              id="searchfor"
+              value={values.searchFor}
+              id="searchFor"
               arialabel="Search by text"
               placeholder={placeholderText}
             />

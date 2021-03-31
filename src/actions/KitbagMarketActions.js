@@ -19,7 +19,7 @@ import { MarketTypes } from '../enums/marketTypes.enum';
 
 export const fetchKitbagMarketItems = ({
   by,
-  searchfor,
+  searchFor,
   page,
   pagesize,
   order = 'updatedAt',
@@ -27,7 +27,7 @@ export const fetchKitbagMarketItems = ({
 }) => (dispatch) => {
   axios
     .get(`/kitbag/market`, {
-      params: { by, searchfor, page, pagesize, order, direction },
+      params: { by, searchFor, page, pagesize, order, direction },
     })
     .then((response) => {
       switch (by) {

@@ -11,7 +11,7 @@ import {
 const initialState = {
   entities: {},
   lists: [],
-  search: { searchfor: '', by: '', page: 1, pagesize: 24, loading: true },
+  search: { searchFor: '', by: '', page: 1, pagesize: 24, loading: true },
 };
 
 export default (state = initialState, action) => {

@@ -67,16 +67,16 @@ const GroupMembers = ({ fetchGroupMembers, match }) => {
     );
 
   function renderCards(isCard) {
-    const searchfor = search.searchfor.toLowerCase();
+    const searchFor = search.searchFor.toLowerCase();
     return Object.keys(memberEntities).map((key, index) => {
       if (search.by !== 'all' && search.by !== '') {
         if (memberEntities[key].state !== search.by) return null;
       }
-      if (searchfor !== '') {
+      if (searchFor !== '') {
         const { firstName, lastName } = memberEntities[key].user;
         if (
-          !firstName.toLowerCase().includes(searchfor) &&
-          !lastName.toLowerCase().includes(searchfor)
+          !firstName.toLowerCase().includes(searchFor) &&
+          !lastName.toLowerCase().includes(searchFor)
         )
           return null;
       }

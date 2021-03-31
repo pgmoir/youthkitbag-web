@@ -20,8 +20,8 @@ const initialState = {
   entities: {},
   lists: [],
   memberEntities: {},
-  search: { searchfor: '', by: '', page: 1, pagesize: 24, loading: true },
-  searchMembers: { searchfor: '', by: '', loading: true },
+  search: { searchFor: '', by: '', page: 1, pagesize: 24, loading: true },
+  searchMembers: { searchFor: '', by: '', loading: true },
   memberRequests: [],
 };
 

@@ -62,10 +62,10 @@ const MarketItemCard = ({ market, callback, isCard = true }) => {
     setModalIsActive(true);
   }
 
-  function searchBy(e, searchfor, by) {
+  function searchBy(e, searchFor, by) {
     e.stopPropagation();
     callback({
-      searchfor,
+      searchFor,
       by,
       page: 1,
       pagesize: 24,

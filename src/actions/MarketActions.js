@@ -11,7 +11,7 @@ import {
 import history from '../utils/history';
 
 export const fetchMarketItems = ({
-  searchfor = '',
+  searchFor = '',
   by = '',
   page = 1,
   pagesize = 24,
@@ -23,7 +23,7 @@ export const fetchMarketItems = ({
   axios
     .get(`/market`, {
       params: {
-        searchfor,
+        searchFor,
         by,
         page,
         pagesize,
@@ -37,10 +37,10 @@ export const fetchMarketItems = ({
       dispatch({ type: FETCH_MARKET_ITEMS, payload: response.data });
       dispatch({
         type: SEARCH_MARKET_ITEMS,
-        payload: { searchfor, by, page, pagesize, excgroups, exckitbags },
+        payload: { searchFor, by, page, pagesize, excgroups, exckitbags },
       });
       history.push(
-        `/market?searchfor=${searchfor}&by=${by}&page=${page}&pagesize=${pagesize}&excgroups=${excgroups}&exckitbags=${exckitbags}`
+        `/market?searchFor=${searchFor}&by=${by}&page=${page}&pagesize=${pagesize}&excgroups=${excgroups}&exckitbags=${exckitbags}`
       );
     })
     .catch((err) => {
