@@ -34,7 +34,7 @@ const KitPage = ({ fetchKitbagKit, match }) => {
     security: [],
     warning: 0,
     activitys: [],
-    tags: '',
+    tags: [],
     active: true,
     images: [],
     topImage: ImageUrls.DEFAULT,
