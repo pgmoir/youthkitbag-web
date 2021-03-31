@@ -34,7 +34,7 @@ const SearchFilter = ({ filter, callback, placeholderText }) => {
     closeFilter();
     const { searchFor } = values;
     callback({
-      ...DefaultFilter,
+      ...filter,
       searchFor,
     });
   }
