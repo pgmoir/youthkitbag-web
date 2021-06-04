@@ -22,9 +22,6 @@ const ImagesForm = ({
 
   const { images } = values;
 
-  const MAXWIDTH = 720;
-  const MAXHEIGHT = 720;
-
   function onFileChanged(event) {
     const { files } = event.target;
     if (!files.length) {
@@ -33,7 +30,7 @@ const ImagesForm = ({
 
     setChange('imagesToUpload', files.length);
     for (let i = 0; i < files.length; i++) {
-      resize(files[i], MAXWIDTH, MAXHEIGHT, function (resizedDataUrl) {
+      resize(files[i], function (resizedDataUrl) {
         let formData = new FormData();
         formData.append('photo', dataURItoBlob(resizedDataUrl), files[i].name);
         dispatch(addImage(kitbagId, formData));

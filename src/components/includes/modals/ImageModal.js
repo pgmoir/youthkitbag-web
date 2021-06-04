@@ -32,7 +32,7 @@ const ImageModal = ({
         onKeyPress={closeModal}
       ></div>
       <div
-        className="modal-content is-clickable"
+        className="modal-content is-clickable modal-content-image"
         role="button"
         tabIndex="0"
         onClick={closeModal}

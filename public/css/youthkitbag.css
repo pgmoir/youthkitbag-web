@@ -8151,8 +8151,10 @@ body,
 
 .modal-content-image {
   object-fit: contain;
-  height: 90%;
-  width: 90%; }
+  height: 100%;
+  width: 100%;
+  max-height: calc(100vh - 40px);
+  max-width: calc(100vw - 80px); }
 
 /*
   burger bun css solution (no javascript)
