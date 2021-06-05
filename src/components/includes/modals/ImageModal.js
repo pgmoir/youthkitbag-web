@@ -14,7 +14,7 @@ const ImageModal = ({
 
   const showImage = getImage({ images, index: imageKey });
 
-  const modalClasses = classNames('modal', {
+  const modalClasses = classNames('lightbox is-clickable', {
     'is-active': modalIsActive,
   });
 
@@ -23,30 +23,17 @@ const ImageModal = ({
   }
 
   return (
-    <div className={modalClasses}>
-      <div
-        className="modal-background is-clickable"
-        role="button"
-        tabIndex="0"
-        onClick={closeModal}
-        onKeyPress={closeModal}
-      ></div>
-      <div
-        className="modal-content is-clickable modal-content-image"
-        role="button"
-        tabIndex="0"
-        onClick={closeModal}
-        onKeyPress={closeModal}
-      >
-        <div className="image">
-          <img src={showImage} alt="" />
-        </div>
-      </div>
-      <button
-        className="modal-close is-large"
-        aria-label="close"
-        onClick={closeModal}
-      ></button>
+    <div
+      className={modalClasses}
+      role="button"
+      tabIndex="0"
+      onClick={closeModal}
+      onKeyPress={closeModal}
+    >
+      <span
+        className="lightbox-image"
+        style={{ backgroundImage: `url("${showImage}")` }}
+      ></span>
       <ImagesNav
         images={images}
         imageKey={imageKey}
