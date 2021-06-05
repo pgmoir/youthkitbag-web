@@ -18,9 +18,9 @@ import ArrayButtonRemove from '../../includes/controls/ArrayButtonRemove';
 import CheckBoxInput from '../../includes/controls/CheckBoxInput';
 import DateInput from '../../includes/controls/DateInput';
 import TextListInput from '../../includes/controls/TextListInput';
+import TextListSelect from '../../includes/controls/TextListSelect';
 
 const mapStateToProps = (state) => ({
-  kitbagLists: state.kitbag.kit.lists,
   newErrors: state.toast.errors,
 });
 
@@ -32,7 +32,6 @@ const mapDispatchToProps = {
 const KitForm = ({
   kitbagId,
   kit,
-  kitbagLists,
   newErrors,
   createKitbagKit,
   editKitbagKit,
@@ -153,13 +152,12 @@ const KitForm = ({
                   key={index}
                 >
                   <div className="mr-3 mb-3 purchased-from">
-                    <TextInput
+                    <TextListSelect
+                      placeHolder="From"
                       value={values.purchases[index].from}
                       field={`purchases[${index}].from`}
-                      handleChange={handleChange}
-                      autoList={kitbagLists.purchasesFroms}
-                      placeHolder="From"
-                      iconRight={false}
+                      setChange={setChange}
+                      suggestions={lists.source}
                     />
                   </div>
                   <div className="mr-3 mb-3 quantity">
@@ -220,12 +218,12 @@ const KitForm = ({
                   key={index}
                 >
                   <div className="mr-3 mb-3 location">
-                    <TextInput
+                    <TextListSelect
+                      placeHolder="Location"
                       value={values.inbag[index].location}
                       field={`inbag[${index}].location`}
-                      handleChange={handleChange}
-                      placeHolder="Location"
-                      iconRight={false}
+                      setChange={setChange}
+                      suggestions={lists.container}
                     />
                   </div>
                   <div className="mr-3 mb-3 condition">
