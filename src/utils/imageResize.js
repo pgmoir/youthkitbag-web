@@ -40,5 +40,5 @@ function resizeImage(image) {
   context.mozImageSmoothingEnabled = false;
 
   context.drawImage(image, 0, 0, width, height);
-  return canvas.toDataURL('image/jpeg', 0.3);
+  return canvas.toDataURL('image/jpeg', 0.23);
 }
