@@ -131,6 +131,8 @@ const TextListSelect = ({
   const selectOption = (event) => {
     const optionValue = event.target.getAttribute('data-item');
     setItem(optionValue);
+
+    event.preventDefault();
   };
 
   return (
@@ -185,6 +187,7 @@ const TextListSelect = ({
                           data-item={autoOption}
                           onClick={selectOption}
                           onKeyDown={selectOption}
+                          onTouchEnd={selectOption}
                           role="button"
                           tabIndex="0"
                           className={
