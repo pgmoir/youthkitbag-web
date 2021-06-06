@@ -8295,6 +8295,11 @@ body,
 .github {
   background-image: url("/images/github.svg"); }
 
+.image-loader {
+  height: 100%;
+  width: 100%;
+  background-image: url("/images/tailspin.svg"); }
+
 /*
 
   Author: Aseem Lalfakawma <alalfakawma.github.io>

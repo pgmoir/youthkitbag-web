@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addImage, clearNewImages } from '../../../actions/ImageActions';
+import { LOADING_IMAGES, RESET_LOADING_IMAGES } from '../../../actions/types';
 import { getImage } from '../../../utils/image';
 import { resize, dataURItoBlob } from '../../../utils/imageResize';
 import { ImageModal } from '../modals/ImageModal';
@@ -17,7 +18,9 @@ const ImagesForm = ({
 }) => {
   const [imageKey, setImageKey] = useState(0);
   const dispatch = useDispatch();
-  const newImages = useSelector((state) => state.images.newImages);
+  const { newImages, loading, numberOfImages } = useSelector(
+    (state) => state.images
+  );
   const [modalIsActive, setModalIsActive] = useState(false);
 
   const { images } = values;
@@ -29,6 +32,11 @@ const ImagesForm = ({
     }
 
     setChange('imagesToUpload', files.length);
+    dispatch({
+      type: LOADING_IMAGES,
+      payload: { loading: true, numberOfImages: files.length },
+    });
+
     for (let i = 0; i < files.length; i++) {
       resize(files[i], function (resizedDataUrl) {
         let formData = new FormData();
@@ -115,6 +123,26 @@ const ImagesForm = ({
       );
     });
 
+    if (loading) {
+      // eslint-disable-next-line id-length
+      for (let i = 0; i < numberOfImages; i++) {
+        thumbnails.push(
+          <div
+            key={`loading-img-${i}`}
+            className="is-flex is-flex-direction-row mb-3 ml-3"
+          >
+            <div className="card">
+              <div className="card-image">
+                <figure className="image is-96x96 has-background-grey p-3">
+                  <div className="image-loader"></div>
+                </figure>
+              </div>
+            </div>
+          </div>
+        );
+      }
+    }
+
     return (
       <div className="columns is-mobile is-multiline mt-3 mb-0">
         {thumbnails}
@@ -179,6 +207,7 @@ const ImagesForm = ({
       dispatch(clearNewImages());
       addArrayItem('images', imagesToAdd);
       setChange('imagesToUpload', 0);
+      dispatch({ type: RESET_LOADING_IMAGES });
     }
   }, [newImages, addArrayItem, setChange, values, dispatch]);
 
