@@ -63,6 +63,12 @@ const TextListInput = ({
     }
   }
 
+  const onBlur = (event) => {
+    event.persist();
+    const { value } = event.target;
+    addItem(value);
+  };
+
   const onChange = (event) => {
     event.persist();
     const { value } = event.target;
@@ -146,6 +152,8 @@ const TextListInput = ({
   const selectOption = (event) => {
     const optionValue = event.target.getAttribute('data-item');
     addItem(optionValue);
+
+    event.preventDefault();
   };
 
   return (
@@ -195,7 +203,7 @@ const TextListInput = ({
                 disabled={disabled}
                 readOnly={readOnly}
                 onChange={onChange}
-                onBlur={onChange}
+                onBlur={onBlur}
                 onKeyPress={onKeyPress}
                 onKeyDown={onKeyDown}
                 value={currentValue}
@@ -221,8 +229,8 @@ const TextListInput = ({
                       <div
                         key={index}
                         data-item={autoOption}
-                        onClick={selectOption}
-                        onKeyDown={selectOption}
+                        onMouseDownCapture={selectOption}
+                        onTouchEnd={selectOption}
                         role="button"
                         tabIndex="0"
                         className={
