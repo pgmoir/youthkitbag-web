@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
+import ObjectID from 'bson-objectid';
 
 import useForm from '../../hooks/useForm';
 import {
@@ -149,7 +150,7 @@ const KitForm = ({
               values.purchases.map((item, index) => (
                 <div
                   className="is-flex is-flex-wrap-wrap is-flex-purchases"
-                  key={index}
+                  key={item._id}
                 >
                   <div className="mr-3 mb-3 purchased-from">
                     <TextListSelect
@@ -203,7 +204,11 @@ const KitForm = ({
               ))}
             <ArrayButtonAdd
               label="Add a new purchase"
-              onClick={() => addArrayItem('purchases', [initialPurchase])}
+              onClick={() =>
+                addArrayItem('purchases', [
+                  { ...initialPurchase, _id: ObjectID.generate() },
+                ])
+              }
             />
           </div>
           <hr />
@@ -215,7 +220,7 @@ const KitForm = ({
               values.inbag.map((item, index) => (
                 <div
                   className="is-flex is-flex-wrap-wrap is-flex-stored"
-                  key={index}
+                  key={item._id}
                 >
                   <div className="mr-3 mb-3 location">
                     <TextListSelect
@@ -251,14 +256,17 @@ const KitForm = ({
                     <ArrayButtonRemove
                       title="Remove Inbag"
                       onClick={() => removeArrayItem('inbag', index)}
-                      index={index}
                     />
                   </div>
                 </div>
               ))}
             <ArrayButtonAdd
               label="Add a new storage location"
-              onClick={() => addArrayItem('inbag', [initialInbag])}
+              onClick={() =>
+                addArrayItem('inbag', [
+                  { ...initialInbag, _id: ObjectID.generate() },
+                ])
+              }
             />
           </div>
           <hr />

@@ -12,13 +12,13 @@ const useForm = (initiaValues, callback, validate) => {
     }
   }, [errors, callback, isSubmitting]);
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     if (event) event.preventDefault();
     setIsSubmitting(true);
     setErrors(validate(values));
   };
 
-  const getNameValue = eventTarget => {
+  const getNameValue = (eventTarget) => {
     let { name, value, checked, type } = eventTarget;
     value = type === 'checkbox' ? checked : value;
 
@@ -34,38 +34,39 @@ const useForm = (initiaValues, callback, validate) => {
     const index = +name.substring(name.indexOf('[') + 1, name.indexOf(']'));
     const propertyName = name.substring(name.indexOf(']') + 2);
     const newItem = { ...values[arrayName][index], [propertyName]: value };
-    const array = values[arrayName].map(function(item, i) {
+    const array = values[arrayName].map(function (item, i) {
       return i === index ? newItem : item;
     });
     return { name: arrayName, value: array };
   };
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     event.persist();
     const { name, value } = getNameValue(event.target);
-    setValues(values => ({ ...values, [name]: value }));
+    setValues((values) => ({ ...values, [name]: value }));
   };
 
   const setChange = (name, value) => {
     if (name.indexOf('[') < 0) {
-      setValues(values => ({ ...values, [name]: value }));
+      setValues((values) => ({ ...values, [name]: value }));
       return;
     }
 
     const array = getArrayNameValue(name, value);
-    setValues(values => ({ ...values, [array.name]: array.value }));
+    setValues((values) => ({ ...values, [array.name]: array.value }));
   };
 
   const addArrayItem = (arrayName, newItem) => {
     const array = [...values[arrayName], ...newItem];
-    setValues(values => ({ ...values, [arrayName]: array }));
+    setValues((values) => ({ ...values, [arrayName]: array }));
   };
 
   const removeArrayItem = (arrayName, index) => {
-    const array = values[arrayName].filter(function(item, i) {
+    console.log('VA', JSON.stringify(values[arrayName], null, 2));
+    const array = values[arrayName].filter(function (item, i) {
       return i !== index;
     });
-    setValues(values => ({ ...values, [arrayName]: array }));
+    setValues((values) => ({ ...values, [arrayName]: array }));
   };
 
   return {
@@ -77,7 +78,7 @@ const useForm = (initiaValues, callback, validate) => {
     values,
     setValues,
     errors,
-    setErrors
+    setErrors,
   };
 };
 
