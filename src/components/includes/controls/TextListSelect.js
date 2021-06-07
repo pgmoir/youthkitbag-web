@@ -185,8 +185,7 @@ const TextListSelect = ({
                         <div
                           key={index}
                           data-item={autoOption}
-                          onClick={selectOption}
-                          onKeyDown={selectOption}
+                          onMouseDownCapture={selectOption}
                           onTouchEnd={selectOption}
                           role="button"
                           tabIndex="0"

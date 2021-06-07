@@ -62,7 +62,6 @@ const useForm = (initiaValues, callback, validate) => {
   };
 
   const removeArrayItem = (arrayName, index) => {
-    console.log('VA', JSON.stringify(values[arrayName], null, 2));
     const array = values[arrayName].filter(function (item, i) {
       return i !== index;
     });
