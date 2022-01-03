@@ -31,6 +31,9 @@ const User = ({
 
   if (!userId) {
     getUser();
+  }
+
+  if (userId) {
     fetchGroupsLists();
     fetchMarketLists();
   }
