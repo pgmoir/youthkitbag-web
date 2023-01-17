@@ -1,6 +1,9 @@
 {
   "name": "youthkitbag-web",
   "version": "0.1.0",
+  "engines": {
+    "node": "18.x"
+  },
   "private": true,
   "dependencies": {
     "autotrack": "^2.4.1",
