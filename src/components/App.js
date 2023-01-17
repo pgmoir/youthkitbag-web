@@ -14,7 +14,8 @@ const App = () => {
     <>
       <Helmet>
         <title>
-          YouthKitbag - Inventory, Trade, Aquire, Reporting for all youth kit
+          YouthKitbag - Inventory, Trade, Aquire, Reporting for all your youth
+          kit
         </title>
       </Helmet>
       <Router history={history}>
