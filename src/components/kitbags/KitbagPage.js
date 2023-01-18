@@ -10,19 +10,20 @@ import Title from '../includes/title/Title';
 import KitbagMemberInvite from './KitbagMemberInvite';
 import { MemberStates } from '../../enums/memberStates.enum';
 import { ImageUrls } from '../../enums/imageUrls.enum';
+import { useParams } from 'react-router-dom';
 
 const mapStateToProps = (state) => ({
   current: state.kitbag.kitbags.current,
-  kitbags: state.user.kitbags,
+  kitbags: state.user.kitbags
 });
 
 const mapDispatchToProps = {
   fetchKitbag,
-  clearKitbag,
+  clearKitbag
 };
 
-const KitbagPage = ({ current, kitbags, fetchKitbag, clearKitbag, match }) => {
-  const { kitbagId } = match.params;
+const KitbagPage = ({ current, kitbags, fetchKitbag, clearKitbag }) => {
+  const { kitbagId } = useParams;
   const [modalIsActive, setModalIsActive] = useState(false);
   const [kitbag, setKitbag] = useState({
     name: '',
@@ -30,7 +31,7 @@ const KitbagPage = ({ current, kitbags, fetchKitbag, clearKitbag, match }) => {
     images: [],
     members: [],
     topImage: ImageUrls.DEFAULT,
-    imagesToUpload: 0,
+    imagesToUpload: 0
   });
 
   useEffect(() => {
@@ -43,7 +44,7 @@ const KitbagPage = ({ current, kitbags, fetchKitbag, clearKitbag, match }) => {
     if (current && current._id) {
       const newKitbag = {
         ...current,
-        imagesToUpload: 0,
+        imagesToUpload: 0
       };
       setKitbag(newKitbag);
     }
@@ -84,7 +85,7 @@ const KitbagPage = ({ current, kitbags, fetchKitbag, clearKitbag, match }) => {
     { title: 'Home', to: '/' },
     { title: 'Personal Settings', to: '/settings' },
     { title: 'Kitbags', to: '/settings/kitbags' },
-    { title: getTitle() },
+    { title: getTitle() }
   ];
 
   return (

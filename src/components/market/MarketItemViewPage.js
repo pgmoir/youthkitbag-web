@@ -6,13 +6,14 @@ import MarketTitle from '../includes/title/MarketTitle';
 import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 import Breadcrumb from '../includes/Breadcrumb';
+import { useParams } from 'react-router-dom';
 
 const mapDispatchToProps = {
-  fetchMarketItem,
+  fetchMarketItem
 };
 
-const MarketItemViewPage = ({ fetchMarketItem, match }) => {
-  const { marketId } = match.params;
+const MarketItemViewPage = ({ fetchMarketItem }) => {
+  const { marketId } = useParams;
 
   const market = useSelector((state) => {
     return !marketId ? null : state.market.entities[marketId];
@@ -21,7 +22,7 @@ const MarketItemViewPage = ({ fetchMarketItem, match }) => {
   const crumbs = [
     { title: 'Home', to: '/' },
     { title: 'Market', to: '/market' },
-    { title: `${market?.title}` },
+    { title: `${market?.title}` }
   ];
 
   useEffect(() => {

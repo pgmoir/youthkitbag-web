@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import {
   fetchMarketKit,
-  fetchMarketKitFromKit,
+  fetchMarketKitFromKit
 } from '../../../actions/KitbagMarketActions';
 import MarketKitEditForm from './MarketKitEditForm';
 import Title from '../../includes/title/Title';
@@ -11,26 +11,23 @@ import Alert from '../../includes/Alert';
 import MarketTitle from '../../includes/title/MarketTitle';
 import Breadcrumb from '../../includes/Breadcrumb';
 import { ImageUrls } from '../../../enums/imageUrls.enum';
+import { useParams } from 'react-router-dom';
 
 const mapStateToProps = (state) => ({
-  current: state.kitbag.market.current,
+  current: state.kitbag.market.current
 });
 
 const mapDispatchToProps = {
   fetchMarketKit,
-  fetchMarketKitFromKit,
+  fetchMarketKitFromKit
 };
 
 const MarketKitEditPage = ({
   current,
   fetchMarketKit,
-  fetchMarketKitFromKit,
-  match,
+  fetchMarketKitFromKit
 }) => {
-  const kitbagId = match.params.kitbagId;
-  const marketId = match.params.marketId;
-  const kitId = match.params.kitId;
-  const marketType = match.params.marketType;
+  const { kitbagId, marketId, kitId, marketType } = useParams;
 
   const [market, setMarketKit] = useState({
     marketType: '',
@@ -51,7 +48,7 @@ const MarketKitEditPage = ({
     groups: [],
     marketDetails: [],
     topImage: ImageUrls.DEFAULT,
-    imagesToUpload: 0,
+    imagesToUpload: 0
   });
 
   useEffect(() => {
@@ -70,7 +67,7 @@ const MarketKitEditPage = ({
     if (current && (current._id || current.sourceId)) {
       const newMarketKit = {
         ...current,
-        imagesToUpload: 0,
+        imagesToUpload: 0
       };
       setMarketKit(newMarketKit);
     }
@@ -79,7 +76,7 @@ const MarketKitEditPage = ({
   const crumbs = [
     { title: 'Home', to: '/' },
     { title: 'Market', to: `/market` },
-    { title: `${market?.title}` },
+    { title: `${market?.title}` }
   ];
 
   function getTitle() {

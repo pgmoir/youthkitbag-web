@@ -7,7 +7,7 @@ import {
   RESET_REQUESTED,
   SIGNUP_FAILURE,
   PASSWORD_RESET_CHECK,
-  PASSWORD_RESET,
+  PASSWORD_RESET
 } from './types';
 import { redirect } from 'react-router-dom';
 import { getUser } from './UserActions';
@@ -19,7 +19,7 @@ export const login = (email, password, referrer) => (dispatch) => {
       `/auth/login`,
       { email, password },
       {
-        'content-type': 'application/json',
+        'content-type': 'application/json'
       }
     )
     .then((response) => {
@@ -45,7 +45,7 @@ export const authenticateToken = (token) => (dispatch) => {
       `/auth/authenticate`,
       { token },
       {
-        'content-type': 'application/json',
+        'content-type': 'application/json'
       }
     )
     .then((response) => {
@@ -106,7 +106,7 @@ export const reset = (email) => (dispatch) => {
       `/auth/reset`,
       { email },
       {
-        'content-type': 'application/json',
+        'content-type': 'application/json'
       }
     )
     .then((response) => {
@@ -141,7 +141,7 @@ export const setNewPassword =
         `/auth/new-password`,
         { userId, passwordToken, password, confirmPassword },
         {
-          'content-type': 'application/json',
+          'content-type': 'application/json'
         }
       )
       .then((response) => {

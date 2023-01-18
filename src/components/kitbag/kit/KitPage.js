@@ -1,5 +1,5 @@
 import { connect, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 
 import { fetchKitbagKit } from '../../../actions/KitbagKitActions';
@@ -10,11 +10,11 @@ import Title from '../../includes/title/Title';
 import { ImageUrls } from '../../../enums/imageUrls.enum';
 
 const mapDispatchToProps = {
-  fetchKitbagKit,
+  fetchKitbagKit
 };
 
-const KitPage = ({ fetchKitbagKit, match }) => {
-  const { kitId, kitbagId } = match.params;
+const KitPage = ({ fetchKitbagKit }) => {
+  const { kitId, kitbagId } = useParams;
 
   const current = useSelector((state) => {
     return state.kitbag.kit?.entities[kitId];
@@ -38,7 +38,7 @@ const KitPage = ({ fetchKitbagKit, match }) => {
     active: true,
     images: [],
     topImage: ImageUrls.DEFAULT,
-    imagesToUpload: 0,
+    imagesToUpload: 0
   });
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const KitPage = ({ fetchKitbagKit, match }) => {
     if (current && current._id) {
       const newKit = {
         ...current,
-        imagesToUpload: 0,
+        imagesToUpload: 0
       };
       setKit(newKit);
     }
@@ -71,7 +71,7 @@ const KitPage = ({ fetchKitbagKit, match }) => {
   const crumbs = [
     { title: 'Home', to: '/' },
     { title: `${kitbag?.name}`, to: `/kitbag/kit/${kitbagId}` },
-    { title: getTitle() },
+    { title: getTitle() }
   ];
 
   return (

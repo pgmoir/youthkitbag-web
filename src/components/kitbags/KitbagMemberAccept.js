@@ -3,7 +3,7 @@ import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 
 const KitbagMemebrAccept = ({ match }) => {
-  // const { kitbagId } = match.params;
+  // const { kitbagId } = useParams;;
   // const [kitbag, setKitbag] = useState({
   //   name: '',
   //   description: '',

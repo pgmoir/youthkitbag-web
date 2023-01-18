@@ -1,9 +1,10 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 import NewPasswordForm from './NewPasswordForm';
 
-const NewPasswordPage = ({ match }) => {
-  const { token } = match.params;
+const NewPasswordPage = () => {
+  const { token } = useParams;
 
   return (
     <div className="main container is-fluid">

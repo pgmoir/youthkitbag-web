@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchKitbagKits } from '../../../actions';
 import Alert from '../../includes/Alert';
@@ -14,11 +14,11 @@ const mapStateToProps = (state) => ({
   entities: state.kitbag.kit.entities,
   pagination: state.pagination,
   kitbags: state.user.kitbags,
-  lists: state.kitbag.kit.lists,
+  lists: state.kitbag.kit.lists
 });
 
 const mapDispatchToProps = {
-  fetchKitbagKits,
+  fetchKitbagKits
 };
 
 const Kitbag = ({
@@ -27,16 +27,16 @@ const Kitbag = ({
   pagination,
   kitbags,
   fetchKitbagKits,
-  match,
+  match
 }) => {
+  const { kitbagId } = useParams;
   const [filter, setFilter] = useState(stateFilter);
   const [displayRow, setDisplayRow] = useState(false);
-  const [kitbagId] = useState(match.params.kitbagId);
 
   useEffect(() => {
     fetchKitbagKits({
       ...filter,
-      kitbagId,
+      kitbagId
     });
   }, [filter, fetchKitbagKits, kitbagId]);
 

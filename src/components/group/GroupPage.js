@@ -1,5 +1,5 @@
 import { connect, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import classNames from 'classnames';
 import React, { useState, useEffect } from 'react';
 
@@ -18,11 +18,11 @@ import { MemberRoles } from '../../enums/memberRoles.enum';
 import { ImageUrls } from '../../enums/imageUrls.enum';
 
 const mapDispatchToProps = {
-  fetchGroup,
+  fetchGroup
 };
 
-const GroupPage = ({ fetchGroup, match }) => {
-  const { groupId } = match.params;
+const GroupPage = ({ fetchGroup }) => {
+  const { groupId } = useParams;
 
   const current = useSelector((state) => {
     return state.group.entities[groupId];
@@ -42,13 +42,13 @@ const GroupPage = ({ fetchGroup, match }) => {
     activitys: [],
     images: [],
     topImage: ImageUrls.DEFAULT,
-    imagesToUpload: 0,
+    imagesToUpload: 0
   });
 
   const canLeaveStates = [
     MemberStates.APPROVED,
     MemberStates.INVITED,
-    MemberStates.REQUESTED,
+    MemberStates.REQUESTED
   ];
 
   useEffect(() => {
@@ -65,7 +65,7 @@ const GroupPage = ({ fetchGroup, match }) => {
     if (current && current._id) {
       const newGroup = {
         ...current,
-        imagesToUpload: 0,
+        imagesToUpload: 0
       };
       setGroup(newGroup);
     }
@@ -125,7 +125,7 @@ const GroupPage = ({ fetchGroup, match }) => {
       'is-warning': group.groupMemberState === MemberStates.REJECTED,
       'is-danger': [MemberStates.SUSPENDED, MemberStates.LEFT].includes(
         group.groupMemberState
-      ),
+      )
     });
 
     if (group.groupMemberState) {
@@ -166,7 +166,7 @@ const GroupPage = ({ fetchGroup, match }) => {
   const crumbs = [
     { title: 'Home', to: '/' },
     { title: 'Groups', to: '/groups' },
-    { title: getTitle() },
+    { title: getTitle() }
   ];
 
   return (

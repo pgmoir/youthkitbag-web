@@ -23,7 +23,7 @@ import MarketKitDelete from './kitbag/market/MarketItemDelete';
 import MarketKitEditPage from './kitbag/market/MarketKitEditPage';
 import MarketPage from './market/MarketPage';
 import NewPassword from './auth/NewPasswordPage';
-import PrivateRoute from '../utils/privateRoute';
+import PrivateRoutes from '../utils/privateRoute';
 import Reset from './auth/ResetPage';
 import SettingsPage from './kitbag/SettingsPage';
 import ShowGroupPage from './show/ShowGroupPage';
@@ -80,80 +80,81 @@ const AppRouter = ({ auth }) => {
             }}
           />
           <Route path="/auth/logout" exact element={<Logout />} />
-          {/* <PrivateRoute
-            path="/bundles/purchase/:bundleId"
-            exact
-            element={<BundlePurchasePage />}
-          />
-          <PrivateRoute
-            path="/market/view/:marketId"
-            exact
-            element={<MarketItemViewPage />}
-          />
-          <Route path="/market" element={<MarketPage />} />
-          <PrivateRoute
-            path="/kitbag/kit/:kitbagId/new"
-            element={<KitPage />}
-          />
-          <PrivateRoute
-            path="/kitbag/kit/:kitbagId/edit/:kitId"
-            exact
-            element={<KitPage />}
-          />
-          <PrivateRoute
-            path="/kitbag/kit/:kitbagId/delete/:kitId"
-            exact
-            element={<KitDelete />}
-          />
-          <PrivateRoute path="/kitbag/kit/:kitbagId" element={<Kitbag />} />
-          <PrivateRoute
-            path="/kitbag/market/:kitbagId/new"
-            exact
-            element={<MarketKitEditPage />}
-          />
-          <PrivateRoute
-            path="/kitbag/market/:kitbagId/add/:kitId/:marketType"
-            exact
-            element={<MarketKitEditPage />}
-          />
-          <PrivateRoute
-            path="/kitbag/market/:kitbagId/edit/:marketId"
-            exact
-            element={<MarketKitEditPage />}
-          />
-          <PrivateRoute
-            path="/kitbag/market/:kitbagId/delete/:marketId"
-            exact
-            element={<MarketKitDelete />}
-          />
-          <Route
-            path="/show/group/:groupId"
-            exact
-            element={<ShowGroupPage />}
-          />
-          <PrivateRoute
-            path="/groups/state/:groupId"
-            exact
-            element={<GroupState />}
-          />
-          <PrivateRoute
-            path="/groups/:groupId/members"
-            exact
-            element={<GroupMembers />}
-          />
-          <PrivateRoute
-            path="/groups/:groupId/leave"
-            exact
-            element={<GroupMemberLeave />}
-          />
-          <PrivateRoute path="/groups/:groupId" exact element={<GroupPage />} />
-          <PrivateRoute path="/groups" element={<Groups />} />
-          <PrivateRoute path="/kitbags/new" element={<KitbagPage />} />
-          <PrivateRoute
-            path="/kitbags/:kitbagId/member/accept/:email/:token"
-            element={<KitbagMemberAccept />}
-          />
-          <PrivateRoute path="/kitbags/:kitbagId" element={<KitbagPage />} />
+          <Route element={<PrivateRoutes />}>
+            <Route
+              exact
+              path="/bundles/purchase/:bundleId"
+              element={<BundlePurchasePage />}
+            />
+
+            <Route
+              path="/market/view/:marketId"
+              exact
+              element={<MarketItemViewPage />}
+            />
+            <Route path="/market" element={<MarketPage />} />
+            <Route path="/kitbag/kit/:kitbagId/new" element={<KitPage />} />
+            <Route
+              path="/kitbag/kit/:kitbagId/edit/:kitId"
+              exact
+              element={<KitPage />}
+            />
+            <Route
+              path="/kitbag/kit/:kitbagId/delete/:kitId"
+              exact
+              element={<KitDelete />}
+            />
+            <Route path="/kitbag/kit/:kitbagId" element={<Kitbag />} />
+            <Route
+              path="/kitbag/market/:kitbagId/new"
+              exact
+              element={<MarketKitEditPage />}
+            />
+            <Route
+              path="/kitbag/market/:kitbagId/add/:kitId/:marketType"
+              exact
+              element={<MarketKitEditPage />}
+            />
+            <Route
+              path="/kitbag/market/:kitbagId/edit/:marketId"
+              exact
+              element={<MarketKitEditPage />}
+            />
+            <Route
+              path="/kitbag/market/:kitbagId/delete/:marketId"
+              exact
+              element={<MarketKitDelete />}
+            />
+            <Route
+              path="/show/group/:groupId"
+              exact
+              element={<ShowGroupPage />}
+            />
+            <Route
+              path="/groups/state/:groupId"
+              exact
+              element={<GroupState />}
+            />
+            <Route
+              path="/groups/:groupId/members"
+              exact
+              element={<GroupMembers />}
+            />
+            <Route
+              path="/groups/:groupId/leave"
+              exact
+              element={<GroupMemberLeave />}
+            />
+            <Route path="/groups/:groupId" exact element={<GroupPage />} />
+            <Route path="/groups" element={<Groups />} />
+            <Route path="/kitbags/new" element={<KitbagPage />} />
+            <Route
+              path="/kitbags/:kitbagId/member/accept/:email/:token"
+              element={<KitbagMemberAccept />}
+            />
+            <Route path="/kitbags/:kitbagId" element={<KitbagPage />} />
+          </Route>
+
           <Route
             path="/settings/:setting?"
             element={
@@ -161,7 +162,7 @@ const AppRouter = ({ auth }) => {
                 <SettingsPage />
               </ProtectedRoute>
             }
-          /> */}
+          />
         </Routes>
       </div>
       <Footer />

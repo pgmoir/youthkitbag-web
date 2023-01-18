@@ -8,13 +8,14 @@ import SearchForm from '../includes/SearchForm';
 import Breadcrumb from '../includes/Breadcrumb';
 import { MemberRoles } from '../../enums/memberRoles.enum';
 import { MemberStates } from '../../enums/memberStates.enum';
+import { useParams } from 'react-router-dom';
 
 const mapDispatchToProps = {
-  fetchGroupMembers,
+  fetchGroupMembers
 };
 
-const GroupMembers = ({ fetchGroupMembers, match }) => {
-  const { groupId } = match.params;
+const GroupMembers = ({ fetchGroupMembers }) => {
+  const { groupId } = useParams;
 
   const stateSearch = useSelector((state) => state.group.searchMembers);
   const memberEntities = useSelector((state) => state.group.memberEntities);
@@ -102,7 +103,7 @@ const GroupMembers = ({ fetchGroupMembers, match }) => {
     { title: 'Home', to: '/' },
     { title: 'Groups', to: '/groups' },
     { title: getTitle(false), to: `/groups/${groupId}` },
-    { title: 'Members' },
+    { title: 'Members' }
   ];
 
   return (

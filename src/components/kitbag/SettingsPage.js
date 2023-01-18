@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { Route, useParams } from 'react-router-dom';
 
 import Alert from '../includes/Alert';
 import Breadcrumb from '../includes/Breadcrumb';
@@ -17,11 +17,11 @@ import UserHelp from './UserHelp';
 import { capitalize } from '../../utils/strings';
 
 const mapStateToProps = (state) => ({
-  user: state.user,
+  user: state.user
 });
 
-const SettingsPage = ({ user, match }) => {
-  const { setting } = match.params;
+const SettingsPage = ({ user }) => {
+  const { setting } = useParams;
 
   const User = () => {
     return (
@@ -78,7 +78,7 @@ const SettingsPage = ({ user, match }) => {
     return [
       { title: 'Home', to: '/' },
       { title: 'Personal Settings', to: '/settings' },
-      { title: capitalize(setting) },
+      { title: capitalize(setting) }
     ];
   }
 

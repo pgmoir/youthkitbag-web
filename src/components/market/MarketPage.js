@@ -8,16 +8,17 @@ import MarketItemCard from './MarketItemCard';
 import Pagination from '../includes/Pagination';
 import SearchForm from '../includes/SearchForm';
 import Title from '../includes/title/Title';
+import { useParams } from 'react-router-dom';
 
 const mapStateToProps = (state) => ({
   stateSearch: state.market.search,
   entities: state.market.entities,
   pagination: state.pagination,
-  lists: state.market.lists,
+  lists: state.market.lists
 });
 
 const mapDispatchToProps = {
-  fetchMarketItems,
+  fetchMarketItems
 };
 
 const MarketPage = ({
@@ -25,12 +26,11 @@ const MarketPage = ({
   entities,
   pagination,
   lists,
-  fetchMarketItems,
-  match,
+  fetchMarketItems
 }) => {
+  const { kitbagId } = useParams;
   const [search, setSearch] = useState(stateSearch);
   const [displayRow, setDisplayRow] = useState(false);
-  const kitbagId = match.params.kitbagId;
 
   useEffect(() => {
     fetchMarketItems({ ...search });

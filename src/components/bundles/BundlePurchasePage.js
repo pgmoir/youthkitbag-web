@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchBundle } from '../../actions/BundlesActions';
 import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 
 const mapStateToProps = (state) => ({
-  selected: state.bundles.selected,
+  selected: state.bundles.selected
 });
 
 const mapDispatchToProps = {
-  fetchBundle,
+  fetchBundle
 };
 
-const BundlePurchasePage = ({ selected, fetchBundle, match }) => {
-  const { bundleId } = match.params;
+const BundlePurchasePage = ({ selected, fetchBundle }) => {
+  const { bundleId } = useParams;
 
   const [bundle, setBundle] = useState({
     title: 'Loading bundle details ...',
     description: '',
     details: [],
-    price: 0.0,
+    price: 0.0
   });
 
   useEffect(() => {

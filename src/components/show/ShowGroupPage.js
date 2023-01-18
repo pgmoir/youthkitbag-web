@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
   fetchShowGroup,
-  fetchShowGroupMarket,
+  fetchShowGroupMarket
 } from '../../actions/ShowActions';
 import GroupIntro from './GroupIntro';
 import ShowTitle from './ShowTitle';
 import { MarketTypes } from '../../enums/marketTypes.enum';
+import { useParams } from 'react-router-dom';
 
 const mapStateToProps = (state) => ({
   current: state.show.group,
@@ -15,12 +16,12 @@ const mapStateToProps = (state) => ({
   founds: state.show.founds,
   losts: state.show.losts,
   stolens: state.show.stolens,
-  wanteds: state.show.wanteds,
+  wanteds: state.show.wanteds
 });
 
 const mapDispatchToProps = {
   fetchShowGroup,
-  fetchShowGroupMarket,
+  fetchShowGroupMarket
 };
 
 const ShowGroupPage = ({
@@ -32,10 +33,9 @@ const ShowGroupPage = ({
   stolens,
   wanteds,
   fetchShowGroup,
-  fetchShowGroupMarket,
-  match,
+  fetchShowGroupMarket
 }) => {
-  const { groupId } = match.params;
+  const { groupId } = useParams;
   const [group, setGroup] = useState({});
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const ShowGroupPage = ({
   useEffect(() => {
     if (current && current._id) {
       setGroup({
-        ...current,
+        ...current
       });
     }
   }, [current]);

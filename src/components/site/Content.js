@@ -5,17 +5,18 @@ import Title from '../includes/title/Title';
 import useContentful from '../hooks/useContentful';
 import Breadcrumb from '../includes/Breadcrumb';
 import { ContentTypes } from '../../enums/contentTypes.enum';
+import { useParams } from 'react-router-dom';
 
 const mapStateToProps = (state) => ({
-  content: state.content.data,
+  content: state.content.data
 });
 
 const mapDispatchToProps = {
-  fetchContent,
+  fetchContent
 };
 
-const Content = ({ content, fetchContent, match }) => {
-  const { contentId } = match.params;
+const Content = ({ content, fetchContent }) => {
+  const { contentId } = useParams;
   const { renderAllConent } = useContentful(
     ContentTypes[contentId.toUpperCase()],
     fetchContent
@@ -41,7 +42,7 @@ const Content = ({ content, fetchContent, match }) => {
             <em>
               Last updated:{' '}
               {new Date(content.sys.updatedAt).toLocaleString('en-GB', {
-                timeZone: 'UTC',
+                timeZone: 'UTC'
               })}
             </em>
           </p>
