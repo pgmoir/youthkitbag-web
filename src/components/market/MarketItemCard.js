@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import history from '../../utils/history';
+import { redirect } from 'react-router-dom';
 import useMarketType from '../hooks/useMarketType';
 import BlankCard from '../kitbag/BlankCard';
 import MarketItemDelete from '../kitbag/market/MarketItemDelete';
@@ -51,9 +51,9 @@ const MarketItemCard = ({ market, callback, isCard = true }) => {
 
   function viewItem() {
     if (isOwned) {
-      history.push(`/kitbag/market/${kitbag}/edit/${_id}`);
+      return redirect(`/kitbag/market/${kitbag}/edit/${_id}`);
     } else {
-      history.push(`/market/view/${_id}`);
+      return redirect(`/market/view/${_id}`);
     }
   }
 

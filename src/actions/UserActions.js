@@ -8,7 +8,7 @@ import {
   RESET_TOAST,
 } from './types';
 import axios from '../utils/axios';
-import history from '../utils/history';
+import { redirect } from 'react-router-dom';
 // import { fetchPreferredKitbag } from './';
 
 export const getUser = () => (dispatch) => {
@@ -26,7 +26,7 @@ export const editUser = (formValues) => (dispatch) => {
   axios
     .put('/user', { ...formValues }, {})
     .then((response) => {
-      history.push('/settings/user');
+      return redirect('/settings/user');
       dispatch({ type: EDIT_USER, payload: response.data });
     })
     .catch((err) => {
@@ -35,31 +35,35 @@ export const editUser = (formValues) => (dispatch) => {
     });
 };
 
-export const deleteUser = ({ userId, formValues }) => (dispatch) => {
-  axios
-    .put('/user/delete', { ...formValues, userId }, {})
-    .then(() => {
-      window.localStorage.clear();
-      dispatch({ type: RESET });
-      history.push('/');
-    })
-    .catch((err) => {
-      const { response } = err;
-      dispatch({ type: API_USER_ERROR, payload: response.data });
-    });
-};
+export const deleteUser =
+  ({ userId, formValues }) =>
+  (dispatch) => {
+    axios
+      .put('/user/delete', { ...formValues, userId }, {})
+      .then(() => {
+        window.localStorage.clear();
+        dispatch({ type: RESET });
+        return redirect('/');
+      })
+      .catch((err) => {
+        const { response } = err;
+        dispatch({ type: API_USER_ERROR, payload: response.data });
+      });
+  };
 
-export const editPreferredKitbag = ({ kitbagId }) => (dispatch) => {
-  axios
-    .put(`/user/kitbag/${kitbagId}`, {}, {})
-    .then((response) => {
-      dispatch({ type: EDIT_USER, payload: response.data });
-    })
-    .catch((err) => {
-      const { response } = err;
-      dispatch({ type: API_USER_ERROR, payload: response.data });
-    });
-};
+export const editPreferredKitbag =
+  ({ kitbagId }) =>
+  (dispatch) => {
+    axios
+      .put(`/user/kitbag/${kitbagId}`, {}, {})
+      .then((response) => {
+        dispatch({ type: EDIT_USER, payload: response.data });
+      })
+      .catch((err) => {
+        const { response } = err;
+        dispatch({ type: API_USER_ERROR, payload: response.data });
+      });
+  };
 
 export const hideFlag = (name, hide) => (dispatch) => {
   axios
@@ -88,5 +92,5 @@ export const resetFlags = () => (dispatch) => {
 
 export const loadSettingsPage = (url) => (dispatch) => {
   dispatch({ type: RESET_TOAST });
-  history.push(url);
+  return redirect(url);
 };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import history from '../../../utils/history';
+import { redirect } from 'react-router-dom';
 import BlankCard from '../BlankCard';
 import KitDelete from './KitDelete';
 import { getImage } from '../../../utils/image';
@@ -49,7 +49,7 @@ const KitCard = ({ kit, kitbagId, callback, isCard = true }) => {
   }
 
   function viewItem() {
-    history.push(`/kitbag/kit/${kitbagId}/edit/${_id}`);
+    return redirect(`/kitbag/kit/${kitbagId}/edit/${_id}`);
   }
 
   function deleteItem(e) {

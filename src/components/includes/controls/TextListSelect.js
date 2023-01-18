@@ -13,7 +13,7 @@ const TextListSelect = ({
   addClassName,
   iconRight = true,
   iconLeft,
-  suggestions,
+  suggestions
 }) => {
   const [currentValue, setCurrentValue] = useState(value);
   const [autoOptions, setAutoOptions] = useState([]);
@@ -22,11 +22,11 @@ const TextListSelect = ({
 
   const controlClasses = classNames('control autocomplete', {
     'has-icons-right': iconRight,
-    'has-icons-left': iconLeft,
+    'has-icons-left': iconLeft
   });
 
   const inputClasses = classNames('input', addClassName, {
-    'is-danger': error,
+    'is-danger': error
   });
 
   const setItem = (value) => {

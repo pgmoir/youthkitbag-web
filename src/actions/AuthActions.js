@@ -9,7 +9,7 @@ import {
   PASSWORD_RESET_CHECK,
   PASSWORD_RESET,
 } from './types';
-import history from '../utils/history';
+import { redirect } from 'react-router-dom';
 import { getUser } from './UserActions';
 
 export const login = (email, password, referrer) => (dispatch) => {
@@ -30,7 +30,7 @@ export const login = (email, password, referrer) => (dispatch) => {
       localStorage.setItem('isloggedin', true);
       dispatch({ type: LOGIN_SUCCESS, payload: data });
       dispatch(getUser());
-      history.push(referrer ? referrer : '/');
+      return redirect(referrer ? referrer : '/');
     })
     .catch((err) => {
       const { response } = err;
@@ -56,12 +56,12 @@ export const authenticateToken = (token) => (dispatch) => {
       localStorage.setItem('isloggedin', true);
       dispatch({ type: LOGIN_SUCCESS, payload: data });
       dispatch(getUser());
-      history.push('/');
+      return redirect('/');
     })
     .catch((err) => {
       const { response } = err;
       dispatch({ type: LOGIN_FAILURE, payload: response.data });
-      history.push('/');
+      return redirect('/');
     });
 };
 
@@ -79,7 +79,7 @@ export const signup = (formValues) => (dispatch) => {
       localStorage.setItem('isloggedin', true);
       dispatch({ type: LOGIN_SUCCESS, payload: data });
       dispatch(getUser());
-      history.push('/');
+      return redirect('/');
     })
     .catch((err) => {
       const { response } = err;
@@ -91,10 +91,10 @@ export const logout = () => async (dispatch) => {
   try {
     window.localStorage.clear();
     dispatch({ type: LOGOUT });
-    history.push('/');
+    return redirect('/');
   } catch (err) {
     if (err.response.status === 401) {
-      history.push('/');
+      return redirect('/');
     }
   }
 };
@@ -110,7 +110,7 @@ export const reset = (email) => (dispatch) => {
       }
     )
     .then((response) => {
-      history.push('/auth/login');
+      return redirect('/auth/login');
       dispatch({ type: RESET_REQUESTED, payload: response.data });
     })
     .catch((err) => {
@@ -133,27 +133,23 @@ export const checkNewPassword = (token) => (dispatch) => {
     });
 };
 
-export const setNewPassword = (
-  userId,
-  passwordToken,
-  password,
-  confirmPassword
-) => (dispatch) => {
-  window.localStorage.clear();
-  axios
-    .post(
-      `/auth/new-password`,
-      { userId, passwordToken, password, confirmPassword },
-      {
-        'content-type': 'application/json',
-      }
-    )
-    .then((response) => {
-      history.push('/auth/login');
-      dispatch({ type: PASSWORD_RESET, payload: response.data });
-    })
-    .catch((err) => {
-      const { response } = err;
-      dispatch({ type: SIGNUP_FAILURE, payload: response.data });
-    });
-};
+export const setNewPassword =
+  (userId, passwordToken, password, confirmPassword) => (dispatch) => {
+    window.localStorage.clear();
+    axios
+      .post(
+        `/auth/new-password`,
+        { userId, passwordToken, password, confirmPassword },
+        {
+          'content-type': 'application/json',
+        }
+      )
+      .then((response) => {
+        return redirect('/auth/login');
+        dispatch({ type: PASSWORD_RESET, payload: response.data });
+      })
+      .catch((err) => {
+        const { response } = err;
+        dispatch({ type: SIGNUP_FAILURE, payload: response.data });
+      });
+  };

@@ -1,8 +1,7 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useSelector } from 'react-redux';
-import history from '../utils/history';
 import User from './auth/User';
 import ScrollToTop from './ScrollToTop';
 import AppRouter from './AppRouter';
@@ -18,11 +17,11 @@ const App = () => {
           kit
         </title>
       </Helmet>
-      <Router history={history}>
+      <BrowserRouter>
         <ScrollToTop />
         <User />
         <AppRouter auth={auth} />
-      </Router>
+      </BrowserRouter>
     </>
   );
 };

@@ -1,16 +1,16 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import DisplayedItem from './DisplayedItem';
 
 const KitbagKitAnnouncement = ({ kitbagId, created }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { recent } = useSelector((state) => state.kitbag.kit);
 
   if (!kitbagId) return null;
 
   function viewKitItem(item) {
-    history.push(`/kitbag/kit/${kitbagId}/edit/${item._id}`);
+    return navigate(`/kitbag/kit/${kitbagId}/edit/${item._id}`);
   }
 
   function renderList(items) {

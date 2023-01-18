@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import DisplayedItem from './DisplayedItem';
 
 const KitbagMarketAnnouncement = ({ description, marketType }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const marketTypeKey = `${marketType.toLowerCase()}s`;
   const { items, totalItems } = useSelector(
     (state) => state.kitbag.market[marketTypeKey]
@@ -13,7 +13,7 @@ const KitbagMarketAnnouncement = ({ description, marketType }) => {
   if (!totalItems || totalItems === 0) return null;
 
   function viewMarketItem(item) {
-    history.push(`/kitbag/market/${item.kitbag}/edit/${item._id}`);
+    return navigate(`/kitbag/market/${item.kitbag}/edit/${item._id}`);
   }
 
   function renderList() {

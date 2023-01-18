@@ -27,13 +27,13 @@ import {
   INVITE_KITBAG_MEMBER,
   DELETE_KITBAG_MEMBER,
   EDIT_KITBAG_MEMBER_STATE,
-  REQUEST_TO_JOIN_KITBAG,
+  REQUEST_TO_JOIN_KITBAG
 } from '../actions/types';
 
 const initialState = {
   currentMessage: '',
   currentStyle: '',
-  errors: [],
+  errors: []
 };
 
 export default (state = initialState, action) => {
@@ -60,14 +60,14 @@ export default (state = initialState, action) => {
     case REQUEST_TO_JOIN_KITBAG:
       return {
         currentMessage: action.payload.message,
-        currentStyle: 'success',
+        currentStyle: 'success'
       };
     case DELETE_KITBAG_KIT:
     case DELETE_MARKET_KIT:
     case GROUP_MEMBER_DELETE:
       return {
         currentMessage: action.payload.message,
-        currentStyle: 'warning',
+        currentStyle: 'warning'
       };
     case API_USER_ERROR:
     case API_ERROR:
@@ -76,7 +76,7 @@ export default (state = initialState, action) => {
       return {
         currentMessage: action.payload.message,
         currentStyle: 'error',
-        errors: action.payload.errors,
+        errors: action.payload.errors
       };
     case RESET_TOAST:
     case LOGOUT:

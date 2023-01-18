@@ -78,7 +78,6 @@ const SearchFilter = ({ filter, callback, placeholderText }) => {
               onChange={handleChange}
               value={values.searchFor}
               id="searchFor"
-              arialabel="Search by text"
               placeholder={placeholderText}
             />
           </p>

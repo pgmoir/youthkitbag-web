@@ -12,7 +12,7 @@ import {
   NavLink,
   NavLinks,
   NavLogo,
-  NavMenu,
+  NavMenu
 } from './NavbarElements';
 
 const Navbar = ({ toggle, loggedIn, kitbag, group, profileImage }) => {

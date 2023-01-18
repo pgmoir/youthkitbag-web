@@ -10,7 +10,7 @@ import {
   FETCH_RECENT_KITS,
   FETCH_WARNING_KITS,
 } from './types';
-import history from '../utils/history';
+import { redirect } from 'react-router-dom';
 
 export const fetchKitbagKits = (filter) => (dispatch) => {
   axios
@@ -23,7 +23,7 @@ export const fetchKitbagKits = (filter) => (dispatch) => {
       //   type: FILTER_KITBAG_KITS,
       //   payload: { ...filter },
       // });
-      history.push(`/kitbag/kit/${filter.kitbagId}`);
+      return redirect(`/kitbag/kit/${filter.kitbagId}`);
     })
     .catch((err) => {
       const { response } = err;
@@ -43,45 +43,47 @@ export const fetchKitbagKit = (kitbagId, kitId) => (dispatch) => {
     });
 };
 
-export const fetchRecentKitbagKits = ({ created, days, kitbagId }) => (
-  dispatch
-) => {
-  axios
-    .get(`/kitbag/kit/${kitbagId}/recent`, {
-      params: { created, days },
-    })
-    .then((response) => {
-      dispatch({
-        type: FETCH_RECENT_KITS,
-        payload: { ...response.data, created, days },
+export const fetchRecentKitbagKits =
+  ({ created, days, kitbagId }) =>
+  (dispatch) => {
+    axios
+      .get(`/kitbag/kit/${kitbagId}/recent`, {
+        params: { created, days },
+      })
+      .then((response) => {
+        dispatch({
+          type: FETCH_RECENT_KITS,
+          payload: { ...response.data, created, days },
+        });
+      })
+      .catch((err) => {
+        const { response } = err;
+        dispatch({ type: API_ERROR, payload: response });
       });
-    })
-    .catch((err) => {
-      const { response } = err;
-      dispatch({ type: API_ERROR, payload: response });
-    });
-};
+  };
 
-export const fetchWarningsKitbagKits = ({ kitbagId }) => (dispatch) => {
-  axios
-    .get(`/kitbag/kit/${kitbagId}/warnings`)
-    .then((response) => {
-      dispatch({
-        type: FETCH_WARNING_KITS,
-        payload: { ...response.data },
+export const fetchWarningsKitbagKits =
+  ({ kitbagId }) =>
+  (dispatch) => {
+    axios
+      .get(`/kitbag/kit/${kitbagId}/warnings`)
+      .then((response) => {
+        dispatch({
+          type: FETCH_WARNING_KITS,
+          payload: { ...response.data },
+        });
+      })
+      .catch((err) => {
+        const { response } = err;
+        dispatch({ type: API_ERROR, payload: response });
       });
-    })
-    .catch((err) => {
-      const { response } = err;
-      dispatch({ type: API_ERROR, payload: response });
-    });
-};
+  };
 
 export const createKitbagKit = (kitbagId, formValues) => (dispatch) => {
   axios
     .post(`/kitbag/kit/${kitbagId}`, { ...formValues }, {})
     .then((response) => {
-      history.push(`/kitbag/kit/${kitbagId}`);
+      return redirect(`/kitbag/kit/${kitbagId}`);
       dispatch({ type: CREATE_KITBAG_KIT, payload: response.data });
     })
     .catch((err) => {
@@ -94,7 +96,7 @@ export const editKitbagKit = (kitbagId, kitId, formValues) => (dispatch) => {
   axios
     .put(`/kitbag/kit/${kitbagId}/${kitId}`, { ...formValues }, {})
     .then((response) => {
-      history.push(`/kitbag/kit/${kitbagId}`);
+      return redirect(`/kitbag/kit/${kitbagId}`);
       dispatch({ type: EDIT_KITBAG_KIT, payload: response.data });
     })
     .catch((err) => {
@@ -103,26 +105,30 @@ export const editKitbagKit = (kitbagId, kitId, formValues) => (dispatch) => {
     });
 };
 
-export const deleteKitbagKit = ({ kitbagId, kitId }) => (dispatch) => {
-  axios
-    .delete(`/kitbag/kit/${kitbagId}/${kitId}`, {})
-    .then(() => {
-      dispatch({ type: DELETE_KITBAG_KIT, payload: kitId });
-    })
-    .catch((err) => {
-      const { response } = err;
-      dispatch({ type: API_ERROR, payload: response.data });
-    });
-};
+export const deleteKitbagKit =
+  ({ kitbagId, kitId }) =>
+  (dispatch) => {
+    axios
+      .delete(`/kitbag/kit/${kitbagId}/${kitId}`, {})
+      .then(() => {
+        dispatch({ type: DELETE_KITBAG_KIT, payload: kitId });
+      })
+      .catch((err) => {
+        const { response } = err;
+        dispatch({ type: API_ERROR, payload: response.data });
+      });
+  };
 
-export const fetchKitbagLists = (kitbagId = null) => (dispatch) => {
-  axios
-    .get(`/kitbag/kit/${kitbagId}/lists`, {})
-    .then((response) => {
-      dispatch({ type: FETCH_KITBAG_LISTS, payload: response.data });
-    })
-    .catch((err) => {
-      const { response } = err;
-      dispatch({ type: API_ERROR, payload: response.data });
-    });
-};
+export const fetchKitbagLists =
+  (kitbagId = null) =>
+  (dispatch) => {
+    axios
+      .get(`/kitbag/kit/${kitbagId}/lists`, {})
+      .then((response) => {
+        dispatch({ type: FETCH_KITBAG_LISTS, payload: response.data });
+      })
+      .catch((err) => {
+        const { response } = err;
+        dispatch({ type: API_ERROR, payload: response.data });
+      });
+  };

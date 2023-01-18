@@ -8,7 +8,7 @@ const SearchForm = ({
   callback,
   placeholderText,
   collections,
-  useInstant = false,
+  useInstant = false
 }) => {
   const filter = useSelector((state) => state.filter);
   const pagination = useSelector((state) => state.pagination);
@@ -34,7 +34,7 @@ const SearchForm = ({
       by: search.by,
       searchFor: search.searchFor,
       order: search.order,
-      direction: search.direction,
+      direction: search.direction
     });
   }, [search, setValues]);
 
@@ -55,7 +55,7 @@ const SearchForm = ({
       page: 1,
       pagesize: pagination.itemsPerPage,
       order,
-      direction,
+      direction
     });
   }
 
@@ -69,7 +69,7 @@ const SearchForm = ({
       page: 1,
       pagesize: pagination.itemsPerPage,
       order,
-      direction,
+      direction
     });
   }
 
@@ -83,7 +83,7 @@ const SearchForm = ({
       page: 1,
       pagesize: pagination.itemsPerPage,
       order,
-      direction,
+      direction
     });
   }
 
@@ -127,7 +127,6 @@ const SearchForm = ({
                 onChange={(e) => instantSearchFor(e)}
                 onBlur={(e) => instantSearchFor(e)}
                 value={values.searchFor}
-                arialabel={`Search by ${values.by}`}
               >
                 {collection.map((item, index) => {
                   return (
@@ -147,7 +146,6 @@ const SearchForm = ({
               onBlur={(e) => instantSearchFor(e)}
               value={values.searchFor}
               id="searchFor"
-              arialabel="Search by text"
               placeholder={placeholderText}
             />
           ) : (
@@ -158,7 +156,6 @@ const SearchForm = ({
               onChange={handleChange}
               value={values.searchFor}
               id="searchFor"
-              arialabel="Search by text"
               placeholder={placeholderText}
             />
           )}

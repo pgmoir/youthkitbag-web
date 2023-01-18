@@ -1,23 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { configureStore } from '@reduxjs/toolkit';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
 
 import App from './components/App';
-import reducers from './reducers';
+import rootReducer from './reducers';
 
-// When ready to switch off dev tools in production, use this block
-// const composeEnhancers =
-//   process.env.NODE_ENV === 'development'
-//     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-//     : compose;
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
+const container = document.getElementById('root');
 
-ReactDOM.render(
+const root = createRoot(container);
+
+const store = configureStore({
+  reducer: rootReducer,
+  devTools: true
+});
+
+root.render(
   <Provider store={store}>
     <App />
-  </Provider>,
-  document.querySelector('#root')
+  </Provider>
 );

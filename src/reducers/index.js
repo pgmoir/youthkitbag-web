@@ -13,7 +13,7 @@ import imageReducer from './imageReducer';
 import showReducer from './showReducer';
 import contentReducer from './contentReducer';
 
-export default combineReducers({
+const rootReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
   group: groupReducer,
@@ -27,3 +27,5 @@ export default combineReducers({
   show: showReducer,
   content: contentReducer,
 });
+
+export default rootReducer;

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { getImage } from '../../utils/image';
 
 const GroupsMemberRequestsAnnouncement = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [groupsWithMemberRequests, setGroupsWithMemberRequests] = useState([]);
   const groupsMemberRequests = useSelector(
     (state) => state.group.memberRequests
@@ -28,7 +28,7 @@ const GroupsMemberRequestsAnnouncement = () => {
 
   // http://localhost:3000/groups/602ec91fb0ed8434fd5a217d/members
   function viewMembersList(group) {
-    history.push(`/groups/${group._id}/members`);
+    return navigate(`/groups/${group._id}/members`);
   }
 
   function renderMemberList(members) {

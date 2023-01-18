@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { GroupStates } from '../../enums/groupStates.enum';
-import history from '../../utils/history';
+import { redirect } from 'react-router-dom';
 import { getImage } from '../../utils/image';
 import { ImagesNav } from '../includes/images';
 import BlankCard from '../kitbag/BlankCard';
@@ -71,7 +71,7 @@ const GroupCard = ({ group, callback, isCard = true }) => {
   }
 
   function viewItem() {
-    history.push(`/groups/${_id}`);
+    return redirect(`/groups/${_id}`);
   }
 
   function editGroup(e) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import BundlePurchasePage from './bundles/BundlePurchasePage';
 import BundlesPage from './bundles/BundlesPage';
 import Content from './site/Content';
@@ -31,28 +31,43 @@ import SignUp from './auth/SignUpPage';
 import Token from './auth/Token';
 import Why from './Why';
 import SiteNav from './SiteNav';
+import ProtectedRoute from '../utils/protectedRoute';
 
 const AppRouter = ({ auth }) => {
+  function Redirect({ to }) {
+    let navigate = useNavigate();
+    useEffect(() => {
+      navigate(to);
+    });
+    return null;
+  }
+
   return (
     <>
       <SiteNav auth={auth} />
       <div id="wrapper">
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/why" exact component={Why} />
-          <Route path="/bundles" exact component={BundlesPage} />
-          <Route path="/learn/:activity" component={LearnMore} />
-          <Route path="/site/:contentId" component={Content} />
-          <Route path="/auth/signup" exact>
-            {auth.loggedIn ? <Redirect to="/" /> : <SignUp />}
-          </Route>
-          <Route path="/auth/login" exact>
-            {auth.loggedIn ? <Redirect to="/" /> : <Login />}
-          </Route>
-          <Route path="/auth/reset" exact>
-            {auth.loggedIn ? <Redirect to="/" /> : <Reset />}
-          </Route>
-          <Route path="/auth/token/:token" exact component={Token} />
+        <Routes>
+          <Route path="/" exact element={<Home />} />
+          <Route path="/why" exact element={<Why />} />
+          <Route path="/bundles" exact element={<BundlesPage />} />
+          <Route path="/learn/:activity" element={<LearnMore />} />
+          <Route path="/site/:contentId" element={<Content />} />
+          <Route
+            path="/auth/signup"
+            exact
+            element={auth.loggedIn ? <Redirect to="/" /> : <SignUp />}
+          />
+          <Route
+            path="/auth/login"
+            exact
+            element={auth.loggedIn ? <Redirect to="/" /> : <Login />}
+          />
+          <Route
+            path="/auth/reset"
+            exact
+            element={auth.loggedIn ? <Redirect to="/" /> : <Reset />}
+          />
+          <Route path="/auth/token/:token" exact element={<Token />} />
           <Route
             path="/auth/newpassword/:token"
             exact
@@ -64,76 +79,90 @@ const AppRouter = ({ auth }) => {
               }
             }}
           />
-          <Route path="/auth/logout" exact component={Logout} />
-          <PrivateRoute
+          <Route path="/auth/logout" exact element={<Logout />} />
+          {/* <PrivateRoute
             path="/bundles/purchase/:bundleId"
             exact
-            component={BundlePurchasePage}
+            element={<BundlePurchasePage />}
           />
           <PrivateRoute
             path="/market/view/:marketId"
             exact
-            component={MarketItemViewPage}
+            element={<MarketItemViewPage />}
           />
-          <Route path="/market" component={MarketPage} />
-          <PrivateRoute path="/kitbag/kit/:kitbagId/new" component={KitPage} />
+          <Route path="/market" element={<MarketPage />} />
+          <PrivateRoute
+            path="/kitbag/kit/:kitbagId/new"
+            element={<KitPage />}
+          />
           <PrivateRoute
             path="/kitbag/kit/:kitbagId/edit/:kitId"
             exact
-            component={KitPage}
+            element={<KitPage />}
           />
           <PrivateRoute
             path="/kitbag/kit/:kitbagId/delete/:kitId"
             exact
-            component={KitDelete}
+            element={<KitDelete />}
           />
-          <PrivateRoute path="/kitbag/kit/:kitbagId" component={Kitbag} />
+          <PrivateRoute path="/kitbag/kit/:kitbagId" element={<Kitbag />} />
           <PrivateRoute
             path="/kitbag/market/:kitbagId/new"
             exact
-            component={MarketKitEditPage}
+            element={<MarketKitEditPage />}
           />
           <PrivateRoute
             path="/kitbag/market/:kitbagId/add/:kitId/:marketType"
             exact
-            component={MarketKitEditPage}
+            element={<MarketKitEditPage />}
           />
           <PrivateRoute
             path="/kitbag/market/:kitbagId/edit/:marketId"
             exact
-            component={MarketKitEditPage}
+            element={<MarketKitEditPage />}
           />
           <PrivateRoute
             path="/kitbag/market/:kitbagId/delete/:marketId"
             exact
-            component={MarketKitDelete}
+            element={<MarketKitDelete />}
           />
-          <Route path="/show/group/:groupId" exact component={ShowGroupPage} />
+          <Route
+            path="/show/group/:groupId"
+            exact
+            element={<ShowGroupPage />}
+          />
           <PrivateRoute
             path="/groups/state/:groupId"
             exact
-            component={GroupState}
+            element={<GroupState />}
           />
           <PrivateRoute
             path="/groups/:groupId/members"
             exact
-            component={GroupMembers}
+            element={<GroupMembers />}
           />
           <PrivateRoute
             path="/groups/:groupId/leave"
             exact
-            component={GroupMemberLeave}
+            element={<GroupMemberLeave />}
           />
-          <PrivateRoute path="/groups/:groupId" exact component={GroupPage} />
-          <PrivateRoute path="/groups" component={Groups} />
-          <PrivateRoute path="/kitbags/new" component={KitbagPage} />
+          <PrivateRoute path="/groups/:groupId" exact element={<GroupPage />} />
+          <PrivateRoute path="/groups" element={<Groups />} />
+          <PrivateRoute path="/kitbags/new" element={<KitbagPage />} />
           <PrivateRoute
             path="/kitbags/:kitbagId/member/accept/:email/:token"
-            component={KitbagMemberAccept}
+            element={<KitbagMemberAccept />}
           />
-          <PrivateRoute path="/kitbags/:kitbagId" component={KitbagPage} />
-          <PrivateRoute path="/settings/:setting?" component={SettingsPage} />
-        </Switch>
+          <PrivateRoute path="/kitbags/:kitbagId" element={<KitbagPage />} />
+          <Route
+            path="/settings/:setting?"
+            element={
+              <ProtectedRoute auth={auth}>
+                <SettingsPage />
+              </ProtectedRoute>
+            }
+          /> */}
+        </Routes>
       </div>
       <Footer />
     </>

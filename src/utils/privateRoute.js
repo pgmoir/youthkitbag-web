@@ -1,23 +1,27 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, useNavigate } from 'react-router-dom';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
+  function Redirect({ to }) {
+    let navigate = useNavigate();
+    useEffect(() => {
+      navigate(to);
+    });
+    return null;
+  }
+
   const authToken = localStorage.getItem('authToken');
   const isloggedin = localStorage.getItem('isloggedin');
   const user = localStorage.getItem('user');
+
   return (
     <Route
       {...rest}
-      render={(props) =>
+      element={(props) =>
         isloggedin && authToken && user ? (
           <Component {...props} />
         ) : (
-          <Redirect
-            to={{
-              pathname: '/auth/login',
-              state: { from: props.location },
-            }}
-          />
+          <Redirect to="/auth/login" />
         )
       }
     />

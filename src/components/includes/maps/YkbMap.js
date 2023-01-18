@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Map, Marker, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 
 function YkbMap({ id, position }) {
   const [lat, lon] = position;
@@ -11,13 +11,13 @@ function YkbMap({ id, position }) {
   }, [lat, lon, setLatLon]);
 
   return (
-    <Map center={latlon} zoom={12}>
+    <MapContainer center={latlon} zoom={12}>
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <Marker key={id} position={latlon} />
-    </Map>
+    </MapContainer>
   );
 }
 

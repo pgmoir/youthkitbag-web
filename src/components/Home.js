@@ -4,7 +4,7 @@ import LoggedOutLanding from './home/LoggedOutLanding';
 import LoggedInLanding from './home/LoggedInLanding';
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  auth: state.auth
 });
 
 const Home = ({ auth }) => {
