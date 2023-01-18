@@ -81,11 +81,19 @@
     "eslint-plugin-react": "7.32.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-simple-import-sort": "^9.0.0",
+    "husky": "^8.0.0",
     "node-sass": "8.0.0",
     "prettier": "2.8.3",
     "react-router-hash-link": "2.4.3",
     "react-test-renderer": "18.2.0",
     "styled-components": "5.3.6",
     "typescript": "4.9.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test",
+      "pre-push": "npm test",
+      "...": "..."
+    }
   }
 }
