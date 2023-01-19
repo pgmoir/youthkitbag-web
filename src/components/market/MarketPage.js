@@ -28,7 +28,7 @@ const MarketPage = ({
   lists,
   fetchMarketItems
 }) => {
-  const { kitbagId } = useParams;
+  const { kitbagId } = useParams();
   const [search, setSearch] = useState(stateSearch);
   const [displayRow, setDisplayRow] = useState(false);
 

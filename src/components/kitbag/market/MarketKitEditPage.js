@@ -27,7 +27,7 @@ const MarketKitEditPage = ({
   fetchMarketKit,
   fetchMarketKitFromKit
 }) => {
-  const { kitbagId, marketId, kitId, marketType } = useParams;
+  const { kitbagId, marketId, kitId, marketType } = useParams();
 
   const [market, setMarketKit] = useState({
     marketType: '',

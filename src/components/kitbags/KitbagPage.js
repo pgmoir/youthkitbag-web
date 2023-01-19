@@ -23,7 +23,7 @@ const mapDispatchToProps = {
 };
 
 const KitbagPage = ({ current, kitbags, fetchKitbag, clearKitbag }) => {
-  const { kitbagId } = useParams;
+  const { kitbagId } = useParams();
   const [modalIsActive, setModalIsActive] = useState(false);
   const [kitbag, setKitbag] = useState({
     name: '',

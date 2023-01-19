@@ -13,7 +13,7 @@ const mapDispatchToProps = {
 };
 
 const MarketItemViewPage = ({ fetchMarketItem }) => {
-  const { marketId } = useParams;
+  const { marketId } = useParams();
 
   const market = useSelector((state) => {
     return !marketId ? null : state.market.entities[marketId];

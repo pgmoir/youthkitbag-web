@@ -16,7 +16,7 @@ const mapDispatchToProps = {
 };
 
 const Content = ({ content, fetchContent }) => {
-  const { contentId } = useParams;
+  const { contentId } = useParams();
   const { renderAllConent } = useContentful(
     ContentTypes[contentId.toUpperCase()],
     fetchContent

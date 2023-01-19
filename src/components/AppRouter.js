@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import BundlePurchasePage from './bundles/BundlePurchasePage';
 import BundlesPage from './bundles/BundlesPage';
 import Content from './site/Content';
@@ -34,14 +34,6 @@ import SiteNav from './SiteNav';
 import ProtectedRoute from '../utils/protectedRoute';
 
 const AppRouter = ({ auth }) => {
-  function Redirect({ to }) {
-    let navigate = useNavigate();
-    useEffect(() => {
-      navigate(to);
-    });
-    return null;
-  }
-
   return (
     <>
       <SiteNav auth={auth} />
@@ -55,17 +47,17 @@ const AppRouter = ({ auth }) => {
           <Route
             path="/auth/signup"
             exact
-            element={auth.loggedIn ? <Redirect to="/" /> : <SignUp />}
+            element={auth.loggedIn ? <Navigate to="/" /> : <SignUp />}
           />
           <Route
             path="/auth/login"
             exact
-            element={auth.loggedIn ? <Redirect to="/" /> : <Login />}
+            element={auth.loggedIn ? <Navigate to="/" /> : <Login />}
           />
           <Route
             path="/auth/reset"
             exact
-            element={auth.loggedIn ? <Redirect to="/" /> : <Reset />}
+            element={auth.loggedIn ? <Navigate to="/" /> : <Reset />}
           />
           <Route path="/auth/token/:token" exact element={<Token />} />
           <Route
@@ -73,7 +65,7 @@ const AppRouter = ({ auth }) => {
             exact
             render={(props) => {
               if (auth.loggedIn) {
-                return <Redirect to="/" />;
+                return <Navigate to="/" />;
               } else {
                 return <NewPassword {...props} />;
               }

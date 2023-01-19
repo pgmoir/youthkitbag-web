@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import NewPasswordForm from './NewPasswordForm';
 
 const NewPasswordPage = () => {
-  const { token } = useParams;
+  const { token } = useParams();
 
   return (
     <div className="main container is-fluid">

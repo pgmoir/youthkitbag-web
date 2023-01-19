@@ -21,7 +21,7 @@ const mapStateToProps = (state) => ({
 });
 
 const SettingsPage = ({ user }) => {
-  const { setting } = useParams;
+  const { setting } = useParams();
 
   const User = () => {
     return (

@@ -22,7 +22,7 @@ const mapDispatchToProps = {
 };
 
 const GroupPage = ({ fetchGroup }) => {
-  const { groupId } = useParams;
+  const { groupId } = useParams();
 
   const current = useSelector((state) => {
     return state.group.entities[groupId];

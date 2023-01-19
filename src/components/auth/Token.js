@@ -9,7 +9,7 @@ const mapDispatchToProps = {
 };
 
 const Token = ({ authenticateToken }) => {
-  const { token } = useParams;
+  const { token } = useParams();
 
   useEffect(() => {
     authenticateToken(token);

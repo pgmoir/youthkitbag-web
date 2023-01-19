@@ -29,7 +29,7 @@ const Kitbag = ({
   fetchKitbagKits,
   match
 }) => {
-  const { kitbagId } = useParams;
+  const { kitbagId } = useParams();
   const [filter, setFilter] = useState(stateFilter);
   const [displayRow, setDisplayRow] = useState(false);
 

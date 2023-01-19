@@ -35,7 +35,7 @@ const ShowGroupPage = ({
   fetchShowGroup,
   fetchShowGroupMarket
 }) => {
-  const { groupId } = useParams;
+  const { groupId } = useParams();
   const [group, setGroup] = useState({});
 
   useEffect(() => {

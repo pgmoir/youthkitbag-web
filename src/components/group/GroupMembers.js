@@ -15,7 +15,7 @@ const mapDispatchToProps = {
 };
 
 const GroupMembers = ({ fetchGroupMembers }) => {
-  const { groupId } = useParams;
+  const { groupId } = useParams();
 
   const stateSearch = useSelector((state) => state.group.searchMembers);
   const memberEntities = useSelector((state) => state.group.memberEntities);
