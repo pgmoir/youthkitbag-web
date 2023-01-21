@@ -8,14 +8,14 @@ import {
   API_ERROR,
   FETCH_KITBAG_LISTS,
   FETCH_RECENT_KITS,
-  FETCH_WARNING_KITS,
+  FETCH_WARNING_KITS
 } from './types';
 import { redirect } from 'react-router-dom';
 
 export const fetchKitbagKits = (filter) => (dispatch) => {
   axios
     .post(`/kitbag/kit/${filter.kitbagId}/filter`, {
-      ...filter,
+      ...filter
     })
     .then((response) => {
       dispatch({ type: FETCH_KITBAG_KITS, payload: response.data });
@@ -48,12 +48,12 @@ export const fetchRecentKitbagKits =
   (dispatch) => {
     axios
       .get(`/kitbag/kit/${kitbagId}/recent`, {
-        params: { created, days },
+        params: { created, days }
       })
       .then((response) => {
         dispatch({
           type: FETCH_RECENT_KITS,
-          payload: { ...response.data, created, days },
+          payload: { ...response.data, created, days }
         });
       })
       .catch((err) => {
@@ -70,7 +70,7 @@ export const fetchWarningsKitbagKits =
       .then((response) => {
         dispatch({
           type: FETCH_WARNING_KITS,
-          payload: { ...response.data },
+          payload: { ...response.data }
         });
       })
       .catch((err) => {
@@ -83,8 +83,8 @@ export const createKitbagKit = (kitbagId, formValues) => (dispatch) => {
   axios
     .post(`/kitbag/kit/${kitbagId}`, { ...formValues }, {})
     .then((response) => {
-      return redirect(`/kitbag/kit/${kitbagId}`);
       dispatch({ type: CREATE_KITBAG_KIT, payload: response.data });
+      redirect(`/kitbag/kit/${kitbagId}`);
     })
     .catch((err) => {
       const { response } = err;

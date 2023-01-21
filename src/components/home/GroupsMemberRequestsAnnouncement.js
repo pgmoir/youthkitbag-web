@@ -5,6 +5,7 @@ import { getImage } from '../../utils/image';
 
 const GroupsMemberRequestsAnnouncement = () => {
   const navigate = useNavigate();
+  
   const [groupsWithMemberRequests, setGroupsWithMemberRequests] = useState([]);
   const groupsMemberRequests = useSelector(
     (state) => state.group.memberRequests
@@ -28,7 +29,7 @@ const GroupsMemberRequestsAnnouncement = () => {
 
   // http://localhost:3000/groups/602ec91fb0ed8434fd5a217d/members
   function viewMembersList(group) {
-    return navigate(`/groups/${group._id}/members`);
+    navigate(`/groups/${group._id}/members`);
   }
 
   function renderMemberList(members) {
@@ -38,7 +39,7 @@ const GroupsMemberRequestsAnnouncement = () => {
           const userProfileImageUrl = getImage({
             images: member.user?.images,
             index: 0,
-            email: member.user?.email,
+            email: member.user?.email
           });
           if (index < 5) {
             return (
@@ -76,7 +77,6 @@ const GroupsMemberRequestsAnnouncement = () => {
           className="box is-flex is-align-items-center is-clickable p-3"
           role="button"
           onClick={() => viewMembersList(group)}
-          onKeyPress={() => viewMembersList(group)}
           tabIndex="0"
         >
           <div className="is-flex-shrink-0 is-flex-grow-0 pr-4">

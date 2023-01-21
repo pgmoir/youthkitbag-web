@@ -8,10 +8,10 @@ const Modal = ({
   buttonText = 'Save',
   handleSubmit,
   modalIsActive,
-  setModalIsActive,
+  setModalIsActive
 }) => {
   const modalClasses = classNames('modal', {
-    'is-active': modalIsActive,
+    'is-active': modalIsActive
   });
 
   const primaryButtonClasses = classNames('button', buttonClassName);
@@ -25,7 +25,6 @@ const Modal = ({
       <div
         className="modal-background"
         onClick={closeModal}
-        onKeyPress={closeModal}
         role="button"
         tabIndex="0"
       ></div>

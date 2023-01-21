@@ -5,6 +5,7 @@ import DisplayedItem from './DisplayedItem';
 
 const KitbagMarketAnnouncement = ({ description, marketType }) => {
   const navigate = useNavigate();
+  
   const marketTypeKey = `${marketType.toLowerCase()}s`;
   const { items, totalItems } = useSelector(
     (state) => state.kitbag.market[marketTypeKey]
@@ -13,7 +14,7 @@ const KitbagMarketAnnouncement = ({ description, marketType }) => {
   if (!totalItems || totalItems === 0) return null;
 
   function viewMarketItem(item) {
-    return navigate(`/kitbag/market/${item.kitbag}/edit/${item._id}`);
+     navigate(`/kitbag/market/${item.kitbag}/edit/${item._id}`);
   }
 
   function renderList() {

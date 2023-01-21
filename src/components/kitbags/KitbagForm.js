@@ -12,12 +12,12 @@ import KitbagMember from './KitbagMember';
 
 const mapStateToProps = (state) => ({
   userBundle: state.user.bundle,
-  newErrors: state.toast.errors,
+  newErrors: state.toast.errors
 });
 
 const mapDispatchToProps = {
   createKitbag,
-  editKitbag,
+  editKitbag
 };
 
 const KitbagForm = ({
@@ -26,14 +26,14 @@ const KitbagForm = ({
   newErrors,
   createKitbag,
   editKitbag,
-  inviteMember,
+  inviteMember
 }) => {
   const userId = useSelector((state) => state.user?._id);
 
   const initialValues = {
     ...kitbag,
     images: getImages(kitbag.images),
-    kitbagAdmin: true,
+    kitbagAdmin: true
   };
 
   const {
@@ -44,7 +44,7 @@ const KitbagForm = ({
     values,
     setValues,
     errors,
-    setErrors,
+    setErrors
   } = useForm(initialValues, updateKitbag, validate);
 
   useEffect(() => {
@@ -141,9 +141,6 @@ const KitbagForm = ({
                   className="button is-info"
                   type="button"
                   onClick={(e) => {
-                    inviteMember(e);
-                  }}
-                  onKeyPress={(e) => {
                     inviteMember(e);
                   }}
                 >

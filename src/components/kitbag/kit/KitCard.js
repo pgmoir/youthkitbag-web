@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import BlankCard from '../BlankCard';
 import KitDelete from './KitDelete';
 import { getImage } from '../../../utils/image';
@@ -8,6 +8,8 @@ import useCardRowClasses from '../../hooks/useCardRowClasses';
 import { getFilterBy } from '../../../utils/filter';
 
 const KitCard = ({ kit, kitbagId, callback, isCard = true }) => {
+  const navigate = useNavigate();
+
   const [modalIsActive, setModalIsActive] = useState(false);
   const [imageKey, setImageKey] = useState(0);
 
@@ -20,7 +22,7 @@ const KitCard = ({ kit, kitbagId, callback, isCard = true }) => {
     tags,
     activitys,
     inbag,
-    purchases,
+    purchases
   } = kit;
 
   const {
@@ -31,7 +33,7 @@ const KitCard = ({ kit, kitbagId, callback, isCard = true }) => {
     contentClassNames,
     titleClassNames,
     subtitleClassNames,
-    tagsClassNames,
+    tagsClassNames
   } = useCardRowClasses({ isCard });
 
   if (!kit?._id) return <BlankCard isCard={isCard} />;
@@ -49,7 +51,7 @@ const KitCard = ({ kit, kitbagId, callback, isCard = true }) => {
   }
 
   function viewItem() {
-    return redirect(`/kitbag/kit/${kitbagId}/edit/${_id}`);
+    navigate(`/kitbag/kit/${kitbagId}/edit/${_id}`);
   }
 
   function deleteItem(e) {
@@ -68,7 +70,6 @@ const KitCard = ({ kit, kitbagId, callback, isCard = true }) => {
         <div
           className={clickAreaClassNames}
           onClick={() => viewItem()}
-          onKeyPress={() => viewItem()}
           role="button"
           tabIndex="0"
         >
@@ -81,9 +82,6 @@ const KitCard = ({ kit, kitbagId, callback, isCard = true }) => {
                 <span
                   className="tag is-danger is-medium is-clickable"
                   onClick={(e) => {
-                    deleteItem(e);
-                  }}
-                  onKeyPress={(e) => {
                     deleteItem(e);
                   }}
                   role="button"
@@ -116,7 +114,6 @@ const KitCard = ({ kit, kitbagId, callback, isCard = true }) => {
                       key={index}
                       className="tag is-warning is-clickable mb-2"
                       onClick={(e) => searchBy(e, tag, 'tag')}
-                      onKeyPress={(e) => searchBy(e, tag, 'tag')}
                       role="button"
                       tabIndex={0}
                     >
@@ -130,7 +127,6 @@ const KitCard = ({ kit, kitbagId, callback, isCard = true }) => {
                       key={index}
                       className="tag is-success is-clickable mb-2"
                       onClick={(e) => searchBy(e, activity, 'activity')}
-                      onKeyPress={(e) => searchBy(e, activity, 'activity')}
                       role="button"
                       tabIndex={0}
                     >
@@ -144,7 +140,6 @@ const KitCard = ({ kit, kitbagId, callback, isCard = true }) => {
                       key={index}
                       className="tag is-info is-clickable mb-2"
                       onClick={(e) => searchBy(e, bag.location, 'container')}
-                      onKeyPress={(e) => searchBy(e, bag.location, 'container')}
                       role="button"
                       tabIndex={0}
                     >
@@ -158,7 +153,6 @@ const KitCard = ({ kit, kitbagId, callback, isCard = true }) => {
                       key={index}
                       className="tag is-danger is-clickable mb-2"
                       onClick={(e) => searchBy(e, purchase.from, 'source')}
-                      onKeyPress={(e) => searchBy(e, purchase.from, 'source')}
                       role="button"
                       tabIndex={0}
                     >

@@ -12,7 +12,6 @@ const DisplayedItem = ({ index, clickAction, images, title, subtext }) => {
       className="box is-flex is-clickable p-3"
       role="button"
       onClick={clickAction}
-      onKeyPress={clickAction}
       tabIndex="0"
     >
       <div className="is-flex-shrink-0 is-flex-grow-0 pr-4">

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useMarketType from '../hooks/useMarketType';
 import BlankCard from '../kitbag/BlankCard';
 import MarketItemDelete from '../kitbag/market/MarketItemDelete';
@@ -8,6 +8,8 @@ import { ImagesNav } from '../includes/images';
 import useCardRowClasses from '../hooks/useCardRowClasses';
 
 const MarketItemCard = ({ market, callback, isCard = true }) => {
+  const navigate = useNavigate();
+
   const [modalIsActive, setModalIsActive] = useState(false);
   const [imageKey, setImageKey] = useState(0);
 
@@ -23,7 +25,7 @@ const MarketItemCard = ({ market, callback, isCard = true }) => {
     activitys,
     tags,
     threads,
-    deleted,
+    deleted
   } = market;
 
   const { pill, color, hasMarketType } = useMarketType({
@@ -31,7 +33,7 @@ const MarketItemCard = ({ market, callback, isCard = true }) => {
     marketType,
     marketPrice,
     threads,
-    isOwned,
+    isOwned
   });
 
   const {
@@ -42,7 +44,7 @@ const MarketItemCard = ({ market, callback, isCard = true }) => {
     contentClassNames,
     titleClassNames,
     subtitleClassNames,
-    tagsClassNames,
+    tagsClassNames
   } = useCardRowClasses({ isCard });
 
   if (!market?._id) return <BlankCard isCard={isCard} />;
@@ -51,9 +53,9 @@ const MarketItemCard = ({ market, callback, isCard = true }) => {
 
   function viewItem() {
     if (isOwned) {
-      return redirect(`/kitbag/market/${kitbag}/edit/${_id}`);
+      navigate(`/kitbag/market/${kitbag}/edit/${_id}`);
     } else {
-      return redirect(`/market/view/${_id}`);
+      navigate(`/market/view/${_id}`);
     }
   }
 
@@ -70,7 +72,7 @@ const MarketItemCard = ({ market, callback, isCard = true }) => {
       page: 1,
       pagesize: 24,
       order: 'updatedAt',
-      direction: -1,
+      direction: -1
     });
   }
 
@@ -80,7 +82,6 @@ const MarketItemCard = ({ market, callback, isCard = true }) => {
         <div
           className={clickAreaClassNames}
           onClick={() => viewItem()}
-          onKeyPress={() => viewItem()}
           role="button"
           tabIndex="0"
         >
@@ -93,9 +94,6 @@ const MarketItemCard = ({ market, callback, isCard = true }) => {
                 <span
                   className="tag is-danger is-medium is-clickable"
                   onClick={(e) => {
-                    deleteItem(e);
-                  }}
-                  onKeyPress={(e) => {
                     deleteItem(e);
                   }}
                   role="button"
@@ -126,7 +124,6 @@ const MarketItemCard = ({ market, callback, isCard = true }) => {
               <span
                 className="tag is-info is-clickable mb-2"
                 onClick={(e) => searchBy(e, '', hasMarketType)}
-                onKeyPress={(e) => searchBy(e, '', hasMarketType)}
                 role="button"
                 tabIndex={0}
               >
@@ -138,7 +135,6 @@ const MarketItemCard = ({ market, callback, isCard = true }) => {
                     key={index}
                     className="tag is-warning is-clickable mb-2"
                     onClick={(e) => searchBy(e, tag, 'tag')}
-                    onKeyPress={(e) => searchBy(e, tag, 'tag')}
                     role="button"
                     tabIndex={0}
                   >
@@ -152,7 +148,6 @@ const MarketItemCard = ({ market, callback, isCard = true }) => {
                     key={index}
                     className="tag is-success is-clickable mb-2"
                     onClick={(e) => searchBy(e, activity, 'activity')}
-                    onKeyPress={(e) => searchBy(e, activity, 'activity')}
                     role="button"
                     tabIndex={0}
                   >

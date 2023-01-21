@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import BundlePurchasePage from './bundles/BundlePurchasePage';
 import BundlesPage from './bundles/BundlesPage';
 import Content from './site/Content';
@@ -31,7 +31,6 @@ import SignUp from './auth/SignUpPage';
 import Token from './auth/Token';
 import Why from './Why';
 import SiteNav from './SiteNav';
-import ProtectedRoute from '../utils/protectedRoute';
 
 const AppRouter = ({ auth }) => {
   return (
@@ -145,16 +144,8 @@ const AppRouter = ({ auth }) => {
               element={<KitbagMemberAccept />}
             />
             <Route path="/kitbags/:kitbagId" element={<KitbagPage />} />
+            <Route path="/settings/:setting?" element={<SettingsPage />} />
           </Route>
-
-          <Route
-            path="/settings/:setting?"
-            element={
-              <ProtectedRoute auth={auth}>
-                <SettingsPage />
-              </ProtectedRoute>
-            }
-          />
         </Routes>
       </div>
       <Footer />

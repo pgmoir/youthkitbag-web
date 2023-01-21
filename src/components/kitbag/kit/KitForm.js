@@ -6,7 +6,7 @@ import ObjectID from 'bson-objectid';
 import useForm from '../../hooks/useForm';
 import {
   createKitbagKit,
-  editKitbagKit,
+  editKitbagKit
 } from '../../../actions/KitbagKitActions';
 import { ImagesForm } from '../../includes/images';
 import validate from '../../includes/FormEmptyValidationRules';
@@ -22,12 +22,12 @@ import TextListInput from '../../includes/controls/TextListInput';
 import TextListSelect from '../../includes/controls/TextListSelect';
 
 const mapStateToProps = (state) => ({
-  newErrors: state.toast.errors,
+  newErrors: state.toast.errors
 });
 
 const mapDispatchToProps = {
   createKitbagKit,
-  editKitbagKit,
+  editKitbagKit
 };
 
 const KitForm = ({
@@ -35,7 +35,7 @@ const KitForm = ({
   kit,
   newErrors,
   createKitbagKit,
-  editKitbagKit,
+  editKitbagKit
 }) => {
   const lists = useSelector((state) => state.kitbag.kit.lists);
 
@@ -44,7 +44,7 @@ const KitForm = ({
     from: '',
     quantity: 0,
     ondate: new Date(),
-    price: 0.0,
+    price: 0.0
   };
   const initialInbag = { location: '', condition: 'used', quantity: 0 };
 
@@ -60,7 +60,7 @@ const KitForm = ({
     'Donated',
     'Lost',
     'Found',
-    'Other',
+    'Other'
   ];
 
   const conditionItems = ['Used', 'New', 'Almost New', 'Other'];
@@ -74,7 +74,7 @@ const KitForm = ({
     values,
     setValues,
     errors,
-    setErrors,
+    setErrors
   } = useForm(initialValues, updateKit, validate);
 
   useEffect(() => {
@@ -206,7 +206,7 @@ const KitForm = ({
               label="Add a new purchase"
               onClick={() =>
                 addArrayItem('purchases', [
-                  { ...initialPurchase, _id: ObjectID.generate() },
+                  { ...initialPurchase, _id: ObjectID.generate() }
                 ])
               }
             />
@@ -264,7 +264,7 @@ const KitForm = ({
               label="Add a new storage location"
               onClick={() =>
                 addArrayItem('inbag', [
-                  { ...initialInbag, _id: ObjectID.generate() },
+                  { ...initialInbag, _id: ObjectID.generate() }
                 ])
               }
             />
@@ -339,7 +339,6 @@ const KitForm = ({
           <div className="is-sticky-bottomright icon-text">
             <div
               onClick={handleSubmit}
-              onKeyPress={handleSubmit}
               className="icon is-extralarge has-background-primary is-clickable has-text-light is-rounded m-5"
               title="Add new item to your kitbag"
               role="button"

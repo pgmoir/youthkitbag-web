@@ -23,7 +23,7 @@ const GroupMember = ({ groupId, member, isGroupAdmin, isCard = true }) => {
     figureClassNames,
     contentClassNames,
     titleClassNames,
-    subtitleClassNames,
+    subtitleClassNames
   } = useCardRowClasses({ isCard });
 
   if (!member._id) return <BlankCard isCard={isCard} />;
@@ -31,7 +31,7 @@ const GroupMember = ({ groupId, member, isGroupAdmin, isCard = true }) => {
   const showImage = getImage({
     images: user?.images,
     index: imageKey,
-    email: user?.email,
+    email: user?.email
   });
 
   function viewItem() {
@@ -53,7 +53,7 @@ const GroupMember = ({ groupId, member, isGroupAdmin, isCard = true }) => {
     'is-success': state === MemberStates.APPROVED,
     'is-info': state === MemberStates.REQUESTED,
     'is-warning': state === MemberStates.REJECTED,
-    'is-danger': state === MemberStates.SUSPENDED,
+    'is-danger': state === MemberStates.SUSPENDED
   });
 
   return (
@@ -62,7 +62,6 @@ const GroupMember = ({ groupId, member, isGroupAdmin, isCard = true }) => {
         <div
           className={clickAreaClassNames}
           onClick={() => viewItem()}
-          onKeyPress={() => viewItem()}
           role="button"
           tabIndex="0"
         >
@@ -78,9 +77,6 @@ const GroupMember = ({ groupId, member, isGroupAdmin, isCard = true }) => {
                     onClick={(e) => {
                       deleteMember(e);
                     }}
-                    onKeyPress={(e) => {
-                      deleteMember(e);
-                    }}
                     role="button"
                     tabIndex="0"
                   >
@@ -94,9 +90,6 @@ const GroupMember = ({ groupId, member, isGroupAdmin, isCard = true }) => {
                   <span
                     className={stateClasses}
                     onClick={(e) => {
-                      editMember(e);
-                    }}
-                    onKeyPress={(e) => {
                       editMember(e);
                     }}
                     role="button"

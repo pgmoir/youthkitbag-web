@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import usePreferredKitbagForm from '../hooks/usePreferredKitbagForm';
 import {
   editPreferredKitbag,
-  loadSettingsPage,
+  loadSettingsPage
 } from '../../actions/UserActions';
 import { connect } from 'react-redux';
 import { getImage } from '../../utils/image';
@@ -13,21 +13,17 @@ import { requestToJoinKitbag } from '../../actions';
 const mapDispatchToProps = {
   editPreferredKitbag,
   loadSettingsPage,
-  requestToJoinKitbag,
+  requestToJoinKitbag
 };
 
 const PreferredKitbagForm = ({
   kitbags,
   editPreferredKitbag,
   loadSettingsPage,
-  requestToJoinKitbag,
+  requestToJoinKitbag
 }) => {
-  const {
-    setPreferred,
-    handleSubmit,
-    values,
-    setValues,
-  } = usePreferredKitbagForm(kitbags, updatePreferredKitbag);
+  const { setPreferred, handleSubmit, values, setValues } =
+    usePreferredKitbagForm(kitbags, updatePreferredKitbag);
 
   useEffect(() => {
     if (kitbags) {
@@ -121,7 +117,6 @@ const PreferredKitbagForm = ({
                   {item.member.state === MemberStates.INVITED && (
                     <div
                       onClick={(e) => acceptInviteToKitbag(e, item._id)}
-                      onKeyPress={(e) => acceptInviteToKitbag(e, item._id)}
                       className="button is-success"
                       role="button"
                       tabIndex="0"

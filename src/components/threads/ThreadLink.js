@@ -14,7 +14,6 @@ const ThreadLink = ({ thread, source, changeThreadDisplayed }) => {
       className="box is-flex is-clickable"
       role="button"
       onClick={() => changeThreadDisplayed(thread._id)}
-      onKeyPress={() => changeThreadDisplayed(thread._id)}
       tabIndex="0"
     >
       <div className="is-flex-shrink-0 is-flex-grow-0 is-align-self-center pr-4">
@@ -22,7 +21,7 @@ const ThreadLink = ({ thread, source, changeThreadDisplayed }) => {
           <img
             src={getImage({
               images: sourceUser.images,
-              email: sourceUser.email,
+              email: sourceUser.email
             })}
             className="is-avatar is-rounded is-48x48"
             alt=""

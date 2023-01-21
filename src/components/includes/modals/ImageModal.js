@@ -8,14 +8,14 @@ const ImageModal = ({
   images,
   currentKey,
   modalIsActive,
-  setModalIsActive,
+  setModalIsActive
 }) => {
   const [imageKey, setImageKey] = useState(currentKey);
 
   const showImage = getImage({ images, index: imageKey });
 
   const modalClasses = classNames('lightbox is-clickable', {
-    'is-active': modalIsActive,
+    'is-active': modalIsActive
   });
 
   function closeModal() {
@@ -28,7 +28,6 @@ const ImageModal = ({
       role="button"
       tabIndex="0"
       onClick={closeModal}
-      onKeyPress={closeModal}
     >
       <span
         className="lightbox-image"

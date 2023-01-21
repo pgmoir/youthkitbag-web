@@ -14,7 +14,7 @@ const TextListInput = ({
   iconRight = true,
   iconLeft,
   suggestions,
-  tagClass = 'is-success',
+  tagClass = 'is-success'
 }) => {
   const [currentValue, setCurrentValue] = useState('');
   const [autoOptions, setAutoOptions] = useState([]);
@@ -23,11 +23,11 @@ const TextListInput = ({
 
   const controlClasses = classNames('control autocomplete', {
     'has-icons-right': iconRight,
-    'has-icons-left': iconLeft,
+    'has-icons-left': iconLeft
   });
 
   const inputClasses = classNames('input', addClassName, {
-    'is-danger': error,
+    'is-danger': error
   });
 
   const tagClasses = classNames(`tag ${tagClass}`);
@@ -84,29 +84,6 @@ const TextListInput = ({
         )
       );
       setAutoOptions(foundSuggestions);
-    }
-  };
-
-  const onKeyPress = (event) => {
-    if (event.defaultPrevented) return;
-
-    function handleKeyPress(key, value) {
-      if (key === 'Enter' && event.target.value.length > 0) {
-        addItem(value);
-        return true;
-      }
-      return false;
-    }
-
-    let handled = false;
-    if (event.key !== undefined) {
-      handled = handleKeyPress(event.key, event.target.value);
-    } else if (event.keyCode !== undefined) {
-      handled = handleKeyPress(event.keyCode, event.target.value);
-    }
-
-    if (handled) {
-      event.preventDefault();
     }
   };
 
@@ -185,7 +162,6 @@ const TextListInput = ({
                       <div
                         className="tag is-delete is-clickable"
                         onClick={removeItem}
-                        onKeyPress={removeItem}
                         role="button"
                         tabIndex="0"
                         data-item={item}
@@ -204,7 +180,6 @@ const TextListInput = ({
                 readOnly={readOnly}
                 onChange={onChange}
                 onBlur={onBlur}
-                onKeyPress={onKeyPress}
                 onKeyDown={onKeyDown}
                 value={currentValue}
                 aria-describedby={field}

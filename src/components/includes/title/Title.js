@@ -8,7 +8,7 @@ const Title = ({ title, icon, iconAction, hasAction, hasHr = true }) => {
   }
 
   const iconClasses = classNames(`ml-3 ${icon}`, {
-    'is-clickable': hasAction,
+    'is-clickable': hasAction
   });
 
   return (
@@ -22,7 +22,6 @@ const Title = ({ title, icon, iconAction, hasAction, hasHr = true }) => {
           <i
             className={iconClasses}
             onClick={() => iconAction()}
-            onKeyPress={() => iconAction()}
             role="button"
             tabIndex="0"
           ></i>

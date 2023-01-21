@@ -26,9 +26,6 @@ const ImagesNav = ({ images, imageKey, setImageKey }) => {
           onClick={(e) => {
             moveImage(e, -1);
           }}
-          onKeyPress={(e) => {
-            moveImage(e, -1);
-          }}
           role="button"
           tabIndex="0"
         >
@@ -42,9 +39,6 @@ const ImagesNav = ({ images, imageKey, setImageKey }) => {
         <span
           className="tag is-medium is-clickable is-seethru"
           onClick={(e) => {
-            moveImage(e, 1);
-          }}
-          onKeyPress={(e) => {
             moveImage(e, 1);
           }}
           role="button"

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { GroupStates } from '../../enums/groupStates.enum';
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getImage } from '../../utils/image';
 import { ImagesNav } from '../includes/images';
 import BlankCard from '../kitbag/BlankCard';
@@ -8,6 +8,7 @@ import GroupState from './GroupState';
 import useCardRowClasses from '../hooks/useCardRowClasses';
 
 const GroupCard = ({ group, callback, isCard = true }) => {
+  const navigate = useNavigate();
   const [stateModalIsActive, setStateModalIsActive] = useState(false);
   const [imageKey, setImageKey] = useState(0);
 
@@ -19,7 +20,7 @@ const GroupCard = ({ group, callback, isCard = true }) => {
     activitys,
     state,
     memberCount,
-    appAdmin,
+    appAdmin
   } = group;
 
   const {
@@ -30,7 +31,7 @@ const GroupCard = ({ group, callback, isCard = true }) => {
     contentClassNames,
     titleClassNames,
     subtitleClassNames,
-    tagsClassNames,
+    tagsClassNames
   } = useCardRowClasses({ isCard });
 
   if (!group?._id) return <BlankCard isCard={isCard} />;
@@ -71,7 +72,7 @@ const GroupCard = ({ group, callback, isCard = true }) => {
   }
 
   function viewItem() {
-    return redirect(`/groups/${_id}`);
+    navigate(`/groups/${_id}`);
   }
 
   function editGroup(e) {
@@ -87,7 +88,7 @@ const GroupCard = ({ group, callback, isCard = true }) => {
       page: 1,
       pagesize: 24,
       order: 'updatedAt',
-      direction: -1,
+      direction: -1
     });
   }
 
@@ -97,7 +98,6 @@ const GroupCard = ({ group, callback, isCard = true }) => {
         <div
           className={clickAreaClassNames}
           onClick={() => viewItem()}
-          onKeyPress={() => viewItem()}
           role="button"
           tabIndex="0"
         >
@@ -110,9 +110,6 @@ const GroupCard = ({ group, callback, isCard = true }) => {
                 <span
                   className="tag is-dark is-medium is-clickable"
                   onClick={(e) => {
-                    editGroup(e);
-                  }}
-                  onKeyPress={(e) => {
                     editGroup(e);
                   }}
                   role="button"
@@ -148,7 +145,6 @@ const GroupCard = ({ group, callback, isCard = true }) => {
                       key={index}
                       className="tag is-success is-clickable mb-2"
                       onClick={(e) => searchBy(e, activity, 'activity')}
-                      onKeyPress={(e) => searchBy(e, activity, 'activity')}
                       role="button"
                       tabIndex={0}
                     >

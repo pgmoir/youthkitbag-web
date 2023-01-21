@@ -30,9 +30,6 @@ const KitbagsPage = () => {
             onClick={(e) => {
               requestToJoinKitbag(e);
             }}
-            onKeyPress={(e) => {
-              requestToJoinKitbag(e);
-            }}
             role="button"
             tabIndex="0"
           >

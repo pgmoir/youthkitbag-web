@@ -4,11 +4,11 @@ import { resetFlags } from '../../actions/UserActions';
 import DeleteUser from './DeleteUser';
 
 const mapStateToProps = (state) => ({
-  flags: state.user.flags,
+  flags: state.user.flags
 });
 
 const mapDispatchToProps = {
-  resetFlags,
+  resetFlags
 };
 
 const ConfigurationPage = ({ userId, flags, resetFlags }) => {
@@ -68,9 +68,6 @@ const ConfigurationPage = ({ userId, flags, resetFlags }) => {
           <span
             className="button is-danger is-clickable"
             onClick={(e) => {
-              deleteUser(e);
-            }}
-            onKeyPress={(e) => {
               deleteUser(e);
             }}
             role="button"

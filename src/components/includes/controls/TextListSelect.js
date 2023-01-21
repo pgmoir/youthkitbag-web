@@ -72,29 +72,6 @@ const TextListSelect = ({
     }
   };
 
-  const onKeyPress = (event) => {
-    if (event.defaultPrevented) return;
-
-    function handleKeyPress(key, value) {
-      if (key === 'Enter' && event.target.value.length > 0) {
-        setItem(value);
-        return true;
-      }
-      return false;
-    }
-
-    let handled = false;
-    if (event.key !== undefined) {
-      handled = handleKeyPress(event.key, event.target.value);
-    } else if (event.keyCode !== undefined) {
-      handled = handleKeyPress(event.keyCode, event.target.value);
-    }
-
-    if (handled) {
-      event.preventDefault();
-    }
-  };
-
   const onKeyDown = (event) => {
     if (event.defaultPrevented) return;
 
@@ -158,7 +135,6 @@ const TextListSelect = ({
                 readOnly={readOnly}
                 onChange={onChange}
                 onBlur={onBlur}
-                onKeyPress={onKeyPress}
                 onKeyDown={onKeyDown}
                 value={currentValue}
                 aria-describedby={field}

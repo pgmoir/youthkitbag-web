@@ -12,7 +12,7 @@ const KitbagKitLevelWarnings = ({ kitbagId }) => {
   if (warnings.length === 0) return null;
 
   function viewKitItem(item) {
-    return navigate(`/kitbag/kit/${kitbagId}/edit/${item._id}`);
+    navigate(`/kitbag/kit/${kitbagId}/edit/${item._id}`);
   }
 
   function renderList(items) {

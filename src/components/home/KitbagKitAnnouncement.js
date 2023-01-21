@@ -5,6 +5,7 @@ import DisplayedItem from './DisplayedItem';
 
 const KitbagKitAnnouncement = ({ kitbagId, created }) => {
   const navigate = useNavigate();
+
   const { recent } = useSelector((state) => state.kitbag.kit);
 
   if (!kitbagId) return null;

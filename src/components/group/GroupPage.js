@@ -196,9 +196,6 @@ const GroupPage = ({ fetchGroup }) => {
                       onClick={(e) => {
                         joinGroup(e);
                       }}
-                      onKeyPress={(e) => {
-                        joinGroup(e);
-                      }}
                       role="button"
                       tabIndex="0"
                     >
@@ -209,9 +206,6 @@ const GroupPage = ({ fetchGroup }) => {
                     <span
                       className="button is-info is-clickable"
                       onClick={(e) => {
-                        leaveGroup(e);
-                      }}
-                      onKeyPress={(e) => {
                         leaveGroup(e);
                       }}
                       role="button"
