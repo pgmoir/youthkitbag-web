@@ -15,11 +15,11 @@ const mapStateToProps = (state) => ({
   items: Object.values(state.group.entities),
   pagination: state.pagination,
   userBundle: state.user.bundle,
-  lists: state.group.lists,
+  lists: state.group.lists
 });
 
 const mapDispatchToProps = {
-  fetchGroups,
+  fetchGroups
 };
 
 const Groups = ({
@@ -28,7 +28,7 @@ const Groups = ({
   pagination,
   lists,
   userBundle,
-  fetchGroups,
+  fetchGroups
 }) => {
   const [search, setSearch] = useState(stateSearch);
   const [displayRow, setDisplayRow] = useState(false);

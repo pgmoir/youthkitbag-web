@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
 import ObjectID from 'bson-objectid';
 
@@ -37,6 +37,7 @@ const KitForm = ({
   createKitbagKit,
   editKitbagKit
 }) => {
+  const navigate = useNavigate();
   const lists = useSelector((state) => state.kitbag.kit.lists);
 
   const initialValues = { ...kit, images: getImages(kit.images) };
@@ -97,6 +98,7 @@ const KitForm = ({
     } else {
       createKitbagKit(kitbagId, values);
     }
+    navigate(`/kitbag/kit/${kitbagId}`);
   }
 
   return (

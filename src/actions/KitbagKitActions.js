@@ -19,11 +19,6 @@ export const fetchKitbagKits = (filter) => (dispatch) => {
     })
     .then((response) => {
       dispatch({ type: FETCH_KITBAG_KITS, payload: response.data });
-      // dispatch({
-      //   type: FILTER_KITBAG_KITS,
-      //   payload: { ...filter },
-      // });
-      return redirect(`/kitbag/kit/${filter.kitbagId}`);
     })
     .catch((err) => {
       const { response } = err;
@@ -84,7 +79,6 @@ export const createKitbagKit = (kitbagId, formValues) => (dispatch) => {
     .post(`/kitbag/kit/${kitbagId}`, { ...formValues }, {})
     .then((response) => {
       dispatch({ type: CREATE_KITBAG_KIT, payload: response.data });
-      redirect(`/kitbag/kit/${kitbagId}`);
     })
     .catch((err) => {
       const { response } = err;
@@ -96,7 +90,6 @@ export const editKitbagKit = (kitbagId, kitId, formValues) => (dispatch) => {
   axios
     .put(`/kitbag/kit/${kitbagId}/${kitId}`, { ...formValues }, {})
     .then((response) => {
-      return redirect(`/kitbag/kit/${kitbagId}`);
       dispatch({ type: EDIT_KITBAG_KIT, payload: response.data });
     })
     .catch((err) => {

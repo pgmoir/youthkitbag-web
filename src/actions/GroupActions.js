@@ -13,7 +13,7 @@ import {
   GROUP_MEMBER_LEAVE,
   SEARCH_GROUPS,
   FETCH_GROUPS_MEMBER_REQUESTS,
-  FETCH_GROUPS_LISTS,
+  FETCH_GROUPS_LISTS
 } from './types';
 import { redirect } from 'react-router-dom';
 import { getUser } from './UserActions';
@@ -23,17 +23,14 @@ export const fetchGroups =
   (dispatch) => {
     axios
       .get(`/group/search`, {
-        params: { by, searchFor, page, pagesize, order, direction },
+        params: { by, searchFor, page, pagesize, order, direction }
       })
       .then((response) => {
         dispatch({ type: FETCH_GROUPS, payload: response.data });
         dispatch({
           type: SEARCH_GROUPS,
-          payload: { searchFor, by, page, pagesize },
+          payload: { searchFor, by, page, pagesize }
         });
-        return redirect(
-          `/groups?searchFor=${searchFor}&by=${by}&page=${page}&pagesize=${pagesize}&order=${order}&direction=${direction}`
-        );
       })
       .catch((err) => {
         const { response } = err;
@@ -99,7 +96,7 @@ export const fetchGroupMembers =
   (dispatch) => {
     axios
       .get(`/group/${groupId}/members`, {
-        params: { by, searchFor, page, pagesize, order, direction },
+        params: { by, searchFor, page, pagesize, order, direction }
       })
       .then((response) => {
         dispatch({ type: FETCH_GROUP_MEMBERS, payload: response.data });
@@ -174,7 +171,7 @@ export const fetchGroupsMemberRequests = () => (dispatch) => {
     .then((response) => {
       dispatch({
         type: FETCH_GROUPS_MEMBER_REQUESTS,
-        payload: response.data,
+        payload: response.data
       });
     })
     .catch((err) => {
