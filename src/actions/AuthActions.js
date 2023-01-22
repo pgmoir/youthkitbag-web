@@ -9,7 +9,6 @@ import {
   PASSWORD_RESET_CHECK,
   PASSWORD_RESET
 } from './types';
-import { redirect } from 'react-router-dom';
 import { getUser } from './UserActions';
 
 export const login = (email, password, referrer) => (dispatch) => {
@@ -30,7 +29,6 @@ export const login = (email, password, referrer) => (dispatch) => {
       localStorage.setItem('isloggedin', true);
       dispatch({ type: LOGIN_SUCCESS, payload: data });
       dispatch(getUser());
-      return redirect(referrer ? referrer : '/');
     })
     .catch((err) => {
       const { response } = err;
@@ -56,12 +54,10 @@ export const authenticateToken = (token) => (dispatch) => {
       localStorage.setItem('isloggedin', true);
       dispatch({ type: LOGIN_SUCCESS, payload: data });
       dispatch(getUser());
-      return redirect('/');
     })
     .catch((err) => {
       const { response } = err;
       dispatch({ type: LOGIN_FAILURE, payload: response.data });
-      return redirect('/');
     });
 };
 
@@ -79,7 +75,6 @@ export const signup = (formValues) => (dispatch) => {
       localStorage.setItem('isloggedin', true);
       dispatch({ type: LOGIN_SUCCESS, payload: data });
       dispatch(getUser());
-      return redirect('/');
     })
     .catch((err) => {
       const { response } = err;
@@ -88,15 +83,8 @@ export const signup = (formValues) => (dispatch) => {
 };
 
 export const logout = () => async (dispatch) => {
-  try {
-    window.localStorage.clear();
-    dispatch({ type: LOGOUT });
-    return redirect('/');
-  } catch (err) {
-    if (err.response.status === 401) {
-      return redirect('/');
-    }
-  }
+  window.localStorage.clear();
+  dispatch({ type: LOGOUT });
 };
 
 export const reset = (email) => (dispatch) => {
@@ -110,7 +98,6 @@ export const reset = (email) => (dispatch) => {
       }
     )
     .then((response) => {
-      return redirect('/auth/login');
       dispatch({ type: RESET_REQUESTED, payload: response.data });
     })
     .catch((err) => {
@@ -145,7 +132,6 @@ export const setNewPassword =
         }
       )
       .then((response) => {
-        return redirect('/auth/login');
         dispatch({ type: PASSWORD_RESET, payload: response.data });
       })
       .catch((err) => {

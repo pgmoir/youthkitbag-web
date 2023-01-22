@@ -6,9 +6,8 @@ import {
   RESPOND_MARKET_ITEM,
   SEARCH_MARKET_ITEMS,
   FETCH_MARKET_LISTS,
-  RESET_TOAST,
+  RESET_TOAST
 } from './types';
-import { redirect } from 'react-router-dom';
 
 export const fetchMarketItems =
   ({
@@ -19,7 +18,7 @@ export const fetchMarketItems =
     order = 'updatedAt',
     direction = -1,
     excgroups = false,
-    exckitbags = false,
+    exckitbags = false
   }) =>
   (dispatch) => {
     axios
@@ -32,18 +31,15 @@ export const fetchMarketItems =
           order,
           direction,
           excgroups,
-          exckitbags,
-        },
+          exckitbags
+        }
       })
       .then((response) => {
         dispatch({ type: FETCH_MARKET_ITEMS, payload: response.data });
         dispatch({
           type: SEARCH_MARKET_ITEMS,
-          payload: { searchFor, by, page, pagesize, excgroups, exckitbags },
+          payload: { searchFor, by, page, pagesize, excgroups, exckitbags }
         });
-        return redirect(
-          `/market?searchFor=${searchFor}&by=${by}&page=${page}&pagesize=${pagesize}&excgroups=${excgroups}&exckitbags=${exckitbags}`
-        );
       })
       .catch((err) => {
         const { response } = err;
@@ -67,7 +63,6 @@ export const respondMarketItem = (marketId, formValues) => (dispatch) => {
   axios
     .post(`/market/respond/${marketId}`, { ...formValues }, {})
     .then((response) => {
-      return redirect(`/market/${marketId}`);
       dispatch({ type: RESET_TOAST });
       dispatch({ type: RESPOND_MARKET_ITEM, payload: response.data });
     })

@@ -12,9 +12,8 @@ import {
   FETCH_KITBAG_MARKET_FOUNDS,
   FETCH_KITBAG_MARKET_LOSTS,
   FETCH_KITBAG_MARKET_STOLENS,
-  FETCH_KITBAG_MARKET_WANTEDS,
+  FETCH_KITBAG_MARKET_WANTEDS
 } from './types';
-import { redirect } from 'react-router-dom';
 import { MarketTypes } from '../enums/marketTypes.enum';
 
 export const fetchKitbagMarketItems =
@@ -22,50 +21,50 @@ export const fetchKitbagMarketItems =
   (dispatch) => {
     axios
       .get(`/kitbag/market`, {
-        params: { by, searchFor, page, pagesize, order, direction },
+        params: { by, searchFor, page, pagesize, order, direction }
       })
       .then((response) => {
         switch (by) {
           case MarketTypes.TRADE:
             dispatch({
               type: FETCH_KITBAG_MARKET_TRADES,
-              payload: response.data,
+              payload: response.data
             });
             break;
           case MarketTypes.RECYCLE:
             dispatch({
               type: FETCH_KITBAG_MARKET_RECYCLES,
-              payload: response.data,
+              payload: response.data
             });
             break;
           case MarketTypes.FOUND:
             dispatch({
               type: FETCH_KITBAG_MARKET_FOUNDS,
-              payload: response.data,
+              payload: response.data
             });
             break;
           case MarketTypes.LOST:
             dispatch({
               type: FETCH_KITBAG_MARKET_LOSTS,
-              payload: response.data,
+              payload: response.data
             });
             break;
           case MarketTypes.STOLEN:
             dispatch({
               type: FETCH_KITBAG_MARKET_STOLENS,
-              payload: response.data,
+              payload: response.data
             });
             break;
           case MarketTypes.WANTED:
             dispatch({
               type: FETCH_KITBAG_MARKET_WANTEDS,
-              payload: response.data,
+              payload: response.data
             });
             break;
           default:
             dispatch({
               type: FETCH_KITBAG_MARKET_ITEMS,
-              payload: response.data,
+              payload: response.data
             });
             break;
         }
@@ -105,7 +104,6 @@ export const createMarketKit = (kitbagId, formValues) => (dispatch) => {
   axios
     .post(`/kitbag/market/${kitbagId}`, { ...formValues }, {})
     .then((response) => {
-      return redirect(`/market/${kitbagId}`);
       dispatch({ type: CREATE_MARKET_KIT, payload: response.data });
     })
     .catch((err) => {
@@ -118,7 +116,6 @@ export const editMarketKit = (kitbagId, marketId, formValues) => (dispatch) => {
   axios
     .put(`/kitbag/market/${kitbagId}/${marketId}`, { ...formValues }, {})
     .then((response) => {
-      return redirect(`/market/${kitbagId}`);
       dispatch({ type: EDIT_MARKET_KIT, payload: response.data });
     })
     .catch((err) => {

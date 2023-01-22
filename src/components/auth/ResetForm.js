@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import useForm from '../hooks/useForm';
 import Title from '../includes/title/Title';
@@ -9,16 +9,17 @@ import Alert from '../includes/Alert';
 import TextInput from '../includes/controls/TextInput';
 
 const mapStateToProps = (state) => ({
-  newErrors: state.toast.errors,
+  newErrors: state.toast.errors
 });
 
 const mapDispatchToProps = {
-  reset,
+  reset
 };
 
 const ResetForm = ({ newErrors, reset }) => {
+  const navigate = useNavigate();
   const initialValues = {
-    email: '',
+    email: ''
   };
 
   const { values, handleChange, handleSubmit, errors, setErrors } = useForm(
@@ -35,6 +36,7 @@ const ResetForm = ({ newErrors, reset }) => {
 
   function resetSubmit() {
     reset(values.email);
+    navigate('/auth/login');
   }
 
   return (

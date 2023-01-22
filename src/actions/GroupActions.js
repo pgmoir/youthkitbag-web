@@ -15,7 +15,6 @@ import {
   FETCH_GROUPS_MEMBER_REQUESTS,
   FETCH_GROUPS_LISTS
 } from './types';
-import { redirect } from 'react-router-dom';
 import { getUser } from './UserActions';
 
 export const fetchGroups =
@@ -54,7 +53,6 @@ export const createGroup = (formValues) => (dispatch) => {
   axios
     .post(`/group`, { ...formValues }, {})
     .then((response) => {
-      return redirect('/groups');
       dispatch({ type: CREATE_GROUP, payload: response.data });
       dispatch(getUser());
     })
@@ -68,7 +66,6 @@ export const editGroup = (groupId, formValues) => (dispatch) => {
   axios
     .put(`/group/${groupId}`, { ...formValues }, {})
     .then((response) => {
-      return redirect('/groups');
       dispatch({ type: EDIT_GROUP, payload: response.data });
     })
     .catch((err) => {
@@ -104,7 +101,6 @@ export const fetchGroupMembers =
       .catch((err) => {
         const { response } = err;
         dispatch({ type: API_ERROR, payload: response.data });
-        return redirect(`/groups/${groupId}/members`);
       });
   };
 

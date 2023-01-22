@@ -6,15 +6,16 @@ import validate from '../includes/FormEmptyValidationRules';
 import TextInput from '../includes/controls/TextInput';
 import Alert from '../includes/Alert';
 import Title from '../includes/title/Title';
+import { useNavigate } from 'react-router-dom';
 
 const mapStateToProps = (state) => ({
   userId: state.auth.userId,
-  newErrors: state.toast.errors,
+  newErrors: state.toast.errors
 });
 
 const mapDispatchToProps = {
   checkNewPassword,
-  setNewPassword,
+  setNewPassword
 };
 
 const NewPasswordForm = ({
@@ -22,11 +23,12 @@ const NewPasswordForm = ({
   newErrors,
   checkNewPassword,
   setNewPassword,
-  token,
+  token
 }) => {
+  const navigate = useNavigate();
   const initialValues = {
     password: '',
-    userId,
+    userId
   };
 
   const { values, handleChange, handleSubmit, errors, setErrors } = useForm(
@@ -49,6 +51,7 @@ const NewPasswordForm = ({
 
   function newPasswordSubmit() {
     setNewPassword(userId, token, values.password);
+    navigate('/auth/login');
   }
 
   return (

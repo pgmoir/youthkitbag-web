@@ -5,11 +5,9 @@ import {
   RESET_USER_FLAGS,
   API_USER_ERROR,
   RESET,
-  RESET_TOAST,
+  RESET_TOAST
 } from './types';
 import axios from '../utils/axios';
-import { redirect } from 'react-router-dom';
-// import { fetchPreferredKitbag } from './';
 
 export const getUser = () => (dispatch) => {
   axios
@@ -17,7 +15,6 @@ export const getUser = () => (dispatch) => {
     .then((response) => {
       dispatch({ type: GETALL_SUCCESS });
       dispatch({ type: GET_USER, payload: response.data });
-      // dispatch(fetchPreferredKitbag());
     })
     .catch(() => {});
 };
@@ -26,7 +23,6 @@ export const editUser = (formValues) => (dispatch) => {
   axios
     .put('/user', { ...formValues }, {})
     .then((response) => {
-      return redirect('/settings/user');
       dispatch({ type: EDIT_USER, payload: response.data });
     })
     .catch((err) => {
@@ -43,7 +39,6 @@ export const deleteUser =
       .then(() => {
         window.localStorage.clear();
         dispatch({ type: RESET });
-        return redirect('/');
       })
       .catch((err) => {
         const { response } = err;
@@ -92,5 +87,4 @@ export const resetFlags = () => (dispatch) => {
 
 export const loadSettingsPage = (url) => (dispatch) => {
   dispatch({ type: RESET_TOAST });
-  return redirect(url);
 };

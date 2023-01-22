@@ -10,7 +10,6 @@ import {
   FETCH_RECENT_KITS,
   FETCH_WARNING_KITS
 } from './types';
-import { redirect } from 'react-router-dom';
 
 export const fetchKitbagKits = (filter) => (dispatch) => {
   axios

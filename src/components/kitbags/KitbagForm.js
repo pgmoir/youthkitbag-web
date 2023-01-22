@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
 import useForm from '../hooks/useForm';
 import { createKitbag, editKitbag } from '../../actions/KitbagActions';
@@ -28,6 +28,7 @@ const KitbagForm = ({
   editKitbag,
   inviteMember
 }) => {
+  const navigate = useNavigate();
   const userId = useSelector((state) => state.user?._id);
 
   const initialValues = {
@@ -66,6 +67,7 @@ const KitbagForm = ({
       editKitbag(values._id, values);
     } else {
       createKitbag(values);
+      navigate('/settings/kitbags');
     }
   }
 

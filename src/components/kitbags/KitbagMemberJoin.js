@@ -7,14 +7,15 @@ import TextInput from '../includes/controls/TextInput';
 import { Modal } from '../includes/modals/Modal';
 
 const mapDispatchToProps = {
-  requestToJoinKitbag,
+  requestToJoinKitbag
 };
 
 const KitbagMemberJoin = ({
   requestToJoinKitbag,
   modalIsActive,
-  setModalIsActive,
+  setModalIsActive
 }) => {
+  const navigate = useNavigate();
   const initialValues = { email: '' };
 
   const { handleChange, handleSubmit, values, errors } = useForm(
@@ -27,6 +28,7 @@ const KitbagMemberJoin = ({
     const formValues = { ...values };
     requestToJoinKitbag({ formValues });
     setModalIsActive(false);
+    navigate(`/`);
   }
 
   return (

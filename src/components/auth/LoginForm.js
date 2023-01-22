@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useForm from '../hooks/useForm';
 import { login } from '../../actions/AuthActions';
 import validate from '../includes/FormEmptyValidationRules';
@@ -9,19 +9,20 @@ import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 
 const mapStateToProps = (state) => ({
-  newErrors: state.toast.errors,
+  newErrors: state.toast.errors
 });
 
 const mapDispatchToProps = {
-  login,
+  login
 };
 
 const LoginForm = ({ referrer, newErrors, login, email }) => {
+  const navigate = useNavigate();
   const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
 
   const initialValues = {
     email: email || '',
-    password: '',
+    password: ''
   };
 
   const { values, handleChange, handleSubmit, errors, setErrors } = useForm(
@@ -38,6 +39,7 @@ const LoginForm = ({ referrer, newErrors, login, email }) => {
 
   function loginSubmit() {
     login(values.email, values.password, referrer);
+    navigate(referrer ? referrer : '/');
   }
 
   return (

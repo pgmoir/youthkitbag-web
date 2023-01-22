@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useForm from '../hooks/useForm';
 import { signup } from '../../actions/AuthActions';
 import { connect } from 'react-redux';
@@ -9,14 +9,15 @@ import Title from '../includes/title/Title';
 import Alert from '../includes/Alert';
 
 const mapStateToProps = (state) => ({
-  newErrors: state.toast.errors,
+  newErrors: state.toast.errors
 });
 
 const mapDispatchToProps = {
-  signup,
+  signup
 };
 
 const SignUpForm = ({ newErrors, signup, kitbagId, groupId, email }) => {
+  const navigate = useNavigate();
   const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
   const emailDisabled = !!email;
 
@@ -27,7 +28,7 @@ const SignUpForm = ({ newErrors, signup, kitbagId, groupId, email }) => {
     password: '',
     confirmPassword: '',
     kitbagId,
-    groupId,
+    groupId
   };
 
   const { values, handleChange, handleSubmit, errors, setErrors } = useForm(
@@ -44,6 +45,7 @@ const SignUpForm = ({ newErrors, signup, kitbagId, groupId, email }) => {
 
   function resetSubmit() {
     signup(values);
+    navigate('/');
   }
 
   return (

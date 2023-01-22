@@ -10,10 +10,12 @@ import TextInputButton from '../includes/controls/TextInputButton';
 import customAxios from '../../utils/axios';
 import YkbMap from '../includes/maps/YkbMap';
 import TextListInput from '../includes/controls/TextListInput';
+import { useNavigate } from 'react-router-dom';
 
 const mapDispatchToProps = { editUser, loadSettingsPage };
 
 const UserForm = ({ user, editUser, loadSettingsPage }) => {
+  const navigate = useNavigate();
   const { activity } = useSelector((state) => state.kitbag.kit.lists);
   const newErrors = useSelector((state) => state.toast.errors);
 
@@ -28,7 +30,7 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
     values,
     setValues,
     errors,
-    setErrors,
+    setErrors
   } = useForm(initialValues, updateUser, validate);
 
   useEffect(() => {
@@ -50,13 +52,15 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
       ...values,
       activitys: Array.isArray(values.activitys)
         ? values.activitys
-        : values.activitys.split(','),
+        : values.activitys.split(',')
     };
     editUser(formValues);
+    navigate('/settings/user');
   }
 
   function cancelPage() {
     loadSettingsPage('/settings/user');
+    navigate('/settings/user');
   }
 
   function handleAddressSearch(e) {
@@ -70,7 +74,7 @@ const UserForm = ({ user, editUser, loadSettingsPage }) => {
     function updateAddressError() {
       setErrors({
         ...errors,
-        address: 'Address search was unable to find this location',
+        address: 'Address search was unable to find this location'
       });
     }
 

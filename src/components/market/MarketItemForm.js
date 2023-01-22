@@ -15,31 +15,27 @@ import { MarketTypes } from '../../enums/marketTypes.enum';
 import TextInput from '../includes/controls/TextInput';
 import { getDateSpan } from '../../utils/date';
 import { getFirstImageExcludeDeleted } from '../../utils/image';
+import { useNavigate } from 'react-router-dom';
 
 const mapStateToProps = (state) => ({
-  newErrors: state.toast.errors,
+  newErrors: state.toast.errors
 });
 
 const mapDispatchToProps = {
-  respondMarketItem,
+  respondMarketItem
 };
 
 const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
+  const navigate = useNavigate();
   const initialValues = {
     _id: '',
     responseOn: '',
     details: '',
-    responsePrice: 0,
+    responsePrice: 0
   };
 
-  const {
-    handleChange,
-    handleSubmit,
-    values,
-    setValues,
-    errors,
-    setErrors,
-  } = useForm(initialValues, updateMarket, validate);
+  const { handleChange, handleSubmit, values, setValues, errors, setErrors } =
+    useForm(initialValues, updateMarket, validate);
 
   useEffect(() => {
     if (newErrors) {
@@ -59,13 +55,14 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
         _id: market._id,
         responseOn: '',
         details: '',
-        responsePrice: 0,
+        responsePrice: 0
       });
     }
   }, [market, setValues]);
 
   function updateMarket() {
     respondMarketItem(values._id, values);
+    navigate(`/market/${marketId}`);
   }
 
   const showCondition = () => {
@@ -146,7 +143,7 @@ const MarketItemForm = ({ market, newErrors, respondMarketItem }) => {
     lost: LostResponse,
     stolen: StolenResponse,
     trade: TradeResponse,
-    wanted: WantedResponse,
+    wanted: WantedResponse
   };
 
   const Response =

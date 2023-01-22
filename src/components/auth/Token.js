@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { authenticateToken } from '../../actions/AuthActions';
 import Title from '../includes/title/Title';
 
@@ -9,11 +9,13 @@ const mapDispatchToProps = {
 };
 
 const Token = ({ authenticateToken }) => {
+  const navigate = useNavigate();
   const { token } = useParams();
 
   useEffect(() => {
     authenticateToken(token);
-  }, [token, authenticateToken]);
+    navigate('/');
+  }, [token, authenticateToken, navigate]);
 
   return (
     <div className="container">

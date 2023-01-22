@@ -8,7 +8,7 @@ import MarketItemCard from './MarketItemCard';
 import Pagination from '../includes/Pagination';
 import SearchForm from '../includes/SearchForm';
 import Title from '../includes/title/Title';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const mapStateToProps = (state) => ({
   stateSearch: state.market.search,
@@ -28,13 +28,18 @@ const MarketPage = ({
   lists,
   fetchMarketItems
 }) => {
+  const navigate = useNavigate();
   const { kitbagId } = useParams();
   const [search, setSearch] = useState(stateSearch);
   const [displayRow, setDisplayRow] = useState(false);
 
   useEffect(() => {
     fetchMarketItems({ ...search });
-  }, [search, fetchMarketItems]);
+    navigate(`/market`);
+    // navigate(
+    //   `/market?searchFor=${searchFor}&by=${by}&page=${page}&pagesize=${pagesize}&excgroups=${excgroups}&exckitbags=${exckitbags}`
+    // );
+  }, [search, fetchMarketItems, navigate]);
 
   function getTitle() {
     return `Market (${pagination.totalItems})`;

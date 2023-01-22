@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
 
 import useForm from '../../hooks/useForm';
 import {
   createMarketKit,
-  editMarketKit,
+  editMarketKit
 } from '../../../actions/KitbagMarketActions';
 import { ImagesForm } from '../../includes/images';
 import Threads from '../../threads/Threads';
@@ -21,12 +21,12 @@ import DateInput from '../../includes/controls/DateInput';
 import TextListInput from '../../includes/controls/TextListInput';
 
 const mapStateToProps = (state) => ({
-  newErrors: state.toast.errors,
+  newErrors: state.toast.errors
 });
 
 const mapDispatchToProps = {
   createMarketKit,
-  editMarketKit,
+  editMarketKit
 };
 
 const MarketKitEditForm = ({
@@ -34,8 +34,9 @@ const MarketKitEditForm = ({
   market,
   newErrors,
   createMarketKit,
-  editMarketKit,
+  editMarketKit
 }) => {
+  const navigate = useNavigate();
   const { activity, tag } = useSelector((state) => state.market.lists);
 
   const initialValues = { ...market, images: getImages(market.images) };
@@ -49,7 +50,7 @@ const MarketKitEditForm = ({
     values,
     setValues,
     errors,
-    setErrors,
+    setErrors
   } = useForm(initialValues, updateMarket, validate);
 
   useEffect(() => {
@@ -72,6 +73,7 @@ const MarketKitEditForm = ({
     } else {
       createMarketKit(kitbagId, values);
     }
+    navigate(`/market/${kitbagId}`);
   }
 
   const showMarketType = () => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
 
 import useForm from '../hooks/useForm';
@@ -16,12 +16,12 @@ import TextListInput from '../includes/controls/TextListInput';
 
 const mapStateToProps = (state) => ({
   userBundle: state.user.bundle,
-  newErrors: state.toast.errors,
+  newErrors: state.toast.errors
 });
 
 const mapDispatchToProps = {
   createGroup,
-  editGroup,
+  editGroup
 };
 
 const GroupForm = ({
@@ -29,8 +29,9 @@ const GroupForm = ({
   userBundle,
   newErrors,
   createGroup,
-  editGroup,
+  editGroup
 }) => {
+  const navigate = useNavigate();
   const { activity } = useSelector((state) => state.group.lists);
 
   const [showMap, setShowMap] = useState(false);
@@ -44,7 +45,7 @@ const GroupForm = ({
     values,
     setValues,
     errors,
-    setErrors,
+    setErrors
   } = useForm(initialValues, updateGroup, validate);
 
   const showGroupUrl = `${window.location
@@ -70,13 +71,14 @@ const GroupForm = ({
       ...values,
       activitys: Array.isArray(values.activitys)
         ? values.activitys
-        : values.activitys.split(','),
+        : values.activitys.split(',')
     };
     if (values._id) {
       editGroup(values._id, formValues);
     } else {
       createGroup(formValues);
     }
+    navigate('/groups');
   }
 
   function handleAddressSearch(e) {
@@ -90,7 +92,7 @@ const GroupForm = ({
     function updateAddressError() {
       setErrors({
         ...errors,
-        address: 'Address search was unable to find this location',
+        address: 'Address search was unable to find this location'
       });
     }
 

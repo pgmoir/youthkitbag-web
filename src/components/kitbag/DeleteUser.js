@@ -6,17 +6,19 @@ import { deleteUser } from '../../actions/UserActions';
 import validate from '../includes/FormEmptyValidationRules';
 import TextInput from '../includes/controls/TextInput';
 import { Modal } from '../includes/modals/Modal';
+import { useNavigate } from 'react-router-dom';
 
 const mapDispatchToProps = {
-  deleteUser,
+  deleteUser
 };
 
 const DeleteUser = ({
   userId,
   deleteUser,
   modalIsActive,
-  setModalIsActive,
+  setModalIsActive
 }) => {
+  const navigate = useNavigate();
   const initialValues = { email: '', password: '' };
 
   const { handleChange, handleSubmit, values, errors } = useForm(
@@ -29,6 +31,7 @@ const DeleteUser = ({
     const formValues = { ...values };
     deleteUser({ userId, formValues });
     setModalIsActive(false);
+    navigate('/');
   }
 
   return (

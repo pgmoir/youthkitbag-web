@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import usePreferredKitbagForm from '../hooks/usePreferredKitbagForm';
 import {
   editPreferredKitbag,
@@ -22,6 +22,7 @@ const PreferredKitbagForm = ({
   loadSettingsPage,
   requestToJoinKitbag
 }) => {
+  const navigate = useNavigate();
   const { setPreferred, handleSubmit, values, setValues } =
     usePreferredKitbagForm(kitbags, updatePreferredKitbag);
 
@@ -40,10 +41,12 @@ const PreferredKitbagForm = ({
   function acceptInviteToKitbag(e, kitbagId) {
     e.stopPropagation();
     requestToJoinKitbag({ kitbagId });
+    navigate(`/`);
   }
 
   function cancelPage() {
     loadSettingsPage('/settings/kitbags');
+    navigate('/settings/kitbags');
   }
 
   return (

@@ -10,9 +10,8 @@ import {
   CREATE_KITBAG,
   DELETE_KITBAG_MEMBER,
   REQUEST_TO_JOIN_KITBAG,
-  EDIT_KITBAG_MEMBER_STATE,
+  EDIT_KITBAG_MEMBER_STATE
 } from './types';
-import { redirect } from 'react-router-dom';
 
 export const fetchKitbag = (kitbagId) => (dispatch) => {
   axios
@@ -42,7 +41,6 @@ export const createKitbag = (formValues) => (dispatch) => {
   axios
     .post(`/kitbag`, { ...formValues }, {})
     .then((response) => {
-      return redirect('/settings/kitbags');
       dispatch({ type: CREATE_KITBAG, payload: response.data });
     })
     .catch((err) => {
@@ -67,7 +65,6 @@ export const editKitbagState = (kitbagId, state) => (dispatch) => {
   axios
     .put(`/kitbag/${kitbagId}/state`, { state: state }, {})
     .then((response) => {
-      return redirect('/settings/kitbags');
       dispatch({ type: EDIT_KITBAG_STATE, payload: response.data });
     })
     .catch((err) => {
@@ -129,7 +126,6 @@ export const requestToJoinKitbag =
       .catch((err) => {
         const { response } = err;
         dispatch({ type: API_ERROR, payload: response.data });
-        return redirect(`/`);
       });
   };
 
@@ -137,7 +133,6 @@ export const requestKitbagLeave = (kitbagId) => (dispatch) => {
   axios
     .put(`/kitbag/${kitbagId}/members/leave`, {}, {})
     .then((response) => {
-      return redirect(`/settings/kitbags`);
       dispatch({ type: EDIT_KITBAG_LEAVE, payload: response.data });
     })
     .catch((err) => {

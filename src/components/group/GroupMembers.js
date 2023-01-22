@@ -8,13 +8,14 @@ import SearchForm from '../includes/SearchForm';
 import Breadcrumb from '../includes/Breadcrumb';
 import { MemberRoles } from '../../enums/memberRoles.enum';
 import { MemberStates } from '../../enums/memberStates.enum';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const mapDispatchToProps = {
   fetchGroupMembers
 };
 
 const GroupMembers = ({ fetchGroupMembers }) => {
+  const navigate = useNavigate();
   const { groupId } = useParams();
 
   const stateSearch = useSelector((state) => state.group.searchMembers);
@@ -33,8 +34,9 @@ const GroupMembers = ({ fetchGroupMembers }) => {
   useEffect(() => {
     if (groupId) {
       fetchGroupMembers({ groupId });
+      navigate(`/groups/${groupId}/members`);
     }
-  }, [fetchGroupMembers, groupId]);
+  }, [fetchGroupMembers, groupId, navigate]);
 
   function getTitle(includeCount = true) {
     if (includeCount) {
