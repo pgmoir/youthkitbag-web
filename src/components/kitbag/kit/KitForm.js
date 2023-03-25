@@ -208,7 +208,7 @@ const KitForm = ({
               label="Add a new purchase"
               onClick={() =>
                 addArrayItem('purchases', [
-                  { ...initialPurchase, _id: ObjectID.generate() }
+                  { ...initialPurchase, _id: new ObjectID().toString() }
                 ])
               }
             />
@@ -266,7 +266,7 @@ const KitForm = ({
               label="Add a new storage location"
               onClick={() =>
                 addArrayItem('inbag', [
-                  { ...initialInbag, _id: ObjectID.generate() }
+                  { ...initialInbag, _id: new ObjectID().toString() }
                 ])
               }
             />
