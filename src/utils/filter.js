@@ -44,8 +44,8 @@ export const DefaultFilter = {
   exactSource: true,
   noImages: false,
   page: 1,
-  pagesize: 24,
+  pagesize: 96,
   order: 'updatedAt',
   direction: -1,
-  loading: true,
+  loading: true
 };

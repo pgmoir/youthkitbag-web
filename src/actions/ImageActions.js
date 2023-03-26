@@ -3,7 +3,9 @@ import { ADD_IMAGE, CLEAR_NEW_IMAGES, API_ERROR } from './types';
 
 export const addImage = (kitbagId, formData) => (dispatch) => {
   axios
-    .post(`/image/${kitbagId}/add`, formData, {})
+    .post(`/image/${kitbagId}/add`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    })
     .then((response) => {
       dispatch({ type: ADD_IMAGE, payload: response.data });
     })

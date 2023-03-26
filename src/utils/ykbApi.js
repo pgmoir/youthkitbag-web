@@ -4,8 +4,8 @@ export const getHeaders = () => {
 
   return {
     Authorization: `bearer ${authToken}`,
-    refreshToken: refreshToken,
-    'content-type': 'application/json',
+    refreshToken: refreshToken
+    // 'content-type': 'application/json',
   };
 };
 
