@@ -1,21 +1,17 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useSelector } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import AppRouter from './AppRouter';
 import User from './auth/User';
 import ScrollToTop from './ScrollToTop';
-import AppRouter from './AppRouter';
 
 const App = () => {
   const auth = useSelector((state) => state.auth);
 
   return (
     <>
-      <Helmet>
-        <title>
-          YouthKitbag - Inventory, Trade, Aquire, Reporting for all your youth
-          kit
-        </title>
+      <Helmet title="YouthKitbag - Inventory, Trade, Aquire, Reporting for all your youth kit">
       </Helmet>
       <BrowserRouter>
         <ScrollToTop />

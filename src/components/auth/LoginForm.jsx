@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import useForm from '../hooks/useForm';
 import { login } from '../../actions/AuthActions';
+import useForm from '../hooks/useForm';
+import Alert from '../includes/Alert';
 import validate from '../includes/FormEmptyValidationRules';
 import TextInput from '../includes/controls/TextInput';
 import Title from '../includes/title/Title';
-import Alert from '../includes/Alert';
 
 const mapStateToProps = (state) => ({
   newErrors: state.toast.errors
@@ -18,7 +18,7 @@ const mapDispatchToProps = {
 
 const LoginForm = ({ referrer, newErrors, login, email }) => {
   const navigate = useNavigate();
-  const baseUrl = process.env.REACT_APP_YKBAPI || 'http://localhost:8080';
+  const baseUrl = import.meta.env.YKBAPI || 'http://localhost:8080';
 
   const initialValues = {
     email: email || '',

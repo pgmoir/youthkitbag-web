@@ -3,8 +3,10 @@ import { getHeaders } from './auth/getHeaders';
 import { updateTokens } from './auth/updateTokens';
 
 const customAxios = axios.create({
-  baseURL: process.env.REACT_APP_YKBAPI,
+  baseURL: import.meta.env.VITE_YKBAPI,
 });
+
+console.log('YKAPI', import.meta.env.VITE_YKBAPI)
 
 customAxios.interceptors.response.use((response) => {
   let { headers } = response;
